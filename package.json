@@ -1,0 +1,19 @@
+{
+  "name": "research-catalog-indexer",
+  "version": "1.0.0",
+  "description": "This repo uses the [Development-QA-Main Git Workflow](https://github.com/NYPL/engineering-general/blob/master/standards/git-workflow.md#development-qa-main)",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "./node_modules/.bin/standard && ./node_modules/.bin/mocha test"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mocha": "^10.1.0",
+    "standard": "^17.0.0"
+  }
+}
