@@ -12,7 +12,22 @@
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {
+  "dependencies": {},
+  "standard": {
+    "globals": [
+      "after",
+      "before",
+      "afterEach",
+      "beforeEach",
+      "describe",
+      "expect",
+      "it",
+      "xdescribe",
+      "xit"
+    ]
+  },
+  "devDependencies": {
+    "chai": "^4.3.7",
     "mocha": "^10.1.0",
     "standard": "^17.0.0"
   }
