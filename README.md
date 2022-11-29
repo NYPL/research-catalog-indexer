@@ -1,3 +1,6 @@
+## Purpose
+This repo 
+
 ## Contributing
 
 This repo uses the [Development-QA-Main Git Workflow](https://github.com/NYPL/engineering-general/blob/master/standards/git-workflow.md#development-qa-main)

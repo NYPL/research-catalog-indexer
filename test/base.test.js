@@ -6,7 +6,6 @@ describe('SierraBase', function () {
   describe('constructor', function () {
     it('initializes NYPL SierraBase based on Sierra marcinjson', function () {
       const record = new SierraBase(require('./fixtures/bib-10001936.json'))
-      console.log(record)
       expect(record.isNyplRecord()).to.eq(true)
       expect(record._isPartnerRecord()).to.eq(false)
 
@@ -76,6 +75,22 @@ describe('SierraBase', function () {
       const title = record.varField('245', ['a', 'c'])
       expect(title).to.be.a('array')
       expect(title[0].value).to.eq('Niwtʻer azgayin patmutʻian hamar Ashkhatasirutʻiamb Galust Shermazaniani.')
+    })
+  })
+  describe('parallel', function () {
+    it('extracts correct text direction when record has multiple parallels with different text directions', function () {
+      const record = new SierraBase(require('./fixtures/bib-11606020.json'))
+
+      const parallelTitle = record.parallel('245', ['a', 'b'])
+      expect(parallelTitle).to.be.a('array')
+      // This asserts that there is no leading '\u200F' at the start of the
+      // title property, confirming a bug fix related to this record, where
+      // the extracted 'rtl' text direction of one 880 was incorrectly applied
+      // to a different 880 that should have been tagged 'ltr'
+      expect(parallelTitle[0].value).to.eq('ספר תולדות ישו = The gospel according to the Jews, called Toldoth Jesu : the generations of Jesus, now first translated from the Hebrew.')
+      expect(parallelTitle[0].script).to.eq('(2')
+      expect(parallelTitle[0].direction).to.eq('ltr')
+      expect(parallelTitle[0].subfieldMap).to.deep.equal({ a: 'ספר תולדות ישו =', b: 'The gospel according to the Jews, called Toldoth Jesu : the generations of Jesus, now first translated from the Hebrew.' })
     })
   })
 })
