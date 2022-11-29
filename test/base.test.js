@@ -6,6 +6,7 @@ describe('SierraBase', function () {
   describe('constructor', function () {
     it('initializes NYPL SierraBase based on Sierra marcinjson', function () {
       const record = new SierraBase(require('./fixtures/bib-10001936.json'))
+      console.log(record)
       expect(record.isNyplRecord()).to.eq(true)
       expect(record._isPartnerRecord()).to.eq(false)
 
