@@ -12,7 +12,11 @@
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "@nypl/nypl-data-api-client": "^1.0.5",
+    "aws-sdk": "^2.1264.0",
+    "winston": "^3.8.2"
+  },
   "standard": {
     "globals": [
       "after",
