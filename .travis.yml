@@ -2,8 +2,6 @@ dist: focal
 language: node_js
 install:
 - npm i
-before_install:
-- npm i -g npm@7
 jobs:
   include:
   - stage: test
