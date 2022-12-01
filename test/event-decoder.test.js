@@ -4,7 +4,7 @@ const chai = require('chai')
 chai.use(require('chai-as-promised'))
 const expect = chai.expect
 
-describe.only('eventDecoder', () => {
+describe('eventDecoder', () => {
   const [bibEvent, itemEvent, holdingEvent, errorEvent] = ['Bib', 'Item', 'Holding', 'spaghet'].map((type) => ({ Records: [{ kinesis: { data: { [type]: {} } }, eventSourceARN: type }] }))
 
   before(() => {
