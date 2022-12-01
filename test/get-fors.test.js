@@ -1,12 +1,21 @@
-// const { getSchema,
-//   bibsForItems,
-//   bibIdentifiersForHoldings,
-//   bibsForHoldings } = require('../lib/clients/platform-api/get-fors')
+const { getSchema } = require('../lib/clients/platform-api/get-fors')
+const platformApi = require('../lib/platform-api/client')
+const sinon = require('sinon')
+const { expect } = require('chai')
 
 describe('platform api methods', () => {
+  let platformInstance
+  let getStub
   describe('getSchema', () => {
-    it('makes a get request', () => {
+    before((=> {
 
+    }))
+    after(() => {
+
+    })
+    it('makes a get request', () => {
+      getSchema('bib')
+      expect(platformInstance)
     })
   })
 
