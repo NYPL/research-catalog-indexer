@@ -1,6 +1,6 @@
 const sinon = require('sinon')
 
-const kms = require('../lib/clients/kms')
+const kms = require('../lib/kms')
 
 before(() => {
   sinon.stub(kms, 'decrypt').callsFake((val) => {
