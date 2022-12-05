@@ -1,8 +1,7 @@
-const logger = require('./lib/clients/logger')
+const logger = require('./lib/logger')
 const { decodeRecordsFromEvent } = require('./lib/event-decoder')
-const { prefilterItems, prefilterBibs, prefilterHoldings, prefetch, EsBib } = require('./lib/stubzzz')
-const { writeRecords } = require('./lib/clients/es-index')
-const SierraBib = require('./lib/sierra-models')
+const { prefilterItems, prefilterBibs, prefilterHoldings, prefetch, writeRecords, EsBib } = require('./lib/stubzzz')
+const SierraBib = require('./lib/sierra-models/bib')
 const { bibsForItems, bibsForHoldings } = require('./lib/platform-api/requests')
 
 /**
@@ -30,9 +29,12 @@ const handler = async (event, context, callback) => {
         break
     }
 
+    // prefetch holdings and items, and recap codes for itemss
     records = await prefetch(records)
 
-    records = records.map((record) => new SierraBib(record))
+    records = buildSierraBibs(records)
+
+    records = records
       .map((record) => new EsBib(record))
       .map((esBib) => JSON.stringify(EsBib))
 
@@ -52,4 +54,15 @@ const handler = async (event, context, callback) => {
   }
 }
 
-module.exports = { handler }
+const buildSierraBibs = (records) => {
+  // instantiate sierra bib per bib record
+  const bibs = records.map((record) => new SierraBib(record))
+  // add bibs to holding and item records on bibs
+  bibs.forEach((bib) => {
+    bib.items().forEach((i) => i.addBib(bib))
+    bib.holdings().forEach((h) => h.addBib(bib))
+  })
+  return bibs
+}
+
+module.exports = { handler, internal: { buildSierraBibs } }
