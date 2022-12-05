@@ -1,7 +1,6 @@
-const { spy, stub } = require('sinon')
+const { spy } = require('sinon')
 const { handler, internal: { buildSierraBibs } } = require('../index')
 const stubz = require('../lib/stubzzz')
-const eventDecoder = require('../lib/event-decoder')
 const { expect } = require('chai')
 
 describe('index handler function', () => {
