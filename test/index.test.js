@@ -1,13 +1,14 @@
-const { spy } = require('sinon')
+const { stub, spy } = require('sinon')
 const { handler, internal: { buildSierraBibs } } = require('../index')
+const eventDecoder = require('../lib/event-decoder')
 const stubz = require('../lib/stubzzz')
 const { expect } = require('chai')
 
 describe('index handler function', () => {
   before(() => {
-    // stub(eventDecoder, eventDecoder.decodeRecordsFromEvent).resolvesArg(0)
+    stub(eventDecoder, 'decodeRecordsFromEvent').resolvesArg(0)
   })
-  describe('prefilters', () => {
+  xdescribe('prefilters', () => {
     it('prefilters a bib', () => {
       const prefilterSpy = spy(stubz, 'prefilterBibs')
       handler({ type: 'Bib' })
@@ -15,7 +16,7 @@ describe('index handler function', () => {
       prefilterSpy.restore()
     })
     it('prefilters an item and fetches bibs', () => {
-      const prefilterSpy = spy(stubz, 'prefilterItem')
+      const prefilterSpy = spy(stubz, 'prefilterItems')
       handler({ type: 'Bib' })
       expect(prefilterSpy.calledOnce).to.equal(true)
     })
@@ -24,7 +25,7 @@ describe('index handler function', () => {
     })
   })
 
-  describe.only('buildSierraBib', () => {
+  describe('buildSierraBib', () => {
     let bibs
     before(() => {
       const records = Array.from(Array(10).keys()).map((n) => ({ id: `b${n}`, _holdings: [{ id: `h1${n}` }, { id: `h2${n}` }], _items: [{ id: `i1${n}` }, { id: `i2${n}` }] }))
