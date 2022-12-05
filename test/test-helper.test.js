@@ -1,11 +1,5 @@
 const sinon = require('sinon')
 
-const chai = require('chai')
-const sinonChai = require('sinon-chai')
-chai.use(sinonChai)
-chai.use(require('chai-as-promised'))
-global.expect = chai.expect
-
 const kms = require('../lib/kms')
 
 before(() => {

@@ -17,6 +17,8 @@
     "@nypl/nypl-data-api-client": "^1.0.5",
     "avsc": "^5.7.7",
     "aws-sdk": "^2.1264.0",
+    "chai-as-promised": "^7.1.1",
+    "sinon": "^15.0.0",
     "winston": "^3.8.2"
   },
   "standard": {
@@ -34,10 +36,7 @@
   },
   "devDependencies": {
     "chai": "^4.3.7",
-    "chai-as-promised": "^7.1.1",
     "mocha": "^10.1.0",
-    "sinon": "^15.0.0",
-    "sinon-chai": "^3.7.0",
     "standard": "^17.0.0"
   }
 }

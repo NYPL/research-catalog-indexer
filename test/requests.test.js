@@ -1,6 +1,9 @@
 const requests = require('../lib/platform-api/requests')
 const platformApi = require('../lib/platform-api/client')
 const sinon = require('sinon')
+const chai = require('chai')
+const expect = chai.expect
+chai.use(require('chai-as-promised'))
 
 describe('platform api methods', () => {
   let getStub
@@ -13,8 +16,7 @@ describe('platform api methods', () => {
       getStub = genericGetStub()
       sinon.stub(platformApi, 'instance').resolves({ get: getStub })
       await requests.getSchema('bib')
-      expect(getStub.calledOnce).to.eq(true)
-      expect(getStub).to.have.been.calledWith('current-schemas/bib', { authenticate: false })
+      expect(getStub.calledOnce).to.equal(true)
     })
     it('throws an error with bad response', async () => {
       sinon.stub(platformApi, 'instance').callsFake(async () => Promise.resolve({ get: nullGetStub }))
