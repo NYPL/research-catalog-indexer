@@ -47,7 +47,9 @@ describe('platform api methods', () => {
     })
     it('should make get requests per bib identifier', async () => {
       stubPlatformApiInstance(genericGetStub)
+
       const bibs = await requests.bibsForHoldingsOrItems('Item', items)
+
       expect(genericGetStub.callCount).to.equal(10)
       expect(bibs).to.have.length(10)
       expect(genericGetStub).to.have.been.calledWith('bibs/Tatooine/bi0')

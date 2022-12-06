@@ -1,9 +1,8 @@
 const { stub, spy } = require('sinon')
-const index = require('../index')
 const eventDecoder = require('../lib/event-decoder')
-const platformApi = require('../lib/platform-api/client')
+const index = require('../index')
+const requests = require('../lib/platform-api/requests')
 const { expect } = require('chai')
-const { stubPlatformApiInstance, genericGetStub, nullGetStub } = require('./utils')
 
 describe('index handler function', () => {
   let eventDecoderStub
@@ -53,34 +52,32 @@ describe('index handler function', () => {
 
   describe('lambda callback', () => {
     eventDecoderStub = stub(eventDecoder, 'decodeRecordsFromEvent').callsFake(async () => {
-      console.log('pooopybutts')
-      return Promise.resolve([{ nyplSource: 'washington-heights', id: '12345678' }])
+      return Promise.resolve({ type: 'Holding', records: [{ nyplSource: 'washington-heights', id: '12345678' }] })
     })
+
     const callback = spy()
     afterEach(() => {
       callback.resetHistory()
-      if (platformApi.instance.restore()) {
-        platformApi.instance.restore()
-      }
+      requests.bibsForHoldingsOrItems.restore()
     })
     it('calls lambda callback on error', async () => {
       const error = new Error('meep morp')
-      stubPlatformApiInstance(stub().resolves(error))
+      stub(requests, 'bibsForHoldingsOrItems').throws(error)
       await index.handler([], null, callback)
       expect(callback.calledOnce).to.equal(true)
       expect(callback).to.have.been.calledWith(error)
     })
     it('calls lambda callback on no record', async () => {
-      stubPlatformApiInstance(nullGetStub)
-      await index.handler(['bibs'], null, callback)
+      stub(requests, 'bibsForHoldingsOrItems').resolves([])
+      await index.handler([], null, callback)
       expect(callback.calledOnce).to.equal(true)
       expect(callback).to.have.been.calledWith(null, 'Nothing to do.')
     })
     it('calls lambda callback on successful indexing', async () => {
-      stubPlatformApiInstance(genericGetStub)
-      await index.handler(['bibs'], null, callback)
+      stub(requests, 'bibsForHoldingsOrItems').resolves([{ id: '1' }])
+      await index.handler([], null, callback)
       expect(callback.calledOnce).to.equal(true)
-      expect(callback).to.have.been.calledWith(null, 'Wrote 1 doc')
+      expect(callback).to.have.been.calledWith(null, 'Wrote 1 doc(s)')
     })
   })
 })
