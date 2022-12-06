@@ -1,24 +1,24 @@
 const { stub, spy } = require('sinon')
-const { handler, internal: { buildSierraBibs } } = require('../index')
+const index = require('../index')
 const eventDecoder = require('../lib/event-decoder')
-const stubz = require('../lib/stubzzz')
+const platformApi = require('../lib/platform-api/client')
 const { expect } = require('chai')
+const { stubPlatformApiInstance, genericGetStub, nullGetStub } = require('./utils')
 
 describe('index handler function', () => {
-  before(() => {
-    stub(eventDecoder, 'decodeRecordsFromEvent').resolvesArg(0)
+  let eventDecoderStub
+
+  afterEach(() => {
+    if (eventDecoderStub.resetHistory) {
+      eventDecoderStub.resetHistory()
+    }
   })
   xdescribe('prefilters', () => {
     it('prefilters a bib', () => {
-      const prefilterSpy = spy(stubz, 'prefilterBibs')
-      handler({ type: 'Bib' })
-      expect(prefilterSpy.calledOnce).to.equal(true)
-      prefilterSpy.restore()
+
     })
     it('prefilters an item and fetches bibs', () => {
-      const prefilterSpy = spy(stubz, 'prefilterItems')
-      handler({ type: 'Bib' })
-      expect(prefilterSpy.calledOnce).to.equal(true)
+
     })
     it('prefilters a holding and fetches bibs', () => {
 
@@ -29,7 +29,7 @@ describe('index handler function', () => {
     let bibs
     before(() => {
       const records = Array.from(Array(10).keys()).map((n) => ({ id: `b${n}`, _holdings: [{ id: `h1${n}` }, { id: `h2${n}` }], _items: [{ id: `i1${n}` }, { id: `i2${n}` }] }))
-      bibs = buildSierraBibs(records)
+      bibs = index.internal.buildSierraBibs(records)
     })
     it('instantiates bibs with items and holdings', () => {
       expect(bibs.filter((bib) => bib._items.length && bib._holdings.length).length).to.equal(10)
@@ -39,22 +39,48 @@ describe('index handler function', () => {
     })
   })
 
-  it('prefetches recap customer codes', () => {
+  describe('stubbed functions', () => {
+    it('prefetches recap customer codes', () => {
 
+    })
+    it('creates ESBib for each record', () => {
+
+    })
+    it('creates JSON for each record', () => {
+
+    })
   })
-  it('creates ESBib for each record', () => {
 
-  })
-  it('creates JSON for each record', () => {
-
-  })
-  it('calls lambda callback on error', () => {
-
-  })
-  it('calls lambda callback on no record', () => {
-
-  })
-  it('calls lambda callback on successful indexing', () => {
-
+  describe('lambda callback', () => {
+    eventDecoderStub = stub(eventDecoder, 'decodeRecordsFromEvent').callsFake(async () => {
+      console.log('pooopybutts')
+      return Promise.resolve([{ nyplSource: 'washington-heights', id: '12345678' }])
+    })
+    const callback = spy()
+    afterEach(() => {
+      callback.resetHistory()
+      if (platformApi.instance.restore()) {
+        platformApi.instance.restore()
+      }
+    })
+    it('calls lambda callback on error', async () => {
+      const error = new Error('meep morp')
+      stubPlatformApiInstance(stub().resolves(error))
+      await index.handler([], null, callback)
+      expect(callback.calledOnce).to.equal(true)
+      expect(callback).to.have.been.calledWith(error)
+    })
+    it('calls lambda callback on no record', async () => {
+      stubPlatformApiInstance(nullGetStub)
+      await index.handler(['bibs'], null, callback)
+      expect(callback.calledOnce).to.equal(true)
+      expect(callback).to.have.been.calledWith(null, 'Nothing to do.')
+    })
+    it('calls lambda callback on successful indexing', async () => {
+      stubPlatformApiInstance(genericGetStub)
+      await index.handler(['bibs'], null, callback)
+      expect(callback.calledOnce).to.equal(true)
+      expect(callback).to.have.been.calledWith(null, 'Wrote 1 doc')
+    })
   })
 })
