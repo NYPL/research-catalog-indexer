@@ -1,0 +1,111 @@
+{
+  "title": {
+    "paths": [
+      {
+        "marc": "245",
+        "subfields": [
+          "a",
+          "b"
+        ],
+        "nyplSources": [
+          "sierra-nypl",
+          "recap-cul",
+          "recap-pul"
+        ]
+      },
+      {
+        "marc": "245",
+        "subfields": [
+          "a",
+          "b",
+          "c"
+        ],
+        "nyplSources": [
+          "recap-hl"
+        ]
+      }
+    ]
+  },
+  "creatorLiteral": {
+    "paths": [
+      {
+        "marc": "100",
+        "subfields": [
+          "a",
+          "b",
+          "c",
+          "q",
+          "d",
+          "j"
+        ]
+      },
+      {
+        "marc": "110",
+        "excludedSubfields": [
+          "0",
+          "6"
+        ]
+      },
+      {
+        "marc": "111",
+        "excludedSubfields": [
+          "0",
+          "6"
+        ]
+      }
+    ]
+  },
+  "contributorLiteral": {
+    "paths": [
+      {
+        "marc": "700",
+        "subfields": [
+          "a",
+          "b",
+          "c",
+          "q",
+          "d",
+          "j"
+        ]
+      },
+      {
+        "marc": "710",
+        "excludedSubfields": [
+          "0",
+          "6"
+        ]
+      },
+      {
+        "marc": "711",
+        "excludedSubfields": [
+          "0",
+          "6"
+        ]
+      },
+      {
+        "marc": "720",
+        "excludedSubfields": [
+          "0",
+          "6"
+        ]
+      },
+      {
+        "marc": "791",
+        "excludedSubfields": [
+          "0",
+          "6"
+        ]
+      }
+    ]
+  },
+  "contentsTitle": {
+    "paths": [
+      {
+        "marc": "505",
+        "subfields": [
+          "t"
+        ]
+      }
+    ]
+  }
+}
