@@ -23,3 +23,9 @@ nvm use
 npm test
 ```
 
+### Local invocation
+To run lambda locally, use this script:
+```
+sam local invoke --profile nypl-digital-dev -t sam.local.yml -e test/sample-events/b10001936.json
+```
+
