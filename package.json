@@ -8,8 +8,8 @@
     "test": "test"
   },
   "scripts": {
-    "test": "./node_modules/.bin/standard && ./node_modules/.bin/mocha test",
-    "test-no-standard": "./node_modules/.bin/mocha test"
+    "test": "./node_modules/.bin/standard && ./node_modules/.bin/mocha test/unit",
+    "test-no-standard": "./node_modules/.bin/mocha test/unit"
   },
   "author": "",
   "license": "ISC",

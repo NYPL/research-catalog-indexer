@@ -1,4 +1,4 @@
-const eventDecoder = require('../lib/event-decoder')
+const eventDecoder = require('../../lib/event-decoder')
 const sinon = require('sinon')
 const chai = require('chai')
 chai.use(require('chai-as-promised'))

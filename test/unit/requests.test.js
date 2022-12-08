@@ -1,5 +1,5 @@
-let requests = require('../lib/platform-api/requests')
-const platformApi = require('../lib/platform-api/client')
+let requests = require('../../lib/platform-api/requests')
+const platformApi = require('../../lib/platform-api/client')
 const { genericGetStub, nullGetStub, stubPlatformApiInstance } = require('./utils')
 const sinon = require('sinon')
 const chai = require('chai')
@@ -57,7 +57,7 @@ describe('platform api methods', () => {
 
     it('should call _bibidentifiersforitems', async () => {
       const idSpy = sinon.stub().resolves([])
-      requests = rewire('../lib/platform-api/requests')
+      requests = rewire('../../lib/platform-api/requests')
       requests.__set__('_bibIdentifiersForItems', idSpy)
       stubPlatformApiInstance(genericGetStub)
 
@@ -66,7 +66,7 @@ describe('platform api methods', () => {
       expect(idSpy.calledOnce).to.equal(true)
     })
     it('should filter out bad responses', async () => {
-      requests = require('../lib/platform-api/requests')
+      requests = require('../../lib/platform-api/requests')
       genericGetStub.onCall(3).resolves(null)
       stubPlatformApiInstance(genericGetStub)
 
@@ -82,7 +82,7 @@ describe('platform api methods', () => {
 
     it('should invoke _bibIdentifiersForHoldings', async () => {
       const idSpy = sinon.stub().resolves([])
-      requests = rewire('../lib/platform-api/requests')
+      requests = rewire('../../lib/platform-api/requests')
       requests.__set__('_bibIdentifiersForHoldings', idSpy)
       const holdings = Array.from(Array(10).keys()).map((n) => ({ bibIds: ['b' + n + 1, 'b' + n + 2], id: 'h' + n }))
       stubPlatformApiInstance(genericGetStub)
