@@ -18,6 +18,7 @@
     "avsc": "^5.7.7",
     "aws-sdk": "^2.1264.0",
     "chai-as-promised": "^7.1.1",
+    "elasticsearch": "^16.7.3",
     "sinon": "^15.0.0",
     "winston": "^3.8.2"
   },
