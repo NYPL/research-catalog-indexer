@@ -1,9 +1,9 @@
-const logger = require('./lib/clients/logger')
-const { decodeRecordsFromEvent } = require('./lib/event-decoder')
-const { prefilterItems, prefilterBibs, prefilterHoldings, prefetch, EsBib } = require('./lib/stubzzz')
-const { writeRecords } = require('./lib/clients/es-index')
-const SierraBib = require('./lib/sierra-models')
-const { bibsForItems, bibsForHoldings } = require('./lib/platform-api/requests')
+const logger = require('./lib/logger')
+const eventDecoder = require('./lib/event-decoder')
+const { prefilterItems, prefilterBibs, prefilterHoldings, prefetch, writeRecords, EsBib } = require('./lib/stubzzz')
+const SierraBib = require('./lib/sierra-models/bib')
+const requests = require('./lib/platform-api/requests')
+const { toJson } = require('./lib/toJson')
 
 /**
  * Main lambda handler receiving Bib, Item, and Holding events
@@ -11,7 +11,7 @@ const { bibsForItems, bibsForHoldings } = require('./lib/platform-api/requests')
 const handler = async (event, context, callback) => {
   logger.setLevel(process.env.LOGLEVEL || 'info')
   try {
-    const decodedEvent = await decodeRecordsFromEvent(event)
+    const decodedEvent = await eventDecoder.decodeRecordsFromEvent(event)
     let records = null
 
     logger.info(`Handling ${decodedEvent.type} event: ${decodedEvent.records.map((r) => `${r.nyplSource || ''}/${r.id}`).join(', ')}`)
@@ -22,21 +22,24 @@ const handler = async (event, context, callback) => {
         break
       case 'Item':
         records = await prefilterItems(decodedEvent.records)
-        records = await bibsForItems(records)
+        records = await requests.bibsForHoldingsOrItems(decodedEvent.type, records)
         break
       case 'Holding':
         records = await prefilterHoldings(decodedEvent.records)
-        records = await bibsForHoldings(records)
+        records = await requests.bibsForHoldingsOrItems(decodedEvent.type, records)
         break
     }
-
+    // prefetch holdings and items, and recap codes for itemss
     records = await prefetch(records)
+    // instantiate sierra bibs with holdings and items attached.
+    // also include bibs on holding and item records
+    records = buildSierraBibs(records)
 
-    records = records.map((record) => new SierraBib(record))
+    records = records
       .map((record) => new EsBib(record))
-      .map((esBib) => JSON.stringify(EsBib))
+      .map((esBib) => toJson(esBib))
 
-    if (records) {
+    if (records.length) {
       // Ensure lambda `callback` is fired after update:
       const { totalProcessed } = await writeRecords(records)
       const message = `Wrote ${totalProcessed} doc(s)`
@@ -52,4 +55,19 @@ const handler = async (event, context, callback) => {
   }
 }
 
-module.exports = { handler }
+const buildSierraBibs = (records) => {
+  // instantiate sierra bib per bib record
+  const bibs = records.map((record) => new SierraBib(record))
+  // add bibs to holding and item records on bibs
+  bibs.forEach((bib) => {
+    if (bib.items()) {
+      bib.items().forEach((i) => i.addBib(bib))
+    }
+    if (bib.holdings()) {
+      bib.holdings().forEach((h) => h.addBib(bib))
+    }
+  })
+  return bibs
+}
+
+module.exports = { handler, internal: { buildSierraBibs } }

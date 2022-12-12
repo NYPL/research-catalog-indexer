@@ -1,5 +1,5 @@
 const { expect } = require('chai')
-const { instance } = require('../lib/platform-api/client')
+const { instance } = require('../../lib/platform-api/client')
 
 describe('platform api client', () => {
   let client
