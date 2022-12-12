@@ -7,14 +7,14 @@ const esClient = require('../../lib/elastic-search/client')
 describe('elastic search', () => {
   process.env.ELASTICSEARCH_CONNECTION_URI = 'thebomb.com'
   describe('client', () => {
-    let client
+    let _client
     it('creates a client', async () => {
-      client = await esClient.internal._client()
-      expect(client)
+      _client = await esClient.client()
+      expect(_client)
     })
     it('returns previously created client', async () => {
-      const clientAgain = await esClient.internal._client()
-      expect(clientAgain).to.equal(client)
+      const clientAgain = await esClient.client()
+      expect(clientAgain).to.equal(_client)
     })
   })
 })
