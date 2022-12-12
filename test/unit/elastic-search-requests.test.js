@@ -9,7 +9,7 @@ const esClient = require('../../lib/elastic-search/client')
 let esRequests = require('../../lib/elastic-search/requests')
 const logger = require('../../lib/logger')
 
-describe.only('elastic search requests', () => {
+describe('elastic search requests', () => {
   let bulkSpy
   const records = [12345, 23456, 34567].map((uri) => ({ uri, _type: 'resource', _parent: 'mom', otherMetadata: 'meep morp' }))
   sinon.stub(Date, 'now').returns('11:11pm')
