@@ -3,6 +3,7 @@ const eventDecoder = require('./lib/event-decoder')
 const { prefilterItems, prefilterBibs, prefilterHoldings, prefetch, writeRecords, EsBib } = require('./lib/stubzzz')
 const SierraBib = require('./lib/sierra-models/bib')
 const requests = require('./lib/platform-api/requests')
+const { toJson } = require('./lib/toJson')
 
 /**
  * Main lambda handler receiving Bib, Item, and Holding events
@@ -36,7 +37,7 @@ const handler = async (event, context, callback) => {
 
     records = records
       .map((record) => new EsBib(record))
-      .map((esBib) => JSON.stringify(EsBib))
+      .map((esBib) => toJson(esBib))
 
     if (records.length) {
       // Ensure lambda `callback` is fired after update:
