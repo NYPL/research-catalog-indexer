@@ -3,7 +3,7 @@ const eventDecoder = require('./lib/event-decoder')
 const { prefilterItems, prefilterBibs, prefilterHoldings, prefetch, writeRecords, EsBib } = require('./lib/stubzzz')
 const SierraBib = require('./lib/sierra-models/bib')
 const requests = require('./lib/platform-api/requests')
-const { toJson } = require('./lib/toJson')
+const { toJson } = require('./lib/to-json')
 
 /**
  * Main lambda handler receiving Bib, Item, and Holding events
