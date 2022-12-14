@@ -61,8 +61,35 @@ describe('EsBib', function () {
     })
   })
 
-  // describe('parallelCreatorLiteral') // still looking for one of these
-  // describe('contentsTitle') // still looking for one of these
+  describe('parallelCreatorLiteral', function () {
+    it('should return the parallel creator literals', function () {
+      const record = new SierraBib(require('./fixtures/bib-hl-990137923810203941.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.parallelCreatorLiteral()).to.deep.equal(
+        ['بوريني، حسن احمد.']
+      )
+    })
+  })
+
+  describe('contentsTitle', function () {
+    it('should return the contents title values in an array', function () {
+      const record = new SierraBib(require('./fixtures/bib-11055155.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.contentsTitle()).to.deep.equal(
+        [
+          '[v. ] 1 The Theban necropolis.',
+          '[v. ] 2. Theban temples.',
+          '[v. ] 3. Memphis (Abû Rawâsh to Dahshûr).',
+          '[v. ] 4. Lower and middle Egypt (Delta and Cairo to Asyût).',
+          '[v. ] 5. Upper Egypt: sites (Deir Rîfa to Aswân, excluding Thebes and the temples of Abydos, Dendera, Esna, Edfu, Kôm Ombo and Philae).',
+          '[v. ] 6. Upper Egypt : chief temples (excluding Thebes) : Abydos, Dendera, Esna, Edfu, Kôm Ombo, and Philae.',
+          '[v. ] 7. Nubia, the deserts, and outside Egypt / by Bertha Porter and Rosalind L.B. Moss; assisted by Ethel W. Burney.',
+          '[v. ] 8. Objects of provenance not known. pt. 1. Royal Statues. private Statues (Predynastic to Dynasty XVII) -- pt. 2. Private Statues (Dynasty XVIII to the Roman Periiod). Statues of Deities -- [pt. 3] Indices to parts 1 and 2, Statues -- pt. 4. Stelae (Dynasty XVIII to the Roman Period) 803-044-050 to 803-099-990 / by Jaromir Malek, assisted by Diana Magee and Elizabeth Miles.'
+        ]
+      )
+    })
+  })
+
   describe('contributor_sort', function () {
     it('should return the first contributor literal, truncated to 80 characters and lower case', function () {
       const record = new SierraBib(require('./fixtures/bib-hl990000453050203941.json'))
@@ -83,7 +110,16 @@ describe('EsBib', function () {
     })
   })
 
-  // describe('parallelContributorLiteral') // still looking for this
+  describe('parallelContributorLiteral', function () {
+    it('should return parallel contributor fields', function () {
+      const record = new SierraBib(require('./fixtures/bib-parallels-party.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.parallelContributorLiteral()).to.deep.equal(
+        ['710-07/$1 parallel content for 710$a parallel content for 710$z']
+      )
+    })
+  })
+
   describe('numItems', function () {
     it('should return 0', function () {
       const record = new SierraBib(require('./fixtures/bib-hl990000453050203941.json'))
