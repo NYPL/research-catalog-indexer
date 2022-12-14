@@ -18,6 +18,7 @@
     "@nypl/nypl-data-api-client": "^1.0.5",
     "avsc": "^5.7.7",
     "aws-sdk": "^2.1264.0",
+    "elasticsearch": "^16.7.3",
     "winston": "^3.8.2"
   },
   "standard": {
