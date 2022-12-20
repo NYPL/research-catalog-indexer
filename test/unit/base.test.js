@@ -1,11 +1,11 @@
 const expect = require('chai').expect
 
-const SierraBase = require('../lib/sierra-models/base')
+const SierraBase = require('../../lib/sierra-models/base')
 
 describe('SierraBase', function () {
   describe('constructor', function () {
     it('initializes NYPL SierraBase based on Sierra marcinjson', function () {
-      const record = new SierraBase(require('./fixtures/bib-10001936.json'))
+      const record = new SierraBase(require('../fixtures/bib-10001936.json'))
       expect(record.isNyplRecord()).to.eq(true)
       expect(record._isPartnerRecord()).to.eq(false)
 
@@ -16,7 +16,7 @@ describe('SierraBase', function () {
     })
 
     it('initializes partner "SierraBase" based on SCSB marcinjson', function () {
-      const record = new SierraBase(require('./fixtures/bib-hl990000453050203941.json'))
+      const record = new SierraBase(require('../fixtures/bib-hl990000453050203941.json'))
       expect(record._isPartnerRecord()).to.eq(true)
 
       // Get title
@@ -28,7 +28,7 @@ describe('SierraBase', function () {
 
   describe('varField', function () {
     it('able to return tagged subfields', function () {
-      const record = new SierraBase(require('./fixtures/bib-10001936.json'))
+      const record = new SierraBase(require('../fixtures/bib-10001936.json'))
       // Get title using all subfields
       const title = record.varField('245', null, { tagSubfields: true })
       expect(title).to.be.a('array')
@@ -43,7 +43,7 @@ describe('SierraBase', function () {
     })
 
     it('able to return tagged subfields with certain subfields excluded', function () {
-      const record = new SierraBase(require('./fixtures/bib-10001936.json'))
+      const record = new SierraBase(require('../fixtures/bib-10001936.json'))
       // Get title using all subfields
       const title = record.varField('245', null, { tagSubfields: true, excludedSubfields: ['b'] })
       expect(title).to.be.a('array')
@@ -54,7 +54,7 @@ describe('SierraBase', function () {
     })
 
     it('able to return single string from all subfields', function () {
-      const record = new SierraBase(require('./fixtures/bib-10001936.json'))
+      const record = new SierraBase(require('../fixtures/bib-10001936.json'))
       // Get title using all subfields
       const title = record.varField('245')
       expect(title).to.be.a('array')
@@ -62,7 +62,7 @@ describe('SierraBase', function () {
     })
 
     it('able to return single string from all subfields, excluding some subfields', function () {
-      const record = new SierraBase(require('./fixtures/bib-10001936.json'))
+      const record = new SierraBase(require('../fixtures/bib-10001936.json'))
       // Get title using all subfields
       const title = record.varField('245', null, { excludedSubfields: ['b'] })
       expect(title).to.be.a('array')
@@ -70,7 +70,7 @@ describe('SierraBase', function () {
     })
 
     it('able to return single string from certain subfields', function () {
-      const record = new SierraBase(require('./fixtures/bib-10001936.json'))
+      const record = new SierraBase(require('../fixtures/bib-10001936.json'))
       // Get title using all subfields
       const title = record.varField('245', ['a', 'c'])
       expect(title).to.be.a('array')
@@ -79,7 +79,7 @@ describe('SierraBase', function () {
   })
   describe('parallel', function () {
     it('extracts correct text direction when record has multiple parallels with different text directions', function () {
-      const record = new SierraBase(require('./fixtures/bib-11606020.json'))
+      const record = new SierraBase(require('../fixtures/bib-11606020.json'))
 
       const parallelTitle = record.parallel('245', ['a', 'b'])
       expect(parallelTitle).to.be.a('array')
