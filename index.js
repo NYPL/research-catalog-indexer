@@ -29,7 +29,9 @@ const handler = async (event, context, callback) => {
         records = await requests.bibsForHoldingsOrItems(decodedEvent.type, records)
         break
     }
-    // prefetch holdings and items, and recap codes for itemss
+    // prefetch holdings and items
+    // all holdings and items for all bibs in parallel
+    //    assign those holdings and items to respective bibs
     records = await prefetch(records)
     // instantiate sierra bibs with holdings and items attached.
     // also include bibs on holding and item records
