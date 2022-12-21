@@ -38,6 +38,46 @@ describe('platform api methods', () => {
     })
   })
 
+  describe.only('itemsForBibs', () => {
+    const bib = { nyplSource: 'bluestockings-books', id: '123456' }
+    const limit = 3
+    const limitItemResponse = { data: Array.from(Array(limit).keys()) }
+    afterEach(() => { platformApi.instance.restore() })
+    it('makes a get request', async () => {
+      stubPlatformApiInstance(genericGetStub)
+      await requests.itemsForBib(bib)
+      expect(genericGetStub.calledOnce).to.equal(true)
+      expect(genericGetStub).to.have.been.calledWith(`bibs/${bib.nyplSource}/${bib.id}/items?limit=500&offset=0`)
+    })
+    it('recurses and then returns items', async () => {
+      const underLimitItemResponse = { data: Array.from(Array(1).keys()) }
+      const getToRecurse = sinon.stub()
+      getToRecurse.onFirstCall().resolves(limitItemResponse)
+      getToRecurse.onSecondCall().resolves(limitItemResponse)
+      getToRecurse.onThirdCall().resolves(underLimitItemResponse)
+      stubPlatformApiInstance(getToRecurse)
+      const items = await requests.itemsForBib(bib, 0, limit)
+      expect(getToRecurse.callCount).to.equal(3)
+      expect(items).to.have.length(limit * 2 + 1)
+    })
+    it('recurses and returns items after no item response', async () => {
+      const noItemResponse = { data: [] }
+      const getToRecurse = sinon.stub()
+      getToRecurse.onFirstCall().resolves(limitItemResponse)
+      getToRecurse.onSecondCall().resolves(noItemResponse)
+      stubPlatformApiInstance(getToRecurse)
+      const items = await requests.itemsForBib(bib, 0, limit)
+      expect(getToRecurse.callCount).to.equal(2)
+      expect(items).to.have.length(limit)
+    })
+    it('returns null when there is invalid resposne', async () => {
+      stubPlatformApiInstance(nullGetStub)
+      const items = await requests.itemsForBib(bib)
+      expect(nullGetStub.callCount).to.equal(1)
+      expect(items).to.equal(null)
+    })
+  })
+
   describe('bibsForHoldingsORItems - items', () => {
     const items = Array.from(Array(10).keys()).map((n) => ({ id: 'i' + n }))
     afterEach(() => {
