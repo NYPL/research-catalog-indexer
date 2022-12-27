@@ -40,6 +40,64 @@ describe('platform api methods', () => {
     })
   })
 
+  describe('modelPrefetch', () => {
+    let bibs
+    const setUpTests = (h, i) => {
+      bibs = [{ nyplSource: 'sierra-nypl', id: '123' }, { nyplSource: 'sierra-nypl', id: '456' }, { nyplSource: 'sierra-nypl', id: '789' }]
+      requests = rewire('../../lib/platform-api/requests')
+      requests.__set__('_holdingsForBibs', () => Promise.resolve(h))
+      requests.__set__('_itemsForArrayOfBibs', () => Promise.resolve(i))
+    }
+    it('adds holdings to bibs - 1:1', async () => {
+      const holdings = [{ id: '1', bibIds: ['123'] }, { id: '2', bibIds: ['456'] }, { id: '3', bibIds: ['789'] }]
+      setUpTests(holdings, [])
+      await requests.modelPrefetch(bibs)
+      expect(bibs.every((bib) => bib._holdings.length === 1))
+    })
+    it('adds holdings to bibs - 1:N', async () => {
+      const holdings = [{ id: '1', bibIds: ['123', '456', '789'] }, { id: '2', bibIds: ['456'] }, { id: '3', bibIds: ['789'] }]
+      setUpTests(holdings, [])
+      await requests.modelPrefetch(bibs)
+      expect(bibs).to.deep.equal([{
+        nyplSource: 'sierra-nypl',
+        id: '123',
+        _holdings: [holdings[0]],
+        _items: []
+      }, {
+        nyplSource: 'sierra-nypl',
+        id: '456',
+        _holdings: [holdings[0], holdings[1]],
+        _items: []
+      }, {
+        nyplSource: 'sierra-nypl',
+        id: '789',
+        _holdings: [holdings[0], holdings[2]],
+        _items: []
+      }])
+    })
+    it('adds items to bibs', async () => {
+      const items = [{ bibIds: ['123'] }, { bibIds: ['456'] }, { bibIds: ['789'] }]
+      setUpTests([], items)
+      await requests.modelPrefetch(bibs)
+      expect(bibs).to.deep.equal([{
+        nyplSource: 'sierra-nypl',
+        id: '123',
+        _holdings: [],
+        _items: [items[0]]
+      }, {
+        nyplSource: 'sierra-nypl',
+        id: '456',
+        _holdings: [],
+        _items: [items[1]]
+      }, {
+        nyplSource: 'sierra-nypl',
+        id: '789',
+        _holdings: [],
+        _items: [items[2]]
+      }])
+    })
+  })
+
   describe('_holdingsForBibs', () => {
     const bibs = [{ nyplSource: 'sierra-nypl', id: '123' }, { nyplSource: 'sierra-nypl', id: '456' }, { nyplSource: 'sierra-nypl', id: '789' }, { nyplSource: 'your-moms-house', id: '666' }]
     const holdings = { data: [{ bibIds: ['123', '456'] }, { bibIds: ['456'] }, { bibIds: ['789'] }] }
