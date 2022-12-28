@@ -1,8 +1,8 @@
 const logger = require('./lib/logger')
 const eventDecoder = require('./lib/event-decoder')
-const { prefilterItems, prefilterBibs, prefilterHoldings, prefetch, writeRecords, EsBib } = require('./lib/stubzzz')
+const { prefilterItems, prefilterBibs, prefilterHoldings, writeRecords, EsBib } = require('./lib/stubzzz')
 const SierraBib = require('./lib/sierra-models/bib')
-const requests = require('./lib/platform-api/requests')
+const platformApi = require('./lib/platform-api/requests')
 const { toJson } = require('./lib/to-json')
 
 /**
@@ -22,17 +22,15 @@ const handler = async (event, context, callback) => {
         break
       case 'Item':
         records = await prefilterItems(decodedEvent.records)
-        records = await requests.bibsForHoldingsOrItems(decodedEvent.type, records)
+        records = await platformApi.bibsForHoldingsOrItems(decodedEvent.type, records)
         break
       case 'Holding':
         records = await prefilterHoldings(decodedEvent.records)
-        records = await requests.bibsForHoldingsOrItems(decodedEvent.type, records)
+        records = await platformApi.bibsForHoldingsOrItems(decodedEvent.type, records)
         break
     }
-    // prefetch holdings and items
-    // all holdings and items for all bibs in parallel
-    //    assign those holdings and items to respective bibs
-    records = await prefetch(records)
+    // prefetch holdings and items and attach to bibs
+    records = await platformApi.modelPrefetch(records)
     // instantiate sierra bibs with holdings and items attached.
     // also include bibs on holding and item records
     records = buildSierraBibs(records)
