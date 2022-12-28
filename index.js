@@ -4,6 +4,7 @@ const { prefilterItems, prefilterBibs, prefilterHoldings, prefetch, writeRecords
 const SierraBib = require('./lib/sierra-models/bib')
 const requests = require('./lib/platform-api/requests')
 const { toJson } = require('./lib/to-json')
+const generalPrefetch = require('./lib/general-prefetch')
 
 /**
  * Main lambda handler receiving Bib, Item, and Holding events
@@ -31,6 +32,10 @@ const handler = async (event, context, callback) => {
     }
     // prefetch holdings and items, and recap codes for itemss
     records = await prefetch(records)
+
+    // generalPrefetch includes:
+    //    - attachRecapCustomerCodes
+    records = await generalPrefetch(records)
     // instantiate sierra bibs with holdings and items attached.
     // also include bibs on holding and item records
     records = buildSierraBibs(records)
