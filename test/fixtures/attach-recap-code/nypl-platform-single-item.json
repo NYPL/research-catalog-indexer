@@ -39,7 +39,8 @@
       "0471110000"
     ],
     "controlNumber": "32051633",
-    "items": [{
+    "_items": [
+      {
       "nyplSource": "sierra-nypl",
       "bibIds": [
         "12078521"

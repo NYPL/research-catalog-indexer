@@ -1,6 +1,6 @@
-// const SierraBib = require('../../lib/sierra-models/bib')
+const SierraBib = require('../../lib/sierra-models/bib')
 const recapFuncs = require('../../lib/scsb/requests')
-const { nyplScsbMultiItemBib, nyplPlatformMultiItemBib, nyplScsbSingleItemBib, nyplPlatformSingleItemBib, partnerPlatformBib, nyplOnsiteBib } = require('../fixtures/attach-recap-code')
+const { nyplScsbMultiItemBib, nyplPlatformMultiItemBib, nyplScsbSingleItemBib, nyplPlatformSingleItemBib, nyplOnsiteBib } = require('../fixtures/attach-recap-code')
 const sinon = require('sinon')
 const ScsbClient = require('../../lib/scsb/client')
 const { expect } = require('chai')
@@ -8,7 +8,7 @@ const { expect } = require('chai')
 describe('SCSB requests', () => {
   const bib = {
     id: '15830171',
-    isNypl: () => true,
+    isNyplRecord: () => true,
     isInRecap: () => true
   }
   describe('createRecapCodeMap', () => {
@@ -39,26 +39,30 @@ describe('SCSB requests', () => {
   describe('attachRecapCustomerCodes', () => {
     it('adds recap codes to the correct item - multiple items', async () => {
       sinon.stub(ScsbClient, 'client').callsFake(() => Promise.resolve({ search: () => nyplScsbMultiItemBib }))
-      const attachedBib = await recapFuncs.attachRecapCustomerCodes(nyplPlatformMultiItemBib)
-      expect(attachedBib.items[0].recapCustomerCode).to.equal('A')
-      expect(attachedBib.items[1].recapCustomerCode).to.equal('B')
-      expect(attachedBib.items[2].recapCustomerCode).to.equal('C')
-      expect(attachedBib.items[3].recapCustomerCode).to.equal(undefined)
+      const attachedBib = await recapFuncs.attachRecapCustomerCodes(new SierraBib(nyplPlatformMultiItemBib))
+      expect(attachedBib.items()[0]._recapCustomerCode).to.equal('A')
+      expect(attachedBib.items()[1]._recapCustomerCode).to.equal('B')
+      expect(attachedBib.items()[2]._recapCustomerCode).to.equal('C')
+      expect(attachedBib.items()[3]._recapCustomerCode).to.equal(undefined)
       ScsbClient.client.restore()
     })
     it('adds recap codes to the correct item - single item', async () => {
       sinon.stub(ScsbClient, 'client').callsFake(() => Promise.resolve({ search: () => nyplScsbSingleItemBib }))
-      const attachedBib = await recapFuncs.attachRecapCustomerCodes(nyplPlatformSingleItemBib)
-      expect(attachedBib.items[0].recapCustomerCode).to.equal('NA')
+      const attachedBib = await recapFuncs.attachRecapCustomerCodes(new SierraBib(nyplPlatformSingleItemBib))
+      expect(attachedBib.items()[0]._recapCustomerCode).to.equal('NA')
       ScsbClient.client.restore()
     })
     it('does nothing to partner bibs', async () => {
-      const attachedBib = await recapFuncs.attachRecapCustomerCodes(partnerPlatformBib)
-      expect(attachedBib).to.equal(partnerPlatformBib)
+      const partnerBib = {
+        isNyplRecord: () => false,
+        isInRecap: () => true
+      }
+      const attachedBib = await recapFuncs.attachRecapCustomerCodes(partnerBib)
+      expect(attachedBib).to.equal(partnerBib)
     })
     it('does nothing to non-recap bibs', async () => {
-      const attachedBib = await recapFuncs.attachRecapCustomerCodes(nyplOnsiteBib)
-      expect(attachedBib).to.equal(nyplOnsiteBib)
+      const attachedBib = await recapFuncs.attachRecapCustomerCodes(new SierraBib(nyplOnsiteBib))
+      expect(attachedBib.items().filter(i => i._recapCustomerCode).length).to.equal(0)
     })
   })
 })
