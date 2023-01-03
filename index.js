@@ -30,15 +30,15 @@ const handler = async (event, context, callback) => {
         records = await requests.bibsForHoldingsOrItems(decodedEvent.type, records)
         break
     }
-    // prefetch holdings and items, and recap codes for itemss
+    // prefetch holdings and items
     records = await prefetch(records)
 
-    // generalPrefetch includes:
-    //    - attachRecapCustomerCodes
-    records = await generalPrefetch(records)
     // instantiate sierra bibs with holdings and items attached.
     // also include bibs on holding and item records
     records = buildSierraBibs(records)
+    // generalPrefetch includes:
+    //    - attachRecapCustomerCodes
+    records = await generalPrefetch(records)
 
     records = records
       .map((record) => new EsBib(record))
