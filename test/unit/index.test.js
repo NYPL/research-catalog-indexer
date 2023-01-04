@@ -1,4 +1,6 @@
 const { stub, spy } = require('sinon')
+const rewire = require('rewire')
+
 const eventDecoder = require('../../lib/event-decoder')
 const index = require('../../index')
 const requests = require('../../lib/platform-api/requests')
@@ -9,7 +11,15 @@ const SierraHolding = require('../../lib/sierra-models/holding')
 
 describe('index handler function', () => {
   let eventDecoderStub
-
+  let stubsyB
+  let generalPrefetch
+  before(() => {
+    stubsyB = stub().callsFake(async (bibs) => {
+      return Promise.resolve(bibs)
+    })
+    generalPrefetch = rewire('../../lib/general-prefetch')
+    generalPrefetch.__set__('attachRecapCustomerCodes', stubsyB)
+  })
   afterEach(() => {
     if (eventDecoderStub.resetHistory) {
       eventDecoderStub.resetHistory()
@@ -55,18 +65,6 @@ describe('index handler function', () => {
       const bibOnItem = bibs[0].items()[0].bibs()
       expect(bibOnItem).to.have.length(1)
       expect(bibOnItem[0]).to.be.instanceOf(SierraBib)
-    })
-  })
-
-  xdescribe('stubbed functions', () => {
-    it('prefetches recap customer codes', () => {
-
-    })
-    it('creates ESBib for each record', () => {
-
-    })
-    it('creates JSON for each record', () => {
-
     })
   })
 
