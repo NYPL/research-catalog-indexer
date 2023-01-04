@@ -68,18 +68,6 @@ describe('index handler function', () => {
     })
   })
 
-  xdescribe('stubbed functions', () => {
-    it('prefetches recap customer codes', () => {
-
-    })
-    it('creates ESBib for each record', () => {
-
-    })
-    it('creates JSON for each record', () => {
-
-    })
-  })
-
   describe('lambda callback', () => {
     eventDecoderStub = (type) => stub(eventDecoder, 'decodeRecordsFromEvent').callsFake(async () => {
       return Promise.resolve({ type, records: [{ nyplSource: 'washington-heights', id: '12345678' }] })
