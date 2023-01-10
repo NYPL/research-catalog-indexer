@@ -1,0 +1,129 @@
+{
+  "identifier": {},
+  "callNumber": {
+    "paths": [
+      {
+        "marc": "852",
+        "subfields": [
+          "k",
+          "h",
+          "i",
+          "n",
+          "z"
+        ]
+      }
+    ]
+  },
+  "physicalLocation": {
+    "paths": [
+      {
+        "marc": "852",
+        "subfields": [
+          "k",
+          "h",
+          "i"
+        ]
+      }
+    ]
+  },
+  "enumerationChronology": {
+    "paths": [
+      {
+        "notes": "Drawn from 'v' legacy field"
+      }
+    ]
+  },
+  "holdingStatement": {
+    "paths": [
+      {
+        "marc": "866",
+        "subfields": [
+          "h"
+        ]
+      },
+      {
+        "marc": "853",
+        "subfields": [
+          "8",
+          "a",
+          "b",
+          "c",
+          "d",
+          "e",
+          "f",
+          "i",
+          "j",
+          "k",
+          "l"
+        ],
+        "notes": "Provides structure for metadata in 863 fields"
+      },
+      {
+        "marc": "863",
+        "subfields": [
+          "8",
+          "a",
+          "b",
+          "c",
+          "d",
+          "e",
+          "f",
+          "i",
+          "j",
+          "k",
+          "l"
+        ],
+        "notes": "Provides structured data as defined in 853 fields"
+      },
+      {
+        "notes": "Additional data drawn from the fieldTag 'h' fields"
+      },
+      {
+        "notes": "Pre-formatted statements also available in holdings.holding_statement field"
+      }
+    ]
+  },
+  "location": {
+    "paths": [
+      {
+        "marc": "Location",
+        "notes": "derived from location code stored in record"
+      }
+    ]
+  },
+  "format": {
+    "paths": [
+      {
+        "marc": "843",
+        "subfields": [
+          "a"
+        ],
+        "notes": "With 843 present, fieldTag may be i or n"
+      },
+      {
+        "notes": "Drawn from fieldTag 'i'"
+      }
+    ]
+  },
+  "note": {
+    "paths": [
+      {
+        "notes": "Drawn from fieldTag 'n', but not if marc field is 843"
+      }
+    ]
+  },
+  "checkInBox": {
+    "paths": [
+      {
+        "notes": "Drawn from enumeration, start_date and end_date fields"
+      }
+    ]
+  },
+  "suppressed": {
+    "paths": [
+      {
+        "notes": "set true if deleted or suppressed fields are set to true"
+      }
+    ]
+  }
+}
