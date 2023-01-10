@@ -1,9 +1,10 @@
 const logger = require('./lib/logger')
 const eventDecoder = require('./lib/event-decoder')
-const { prefilterItems, prefilterBibs, prefilterHoldings, writeRecords, EsBib } = require('./lib/stubzzz')
+const { writeRecords, EsBib } = require('./lib/stubzzz')
 const SierraBib = require('./lib/sierra-models/bib')
 const platformApi = require('./lib/platform-api/requests')
 const { toJson } = require('./lib/to-json')
+const { prefilterItems, prefilterBibs, prefilterHoldings } = require('./lib/utils')
 const generalPrefetch = require('./lib/general-prefetch')
 
 /**

@@ -17,6 +17,7 @@
     "axios": "^1.2.1",
     "sync-request": "^6.1.0",
     "@aws-sdk/client-kms": "^3.226.0",
+    "@nypl/nypl-core-objects": "^2.0.0",
     "@nypl/nypl-data-api-client": "^1.0.5",
     "@nypl/scsb-rest-client": "^2.0.0",
     "avsc": "^5.7.7",
