@@ -1,10 +1,11 @@
 const logger = require('./lib/logger')
 const eventDecoder = require('./lib/event-decoder')
-const { prefetch, writeRecords, EsBib } = require('./lib/stubzzz')
+const { writeRecords, EsBib } = require('./lib/stubzzz')
 const SierraBib = require('./lib/sierra-models/bib')
-const requests = require('./lib/platform-api/requests')
+const platformApi = require('./lib/platform-api/requests')
 const { toJson } = require('./lib/to-json')
 const { prefilterItems, prefilterBibs, prefilterHoldings } = require('./lib/utils')
+const generalPrefetch = require('./lib/general-prefetch')
 
 /**
  * Main lambda handler receiving Bib, Item, and Holding events
@@ -23,18 +24,21 @@ const handler = async (event, context, callback) => {
         break
       case 'Item':
         records = await prefilterItems(decodedEvent.records)
-        records = await requests.bibsForHoldingsOrItems(decodedEvent.type, records)
+        records = await platformApi.bibsForHoldingsOrItems(decodedEvent.type, records)
         break
       case 'Holding':
         records = await prefilterHoldings(decodedEvent.records)
-        records = await requests.bibsForHoldingsOrItems(decodedEvent.type, records)
+        records = await platformApi.bibsForHoldingsOrItems(decodedEvent.type, records)
         break
     }
-    // prefetch holdings and items, and recap codes for itemss
-    records = await prefetch(records)
+    // prefetch holdings and items and attach to bibs
+    records = await platformApi.modelPrefetch(records)
     // instantiate sierra bibs with holdings and items attached.
     // also include bibs on holding and item records
     records = buildSierraBibs(records)
+    // generalPrefetch includes:
+    //    - attachRecapCustomerCodes
+    records = await generalPrefetch(records)
 
     records = records
       .map((record) => new EsBib(record))

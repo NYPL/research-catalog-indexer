@@ -1,7 +1,9 @@
 const { stub, spy } = require('sinon')
+const rewire = require('rewire')
+
 const eventDecoder = require('../../lib/event-decoder')
 const index = require('../../index')
-const requests = require('../../lib/platform-api/requests')
+const platformApi = require('../../lib/platform-api/requests')
 const { expect } = require('chai')
 const SierraBib = require('../../lib/sierra-models/bib')
 const SierraItem = require('../../lib/sierra-models/item')
@@ -9,11 +11,37 @@ const SierraHolding = require('../../lib/sierra-models/holding')
 
 describe('index handler function', () => {
   let eventDecoderStub
+  let stubsyB
+  let generalPrefetch
+  let modelPrefetchStub
+  before(() => {
+    stubsyB = stub().callsFake(async (bibs) => {
+      return Promise.resolve(bibs)
+    })
+    generalPrefetch = rewire('../../lib/general-prefetch')
+    generalPrefetch.__set__('attachRecapCustomerCodes', stubsyB)
+
+    modelPrefetchStub = stub(platformApi, 'modelPrefetch').callsFake(async (bibs) => {
+      return await Promise.all(bibs.map((bib) => {
+        bib._holdings = [{ id: 1 }]
+        bib._items = [{ id: 1 }]
+        return bib
+      }))
+    })
+  })
+
+  after(() => {
+    modelPrefetchStub.restore()
+    if (platformApi.bibsForHoldingsOrItems.restore) {
+      platformApi.bibsForHoldingsOrItems.restore()
+    }
+  })
 
   afterEach(() => {
     if (eventDecoderStub.resetHistory) {
       eventDecoderStub.resetHistory()
     }
+    modelPrefetchStub.resetHistory()
   })
 
   xdescribe('prefilters', () => {
@@ -58,18 +86,6 @@ describe('index handler function', () => {
     })
   })
 
-  xdescribe('stubbed functions', () => {
-    it('prefetches recap customer codes', () => {
-
-    })
-    it('creates ESBib for each record', () => {
-
-    })
-    it('creates JSON for each record', () => {
-
-    })
-  })
-
   describe('lambda callback', () => {
     eventDecoderStub = (type) => stub(eventDecoder, 'decodeRecordsFromEvent').callsFake(async () => {
       return Promise.resolve({ type, records: [{ nyplSource: 'washington-heights', id: '12345678' }] })
@@ -77,14 +93,14 @@ describe('index handler function', () => {
     const callback = spy()
     afterEach(() => {
       callback.resetHistory()
-      requests.bibsForHoldingsOrItems.restore()
+      platformApi.bibsForHoldingsOrItems.restore()
       eventDecoder.decodeRecordsFromEvent.restore()
     })
     it('calls lambda callback on error', async () => {
       try {
         const error = new Error('meep morp')
         eventDecoderStub('Item')
-        stub(requests, 'bibsForHoldingsOrItems').throws(error)
+        stub(platformApi, 'bibsForHoldingsOrItems').throws(error)
         await index.handler([], null, callback)
         expect(callback.calledOnce).to.equal(true)
         expect(callback).to.have.been.calledWith(error)
@@ -97,17 +113,25 @@ describe('index handler function', () => {
     })
     it('calls lambda callback on no record', async () => {
       eventDecoderStub('Holding')
-      stub(requests, 'bibsForHoldingsOrItems').resolves([])
+      stub(platformApi, 'bibsForHoldingsOrItems').resolves([])
       await index.handler([], null, callback)
       expect(callback.calledOnce).to.equal(true)
       expect(callback).to.have.been.calledWith(null, 'Nothing to do.')
     })
     it('calls lambda callback on successful indexing', async () => {
       eventDecoderStub('Item')
-      stub(requests, 'bibsForHoldingsOrItems').resolves([{ id: '1' }])
+      stub(platformApi, 'bibsForHoldingsOrItems').resolves([{ id: '1' }])
       await index.handler([], null, callback)
       expect(callback.calledOnce).to.equal(true)
       expect(callback).to.have.been.calledWith(null, 'Wrote 1 doc(s)')
+    })
+  })
+  describe('modelPrefetch', () => {
+    it('calls platformApi#modelPrefetch', async () => {
+      eventDecoderStub('Item')
+      stub(platformApi, 'bibsForHoldingsOrItems').resolves([{ id: '1' }])
+      await index.handler([], null, () => { })
+      expect(modelPrefetchStub.calledOnce).to.equal(true)
     })
   })
 })
