@@ -12,6 +12,7 @@ describe('SierraBase', function () {
       // Get callnumber
       const callNum = record.varField('852', ['h'])
       expect(callNum).to.be.a('array')
+      console.log(callNum)
       expect(callNum[0].value).to.eq('*ONR 84-743')
     })
 
