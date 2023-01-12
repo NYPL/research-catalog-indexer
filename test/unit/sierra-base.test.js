@@ -88,8 +88,8 @@ describe('SierraBase', function () {
       expect(title).to.be.a('array')
       expect(title[0].value).to.eq('Niwtʻer azgayin patmutʻian hamar Ashkhatasirutʻiamb Galust Shermazaniani.')
     })
-    it('returns parallel values with no primary values', () => {
-      const record = new SierraBase(require('../fixtures/bib-10001936.json'))
+    it.only('returns parallel values with no primary values', () => {
+      const record = new SierraBase(require('../fixtures/bib-11606020.json'))
       const [varFieldValue] = record.varField(100, ['a'])
       expect(varFieldValue.parallel.value).to.equal()
       expect(varFieldValue.parallel.script).to.equal()
@@ -99,9 +99,9 @@ describe('SierraBase', function () {
     it('returns parallel value attached to correct primary value', () => {
       const record = new SierraBase(require('../fixtures/bib-10001936.json'))
       const [{ value, subfieldMap, parallel }] = record.varField(130, ['a'])
-      expect(value).to.equal("Toledot Yeshu.")
+      expect(value).to.equal('Toledot Yeshu.')
       expect(subfieldMap).to.deep.equal({
-        a: "Toledot Yeshu."
+        a: 'Toledot Yeshu.'
       })
       expect(parallel).to.deep.equal({
         value: 'תולדות ישו.',
@@ -112,11 +112,12 @@ describe('SierraBase', function () {
         }
       })
     })
-    // this test will be for varfieldmulti
-    // it('returns a mix of orphan parallels and primaries with parallels', () => {
-
-    // })
   })
+  describe('varFieldsMulti', () => {
+    // these tests will check on the order that orphan parallels and primaries are returned in
+  })
+
+  // })
   describe('parallel', function () {
     it('parallel objects have value prop', () => {
 
@@ -143,3 +144,31 @@ describe('SierraBase', function () {
     })
   })
 })
+
+245 - 03
+245 - 02
+
+{
+  marctag: 245
+  subfield: [{ tag: 6, content: 880 - 03 }]
+}
+{
+  marctag: 880
+  subfield: [{ tag: 6, content: 245 - 03 }]
+}
+{
+  marctag: 880
+  subfield: [{ tag: 6, content: 245 - 02 }]
+}
+
+{
+  245 - 03: parallel
+  245 - 02: parallel
+}
+
+// identify parallels using the keys, get keys that 
+varField(){ parallel = cache[marctag + suffix] }
+{
+  value: 'title',
+    parallels: []
+}
