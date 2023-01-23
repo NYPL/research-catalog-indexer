@@ -144,31 +144,3 @@ describe('SierraBase', function () {
     })
   })
 })
-
-245 - 03
-245 - 02
-
-{
-  marctag: 245
-  subfield: [{ tag: 6, content: 880 - 03 }]
-}
-{
-  marctag: 880
-  subfield: [{ tag: 6, content: 245 - 03 }]
-}
-{
-  marctag: 880
-  subfield: [{ tag: 6, content: 245 - 02 }]
-}
-
-{
-  245 - 03: parallel
-  245 - 02: parallel
-}
-
-// identify parallels using the keys, get keys that 
-varField(){ parallel = cache[marctag + suffix] }
-{
-  value: 'title',
-    parallels: []
-}

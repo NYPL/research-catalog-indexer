@@ -1,0 +1,53 @@
+[
+  {
+    "fieldTag": "y",
+    "marcTag": "245",
+    "ind1": "1",
+    "ind2": "0",
+    "content": null,
+    "subfields": [
+      {
+        "tag": "6",
+        "content": "880-02"
+      },
+      {
+        "tag": "a",
+        "content": "primary-value-2"
+      }
+    ]
+  },
+  {
+    "fieldTag": "y",
+    "marcTag": "880",
+    "ind1": "1",
+    "ind2": "0",
+    "content": null,
+    "subfields": [
+      {
+        "tag": "6",
+        "content": "245-01/(2"
+      },
+      {
+        "tag": "a",
+        "content": "parallel-value-1"
+      }
+    ]
+  },
+  {
+    "fieldTag": "y",
+    "marcTag": "880",
+    "ind1": "1",
+    "ind2": "0",
+    "content": null,
+    "subfields": [
+      {
+        "tag": "6",
+        "content": "245-02/(2"
+      },
+      {
+        "tag": "a",
+        "content": "parallel-value-2"
+      }
+    ]
+  }
+]
