@@ -88,12 +88,10 @@ describe('SierraBase', function () {
       expect(title).to.be.a('array')
       expect(title[0].value).to.eq('Niwtʻer azgayin patmutʻian hamar Ashkhatasirutʻiamb Galust Shermazaniani.')
     })
-    it.only('returns parallel values with no primary values', () => {
+    it('returns parallel values with no primary values', () => {
       const record = new SierraBase(require('../fixtures/bib-11606020.json'))
       const [varFieldValue] = record.varField(100, ['a'])
-      expect(varFieldValue.parallel.value).to.equal()
-      expect(varFieldValue.parallel.script).to.equal()
-      expect(varFieldValue.parallel.subfieldMap).to.equal()
+      expect(varFieldValue.parallel).to.equal(undefined)
       expect(!varFieldValue.value)
     })
     it('returns parallel value attached to correct primary value', () => {
