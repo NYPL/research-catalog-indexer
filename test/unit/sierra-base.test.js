@@ -95,7 +95,7 @@ describe('SierraBase', function () {
       expect(!varFieldValue.value)
     })
     it('returns parallel value attached to correct primary value', () => {
-      const record = new SierraBase(require('../fixtures/bib-10001936.json'))
+      const record = new SierraBase(require('../fixtures/bib-11606020.json'))
       const [{ value, subfieldMap, parallel }] = record.varField(130, ['a'])
       expect(value).to.equal('Toledot Yeshu.')
       expect(subfieldMap).to.deep.equal({
@@ -116,7 +116,7 @@ describe('SierraBase', function () {
   })
 
   // })
-  describe('parallel', function () {
+  xdescribe('parallel', function () {
     it('parallel objects have value prop', () => {
 
     })
