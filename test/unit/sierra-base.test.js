@@ -44,7 +44,6 @@ describe('SierraBase', function () {
       const title = record.varField('245', null, { tagSubfields: true })
       expect(title).to.be.a('array')
       expect(title[0]).to.deep.equal({
-        parallel: [],
         value: 'Niwtʻer azgayin patmutʻian hamar Ereveli hay kazunkʻ ; Parskastan / Ashkhatasirutʻiamb Galust Shermazaniani.',
         subfieldMap: {
           a: 'Niwtʻer azgayin patmutʻian hamar',
@@ -91,12 +90,19 @@ describe('SierraBase', function () {
     it('returns parallel values with no primary values', () => {
       const record = new SierraBase(require('../fixtures/bib-11606020.json'))
       const [varFieldValue] = record.varField(100, ['a'])
-      expect(varFieldValue.parallel).to.equal(undefined)
+      console.log(varFieldValue.parallel)
+      expect(varFieldValue.parallel).to.deep.equal({
+        value: 'ابن الكلبي.',
+        subfieldMap: { a: 'ابن الكلبي.' },
+        scriptCode: '(3',
+        direction: 'rtl'
+      })
       expect(!varFieldValue.value)
     })
     it('returns parallel value attached to correct primary value', () => {
       const record = new SierraBase(require('../fixtures/bib-11606020.json'))
-      const [{ value, subfieldMap, parallel }] = record.varField(130, ['a'])
+      const varField130 = record.varField(130, ['a'])
+      const [{ value, subfieldMap, parallel }] = varField130
       expect(value).to.equal('Toledot Yeshu.')
       expect(subfieldMap).to.deep.equal({
         a: 'Toledot Yeshu.'
