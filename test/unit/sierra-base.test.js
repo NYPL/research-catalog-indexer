@@ -25,16 +25,6 @@ describe('SierraBase', function () {
       expect(title).to.be.a('array')
       expect(title[0].value).to.eq('ʻOrekh ha-din be-Yiśraʾel : maʻamado, zekhuyotaṿ ṿe-ḥovotaṿ : leḳeṭ dinim ṿe-halakhot / ba-ʻarikhat S. Ginosar.')
     })
-    xit('initializes NYPL bib with lots of parallel values', function () {
-      // const record = new SierraBase(require('../fixtures/bib-11606020.json'))
-
-      expect(false)
-    })
-    xit('initializes NYPL bib orphan parallel values', function () {
-      // const record = new SierraBase(require('../fixtures/bib-11606020.json'))
-
-      expect(false)
-    })
   })
 
   describe('varField', function () {
@@ -87,14 +77,14 @@ describe('SierraBase', function () {
       expect(title).to.be.a('array')
       expect(title[0].value).to.eq('Niwtʻer azgayin patmutʻian hamar Ashkhatasirutʻiamb Galust Shermazaniani.')
     })
-    it('returns parallel values with no primary values', () => {
+    it('returns orphan parallel values (no corresponding primary)', () => {
       const record = new SierraBase(require('../fixtures/bib-11606020.json'))
       const [varFieldValue] = record.varField(100, ['a'])
       console.log(varFieldValue.parallel)
       expect(varFieldValue.parallel).to.deep.equal({
         value: 'ابن الكلبي.',
         subfieldMap: { a: 'ابن الكلبي.' },
-        scriptCode: '(3',
+        script: 'arabic',
         direction: 'rtl'
       })
       expect(!varFieldValue.value)
@@ -109,42 +99,28 @@ describe('SierraBase', function () {
       })
       expect(parallel).to.deep.equal({
         value: 'תולדות ישו.',
-        script: '(2',
-        direction: 'RTL',
+        script: 'hebrew',
+        direction: 'rtl',
         subfieldMap: {
           a: 'תולדות ישו.'
         }
       })
     })
-  })
-  describe('varFieldsMulti', () => {
-    // these tests will check on the order that orphan parallels and primaries are returned in
-  })
-
-  // })
-  xdescribe('parallel', function () {
-    it('parallel objects have value prop', () => {
-
-    })
-    it('parallel objects have subfieldMap prop', () => {
-
-    })
-    it('parallel objects have script and direction prop', () => {
-
-    })
     it('extracts correct text direction when record has multiple parallels with different text directions', function () {
       const record = new SierraBase(require('../fixtures/bib-11606020.json'))
 
-      const parallelTitle = record.parallel('245', ['a', 'b'])
-      expect(parallelTitle).to.be.a('array')
+      const title = record.varField('245', ['a', 'b'])
       // This asserts that there is no leading '\u200F' at the start of the
       // title property, confirming a bug fix related to this record, where
       // the extracted 'rtl' text direction of one 880 was incorrectly applied
       // to a different 880 that should have been tagged 'ltr'
-      expect(parallelTitle[0].value).to.eq('ספר תולדות ישו = The gospel according to the Jews, called Toldoth Jesu : the generations of Jesus, now first translated from the Hebrew.')
-      expect(parallelTitle[0].script).to.eq('(2')
-      expect(parallelTitle[0].direction).to.eq('ltr')
-      expect(parallelTitle[0].subfieldMap).to.deep.equal({ a: 'ספר תולדות ישו =', b: 'The gospel according to the Jews, called Toldoth Jesu : the generations of Jesus, now first translated from the Hebrew.' })
+      expect(title[0].parallel.value).to.eq('ספר תולדות ישו = The gospel according to the Jews, called Toldoth Jesu : the generations of Jesus, now first translated from the Hebrew.')
+      expect(title[0].parallel.script).to.eq('hebrew')
+      expect(title[0].parallel.direction).to.eq('ltr')
+      expect(title[0].parallel.subfieldMap).to.deep.equal({ a: 'ספר תולדות ישו =', b: 'The gospel according to the Jews, called Toldoth Jesu : the generations of Jesus, now first translated from the Hebrew.' })
     })
+  })
+  describe('varFieldsMulti', () => {
+    // these tests will check on the order that orphan parallels and primaries are returned in
   })
 })
