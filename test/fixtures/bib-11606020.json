@@ -249,6 +249,23 @@
       ]
     },
     {
+      "fieldTag": "y",
+      "marcTag": "880",
+      "ind1": "0",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "100-01/(3/r"
+        },
+        {
+          "tag": "a",
+          "content": "ابن الكلبي."
+        }
+      ]
+    },
+    {
       "fieldTag": "t",
       "marcTag": "245",
       "ind1": "1",
@@ -278,7 +295,7 @@
       "subfields": [
         {
           "tag": "6",
-          "content": "880-01."
+          "content": "880-01"
         },
         {
           "tag": "a",
