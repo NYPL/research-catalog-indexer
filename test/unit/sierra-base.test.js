@@ -12,7 +12,6 @@ describe('SierraBase', function () {
       // Get callnumber
       const callNum = record.varField('852', ['h'])
       expect(callNum).to.be.a('array')
-      console.log(callNum)
       expect(callNum[0].value).to.eq('*ONR 84-743')
     })
 
@@ -80,7 +79,6 @@ describe('SierraBase', function () {
     it('returns orphan parallel values (no corresponding primary)', () => {
       const record = new SierraBase(require('../fixtures/bib-11606020.json'))
       const [varFieldValue] = record.varField(100, ['a'])
-      console.log(varFieldValue.parallel)
       expect(varFieldValue.parallel).to.deep.equal({
         value: 'ابن الكلبي.',
         subfieldMap: { a: 'ابن الكلبي.' },
