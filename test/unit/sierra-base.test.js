@@ -119,6 +119,73 @@ describe('SierraBase', function () {
       expect(title[0].parallel.direction).to.eq('ltr')
       expect(title[0].parallel.subfieldMap).to.deep.equal({ a: 'ספר תולדות ישו =', b: 'The gospel according to the Jews, called Toldoth Jesu : the generations of Jesus, now first translated from the Hebrew.' })
     })
+
+    it('returns parallel value attached to correct primary value', () => {
+      const record = new SierraBase(require('../fixtures/bib-parallels-chaos.json'))
+      const varField600 = record.varField(600, ['a', 'b'])
+
+      expect(varField600).to.deep.equal([
+        {
+          value: '600 primary value a 600 primary value b',
+          subfieldMap: {
+            a: '600 primary value a',
+            b: '600 primary value b'
+          },
+          parallel: {
+            value: '600 parallel value a 600 parallel value b',
+            script: 'arabic',
+            direction: 'rtl',
+            subfieldMap: {
+              a: '600 parallel value a',
+              b: '600 parallel value b'
+            }
+          }
+        }
+      ])
+    })
+
+    it('returns orphaned parallel without any primary value in return', () => {
+      const record = new SierraBase(require('../fixtures/bib-parallels-chaos.json'))
+      const varField100 = record.varField(100, ['a', 'b'])
+
+      expect(varField100).to.deep.equal([
+        {
+          parallel: {
+            value: '100 parallel value a 100 parallel value b',
+            script: 'arabic',
+            direction: 'rtl',
+            subfieldMap: {
+              a: '100 parallel value a',
+              b: '100 parallel value b'
+            }
+          }
+        }
+      ])
+    })
+
+    it('respects excludedSubfields for parallel values', () => {
+      const record = new SierraBase(require('../fixtures/bib-parallels-chaos.json'))
+      // Specifying marc query by subfield exclusion works on parallel:
+      expect(record.varField(100, null, { excludedSubfields: ['b'] }).shift().value).to.be.a('undefined')
+      expect(record.varField(100, null, { excludedSubfields: ['b'] }).shift().parallel.value).to.eq('100 parallel value a')
+    })
+
+    it('orders orphaned parallel last, arbitrarily', () => {
+      const record = new SierraBase(require('../fixtures/bib-parallels-chaos.json'))
+      const varField200 = record.varField(200, ['a', 'b'])
+
+      expect(varField200[0].value).to.eq('200 primary value a 200 primary value b')
+      expect(varField200[0].parallel.value).to.eq('200 parallel value a 200 parallel value b')
+      expect(varField200[1].value).to.be.a('undefined')
+      expect(varField200[1].parallel.value).to.eq('200 orphaned parallel value a 200 orphaned parallel value b')
+
+      const varField300 = record.varField(300, ['a', 'b'])
+
+      expect(varField300[0].value).to.eq('300 primary value a 300 primary value b')
+      expect(varField300[0].parallel.value).to.eq('300 parallel value a 300 parallel value b')
+      expect(varField300[1].value).to.be.a('undefined')
+      expect(varField300[1].parallel.value).to.eq('300 orphaned parallel value a 300 orphaned parallel value b')
+    })
   })
   describe('varFieldsMulti', () => {
     // these tests will check on the order that orphan parallels and primaries are returned in

@@ -1,0 +1,196 @@
+{
+  "varFields": [
+    {
+      "fieldTag": "d",
+      "marcTag": "600",
+      "ind1": "0",
+      "ind2": "0",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "880-01"
+        },
+        {
+          "tag": "a",
+          "content": "600 primary value a"
+        },
+        {
+          "tag": "b",
+          "content": "600 primary value b"
+        }
+      ]
+    },
+
+    {
+      "fieldTag": "y",
+      "marcTag": "880",
+      "ind1": "0",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "600-01/(3/r"
+        },
+        {
+          "tag": "a",
+          "content": "600 parallel value a"
+        },
+        {
+          "tag": "b",
+          "content": "600 parallel value b"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "880",
+      "ind1": "0",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "100-01/(3/r"
+        },
+        {
+          "tag": "a",
+          "content": "100 parallel value a"
+        },
+        {
+          "tag": "b",
+          "content": "100 parallel value b"
+        }
+      ]
+    },
+
+    {
+      "fieldTag": "y",
+      "marcTag": "880",
+      "ind1": "0",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "200-02/(3/r"
+        },
+        {
+          "tag": "a",
+          "content": "200 orphaned parallel value a"
+        },
+        {
+          "tag": "b",
+          "content": "200 orphaned parallel value b"
+        }
+      ]
+    },
+    {
+      "fieldTag": "d",
+      "marcTag": "200",
+      "ind1": "0",
+      "ind2": "0",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "880-03"
+        },
+        {
+          "tag": "a",
+          "content": "200 primary value a"
+        },
+        {
+          "tag": "b",
+          "content": "200 primary value b"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "880",
+      "ind1": "0",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "200-03/(3/r"
+        },
+        {
+          "tag": "a",
+          "content": "200 parallel value a"
+        },
+        {
+          "tag": "b",
+          "content": "200 parallel value b"
+        }
+      ]
+    },
+
+    {
+      "fieldTag": "y",
+      "marcTag": "880",
+      "ind1": "0",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "300-05/(3/r"
+        },
+        {
+          "tag": "a",
+          "content": "300 orphaned parallel value a"
+        },
+        {
+          "tag": "b",
+          "content": "300 orphaned parallel value b"
+        }
+      ]
+    },
+    {
+      "fieldTag": "d",
+      "marcTag": "300",
+      "ind1": "0",
+      "ind2": "0",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "880-04"
+        },
+        {
+          "tag": "a",
+          "content": "300 primary value a"
+        },
+        {
+          "tag": "b",
+          "content": "300 primary value b"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "880",
+      "ind1": "0",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "300-04/(3/r"
+        },
+        {
+          "tag": "a",
+          "content": "300 parallel value a"
+        },
+        {
+          "tag": "b",
+          "content": "300 parallel value b"
+        }
+      ]
+    }
+  ]
+}
