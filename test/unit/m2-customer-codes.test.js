@@ -13,7 +13,7 @@ describe('attachM2CustomerCodes', () => {
   after(() => {
     platformApi.m2CustomerCodesForBarcodes.restore()
   })
-  it.only('attaches m2 codes', async () => {
+  it('attaches m2 codes', async () => {
     const bib = { items: () => [{ location: { code: 'mal9' }, barcode: '123' }, { location: { code: 'mal9' }, barcode: '456' }] }
     const bibWithM2Codes = await attachM2CustomerCodes(bib)
     expect(bibWithM2Codes._items.map(item => item.m2CustomerCode)).to.deep.equal(['XX', 'YY'])

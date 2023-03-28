@@ -5,7 +5,7 @@ describe('platform api client', () => {
   let apiClient
   it('creates a client if there is not one', async () => {
     apiClient = await client()
-    expect(client).to.be.an('object')
+    expect(apiClient).to.be.an('object')
   })
   it('returns existing client', async () => {
     before(() => {
