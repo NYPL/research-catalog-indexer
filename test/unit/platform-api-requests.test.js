@@ -14,6 +14,57 @@ describe('platform api methods', () => {
     genericGetStub.resetHistory()
     nullGetStub.resetHistory()
   })
+  describe('m2CustomerCodesForBarcodes', () => {
+    it('returns empty object with no barcodes', async () => [
+      await requests.m2CustomerCodesForBarcodes()
+    ])
+    it('returns populated map when there are barcodes', async () => {
+      const barcodeGetStub = () => ({ status: 200, data: [{ barcode: 123, m2CustomerCode: 'XX' }, { barcode: 456, m2CustomerCode: 'YY' }] })
+      stubPlatformApiclient(barcodeGetStub)
+
+      const barcodesMap = await requests.m2CustomerCodesForBarcodes([123, 456])
+
+      expect(barcodesMap).to.deep.equal({ 123: 'XX', 456: 'YY' })
+    })
+
+    it('recurses and returns the map - all barcodes have customercodes', async () => {
+      const numBarcodes = 5
+      const lotsOfBarcodes = Array.from(Array(numBarcodes)).map((x, i) => `${i}`)
+      const get = sinon.stub().resolves({ status: 200, data: lotsOfBarcodes.map(barcode => ({ barcode, m2CustomerCode: 'm2' + barcode })) })
+      stubPlatformApiclient(get)
+      const barcodesMap = await requests.m2CustomerCodesForBarcodes(lotsOfBarcodes, 0, {}, 2)
+      expect(get.callCount).to.equal(3)
+      expect(barcodesMap).to.deep.equal({ 0: 'm20', 1: 'm21', 2: 'm22', 3: 'm23', 4: 'm24' })
+    })
+
+    it('recurses and returns the map - not all barcodes have customercodes', async () => {
+      const numBarcodes = 5
+      const lotsOfBarcodes = Array.from(Array(numBarcodes)).map((x, i) => `${i}`)
+      const get = sinon.stub()
+      get.onFirstCall().resolves({
+        status: 200,
+        data: [{ barcode: 1, m2CustomerCode: 'm1' }]
+      })
+      get.onSecondCall().resolves({
+        status: 200,
+        data: [{ barcode: 3, m2CustomerCode: 'm3' }]
+      })
+      get.onThirdCall().resolves({ status: 400 })
+      stubPlatformApiclient(get)
+      const barcodesMap = await requests.m2CustomerCodesForBarcodes(lotsOfBarcodes, 0, {}, 2)
+      expect(get.callCount).to.equal(3)
+      expect(barcodesMap).to.deep.equal({ 1: 'm1', 3: 'm3' })
+    })
+
+    it('recurses and returns the map - no barcodes have customercodes', async () => {
+      const numBarcodes = 5
+      const lotsOfBarcodes = Array.from(Array(numBarcodes)).map((x, i) => `${i}`)
+      stubPlatformApiclient(genericGetStub)
+      const barcodesMap = await requests.m2CustomerCodesForBarcodes(lotsOfBarcodes, 0, {}, 2)
+      expect(barcodesMap).to.deep.equal({})
+    })
+  })
+
   describe('getSchema', () => {
     it('makes a get request', async () => {
       stubPlatformApiclient(genericGetStub)
