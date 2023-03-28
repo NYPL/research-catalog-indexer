@@ -71,18 +71,18 @@ describe('index handler function', () => {
     })
     it('instantiates bibs with items and holdings', () => {
       expect(bibs.filter((bib) => bib._items.length && bib._holdings.length).length).to.equal(10)
-      expect(bibs[0].items()[0]).to.be.instanceOf(SierraItem)
-      expect(bibs[0].holdings()[0]).to.be.instanceOf(SierraHolding)
+      expect(bibs[0].items()[0]).to.be.clientOf(SierraItem)
+      expect(bibs[0].holdings()[0]).to.be.clientOf(SierraHolding)
     })
     it('holdings are attached to bibs', () => {
       const bibOnHolding = bibs[0].holdings()[0].bibs()
       expect(bibOnHolding).to.have.length(1)
-      expect(bibOnHolding[0]).to.be.instanceOf(SierraBib)
+      expect(bibOnHolding[0]).to.be.clientOf(SierraBib)
     })
     it('items are attached to bibs', () => {
       const bibOnItem = bibs[0].items()[0].bibs()
       expect(bibOnItem).to.have.length(1)
-      expect(bibOnItem[0]).to.be.instanceOf(SierraBib)
+      expect(bibOnItem[0]).to.be.clientOf(SierraBib)
     })
   })
 

@@ -16,7 +16,7 @@ class Model {
 describe('toJson', () => {
   const mod = new Model({ id: 2 })
   describe('_getAllMethods', () => {
-    it('returns methods of class instance', () => {
+    it('returns methods of class client', () => {
       expect(_getAllMethods(mod)).to.deep.equal([
         '_privateMethod',
         'publicMethod'
