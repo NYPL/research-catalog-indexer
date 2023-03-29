@@ -1,6 +1,6 @@
 const expect = require('chai').expect
 const nock = require('nock')
-const NyplSourceMapper = require('../lib/utils/nypl-source-mapper')
+const NyplSourceMapper = require('../../lib/utils/nypl-source-mapper')
 
 describe('NyplSourceMapper', async function () {
   describe('nyplSourceMapping', async function () {

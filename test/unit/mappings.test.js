@@ -6,7 +6,7 @@ const {
   BibMappings,
   ItemMappings,
   HoldingMappings
-} = require('../lib/mappings/mappings')
+} = require('../../lib/mappings/mappings')
 
 describe('mappings', function () {
   describe('amendMappingsBasedOnNyplSource', function () {
