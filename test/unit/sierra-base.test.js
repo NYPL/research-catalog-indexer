@@ -1,6 +1,7 @@
 const expect = require('chai').expect
 
 const SierraBase = require('../../lib/sierra-models/base')
+const SierraBib = require('../../lib/sierra-models/bib')
 
 describe('SierraBase', function () {
   describe('constructor', function () {
@@ -186,6 +187,25 @@ describe('SierraBase', function () {
     })
   })
   describe('varFieldsMulti', () => {
-    // these tests will check on the order that orphan parallels and primaries are returned in
+    it('more paths in bib-mappings.json than fields in fixture', () => {
+      const bib = new SierraBib(require('../fixtures/bib-11606020.json'))
+      // the fixture only has a 791 field for contributorLiteral, but there
+      // are five possible tags for that field. The returned array should
+      // only have one element.
+      const mappings = [
+        { marc: '700', subfields: ['a', 'b', 'c', 'q', 'd', 'j'] },
+        { marc: '710', excludedSubfields: ['0', '6'] },
+        { marc: '711', excludedSubfields: ['0', '6'] },
+        { marc: '720', excludedSubfields: ['0', '6'] },
+        { marc: '791', excludedSubfields: ['0', '6'] }
+      ]
+      const varFields = bib.varFieldsMulti(mappings)
+      expect(varFields).to.deep.equal([
+        {
+          value: 'Schiff Collection.',
+          subfieldMap: { a: 'Schiff Collection.' }
+        }
+      ])
+    })
   })
 })
