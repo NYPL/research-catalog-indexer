@@ -43,7 +43,7 @@ describe('primary and parallel values', () => {
       expect(primaryValues(bib.varFieldsMulti(mappings))).to.deep.equal(['600 primary value a 600 primary value b'])
       expect(parallelValues(bib.varFieldsMulti(mappings))).to.deep.equal(['\u200F600 parallel value a 600 parallel value b'])
 
-      // This bib has a single 600 with a linked parallel that is tagged RTL
+      // This bib has a single orphaned parallel for marc 100 that is tagged RTL
       mappings = BibMappings.get('creatorLiteral', bib)
       expect(primaryValues(bib.varFieldsMulti(mappings))).to.deep.equal([''])
       expect(parallelValues(bib.varFieldsMulti(mappings))).to.deep.equal(['\u200F100 parallel value a 100 parallel value b'])
