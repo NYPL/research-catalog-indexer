@@ -45,7 +45,6 @@ describe('EsBib', function () {
       const esBib = new EsBib(record)
       expect(esBib.parallelTitle()).to.deep.equal(
         [
-          'ספר תולדות ישו = The gospel according to the Jews, called Toldoth Jesu : the generations of Jesus, now first translated from the Hebrew.',
           'ספר תולדות ישו = The gospel according to the Jews, called Toldoth Jesu : the generations of Jesus, now first translated from the Hebrew.'
         ]
       )
@@ -76,14 +75,14 @@ describe('EsBib', function () {
       const esBib = new EsBib(record)
       expect(esBib.contentsTitle()).to.deep.equal(
         [
-          '[v. ] 1 The Theban necropolis.',
-          '[v. ] 2. Theban temples.',
-          '[v. ] 3. Memphis (Abû Rawâsh to Dahshûr).',
-          '[v. ] 4. Lower and middle Egypt (Delta and Cairo to Asyût).',
-          '[v. ] 5. Upper Egypt: sites (Deir Rîfa to Aswân, excluding Thebes and the temples of Abydos, Dendera, Esna, Edfu, Kôm Ombo and Philae).',
-          '[v. ] 6. Upper Egypt : chief temples (excluding Thebes) : Abydos, Dendera, Esna, Edfu, Kôm Ombo, and Philae.',
-          '[v. ] 7. Nubia, the deserts, and outside Egypt / by Bertha Porter and Rosalind L.B. Moss; assisted by Ethel W. Burney.',
-          '[v. ] 8. Objects of provenance not known. pt. 1. Royal Statues. private Statues (Predynastic to Dynasty XVII) -- pt. 2. Private Statues (Dynasty XVIII to the Roman Periiod). Statues of Deities -- [pt. 3] Indices to parts 1 and 2, Statues -- pt. 4. Stelae (Dynasty XVIII to the Roman Period) 803-044-050 to 803-099-990 / by Jaromir Malek, assisted by Diana Magee and Elizabeth Miles.'
+          'The Theban necropolis.',
+          'Theban temples.',
+          'Memphis (Abû Rawâsh to Dahshûr).',
+          'Lower and middle Egypt (Delta and Cairo to Asyût).',
+          'Upper Egypt: sites (Deir Rîfa to Aswân, excluding Thebes and the temples of Abydos, Dendera, Esna, Edfu, Kôm Ombo and Philae).',
+          'Upper Egypt : chief temples (excluding Thebes) : Abydos, Dendera, Esna, Edfu, Kôm Ombo, and Philae.',
+          'Nubia, the deserts, and outside Egypt /',
+          'Objects of provenance not known. Royal Statues. private Statues (Predynastic to Dynasty XVII) -- Private Statues (Dynasty XVIII to the Roman Periiod). Statues of Deities -- Indices to parts 1 and 2, Statues -- Stelae (Dynasty XVIII to the Roman Period) 803-044-050 to 803-099-990 /'
         ]
       )
     })
@@ -93,7 +92,7 @@ describe('EsBib', function () {
     it('should return the first contributor literal, truncated to 80 characters and lower case', function () {
       const record = new SierraBib(require('../fixtures/bib-hl990000453050203941.json'))
       const esBib = new EsBib(record)
-      expect(esBib.contributor_sort()).to.equal('ginosar, sh. (shaleṿ), 1902- ed.')
+      expect(esBib.contributor_sort()).to.equal('ginosar, sh. (shaleṿ), 1902-')
     })
   })
 
@@ -103,7 +102,7 @@ describe('EsBib', function () {
       const esBib = new EsBib(record)
       expect(esBib.contributorLiteral()).to.deep.equal(
         [
-          'Ginosar, Sh. (Shaleṿ), 1902- ed.'
+          'Ginosar, Sh. (Shaleṿ), 1902-'
         ]
       )
     })
@@ -114,7 +113,7 @@ describe('EsBib', function () {
       const record = new SierraBib(require('../fixtures/bib-parallels-party.json'))
       const esBib = new EsBib(record)
       expect(esBib.parallelContributorLiteral()).to.deep.equal(
-        ['710-07/$1 parallel content for 710$a parallel content for 710$z']
+        ['parallel content for 710$a parallel content for 710$z']
       )
     })
   })
