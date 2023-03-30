@@ -15,9 +15,10 @@ describe('platform api methods', () => {
     nullGetStub.resetHistory()
   })
   describe('m2CustomerCodesForBarcodes', () => {
-    it('returns empty object with no barcodes', async () => [
-      await requests.m2CustomerCodesForBarcodes()
-    ])
+    it('returns empty object with no barcodes', async () => {
+      const codes = await requests.m2CustomerCodesForBarcodes()
+      expect(codes).to.deep.equal({})
+    })
     it('returns populated map when there are barcodes', async () => {
       const barcodeGetStub = () => ({ status: 200, data: [{ barcode: 123, m2CustomerCode: 'XX' }, { barcode: 456, m2CustomerCode: 'YY' }] })
       stubPlatformApiGetRequest(barcodeGetStub)
