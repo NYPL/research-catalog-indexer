@@ -94,71 +94,59 @@ describe('mappings', function () {
   describe('model mappers', function () {
     describe('BibMappings', function () {
       it('should have a get function that extracts from bib mappings', function () {
-        expect(BibMappings.get('title', {})).to.deep.equal(
+        expect(BibMappings.get('title', {})).to.deep.equal([
           {
-            paths: [
-              {
-                marc: '245',
-                subfields: [
-                  'a',
-                  'b'
-                ],
-                nyplSources: [
-                  'sierra-nypl',
-                  'recap-cul',
-                  'recap-pul'
-                ]
-              },
-              {
-                marc: '245',
-                subfields: [
-                  'a',
-                  'b',
-                  'c'
-                ],
-                nyplSources: [
-                  'recap-hl'
-                ]
-              }
+            marc: '245',
+            subfields: [
+              'a',
+              'b'
+            ],
+            nyplSources: [
+              'sierra-nypl',
+              'recap-cul',
+              'recap-pul'
+            ]
+          },
+          {
+            marc: '245',
+            subfields: [
+              'a',
+              'b',
+              'c'
+            ],
+            nyplSources: [
+              'recap-hl'
             ]
           }
-        )
+        ])
       })
     })
 
     describe('ItemMappings', function () {
       it('should have a get function that extracts from item mappings', function () {
-        expect(ItemMappings.get('recapCustomerCode', {})).to.deep.equal(
+        expect(ItemMappings.get('recapCustomerCode', {})).to.deep.equal([
           {
-            paths: [
-              {
-                marc: '900',
-                subfields: [
-                  'b'
-                ]
-              }
+            marc: '900',
+            subfields: [
+              'b'
             ]
           }
-        )
+        ])
       })
     })
 
     describe('HoldingMappings', function () {
       it('should have a get function that extracts from holding mappings', function () {
-        expect(HoldingMappings.get('physicalLocation', {})).to.deep.equal(
+        expect(HoldingMappings.get('physicalLocation', {})).to.deep.equal([
           {
-            paths: [
-              {
-                marc: '852',
-                subfields: [
-                  'k',
-                  'h',
-                  'i'
-                ]
-              }
+            marc: '852',
+            subfields: [
+              'k',
+              'h',
+              'i'
             ]
           }
-        )
+        ])
       })
     })
   })
