@@ -33,8 +33,7 @@ describe('EsBib', function () {
       const record = new SierraBib(require('../fixtures/bib-11606020.json'))
       const esBib = new EsBib(record)
       expect(esBib.title()).to.deep.equal(
-        ['880-02 Sefer Toldot Yeshu = The gospel according to the Jews, called Toldoth Jesu : the generations of Jesus, now first translated from the Hebrew.',
-          '880-02 Sefer Toldot Yeshu = The gospel according to the Jews, called Toldoth Jesu : the generations of Jesus, now first translated from the Hebrew.'
+        ['Sefer Toldot Yeshu = The gospel according to the Jews, called Toldoth Jesu : the generations of Jesus, now first translated from the Hebrew.'
         ]
       )
     })

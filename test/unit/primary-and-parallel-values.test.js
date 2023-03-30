@@ -10,14 +10,13 @@ describe('primary and parallel values', () => {
       const bib = new SierraBib(require('../fixtures/bib-11606020.json'))
       const mappings = BibMappings.get('title', bib)
       expect(primaryValues(bib.varFieldsMulti(mappings))).to.deep.equal(
-        ['880-02 Sefer Toldot Yeshu = The gospel according to the Jews, called Toldoth Jesu : the generations of Jesus, now first translated from the Hebrew.',
-          '880-02 Sefer Toldot Yeshu = The gospel according to the Jews, called Toldoth Jesu : the generations of Jesus, now first translated from the Hebrew.'
+        ['Sefer Toldot Yeshu = The gospel according to the Jews, called Toldoth Jesu : the generations of Jesus, now first translated from the Hebrew.'
         ]
       )
     })
   })
 
-  describe.only('parallelValues', () => {
+  describe('parallelValues', () => {
     let bib
     before(() => {
       bib = new SierraBib(require('../fixtures/bib-11606020.json'))
@@ -34,6 +33,39 @@ describe('primary and parallel values', () => {
       const mappings = BibMappings.get('contributorLiteral', bib)
       expect(parallelValues(bib.varFieldsMulti(mappings))).to.deep.equal([''])
     })
+
+    it('should navigate parallel chaos', () => {
+      bib = new SierraBib(require('../fixtures/bib-parallels-chaos.json'))
+      let mappings
+
+      // This bib has a single primary 600 with a linked parallel that is tagged RTL
+      mappings = BibMappings.get('subjectLiteral', bib)
+      expect(primaryValues(bib.varFieldsMulti(mappings))).to.deep.equal(['600 primary value a 600 primary value b'])
+      expect(parallelValues(bib.varFieldsMulti(mappings))).to.deep.equal(['\u200F600 parallel value a 600 parallel value b'])
+
+      // This bib has a single orphaned parallel for marc 100 that is tagged RTL
+      mappings = BibMappings.get('creatorLiteral', bib)
+      expect(primaryValues(bib.varFieldsMulti(mappings))).to.deep.equal([''])
+      expect(parallelValues(bib.varFieldsMulti(mappings))).to.deep.equal(['\u200F100 parallel value a 100 parallel value b'])
+
+      // This bib has a single primary 200 with a linked parallel and one orphaned parallel:
+      mappings = [{ marc: '200', subfields: ['a', 'b'] }]
+      expect(primaryValues(bib.varFieldsMulti(mappings))).to.deep.equal([
+        '200 primary value a 200 primary value b',
+        ''
+      ])
+      // Note that we're ordering the orphaned parallel last even though its $u
+      // has a subfield 6 number ('02') that is less than the non-orphaned
+      // parallel's subfield 6 number ('03'). Ideeally we would present lower-
+      // number values before higher value numbers, but orphaned parallels are
+      // rare enough that just including their value at the end of the array is
+      // sufficient for now.
+      expect(parallelValues(bib.varFieldsMulti(mappings))).to.deep.equal([
+        '\u200F200 parallel value a 200 parallel value b',
+        '\u200F200 orphaned parallel value a 200 orphaned parallel value b'
+      ])
+    })
+
     it('should append \'\u200F\' to parallel.value if direction is rtl', () => {
     })
   })
