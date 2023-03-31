@@ -1,17 +1,17 @@
 const { expect } = require('chai')
-const { instance } = require('../../lib/platform-api/client')
+const { client } = require('../../lib/platform-api/client')
 
 describe('platform api client', () => {
-  let client
+  let apiClient
   it('creates a client if there is not one', async () => {
-    client = await instance()
-    expect(client).to.be.an('object')
+    apiClient = await client()
+    expect(apiClient).to.be.an('object')
   })
   it('returns existing client', async () => {
     before(() => {
-      client = instance()
+      apiClient = client()
     })
-    const secondClient = await instance()
-    expect(secondClient).to.equal(client)
+    const secondClient = await client()
+    expect(secondClient).to.equal(apiClient)
   })
 })

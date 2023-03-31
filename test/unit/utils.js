@@ -1,14 +1,16 @@
 const sinon = require('sinon')
 
 const platformApi = require('../../lib/platform-api/client')
+
 const genericGetStub = sinon.stub().resolves({ data: {} })
 const nullGetStub = sinon.stub().resolves({})
 const errorGetStub = sinon.stub().throws()
-const stubPlatformApiInstance = (get) => sinon.stub(platformApi, 'instance').resolves({ get })
+// This is a convenience function for stubbing the platformApi.
+const stubPlatformApiGetRequest = (get) => sinon.stub(platformApi, 'client').resolves({ get })
 
 module.exports = {
   genericGetStub,
   nullGetStub,
   errorGetStub,
-  stubPlatformApiInstance
+  stubPlatformApiGetRequest
 }
