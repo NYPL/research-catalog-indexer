@@ -278,7 +278,7 @@ describe.only('EsBib', function () {
   })
   describe('updatedAt', () => {
     it('returns a new date', () => {
-      const whenIWroteThisCode = Date.now()
+      const whenIWroteThisCode = 1680896312585
       const record = new SierraBib(require('../fixtures/bib-parallels-chaos.json'))
       const esBib = new EsBib(record)
       expect(esBib.updatedAt()).to.be.above(whenIWroteThisCode)
