@@ -11,8 +11,14 @@ const logger = require('../../lib/logger')
 
 describe('elastic search requests', () => {
   let bulkSpy
+  let dateStub
+  before(() => {
+    dateStub = sinon.stub(Date, 'now').returns('11:11pm')
+  })
+  after(() => {
+    dateStub.restore()
+  })
   const records = [12345, 23456, 34567].map((uri) => ({ uri, _type: 'resource', _parent: 'mom', otherMetadata: 'meep morp' }))
-  sinon.stub(Date, 'now').returns('11:11pm')
   describe('_indexGeneric', () => {
     before(() => {
       bulkSpy = sinon.stub().callsFake((body) => Promise.resolve(body))
