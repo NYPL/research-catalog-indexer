@@ -107,9 +107,10 @@ describe.only('EsBib', function () {
   })
 
   describe('donor', () => {
-    it('should return dimensions', () => {
-      // const record = new SierraBib(require('../fixtures/bib-10001936.json'))
-      // const esBib = new EsBib(record)
+    it('should return donor', () => {
+      const record = new SierraBib(require('../fixtures/bib-11655934.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.donor()).to.deep.equal(['National Endowment for the Humanities Preservation Grant 2, 1992/1994.'])
     })
   })
 
@@ -193,15 +194,45 @@ describe.only('EsBib', function () {
     })
   })
 
-  // describe('idIsbn', () => {
-  //   it('should return array containing isbn', function () {
-  //     const record = new SierraBib(require('../fixtures/bib-hl990000453050203941.json'))
-  //     const esBib = new EsBib(record)
-  //     expect(esBib.idIsbn()).to.deep.equal(
-  //       []
-  //     )
-  //   })
-  // })
+  describe('idIsbn', () => {
+    it('should return array containing isbn without colon', function () {
+      const record = new SierraBib(require('../fixtures/bib-11806560.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.idIsbn()).to.deep.equal(['0935661204 (tr)'])
+    })
+  })
+
+  describe('idIsbn_clean', () => {
+    it('should return array containing isbn without extra characters', function () {
+      const record = new SierraBib(require('../fixtures/bib-11806560.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.idIsbn_clean()).to.deep.equal(['0935661204'])
+    })
+  })
+
+  describe('idIssn', () => {
+    it('should return array containing issn', function () {
+      const record = new SierraBib(require('../fixtures/bib-10554371.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.idIssn()).to.deep.equal(['0208-4058'])
+    })
+  })
+
+  describe('idLccn', () => {
+    it('should return array containing lccn', () => {
+      const record = new SierraBib(require('../fixtures/bib-11806560.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.idLccn()).to.deep.equal(['91060775'])
+    })
+  })
+
+  describe('idOclc', () => {
+    it('should return array containing oclc numbers', () => {
+      const record = new SierraBib(require('../fixtures/bib-11055155.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.idOclc()).to.deep.equal(['(OCoLC)2362202'])
+    })
+  })
 
   describe('parallelContributorLiteral', function () {
     it('should return parallel contributor fields', function () {
@@ -261,6 +292,14 @@ describe.only('EsBib', function () {
       const record = new SierraBib(require('../fixtures/bib-10001936.json'))
       const esBib = new EsBib(record)
       expect(esBib.nyplSource()).to.equal('sierra-nypl')
+    })
+  })
+
+  describe('partOf', () => {
+    it('should return an array of subject literals ', () => {
+      const record = new SierraBib(require('../fixtures/bib-10554618.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.partOf()).to.deep.equal(['The Devon historian, no. 5 (1972), p. 16-[22]'])
     })
   })
 

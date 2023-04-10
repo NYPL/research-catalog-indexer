@@ -864,7 +864,7 @@
       }
     ]
   },
-  "Part of": {
+"partOf": {
     "paths": [
       {
         "marc": "773",
