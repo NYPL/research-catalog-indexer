@@ -247,8 +247,58 @@ describe.only('EsBib', function () {
     it('should return array of notes', () => {
       const record = new SierraBib(require('../fixtures/bib-notes.json'))
       const esBib = new EsBib(record)
-      console.log(esBib.note())
-      expect()
+      expect(esBib.note()).to.deep.equal([
+        {
+          label: 'Title devised by cataloger.',
+          type: 'bf:note',
+          noteType: 'Note'
+        },
+        {
+          label: "Many items have photographer's handstamp on verso; some items have studio blindstamp on recto.",
+          type: 'bf:note',
+          noteType: 'Note'
+        },
+        {
+          label: 'Some photographs have captions on verso or recto.',
+          type: 'bf:note',
+          noteType: 'Note'
+        },
+        {
+          label: 'Some photographs are airbrushed; some are cropped; some have cropping marks.',
+          type: 'bf:note',
+          noteType: 'Note'
+        },
+        {
+          label: 'Collection is under copyright; permission of the copyright holder is required for duplication.',
+          type: 'bf:note',
+          noteType: 'Terms of Use'
+        },
+        {
+          label: 'Photo negatives are closed to research.',
+          type: 'bf:note',
+          noteType: 'Terms of Use'
+        },
+        {
+          label: 'Austin Hansen, known primarily as a Harlem studio photographer, has had a career in photography that spans nearly seventy years, from the mid-1920s to the present.',
+          type: 'bf:note',
+          noteType: 'Biography'
+        },
+        {
+          label: 'Finding aid:',
+          type: 'bf:note',
+          noteType: 'Indexes/Finding Aids'
+        },
+        {
+          label: "Hansen's Harlem. New York : New York Public Library, 1989.",
+          type: 'bf:note',
+          noteType: 'Publications'
+        },
+        {
+          label: 'Exhibited: "Hansen\'s Harlem," an exhibition at the Schomburg Center for Research in Black Culture, 1989.',
+          type: 'bf:note',
+          noteType: 'Exhibitions'
+        }
+      ])
     })
   })
 
