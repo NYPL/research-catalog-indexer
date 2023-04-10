@@ -63,7 +63,6 @@ describe.only('EsBib', function () {
     it('should return title transformed for sorting', function () {
       const record = new SierraBib(require('../fixtures/bib-11606020.json'))
       const esBib = new EsBib(record)
-      console.log(esBib.title_sort())
       expect(esBib.title_sort()).to.deep.equal(
         ['sefer toldot yeshu  the gospel according to the jews called toldoth jesu  the generations of jesus now first translated from the hebrew']
       )
@@ -248,7 +247,6 @@ describe.only('EsBib', function () {
     it('should return table of contents', function () {
       const record = new SierraBib(require('../fixtures/bib-11055155.json'))
       const esBib = new EsBib(record)
-      console.log(esBib.tableOfContents())
       expect(esBib.tableOfContents()).to.deep.equal(
         [
           '[v. ] 1 The Theban necropolis.',
