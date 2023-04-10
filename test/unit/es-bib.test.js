@@ -243,6 +243,15 @@ describe.only('EsBib', function () {
     })
   })
 
+  describe('note', () => {
+    it('should return array of notes', () => {
+      const record = new SierraBib(require('../fixtures/bib-notes.json'))
+      const esBib = new EsBib(record)
+      console.log(esBib.note())
+      expect()
+    })
+  })
+
   describe('tableOfContents', () => {
     it('should return table of contents', function () {
       const record = new SierraBib(require('../fixtures/bib-11055155.json'))
