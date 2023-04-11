@@ -1,0 +1,905 @@
+{
+      "id": "21071947",
+      "nyplSource": "sierra-nypl",
+      "nyplType": "bib",
+      "updatedDate": "2021-11-13T06:05:57-05:00",
+      "createdDate": "2016-08-19T02:29:20-04:00",
+      "deletedDate": null,
+      "deleted": false,
+      "locations": [
+          {
+              "code": "mal",
+              "name": "SASB - Service Desk Rm 315"
+          }
+      ],
+      "suppressed": false,
+      "lang": {
+          "code": "fre",
+          "name": "French"
+      },
+      "title": "Les chants du monde : le paysage sonore de l'ancienne Mésopotamie",
+      "author": "Rendu Loisel, Anne-Caroline, author.",
+      "materialType": {
+          "code": "a  ",
+          "value": "BOOK/TEXT"
+      },
+      "bibLevel": {
+          "code": "m",
+          "value": "MONOGRAPH"
+      },
+      "publishYear": 2016,
+      "catalogDate": "2016-08-18",
+      "country": {
+          "code": "fr ",
+          "name": "France"
+      },
+      "normTitle": "les chants du monde le paysage sonore de lancienne mésopotamie",
+      "normAuthor": "rendu loisel anne caroline author",
+      "standardNumbers": [
+          "9782810703753"
+      ],
+      "controlNumber": "953527732",
+      "fixedFields": {
+          "24": {
+              "label": "Language",
+              "value": "fre",
+              "display": "French"
+          },
+          "25": {
+              "label": "Skip",
+              "value": "4",
+              "display": null
+          },
+          "26": {
+              "label": "Location",
+              "value": "mal  ",
+              "display": "SASB - Service Desk Rm 315"
+          },
+          "27": {
+              "label": "COPIES",
+              "value": "1",
+              "display": null
+          },
+          "28": {
+              "label": "Cat. Date",
+              "value": "2016-08-18",
+              "display": null
+          },
+          "29": {
+              "label": "Bib Level",
+              "value": "m",
+              "display": "MONOGRAPH"
+          },
+          "30": {
+              "label": "Material Type",
+              "value": "a  ",
+              "display": "BOOK/TEXT"
+          },
+          "31": {
+              "label": "Bib Code 3",
+              "value": "a",
+              "display": null
+          },
+          "80": {
+              "label": "Record Type",
+              "value": "b",
+              "display": null
+          },
+          "81": {
+              "label": "Record Number",
+              "value": "21071947",
+              "display": null
+          },
+          "83": {
+              "label": "Created Date",
+              "value": "2016-08-19T02:29:20Z",
+              "display": null
+          },
+          "84": {
+              "label": "Updated Date",
+              "value": "2021-11-13T06:05:57Z",
+              "display": null
+          },
+          "85": {
+              "label": "No. of Revisions",
+              "value": "5",
+              "display": null
+          },
+          "86": {
+              "label": "Agency",
+              "value": "1",
+              "display": null
+          },
+          "89": {
+              "label": "Country",
+              "value": "fr ",
+              "display": "France"
+          },
+          "98": {
+              "label": "PDATE",
+              "value": "2021-10-25T04:59:12Z",
+              "display": null
+          },
+          "107": {
+              "label": "MARC Type",
+              "value": " ",
+              "display": null
+          }
+      },
+      "varFields": [
+          {
+              "fieldTag": "a",
+              "marcTag": "100",
+              "ind1": "1",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "Rendu Loisel, Anne-Caroline,"
+                  },
+                  {
+                      "tag": "e",
+                      "content": "author."
+                  }
+              ]
+          },
+          {
+              "fieldTag": "b",
+              "marcTag": "700",
+              "ind1": "1",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "Thomas, Ariane,"
+                  },
+                  {
+                      "tag": "e",
+                      "content": "contributor."
+                  }
+              ]
+          },
+          {
+              "fieldTag": "d",
+              "marcTag": "650",
+              "ind1": " ",
+              "ind2": "0",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "Civilization, Assyro-Babylonian."
+                  }
+              ]
+          },
+          {
+              "fieldTag": "d",
+              "marcTag": "650",
+              "ind1": " ",
+              "ind2": "0",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "Sounds"
+                  },
+                  {
+                      "tag": "z",
+                      "content": "Iraq"
+                  },
+                  {
+                      "tag": "x",
+                      "content": "History"
+                  },
+                  {
+                      "tag": "y",
+                      "content": "To 634."
+                  }
+              ]
+          },
+          {
+              "fieldTag": "d",
+              "marcTag": "651",
+              "ind1": " ",
+              "ind2": "0",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "Iraq"
+                  },
+                  {
+                      "tag": "x",
+                      "content": "Civilization"
+                  },
+                  {
+                      "tag": "y",
+                      "content": "To 634."
+                  }
+              ]
+          },
+          {
+              "fieldTag": "i",
+              "marcTag": "020",
+              "ind1": " ",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "9782810703753 (pbk.):"
+                  },
+                  {
+                      "tag": "c",
+                      "content": "24,00 EUR"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "l",
+              "marcTag": "035",
+              "ind1": " ",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "(OCoLC)953527732"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "n",
+              "marcTag": "504",
+              "ind1": " ",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "Includes bibliographical references (pages 247-265) and indexes."
+                  }
+              ]
+          },
+          {
+              "fieldTag": "n",
+              "marcTag": "505",
+              "ind1": "0",
+              "ind2": "0",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "t",
+                      "content": "Introduction : Pour une anthropologie des sons dans les textes cunéiformes --"
+                  },
+                  {
+                      "tag": "g",
+                      "content": "1."
+                  },
+                  {
+                      "tag": "t",
+                      "content": "Entendre et interpréter les sons --"
+                  },
+                  {
+                      "tag": "t",
+                      "content": "Les paysages sonores de l'ancienne Mésopotamie --"
+                  },
+                  {
+                      "tag": "t",
+                      "content": "Son et divination --"
+                  },
+                  {
+                      "tag": "t",
+                      "content": "Paysage sonore et description d'un signe --"
+                  },
+                  {
+                      "tag": "t",
+                      "content": "Identifier un son : énumération, variation, comparaisons --"
+                  },
+                  {
+                      "tag": "t",
+                      "content": "Écrire un son : les formes onomatopéiques en akkadien --"
+                  },
+                  {
+                      "tag": "t",
+                      "content": "Un mot, plusieurs réalités sonores ? --"
+                  },
+                  {
+                      "tag": "t",
+                      "content": "Quels sons pour quelles significations ? Au-delà du bruit, le message divin --"
+                  },
+                  {
+                      "tag": "t",
+                      "content": "Entre les pleurs du chat et le grincement de l'angoisse --"
+                  },
+                  {
+                      "tag": "g",
+                      "content": "2."
+                  },
+                  {
+                      "tag": "t",
+                      "content": "Les chants de la nature. Tonnerre et cris d'oiseaux --"
+                  },
+                  {
+                      "tag": "t",
+                      "content": "Le tonnerre : voix de dieu de l'orage --"
+                  },
+                  {
+                      "tag": "t",
+                      "content": "L'orage, un char en marche --"
+                  },
+                  {
+                      "tag": "t",
+                      "content": "Métaphores et zoomorphisme autour du tonnerre --"
+                  },
+                  {
+                      "tag": "t",
+                      "content": "Arithmétique et logique divinatoire --"
+                  },
+                  {
+                      "tag": "t",
+                      "content": "Au-delà de la mélodie : l'écoute et l'interprétation des chants d'oiseaux --"
+                  },
+                  {
+                      "tag": "t",
+                      "content": "Comprendre ce que disent et prédisent les oiseaux --"
+                  },
+                  {
+                      "tag": "t",
+                      "content": "Les oiseaux et leurs chants, un véritable langage --"
+                  },
+                  {
+                      "tag": "t",
+                      "content": "Le petit oiseau multicolore et son cri \"kappa\" --"
+                  },
+                  {
+                      "tag": "g",
+                      "content": "3."
+                  },
+                  {
+                      "tag": "t",
+                      "content": "Du grondement de fureur au chant de lamentation --"
+                  },
+                  {
+                      "tag": "t",
+                      "content": "Le dieu de l'orage, entre colère et bonheur --"
+                  },
+                  {
+                      "tag": "t",
+                      "content": "Adad, un dieu tonitruant et allié du roi --"
+                  },
+                  {
+                      "tag": "t",
+                      "content": "Adad, bonheur et joie du pays --"
+                  },
+                  {
+                      "tag": "t",
+                      "content": "Oiseaux et émotions : du chant de tristesse aux gazouillis d'amour --"
+                  },
+                  {
+                      "tag": "t",
+                      "content": "Krma summilsumati damamu : se lamenter comme une colombe --"
+                  },
+                  {
+                      "tag": "t",
+                      "content": "Le qadû, oiseau de malheur --"
+                  },
+                  {
+                      "tag": "t",
+                      "content": "Les oiseaux et la mort --"
+                  },
+                  {
+                      "tag": "t",
+                      "content": "Le pépiement d'amour --"
+                  },
+                  {
+                      "tag": "g",
+                      "content": "4."
+                  },
+                  {
+                      "tag": "t",
+                      "content": "Cris de joie, cris de deuil. Lorsque l'émotion intime se fait cri communautaire --"
+                  },
+                  {
+                      "tag": "t",
+                      "content": "Bonheur divin et vitalité humaine : la dimension sonore de la joie --"
+                  },
+                  {
+                      "tag": "t",
+                      "content": "Joie, vitalité et exubérance humaine --"
+                  },
+                  {
+                      "tag": "t",
+                      "content": "Bruits de la prospérité, atmosphère joyeuse et rituels collectifs --"
+                  },
+                  {
+                      "tag": "t",
+                      "content": "Du chant de la moisson aux cris de joie --"
+                  },
+                  {
+                      "tag": "t",
+                      "content": "Préliminaires à l'amour et gémissements érotiques --"
+                  },
+                  {
+                      "tag": "t",
+                      "content": "Brûlure et zoomorphisme sonore : l'imaginaire de la douleur paroxystique --"
+                  },
+                  {
+                      "tag": "t",
+                      "content": "La voix féminine et l'expression de la douleur : de l'enfantement au deuil --"
+                  },
+                  {
+                      "tag": "t",
+                      "content": "Les douleurs de l'enfantement --"
+                  },
+                  {
+                      "tag": "t",
+                      "content": "Le cri féminin qui remplit le ciel --"
+                  },
+                  {
+                      "tag": "t",
+                      "content": "Circumambulation sonore funèbre --"
+                  },
+                  {
+                      "tag": "t",
+                      "content": "La rue, la communauté et l'expression sonore des émotions --"
+                  },
+                  {
+                      "tag": "g",
+                      "content": "5."
+                  },
+                  {
+                      "tag": "t",
+                      "content": "Rugissement, grincement, hurlement : entre colère et fureur guerrière --"
+                  },
+                  {
+                      "tag": "t",
+                      "content": "L'imaginaire sonore de la colère --"
+                  },
+                  {
+                      "tag": "t",
+                      "content": "La colère, moteur et cadre de la guerre --"
+                  },
+                  {
+                      "tag": "t",
+                      "content": "La vaillance au combat, un sentiment sonore --"
+                  },
+                  {
+                      "tag": "t",
+                      "content": "De la fureur bruyante au combat mythologique dans les récits assyriens --"
+                  },
+                  {
+                      "tag": "t",
+                      "content": "Les vaincus, entre cri de deuil et silence de mort --"
+                  },
+                  {
+                      "tag": "t",
+                      "content": "Proclamations des hérauts et cris d'avertissement. --"
+                  },
+                  {
+                      "tag": "g",
+                      "content": "6."
+                  },
+                  {
+                      "tag": "t",
+                      "content": "Lorsque le mal se fait sonore --"
+                  },
+                  {
+                      "tag": "t",
+                      "content": "Bruits et hurlements démoniaques --"
+                  },
+                  {
+                      "tag": "t",
+                      "content": "Les êtres démoniaques en Mésopotamie --"
+                  },
+                  {
+                      "tag": "t",
+                      "content": "Le bruit, signe d'une présence démoniaque --"
+                  },
+                  {
+                      "tag": "t",
+                      "content": "Les animaux et les hurlements des démons --"
+                  },
+                  {
+                      "tag": "t",
+                      "content": "À l'écoute des bruits dans la maison : la voix du démon-Clameur et celle du fantôme --"
+                  },
+                  {
+                      "tag": "t",
+                      "content": "Le hurlement démoniaque : destruction et contamination --"
+                  },
+                  {
+                      "tag": "t",
+                      "content": "Le mal qui résonne comme un pot --"
+                  },
+                  {
+                      "tag": "t",
+                      "content": "Le cri et la salive qui contaminent --"
+                  },
+                  {
+                      "tag": "t",
+                      "content": "Les pleurs du nourrisson : un cri dont il faut se méfier --"
+                  },
+                  {
+                      "tag": "g",
+                      "content": "7."
+                  },
+                  {
+                      "tag": "t",
+                      "content": "Cuivre puissant et exorcismes sonores --"
+                  },
+                  {
+                      "tag": "t",
+                      "content": "Flûtes et tambours dans la chasse aux démons --"
+                  },
+                  {
+                      "tag": "t",
+                      "content": "Éclipses de Lune et tambours --"
+                  },
+                  {
+                      "tag": "t",
+                      "content": "Quand un rituel sonore est accompli indûment : l'affaire de Larsa (an 8 de Cyrus, vie siècle av. J.-C.)"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "n",
+              "marcTag": "505",
+              "ind1": "8",
+              "ind2": "0",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "t",
+                      "content": "Cuivre puissant et son cri retentissant (Utukkû Lemnùtu VII, 1. 1-97) --"
+                  },
+                  {
+                      "tag": "t",
+                      "content": "Première partie du rituel : odeur et lumière pour dissiper la sentence funeste --"
+                  },
+                  {
+                      "tag": "t",
+                      "content": "Deuxième partie du rituel : la voix de Cuivre puissant --"
+                  },
+                  {
+                      "tag": "t",
+                      "content": "Cuivre puissant, un génie bienfaisant ? --"
+                  },
+                  {
+                      "tag": "g",
+                      "content": "8."
+                  },
+                  {
+                      "tag": "t",
+                      "content": "Du grondement au murmure : les pouvoirs de la voix humaine dans les rituels et le grondement créateur de l'exorciste --"
+                  },
+                  {
+                      "tag": "t",
+                      "content": "Le murmure créateur --"
+                  },
+                  {
+                      "tag": "t",
+                      "content": "Conclusion : S'initier aux correspondances sensorielles --"
+                  },
+                  {
+                      "tag": "t",
+                      "content": "Par-delà le son, l'expérience polysensorielle."
+                  }
+              ]
+          },
+          {
+              "fieldTag": "o",
+              "marcTag": "001",
+              "ind1": " ",
+              "ind2": " ",
+              "content": "953527732",
+              "subfields": null
+          },
+          {
+              "fieldTag": "p",
+              "marcTag": "264",
+              "ind1": " ",
+              "ind2": "1",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "Toulouse :"
+                  },
+                  {
+                      "tag": "b",
+                      "content": "Presses universitaires du Midi,"
+                  },
+                  {
+                      "tag": "c",
+                      "content": "[2016]"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "p",
+              "marcTag": "264",
+              "ind1": " ",
+              "ind2": "4",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "c",
+                      "content": "copyright 2016"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "q",
+              "marcTag": "852",
+              "ind1": "8",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "h",
+                      "content": "ReCAP 16-64126"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "r",
+              "marcTag": "300",
+              "ind1": " ",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "276 pages, 12 unnumbered pages of plates :"
+                  },
+                  {
+                      "tag": "b",
+                      "content": "illustrations (chiefly color), map, charts ;"
+                  },
+                  {
+                      "tag": "c",
+                      "content": "24 cm."
+                  }
+              ]
+          },
+          {
+              "fieldTag": "r",
+              "marcTag": "336",
+              "ind1": " ",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "text"
+                  },
+                  {
+                      "tag": "b",
+                      "content": "txt"
+                  },
+                  {
+                      "tag": "2",
+                      "content": "rdacontent"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "r",
+              "marcTag": "337",
+              "ind1": " ",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "unmediated"
+                  },
+                  {
+                      "tag": "b",
+                      "content": "n"
+                  },
+                  {
+                      "tag": "2",
+                      "content": "rdamedia"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "r",
+              "marcTag": "338",
+              "ind1": " ",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "volume"
+                  },
+                  {
+                      "tag": "b",
+                      "content": "nc"
+                  },
+                  {
+                      "tag": "2",
+                      "content": "rdacarrier"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "s",
+              "marcTag": "490",
+              "ind1": "1",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "Tempus"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "s",
+              "marcTag": "830",
+              "ind1": " ",
+              "ind2": "0",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "Tempus (Toulouse, France)"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "t",
+              "marcTag": "245",
+              "ind1": "1",
+              "ind2": "4",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "Les chants du monde :"
+                  },
+                  {
+                      "tag": "b",
+                      "content": "le paysage sonore de l'ancienne Mésopotamie /"
+                  },
+                  {
+                      "tag": "c",
+                      "content": "Anne-Caroline Rendu Loisel ; avec un appendice d'Ariane Thomas."
+                  }
+              ]
+          },
+          {
+              "fieldTag": "y",
+              "marcTag": "003",
+              "ind1": " ",
+              "ind2": " ",
+              "content": "Fr-PaAMA",
+              "subfields": null
+          },
+          {
+              "fieldTag": "y",
+              "marcTag": "005",
+              "ind1": " ",
+              "ind2": " ",
+              "content": "20160712.0",
+              "subfields": null
+          },
+          {
+              "fieldTag": "y",
+              "marcTag": "008",
+              "ind1": " ",
+              "ind2": " ",
+              "content": "160712s2016    fr abdf  b    001 0 fre dcam i ",
+              "subfields": null
+          },
+          {
+              "fieldTag": "y",
+              "marcTag": "040",
+              "ind1": " ",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "Fr-PaAMA"
+                  },
+                  {
+                      "tag": "b",
+                      "content": "eng"
+                  },
+                  {
+                      "tag": "e",
+                      "content": "rda"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "y",
+              "marcTag": "043",
+              "ind1": " ",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "a-iq---"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "y",
+              "marcTag": "050",
+              "ind1": " ",
+              "ind2": "4",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "DS70.7"
+                  },
+                  {
+                      "tag": "b",
+                      "content": ".R46 2016"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "y",
+              "marcTag": "908",
+              "ind1": " ",
+              "ind2": "4",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "DS70.7"
+                  },
+                  {
+                      "tag": "b",
+                      "content": ".R46 2016"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "y",
+              "marcTag": "901",
+              "ind1": " ",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "AUXAM"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "y",
+              "marcTag": "910",
+              "ind1": " ",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "RL"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "_",
+              "marcTag": null,
+              "ind1": null,
+              "ind2": null,
+              "content": "00000cam  2200457 i 4500",
+              "subfields": null
+          }
+      ]
+  }

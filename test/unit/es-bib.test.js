@@ -97,6 +97,33 @@ describe.only('EsBib', function () {
     })
   })
 
+  describe('dates', () => {
+    it('_dateCreated returns date by publishYear', () => {
+      const record = new SierraBib(require('../fixtures/bib-10554371.json'))
+      const esBib = new EsBib(record)
+      console.log(esBib._dateCreated())
+      expect(esBib._dateCreated()).to.deep.equal(1977)
+    })
+    it('_dateCreated returns date by 008', () => {
+      const record = new SierraBib(require('../fixtures/bib-10554371.json'))
+      delete record.publishYear
+      const esBib = new EsBib(record)
+      expect(esBib._dateCreated()).to.deep.equal(1977)
+    })
+    it('dateStartYear returns _dateCreated value', () => {
+      const record = new SierraBib(require('../fixtures/bib-10554371.json'))
+      delete record.publishYear
+      const esBib = new EsBib(record)
+      expect(esBib.dateStartYear()).to.deep.equal(1977)
+    })
+    it('created returns _dateCreated value', () => {
+      const record = new SierraBib(require('../fixtures/bib-10554371.json'))
+      delete record.publishYear
+      const esBib = new EsBib(record)
+      expect(esBib.created()).to.deep.equal(1977)
+    })
+  })
+
   describe('dimensions', () => {
     it('should return dimensions', () => {
       const record = new SierraBib(require('../fixtures/bib-10001936.json'))
@@ -190,6 +217,22 @@ describe.only('EsBib', function () {
           'Ginosar, Sh. (Shaleṿ), 1902-'
         ]
       )
+    })
+  })
+
+  describe('identifier', () => {
+    it('should return array of identifiers', () => {
+      const record = new SierraBib(require('../fixtures/bib-identifiers.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.identifier()).to.deep.equal(['9782810703753 (pbk.)', '9782810703753', '(OCoLC)953527732'])
+    })
+  })
+
+  describe('identifierV2', () => {
+    it('should return array of identifiers', () => {
+      const record = new SierraBib(require('../fixtures/bib-identifiers.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.identifierV2()).to.deep.equal([{ value: '9782810703753 (pbk.)', name: 'idIsbn' }, { value: '9782810703753', name: 'idIsbn_clean' }, { value: '(OCoLC)953527732', name: 'idOclc' }])
     })
   })
 
