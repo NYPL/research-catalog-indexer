@@ -3,7 +3,7 @@ const expect = require('chai').expect
 const SierraBib = require('../../lib/sierra-models/bib')
 const EsBib = require('../../lib/es-models/bib')
 
-describe.only('EsBib', function () {
+describe('EsBib', function () {
   describe('_valueToIndexFromBasicMapping', () => {
     it('should return an array of primary values', () => {
       const field = 'title'
