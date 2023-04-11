@@ -203,6 +203,15 @@ describe.only('EsBib', function () {
   //   })
   // })
 
+  describe.only('issuance', () => {
+    it('should return issuance', function () {
+      const record = new SierraBib(require('../fixtures/bib.json'))
+      const esBib = new EsBib(record)
+      console.log(esBib.issuance())
+      expect(esBib.issuance())
+    })
+  })
+
   describe('parallelContributorLiteral', function () {
     it('should return parallel contributor fields', function () {
       const record = new SierraBib(require('../fixtures/bib-parallels-party.json'))

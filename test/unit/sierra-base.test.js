@@ -4,6 +4,9 @@ const SierraBase = require('../../lib/sierra-models/base')
 const SierraBib = require('../../lib/sierra-models/bib')
 
 describe('SierraBase', function () {
+  describe('ldr', () => {
+    it('lolll i actually have no idea :P')
+  })
   describe('constructor', function () {
     it('initializes NYPL SierraBase based on Sierra marcinjson', function () {
       const record = new SierraBase(require('../fixtures/bib-10001936.json'))
