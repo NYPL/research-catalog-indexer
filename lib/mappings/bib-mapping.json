@@ -473,7 +473,7 @@
   "issuance": {
     "paths": [
       {
-        "notes": "bibLevel.code (bibLevel.value for prefLabel)"
+        "notes": "bibLevel.code as returned by SierraBase.prototype.ldr()"
       }
     ]
   },
