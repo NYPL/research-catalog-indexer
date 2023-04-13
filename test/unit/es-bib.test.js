@@ -32,6 +32,14 @@ describe.only('EsBib', function () {
     })
   })
 
+  describe('datesOfSerialPublication', function () {
+    it('returns an array with datesOfSerialPublication', function () {
+      const record = new SierraBib(require('../fixtures/bib-10554371.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.datesOfSerialPublication()).to.deep.eq(['1-'])
+    })
+  })
+
   describe('uri', async function () {
     it('should return correctly prefixed uri for nypl bib', async function () {
       const record = new SierraBib(require('../fixtures/bib-10001936.json'))
@@ -299,6 +307,16 @@ describe.only('EsBib', function () {
     })
   })
 
+  describe('lccClassification', function () {
+    it('should return array of lccClassification', function () {
+      const record = new SierraBib(require('../fixtures/bib-11055155.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.lccClassification()).to.deep.equal(
+        ['Z7064 .P84', 'PJ1097 .P67 1927']
+      )
+    })
+  })
+
   xdescribe('note', () => {
     it('should return array of notes', () => {
       const record = new SierraBib(require('../fixtures/bib-notes.json'))
@@ -369,6 +387,37 @@ describe.only('EsBib', function () {
       ])
     })
   })
+  describe('placeOfPublication', () => {
+    it('should return array with placeOfPublication', function () {
+      const record = new SierraBib(require('../fixtures/bib-10001936.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.placeOfPublication()).to.deep.equal(['Ṛostov (Doni Vra) :'])
+    })
+  })
+
+  describe('publicationStatement', () => {
+    it('should return array with publicationStatement', function () {
+      const record = new SierraBib(require('../fixtures/bib-10001936.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.publicationStatement()).to.deep.equal(['Ṛostov (Doni Vra) : Tparan Hovhannu Tēr-Abrahamian, 1890 [i.e. 1891]'])
+    })
+  })
+
+  describe('publisherLiteral', () => {
+    it('should return array with publisherLiteral', function () {
+      const record = new SierraBib(require('../fixtures/bib-10001936.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.publisherLiteral()).to.deep.equal(['Tparan Hovhannu Tēr-Abrahamian,'])
+    })
+  })
+
+  describe('seriesStatement', () => {
+    it('should return array with seriesStatement', function () {
+      const record = new SierraBib(require('../fixtures/bib-parallels-party.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.seriesStatement()).to.deep.equal(['content for 440$a', 'content for 440$a (2)', 'content for 490$a', 'content for 800$a'])
+    })
+  })
 
   describe('tableOfContents', () => {
     it('should return table of contents', function () {
@@ -395,6 +444,26 @@ describe.only('EsBib', function () {
       const esBib = new EsBib(record)
       expect(esBib.titleAlt()).to.deep.equal(
         ['Slavica']
+      )
+    })
+  })
+
+  describe('titleDisplay', () => {
+    it('should return display titles', function () {
+      const record = new SierraBib(require('../fixtures/bib-10001936.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.titleDisplay()).to.deep.equal(
+        ['Niwtʻer azgayin patmutʻian hamar Ereveli hay kazunkʻ ; Parskastan / Ashkhatasirutʻiamb Galust Shermazaniani.']
+      )
+    })
+  })
+
+  describe('uniformTitle', () => {
+    it('should return display titles', function () {
+      const record = new SierraBib(require('../fixtures/bib-11606020.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.uniformTitle()).to.deep.equal(
+        ['Toledot Yeshu.']
       )
     })
   })
