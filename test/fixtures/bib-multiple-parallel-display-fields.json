@@ -1,0 +1,174 @@
+{
+  "id": "bib-with-multiple-parallel-display-fields",
+  "nyplSource": "sierra-nypl",
+  "nyplType": "bib",
+  "varFields": [
+    {
+        "fieldTag": "a",
+        "marcTag": "520",
+        "ind1": "1",
+        "ind2": " ",
+        "content": null,
+        "subfields": [
+            {
+                "tag": "6",
+                "content": "880-01"
+            },
+            {
+                "tag": "a",
+                "content": "520 primary value (description)"
+            }
+        ]
+    },
+    {
+        "fieldTag": "y",
+        "marcTag": "880",
+        "ind1": "1",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+            {
+                "tag": "6",
+                "content": "520-01/$1"
+            },
+            {
+                "tag": "a",
+                "content": "520 parallel value (description)"
+            }
+        ]
+    },
+
+    {
+        "fieldTag": "a",
+        "marcTag": "500",
+        "ind1": "1",
+        "ind2": " ",
+        "content": null,
+        "subfields": [
+            {
+                "tag": "6",
+                "content": "880-02"
+            },
+            {
+                "tag": "a",
+                "content": "500 primary value 1 (note)"
+            }
+        ]
+    },
+    {
+        "fieldTag": "y",
+        "marcTag": "880",
+        "ind1": "1",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+            {
+                "tag": "6",
+                "content": "500-02/$1"
+            },
+            {
+                "tag": "a",
+                "content": "500 parallel value 1 (note)"
+            }
+        ]
+    },
+
+    {
+        "fieldTag": "a",
+        "marcTag": "500",
+        "ind1": "1",
+        "ind2": " ",
+        "content": null,
+        "subfields": [
+            {
+                "tag": "a",
+                "content": "500 primary value 2 (note)"
+            }
+        ]
+    },
+
+    {
+        "fieldTag": "a",
+        "marcTag": "500",
+        "ind1": "1",
+        "ind2": " ",
+        "content": null,
+        "subfields": [
+            {
+                "tag": "6",
+                "content": "880-03"
+            },
+            {
+                "tag": "a",
+                "content": "500 primary value 3 (note)"
+            }
+        ]
+    },
+    {
+        "fieldTag": "y",
+        "marcTag": "880",
+        "ind1": "1",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+            {
+                "tag": "6",
+                "content": "500-03/$1"
+            },
+            {
+                "tag": "a",
+                "content": "500 parallel value 3 (note)"
+            }
+        ]
+    },
+
+    {
+        "fieldTag": "a",
+        "marcTag": "510",
+        "ind1": "1",
+        "ind2": " ",
+        "content": null,
+        "subfields": [
+            {
+                "tag": "a",
+                "content": "510 primary value 1 ('indexed in' note)"
+            }
+        ]
+    },
+
+    {
+        "fieldTag": "a",
+        "marcTag": "510",
+        "ind1": "1",
+        "ind2": " ",
+        "content": null,
+        "subfields": [
+            {
+                "tag": "6",
+                "content": "880-04"
+            },
+            {
+                "tag": "a",
+                "content": "510 primary value 2 ('indexed in' note)"
+            }
+        ]
+    },
+    {
+        "fieldTag": "y",
+        "marcTag": "880",
+        "ind1": "1",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+            {
+                "tag": "6",
+                "content": "510-04/$1"
+            },
+            {
+                "tag": "a",
+                "content": "510 parallel value 2 ('indexed in' note)"
+            }
+        ]
+    }
+  ]
+}

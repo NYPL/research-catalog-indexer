@@ -437,6 +437,36 @@ describe.only('EsBib', function () {
       console.log(esBib.parallelDisplayField())
       expect(esBib.parallelDisplayField()).to.deep.equal(['600 primary value a 600 primary value b'])
     })
+
+    it('handles multiple parallel display fields', () => {
+      const record = new SierraBib(require('../fixtures/bib-multiple-parallel-display-fields.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.parallelDisplayField()).to.deep.equal([
+        // There are parallels for the first and third 500 note:
+        {
+          fieldName: 'note',
+          index: 0,
+          value: '500 parallel value 1 (note)'
+        },
+        {
+          fieldName: 'note',
+          index: 2,
+          value: '500 parallel value 3 (note)'
+        },
+        // There is a parallel for the second 510 note:
+        {
+          fieldName: 'note',
+          index: 4,
+          value: '510 parallel value 2 (note)'
+        },
+        // There is a paralel for the single description note:
+        {
+          fieldName: 'description',
+          index: 0,
+          value: '520 parallel value (description)'
+        }
+      ])
+    })
   })
   describe('updatedAt', () => {
     it('returns a new date', () => {
