@@ -97,6 +97,33 @@ describe.only('EsBib', function () {
     })
   })
 
+  describe('dates', () => {
+    it('_dateCreated returns date by publishYear', () => {
+      const record = new SierraBib(require('../fixtures/bib-10554371.json'))
+      const esBib = new EsBib(record)
+      console.log(esBib._dateCreated())
+      expect(esBib._dateCreated()).to.deep.equal(1977)
+    })
+    it('_dateCreated returns date by 008', () => {
+      const record = new SierraBib(require('../fixtures/bib-10554371.json'))
+      delete record.publishYear
+      const esBib = new EsBib(record)
+      expect(esBib._dateCreated()).to.deep.equal(1977)
+    })
+    it('dateStartYear returns _dateCreated value', () => {
+      const record = new SierraBib(require('../fixtures/bib-10554371.json'))
+      delete record.publishYear
+      const esBib = new EsBib(record)
+      expect(esBib.dateStartYear()).to.deep.equal(1977)
+    })
+    it('created returns _dateCreated value', () => {
+      const record = new SierraBib(require('../fixtures/bib-10554371.json'))
+      delete record.publishYear
+      const esBib = new EsBib(record)
+      expect(esBib.created()).to.deep.equal(1977)
+    })
+  })
+
   describe('dimensions', () => {
     it('should return dimensions', () => {
       const record = new SierraBib(require('../fixtures/bib-10001936.json'))
@@ -193,6 +220,22 @@ describe.only('EsBib', function () {
     })
   })
 
+  describe('identifier', () => {
+    it('should return array of identifiers', () => {
+      const record = new SierraBib(require('../fixtures/bib-identifiers.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.identifier()).to.deep.equal(['9782810703753 (pbk.)', '9782810703753', '(OCoLC)953527732'])
+    })
+  })
+
+  describe('identifierV2', () => {
+    it('should return array of identifiers', () => {
+      const record = new SierraBib(require('../fixtures/bib-identifiers.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.identifierV2()).to.deep.equal([{ value: '9782810703753 (pbk.)', name: 'idIsbn' }, { value: '9782810703753', name: 'idIsbn_clean' }, { value: '(OCoLC)953527732', name: 'idOclc' }])
+    })
+  })
+
   describe('idIsbn', () => {
     it('should return array containing isbn without colon', function () {
       const record = new SierraBib(require('../fixtures/bib-11806560.json'))
@@ -241,6 +284,77 @@ describe.only('EsBib', function () {
       expect(esBib.parallelContributorLiteral()).to.deep.equal(
         ['parallel content for 710$a parallel content for 710$z']
       )
+    })
+  })
+
+  describe('note', () => {
+    it('should return array of notes', () => {
+      const record = new SierraBib(require('../fixtures/bib-notes.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.note()).to.deep.equal([
+        {
+          label: 'Title devised by cataloger.',
+          type: 'bf:note',
+          noteType: 'Note'
+        },
+        {
+          label: "Many items have photographer's handstamp on verso; some items have studio blindstamp on recto.",
+          type: 'bf:note',
+          noteType: 'Note'
+        },
+        {
+          label: 'Some photographs have captions on verso or recto.',
+          type: 'bf:note',
+          noteType: 'Note'
+        },
+        {
+          label: 'Some photographs are airbrushed; some are cropped; some have cropping marks.',
+          type: 'bf:note',
+          noteType: 'Note'
+        },
+        {
+          label: 'Collection is under copyright; permission of the copyright holder is required for duplication.',
+          type: 'bf:note',
+          noteType: 'Terms of Use'
+        },
+        {
+          label: 'Photo negatives are closed to research.',
+          type: 'bf:note',
+          noteType: 'Terms of Use'
+        },
+        {
+          label: 'Austin Hansen, known primarily as a Harlem studio photographer, has had a career in photography that spans nearly seventy years, from the mid-1920s to the present.',
+          type: 'bf:note',
+          noteType: 'Biography'
+        },
+        {
+          label: 'Finding aid:',
+          type: 'bf:note',
+          noteType: 'Indexes/Finding Aids'
+        },
+        {
+          label: "Hansen's Harlem. New York : New York Public Library, 1989.",
+          type: 'bf:note',
+          noteType: 'Publications'
+        },
+        {
+          label: 'Exhibited: "Hansen\'s Harlem," an exhibition at the Schomburg Center for Research in Black Culture, 1989.',
+          type: 'bf:note',
+          noteType: 'Exhibitions'
+        }
+      ])
+    })
+    it('parallel notes', () => {
+      const record = new SierraBib(require('../fixtures/bib-notes.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.note(false)).to.deep.equal([
+        { label: 'parallel 500 a', type: 'bf:note', noteType: 'Note' },
+        {
+          label: 'parallel for 545 a ',
+          type: 'bf:note',
+          noteType: 'Biography'
+        }
+      ])
     })
   })
 
@@ -303,6 +417,14 @@ describe.only('EsBib', function () {
     })
   })
 
+  describe.only('shelfMark', () => {
+    it('should return shelfmark ', () => {
+      const record = new SierraBib(require('../fixtures/bib-11655934.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.shelfMark()).to.deep.equal(['The Devon historian, no. 5 (1972), p. 16-[22]'])
+    })
+  })
+
   describe('subjectLiteral', () => {
     it('should return an array of subject literals ', () => {
       const record = new SierraBib(require('../fixtures/bib-parallels-chaos.json'))
@@ -311,8 +433,11 @@ describe.only('EsBib', function () {
     })
   })
   describe('parallelDisplayField', () => {
-    it('returns parallel publicationStatement', () => {
-
+    it('returns parallel display fields', () => {
+      const record = new SierraBib(require('../fixtures/bib-parallel-display-fields.json'))
+      const esBib = new EsBib(record)
+      console.log(esBib.parallelDisplayField())
+      expect(esBib.parallelDisplayField()).to.deep.equal(['600 primary value a 600 primary value b'])
     })
   })
   describe('updatedAt', () => {
