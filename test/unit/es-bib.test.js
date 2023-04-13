@@ -343,6 +343,18 @@ describe.only('EsBib', function () {
         }
       ])
     })
+    it('parallel notes', () => {
+      const record = new SierraBib(require('../fixtures/bib-notes.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.note(false)).to.deep.equal([
+        { label: 'parallel 500 a', type: 'bf:note', noteType: 'Note' },
+        {
+          label: 'parallel for 545 a ',
+          type: 'bf:note',
+          noteType: 'Biography'
+        }
+      ])
+    })
   })
 
   describe('tableOfContents', () => {
@@ -403,6 +415,14 @@ describe.only('EsBib', function () {
     })
   })
 
+  describe.only('shelfMark', () => {
+    it('should return shelfmark ', () => {
+      const record = new SierraBib(require('../fixtures/bib-11655934.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.shelfMark()).to.deep.equal(['The Devon historian, no. 5 (1972), p. 16-[22]'])
+    })
+  })
+
   describe('subjectLiteral', () => {
     it('should return an array of subject literals ', () => {
       const record = new SierraBib(require('../fixtures/bib-parallels-chaos.json'))
@@ -411,8 +431,11 @@ describe.only('EsBib', function () {
     })
   })
   describe('parallelDisplayField', () => {
-    it('returns parallel publicationStatement', () => {
-
+    it('returns parallel display fields', () => {
+      const record = new SierraBib(require('../fixtures/bib-parallel-display-fields.json'))
+      const esBib = new EsBib(record)
+      console.log(esBib.parallelDisplayField())
+      expect(esBib.parallelDisplayField()).to.deep.equal(['600 primary value a 600 primary value b'])
     })
   })
   describe('updatedAt', () => {
