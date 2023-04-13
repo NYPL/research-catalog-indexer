@@ -197,7 +197,8 @@ describe.only('EsBib', function () {
     it('should return array containing isbn without colon', function () {
       const record = new SierraBib(require('../fixtures/bib-11806560.json'))
       const esBib = new EsBib(record)
-      expect(esBib.idIsbn()).to.deep.equal(['0935661204 (tr)'])
+      console.log(esBib.idIsbn())
+      expect(esBib.idIsbn()).to.deep.equal([{ id: '0935661204 (tr)', type: 'bf:isbn' }])
     })
   })
 
@@ -213,7 +214,7 @@ describe.only('EsBib', function () {
     it('should return array containing issn', function () {
       const record = new SierraBib(require('../fixtures/bib-10554371.json'))
       const esBib = new EsBib(record)
-      expect(esBib.idIssn()).to.deep.equal(['0208-4058'])
+      expect(esBib.idIssn()).to.deep.equal([{ id: '0208-4058', type: 'bf:issn' }])
     })
   })
 
@@ -221,7 +222,7 @@ describe.only('EsBib', function () {
     it('should return array containing lccn', () => {
       const record = new SierraBib(require('../fixtures/bib-11806560.json'))
       const esBib = new EsBib(record)
-      expect(esBib.idLccn()).to.deep.equal(['91060775'])
+      expect(esBib.idLccn()).to.deep.equal([{ id: '91060775', type: 'bf:lccn' }])
     })
   })
 
@@ -229,7 +230,7 @@ describe.only('EsBib', function () {
     it('should return array containing oclc numbers', () => {
       const record = new SierraBib(require('../fixtures/bib-11055155.json'))
       const esBib = new EsBib(record)
-      expect(esBib.idOclc()).to.deep.equal(['(OCoLC)2362202'])
+      expect(esBib.idOclc()).to.deep.equal([{ id: '(OCoLC)2362202', type: 'bf:oclc' }])
     })
   })
 
@@ -264,13 +265,14 @@ describe.only('EsBib', function () {
 
   describe('titleAlt', () => {
     it('should return alternative titles', function () {
-      const record = new SierraBib(require('../fixtures/bib-parallels-party.json'))
+      const record = new SierraBib(require('../fixtures/bib-10554371.json'))
       const esBib = new EsBib(record)
-      expect(esBib.parallelContributorLiteral()).to.deep.equal(
-        ['parallel content for 710$a parallel content for 710$z']
+      expect(esBib.titleAlt()).to.deep.equal(
+        ['Slavica']
       )
     })
   })
+
   describe('type', function () {
     it('should return \'nypl:Item\'', function () {
       const record = new SierraBib(require('../fixtures/bib-hl990000453050203941.json'))
