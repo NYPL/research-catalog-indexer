@@ -317,8 +317,8 @@ describe.only('EsBib', function () {
     })
   })
 
-  xdescribe('note', () => {
-    it('should return array of notes', () => {
+  describe.only('note', () => {
+    it('should return array of primary note values', () => {
       const record = new SierraBib(require('../fixtures/bib-notes.json'))
       const esBib = new EsBib(record)
       expect(esBib.note()).to.deep.equal([
@@ -377,13 +377,9 @@ describe.only('EsBib', function () {
     it('parallel notes', () => {
       const record = new SierraBib(require('../fixtures/bib-notes.json'))
       const esBib = new EsBib(record)
-      expect(esBib.note(false)).to.deep.equal([
-        { label: 'parallel 500 a', type: 'bf:note', noteType: 'Note' },
-        {
-          label: 'parallel for 545 a ',
-          type: 'bf:note',
-          noteType: 'Biography'
-        }
+      expect(esBib.parallelNote()).to.deep.equal([
+        { label: 'parallel 500 a', index: 0, fieldName: 'note' },
+        { label: 'parallel for 545 a ', index: 2, fieldName: 'note' }
       ])
     })
   })
