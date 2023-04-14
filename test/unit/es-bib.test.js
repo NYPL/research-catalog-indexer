@@ -317,7 +317,7 @@ describe.only('EsBib', function () {
     })
   })
 
-  describe.only('note', () => {
+  describe('note', () => {
     it('should return array of primary note values', () => {
       const record = new SierraBib(require('../fixtures/bib-notes.json'))
       const esBib = new EsBib(record)
@@ -509,14 +509,22 @@ describe.only('EsBib', function () {
       expect(esBib.subjectLiteral()).to.deep.equal(['600 primary value a 600 primary value b'])
     })
   })
-  xdescribe('parallelDisplayField', () => {
+  describe('parallelDisplayField', () => {
     it('returns parallel display fields', () => {
       const record = new SierraBib(require('../fixtures/bib-parallel-display-fields.json'))
       const esBib = new EsBib(record)
-      console.log(esBib.parallelDisplayField())
-      expect(esBib.parallelDisplayField()).to.deep.equal(['600 primary value a 600 primary value b'])
+      expect(esBib.parallelDisplayField()).to.deep.equal([
+        {
+          fieldName: 'publicationStatement',
+          index: 0,
+          value: '长沙市 : 湖南人民出版社 : 湖南省新華書店发行, 1984.'
+        },
+        { fieldName: 'placeOfPublication', index: 0, value: '长沙市 :' },
+        { fieldName: 'editionStatement', index: 0, value: '第1版.' }
+      ])
     })
   })
+
   describe('updatedAt', () => {
     it('returns a new date', () => {
       const whenIWroteThisCode = 1680896312585
