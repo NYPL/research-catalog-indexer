@@ -244,7 +244,7 @@ describe.only('EsBib', function () {
     it('should return array of identifiers', () => {
       const record = new SierraBib(require('../fixtures/bib-identifiers.json'))
       const esBib = new EsBib(record)
-      expect(esBib.identifier()).to.deep.equal(['9782810703753 (pbk.)', '9782810703753', '(OCoLC)953527732'])
+      expect(esBib.identifier()).to.deep.equal(['9782810703753 (pbk.)', '9782810703753', '953527732'])
     })
   })
 
@@ -252,7 +252,7 @@ describe.only('EsBib', function () {
     it('should return array of identifiers', () => {
       const record = new SierraBib(require('../fixtures/bib-identifiers.json'))
       const esBib = new EsBib(record)
-      expect(esBib.identifierV2()).to.deep.equal([{ value: '9782810703753 (pbk.)', name: 'idIsbn' }, { value: '9782810703753', name: 'idIsbn_clean' }, { value: '(OCoLC)953527732', name: 'idOclc' }])
+      expect(esBib.identifierV2()).to.deep.equal([{ value: '9782810703753 (pbk.)', name: 'idIsbn' }, { value: '9782810703753', name: 'idIsbn_clean' }, { value: '953527732', name: 'idOclc' }])
     })
   })
 
@@ -293,7 +293,7 @@ describe.only('EsBib', function () {
     it('should return array containing oclc numbers', () => {
       const record = new SierraBib(require('../fixtures/bib-11055155.json'))
       const esBib = new EsBib(record)
-      expect(esBib.idOclc()).to.deep.equal([{ id: '(OCoLC)2362202', type: 'bf:oclc' }])
+      expect(esBib.idOclc()).to.deep.equal([{ id: '2362202', type: 'bf:oclc' }])
     })
   })
 
@@ -377,7 +377,7 @@ describe.only('EsBib', function () {
     it('parallel notes', () => {
       const record = new SierraBib(require('../fixtures/bib-notes.json'))
       const esBib = new EsBib(record)
-      expect(esBib.parallelNote()).to.deep.equal([
+      expect(esBib._parallelNote()).to.deep.equal([
         { label: 'parallel 500 a', index: 0, fieldName: 'note' },
         { label: 'parallel for 545 a ', index: 2, fieldName: 'note' }
       ])
@@ -494,11 +494,11 @@ describe.only('EsBib', function () {
     })
   })
 
-  xdescribe('shelfMark', () => {
+  describe('shelfMark', () => {
     it('should return shelfmark ', () => {
       const record = new SierraBib(require('../fixtures/bib-11655934.json'))
       const esBib = new EsBib(record)
-      expect(esBib.shelfMark()).to.deep.equal(['The Devon historian, no. 5 (1972), p. 16-[22]'])
+      expect(esBib.shelfMark()).to.deep.equal(['*ZAN-10228 no. 1'])
     })
   })
 
