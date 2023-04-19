@@ -240,19 +240,47 @@ describe.only('EsBib', function () {
     })
   })
 
-  xdescribe('identifier', () => {
+  describe('identifier', () => {
     it('should return array of identifiers', () => {
       const record = new SierraBib(require('../fixtures/bib-identifiers.json'))
       const esBib = new EsBib(record)
-      expect(esBib.identifier()).to.deep.equal(['9782810703753 (pbk.)', '9782810703753', '953527732'])
+      expect(esBib.identifier()).to.deep.equal([
+        'urn:bnum:21071947',
+        'urn:isbn:9782810703753 (pbk.)',
+        'urn:oclc:953527732',
+        'urn:identifier:(OCoLC)953527732',
+        'urn:identifier:ReCAP 16-64126'
+      ])
     })
   })
 
-  xdescribe('identifierV2', () => {
+  describe('identifierV2', () => {
     it('should return array of identifiers', () => {
       const record = new SierraBib(require('../fixtures/bib-identifiers.json'))
       const esBib = new EsBib(record)
-      expect(esBib.identifierV2()).to.deep.equal([{ value: '9782810703753 (pbk.)', name: 'idIsbn' }, { value: '9782810703753', name: 'idIsbn_clean' }, { value: '953527732', name: 'idOclc' }])
+
+      expect(esBib.identifierV2()).to.deep.equal([
+        {
+          value: '21071947',
+          type: 'nypl:Bnumber'
+        },
+        {
+          value: '9782810703753 (pbk.)',
+          type: 'bf:Isbn'
+        },
+        {
+          value: '953527732',
+          type: 'nypl:Oclc'
+        },
+        {
+          value: '(OCoLC)953527732',
+          type: 'bf:Identifier'
+        },
+        {
+          value: 'ReCAP 16-64126',
+          type: 'bf:ShelfMark'
+        }
+      ])
     })
   })
 
@@ -260,8 +288,7 @@ describe.only('EsBib', function () {
     it('should return array containing isbn without colon', function () {
       const record = new SierraBib(require('../fixtures/bib-11806560.json'))
       const esBib = new EsBib(record)
-      console.log(esBib.idIsbn())
-      expect(esBib.idIsbn()).to.deep.equal([{ id: '0935661204 (tr)', type: 'bf:isbn' }])
+      expect(esBib.idIsbn()).to.deep.equal(['0935661204 (tr)'])
     })
   })
 
@@ -277,7 +304,7 @@ describe.only('EsBib', function () {
     it('should return array containing issn', function () {
       const record = new SierraBib(require('../fixtures/bib-10554371.json'))
       const esBib = new EsBib(record)
-      expect(esBib.idIssn()).to.deep.equal([{ id: '0208-4058', type: 'bf:issn' }])
+      expect(esBib.idIssn()).to.deep.equal(['0208-4058'])
     })
   })
 
@@ -285,7 +312,7 @@ describe.only('EsBib', function () {
     it('should return array containing lccn', () => {
       const record = new SierraBib(require('../fixtures/bib-11806560.json'))
       const esBib = new EsBib(record)
-      expect(esBib.idLccn()).to.deep.equal([{ id: '91060775', type: 'bf:lccn' }])
+      expect(esBib.idLccn()).to.deep.equal(['91060775'])
     })
   })
 
@@ -293,7 +320,7 @@ describe.only('EsBib', function () {
     it('should return array containing oclc numbers', () => {
       const record = new SierraBib(require('../fixtures/bib-11055155.json'))
       const esBib = new EsBib(record)
-      expect(esBib.idOclc()).to.deep.equal([{ id: '2362202', type: 'bf:oclc' }])
+      expect(esBib.idOclc()).to.deep.equal(['2362202'])
     })
   })
 
@@ -531,6 +558,189 @@ describe.only('EsBib', function () {
       const record = new SierraBib(require('../fixtures/bib-parallels-chaos.json'))
       const esBib = new EsBib(record)
       expect(esBib.updatedAt()).to.be.above(whenIWroteThisCode)
+    })
+  })
+
+  describe('mediaType', () => {
+    it('defaults to unmediated', () => {
+      const record = new SierraBib({})
+      expect((new EsBib(record)).mediaType()).to.deep.equal([{
+        id: 'mediatypes:n',
+        label: 'unmediated'
+      }])
+    })
+
+    it('uses mediaTypes:h for microforms', () => {
+      const record = new SierraBib({
+        fixedFields: [
+          {
+            label: 'Material Type',
+            value: 'h',
+            display: 'MICROFORM'
+          }
+        ]
+      })
+      expect((new EsBib(record)).mediaType()).to.deep.equal([{
+        id: 'mediatypes:h',
+        label: 'microform'
+      }])
+    })
+
+    it('uses mediaTypes:c for e-audiobooks', () => {
+      const record = new SierraBib({
+        fixedFields: [
+          {
+            label: 'Material Type',
+            value: 'n',
+            display: 'E-Audiobook'
+          }
+        ]
+      })
+      expect((new EsBib(record)).mediaType()).to.deep.equal([{
+        id: 'mediatypes:c',
+        label: 'computer'
+      }])
+    })
+
+    it('trusts varfield 007 for partner record', () => {
+      const record = new SierraBib({
+        nyplSource: 'recap-pul',
+        varFields: [
+          {
+            marcTag: '007',
+            content: 'e...someothercontent'
+          }
+        ]
+      })
+      expect((new EsBib(record)).mediaType()).to.deep.equal([{
+        id: 'mediatypes:e',
+        label: 'stereographic'
+      }])
+    })
+
+    it('trusts varfield 337 for partner record', () => {
+      const record = new SierraBib({
+        nyplSource: 'recap-pul',
+        varFields: [
+          {
+            marcTag: '337',
+            subfields: [
+              { tag: 'a', content: 'some label' },
+              { tag: 'b', content: 'some-id' }
+            ]
+          }
+        ]
+      })
+      expect((new EsBib(record)).mediaType()).to.deep.equal([{
+        id: 'mediatypes:some-id',
+        label: 'some label'
+      }])
+    })
+  })
+
+  describe('mediaType_packed', () => {
+    it('packs mediaType values', () => {
+      const record = new SierraBib({})
+      expect((new EsBib(record)).mediaType_packed()).to.deep.equal([
+        'mediatypes:n||unmediated'
+      ])
+    })
+  })
+
+  describe('carrierType', () => {
+    it('defaults to unmediated', () => {
+      const record = new SierraBib({})
+      expect((new EsBib(record)).carrierType()).to.deep.equal([{
+        id: 'carriertypes:nc',
+        label: 'volume'
+      }])
+    })
+
+    it('uses 007[0,1] for Material Type h', () => {
+      const record = new SierraBib({
+        fixedFields: [
+          {
+            label: 'Material Type',
+            value: 'h',
+            display: 'MICROFORM'
+          }
+        ],
+        varFields: [
+          {
+            marcTag: '007',
+            content: 'ce...someothercontent'
+          }
+        ]
+      })
+      expect((new EsBib(record)).carrierType()).to.deep.equal([{
+        id: 'carriertypes:ce',
+        label: 'computer disc cartridge'
+      }])
+    })
+
+    it('uses 007[0,1] for Material Type m', () => {
+      const record = new SierraBib({
+        fixedFields: [
+          {
+            label: 'Material Type',
+            value: 'm'
+          }
+        ],
+        varFields: [
+          {
+            marcTag: '007',
+            content: '-o...someothercontent'
+          }
+        ]
+      })
+      expect((new EsBib(record)).carrierType()).to.deep.equal([{
+        id: 'carriertypes:cd',
+        label: 'computer disc'
+      }])
+    })
+
+    it('trusts varfield 007 for partner record', () => {
+      const record = new SierraBib({
+        nyplSource: 'recap-pul',
+        varFields: [
+          {
+            marcTag: '007',
+            content: 'cb...someothercontent'
+          }
+        ]
+      })
+      expect((new EsBib(record)).carrierType()).to.deep.equal([{
+        id: 'carriertypes:cb',
+        label: 'computer chip cartridge'
+      }])
+    })
+
+    it('trusts varfield 338 for partner record', () => {
+      const record = new SierraBib({
+        nyplSource: 'recap-pul',
+        varFields: [
+          {
+            marcTag: '338',
+            subfields: [
+              { tag: 'a', content: 'some label' },
+              { tag: 'b', content: 'some-id' }
+            ]
+          }
+        ]
+      })
+      expect((new EsBib(record)).carrierType()).to.deep.equal([{
+        id: 'carriertypes:some-id',
+        label: 'some label'
+      }])
+    })
+  })
+
+  describe('carrierType_packed', () => {
+    it('packs carrierType values', () => {
+      const record = new SierraBib({})
+      expect((new EsBib(record)).carrierType_packed()).to.deep.equal([
+        'carriertypes:nc||volume'
+      ])
     })
   })
 })

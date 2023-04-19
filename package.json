@@ -21,6 +21,7 @@
     "avsc": "^5.7.7",
     "aws-sdk": "^2.1264.0",
     "axios": "^1.2.1",
+    "csv-parse": "^5.3.8",
     "elasticsearch": "^16.7.3",
     "lodash": "^4.17.21",
     "sync-request": "^6.1.0",
