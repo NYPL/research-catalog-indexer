@@ -324,6 +324,19 @@ describe('EsBib', function () {
     })
   })
 
+  describe('issuance', () => {
+    it('should return array containing issuance object', () => {
+      const record = new SierraBib(require('../fixtures/bib-10001936.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.issuance()).to.deep.equal([{ id: 'urn:biblevelm', label: 'monograph/item' }])
+    })
+    it('should pack properly', () => {
+      const record = new SierraBib(require('../fixtures/bib-10001936.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.issuance_packed()).to.deep.equal(['urn:biblevelm||monograph/item'])
+    })
+  })
+
   describe('parallelContributorLiteral', function () {
     it('should return parallel contributor fields', function () {
       const record = new SierraBib(require('../fixtures/bib-parallels-party.json'))
@@ -494,6 +507,11 @@ describe('EsBib', function () {
   describe('type', function () {
     it('should return \'nypl:Item\'', function () {
       const record = new SierraBib(require('../fixtures/bib-hl990000453050203941.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.type()).to.equal('nypl:Item')
+    })
+    it('should return \'nypl:Collection\'', function () {
+      const record = new SierraBib(require('../fixtures/bib-10554371.json'))
       const esBib = new EsBib(record)
       expect(esBib.type()).to.equal('nypl:Item')
     })
