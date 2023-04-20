@@ -404,9 +404,13 @@ describe('EsBib', function () {
     it('parallel notes', () => {
       const record = new SierraBib(require('../fixtures/bib-notes.json'))
       const esBib = new EsBib(record)
-      expect(esBib._parallelNote()).to.deep.equal([
-        { label: 'parallel 500 a', index: 0, fieldName: 'note' },
-        { label: 'parallel for 545 a ', index: 2, fieldName: 'note' }
+      expect(esBib._parallelNotesAsDisplayFields()).to.deep.equal([
+        // This is a parallel for primary note "Title devised by cataloger.",
+        // which appears at index 0 in the note array:
+        { value: 'parallel 500 a', index: 0, fieldName: 'note' },
+        // This is a parallel for primary note "Austin Hansen, ...", which
+        // appears at index 6 in the note array:
+        { value: 'parallel for 545 a ', index: 6, fieldName: 'note' }
       ])
     })
   })
