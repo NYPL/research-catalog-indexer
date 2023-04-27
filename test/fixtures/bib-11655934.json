@@ -1,0 +1,637 @@
+{
+      "id": "11655934",
+      "nyplSource": "sierra-nypl",
+      "nyplType": "bib",
+      "updatedDate": "2021-11-06T23:31:13-04:00",
+      "createdDate": "2008-12-15T04:32:45-05:00",
+      "deletedDate": null,
+      "deleted": false,
+      "locations": [
+          {
+              "code": "mai",
+              "name": "SASB - Microforms Rm 315"
+          },
+          {
+              "code": "lsx",
+              "name": "Library Services Center - Preservation"
+          }
+      ],
+      "suppressed": false,
+      "lang": {
+          "code": "eng",
+          "name": "English"
+      },
+      "title": "Biennial report of the Board of Regents of the University of Utah [microform].",
+      "author": "University of Utah.",
+      "materialType": {
+          "code": "h  ",
+          "value": "MICROFORM"
+      },
+      "bibLevel": {
+          "code": "s",
+          "value": "SERIAL"
+      },
+      "publishYear": null,
+      "catalogDate": "2001-01-03",
+      "country": {
+          "code": "utu",
+          "name": "Utah"
+      },
+      "normTitle": "biennial report of the board of regents of the university of utah microform",
+      "normAuthor": "university of utah",
+      "standardNumbers": [],
+      "controlNumber": "NYPG92-S4323",
+      "fixedFields": {
+          "24": {
+              "label": "Language",
+              "value": "eng",
+              "display": "English"
+          },
+          "25": {
+              "label": "Skip",
+              "value": "0",
+              "display": null
+          },
+          "26": {
+              "label": "Location",
+              "value": "multi",
+              "display": null
+          },
+          "27": {
+              "label": "COPIES",
+              "value": "1",
+              "display": null
+          },
+          "28": {
+              "label": "Cat. Date",
+              "value": "2001-01-03",
+              "display": null
+          },
+          "29": {
+              "label": "Bib Level",
+              "value": "s",
+              "display": "SERIAL"
+          },
+          "30": {
+              "label": "Material Type",
+              "value": "h  ",
+              "display": "MICROFORM"
+          },
+          "31": {
+              "label": "Bib Code 3",
+              "value": "-",
+              "display": null
+          },
+          "80": {
+              "label": "Record Type",
+              "value": "b",
+              "display": null
+          },
+          "81": {
+              "label": "Record Number",
+              "value": "11655934",
+              "display": null
+          },
+          "83": {
+              "label": "Created Date",
+              "value": "2008-12-15T04:32:45Z",
+              "display": null
+          },
+          "84": {
+              "label": "Updated Date",
+              "value": "2021-11-06T23:31:13Z",
+              "display": null
+          },
+          "85": {
+              "label": "No. of Revisions",
+              "value": "8",
+              "display": null
+          },
+          "86": {
+              "label": "Agency",
+              "value": "1",
+              "display": null
+          },
+          "89": {
+              "label": "Country",
+              "value": "utu",
+              "display": "Utah"
+          },
+          "98": {
+              "label": "PDATE",
+              "value": "2021-10-18T00:09:14Z",
+              "display": null
+          },
+          "107": {
+              "label": "MARC Type",
+              "value": " ",
+              "display": null
+          }
+      },
+      "varFields": [
+          {
+              "fieldTag": "a",
+              "marcTag": "110",
+              "ind1": "2",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "University of Utah."
+                  }
+              ]
+          },
+          {
+              "fieldTag": "c",
+              "marcTag": "852",
+              "ind1": "8",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "h",
+                      "content": "*ZAN-10228 no. 1"
+                  },
+                  {
+                      "tag": "z",
+                      "content": "Library has: 1896-1897/98."
+                  },
+                  {
+                      "tag": "z",
+                      "content": "Filmed together with other titles"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "d",
+              "marcTag": "610",
+              "ind1": "2",
+              "ind2": "0",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "University of Utah"
+                  },
+                  {
+                      "tag": "v",
+                      "content": "Periodicals."
+                  }
+              ]
+          },
+          {
+              "fieldTag": "d",
+              "marcTag": "650",
+              "ind1": " ",
+              "ind2": "0",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "Education, Higher"
+                  },
+                  {
+                      "tag": "z",
+                      "content": "Utah"
+                  },
+                  {
+                      "tag": "v",
+                      "content": "Periodicals."
+                  }
+              ]
+          },
+          {
+              "fieldTag": "l",
+              "marcTag": "035",
+              "ind1": " ",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "NEH2-GRD"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "l",
+              "marcTag": "035",
+              "ind1": " ",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "(WaOLN)nyp0344063"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "l",
+              "marcTag": "947",
+              "ind1": " ",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "*ZZAN-20552"
+                  },
+                  {
+                      "tag": "z",
+                      "content": "Library has: 1896-1897/98."
+                  },
+                  {
+                      "tag": "z",
+                      "content": "Filmed together with other titles."
+                  },
+                  {
+                      "tag": "z",
+                      "content": "PRINTING MASTER (of *ZAN-10228 no. 1)"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "l",
+              "marcTag": "947",
+              "ind1": " ",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "*ZZAN-20552"
+                  },
+                  {
+                      "tag": "z",
+                      "content": "Library has: 1896-1897/98."
+                  },
+                  {
+                      "tag": "z",
+                      "content": "Filmed together with other titles."
+                  },
+                  {
+                      "tag": "z",
+                      "content": "PRESERVATION MASTER (of *ZAN-10228 no. 1)"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "n",
+              "marcTag": "533",
+              "ind1": " ",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "Microfilm."
+                  },
+                  {
+                      "tag": "m",
+                      "content": "1896-1897/98."
+                  },
+                  {
+                      "tag": "b",
+                      "content": "New York :"
+                  },
+                  {
+                      "tag": "c",
+                      "content": "New York Public Library,"
+                  },
+                  {
+                      "tag": "d",
+                      "content": "1992."
+                  },
+                  {
+                      "tag": "e",
+                      "content": "1 microfilm reel ; 35 mm."
+                  },
+                  {
+                      "tag": "f",
+                      "content": "(*ZZAN-20552)."
+                  }
+              ]
+          },
+          {
+              "fieldTag": "o",
+              "marcTag": "001",
+              "ind1": " ",
+              "ind2": " ",
+              "content": "NYPG92-S4323",
+              "subfields": null
+          },
+          {
+              "fieldTag": "p",
+              "marcTag": "260",
+              "ind1": " ",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "Salt Lake City."
+                  }
+              ]
+          },
+          {
+              "fieldTag": "q",
+              "marcTag": "852",
+              "ind1": "8",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "h",
+                      "content": "*ZAN-10228 no. 1"
+                  },
+                  {
+                      "tag": "z",
+                      "content": "Library has: 1896-1897/98."
+                  },
+                  {
+                      "tag": "z",
+                      "content": "Filmed together with other titles"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "r",
+              "marcTag": "300",
+              "ind1": " ",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "v."
+                  },
+                  {
+                      "tag": "c",
+                      "content": "23 cm."
+                  }
+              ]
+          },
+          {
+              "fieldTag": "r",
+              "marcTag": "310",
+              "ind1": " ",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "biennial,"
+                  },
+                  {
+                      "tag": "b",
+                      "content": "1897/98-<   >"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "r",
+              "marcTag": "321",
+              "ind1": " ",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "Annual,"
+                  },
+                  {
+                      "tag": "b",
+                      "content": "<   >-1896"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "t",
+              "marcTag": "245",
+              "ind1": "0",
+              "ind2": "0",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "Biennial report of the Board of Regents of the University of Utah"
+                  },
+                  {
+                      "tag": "h",
+                      "content": "[microform]."
+                  }
+              ]
+          },
+          {
+              "fieldTag": "u",
+              "marcTag": "247",
+              "ind1": "0",
+              "ind2": "0",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "Reports of Regents and of the President"
+                  },
+                  {
+                      "tag": "f",
+                      "content": "-1896"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "u",
+              "marcTag": "299",
+              "ind1": "0",
+              "ind2": "0",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "Biennial report of the Board of Regents of the University of Utah."
+                  }
+              ]
+          },
+          {
+              "fieldTag": "u",
+              "marcTag": "299",
+              "ind1": "1",
+              "ind2": "0",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "Reports of Regents and of the President"
+                  },
+                  {
+                      "tag": "f",
+                      "content": "-1896."
+                  }
+              ]
+          },
+          {
+              "fieldTag": "u",
+              "marcTag": "799",
+              "ind1": " ",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "National Endowment for the Humanities Preservation Grant 2, 1992/1994."
+                  }
+              ]
+          },
+          {
+              "fieldTag": "v",
+              "marcTag": "959",
+              "ind1": " ",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": ".b26907628"
+                  },
+                  {
+                      "tag": "b",
+                      "content": "11-26-08"
+                  },
+                  {
+                      "tag": "c",
+                      "content": "03-29-93"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "y",
+              "marcTag": "005",
+              "ind1": " ",
+              "ind2": " ",
+              "content": "20000925124805.1",
+              "subfields": null
+          },
+          {
+              "fieldTag": "y",
+              "marcTag": "007",
+              "ind1": " ",
+              "ind2": " ",
+              "content": "hd afa---baca",
+              "subfields": null
+          },
+          {
+              "fieldTag": "y",
+              "marcTag": "007",
+              "ind1": " ",
+              "ind2": " ",
+              "content": "hd bfa---baba",
+              "subfields": null
+          },
+          {
+              "fieldTag": "y",
+              "marcTag": "008",
+              "ind1": " ",
+              "ind2": " ",
+              "content": "920729d18uu1uuuutugr   a     0    1eng dcas   ",
+              "subfields": null
+          },
+          {
+              "fieldTag": "y",
+              "marcTag": "040",
+              "ind1": " ",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "NN"
+                  },
+                  {
+                      "tag": "c",
+                      "content": "NN"
+                  },
+                  {
+                      "tag": "d",
+                      "content": "WaOLN"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "y",
+              "marcTag": "043",
+              "ind1": " ",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "n-us-ut"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "y",
+              "marcTag": "997",
+              "ind1": " ",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "hf"
+                  },
+                  {
+                      "tag": "b",
+                      "content": "01-03-01"
+                  },
+                  {
+                      "tag": "c",
+                      "content": "s"
+                  },
+                  {
+                      "tag": "d",
+                      "content": "a"
+                  },
+                  {
+                      "tag": "e",
+                      "content": "-"
+                  },
+                  {
+                      "tag": "f",
+                      "content": "eng"
+                  },
+                  {
+                      "tag": "g",
+                      "content": "utu"
+                  },
+                  {
+                      "tag": "h",
+                      "content": "0"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "y",
+              "marcTag": "910",
+              "ind1": " ",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "RL"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "_",
+              "marcTag": null,
+              "ind1": null,
+              "ind2": null,
+              "content": "00000cas  2200349   4500",
+              "subfields": null
+          }
+      ]
+  }

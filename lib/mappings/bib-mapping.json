@@ -13,7 +13,7 @@
       }
     ]
   },
-  "alternativeTitle": {
+  "titleAlt": {
     "paths": [
       {
         "marc": "210",
@@ -89,7 +89,7 @@
       }
     ]
   },
-  "contents": {
+  "tableOfContents": {
     "paths": [
       {
         "marc": "505",
@@ -473,7 +473,7 @@
   "issuance": {
     "paths": [
       {
-        "notes": "bibLevel.code (bibLevel.value for prefLabel)"
+        "notes": "bibLevel.code as returned by SierraBase.prototype.ldr()"
       }
     ]
   },
@@ -864,7 +864,7 @@
       }
     ]
   },
-  "Part of": {
+"partOf": {
     "paths": [
       {
         "marc": "773",

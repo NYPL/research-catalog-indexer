@@ -1,0 +1,664 @@
+{
+      "id": "11270770",
+      "nyplSource": "sierra-nypl",
+      "nyplType": "bib",
+      "updatedDate": "2021-11-06T00:35:53-04:00",
+      "createdDate": "2008-12-14T20:43:29-05:00",
+      "deletedDate": null,
+      "deleted": false,
+      "locations": [
+          {
+              "code": "mal",
+              "name": "SASB - Service Desk Rm 315"
+          }
+      ],
+      "suppressed": false,
+      "lang": {
+          "code": "chi",
+          "name": "Chinese"
+      },
+      "title": "Gu Xiang wen xue ping lun xuan.",
+      "author": "Gu, Xiang.",
+      "materialType": {
+          "code": "a  ",
+          "value": "BOOK/TEXT"
+      },
+      "bibLevel": {
+          "code": "m",
+          "value": "MONOGRAPH"
+      },
+      "publishYear": 1984,
+      "catalogDate": "2002-12-07",
+      "country": {
+          "code": "cc ",
+          "name": "China"
+      },
+      "normTitle": "gu xiang wen xue ping lun xuan",
+      "normAuthor": "gu xiang",
+      "standardNumbers": [],
+      "controlNumber": "NYPO90-B2436",
+      "fixedFields": {
+          "24": {
+              "label": "Language",
+              "value": "chi",
+              "display": "Chinese"
+          },
+          "25": {
+              "label": "Skip",
+              "value": "0",
+              "display": null
+          },
+          "26": {
+              "label": "Location",
+              "value": "mal  ",
+              "display": "SASB - Service Desk Rm 315"
+          },
+          "27": {
+              "label": "COPIES",
+              "value": "1",
+              "display": null
+          },
+          "28": {
+              "label": "Cat. Date",
+              "value": "2002-12-07",
+              "display": null
+          },
+          "29": {
+              "label": "Bib Level",
+              "value": "m",
+              "display": "MONOGRAPH"
+          },
+          "30": {
+              "label": "Material Type",
+              "value": "a  ",
+              "display": "BOOK/TEXT"
+          },
+          "31": {
+              "label": "Bib Code 3",
+              "value": "-",
+              "display": null
+          },
+          "80": {
+              "label": "Record Type",
+              "value": "b",
+              "display": null
+          },
+          "81": {
+              "label": "Record Number",
+              "value": "11270770",
+              "display": null
+          },
+          "83": {
+              "label": "Created Date",
+              "value": "2008-12-14T20:43:29Z",
+              "display": null
+          },
+          "84": {
+              "label": "Updated Date",
+              "value": "2021-11-06T00:35:53Z",
+              "display": null
+          },
+          "85": {
+              "label": "No. of Revisions",
+              "value": "11",
+              "display": null
+          },
+          "86": {
+              "label": "Agency",
+              "value": "1",
+              "display": null
+          },
+          "89": {
+              "label": "Country",
+              "value": "cc ",
+              "display": "China"
+          },
+          "98": {
+              "label": "PDATE",
+              "value": "2021-10-17T21:48:34Z",
+              "display": null
+          },
+          "107": {
+              "label": "MARC Type",
+              "value": " ",
+              "display": null
+          }
+      },
+      "varFields": [
+          {
+              "fieldTag": "a",
+              "marcTag": "100",
+              "ind1": "1",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "6",
+                      "content": "880-01"
+                  },
+                  {
+                      "tag": "a",
+                      "content": "Gu, Xiang."
+                  }
+              ]
+          },
+          {
+              "fieldTag": "c",
+              "marcTag": "852",
+              "ind1": "8",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "h",
+                      "content": "*OVB 90-4464"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "d",
+              "marcTag": "650",
+              "ind1": " ",
+              "ind2": "0",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "Chinese literature"
+                  },
+                  {
+                      "tag": "y",
+                      "content": "20th century"
+                  },
+                  {
+                      "tag": "x",
+                      "content": "History and criticism."
+                  }
+              ]
+          },
+          {
+              "fieldTag": "e",
+              "marcTag": "250",
+              "ind1": " ",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "6",
+                      "content": "880-03"
+                  },
+                  {
+                      "tag": "a",
+                      "content": "Di 1 ban."
+                  }
+              ]
+          },
+          {
+              "fieldTag": "l",
+              "marcTag": "010",
+              "ind1": " ",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "85197662 /ACN"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "n",
+              "marcTag": "504",
+              "ind1": " ",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "Includes bibliographical references."
+                  }
+              ]
+          },
+          {
+              "fieldTag": "n",
+              "marcTag": "546",
+              "ind1": " ",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "In Chinese."
+                  }
+              ]
+          },
+          {
+              "fieldTag": "o",
+              "marcTag": "001",
+              "ind1": " ",
+              "ind2": " ",
+              "content": "NYPO90-B2436",
+              "subfields": null
+          },
+          {
+              "fieldTag": "p",
+              "marcTag": "260",
+              "ind1": " ",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "6",
+                      "content": "880-04"
+                  },
+                  {
+                      "tag": "a",
+                      "content": "Changsha Shi :"
+                  },
+                  {
+                      "tag": "b",
+                      "content": "Hunan ren min chu ban she :"
+                  },
+                  {
+                      "tag": "b",
+                      "content": "Hunan sheng xin hua shu dian fa xing,"
+                  },
+                  {
+                      "tag": "c",
+                      "content": "1984."
+                  }
+              ]
+          },
+          {
+              "fieldTag": "q",
+              "marcTag": "852",
+              "ind1": "8",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "h",
+                      "content": "*OVB 90-4464"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "r",
+              "marcTag": "300",
+              "ind1": " ",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "3, 3, 276 p., [1] leaf of plates :"
+                  },
+                  {
+                      "tag": "b",
+                      "content": "port. ;"
+                  },
+                  {
+                      "tag": "c",
+                      "content": "21 cm."
+                  }
+              ]
+          },
+          {
+              "fieldTag": "s",
+              "marcTag": "490",
+              "ind1": "0",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "6",
+                      "content": "880-05"
+                  },
+                  {
+                      "tag": "a",
+                      "content": "Zhongguo dang dai wen xue ping lun cong shu"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "t",
+              "marcTag": "245",
+              "ind1": "1",
+              "ind2": "0",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "6",
+                      "content": "880-02"
+                  },
+                  {
+                      "tag": "a",
+                      "content": "Gu Xiang wen xue ping lun xuan."
+                  }
+              ]
+          },
+          {
+              "fieldTag": "v",
+              "marcTag": "959",
+              "ind1": " ",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": ".b22968052"
+                  },
+                  {
+                      "tag": "b",
+                      "content": "01-11-08"
+                  },
+                  {
+                      "tag": "c",
+                      "content": "08-30-91"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "y",
+              "marcTag": "003",
+              "ind1": " ",
+              "ind2": " ",
+              "content": "CStRLIN",
+              "subfields": null
+          },
+          {
+              "fieldTag": "y",
+              "marcTag": "005",
+              "ind1": " ",
+              "ind2": " ",
+              "content": "20021115104341.0",
+              "subfields": null
+          },
+          {
+              "fieldTag": "y",
+              "marcTag": "008",
+              "ind1": " ",
+              "ind2": " ",
+              "content": "900509s1984    cc cf    b    00010 chi  cam a ",
+              "subfields": null
+          },
+          {
+              "fieldTag": "y",
+              "marcTag": "040",
+              "ind1": " ",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "d",
+                      "content": "NN"
+                  },
+                  {
+                      "tag": "d",
+                      "content": "CStRLIN"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "y",
+              "marcTag": "043",
+              "ind1": " ",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "a-cc---"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "y",
+              "marcTag": "050",
+              "ind1": "0",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "PL2303"
+                  },
+                  {
+                      "tag": "b",
+                      "content": ".K8 1984 <Orien China>"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "y",
+              "marcTag": "908",
+              "ind1": "0",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "PL2303"
+                  },
+                  {
+                      "tag": "b",
+                      "content": ".K8 1984 <Orien China>"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "y",
+              "marcTag": "066",
+              "ind1": " ",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "c",
+                      "content": "$1"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "y",
+              "marcTag": "880",
+              "ind1": "1",
+              "ind2": "0",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "6",
+                      "content": "100-01/$1"
+                  },
+                  {
+                      "tag": "a",
+                      "content": "顾骧."
+                  }
+              ]
+          },
+          {
+              "fieldTag": "y",
+              "marcTag": "880",
+              "ind1": "1",
+              "ind2": "0",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "6",
+                      "content": "245-02/$1"
+                  },
+                  {
+                      "tag": "a",
+                      "content": "顾骧文学评论选."
+                  }
+              ]
+          },
+          {
+              "fieldTag": "y",
+              "marcTag": "880",
+              "ind1": " ",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "6",
+                      "content": "250-03/$1"
+                  },
+                  {
+                      "tag": "a",
+                      "content": "第1版."
+                  }
+              ]
+          },
+          {
+              "fieldTag": "y",
+              "marcTag": "880",
+              "ind1": " ",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "6",
+                      "content": "260-04/$1"
+                  },
+                  {
+                      "tag": "a",
+                      "content": "长沙市 :"
+                  },
+                  {
+                      "tag": "b",
+                      "content": "湖南人民出版社 :"
+                  },
+                  {
+                      "tag": "b",
+                      "content": "湖南省新華書店发行,"
+                  },
+                  {
+                      "tag": "c",
+                      "content": "1984."
+                  }
+              ]
+          },
+          {
+              "fieldTag": "y",
+              "marcTag": "880",
+              "ind1": "0",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "6",
+                      "content": "490-05/$1"
+                  },
+                  {
+                      "tag": "a",
+                      "content": "中国当代文学评论丛书"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "y",
+              "marcTag": "987",
+              "ind1": " ",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "PINYIN"
+                  },
+                  {
+                      "tag": "b",
+                      "content": "CStRLIN"
+                  },
+                  {
+                      "tag": "c",
+                      "content": "20001213"
+                  },
+                  {
+                      "tag": "d",
+                      "content": "c"
+                  },
+                  {
+                      "tag": "e",
+                      "content": "1.0"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "y",
+              "marcTag": "997",
+              "ind1": " ",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "ho"
+                  },
+                  {
+                      "tag": "b",
+                      "content": "12-07-02"
+                  },
+                  {
+                      "tag": "c",
+                      "content": "m"
+                  },
+                  {
+                      "tag": "d",
+                      "content": "a"
+                  },
+                  {
+                      "tag": "e",
+                      "content": "-"
+                  },
+                  {
+                      "tag": "f",
+                      "content": "chi"
+                  },
+                  {
+                      "tag": "g",
+                      "content": "cc "
+                  },
+                  {
+                      "tag": "h",
+                      "content": "0"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "y",
+              "marcTag": "991",
+              "ind1": " ",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "y",
+                      "content": "15409247"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "y",
+              "marcTag": "910",
+              "ind1": " ",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "RL"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "_",
+              "marcTag": null,
+              "ind1": null,
+              "ind2": null,
+              "content": "00000cam  2200361 a 4500",
+              "subfields": null
+          }
+      ]
+  }

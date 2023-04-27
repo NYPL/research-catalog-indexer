@@ -1,0 +1,2255 @@
+{
+    "id": "12017637",
+    "nyplSource": "sierra-nypl",
+    "nyplType": "bib",
+    "updatedDate": "2022-05-07T14:41:22-04:00",
+    "createdDate": "2008-12-15T15:33:00-05:00",
+    "deletedDate": null,
+    "deleted": false,
+    "locations": [
+        {
+            "code": "sce",
+            "name": "Schomburg Center - Photographs & Prints"
+        }
+    ],
+    "suppressed": false,
+    "lang": {
+        "code": "eng",
+        "name": "English"
+    },
+    "title": "Austin Hansen collection [graphic]",
+    "author": "Hansen, Austin, 1910-1996, photographer.",
+    "materialType": {
+        "code": "k  ",
+        "value": "PICTURE"
+    },
+    "bibLevel": {
+        "code": "c",
+        "value": "COLLECTION"
+    },
+    "publishYear": 198,
+    "catalogDate": "2000-10-31",
+    "country": {
+        "code": "xxu",
+        "name": "United States"
+    },
+    "normTitle": "austin hansen collection graphic",
+    "normAuthor": "hansen austin 1910 1996 photographer",
+    "standardNumbers": [],
+    "controlNumber": "NYPG95-F8",
+    "fixedFields": {
+        "24": {
+            "label": "Language",
+            "value": "eng",
+            "display": "English"
+        },
+        "25": {
+            "label": "Skip",
+            "value": "0",
+            "display": null
+        },
+        "26": {
+            "label": "Location",
+            "value": "sce  ",
+            "display": "Schomburg Center - Photographs & Prints"
+        },
+        "27": {
+            "label": "COPIES",
+            "value": "216",
+            "display": null
+        },
+        "28": {
+            "label": "Cat. Date",
+            "value": "2000-10-31",
+            "display": null
+        },
+        "29": {
+            "label": "Bib Level",
+            "value": "c",
+            "display": "COLLECTION"
+        },
+        "30": {
+            "label": "Material Type",
+            "value": "k  ",
+            "display": "PICTURE"
+        },
+        "31": {
+            "label": "Bib Code 3",
+            "value": "-",
+            "display": null
+        },
+        "80": {
+            "label": "Record Type",
+            "value": "b",
+            "display": null
+        },
+        "81": {
+            "label": "Record Number",
+            "value": "12017637",
+            "display": null
+        },
+        "83": {
+            "label": "Created Date",
+            "value": "2008-12-15T15:33:00Z",
+            "display": null
+        },
+        "84": {
+            "label": "Updated Date",
+            "value": "2022-05-07T14:41:22Z",
+            "display": null
+        },
+        "85": {
+            "label": "No. of Revisions",
+            "value": "20",
+            "display": null
+        },
+        "86": {
+            "label": "Agency",
+            "value": "1",
+            "display": null
+        },
+        "89": {
+            "label": "Country",
+            "value": "xxu",
+            "display": "United States"
+        },
+        "98": {
+            "label": "PDATE",
+            "value": "2022-02-09T16:43:00Z",
+            "display": null
+        },
+        "107": {
+            "label": "MARC Type",
+            "value": " ",
+            "display": null
+        }
+    },
+    "varFields": [
+        {
+            "fieldTag": "a",
+            "marcTag": "100",
+            "ind1": "1",
+            "ind2": " ",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "Hansen, Austin,"
+                },
+                {
+                    "tag": "d",
+                    "content": "1910-1996,"
+                },
+                {
+                    "tag": "e",
+                    "content": "photographer."
+                }
+            ]
+        },
+        {
+            "fieldTag": "b",
+            "marcTag": "700",
+            "ind1": "1",
+            "ind2": " ",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "Hansen, Aubrey."
+                }
+            ]
+        },
+        {
+            "fieldTag": "b",
+            "marcTag": "710",
+            "ind1": "2",
+            "ind2": " ",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "A. Hansen Studio (New York, N.Y.)"
+                }
+            ]
+        },
+        {
+            "fieldTag": "c",
+            "marcTag": "852",
+            "ind1": "8",
+            "ind2": " ",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "h",
+                    "content": "Sc Photo Austin Hansen Collection"
+                }
+            ]
+        },
+        {
+            "fieldTag": "d",
+            "marcTag": "600",
+            "ind1": "1",
+            "ind2": "0",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "Bethune, Mary McLeod,"
+                },
+                {
+                    "tag": "d",
+                    "content": "1875-1955."
+                }
+            ]
+        },
+        {
+            "fieldTag": "d",
+            "marcTag": "600",
+            "ind1": "1",
+            "ind2": "0",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "Bryant, Willie,"
+                },
+                {
+                    "tag": "d",
+                    "content": "1908-1964."
+                }
+            ]
+        },
+        {
+            "fieldTag": "d",
+            "marcTag": "600",
+            "ind1": "1",
+            "ind2": "0",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "Jack, Hulan E."
+                }
+            ]
+        },
+        {
+            "fieldTag": "d",
+            "marcTag": "600",
+            "ind1": "1",
+            "ind2": "0",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "King, Coretta Scott,"
+                },
+                {
+                    "tag": "d",
+                    "content": "1927-2006."
+                }
+            ]
+        },
+        {
+            "fieldTag": "d",
+            "marcTag": "600",
+            "ind1": "1",
+            "ind2": "0",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "Lee, Canada."
+                }
+            ]
+        },
+        {
+            "fieldTag": "d",
+            "marcTag": "600",
+            "ind1": "1",
+            "ind2": "0",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "Louis, Joe,"
+                },
+                {
+                    "tag": "d",
+                    "content": "1914-1981."
+                }
+            ]
+        },
+        {
+            "fieldTag": "d",
+            "marcTag": "600",
+            "ind1": "1",
+            "ind2": "0",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "Powell, A. Clayton"
+                },
+                {
+                    "tag": "q",
+                    "content": "(Adam Clayton),"
+                },
+                {
+                    "tag": "d",
+                    "content": "1865-1953."
+                }
+            ]
+        },
+        {
+            "fieldTag": "d",
+            "marcTag": "600",
+            "ind1": "1",
+            "ind2": "0",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "Powell, Adam Clayton,"
+                },
+                {
+                    "tag": "c",
+                    "content": "Jr.,"
+                },
+                {
+                    "tag": "d",
+                    "content": "1908-1972."
+                }
+            ]
+        },
+        {
+            "fieldTag": "d",
+            "marcTag": "600",
+            "ind1": "1",
+            "ind2": "0",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "Randolph, A. Philip"
+                },
+                {
+                    "tag": "q",
+                    "content": "(Asa Philip),"
+                },
+                {
+                    "tag": "d",
+                    "content": "1889-1979."
+                }
+            ]
+        },
+        {
+            "fieldTag": "d",
+            "marcTag": "600",
+            "ind1": "1",
+            "ind2": "0",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "Robinson, Jackie,"
+                },
+                {
+                    "tag": "d",
+                    "content": "1919-1972."
+                }
+            ]
+        },
+        {
+            "fieldTag": "d",
+            "marcTag": "600",
+            "ind1": "1",
+            "ind2": "0",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "Roosevelt, Eleanor,"
+                },
+                {
+                    "tag": "d",
+                    "content": "1884-1962."
+                }
+            ]
+        },
+        {
+            "fieldTag": "d",
+            "marcTag": "600",
+            "ind1": "1",
+            "ind2": "0",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "Tobias, Channing H."
+                }
+            ]
+        },
+        {
+            "fieldTag": "d",
+            "marcTag": "610",
+            "ind1": "2",
+            "ind2": "0",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "Abyssinian Baptist Church (New York, N.Y.)"
+                }
+            ]
+        },
+        {
+            "fieldTag": "d",
+            "marcTag": "610",
+            "ind1": "2",
+            "ind2": "0",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "African Methodist Episcopal Church"
+                },
+                {
+                    "tag": "z",
+                    "content": "New York (State)"
+                },
+                {
+                    "tag": "z",
+                    "content": "New York."
+                }
+            ]
+        },
+        {
+            "fieldTag": "d",
+            "marcTag": "610",
+            "ind1": "2",
+            "ind2": "0",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "African Methodist Episcopal Zion Church"
+                },
+                {
+                    "tag": "z",
+                    "content": "New York (State)"
+                },
+                {
+                    "tag": "z",
+                    "content": "New York."
+                }
+            ]
+        },
+        {
+            "fieldTag": "d",
+            "marcTag": "610",
+            "ind1": "2",
+            "ind2": "0",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "Ancient Egyptian Arabic Order Nobles of the Mystic Shrine, Inc. (Prince Hall Affiliated)"
+                }
+            ]
+        },
+        {
+            "fieldTag": "d",
+            "marcTag": "610",
+            "ind1": "2",
+            "ind2": "0",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "Cathedral of St. John the Divine (New York, N.Y.)"
+                }
+            ]
+        },
+        {
+            "fieldTag": "d",
+            "marcTag": "610",
+            "ind1": "2",
+            "ind2": "0",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "Freemasons."
+                },
+                {
+                    "tag": "b",
+                    "content": "Prince Hall Grand Lodge (N.Y.)"
+                }
+            ]
+        },
+        {
+            "fieldTag": "d",
+            "marcTag": "610",
+            "ind1": "2",
+            "ind2": "0",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "Daughters of Improved, Benevolent, Protective Order of Elks of the World."
+                }
+            ]
+        },
+        {
+            "fieldTag": "d",
+            "marcTag": "610",
+            "ind1": "1",
+            "ind2": "0",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "New York (N.Y.)."
+                },
+                {
+                    "tag": "b",
+                    "content": "Police Department."
+                }
+            ]
+        },
+        {
+            "fieldTag": "d",
+            "marcTag": "610",
+            "ind1": "1",
+            "ind2": "0",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "United States."
+                },
+                {
+                    "tag": "b",
+                    "content": "Navy"
+                },
+                {
+                    "tag": "x",
+                    "content": "African Americans."
+                }
+            ]
+        },
+        {
+            "fieldTag": "d",
+            "marcTag": "610",
+            "ind1": "2",
+            "ind2": "0",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "National Association of Negro Business and Professional Women's Clubs."
+                },
+                {
+                    "tag": "b",
+                    "content": "New York Club."
+                }
+            ]
+        },
+        {
+            "fieldTag": "d",
+            "marcTag": "610",
+            "ind1": "2",
+            "ind2": "0",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "Order of the Eastern Star."
+                }
+            ]
+        },
+        {
+            "fieldTag": "d",
+            "marcTag": "610",
+            "ind1": "2",
+            "ind2": "0",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "Scottish Rite (Masonic order)"
+                }
+            ]
+        },
+        {
+            "fieldTag": "d",
+            "marcTag": "610",
+            "ind1": "2",
+            "ind2": "0",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "St. Martin's Church (New York, N.Y.)"
+                }
+            ]
+        },
+        {
+            "fieldTag": "d",
+            "marcTag": "610",
+            "ind1": "2",
+            "ind2": "0",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "St. Philip's Church (Harlem, New York, N.Y.)"
+                }
+            ]
+        },
+        {
+            "fieldTag": "d",
+            "marcTag": "610",
+            "ind1": "2",
+            "ind2": "0",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "Young Men's Christian Association (New York, N.Y.)."
+                },
+                {
+                    "tag": "b",
+                    "content": "Harlem Branch."
+                }
+            ]
+        },
+        {
+            "fieldTag": "d",
+            "marcTag": "650",
+            "ind1": " ",
+            "ind2": "0",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "African American business enterprises"
+                },
+                {
+                    "tag": "z",
+                    "content": "New York (State)"
+                },
+                {
+                    "tag": "z",
+                    "content": "New York."
+                }
+            ]
+        },
+        {
+            "fieldTag": "d",
+            "marcTag": "650",
+            "ind1": " ",
+            "ind2": "0",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "African American clergy."
+                }
+            ]
+        },
+        {
+            "fieldTag": "d",
+            "marcTag": "650",
+            "ind1": " ",
+            "ind2": "0",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "African American photographers."
+                }
+            ]
+        },
+        {
+            "fieldTag": "d",
+            "marcTag": "650",
+            "ind1": " ",
+            "ind2": "0",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "African American politicians."
+                }
+            ]
+        },
+        {
+            "fieldTag": "d",
+            "marcTag": "650",
+            "ind1": " ",
+            "ind2": "0",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "African American churches"
+                },
+                {
+                    "tag": "z",
+                    "content": "New York (State)"
+                },
+                {
+                    "tag": "z",
+                    "content": "New York."
+                }
+            ]
+        },
+        {
+            "fieldTag": "d",
+            "marcTag": "650",
+            "ind1": " ",
+            "ind2": "0",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "African Americans"
+                },
+                {
+                    "tag": "z",
+                    "content": "New York (State)"
+                },
+                {
+                    "tag": "z",
+                    "content": "New York"
+                },
+                {
+                    "tag": "x",
+                    "content": "Religion."
+                }
+            ]
+        },
+        {
+            "fieldTag": "d",
+            "marcTag": "650",
+            "ind1": " ",
+            "ind2": "0",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "African Americans"
+                },
+                {
+                    "tag": "x",
+                    "content": "Religious life."
+                }
+            ]
+        },
+        {
+            "fieldTag": "d",
+            "marcTag": "650",
+            "ind1": " ",
+            "ind2": "0",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "African Americans"
+                },
+                {
+                    "tag": "x",
+                    "content": "Social life and customs."
+                }
+            ]
+        },
+        {
+            "fieldTag": "d",
+            "marcTag": "650",
+            "ind1": " ",
+            "ind2": "7",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "African Americans"
+                },
+                {
+                    "tag": "x",
+                    "content": "Clothing & dress"
+                },
+                {
+                    "tag": "y",
+                    "content": "1930-1989."
+                },
+                {
+                    "tag": "2",
+                    "content": "lctgm"
+                }
+            ]
+        },
+        {
+            "fieldTag": "d",
+            "marcTag": "650",
+            "ind1": " ",
+            "ind2": "0",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "African Americans"
+                },
+                {
+                    "tag": "z",
+                    "content": "New York (State)"
+                },
+                {
+                    "tag": "z",
+                    "content": "New York"
+                },
+                {
+                    "tag": "x",
+                    "content": "Societies, etc."
+                }
+            ]
+        },
+        {
+            "fieldTag": "d",
+            "marcTag": "650",
+            "ind1": " ",
+            "ind2": "0",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "African Americans in the performing arts."
+                }
+            ]
+        },
+        {
+            "fieldTag": "d",
+            "marcTag": "650",
+            "ind1": " ",
+            "ind2": "0",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "African American musicians."
+                }
+            ]
+        },
+        {
+            "fieldTag": "d",
+            "marcTag": "650",
+            "ind1": " ",
+            "ind2": "0",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "African Americans"
+                },
+                {
+                    "tag": "z",
+                    "content": "New York (State)"
+                },
+                {
+                    "tag": "z",
+                    "content": "New York"
+                },
+                {
+                    "tag": "x",
+                    "content": "Political activity."
+                }
+            ]
+        },
+        {
+            "fieldTag": "d",
+            "marcTag": "650",
+            "ind1": " ",
+            "ind2": "0",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "Beauty culture"
+                },
+                {
+                    "tag": "z",
+                    "content": "New York (State)"
+                },
+                {
+                    "tag": "z",
+                    "content": "New York."
+                }
+            ]
+        },
+        {
+            "fieldTag": "d",
+            "marcTag": "650",
+            "ind1": " ",
+            "ind2": "0",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "Etiquette"
+                },
+                {
+                    "tag": "x",
+                    "content": "Awards."
+                }
+            ]
+        },
+        {
+            "fieldTag": "d",
+            "marcTag": "650",
+            "ind1": " ",
+            "ind2": "0",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "Manners and customs"
+                },
+                {
+                    "tag": "x",
+                    "content": "Awards."
+                }
+            ]
+        },
+        {
+            "fieldTag": "d",
+            "marcTag": "650",
+            "ind1": " ",
+            "ind2": "0",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "Rites and ceremonies"
+                },
+                {
+                    "tag": "x",
+                    "content": "Awards."
+                }
+            ]
+        },
+        {
+            "fieldTag": "d",
+            "marcTag": "650",
+            "ind1": " ",
+            "ind2": "0",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "Cotillions."
+                }
+            ]
+        },
+        {
+            "fieldTag": "d",
+            "marcTag": "650",
+            "ind1": " ",
+            "ind2": "0",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "Poor People's Campaign."
+                }
+            ]
+        },
+        {
+            "fieldTag": "d",
+            "marcTag": "650",
+            "ind1": " ",
+            "ind2": "7",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "Churches"
+                },
+                {
+                    "tag": "z",
+                    "content": "New York (N.Y.)"
+                },
+                {
+                    "tag": "2",
+                    "content": "lctgm"
+                }
+            ]
+        },
+        {
+            "fieldTag": "d",
+            "marcTag": "650",
+            "ind1": " ",
+            "ind2": "7",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "Buildings"
+                },
+                {
+                    "tag": "z",
+                    "content": "New York (State)"
+                },
+                {
+                    "tag": "z",
+                    "content": "New York."
+                },
+                {
+                    "tag": "2",
+                    "content": "lctgm"
+                }
+            ]
+        },
+        {
+            "fieldTag": "d",
+            "marcTag": "650",
+            "ind1": " ",
+            "ind2": "7",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "Fraternal organizations"
+                },
+                {
+                    "tag": "z",
+                    "content": "New York (N.Y.)"
+                },
+                {
+                    "tag": "2",
+                    "content": "lctgm"
+                }
+            ]
+        },
+        {
+            "fieldTag": "d",
+            "marcTag": "650",
+            "ind1": " ",
+            "ind2": "0",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "Clubs"
+                },
+                {
+                    "tag": "z",
+                    "content": "New York (State)"
+                },
+                {
+                    "tag": "z",
+                    "content": "New York."
+                }
+            ]
+        },
+        {
+            "fieldTag": "d",
+            "marcTag": "650",
+            "ind1": " ",
+            "ind2": "0",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "Fashion"
+                },
+                {
+                    "tag": "z",
+                    "content": "New York (State)"
+                },
+                {
+                    "tag": "z",
+                    "content": "New York."
+                }
+            ]
+        },
+        {
+            "fieldTag": "d",
+            "marcTag": "650",
+            "ind1": " ",
+            "ind2": "7",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "Fashion models"
+                },
+                {
+                    "tag": "z",
+                    "content": "New York (N.Y.)"
+                },
+                {
+                    "tag": "2",
+                    "content": "lctgm"
+                }
+            ]
+        },
+        {
+            "fieldTag": "d",
+            "marcTag": "650",
+            "ind1": " ",
+            "ind2": "7",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "Funeral rites & ceremonies"
+                },
+                {
+                    "tag": "z",
+                    "content": "New York (N.Y.)"
+                },
+                {
+                    "tag": "2",
+                    "content": "lctgm"
+                }
+            ]
+        },
+        {
+            "fieldTag": "d",
+            "marcTag": "650",
+            "ind1": " ",
+            "ind2": "7",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "Parades & processions"
+                },
+                {
+                    "tag": "z",
+                    "content": "New York (State)"
+                },
+                {
+                    "tag": "z",
+                    "content": "New York"
+                },
+                {
+                    "tag": "y",
+                    "content": "1940-1989."
+                },
+                {
+                    "tag": "2",
+                    "content": "lctgm"
+                }
+            ]
+        },
+        {
+            "fieldTag": "d",
+            "marcTag": "650",
+            "ind1": " ",
+            "ind2": "7",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "Photojournalism"
+                },
+                {
+                    "tag": "z",
+                    "content": "New York (N.Y.)"
+                },
+                {
+                    "tag": "y",
+                    "content": "1930-1989."
+                },
+                {
+                    "tag": "2",
+                    "content": "lctgm"
+                }
+            ]
+        },
+        {
+            "fieldTag": "d",
+            "marcTag": "650",
+            "ind1": " ",
+            "ind2": "0",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "World War, 1939-1945"
+                },
+                {
+                    "tag": "x",
+                    "content": "African Americans."
+                }
+            ]
+        },
+        {
+            "fieldTag": "d",
+            "marcTag": "651",
+            "ind1": " ",
+            "ind2": "0",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "Harlem (New York, N.Y.)"
+                }
+            ]
+        },
+        {
+            "fieldTag": "d",
+            "marcTag": "650",
+            "ind1": " ",
+            "ind2": "7",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "Politics and government"
+                },
+                {
+                    "tag": "z",
+                    "content": "New York (N.Y.)"
+                },
+                {
+                    "tag": "y",
+                    "content": "1930-1989."
+                },
+                {
+                    "tag": "2",
+                    "content": "lctgm"
+                }
+            ]
+        },
+        {
+            "fieldTag": "d",
+            "marcTag": "650",
+            "ind1": " ",
+            "ind2": "7",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "Weddings"
+                },
+                {
+                    "tag": "z",
+                    "content": "New York (State)"
+                },
+                {
+                    "tag": "z",
+                    "content": "New York"
+                },
+                {
+                    "tag": "y",
+                    "content": "1940-1989."
+                },
+                {
+                    "tag": "2",
+                    "content": "lctgm"
+                }
+            ]
+        },
+        {
+            "fieldTag": "d",
+            "marcTag": "655",
+            "ind1": " ",
+            "ind2": "7",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "Portrait photographs"
+                },
+                {
+                    "tag": "y",
+                    "content": "1930-1989."
+                },
+                {
+                    "tag": "2",
+                    "content": "gmgpc"
+                }
+            ]
+        },
+        {
+            "fieldTag": "d",
+            "marcTag": "655",
+            "ind1": " ",
+            "ind2": "7",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "Group portraits"
+                },
+                {
+                    "tag": "y",
+                    "content": "1930-1989."
+                },
+                {
+                    "tag": "2",
+                    "content": "gmgpc"
+                }
+            ]
+        },
+        {
+            "fieldTag": "d",
+            "marcTag": "655",
+            "ind1": " ",
+            "ind2": "7",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "Cityscape photographs"
+                },
+                {
+                    "tag": "y",
+                    "content": "1930-1989."
+                },
+                {
+                    "tag": "2",
+                    "content": "gmgpc"
+                }
+            ]
+        },
+        {
+            "fieldTag": "d",
+            "marcTag": "655",
+            "ind1": " ",
+            "ind2": "7",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "Legal photographs"
+                },
+                {
+                    "tag": "y",
+                    "content": "1930-1989."
+                },
+                {
+                    "tag": "2",
+                    "content": "gmgpc"
+                }
+            ]
+        },
+        {
+            "fieldTag": "d",
+            "marcTag": "655",
+            "ind1": " ",
+            "ind2": "7",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "Fashion photographs"
+                },
+                {
+                    "tag": "y",
+                    "content": "1930-1989."
+                },
+                {
+                    "tag": "2",
+                    "content": "gmgpc"
+                }
+            ]
+        },
+        {
+            "fieldTag": "d",
+            "marcTag": "655",
+            "ind1": " ",
+            "ind2": "7",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "Photographic prints"
+                },
+                {
+                    "tag": "y",
+                    "content": "1930-1989."
+                },
+                {
+                    "tag": "2",
+                    "content": "gmgpc"
+                }
+            ]
+        },
+        {
+            "fieldTag": "d",
+            "marcTag": "655",
+            "ind1": " ",
+            "ind2": "7",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "Gelatin silver prints"
+                },
+                {
+                    "tag": "y",
+                    "content": "1930-1989."
+                },
+                {
+                    "tag": "2",
+                    "content": "gmgpc"
+                }
+            ]
+        },
+        {
+            "fieldTag": "d",
+            "marcTag": "655",
+            "ind1": " ",
+            "ind2": "7",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "Dye coupler prints"
+                },
+                {
+                    "tag": "y",
+                    "content": "1940-1989."
+                },
+                {
+                    "tag": "2",
+                    "content": "gmgpc"
+                }
+            ]
+        },
+        {
+            "fieldTag": "d",
+            "marcTag": "655",
+            "ind1": " ",
+            "ind2": "7",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "Panoramic photographs"
+                },
+                {
+                    "tag": "y",
+                    "content": "1940-1989."
+                },
+                {
+                    "tag": "2",
+                    "content": "gmgpc"
+                }
+            ]
+        },
+        {
+            "fieldTag": "d",
+            "marcTag": "655",
+            "ind1": " ",
+            "ind2": "7",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "Hand coloring."
+                },
+                {
+                    "tag": "2",
+                    "content": "aat"
+                }
+            ]
+        },
+        {
+            "fieldTag": "d",
+            "marcTag": "690",
+            "ind1": " ",
+            "ind2": "0",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "African-American Day Parade."
+                }
+            ]
+        },
+        {
+            "fieldTag": "l",
+            "marcTag": "035",
+            "ind1": " ",
+            "ind2": " ",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "z",
+                    "content": "NEH-SCH-SCG-ACCESS2"
+                }
+            ]
+        },
+        {
+            "fieldTag": "l",
+            "marcTag": "035",
+            "ind1": " ",
+            "ind2": " ",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "(WaOLN)nyp2006590"
+                }
+            ]
+        },
+        {
+            "fieldTag": "n",
+            "marcTag": "880",
+            "ind1": " ",
+            "ind2": " ",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "parallel for 545 a "
+                },
+                {
+                    "tag": "6",
+                    "content": "545-01"
+                }
+            ]
+        },
+        {
+            "fieldTag": "n",
+            "marcTag": "880",
+            "ind1": " ",
+            "ind2": " ",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "parallel 500 a"
+                },
+                {
+                    "tag": "6",
+                    "content": "500-01"
+                }
+            ]
+        },
+        {
+            "fieldTag": "n",
+            "marcTag": "500",
+            "ind1": " ",
+            "ind2": " ",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "6",
+                    "content": "880-01"
+                },
+                {
+                    "tag": "a",
+                    "content": "Title devised by cataloger."
+                }
+            ]
+        },
+        {
+            "fieldTag": "n",
+            "marcTag": "500",
+            "ind1": " ",
+            "ind2": " ",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "Many items have photographer's handstamp on verso; some items have studio blindstamp on recto."
+                }
+            ]
+        },
+        {
+            "fieldTag": "n",
+            "marcTag": "500",
+            "ind1": " ",
+            "ind2": " ",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "Some photographs have captions on verso or recto."
+                }
+            ]
+        },
+        {
+            "fieldTag": "n",
+            "marcTag": "500",
+            "ind1": " ",
+            "ind2": " ",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "Some photographs are airbrushed; some are cropped; some have cropping marks."
+                }
+            ]
+        },
+        {
+            "fieldTag": "n",
+            "marcTag": "520",
+            "ind1": " ",
+            "ind2": " ",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "The Austin Hansen Collection primarily documents the people, places, and events in Harlem during the period from approximately the 1930s to the late 1980s."
+                },
+                {
+                    "tag": "b",
+                    "content": "The Navy photography, produced when Hansen served on Manus Island in the South Pacific during the Second World War (1944-45), includes individual and group portraits of sailors, officers, South Seas inhabitants, and self-portraits.  Also included are views of daily military life and various construction projects."
+                }
+            ]
+        },
+        {
+            "fieldTag": "n",
+            "marcTag": "520",
+            "ind1": " ",
+            "ind2": " ",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "b",
+                    "content": "The Personalities series includes many well-known political, civil rights, labor, entertainment, literary, and sports figures. Among the more notable are Mary McLeod Bethune, Coretta Scott King, Canada Lee, Joe Louis, Adam Clayton Powell, Jr., A. Philip Randolph, Jackie Robinson, and Eleanor Roosevelt."
+                }
+            ]
+        },
+        {
+            "fieldTag": "n",
+            "marcTag": "520",
+            "ind1": " ",
+            "ind2": " ",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "b",
+                    "content": "The Organization series depicts the numerous benevolent, civic, social, fraternal and professional organizations in Harlem.  This includes individual and group portraits of officers and membership; meetings and assemblies; dinners; ceremonies; cotillions; parties; community service events; and miscellaneous events.  Among the organizations represented are the New York Club of the National Association of Negro Business & Professional Women's Clubs, the Virgin Islands Professional League, Club \"75\" Inc., the Harlem Branch of the Young Men's Christian Association, and a large representation of fraternal groups.  The latter includes the Ancient Egyptian Arabic Order Nobles Mystic Shrine (Prince Hall Affiliated), the Prince Hall Grand Lodge (N.Y.), the Improved Benevolent Protective Order of Elks of the World, and the Scottish Rite Masonic order."
+                }
+            ]
+        },
+        {
+            "fieldTag": "n",
+            "marcTag": "520",
+            "ind1": " ",
+            "ind2": " ",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "b",
+                    "content": "Church photography documents clergy, parishioners, confirmation classes, clubs and associations, architectural views, rites and ceremonies, special events, and other activities of the mostly Protestant denominations in the Harlem area.  Included in this series are Abyssinian Baptist Church, Mother A.M.E. Zion, St. Luke's A.M.E., St. Martin's Episcopal, St. Philip's Episcopal, Salem United Methodist, and the Cathedral of St. John the Divine."
+                }
+            ]
+        },
+        {
+            "fieldTag": "n",
+            "marcTag": "520",
+            "ind1": " ",
+            "ind2": " ",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "b",
+                    "content": "The wedding photography records the participants and activities in a variety of weddings that Hansen photographed from the 1940s to the 1980s.  The collection is a mixture of both black and white and color photographs which include portraits of the bride and groom, bridal parties, prenuptial bridal preparations, views of ceremonies, wedding guests, and receptions.  Most notable among this group is the wedding of former New York City mayor David N. Dinkins to Joyce Burrows."
+                }
+            ]
+        },
+        {
+            "fieldTag": "n",
+            "marcTag": "520",
+            "ind1": " ",
+            "ind2": " ",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "b",
+                    "content": "Studio portraits primarily depict residents of the Harlem community and include images of babies, children, couples, and families.  Images consist of individual and group portraits, including head shots, medium close-ups and full-length shots.  Some of the prints have been hand-colored, and several were done on the occasion of graduations, confirmations or first communions, formal occasions, or for modeling portfolios."
+                }
+            ]
+        },
+        {
+            "fieldTag": "n",
+            "marcTag": "520",
+            "ind1": " ",
+            "ind2": " ",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "b",
+                    "content": "The remainder of the collection represents the variety of assignments and projects that Hansen carried out for specific clients, as well as some of the work that he produced for New York's major African American newspapers.  These images include views of accidents and legal photos; architectural views and street scenes; miscellaneous unidentified organization and church functions; interior views of bars and nightclubs; various gospel singers and other musical groups in performance; police and fire department activities, including a series of portraits of the officers of the New York Police Department 32nd Precinct; funerals; parties; local banks and businesses; and events, such as the Joe Louis Day Parade (1946) and the Poor People's Campaign March on Washington, D.C. (1968)."
+                }
+            ]
+        },
+        {
+            "fieldTag": "n",
+            "marcTag": "540",
+            "ind1": " ",
+            "ind2": " ",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "Collection is under copyright; permission of the copyright holder is required for duplication."
+                }
+            ]
+        },
+        {
+            "fieldTag": "n",
+            "marcTag": "540",
+            "ind1": " ",
+            "ind2": " ",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "Photo negatives are closed to research."
+                }
+            ]
+        },
+        {
+            "fieldTag": "n",
+            "marcTag": "545",
+            "ind1": " ",
+            "ind2": " ",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "6",
+                    "content": "880-01"
+                },
+                {
+                    "tag": "a",
+                    "content": "Austin Hansen, known primarily as a Harlem studio photographer, has had a career in photography that spans nearly seventy years, from the mid-1920s to the present."
+                },
+                {
+                    "tag": "b",
+                    "content": "Hansen was born in St. Thomas, in the Virgin Islands, on January 28, 1910, where he began his photographic career as a student of Clair Taylor, the Islands' official photographer.  Among the first images that he produced were depictions of the hurricane damage done to St. Thomas in 1926 which he sold to the Virgin Islands' government for $4.00.  When Charles Lindburgh stopped in the Virgin Islands after his 1927 transatlantic solo flight, Hansen recorded his visit and later sold these pictures to the New York Amsterdam News for $2.00."
+                }
+            ]
+        },
+        {
+            "fieldTag": "n",
+            "marcTag": "545",
+            "ind1": " ",
+            "ind2": " ",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "b",
+                    "content": "Moving to Harlem in 1928, Hansen worked at various jobs including messenger, elevator operator, and professional drummer in local Harlem nightclubs.  He also continued to pursue a career in professional photography by bringing his camera to gigs and photographing club patrons for a fee.  In 1929, he sold an image to the New York Amsterdam News of an African American woman singer performing for Eleanor Roosevelt at the Essex Hotel, for which Hansen was paid $2.00.  This would begin his long association with the local African American press as a freelance photojournalist."
+                }
+            ]
+        },
+        {
+            "fieldTag": "n",
+            "marcTag": "545",
+            "ind1": " ",
+            "ind2": " ",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "b",
+                    "content": "In the 1930s, Hansen joined the musicians' union, Local 802, which enabled him to play and travel with larger bands.  He also studied art and started to expand his photographic output with the assistance of his younger brother, Aubrey, who had arrived in New York in 1939.  It was at this time that he began to photograph the Harlem nightclub scene; it also marked the beginning of his photographic record of both the day-to-day occurences in the local community, as well as the activities of notable Harlem residents and distinguished visitors.  During this time he also opened his first studio on West 116th Street in Harlem.  In 1942, Hansen began to do freelance work for the People's Voice, the newspaper founded and edited by Adam Clayton Powell, Jr., both as a contributing photographer, and as \"The Mystery Photographer\" for the Voice's promotional campaign."
+                }
+            ]
+        },
+        {
+            "fieldTag": "n",
+            "marcTag": "545",
+            "ind1": " ",
+            "ind2": " ",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "b",
+                    "content": "Hansen was drafted into the Navy during World War II, and served from July 17, 1943 to January 26, 1945.  He was trained as a war photographer and given the rank of Photographer's Mate, 2nd class, later serving on Manus Island in the Admiralty Islands in the South Pacific.  In 1945, after his discharge from the Navy, he was employed for over a year as a darkroom technician and photographer for the Office of War Information in New York City.  After the war, Hansen opened a photo studio on Eagle Ave. in the Bronx.  He later owned and operated a studio at 232 W. 135th Street, Harlem, where, for over forty years, he produced an archive of thousands of images depicting Harlem's architecture, religious institutions, businesses, professional schools, social and fraternal organizations, events, and weddings, along with a sizable studio portrait collection of families, clergy, political leaders, entertainers, athletes, police, and writers.  As a freelance photographer, Hansen was on assignment for or sold images to such publications as the New York Amsterdam News, the People's Voice, the New York Age, the Pittsburgh Courier (New York edition), African Opinion, and the Afro-American.  Austin Hansen died in New York City on January 23, 1996, a few days short of his 86th birthday."
+                }
+            ]
+        },
+        {
+            "fieldTag": "n",
+            "marcTag": "555",
+            "ind1": "8",
+            "ind2": " ",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "Finding aid:"
+                },
+                {
+                    "tag": "c",
+                    "content": "folder level control."
+                }
+            ]
+        },
+        {
+            "fieldTag": "n",
+            "marcTag": "581",
+            "ind1": " ",
+            "ind2": " ",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "Hansen's Harlem. New York : New York Public Library, 1989."
+                }
+            ]
+        },
+        {
+            "fieldTag": "n",
+            "marcTag": "585",
+            "ind1": " ",
+            "ind2": " ",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "Exhibited: \"Hansen's Harlem,\" an exhibition at the Schomburg Center for Research in Black Culture, 1989."
+                }
+            ]
+        },
+        {
+            "fieldTag": "o",
+            "marcTag": "001",
+            "ind1": " ",
+            "ind2": " ",
+            "content": "NYPG95-F8",
+            "subfields": null
+        },
+        {
+            "fieldTag": "p",
+            "marcTag": "260",
+            "ind1": " ",
+            "ind2": " ",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "c",
+                    "content": "[193-]-1989."
+                }
+            ]
+        },
+        {
+            "fieldTag": "q",
+            "marcTag": "852",
+            "ind1": "8",
+            "ind2": " ",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "h",
+                    "content": "Sc Photo Austin Hansen Collection"
+                }
+            ]
+        },
+        {
+            "fieldTag": "r",
+            "marcTag": "300",
+            "ind1": " ",
+            "ind2": " ",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "ca. 530,484 items (124.2 lin. ft., 262 boxes)"
+                }
+            ]
+        },
+        {
+            "fieldTag": "r",
+            "marcTag": "300",
+            "ind1": " ",
+            "ind2": " ",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "ca. 21,679 photographic prints :"
+                },
+                {
+                    "tag": "b",
+                    "content": "silver gelatin, b&w, some hand-colored ;"
+                },
+                {
+                    "tag": "c",
+                    "content": "26 x 21 cm. and smaller."
+                }
+            ]
+        },
+        {
+            "fieldTag": "r",
+            "marcTag": "300",
+            "ind1": " ",
+            "ind2": " ",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "ca. 3038 photographic prints :"
+                },
+                {
+                    "tag": "b",
+                    "content": "silver gelatin, b&w ;"
+                },
+                {
+                    "tag": "c",
+                    "content": "18 x 13 cm. and smaller."
+                }
+            ]
+        },
+        {
+            "fieldTag": "r",
+            "marcTag": "300",
+            "ind1": " ",
+            "ind2": " ",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "ca. 460 photographic prints :"
+                },
+                {
+                    "tag": "b",
+                    "content": "col. ;"
+                },
+                {
+                    "tag": "c",
+                    "content": "26 x 21 cm. and smaller."
+                }
+            ]
+        },
+        {
+            "fieldTag": "r",
+            "marcTag": "300",
+            "ind1": " ",
+            "ind2": " ",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "ca. 4514 photographic prints :"
+                },
+                {
+                    "tag": "b",
+                    "content": "col. ;"
+                },
+                {
+                    "tag": "c",
+                    "content": "13 x 10 cm. and smaller."
+                }
+            ]
+        },
+        {
+            "fieldTag": "r",
+            "marcTag": "300",
+            "ind1": " ",
+            "ind2": " ",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "ca. 529 photographic prints :"
+                },
+                {
+                    "tag": "b",
+                    "content": "silver gelatin, b&w, some hand-colored ;"
+                },
+                {
+                    "tag": "c",
+                    "content": "36 x 28 cm. and smaller."
+                }
+            ]
+        },
+        {
+            "fieldTag": "r",
+            "marcTag": "300",
+            "ind1": " ",
+            "ind2": " ",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "ca. 225 photographic prints :"
+                },
+                {
+                    "tag": "b",
+                    "content": "silver gelatin, b&w, some hand-colored ;"
+                },
+                {
+                    "tag": "c",
+                    "content": "52 x 42 cm. and smaller."
+                }
+            ]
+        },
+        {
+            "fieldTag": "r",
+            "marcTag": "300",
+            "ind1": " ",
+            "ind2": " ",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "ca. 39 photographic prints :"
+                },
+                {
+                    "tag": "b",
+                    "content": "silver gelatin, b&w ;"
+                },
+                {
+                    "tag": "c",
+                    "content": "34 x 66 cm. and smaller."
+                }
+            ]
+        },
+        {
+            "fieldTag": "r",
+            "marcTag": "300",
+            "ind1": " ",
+            "ind2": " ",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "ca. 500,000 negatives :"
+                },
+                {
+                    "tag": "b",
+                    "content": "b&w, some col. ;"
+                },
+                {
+                    "tag": "c",
+                    "content": "10 x 13 cm. and smaller."
+                }
+            ]
+        },
+        {
+            "fieldTag": "r",
+            "marcTag": "351",
+            "ind1": " ",
+            "ind2": " ",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "Organized into seven series: I. Navy Photography, 1943-1945; II. Personalities, 193?-198?; III. Organizations, 193?-1989; IV. Churches, 193?-1989; V. Wedding Photography, 194?-198?; VI. Studio Portraits, 193?-1989; VII. General Subjects, 193?-1989."
+                }
+            ]
+        },
+        {
+            "fieldTag": "t",
+            "marcTag": "245",
+            "ind1": "1",
+            "ind2": "0",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "Austin Hansen collection"
+                },
+                {
+                    "tag": "h",
+                    "content": "[graphic] /"
+                },
+                {
+                    "tag": "c",
+                    "content": "A. Hansen."
+                }
+            ]
+        },
+        {
+            "fieldTag": "u",
+            "marcTag": "799",
+            "ind1": "0",
+            "ind2": " ",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "Schomburg NEH Humanities Resources Access Project."
+                }
+            ]
+        },
+        {
+            "fieldTag": "v",
+            "marcTag": "959",
+            "ind1": " ",
+            "ind2": " ",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": ".b34680937"
+                },
+                {
+                    "tag": "b",
+                    "content": "06-08-09"
+                },
+                {
+                    "tag": "c",
+                    "content": "03-01-95"
+                }
+            ]
+        },
+        {
+            "fieldTag": "y",
+            "marcTag": "003",
+            "ind1": " ",
+            "ind2": " ",
+            "content": "CStRLIN",
+            "subfields": null
+        },
+        {
+            "fieldTag": "y",
+            "marcTag": "005",
+            "ind1": " ",
+            "ind2": " ",
+            "content": "20000629182937.0",
+            "subfields": null
+        },
+        {
+            "fieldTag": "y",
+            "marcTag": "007",
+            "ind1": " ",
+            "ind2": " ",
+            "content": "kh|mo ",
+            "subfields": null
+        },
+        {
+            "fieldTag": "y",
+            "marcTag": "007",
+            "ind1": " ",
+            "ind2": " ",
+            "content": "kgom| ",
+            "subfields": null
+        },
+        {
+            "fieldTag": "y",
+            "marcTag": "008",
+            "ind1": " ",
+            "ind2": " ",
+            "content": "950110i193u1989xxunnn  z         kneng dckc a ",
+            "subfields": null
+        },
+        {
+            "fieldTag": "y",
+            "marcTag": "040",
+            "ind1": " ",
+            "ind2": " ",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "NN"
+                },
+                {
+                    "tag": "c",
+                    "content": "NN"
+                },
+                {
+                    "tag": "e",
+                    "content": "gihc"
+                },
+                {
+                    "tag": "d",
+                    "content": "WaOLN"
+                }
+            ]
+        },
+        {
+            "fieldTag": "y",
+            "marcTag": "043",
+            "ind1": " ",
+            "ind2": " ",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "n-us-ny"
+                }
+            ]
+        },
+        {
+            "fieldTag": "y",
+            "marcTag": "856",
+            "ind1": "4",
+            "ind2": "1",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "u",
+                    "content": "https://digitalcollections.nypl.org/collections/austin-hansen-collection#/?tab=navigation"
+                },
+                {
+                    "tag": "z",
+                    "content": "View images in NYPL Digital Collections"
+                }
+            ]
+        },
+        {
+            "fieldTag": "y",
+            "marcTag": "997",
+            "ind1": " ",
+            "ind2": " ",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "sp"
+                },
+                {
+                    "tag": "b",
+                    "content": "10-31-00"
+                },
+                {
+                    "tag": "c",
+                    "content": "c"
+                },
+                {
+                    "tag": "d",
+                    "content": "k"
+                },
+                {
+                    "tag": "e",
+                    "content": "-"
+                },
+                {
+                    "tag": "f",
+                    "content": "eng"
+                },
+                {
+                    "tag": "g",
+                    "content": "xxu"
+                },
+                {
+                    "tag": "h",
+                    "content": "0"
+                }
+            ]
+        },
+        {
+            "fieldTag": "y",
+            "marcTag": "910",
+            "ind1": " ",
+            "ind2": " ",
+            "content": null,
+            "subfields": [
+                {
+                    "tag": "a",
+                    "content": "RL"
+                }
+            ]
+        },
+        {
+            "fieldTag": "_",
+            "marcTag": null,
+            "ind1": null,
+            "ind2": null,
+            "content": "00000ckc  2201465 a 4500",
+            "subfields": null
+        }
+    ]
+}

@@ -8,7 +8,7 @@ describe('SierraBase', function () {
     it('initializes NYPL SierraBase based on Sierra marcinjson', function () {
       const record = new SierraBase(require('../fixtures/bib-10001936.json'))
       expect(record.isNyplRecord()).to.eq(true)
-      expect(record._isPartnerRecord()).to.eq(false)
+      expect(record.isPartnerRecord()).to.eq(false)
 
       // Get callnumber
       const callNum = record.varField('852', ['h'])
@@ -18,7 +18,7 @@ describe('SierraBase', function () {
 
     it('initializes partner "SierraBase" based on SCSB marcinjson', function () {
       const record = new SierraBase(require('../fixtures/bib-hl990000453050203941.json'))
-      expect(record._isPartnerRecord()).to.eq(true)
+      expect(record.isPartnerRecord()).to.eq(true)
 
       // Get title
       const title = record.varField('245', ['a', 'b', 'c'])
