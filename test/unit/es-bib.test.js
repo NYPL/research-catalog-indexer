@@ -109,7 +109,6 @@ describe('EsBib', function () {
     it('_dateCreated returns date by publishYear', () => {
       const record = new SierraBib(require('../fixtures/bib-10554371.json'))
       const esBib = new EsBib(record)
-      console.log(esBib._dateCreated())
       expect(esBib._dateCreated()).to.deep.equal(1977)
     })
     it('_dateCreated returns date by 008', () => {
