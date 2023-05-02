@@ -15,6 +15,7 @@
   "license": "ISC",
   "dependencies": {
     "@aws-sdk/client-kms": "^3.226.0",
+    "@nypl/nypl-core-objects": "^2.1.1",
     "@nypl/nypl-data-api-client": "^1.0.5",
     "@nypl/scsb-rest-client": "^2.0.0",
     "accent-fold": "^1.0.1",
