@@ -1,7 +1,3 @@
-const chai = require('chai')
-chai.use(require('chai-as-promised'))
-const expect = chai.expect
-chai.use(require('sinon-chai'))
 const esClient = require('../../lib/elastic-search/client')
 
 describe('elastic search', () => {
