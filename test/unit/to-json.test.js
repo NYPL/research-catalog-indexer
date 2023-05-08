@@ -1,5 +1,6 @@
+const expect = require('chai').expect
+
 const { toJson, internal: { _getAllMethods, _publicMethods } } = require('../../lib/to-json')
-const { expect } = require('chai')
 
 class Model {
   constructor (obj) {

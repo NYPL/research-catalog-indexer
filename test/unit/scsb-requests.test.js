@@ -1,9 +1,10 @@
+const expect = require('chai').expect
+const sinon = require('sinon')
+
 const SierraBib = require('../../lib/sierra-models/bib')
 const recapFuncs = require('../../lib/scsb/requests')
 const { nyplScsbMultiItemBib, nyplPlatformMultiItemBib, nyplScsbSingleItemBib, nyplPlatformSingleItemBib, nyplOnsiteBib } = require('../fixtures/attach-recap-code')
-const sinon = require('sinon')
 const ScsbClient = require('../../lib/scsb/client')
-const { expect } = require('chai')
 
 describe('SCSB requests', () => {
   const bib = {

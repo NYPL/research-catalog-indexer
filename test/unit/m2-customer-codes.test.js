@@ -1,5 +1,6 @@
 const expect = require('chai').expect
 const sinon = require('sinon')
+
 const platformApi = require('../../lib/platform-api/requests')
 const { attachM2CustomerCodes } = require('../../lib/utils/m2-customer-codes')
 

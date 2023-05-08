@@ -1,7 +1,5 @@
-const chai = require('chai')
-chai.use(require('chai-as-promised'))
-const expect = chai.expect
-chai.use(require('sinon-chai'))
+const expect = require('chai').expect
+
 const sinon = require('sinon')
 const rewire = require('rewire')
 
