@@ -1,8 +1,7 @@
-const eventDecoder = require('../../lib/event-decoder')
 const sinon = require('sinon')
-const chai = require('chai')
-chai.use(require('chai-as-promised'))
-const expect = chai.expect
+const expect = require('chai').expect
+
+const eventDecoder = require('../../lib/event-decoder')
 
 describe('eventDecoder', () => {
   const [bibEvent, itemEvent, holdingEvent, errorEvent] = ['Bib', 'Item', 'Holding', 'spaghet'].map((type) => ({ Records: [{ kinesis: { data: { [type]: {} } }, eventSourceARN: type }] }))

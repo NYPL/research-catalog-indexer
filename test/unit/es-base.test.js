@@ -1,3 +1,5 @@
+const { expect } = require('chai')
+
 const EsBase = require('../../lib/es-models/base')
 
 describe('EsBase', function () {

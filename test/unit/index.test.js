@@ -1,11 +1,11 @@
 const { stub, spy } = require('sinon')
 const rewire = require('rewire')
+const { expect } = require('chai')
 
 const eventDecoder = require('../../lib/event-decoder')
 const index = require('../../index')
 const platformApi = require('../../lib/platform-api/requests')
 const elastic = require('../../lib/elastic-search/requests')
-const { expect } = require('chai')
 const SierraBib = require('../../lib/sierra-models/bib')
 const SierraItem = require('../../lib/sierra-models/item')
 const SierraHolding = require('../../lib/sierra-models/holding')

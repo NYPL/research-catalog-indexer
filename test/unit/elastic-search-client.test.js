@@ -1,3 +1,5 @@
+const expect = require('chai').expect
+
 const esClient = require('../../lib/elastic-search/client')
 
 describe('elastic search', () => {
