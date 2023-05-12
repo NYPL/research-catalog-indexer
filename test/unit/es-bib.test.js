@@ -32,11 +32,11 @@ describe('EsBib', function () {
     })
   })
 
-  describe('datesOfSerialPublication', function () {
-    it('returns an array with datesOfSerialPublication', function () {
+  describe('serialPublicationDates', function () {
+    it('returns an array with serialPublicationDates', function () {
       const record = new SierraBib(require('../fixtures/bib-10554371.json'))
       const esBib = new EsBib(record)
-      expect(esBib.datesOfSerialPublication()).to.deep.eq(['1-'])
+      expect(esBib.serialPublicationDates()).to.deep.eq(['1-'])
     })
   })
 
@@ -109,7 +109,6 @@ describe('EsBib', function () {
     it('_dateCreated returns date by publishYear', () => {
       const record = new SierraBib(require('../fixtures/bib-10554371.json'))
       const esBib = new EsBib(record)
-      console.log(esBib._dateCreated())
       expect(esBib._dateCreated()).to.deep.equal(1977)
     })
     it('_dateCreated returns date by 008', () => {
@@ -512,12 +511,12 @@ describe('EsBib', function () {
     it('should return \'nypl:Item\'', function () {
       const record = new SierraBib(require('../fixtures/bib-hl990000453050203941.json'))
       const esBib = new EsBib(record)
-      expect(esBib.type()).to.equal('nypl:Item')
+      expect(esBib.type()).to.deep.equal(['nypl:Item'])
     })
     it('should return \'nypl:Collection\'', function () {
       const record = new SierraBib(require('../fixtures/bib-10554371.json'))
       const esBib = new EsBib(record)
-      expect(esBib.type()).to.equal('nypl:Item')
+      expect(esBib.type()).to.deep.equal(['nypl:Item'])
     })
   })
 
@@ -762,6 +761,42 @@ describe('EsBib', function () {
       const record = new SierraBib({})
       expect((new EsBib(record)).carrierType_packed()).to.deep.equal([
         'carriertypes:nc||volume'
+      ])
+    })
+  })
+
+  describe('language', () => {
+    it('should return language from leader 008', () => {
+      const record = new SierraBib({
+        varFields: [
+          {
+            marcTag: '008',
+            content: '                                   rum'
+          }
+        ]
+      })
+      expect((new EsBib(record)).language()).to.deep.equal([
+        { id: 'lang:rum', label: 'Romanian' }
+      ])
+    })
+
+    it('should return language from 041 $a if not found in leader', () => {
+      const record = new SierraBib({
+        varFields: [
+          {
+            marcTag: '008',
+            content: '                                      '
+          },
+          {
+            marcTag: '041',
+            subfields: [
+              { tag: 'a', content: 'san' }
+            ]
+          }
+        ]
+      })
+      expect((new EsBib(record)).language()).to.deep.equal([
+        { id: 'lang:san', label: 'Sanskrit' }
       ])
     })
   })

@@ -1,16 +1,19 @@
 const { stub, spy } = require('sinon')
 const rewire = require('rewire')
+const { expect } = require('chai')
 
 const eventDecoder = require('../../lib/event-decoder')
 const index = require('../../index')
 const platformApi = require('../../lib/platform-api/requests')
-const { expect } = require('chai')
+const elastic = require('../../lib/elastic-search/requests')
 const SierraBib = require('../../lib/sierra-models/bib')
 const SierraItem = require('../../lib/sierra-models/item')
 const SierraHolding = require('../../lib/sierra-models/holding')
 
 describe('index handler function', () => {
-  let eventDecoderStub
+  const eventDecoderStub = (type) => stub(eventDecoder, 'decodeRecordsFromEvent').callsFake(async () => {
+    return Promise.resolve({ type, records: [{ nyplSource: 'washington-heights', id: '12345678' }] })
+  })
   let stubsyB
   let generalPrefetch
   let modelPrefetchStub
@@ -28,6 +31,9 @@ describe('index handler function', () => {
         return bib
       }))
     })
+
+    // Stub ES writes:
+    stub(elastic, 'writeRecords').resolves({ totalProcessed: 1 })
   })
 
   after(() => {
@@ -87,9 +93,6 @@ describe('index handler function', () => {
   })
 
   describe('lambda callback', () => {
-    eventDecoderStub = (type) => stub(eventDecoder, 'decodeRecordsFromEvent').callsFake(async () => {
-      return Promise.resolve({ type, records: [{ nyplSource: 'washington-heights', id: '12345678' }] })
-    })
     const callback = spy()
     afterEach(() => {
       callback.resetHistory()
@@ -121,7 +124,10 @@ describe('index handler function', () => {
     it('calls lambda callback on successful indexing', async () => {
       eventDecoderStub('Item')
       stub(platformApi, 'bibsForHoldingsOrItems').resolves([{ id: '1' }])
-      await index.handler([], null, callback)
+
+      // Note we can send in an invalid event because of above eventDecoder
+      // stub, which always returns a fake item:
+      await index.handler('some fake event data', null, callback)
       expect(callback.calledOnce).to.equal(true)
       expect(callback).to.have.been.calledWith(null, 'Wrote 1 doc(s)')
     })

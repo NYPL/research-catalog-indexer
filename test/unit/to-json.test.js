@@ -1,5 +1,6 @@
+const expect = require('chai').expect
+
 const { toJson, internal: { _getAllMethods, _publicMethods } } = require('../../lib/to-json')
-const { expect } = require('chai')
 
 class Model {
   constructor (obj) {
@@ -31,10 +32,11 @@ describe('toJson', () => {
       ])
     })
   })
+
   describe('toJson', () => {
-    it('returns the values of the public methods of object', () => {
-      const JSONifiedMod = toJson(mod)
-      expect(JSONifiedMod).to.equal('{"publicMethod":"I am supposed to be here"}')
+    it('returns the values of the public methods of object', async () => {
+      const JSONifiedMod = await toJson(mod)
+      expect(JSONifiedMod).to.deep.equal({ publicMethod: 'I am supposed to be here' })
     })
   })
 })

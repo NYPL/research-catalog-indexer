@@ -15,6 +15,7 @@
   "license": "ISC",
   "dependencies": {
     "@aws-sdk/client-kms": "^3.226.0",
+    "@nypl/nypl-core-objects": "^2.1.1",
     "@nypl/nypl-data-api-client": "^1.0.5",
     "@nypl/scsb-rest-client": "^2.0.0",
     "accent-fold": "^1.0.1",
@@ -44,6 +45,8 @@
   "devDependencies": {
     "chai": "^4.3.7",
     "chai-as-promised": "^7.1.1",
+    "dotenv": "^16.0.3",
+    "minimist": "^1.2.8",
     "mocha": "^10.1.0",
     "nock": "^13.2.9",
     "rewire": "^6.0.0",
