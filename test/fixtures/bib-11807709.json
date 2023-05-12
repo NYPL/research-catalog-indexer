@@ -1,0 +1,863 @@
+{
+      "id": "11807709",
+      "nyplSource": "sierra-nypl",
+      "nyplType": "bib",
+      "updatedDate": "2021-11-07T06:23:00-05:00",
+      "createdDate": "2008-12-15T07:44:00-05:00",
+      "deletedDate": null,
+      "deleted": false,
+      "locations": [
+          {
+              "code": "mag",
+              "name": "SASB - Milstein Division Rm 121"
+          }
+      ],
+      "suppressed": false,
+      "lang": {
+          "code": "eng",
+          "name": "English"
+      },
+      "title": "Plunkitt of Tammany Hall : a series of very plain talks on very practical politics",
+      "author": "Plunkitt, George Washington, 1842-1924.",
+      "materialType": {
+          "code": "a  ",
+          "value": "BOOK/TEXT"
+      },
+      "bibLevel": {
+          "code": "m",
+          "value": "MONOGRAPH"
+      },
+      "publishYear": 1994,
+      "catalogDate": "2014-04-15",
+      "country": {
+          "code": "mau",
+          "name": "Massachusetts"
+      },
+      "normTitle": "plunkitt of tammany hall a series of very plain talks on very practical politics",
+      "normAuthor": "plunkitt george washington 1842 1924",
+      "standardNumbers": [
+          "0312096666",
+          "9780312096663",
+          "0312084447",
+          "9780312084448"
+      ],
+      "controlNumber": "27382298",
+      "fixedFields": {
+          "24": {
+              "label": "Language",
+              "value": "eng",
+              "display": "English"
+          },
+          "25": {
+              "label": "Skip",
+              "value": "0",
+              "display": null
+          },
+          "26": {
+              "label": "Location",
+              "value": "mag  ",
+              "display": "SASB - Milstein Division Rm 121"
+          },
+          "27": {
+              "label": "COPIES",
+              "value": "1",
+              "display": null
+          },
+          "28": {
+              "label": "Cat. Date",
+              "value": "2014-04-15",
+              "display": null
+          },
+          "29": {
+              "label": "Bib Level",
+              "value": "m",
+              "display": "MONOGRAPH"
+          },
+          "30": {
+              "label": "Material Type",
+              "value": "a  ",
+              "display": "BOOK/TEXT"
+          },
+          "31": {
+              "label": "Bib Code 3",
+              "value": "-",
+              "display": null
+          },
+          "80": {
+              "label": "Record Type",
+              "value": "b",
+              "display": null
+          },
+          "81": {
+              "label": "Record Number",
+              "value": "11807709",
+              "display": null
+          },
+          "83": {
+              "label": "Created Date",
+              "value": "2008-12-15T07:44:00Z",
+              "display": null
+          },
+          "84": {
+              "label": "Updated Date",
+              "value": "2021-11-07T06:23:00Z",
+              "display": null
+          },
+          "85": {
+              "label": "No. of Revisions",
+              "value": "14",
+              "display": null
+          },
+          "86": {
+              "label": "Agency",
+              "value": "1",
+              "display": null
+          },
+          "89": {
+              "label": "Country",
+              "value": "mau",
+              "display": "Massachusetts"
+          },
+          "98": {
+              "label": "PDATE",
+              "value": "2021-10-18T08:39:50Z",
+              "display": null
+          },
+          "107": {
+              "label": "MARC Type",
+              "value": " ",
+              "display": null
+          }
+      },
+      "varFields": [
+          {
+              "fieldTag": "a",
+              "marcTag": "100",
+              "ind1": "1",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "Plunkitt, George Washington,"
+                  },
+                  {
+                      "tag": "d",
+                      "content": "1842-1924."
+                  }
+              ]
+          },
+          {
+              "fieldTag": "b",
+              "marcTag": "700",
+              "ind1": "1",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "Riordon, William L.,"
+                  },
+                  {
+                      "tag": "d",
+                      "content": "1861-1909."
+                  }
+              ]
+          },
+          {
+              "fieldTag": "b",
+              "marcTag": "700",
+              "ind1": "1",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "McDonald, Terrence J."
+                  }
+              ]
+          },
+          {
+              "fieldTag": "c",
+              "marcTag": "852",
+              "ind1": "8",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "h",
+                      "content": "IRGN 93-13216"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "d",
+              "marcTag": "600",
+              "ind1": "1",
+              "ind2": "0",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "Plunkitt, George Washington,"
+                  },
+                  {
+                      "tag": "d",
+                      "content": "1842-1924."
+                  }
+              ]
+          },
+          {
+              "fieldTag": "d",
+              "marcTag": "610",
+              "ind1": "2",
+              "ind2": "0",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "Tammany Hall."
+                  }
+              ]
+          },
+          {
+              "fieldTag": "d",
+              "marcTag": "600",
+              "ind1": "1",
+              "ind2": "7",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "Plunkitt, George Washington,"
+                  },
+                  {
+                      "tag": "d",
+                      "content": "1842-1924."
+                  },
+                  {
+                      "tag": "2",
+                      "content": "fast"
+                  },
+                  {
+                      "tag": "0",
+                      "content": "(OCoLC)fst00315220"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "d",
+              "marcTag": "610",
+              "ind1": "2",
+              "ind2": "7",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "Tammany Hall."
+                  },
+                  {
+                      "tag": "2",
+                      "content": "fast"
+                  },
+                  {
+                      "tag": "0",
+                      "content": "(OCoLC)fst00630815"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "i",
+              "marcTag": "020",
+              "ind1": " ",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "0312096666 (cl.)"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "i",
+              "marcTag": "020",
+              "ind1": " ",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "9780312096663 (cl.)"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "i",
+              "marcTag": "020",
+              "ind1": " ",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "0312084447 (pbk)"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "i",
+              "marcTag": "020",
+              "ind1": " ",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "9780312084448 (pbk)"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "l",
+              "marcTag": "010",
+              "ind1": " ",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "   92072221"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "l",
+              "marcTag": "035",
+              "ind1": " ",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "(OCoLC)27382298"
+                  },
+                  {
+                      "tag": "z",
+                      "content": "(OCoLC)29916311"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "n",
+              "marcTag": "504",
+              "ind1": " ",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "Includes bibliographical references (p. 137-139) and index."
+                  }
+              ]
+          },
+          {
+              "fieldTag": "o",
+              "marcTag": "001",
+              "ind1": " ",
+              "ind2": " ",
+              "content": "27382298 ",
+              "subfields": null
+          },
+          {
+              "fieldTag": "p",
+              "marcTag": "260",
+              "ind1": " ",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "Boston :"
+                  },
+                  {
+                      "tag": "b",
+                      "content": "Bedford Books of St. Martin's Press,"
+                  },
+                  {
+                      "tag": "c",
+                      "content": "c1994."
+                  }
+              ]
+          },
+          {
+              "fieldTag": "q",
+              "marcTag": "852",
+              "ind1": "8",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "h",
+                      "content": "IRGN 93-13216"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "r",
+              "marcTag": "300",
+              "ind1": " ",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "xii, 148 p. ;"
+                  },
+                  {
+                      "tag": "c",
+                      "content": "23 cm."
+                  }
+              ]
+          },
+          {
+              "fieldTag": "r",
+              "marcTag": "336",
+              "ind1": " ",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "text"
+                  },
+                  {
+                      "tag": "b",
+                      "content": "txt"
+                  },
+                  {
+                      "tag": "2",
+                      "content": "rdacontent"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "r",
+              "marcTag": "337",
+              "ind1": " ",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "unmediated"
+                  },
+                  {
+                      "tag": "b",
+                      "content": "n"
+                  },
+                  {
+                      "tag": "2",
+                      "content": "rdamedia"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "r",
+              "marcTag": "338",
+              "ind1": " ",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "volume"
+                  },
+                  {
+                      "tag": "b",
+                      "content": "nc"
+                  },
+                  {
+                      "tag": "2",
+                      "content": "rdacarrier"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "s",
+              "marcTag": "490",
+              "ind1": "1",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "Bedford books in American history"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "s",
+              "marcTag": "830",
+              "ind1": " ",
+              "ind2": "0",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "Bedford books in American history."
+                  }
+              ]
+          },
+          {
+              "fieldTag": "t",
+              "marcTag": "245",
+              "ind1": "1",
+              "ind2": "0",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "Plunkitt of Tammany Hall :"
+                  },
+                  {
+                      "tag": "b",
+                      "content": "a series of very plain talks on very practical politics /"
+                  },
+                  {
+                      "tag": "c",
+                      "content": "by William L. Riordon ; edited, with an introduction, by Terrence J. McDonald."
+                  }
+              ]
+          },
+          {
+              "fieldTag": "u",
+              "marcTag": "246",
+              "ind1": "2",
+              "ind2": "0",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "Series of very plain talks on very practical politics"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "v",
+              "marcTag": "959",
+              "ind1": " ",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": ".b2876285x"
+                  },
+                  {
+                      "tag": "b",
+                      "content": "04-19-07"
+                  },
+                  {
+                      "tag": "c",
+                      "content": "01-31-94"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "y",
+              "marcTag": "003",
+              "ind1": " ",
+              "ind2": " ",
+              "content": "OCoLC",
+              "subfields": null
+          },
+          {
+              "fieldTag": "y",
+              "marcTag": "005",
+              "ind1": " ",
+              "ind2": " ",
+              "content": "20140414114731.0",
+              "subfields": null
+          },
+          {
+              "fieldTag": "y",
+              "marcTag": "008",
+              "ind1": " ",
+              "ind2": " ",
+              "content": "920709s1994    mau      b    001 0 eng  cam a ",
+              "subfields": null
+          },
+          {
+              "fieldTag": "y",
+              "marcTag": "019",
+              "ind1": " ",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "29916311"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "y",
+              "marcTag": "040",
+              "ind1": " ",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "DLC"
+                  },
+                  {
+                      "tag": "b",
+                      "content": "eng"
+                  },
+                  {
+                      "tag": "c",
+                      "content": "DLC"
+                  },
+                  {
+                      "tag": "d",
+                      "content": "BAKER"
+                  },
+                  {
+                      "tag": "d",
+                      "content": "BTCTA"
+                  },
+                  {
+                      "tag": "d",
+                      "content": "YDXCP"
+                  },
+                  {
+                      "tag": "d",
+                      "content": "ZWZ"
+                  },
+                  {
+                      "tag": "d",
+                      "content": "GBVCP"
+                  },
+                  {
+                      "tag": "d",
+                      "content": "OCLCO"
+                  },
+                  {
+                      "tag": "d",
+                      "content": "OCLCF"
+                  },
+                  {
+                      "tag": "d",
+                      "content": "OCLCO"
+                  },
+                  {
+                      "tag": "d",
+                      "content": "NYP"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "y",
+              "marcTag": "043",
+              "ind1": " ",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "n-us-ny"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "y",
+              "marcTag": "049",
+              "ind1": " ",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "NYPP"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "y",
+              "marcTag": "050",
+              "ind1": "0",
+              "ind2": "0",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "JK2319.N57"
+                  },
+                  {
+                      "tag": "b",
+                      "content": "R5 1993"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "y",
+              "marcTag": "082",
+              "ind1": "0",
+              "ind2": "0",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "324.2747/106/092"
+                  },
+                  {
+                      "tag": "2",
+                      "content": "20"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "y",
+              "marcTag": "084",
+              "ind1": " ",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "3,6"
+                  },
+                  {
+                      "tag": "2",
+                      "content": "ssgn"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "y",
+              "marcTag": "856",
+              "ind1": "4",
+              "ind2": "2",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "u",
+                      "content": "http://www.gbv.de/dms/bowker/toc/9780312096663.pdf"
+                  },
+                  {
+                      "tag": "3",
+                      "content": "Contents"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "y",
+              "marcTag": "908",
+              "ind1": "0",
+              "ind2": "0",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "JK2319.N57"
+                  },
+                  {
+                      "tag": "b",
+                      "content": "R5 1993"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "y",
+              "marcTag": "901",
+              "ind1": " ",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "KLC"
+                  },
+                  {
+                      "tag": "b",
+                      "content": "SFP"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "y",
+              "marcTag": "901",
+              "ind1": " ",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "MARS"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "y",
+              "marcTag": "945",
+              "ind1": " ",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": ".b118077090"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "y",
+              "marcTag": "946",
+              "ind1": " ",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "m"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "y",
+              "marcTag": "991",
+              "ind1": " ",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "y",
+                      "content": "60097659"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "y",
+              "marcTag": "910",
+              "ind1": " ",
+              "ind2": " ",
+              "content": null,
+              "subfields": [
+                  {
+                      "tag": "a",
+                      "content": "RL"
+                  }
+              ]
+          },
+          {
+              "fieldTag": "_",
+              "marcTag": null,
+              "ind1": null,
+              "ind2": null,
+              "content": "00000cam  2200613 a 4500",
+              "subfields": null
+          }
+      ]
+  }

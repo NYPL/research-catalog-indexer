@@ -1,0 +1,1084 @@
+{
+  "id": "16787052",
+  "nyplSource": "sierra-nypl",
+  "nyplType": "bib",
+  "updatedDate": "2022-03-01T15:18:09-05:00",
+  "createdDate": "2008-12-22T15:01:00-05:00",
+  "deletedDate": null,
+  "deleted": false,
+  "locations": [
+      {
+          "code": "mae",
+          "name": "SASB - Berg Collection Rm 320"
+      },
+      {
+          "code": "lsx",
+          "name": "Library Services Center - Preservation"
+      }
+  ],
+  "suppressed": false,
+  "lang": {
+      "code": "eng",
+      "name": "English"
+  },
+  "title": "Vladimir Nabokov papers, bulk (1934-1975) [microform].",
+  "author": "Nabokov, Vladimir Vladimirovich, 1899-1977.",
+  "materialType": {
+      "code": "h  ",
+      "value": "MICROFORM"
+  },
+  "bibLevel": {
+      "code": "c",
+      "value": "COLLECTION"
+  },
+  "publishYear": 1918,
+  "catalogDate": "2008-02-27",
+  "country": {
+      "code": "nyu",
+      "name": "New York (State)"
+  },
+  "normTitle": "vladimir nabokov papers bulk 1934 1975 microform",
+  "normAuthor": "nabokov vladimir vladimirovich 1899 1977",
+  "standardNumbers": [],
+  "controlNumber": "210012737",
+  "fixedFields": {
+      "24": {
+          "label": "Language",
+          "value": "eng",
+          "display": "English"
+      },
+      "25": {
+          "label": "Skip",
+          "value": "0",
+          "display": null
+      },
+      "26": {
+          "label": "Location",
+          "value": "multi",
+          "display": null
+      },
+      "27": {
+          "label": "COPIES",
+          "value": "522",
+          "display": null
+      },
+      "28": {
+          "label": "Cat. Date",
+          "value": "2008-02-27",
+          "display": null
+      },
+      "29": {
+          "label": "Bib Level",
+          "value": "c",
+          "display": "COLLECTION"
+      },
+      "30": {
+          "label": "Material Type",
+          "value": "h  ",
+          "display": "MICROFORM"
+      },
+      "31": {
+          "label": "Bib Code 3",
+          "value": "-",
+          "display": null
+      },
+      "80": {
+          "label": "Record Type",
+          "value": "b",
+          "display": null
+      },
+      "81": {
+          "label": "Record Number",
+          "value": "16787052",
+          "display": null
+      },
+      "83": {
+          "label": "Created Date",
+          "value": "2008-12-22T15:01:00Z",
+          "display": null
+      },
+      "84": {
+          "label": "Updated Date",
+          "value": "2022-03-01T15:18:09Z",
+          "display": null
+      },
+      "85": {
+          "label": "No. of Revisions",
+          "value": "22",
+          "display": null
+      },
+      "86": {
+          "label": "Agency",
+          "value": "1",
+          "display": null
+      },
+      "89": {
+          "label": "Country",
+          "value": "nyu",
+          "display": "New York (State)"
+      },
+      "98": {
+          "label": "PDATE",
+          "value": "2022-03-01T15:07:02Z",
+          "display": null
+      },
+      "107": {
+          "label": "MARC Type",
+          "value": " ",
+          "display": null
+      }
+  },
+  "varFields": [
+      {
+          "fieldTag": "a",
+          "marcTag": "100",
+          "ind1": "1",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "Nabokov, Vladimir Vladimirovich,"
+              },
+              {
+                  "tag": "d",
+                  "content": "1899-1977."
+              }
+          ]
+      },
+      {
+          "fieldTag": "b",
+          "marcTag": "700",
+          "ind1": "1",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "Aldanov, Mark Aleksandrovich,"
+              },
+              {
+                  "tag": "d",
+                  "content": "1886-1957."
+              }
+          ]
+      },
+      {
+          "fieldTag": "b",
+          "marcTag": "700",
+          "ind1": "1",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "Kazan, Elia."
+              }
+          ]
+      },
+      {
+          "fieldTag": "b",
+          "marcTag": "700",
+          "ind1": "1",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "Makovskii, Sergei Konstantinovich,"
+              },
+              {
+                  "tag": "d",
+                  "content": "1877-1962."
+              }
+          ]
+      },
+      {
+          "fieldTag": "b",
+          "marcTag": "700",
+          "ind1": "1",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "Nabokov, Elena Ivanovna."
+              }
+          ]
+      },
+      {
+          "fieldTag": "b",
+          "marcTag": "700",
+          "ind1": "1",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "Nabokova, Vera."
+              }
+          ]
+      },
+      {
+          "fieldTag": "b",
+          "marcTag": "700",
+          "ind1": "1",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "Struve, Gleb."
+              }
+          ]
+      },
+      {
+          "fieldTag": "b",
+          "marcTag": "700",
+          "ind1": "1",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "Wilson, Edmund,"
+              },
+              {
+                  "tag": "d",
+                  "content": "1895-1972."
+              }
+          ]
+      },
+      {
+          "fieldTag": "b",
+          "marcTag": "700",
+          "ind1": "1",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "Bruccoli, Matthew Joseph,"
+              },
+              {
+                  "tag": "d",
+                  "content": "1931-"
+              }
+          ]
+      },
+      {
+          "fieldTag": "b",
+          "marcTag": "700",
+          "ind1": "1",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "Plimpton, George."
+              }
+          ]
+      },
+      {
+          "fieldTag": "b",
+          "marcTag": "700",
+          "ind1": "1",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "Nabokov, Vladimir Vladimirovich,"
+              },
+              {
+                  "tag": "d",
+                  "content": "1899-1977."
+              },
+              {
+                  "tag": "4",
+                  "content": "fmo"
+              }
+          ]
+      },
+      {
+          "fieldTag": "b",
+          "marcTag": "700",
+          "ind1": "1",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "Boyle, Kay,"
+              },
+              {
+                  "tag": "d",
+                  "content": "1902-1992."
+              },
+              {
+                  "tag": "4",
+                  "content": "fmo"
+              }
+          ]
+      },
+      {
+          "fieldTag": "b",
+          "marcTag": "700",
+          "ind1": "1",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "Field, Andrew,"
+              },
+              {
+                  "tag": "d",
+                  "content": "1938-"
+              },
+              {
+                  "tag": "4",
+                  "content": "fmo"
+              }
+          ]
+      },
+      {
+          "fieldTag": "b",
+          "marcTag": "710",
+          "ind1": "2",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "Bollingen Foundation."
+              }
+          ]
+      },
+      {
+          "fieldTag": "b",
+          "marcTag": "710",
+          "ind1": "2",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "Izdatelstvo imeni Chekhova (New York, N.Y.)"
+              }
+          ]
+      },
+      {
+          "fieldTag": "b",
+          "marcTag": "710",
+          "ind1": "2",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "Bureau littřaire D. Clairouin."
+              }
+          ]
+      },
+      {
+          "fieldTag": "b",
+          "marcTag": "710",
+          "ind1": "2",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "Cornell University."
+              }
+          ]
+      },
+      {
+          "fieldTag": "b",
+          "marcTag": "710",
+          "ind1": "2",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "Doubleday and Company, inc."
+              }
+          ]
+      },
+      {
+          "fieldTag": "b",
+          "marcTag": "710",
+          "ind1": "2",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "Librarie Gallimard."
+              }
+          ]
+      },
+      {
+          "fieldTag": "b",
+          "marcTag": "710",
+          "ind1": "2",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "Harper & Brothers."
+              }
+          ]
+      },
+      {
+          "fieldTag": "b",
+          "marcTag": "710",
+          "ind1": "2",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "Henry Holt and Company."
+              }
+          ]
+      },
+      {
+          "fieldTag": "b",
+          "marcTag": "710",
+          "ind1": "2",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "McGraw-Hill, inc."
+              }
+          ]
+      },
+      {
+          "fieldTag": "b",
+          "marcTag": "710",
+          "ind1": "2",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "New Directions Publishing."
+              }
+          ]
+      },
+      {
+          "fieldTag": "b",
+          "marcTag": "710",
+          "ind1": "2",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "New Yorker Magazine, Inc."
+              }
+          ]
+      },
+      {
+          "fieldTag": "b",
+          "marcTag": "710",
+          "ind1": "2",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "G.P. Putnam's Sons."
+              }
+          ]
+      },
+      {
+          "fieldTag": "b",
+          "marcTag": "710",
+          "ind1": "2",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "Viking Press."
+              }
+          ]
+      },
+      {
+          "fieldTag": "b",
+          "marcTag": "710",
+          "ind1": "2",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "Weidenfeld and Nicolson (Firm)"
+              }
+          ]
+      },
+      {
+          "fieldTag": "b",
+          "marcTag": "710",
+          "ind1": "2",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "Prins & Prins."
+              }
+          ]
+      },
+      {
+          "fieldTag": "c",
+          "marcTag": "852",
+          "ind1": "8",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "h",
+                  "content": "*Z-10334"
+              }
+          ]
+      },
+      {
+          "fieldTag": "d",
+          "marcTag": "600",
+          "ind1": "1",
+          "ind2": "0",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "Nabokov, Vladimir Vladimirovich,"
+              },
+              {
+                  "tag": "d",
+                  "content": "1899-1977."
+              }
+          ]
+      },
+      {
+          "fieldTag": "d",
+          "marcTag": "600",
+          "ind1": "1",
+          "ind2": "0",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "Nabokov, Vladimir Vladimirovich,"
+              },
+              {
+                  "tag": "d",
+                  "content": "1899-1977"
+              },
+              {
+                  "tag": "v",
+                  "content": "Portraits."
+              }
+          ]
+      },
+      {
+          "fieldTag": "l",
+          "marcTag": "035",
+          "ind1": " ",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "(OCoLC)210012737"
+              }
+          ]
+      },
+      {
+          "fieldTag": "l",
+          "marcTag": "947",
+          "ind1": " ",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "*ZZ-37918"
+              }
+          ]
+      },
+      {
+          "fieldTag": "n",
+          "marcTag": "520",
+          "ind1": " ",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "The collection consists of manuscripts and typescripts, correspondence by, to, and about the author; diaries for 1941 through 1977, notebooks, legal documents, portraits, and pictorial works."
+              },
+              {
+                  "tag": "b",
+                  "content": "The manuscripts and typescripts include holographs, photocopies, drafts, and setting copies of novels, short stories, plays, poems, interviews, lectures, notes toward works, essays, and criticism in English, Russian, French, Italian, and Polish. There are also manuscripts and typescripts of works relating to the author and his works."
+              }
+          ]
+      },
+      {
+          "fieldTag": "n",
+          "marcTag": "520",
+          "ind1": " ",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "There is correspondence by the author, dating from [1919]-1977, to Mark Aleksandrovich Aldanov, Elia Kazan, Sergei Makovsky, his mother Elena Ivanovna Nabokov, his wife Vera Nabokov, Gleb Struve, Edmund Wilson, the Bollingen Foundation, the Chekhov Publishing House, the Bureau littéraire D. Clairouin, Cornell University, Doubleday & Co. Publishers, the Librarie Gallimard, Harper & Bros. Publishers, Henry Holt & Co. Publishers, McGraw-Hill Inc., New Directions Publishers, The New Yorker Magazine, G. P. Putnam's Sons Publishers, the Viking Press, George Weidenfeld & Nicholson, Ltd., and others. Many of these are accompanied by letters to the author from the correspondents and between the correspondents and the author's wife Vera Nabokov. There are also letters relating to the author, dating from 1944 to 1980, between various correspondents including Vera Nabokov, Matthew Bruccoli, Edmund Wilson, George Plimpton, and Prins & Prins Literary Agents and others."
+              }
+          ]
+      },
+      {
+          "fieldTag": "n",
+          "marcTag": "533",
+          "ind1": " ",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "Microfilm."
+              },
+              {
+                  "tag": "b",
+                  "content": "New York :"
+              },
+              {
+                  "tag": "c",
+                  "content": "New York Public Library,"
+              },
+              {
+                  "tag": "d",
+                  "content": "2002."
+              },
+              {
+                  "tag": "e",
+                  "content": "1 microfilm reel ; 35 mm."
+              },
+              {
+                  "tag": "n",
+                  "content": "(MN *ZZ-37918)"
+              }
+          ]
+      },
+      {
+          "fieldTag": "n",
+          "marcTag": "530",
+          "ind1": " ",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "Also available in print."
+              }
+          ]
+      },
+      {
+          "fieldTag": "n",
+          "marcTag": "545",
+          "ind1": " ",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "Vladimir Nabokov was a Russian and American novelist, poet, short-story writer, lecturer, and literary critic."
+              }
+          ]
+      },
+      {
+          "fieldTag": "n",
+          "marcTag": "546",
+          "ind1": " ",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "Materials in English, Russian, French, Polish, German, and Italian."
+              }
+          ]
+      },
+      {
+          "fieldTag": "n",
+          "marcTag": "561",
+          "ind1": " ",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "The collection comprises the papers of the author, as well as other minor acquisitions from various sources including Andrew Field and Kay Boyle."
+              }
+          ]
+      },
+      {
+          "fieldTag": "n",
+          "marcTag": "555",
+          "ind1": " ",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "Inventory list and card catalog available in repository."
+              }
+          ]
+      },
+      {
+          "fieldTag": "n",
+          "marcTag": "583",
+          "ind1": " ",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "Microfilmed;"
+              },
+              {
+                  "tag": "c",
+                  "content": "2002"
+              },
+              {
+                  "tag": "5",
+                  "content": "NN"
+              }
+          ]
+      },
+      {
+          "fieldTag": "o",
+          "marcTag": "001",
+          "ind1": " ",
+          "ind2": " ",
+          "content": "210012737",
+          "subfields": null
+      },
+      {
+          "fieldTag": "q",
+          "marcTag": "852",
+          "ind1": "8",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "h",
+                  "content": "*Z-10334"
+              }
+          ]
+      },
+      {
+          "fieldTag": "r",
+          "marcTag": "300",
+          "ind1": " ",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "15,254 items."
+              }
+          ]
+      },
+      {
+          "fieldTag": "t",
+          "marcTag": "245",
+          "ind1": "1",
+          "ind2": "0",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "Vladimir Nabokov papers,"
+              },
+              {
+                  "tag": "f",
+                  "content": "1918-1987"
+              },
+              {
+                  "tag": "g",
+                  "content": "bulk (1934-1975)"
+              },
+              {
+                  "tag": "h",
+                  "content": "[microform]."
+              }
+          ]
+      },
+      {
+          "fieldTag": "v",
+          "marcTag": "959",
+          "ind1": " ",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": ".b90332167"
+              },
+              {
+                  "tag": "b",
+                  "content": "03-17-09"
+              },
+              {
+                  "tag": "c",
+                  "content": "02-25-08"
+              }
+          ]
+      },
+      {
+          "fieldTag": "w",
+          "marcTag": "776",
+          "ind1": "0",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "c",
+                  "content": "Original"
+              },
+              {
+                  "tag": "w",
+                  "content": "(OCoLC)122465556"
+              }
+          ]
+      },
+      {
+          "fieldTag": "y",
+          "marcTag": "856",
+          "ind1": "4",
+          "ind2": "0",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "u",
+                  "content": "https://specialcollections.nypl.org/aeon/Aeon.dll?Action=10&Form=30&Title=Vladimir+Nabokov+papers,&Site=SASBG&CallNumber=&Author=Nabokov,+Vladimir+Vladimirovich,&ItemInfo3=https://catalog.nypl.org/record=b16787052&ReferenceNumber=b16787052x&ItemInfo2=AVAILABLE&Genre=Microform&Location=Berg+Collection"
+              },
+              {
+                  "tag": "z",
+                  "content": "Request access to this item in the Berg Collection"
+              }
+          ]
+      },
+      {
+          "fieldTag": "y",
+          "marcTag": "003",
+          "ind1": " ",
+          "ind2": " ",
+          "content": "OCoLC",
+          "subfields": null
+      },
+      {
+          "fieldTag": "y",
+          "marcTag": "007",
+          "ind1": " ",
+          "ind2": " ",
+          "content": "hd afa012baca",
+          "subfields": null
+      },
+      {
+          "fieldTag": "y",
+          "marcTag": "007",
+          "ind1": " ",
+          "ind2": " ",
+          "content": "hd bfa012baba",
+          "subfields": null
+      },
+      {
+          "fieldTag": "y",
+          "marcTag": "007",
+          "ind1": " ",
+          "ind2": " ",
+          "content": "hd bfa012baaa",
+          "subfields": null
+      },
+      {
+          "fieldTag": "y",
+          "marcTag": "008",
+          "ind1": " ",
+          "ind2": " ",
+          "content": "080226i19181987nyu     a           eng dnpcIaa",
+          "subfields": null
+      },
+      {
+          "fieldTag": "y",
+          "marcTag": "005",
+          "ind1": " ",
+          "ind2": " ",
+          "content": "20080226142750.0",
+          "subfields": null
+      },
+      {
+          "fieldTag": "y",
+          "marcTag": "040",
+          "ind1": " ",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "NYP"
+              },
+              {
+                  "tag": "c",
+                  "content": "NYP"
+              }
+          ]
+      },
+      {
+          "fieldTag": "y",
+          "marcTag": "041",
+          "ind1": "0",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "eng"
+              },
+              {
+                  "tag": "a",
+                  "content": "rus"
+              },
+              {
+                  "tag": "a",
+                  "content": "fre"
+              },
+              {
+                  "tag": "a",
+                  "content": "pol"
+              },
+              {
+                  "tag": "a",
+                  "content": "ger"
+              },
+              {
+                  "tag": "a",
+                  "content": "ita"
+              }
+          ]
+      },
+      {
+          "fieldTag": "y",
+          "marcTag": "049",
+          "ind1": " ",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "NYPP"
+              }
+          ]
+      },
+      {
+          "fieldTag": "y",
+          "marcTag": "901",
+          "ind1": " ",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "b",
+                  "content": "hf"
+              },
+              {
+                  "tag": "c",
+                  "content": "CMC/MNM"
+              }
+          ]
+      },
+      {
+          "fieldTag": "y",
+          "marcTag": "946",
+          "ind1": " ",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "m"
+              }
+          ]
+      },
+      {
+          "fieldTag": "y",
+          "marcTag": "997",
+          "ind1": " ",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "hf"
+              },
+              {
+                  "tag": "b",
+                  "content": "02-27-08"
+              },
+              {
+                  "tag": "c",
+                  "content": "c"
+              },
+              {
+                  "tag": "d",
+                  "content": "p"
+              },
+              {
+                  "tag": "e",
+                  "content": "-"
+              },
+              {
+                  "tag": "f",
+                  "content": "eng"
+              },
+              {
+                  "tag": "g",
+                  "content": "nyu"
+              },
+              {
+                  "tag": "h",
+                  "content": "0"
+              }
+          ]
+      },
+      {
+          "fieldTag": "y",
+          "marcTag": "910",
+          "ind1": " ",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "RL"
+              }
+          ]
+      },
+      {
+          "fieldTag": "_",
+          "marcTag": null,
+          "ind1": null,
+          "ind2": null,
+          "content": "00000npca 2200721Ia 4500",
+          "subfields": null
+      }
+  ]
+}

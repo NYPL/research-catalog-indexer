@@ -1,0 +1,420 @@
+{
+  "id": "21372238",
+  "nyplSource": "sierra-nypl",
+  "nyplType": "bib",
+  "updatedDate": "2022-06-13T06:52:54-04:00",
+  "createdDate": "2017-10-16T12:28:44-04:00",
+  "deletedDate": null,
+  "deleted": false,
+  "locations": [
+      {
+          "code": "iarch",
+          "name": "Research Electronic materials for Adults"
+      }
+  ],
+  "suppressed": false,
+  "lang": {
+      "code": "   ",
+      "name": "---"
+  },
+  "title": "Mystery of Edwin Drood [n.d.] [electronic resource]",
+  "author": "Dickens, Charles, 1812-1870.",
+  "materialType": {
+      "code": "w  ",
+      "value": "WEB RESOURCE"
+  },
+  "bibLevel": {
+      "code": "m",
+      "value": "MONOGRAPH"
+  },
+  "publishYear": null,
+  "catalogDate": "2017-10-16",
+  "country": {
+      "code": "   ",
+      "name": "No country"
+  },
+  "normTitle": "mystery of edwin drood n d electronic resource",
+  "normAuthor": "dickens charles 1812 1870",
+  "standardNumbers": [],
+  "controlNumber": "ssib029357836",
+  "fixedFields": {
+      "24": {
+          "label": "Language",
+          "value": "   ",
+          "display": "---"
+      },
+      "25": {
+          "label": "Skip",
+          "value": "0",
+          "display": null
+      },
+      "26": {
+          "label": "Location",
+          "value": "iarch",
+          "display": "Research Electronic materials for Adults"
+      },
+      "27": {
+          "label": "COPIES",
+          "value": "1",
+          "display": null
+      },
+      "28": {
+          "label": "Cat. Date",
+          "value": "2017-10-16",
+          "display": null
+      },
+      "29": {
+          "label": "Bib Level",
+          "value": "m",
+          "display": "MONOGRAPH"
+      },
+      "30": {
+          "label": "Material Type",
+          "value": "w  ",
+          "display": "WEB RESOURCE"
+      },
+      "31": {
+          "label": "Bib Code 3",
+          "value": "a",
+          "display": null
+      },
+      "80": {
+          "label": "Record Type",
+          "value": "b",
+          "display": null
+      },
+      "81": {
+          "label": "Record Number",
+          "value": "21372238",
+          "display": null
+      },
+      "83": {
+          "label": "Created Date",
+          "value": "2017-10-16T12:28:44Z",
+          "display": null
+      },
+      "84": {
+          "label": "Updated Date",
+          "value": "2022-06-13T06:52:54Z",
+          "display": null
+      },
+      "85": {
+          "label": "No. of Revisions",
+          "value": "4",
+          "display": null
+      },
+      "86": {
+          "label": "Agency",
+          "value": "1",
+          "display": null
+      },
+      "89": {
+          "label": "Country",
+          "value": "   ",
+          "display": "No country"
+      },
+      "98": {
+          "label": "PDATE",
+          "value": "2021-11-18T02:17:57Z",
+          "display": null
+      },
+      "107": {
+          "label": "MARC Type",
+          "value": " ",
+          "display": null
+      }
+  },
+  "varFields": [
+      {
+          "fieldTag": "a",
+          "marcTag": "100",
+          "ind1": "1",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "Dickens, Charles,"
+              },
+              {
+                  "tag": "d",
+                  "content": "1812-1870."
+              }
+          ]
+      },
+      {
+          "fieldTag": "d",
+          "marcTag": "655",
+          "ind1": " ",
+          "ind2": "7",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "Electronic books."
+              },
+              {
+                  "tag": "2",
+                  "content": "lcgft"
+              }
+          ]
+      },
+      {
+          "fieldTag": "l",
+          "marcTag": "035",
+          "ind1": " ",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "(WaSeSS)ssib029357836"
+              }
+          ]
+      },
+      {
+          "fieldTag": "n",
+          "marcTag": "500",
+          "ind1": " ",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "Title from content provider."
+              }
+          ]
+      },
+      {
+          "fieldTag": "n",
+          "marcTag": "506",
+          "ind1": " ",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "Access restricted to authorized users."
+              }
+          ]
+      },
+      {
+          "fieldTag": "o",
+          "marcTag": "001",
+          "ind1": " ",
+          "ind2": " ",
+          "content": "ssib029357836",
+          "subfields": null
+      },
+      {
+          "fieldTag": "p",
+          "marcTag": "260",
+          "ind1": " ",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "[S.l.] :"
+              },
+              {
+                  "tag": "b",
+                  "content": "Charles Dickens and Evans"
+              }
+          ]
+      },
+      {
+          "fieldTag": "r",
+          "marcTag": "300",
+          "ind1": " ",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "1 online resource."
+              }
+          ]
+      },
+      {
+          "fieldTag": "t",
+          "marcTag": "240",
+          "ind1": "1",
+          "ind2": "0",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "Mystery of Edwin Drood [n.d.] (Online)"
+              }
+          ]
+      },
+      {
+          "fieldTag": "t",
+          "marcTag": "245",
+          "ind1": "1",
+          "ind2": "0",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "Mystery of Edwin Drood [n.d.]"
+              },
+              {
+                  "tag": "h",
+                  "content": "[electronic resource] /"
+              },
+              {
+                  "tag": "c",
+                  "content": "Dickens, Charles."
+              }
+          ]
+      },
+      {
+          "fieldTag": "y",
+          "marcTag": "003",
+          "ind1": " ",
+          "ind2": " ",
+          "content": "WaSeSS",
+          "subfields": null
+      },
+      {
+          "fieldTag": "y",
+          "marcTag": "005",
+          "ind1": " ",
+          "ind2": " ",
+          "content": "20171013205644.0",
+          "subfields": null
+      },
+      {
+          "fieldTag": "y",
+          "marcTag": "006",
+          "ind1": " ",
+          "ind2": " ",
+          "content": "m        d        ",
+          "subfields": null
+      },
+      {
+          "fieldTag": "y",
+          "marcTag": "007",
+          "ind1": " ",
+          "ind2": " ",
+          "content": "cr  n         ",
+          "subfields": null
+      },
+      {
+          "fieldTag": "y",
+          "marcTag": "008",
+          "ind1": " ",
+          "ind2": " ",
+          "content": "171014nuuuu    ||||||||o|||||||| ||||| dnam3u ",
+          "subfields": null
+      },
+      {
+          "fieldTag": "y",
+          "marcTag": "040",
+          "ind1": " ",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "WaSeSS"
+              },
+              {
+                  "tag": "c",
+                  "content": "WaSeSS"
+              },
+              {
+                  "tag": "d",
+                  "content": "WaSeSS"
+              }
+          ]
+      },
+      {
+          "fieldTag": "y",
+          "marcTag": "856",
+          "ind1": "4",
+          "ind2": "0",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "z",
+                  "content": "Available from home with a valid library card"
+              },
+              {
+                  "tag": "u",
+                  "content": "http://TM9QT7LG9G.search.serialssolutions.com/?V=1.0&L=TM9QT7LG9G&S=JCs&C=TC_029357836&T=marc&tab=BOOKS"
+              }
+          ]
+      },
+      {
+          "fieldTag": "y",
+          "marcTag": "856",
+          "ind1": "4",
+          "ind2": "0",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "z",
+                  "content": "Available onsite at NYPL"
+              },
+              {
+                  "tag": "u",
+                  "content": "http://WU9FB9WH4A.search.serialssolutions.com/?V=1.0&L=WU9FB9WH4A&S=JCs&C=TC_029357836&T=marc&tab=BOOKS"
+              }
+          ]
+      },
+      {
+          "fieldTag": "y",
+          "marcTag": "901",
+          "ind1": " ",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "SERSOL EBK"
+              },
+              {
+                  "tag": "n",
+                  "content": "20171016"
+              }
+          ]
+      },
+      {
+          "fieldTag": "y",
+          "marcTag": "910",
+          "ind1": " ",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "RL"
+              }
+          ]
+      },
+      {
+          "fieldTag": "y",
+          "marcTag": "909",
+          "ind1": " ",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "OCLC Holdings Update Project Exclusion 2022"
+              }
+          ]
+      },
+      {
+          "fieldTag": "_",
+          "marcTag": null,
+          "ind1": null,
+          "ind2": null,
+          "content": "00000nam  22002653u 4500",
+          "subfields": null
+      }
+  ]
+}

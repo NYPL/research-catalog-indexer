@@ -800,4 +800,122 @@ describe('EsBib', function () {
       ])
     })
   })
+  describe('electronic resource properties', () => {
+    let supplementaryContentRecord
+    let electronicResourcesRecord
+    before(() => {
+      supplementaryContentRecord = new EsBib(new SierraBib(require('../fixtures/bib-11807709.json')))
+      electronicResourcesRecord = new EsBib(new SierraBib(require('../fixtures/bib-electronic-resources.json')))
+    })
+    it('supplementaryContent', () => {
+      expect(supplementaryContentRecord.supplementaryContent()).to.deep.equal([
+        {
+          label: 'Contents',
+          url: 'http://www.gbv.de/dms/bowker/toc/9780312096663.pdf'
+        }
+      ])
+      expect(electronicResourcesRecord.supplementaryContent()).to.equal(null)
+    })
+    it('_aeonUrls', () => {
+      const record = new SierraBib(require('../fixtures/bib-aeon.json'))
+      expect((new EsBib(record)._aeonUrls())).to.deep.equal([
+        'https://specialcollections.nypl.org/aeon/Aeon.dll?Action=10&Form=30&Title=Vladimir+Nabokov+papers,&Site=SASBG&CallNumber=&Author=Nabokov,+Vladimir+Vladimirovich,&ItemInfo3=https://catalog.nypl.org/record=b16787052&ReferenceNumber=b16787052x&ItemInfo2=AVAILABLE&Genre=Microform&Location=Berg+Collection'
+      ])
+    })
+    it('electronicResources', () => {
+      expect(electronicResourcesRecord.electronicResources()).to.deep.equal([
+        {
+          label: 'Available from home with a valid library card',
+          url: 'http://TM9QT7LG9G.search.serialssolutions.com/?V=1.0&L=TM9QT7LG9G&S=JCs&C=TC_029357836&T=marc&tab=BOOKS'
+        },
+        {
+          label: 'Available onsite at NYPL',
+          url: 'http://WU9FB9WH4A.search.serialssolutions.com/?V=1.0&L=WU9FB9WH4A&S=JCs&C=TC_029357836&T=marc&tab=BOOKS'
+        }
+      ])
+      expect(supplementaryContentRecord.electronicResources()).to.equal(null)
+    })
+    it('numElectronicResources', () => {
+      expect(electronicResourcesRecord.numElectronicResources()).to.equal(2)
+      expect(supplementaryContentRecord.numElectronicResources()).to.equal(0)
+    })
+    it('electronic resources, aeonlinks, and supplementary content', () => {
+      const record = new SierraBib({
+        varFields: [
+          {
+            fieldTag: 'y',
+            marcTag: '856',
+            ind1: '4',
+            ind2: '0',
+            content: null,
+            subfields: [
+              {
+                tag: 'z',
+                content: 'Available from home with a valid library card'
+              },
+              {
+                tag: 'u',
+                content: 'http://TM9QT7LG9G.search.serialssolutions.com/?V=1.0&L=TM9QT7LG9G&S=JCs&C=TC_029357836&T=marc&tab=BOOKS'
+              }
+            ]
+          },
+          {
+            fieldTag: 'y',
+            marcTag: '856',
+            ind1: '4',
+            ind2: '0',
+            content: null,
+            subfields: [
+              {
+                tag: 'z',
+                content: 'Available onsite at NYPL'
+              },
+              {
+                tag: 'u',
+                content: 'http://WU9FB9WH4A.search.serialssolutions.com/?V=1.0&L=WU9FB9WH4A&S=JCs&C=TC_029357836&T=marc&tab=BOOKS'
+              }
+            ]
+          },
+          {
+            fieldTag: 'y',
+            marcTag: '856',
+            ind1: '4',
+            ind2: '2',
+            content: null,
+            subfields: [
+              {
+                tag: 'u',
+                content: 'http://www.gbv.de/dms/bowker/toc/9780312096663.pdf'
+              },
+              {
+                tag: '3',
+                content: 'Contents'
+              }
+            ]
+          },
+          {
+            fieldTag: 'y',
+            marcTag: '856',
+            ind1: '4',
+            ind2: '0',
+            content: null,
+            subfields: [
+              {
+                tag: 'u',
+                content: 'https://specialcollections.nypl.org/aeon/Aeon.dll?Action=10&Form=30&Title=Vladimir+Nabokov+papers,&Site=SASBG&CallNumber=&Author=Nabokov,+Vladimir+Vladimirovich,&ItemInfo3=https://catalog.nypl.org/record=b16787052&ReferenceNumber=b16787052x&ItemInfo2=AVAILABLE&Genre=Microform&Location=Berg+Collection'
+              },
+              {
+                tag: 'z',
+                content: 'Request access to this item in the Berg Collection'
+              }
+            ]
+          }
+        ]
+      })
+      const esRecord = new EsBib(record)
+      expect(esRecord.supplementaryContent().length).to.equal(1)
+      expect(esRecord.numElectronicResources()).to.equal(2)
+      expect(esRecord._aeonUrls().length).to.equal(1)
+    })
+  })
 })
