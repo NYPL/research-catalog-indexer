@@ -241,7 +241,7 @@
       }
     ]
   },
-  "datesOfSerialPublication": {
+  "serialPublicationDates": {
     "paths": [
       {
         "marc": "362",

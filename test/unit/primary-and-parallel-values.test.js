@@ -51,7 +51,7 @@ describe('primary and parallel values', () => {
     })
     it('should return an empty string when no parallel value', () => {
       const mappings = BibMappings.get('contributorLiteral', bib)
-      expect(parallelValues(bib.varFieldsMulti(mappings))).to.deep.equal([''])
+      expect(parallelValues(bib.varFieldsMulti(mappings))).to.deep.equal([])
     })
 
     it('should navigate parallel chaos', () => {
