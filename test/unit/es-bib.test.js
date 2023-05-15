@@ -816,12 +816,42 @@ describe('EsBib', function () {
       ])
       expect(electronicResourcesRecord.supplementaryContent()).to.equal(null)
     })
+    it('supplementaryContent returns null when there are none present', () => {
+      expect(electronicResourcesRecord.supplementaryContent()).to.equal(null)
+    })
     it('_aeonUrls', () => {
       const record = new SierraBib(require('../fixtures/bib-aeon.json'))
       expect((new EsBib(record)._aeonUrls())).to.deep.equal([
         'https://specialcollections.nypl.org/aeon/Aeon.dll?Action=10&Form=30&Title=Vladimir+Nabokov+papers,&Site=SASBG&CallNumber=&Author=Nabokov,+Vladimir+Vladimirovich,&ItemInfo3=https://catalog.nypl.org/record=b16787052&ReferenceNumber=b16787052x&ItemInfo2=AVAILABLE&Genre=Microform&Location=Berg+Collection'
       ])
     })
+    it('_aeonUrls returns null if there are no electronic resources', () => {
+      const record = new SierraBib({
+        varFields: [{
+          fieldTag: 'y',
+          marcTag: '856',
+          ind1: '4',
+          ind2: '2',
+          content: null,
+          subfields: [
+            {
+              tag: 'u',
+              content: 'http://www.gbv.de/dms/bowker/toc/9780312096663.pdf'
+            },
+            {
+              tag: '3',
+              content: 'Contents'
+            }
+          ]
+        }]
+      })
+      expect((new EsBib(record))._aeonUrls()).to.equal(null)
+    })
+
+    it('_aeonUrls returns null if there are electronic resources but no aeon links', () => {
+      expect(electronicResourcesRecord._aeonUrls()).to.equal(null)
+    })
+
     it('electronicResources', () => {
       expect(electronicResourcesRecord.electronicResources()).to.deep.equal([
         {
@@ -842,6 +872,7 @@ describe('EsBib', function () {
     it('electronic resources, aeonlinks, and supplementary content', () => {
       const record = new SierraBib({
         varFields: [
+          // electronic resource
           {
             fieldTag: 'y',
             marcTag: '856',
@@ -859,6 +890,7 @@ describe('EsBib', function () {
               }
             ]
           },
+          // electronic resource
           {
             fieldTag: 'y',
             marcTag: '856',
@@ -876,6 +908,7 @@ describe('EsBib', function () {
               }
             ]
           },
+          // supplementary content
           {
             fieldTag: 'y',
             marcTag: '856',
@@ -893,6 +926,7 @@ describe('EsBib', function () {
               }
             ]
           },
+          // aeonUrl
           {
             fieldTag: 'y',
             marcTag: '856',
@@ -916,6 +950,12 @@ describe('EsBib', function () {
       expect(esRecord.supplementaryContent().length).to.equal(1)
       expect(esRecord.numElectronicResources()).to.equal(2)
       expect(esRecord._aeonUrls().length).to.equal(1)
+    })
+  })
+  describe('_extractElectronicResources', () => {
+    it('returns null when supplementary content is not present', () => {
+      const record = new EsBib(new SierraBib(require('../fixtures/bib-aeon.json')))
+      expect(record._extractElectronicResourcesFromBibMarc('supplementary content')).to.equal(null)
     })
   })
 })
