@@ -13,14 +13,16 @@ describe('EsHolding model', () => {
           coverage: '20 (--)',
           position: 1,
           status: 'Bound',
-          type: 'nypl:CheckInBox'
+          type: 'nypl:CheckInBox',
+          shelfMark: '*R-SIBL NK9509 .T722 Latest ed.'
         },
         {
           copies: null,
           coverage: '21 (--)',
           position: 2,
           status: 'Expected',
-          type: 'nypl:CheckInBox'
+          type: 'nypl:CheckInBox',
+          shelfMark: 'JBM 07-158 Bound vols.'
         }
       ])
     })
@@ -69,6 +71,30 @@ describe('EsHolding model', () => {
     it('returns shelfMark', () => {
       const holding = new EsHolding(new SierraHolding(require('../fixtures/holding-1089484.json')))
       expect(holding.physicalLocation()).to.deep.equal(holding.shelfMark())
+    })
+  })
+
+  describe('note', () => {
+    it('returns notes array', () => {
+      const holding = new EsHolding(new SierraHolding({
+        varFields: [{
+          ind1: null,
+          ind2: null,
+          content: 'Checkin **EDITION SPECIALE** here.',
+          marcTag: null,
+          fieldTag: 'n',
+          subfields: null
+        },
+        {
+          ind1: null,
+          ind2: null,
+          content: 'IRREGULAR',
+          marcTag: null,
+          fieldTag: 'n',
+          subfields: null
+        }]
+      }))
+      expect(holding.note()).to.deep.equal(['Checkin **EDITION SPECIALE** here.', 'IRREGULAR'])
     })
   })
 
