@@ -1,12 +1,10 @@
+const expect = require('chai').expect
+const rewire = require('rewire')
+const sinon = require('sinon')
+
 let requests = require('../../lib/platform-api/requests')
 const platformApi = require('../../lib/platform-api/client')
 const { genericGetStub, nullGetStub, stubPlatformApiGetRequest } = require('./utils')
-const sinon = require('sinon')
-const chai = require('chai')
-const expect = chai.expect
-const rewire = require('rewire')
-chai.use(require('sinon-chai'))
-chai.use(require('chai-as-promised'))
 
 describe('platform api methods', () => {
   afterEach(() => {

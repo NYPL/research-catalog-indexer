@@ -1,7 +1,5 @@
-const chai = require('chai')
-chai.use(require('chai-as-promised'))
-const expect = chai.expect
-chai.use(require('sinon-chai'))
+const expect = require('chai').expect
+
 const sinon = require('sinon')
 const rewire = require('rewire')
 
@@ -11,8 +9,14 @@ const logger = require('../../lib/logger')
 
 describe('elastic search requests', () => {
   let bulkSpy
+  let dateStub
+  before(() => {
+    dateStub = sinon.stub(Date, 'now').returns('11:11pm')
+  })
+  after(() => {
+    dateStub.restore()
+  })
   const records = [12345, 23456, 34567].map((uri) => ({ uri, _type: 'resource', _parent: 'mom', otherMetadata: 'meep morp' }))
-  sinon.stub(Date, 'now').returns('11:11pm')
   describe('_indexGeneric', () => {
     before(() => {
       bulkSpy = sinon.stub().callsFake((body) => Promise.resolve(body))
@@ -50,10 +54,27 @@ describe('elastic search requests', () => {
     process.env.ELASTIC_RESOURCES_INDEX_NAME = 'indexName'
     it('logs errors', async () => {
       esRequests = rewire('../../lib/elastic-search/requests')
-      esRequests.__set__('_indexGeneric', () => Promise.resolve({ errors: ['ya', 'messed', 'up'] }))
-      const loggerSpy = sinon.spy(logger, 'debug')
-      await esRequests.writeRecords(records)
-      expect(loggerSpy.calledWith('Index: Error'))
+
+      esRequests.__set__(
+        '_indexGeneric',
+        () => Promise.resolve({
+          errors: true,
+          items: [
+            {
+              index: {
+                error: { type: 'ya', reason: 'messed up' }
+              }
+            }
+          ]
+        })
+      )
+      const loggerSpy = sinon.spy(logger, 'error')
+
+      try {
+        await esRequests.writeRecords(records)
+      } catch (e) {}
+
+      expect(loggerSpy.calledWith('Indexing error: ya: messed up')).to.eq(true)
     })
   })
 })

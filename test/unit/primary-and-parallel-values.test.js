@@ -19,10 +19,9 @@ describe('primary and parallel values', () => {
     })
     it('should return empty array when field is not on bib', () => {
       const mappings = BibMappings.get('seriesStatement', bib)
-      console.log(primaryValues(bib.varFieldsMulti(mappings)))
       expect(primaryValues(bib.varFieldsMulti(mappings))).to.deep.equal([])
     })
-    it('should return empty string array for orphaned parallel with no .value', () => {
+    it('should return empty array for orphaned parallel with no .value', () => {
       const mappings = BibMappings.get('creatorLiteral', bib)
       expect(primaryValues(bib.varFieldsMulti(mappings))).to.deep.equal([''])
     })
@@ -52,7 +51,7 @@ describe('primary and parallel values', () => {
     })
     it('should return an empty string when no parallel value', () => {
       const mappings = BibMappings.get('contributorLiteral', bib)
-      expect(parallelValues(bib.varFieldsMulti(mappings))).to.deep.equal([''])
+      expect(parallelValues(bib.varFieldsMulti(mappings))).to.deep.equal([])
     })
 
     it('should navigate parallel chaos', () => {

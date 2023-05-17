@@ -1,9 +1,10 @@
 const logger = require('./lib/logger')
 const eventDecoder = require('./lib/event-decoder')
-const { prefilterItems, prefilterBibs, prefilterHoldings, writeRecords, EsBib } = require('./lib/stubzzz')
+const { prefilterItems, prefilterBibs, prefilterHoldings } = require('./lib/stubzzz')
+const elastic = require('./lib/elastic-search/requests')
 const SierraBib = require('./lib/sierra-models/bib')
+const EsBib = require('./lib/es-models/bib')
 const platformApi = require('./lib/platform-api/requests')
-const { toJson } = require('./lib/to-json')
 const generalPrefetch = require('./lib/general-prefetch')
 
 /**
@@ -41,18 +42,21 @@ const handler = async (event, context, callback) => {
 
     records = records
       .map((record) => new EsBib(record))
-      .map((esBib) => toJson(esBib))
 
-    if (records.length) {
-      // Ensure lambda `callback` is fired after update:
-      const { totalProcessed } = await writeRecords(records)
-      const message = `Wrote ${totalProcessed} doc(s)`
-      logger.debug(`Firing callback with ${message}`)
-      callback(null, message)
-    } else {
-      logger.warn('Nothing to do for event', event)
-      callback(null, 'Nothing to do.')
+    // Render records as plainobjects suitable for indexing:
+    const recordsToIndex = await Promise.all(
+      records.map(async (record) => record.toJson())
+    )
+
+    let message = 'Nothing to do.'
+    if (recordsToIndex.length) {
+      await elastic.writeRecords(recordsToIndex)
+
+      message = `Wrote ${recordsToIndex.length} doc(s)`
+      logger.info(message)
     }
+
+    callback(null, message)
   } catch (e) {
     logger.error('Calling back with error: ', e)
     callback(e)

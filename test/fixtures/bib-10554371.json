@@ -1,0 +1,507 @@
+{
+  "id": "10554371",
+  "nyplSource": "sierra-nypl",
+  "nyplType": "bib",
+  "updatedDate": "2021-11-19T03:44:23-05:00",
+  "createdDate": "2008-12-14T01:35:00-05:00",
+  "deletedDate": null,
+  "deleted": false,
+  "locations": [
+      {
+          "code": "mal",
+          "name": "SASB - Service Desk Rm 315"
+      }
+  ],
+  "suppressed": false,
+  "lang": {
+      "code": "pol",
+      "name": "Polish"
+  },
+  "title": "Prace Slawistyczne.",
+  "author": "",
+  "materialType": {
+      "code": "a  ",
+      "value": "BOOK/TEXT"
+  },
+  "bibLevel": {
+      "code": "s",
+      "value": "SERIAL"
+  },
+  "publishYear": 1977,
+  "catalogDate": "1999-07-14",
+  "country": {
+      "code": "pl ",
+      "name": "Poland"
+  },
+  "normTitle": "prace slawistyczne",
+  "normAuthor": "",
+  "standardNumbers": [],
+  "controlNumber": "NYPG794270430-S",
+  "fixedFields": {
+      "24": {
+          "label": "Language",
+          "value": "pol",
+          "display": "Polish"
+      },
+      "25": {
+          "label": "Skip",
+          "value": "0",
+          "display": null
+      },
+      "26": {
+          "label": "Location",
+          "value": "mal  ",
+          "display": "SASB - Service Desk Rm 315"
+      },
+      "27": {
+          "label": "COPIES",
+          "value": "1",
+          "display": null
+      },
+      "28": {
+          "label": "Cat. Date",
+          "value": "1999-07-14",
+          "display": null
+      },
+      "29": {
+          "label": "Bib Level",
+          "value": "s",
+          "display": "SERIAL"
+      },
+      "30": {
+          "label": "Material Type",
+          "value": "a  ",
+          "display": "BOOK/TEXT"
+      },
+      "31": {
+          "label": "Bib Code 3",
+          "value": "-",
+          "display": null
+      },
+      "80": {
+          "label": "Record Type",
+          "value": "b",
+          "display": null
+      },
+      "81": {
+          "label": "Record Number",
+          "value": "10554371",
+          "display": null
+      },
+      "83": {
+          "label": "Created Date",
+          "value": "2008-12-14T01:35:00Z",
+          "display": null
+      },
+      "84": {
+          "label": "Updated Date",
+          "value": "2021-11-19T03:44:23Z",
+          "display": null
+      },
+      "85": {
+          "label": "No. of Revisions",
+          "value": "3",
+          "display": null
+      },
+      "86": {
+          "label": "Agency",
+          "value": "1",
+          "display": null
+      },
+      "89": {
+          "label": "Country",
+          "value": "pl ",
+          "display": "Poland"
+      },
+      "98": {
+          "label": "PDATE",
+          "value": "2011-07-05T15:23:00Z",
+          "display": null
+      },
+      "107": {
+          "label": "MARC Type",
+          "value": " ",
+          "display": null
+      }
+  },
+  "varFields": [
+      {
+          "fieldTag": "b",
+          "marcTag": "710",
+          "ind1": "2",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "Zakład Słowianoznawstwa PAN."
+              }
+          ]
+      },
+      {
+          "fieldTag": "b",
+          "marcTag": "710",
+          "ind1": "2",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "Instytut Słowianoznawstwa (Polska Akademia Nauk)"
+              }
+          ]
+      },
+      {
+          "fieldTag": "d",
+          "marcTag": "650",
+          "ind1": " ",
+          "ind2": "0",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "Slavic philology."
+              }
+          ]
+      },
+      {
+          "fieldTag": "i",
+          "marcTag": "022",
+          "ind1": " ",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "0208-4058"
+              }
+          ]
+      },
+      {
+          "fieldTag": "l",
+          "marcTag": "035",
+          "ind1": " ",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "NN794270430"
+              }
+          ]
+      },
+      {
+          "fieldTag": "l",
+          "marcTag": "035",
+          "ind1": " ",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "(WaOLN)nyp0559582"
+              }
+          ]
+      },
+      {
+          "fieldTag": "l",
+          "marcTag": "947",
+          "ind1": " ",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "Analyzed"
+              }
+          ]
+      },
+      {
+          "fieldTag": "n",
+          "marcTag": "500",
+          "ind1": " ",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "At head of title: 1979, Polska Akademia Nauk. Zakład Słowianoznawstwa; 1980- Polska Akademia Nauk Instytut Słowianoznawstwa."
+              }
+          ]
+      },
+      {
+          "fieldTag": "n",
+          "marcTag": "500",
+          "ind1": " ",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "On cover: 1979, Slavica."
+              }
+          ]
+      },
+      {
+          "fieldTag": "o",
+          "marcTag": "001",
+          "ind1": " ",
+          "ind2": " ",
+          "content": "NYPG794270430-S",
+          "subfields": null
+      },
+      {
+          "fieldTag": "p",
+          "marcTag": "260",
+          "ind1": " ",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "Wrocław,"
+              },
+              {
+                  "tag": "b",
+                  "content": "Zakład Narodowy im. Ossolinskich,"
+              },
+              {
+                  "tag": "c",
+                  "content": "1977-"
+              }
+          ]
+      },
+      {
+          "fieldTag": "q",
+          "marcTag": "852",
+          "ind1": "8",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "h",
+                  "content": "*QAA 78-1437"
+              },
+              {
+                  "tag": "z",
+                  "content": "Library has: 1-101 (incomplete)/THIS IS NOT A SERIAL--DO NOT ADD ITEM RECORDS TO THIS RECORD--ONLY ADD ITEM RECORDS TO INDIVIDUAL MONOGRAPH BIBLIOGRAPHIC RECORDS"
+              }
+          ]
+      },
+      {
+          "fieldTag": "r",
+          "marcTag": "300",
+          "ind1": " ",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "v."
+              },
+              {
+                  "tag": "c",
+                  "content": "20 cm."
+              }
+          ]
+      },
+      {
+          "fieldTag": "r",
+          "marcTag": "362",
+          "ind1": "0",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "1-"
+              }
+          ]
+      },
+      {
+          "fieldTag": "t",
+          "marcTag": "245",
+          "ind1": "0",
+          "ind2": "0",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "Prace Slawistyczne."
+              }
+          ]
+      },
+      {
+          "fieldTag": "u",
+          "marcTag": "246",
+          "ind1": "1",
+          "ind2": "9",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "Slavica"
+              }
+          ]
+      },
+      {
+          "fieldTag": "u",
+          "marcTag": "299",
+          "ind1": "0",
+          "ind2": "0",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "Prace Slawistyczne."
+              }
+          ]
+      },
+      {
+          "fieldTag": "u",
+          "marcTag": "299",
+          "ind1": "1",
+          "ind2": "0",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "Slavica."
+              }
+          ]
+      },
+      {
+          "fieldTag": "v",
+          "marcTag": "959",
+          "ind1": " ",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": ".b15661428"
+              },
+              {
+                  "tag": "b",
+                  "content": "04-03-08"
+              },
+              {
+                  "tag": "c",
+                  "content": "08-08-91"
+              }
+          ]
+      },
+      {
+          "fieldTag": "y",
+          "marcTag": "005",
+          "ind1": " ",
+          "ind2": " ",
+          "content": "19990702091359.2",
+          "subfields": null
+      },
+      {
+          "fieldTag": "y",
+          "marcTag": "008",
+          "ind1": " ",
+          "ind2": " ",
+          "content": "790530u197719uupl uu m||     0    |pol|ncas   ",
+          "subfields": null
+      },
+      {
+          "fieldTag": "y",
+          "marcTag": "040",
+          "ind1": " ",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "NN"
+              },
+              {
+                  "tag": "c",
+                  "content": "NN"
+              },
+              {
+                  "tag": "d",
+                  "content": "WaOLN"
+              }
+          ]
+      },
+      {
+          "fieldTag": "y",
+          "marcTag": "904",
+          "ind1": " ",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "MONO SER/ORD SEP/TR"
+              }
+          ]
+      },
+      {
+          "fieldTag": "y",
+          "marcTag": "997",
+          "ind1": " ",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "hv"
+              },
+              {
+                  "tag": "b",
+                  "content": "07-14-99"
+              },
+              {
+                  "tag": "c",
+                  "content": "s"
+              },
+              {
+                  "tag": "d",
+                  "content": "a"
+              },
+              {
+                  "tag": "e",
+                  "content": "-"
+              },
+              {
+                  "tag": "f",
+                  "content": "pol"
+              },
+              {
+                  "tag": "g",
+                  "content": "pl "
+              },
+              {
+                  "tag": "h",
+                  "content": "0"
+              }
+          ]
+      },
+      {
+          "fieldTag": "y",
+          "marcTag": "910",
+          "ind1": " ",
+          "ind2": " ",
+          "content": null,
+          "subfields": [
+              {
+                  "tag": "a",
+                  "content": "RL"
+              }
+          ]
+      },
+      {
+          "fieldTag": "_",
+          "marcTag": null,
+          "ind1": null,
+          "ind2": null,
+          "content": "00000cas  2200313   4500",
+          "subfields": null
+      }
+  ]
+}

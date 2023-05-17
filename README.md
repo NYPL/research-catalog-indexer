@@ -1,5 +1,6 @@
 ## Purpose
 This app manipulates MarcInJson records, writing the result to the Elastic Search index that powers the [Discovery API](https://github.com/NYPL/discovery-api). It was built to replace the trifecta Discovery Store Poster (aka PCDM store updater)/Discovery API Indexer/Discovery Hybrid Indexer.
+
 ## Contributing
 
 This repo uses the [Main-QA-Production](https://github.com/NYPL/engineering-general/blob/master/standards/git-workflow.md#main-qa-production)

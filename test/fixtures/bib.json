@@ -1,0 +1,507 @@
+{
+        "id": "11806560",
+        "nyplSource": "sierra-nypl",
+        "nyplType": "bib",
+        "updatedDate": "2021-11-07T04:44:37-05:00",
+        "createdDate": "2008-12-15T07:43:22-05:00",
+        "deletedDate": null,
+        "deleted": false,
+        "locations": [
+            {
+                "code": "mal",
+                "name": "SASB - Service Desk Rm 315"
+            }
+        ],
+        "suppressed": false,
+        "lang": {
+            "code": "eng",
+            "name": "English"
+        },
+        "title": "Native basketry of american southern California",
+        "author": "Moser, Christopher L.",
+        "materialType": {
+            "code": "a  ",
+            "value": "BOOK/TEXT"
+        },
+        "bibLevel": {
+            "code": "m",
+            "value": "MONOGRAPH"
+        },
+        "publishYear": 1993,
+        "catalogDate": "2000-10-30",
+        "country": {
+            "code": "cau",
+            "name": "California"
+        },
+        "normTitle": "native basketry of american southern california",
+        "normAuthor": "moser christopher l",
+        "standardNumbers": [
+            "0935661204"
+        ],
+        "controlNumber": "NYPG93-B74358",
+        "fixedFields": {
+            "24": {
+                "label": "Language",
+                "value": "eng",
+                "display": "English"
+            },
+            "25": {
+                "label": "Skip",
+                "value": "0",
+                "display": null
+            },
+            "26": {
+                "label": "Location",
+                "value": "mal  ",
+                "display": "SASB - Service Desk Rm 315"
+            },
+            "27": {
+                "label": "COPIES",
+                "value": "1",
+                "display": null
+            },
+            "28": {
+                "label": "Cat. Date",
+                "value": "2000-10-30",
+                "display": null
+            },
+            "29": {
+                "label": "Bib Level",
+                "value": "m",
+                "display": "MONOGRAPH"
+            },
+            "30": {
+                "label": "Material Type",
+                "value": "a  ",
+                "display": "BOOK/TEXT"
+            },
+            "31": {
+                "label": "Bib Code 3",
+                "value": "-",
+                "display": null
+            },
+            "80": {
+                "label": "Record Type",
+                "value": "b",
+                "display": null
+            },
+            "81": {
+                "label": "Record Number",
+                "value": "11806560",
+                "display": null
+            },
+            "83": {
+                "label": "Created Date",
+                "value": "2008-12-15T07:43:22Z",
+                "display": null
+            },
+            "84": {
+                "label": "Updated Date",
+                "value": "2021-11-07T04:44:37Z",
+                "display": null
+            },
+            "85": {
+                "label": "No. of Revisions",
+                "value": "6",
+                "display": null
+            },
+            "86": {
+                "label": "Agency",
+                "value": "1",
+                "display": null
+            },
+            "89": {
+                "label": "Country",
+                "value": "cau",
+                "display": "California"
+            },
+            "98": {
+                "label": "PDATE",
+                "value": "2021-10-18T07:36:23Z",
+                "display": null
+            },
+            "107": {
+                "label": "MARC Type",
+                "value": " ",
+                "display": null
+            }
+        },
+        "varFields": [
+            {
+                "fieldTag": "a",
+                "marcTag": "100",
+                "ind1": "1",
+                "ind2": " ",
+                "content": null,
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "Moser, Christopher L."
+                    }
+                ]
+            },
+            {
+                "fieldTag": "b",
+                "marcTag": "700",
+                "ind1": "1",
+                "ind2": " ",
+                "content": null,
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "Farmer, Justin F."
+                    }
+                ]
+            },
+            {
+                "fieldTag": "b",
+                "marcTag": "710",
+                "ind1": "2",
+                "ind2": " ",
+                "content": null,
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "Riverside Municipal Museum."
+                    }
+                ]
+            },
+            {
+                "fieldTag": "c",
+                "marcTag": "852",
+                "ind1": "8",
+                "ind2": " ",
+                "content": null,
+                "subfields": [
+                    {
+                        "tag": "h",
+                        "content": "HBC 93-12695"
+                    }
+                ]
+            },
+            {
+                "fieldTag": "d",
+                "marcTag": "650",
+                "ind1": " ",
+                "ind2": "0",
+                "content": null,
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "Indian baskets"
+                    },
+                    {
+                        "tag": "z",
+                        "content": "California"
+                    },
+                    {
+                        "tag": "v",
+                        "content": "Exhibitions."
+                    }
+                ]
+            },
+            {
+                "fieldTag": "i",
+                "marcTag": "020",
+                "ind1": " ",
+                "ind2": " ",
+                "content": null,
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "0935661204"
+                    }
+                ]
+            },
+            {
+                "fieldTag": "l",
+                "marcTag": "010",
+                "ind1": " ",
+                "ind2": " ",
+                "content": null,
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "91060775"
+                    }
+                ]
+            },
+            {
+                "fieldTag": "l",
+                "marcTag": "035",
+                "ind1": " ",
+                "ind2": " ",
+                "content": null,
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "(WaOLN)nyp1816486"
+                    }
+                ]
+            },
+            {
+                "fieldTag": "n",
+                "marcTag": "500",
+                "ind1": " ",
+                "ind2": " ",
+                "content": null,
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "\"Catalog for the exhibition 'Coils in time: a century of Southern California Indian basketmakers and their baskets' at the Riverside Municipal Museum, October 12, 1992 to May 30, 1993\"--T.p."
+                    }
+                ]
+            },
+            {
+                "fieldTag": "n",
+                "marcTag": "504",
+                "ind1": " ",
+                "ind2": " ",
+                "content": null,
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "Includes bibliographical references (p. 149-154)."
+                    }
+                ]
+            },
+            {
+                "fieldTag": "o",
+                "marcTag": "001",
+                "ind1": " ",
+                "ind2": " ",
+                "content": "NYPG93-B74358",
+                "subfields": null
+            },
+            {
+                "fieldTag": "p",
+                "marcTag": "260",
+                "ind1": " ",
+                "ind2": " ",
+                "content": null,
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "Riverside, Calif. :"
+                    },
+                    {
+                        "tag": "b",
+                        "content": "Riverside Museum Press,"
+                    },
+                    {
+                        "tag": "c",
+                        "content": "c1993."
+                    }
+                ]
+            },
+            {
+                "fieldTag": "q",
+                "marcTag": "852",
+                "ind1": "8",
+                "ind2": " ",
+                "content": null,
+                "subfields": [
+                    {
+                        "tag": "h",
+                        "content": "HBC 93-12695"
+                    }
+                ]
+            },
+            {
+                "fieldTag": "r",
+                "marcTag": "300",
+                "ind1": " ",
+                "ind2": " ",
+                "content": null,
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "155 p. :"
+                    },
+                    {
+                        "tag": "b",
+                        "content": "ill. ;"
+                    },
+                    {
+                        "tag": "c",
+                        "content": "30 cm."
+                    }
+                ]
+            },
+            {
+                "fieldTag": "t",
+                "marcTag": "245",
+                "ind1": "1",
+                "ind2": "0",
+                "content": null,
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "Native basketry of american southern California /"
+                    },
+                    {
+                        "tag": "c",
+                        "content": "by Christopher L. Moser ; with an article by Justin F. Farmer."
+                    }
+                ]
+            },
+            {
+                "fieldTag": "v",
+                "marcTag": "959",
+                "ind1": " ",
+                "ind2": " ",
+                "content": null,
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": ".b28750925"
+                    },
+                    {
+                        "tag": "b",
+                        "content": "04-19-07"
+                    },
+                    {
+                        "tag": "c",
+                        "content": "01-31-94"
+                    }
+                ]
+            },
+            {
+                "fieldTag": "y",
+                "marcTag": "003",
+                "ind1": " ",
+                "ind2": " ",
+                "content": "CStRLIN",
+                "subfields": null
+            },
+            {
+                "fieldTag": "y",
+                "marcTag": "005",
+                "ind1": " ",
+                "ind2": " ",
+                "content": "20000629182410.0",
+                "subfields": null
+            },
+            {
+                "fieldTag": "y",
+                "marcTag": "008",
+                "ind1": " ",
+                "ind2": " ",
+                "content": "931208s1993    caua     bc   000 0deng dnamua ",
+                "subfields": null
+            },
+            {
+                "fieldTag": "y",
+                "marcTag": "040",
+                "ind1": " ",
+                "ind2": " ",
+                "content": null,
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "CMalG"
+                    },
+                    {
+                        "tag": "c",
+                        "content": "CMalG"
+                    },
+                    {
+                        "tag": "d",
+                        "content": "NN"
+                    },
+                    {
+                        "tag": "d",
+                        "content": "WaOLN"
+                    }
+                ]
+            },
+            {
+                "fieldTag": "y",
+                "marcTag": "043",
+                "ind1": " ",
+                "ind2": " ",
+                "content": null,
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "n-us-ca"
+                    }
+                ]
+            },
+            {
+                "fieldTag": "y",
+                "marcTag": "997",
+                "ind1": " ",
+                "ind2": " ",
+                "content": null,
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "hg"
+                    },
+                    {
+                        "tag": "b",
+                        "content": "10-30-00"
+                    },
+                    {
+                        "tag": "c",
+                        "content": "m"
+                    },
+                    {
+                        "tag": "d",
+                        "content": "a"
+                    },
+                    {
+                        "tag": "e",
+                        "content": "-"
+                    },
+                    {
+                        "tag": "f",
+                        "content": "eng"
+                    },
+                    {
+                        "tag": "g",
+                        "content": "cau"
+                    },
+                    {
+                        "tag": "h",
+                        "content": "0"
+                    }
+                ]
+            },
+            {
+                "fieldTag": "y",
+                "marcTag": "991",
+                "ind1": " ",
+                "ind2": " ",
+                "content": null,
+                "subfields": [
+                    {
+                        "tag": "y",
+                        "content": "28942876"
+                    }
+                ]
+            },
+            {
+                "fieldTag": "y",
+                "marcTag": "910",
+                "ind1": " ",
+                "ind2": " ",
+                "content": null,
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "RL"
+                    }
+                ]
+            },
+            {
+                "fieldTag": "_",
+                "marcTag": null,
+                "ind1": null,
+                "ind2": null,
+                "content": "00000nam  2200277ua 4500",
+                "subfields": null
+            }
+        ]
+    }
