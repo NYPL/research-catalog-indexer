@@ -44,6 +44,7 @@ describe.only('EsItem', function () {
 
     it('should return null if no item type')
     it('should return null if item type not found')
+    it('should return requestable in case property is set')
   })
 
   describe('enumerationChronology', function () {
@@ -157,6 +158,10 @@ describe.only('EsItem', function () {
         )
       })
     })
+
+    describe('for a partner record', function () {
+
+    })
   })
 
   describe('physicalLocation', function () {
@@ -195,6 +200,10 @@ describe.only('EsItem', function () {
           ]
         )
       })
+    })
+
+    describe('item with varField 876j', function () {
+
     })
   })
 
