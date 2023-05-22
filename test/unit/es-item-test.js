@@ -3,7 +3,7 @@ const expect = require('chai').expect
 const SierraItem = require('../../lib/sierra-models/item')
 const EsItem = require('../../lib/es-models/item')
 
-describe.only('EsItem', function () {
+describe('EsItem', function () {
   describe('constructor', function () {
     it('initializes an EsItem with an \'item\' property', function () {
       const record = new SierraItem(require('../fixtures/item-10003973.json'))
@@ -26,10 +26,26 @@ describe.only('EsItem', function () {
         it('should return the correct values', function () {
           const record = new SierraItem(require('../fixtures/item-17145801.json'))
           const esItem = new EsItem(record)
-          expect(esItem.accessMessage()).to.deep.eq([ { id: 'accessMessage:u', label: 'Supervised use' } ])
+          expect(esItem.accessMessage()).to.deep.eq([{ id: 'accessMessage:u', label: 'Supervised use' }])
         })
       })
       // describe('record has no OPAC message')
+    })
+  })
+
+  describe('accessMessage_packed', function () {
+    describe('for an nypl record', function () {
+      describe('record has OPAC message', function () {
+        it('should return the correct values', function () {
+          const record = new SierraItem(require('../fixtures/item-17145801.json'))
+          const esItem = new EsItem(record)
+          expect(esItem.accessMessage_packed()).to.deep.eq(
+            [
+              'accessMessage:u||Supervised use'
+            ]
+          )
+        })
+      })
     })
   })
 
@@ -38,7 +54,7 @@ describe.only('EsItem', function () {
       const record = new SierraItem(require('../fixtures/item-17145801.json'))
       const esItem = new EsItem(record)
       expect(esItem.catalogItemType()).to.deep.equal(
-        [ { id: 'catalogItemType:33', label: 'google project, serial' } ]
+        [{ id: 'catalogItemType:33', label: 'google project, serial' }]
       )
     })
 
@@ -47,12 +63,24 @@ describe.only('EsItem', function () {
     it('should return requestable in case property is set')
   })
 
+  describe('catalogItemType_packed', function () {
+    it('should return mapped item type if present', function () {
+      const record = new SierraItem(require('../fixtures/item-17145801.json'))
+      const esItem = new EsItem(record)
+      expect(esItem.catalogItemType_packed()).to.deep.equal(
+        [
+          'catalogItemType:33||google project, serial'
+        ]
+      )
+    })
+  })
+
   describe('enumerationChronology', function () {
     it('should return enumeration chronology', function () {
       const record = new SierraItem(require('../fixtures/item-17145801.json'))
       const esItem = new EsItem(record)
       expect(esItem.enumerationChronology()).to.deep.equal(
-        ["no. 12 (1784)"]
+        ['no. 12 (1784)']
       )
     })
 
@@ -65,7 +93,7 @@ describe.only('EsItem', function () {
         const record = new SierraItem(require('../fixtures/item-17145801.json'))
         const esItem = new EsItem(record)
         expect(esItem.holdingLocation()).to.deep.equal(
-          [ { id: 'loc:rc2ma', label: 'Offsite' } ]
+          [{ id: 'loc:rc2ma', label: 'Offsite' }]
         )
       })
     })
@@ -79,12 +107,24 @@ describe.only('EsItem', function () {
     })
   })
 
+  describe('holdingLocation_packed', function () {
+    describe('for an item with location', function () {
+      it('should return the location', function () {
+        const record = new SierraItem(require('../fixtures/item-17145801.json'))
+        const esItem = new EsItem(record)
+        expect(esItem.holdingLocation_packed()).to.deep.equal(
+          ['loc:rc2ma||Offsite']
+        )
+      })
+    })
+  })
+
   describe('idBarcode', function () {
     describe('for an item with barcode', function () {
       it('should return the barcode', function () {
         const record = new SierraItem(require('../fixtures/item-17145801.json'))
         const esItem = new EsItem(record)
-        expect(esItem.idBarcode()).to.deep.equal(["33433081745998"])
+        expect(esItem.idBarcode()).to.deep.equal(['33433081745998'])
       })
     })
 
@@ -101,8 +141,8 @@ describe.only('EsItem', function () {
         const record = new SierraItem(require('../fixtures/item-17145801.json'))
         const esItem = new EsItem(record)
         expect(esItem.identifier()).to.deep.equal([
-          "urn:identifier:*DM (Esprit des Journaux, françois et etrangers) no. 12 (1784)",
-          "urn:barcode:33433081745998"
+          'urn:identifier:*DM (Esprit des Journaux, françois et etrangers) no. 12 (1784)',
+          'urn:barcode:33433081745998'
         ])
       })
     })
@@ -116,12 +156,12 @@ describe.only('EsItem', function () {
         expect(esItem.identifierV2()).to.deep.equal(
           [
             {
-              "value": "*DM (Esprit des Journaux, françois et etrangers) no. 12 (1784)",
-              "type": "bf:ShelfMark"
+              value: '*DM (Esprit des Journaux, françois et etrangers) no. 12 (1784)',
+              type: 'bf:ShelfMark'
             },
             {
-              "type": "bf:Barcode",
-              "value": "33433081745998"
+              type: 'bf:Barcode',
+              value: '33433081745998'
             }
           ]
         )
@@ -136,8 +176,20 @@ describe.only('EsItem', function () {
         const esItem = new EsItem(record)
         expect(esItem.shelfMark()).to.deep.equal(
           [
-            "*DM (Esprit des Journaux, françois et etrangers) no. 12 (1784)"
+            '*DM (Esprit des Journaux, françois et etrangers) no. 12 (1784)'
           ]
+        )
+      })
+    })
+  })
+
+  describe('shelfMark_sort', function () {
+    describe('for an item with callNumber', function () {
+      it('should return the call number', function () {
+        const record = new SierraItem(require('../fixtures/item-17145801.json'))
+        const esItem = new EsItem(record)
+        expect(esItem.shelfMark_sort()).to.equal(
+          'a*DM (Esprit des Journaux, françois et etrangers) no. 000012 (1784)'
         )
       })
     })
@@ -151,8 +203,8 @@ describe.only('EsItem', function () {
         expect(esItem.owner()).to.deep.equal(
           [
             {
-              "id": "orgs:1000",
-              "label": "Stephen A. Schwarzman Building"
+              id: 'orgs:1000',
+              label: 'Stephen A. Schwarzman Building'
             }
           ]
         )
@@ -164,13 +216,27 @@ describe.only('EsItem', function () {
     })
   })
 
+  describe('owner_packed', function () {
+    describe('nypl item with location', function () {
+      it('should return the properly mapped owner', function () {
+        const record = new SierraItem(require('../fixtures/item-17145801.json'))
+        const esItem = new EsItem(record)
+        expect(esItem.owner_packed()).to.deep.equal(
+          [
+            'orgs:1000||Stephen A. Schwarzman Building'
+          ]
+        )
+      })
+    })
+  })
+
   describe('physicalLocation', function () {
     describe('nypl item with location', function () {
       const record = new SierraItem(require('../fixtures/item-17145801.json'))
       const esItem = new EsItem(record)
       expect(esItem.physicalLocation()).to.deep.equal(
         [
-          "*DM (Esprit des Journaux, françois et etrangers)"
+          '*DM (Esprit des Journaux, françois et etrangers)'
         ]
       )
     })
@@ -180,8 +246,22 @@ describe.only('EsItem', function () {
     describe('nypl record with recapCustomerCode', function () {
       it('should return the recapCustomerCode', function () {
         const record = new SierraItem(require('../fixtures/item-17145801.json'))
+        record.recapCustomerCode = 'NA'
         const esItem = new EsItem(record)
-        expect(esItem.recapCustomerCode()).to.deep.equal(["NA"])
+        expect(esItem.recapCustomerCode()).to.deep.equal(['NA'])
+      })
+    })
+  })
+
+  describe('requestable', function () {
+    // ToDo: requestable partner, non-requestable partner, nypl without
+    // requestable status, nypl without reqestable location, nypl
+    // without requestable accessMessage code, ...
+    describe('requestable nypl record', function () {
+      it('should be requestable', function () {
+        const record = new SierraItem(require('../fixtures/item-17145801.json'))
+        const esItem = new EsItem(record)
+        expect(esItem.requestable()).to.deep.equal([true])
       })
     })
   })
@@ -194,8 +274,8 @@ describe.only('EsItem', function () {
         expect(esItem.status()).to.deep.equal(
           [
             {
-              "id": "status:a",
-              "label": "Available"
+              id: 'status:a',
+              label: 'Available'
             }
           ]
         )
@@ -211,7 +291,7 @@ describe.only('EsItem', function () {
     it('should return [{id: \'bf:Item\'}]', function () {
       const record = new SierraItem(require('../fixtures/item-17145801.json'))
       const esItem = new EsItem(record)
-      expect(esItem.type()).to.deep.equal([{id: 'bf:Item'}])
+      expect(esItem.type()).to.deep.equal([{ id: 'bf:Item' }])
     })
   })
 
@@ -219,8 +299,7 @@ describe.only('EsItem', function () {
     it('should return the id', function () {
       const record = new SierraItem(require('../fixtures/item-17145801.json'))
       const esItem = new EsItem(record)
-      expect(esItem.uri()).to.equal("i17145801")
+      expect(esItem.uri()).to.equal('i17145801')
     })
   })
-
 })
