@@ -81,7 +81,7 @@ describe('EsBib', function () {
     it('should return the creator transformed for sorting', () => {
       const record = new SierraBib(require('../fixtures/bib-10001936.json'))
       const esBib = new EsBib(record)
-      expect(esBib.creator_sort()).to.deep.equal('shermazanian, galust.')
+      expect(esBib.creator_sort()).to.deep.equal(['shermazanian, galust.'])
     })
   })
 
@@ -101,13 +101,13 @@ describe('EsBib', function () {
       const record = new SierraBib(require('../fixtures/bib-10554371.json'))
       delete record.publishYear
       const esBib = new EsBib(record)
-      expect(esBib.dateStartYear()).to.deep.equal(1977)
+      expect(esBib.dateStartYear()).to.deep.equal([1977])
     })
     it('created returns _dateCreated value', () => {
       const record = new SierraBib(require('../fixtures/bib-10554371.json'))
       delete record.publishYear
       const esBib = new EsBib(record)
-      expect(esBib.created()).to.deep.equal(1977)
+      expect(esBib.createdYear()).to.deep.equal([1977])
     })
   })
 
@@ -180,8 +180,8 @@ describe('EsBib', function () {
           'Lower and middle Egypt (Delta and Cairo to Asyût).',
           'Upper Egypt: sites (Deir Rîfa to Aswân, excluding Thebes and the temples of Abydos, Dendera, Esna, Edfu, Kôm Ombo and Philae).',
           'Upper Egypt : chief temples (excluding Thebes) : Abydos, Dendera, Esna, Edfu, Kôm Ombo, and Philae.',
-          'Nubia, the deserts, and outside Egypt /',
-          'Objects of provenance not known. Royal Statues. private Statues (Predynastic to Dynasty XVII) -- Private Statues (Dynasty XVIII to the Roman Periiod). Statues of Deities -- Indices to parts 1 and 2, Statues -- Stelae (Dynasty XVIII to the Roman Period) 803-044-050 to 803-099-990 /'
+          'Nubia, the deserts, and outside Egypt',
+          'Objects of provenance not known. Royal Statues. private Statues (Predynastic to Dynasty XVII) -- Private Statues (Dynasty XVIII to the Roman Periiod). Statues of Deities -- Indices to parts 1 and 2, Statues -- Stelae (Dynasty XVIII to the Roman Period) 803-044-050 to 803-099-990'
         ]
       )
     })
@@ -307,12 +307,12 @@ describe('EsBib', function () {
     it('should return array containing issuance object', () => {
       const record = new SierraBib(require('../fixtures/bib-10001936.json'))
       const esBib = new EsBib(record)
-      expect(esBib.issuance()).to.deep.equal([{ id: 'urn:biblevelm', label: 'monograph/item' }])
+      expect(esBib.issuance()).to.deep.equal([{ id: 'urn:biblevel:m', label: 'monograph/item' }])
     })
     it('should pack properly', () => {
       const record = new SierraBib(require('../fixtures/bib-10001936.json'))
       const esBib = new EsBib(record)
-      expect(esBib.issuance_packed()).to.deep.equal(['urn:biblevelm||monograph/item'])
+      expect(esBib.issuance_packed()).to.deep.equal(['urn:biblevel:m||monograph/item'])
     })
   })
 
@@ -343,52 +343,52 @@ describe('EsBib', function () {
       expect(esBib.note()).to.deep.equal([
         {
           label: 'Title devised by cataloger.',
-          type: 'bf:note',
+          type: 'bf:Note',
           noteType: 'Note'
         },
         {
           label: "Many items have photographer's handstamp on verso; some items have studio blindstamp on recto.",
-          type: 'bf:note',
+          type: 'bf:Note',
           noteType: 'Note'
         },
         {
           label: 'Some photographs have captions on verso or recto.',
-          type: 'bf:note',
+          type: 'bf:Note',
           noteType: 'Note'
         },
         {
           label: 'Some photographs are airbrushed; some are cropped; some have cropping marks.',
-          type: 'bf:note',
+          type: 'bf:Note',
           noteType: 'Note'
         },
         {
           label: 'Collection is under copyright; permission of the copyright holder is required for duplication.',
-          type: 'bf:note',
+          type: 'bf:Note',
           noteType: 'Terms of Use'
         },
         {
           label: 'Photo negatives are closed to research.',
-          type: 'bf:note',
+          type: 'bf:Note',
           noteType: 'Terms of Use'
         },
         {
           label: 'Austin Hansen, known primarily as a Harlem studio photographer, has had a career in photography that spans nearly seventy years, from the mid-1920s to the present.',
-          type: 'bf:note',
+          type: 'bf:Note',
           noteType: 'Biography'
         },
         {
           label: 'Finding aid:',
-          type: 'bf:note',
+          type: 'bf:Note',
           noteType: 'Indexes/Finding Aids'
         },
         {
           label: "Hansen's Harlem. New York : New York Public Library, 1989.",
-          type: 'bf:note',
+          type: 'bf:Note',
           noteType: 'Publications'
         },
         {
           label: 'Exhibited: "Hansen\'s Harlem," an exhibition at the Schomburg Center for Research in Black Culture, 1989.',
-          type: 'bf:note',
+          type: 'bf:Note',
           noteType: 'Exhibitions'
         }
       ])
@@ -410,7 +410,7 @@ describe('EsBib', function () {
     it('should return array with placeOfPublication', function () {
       const record = new SierraBib(require('../fixtures/bib-10001936.json'))
       const esBib = new EsBib(record)
-      expect(esBib.placeOfPublication()).to.deep.equal(['Ṛostov (Doni Vra) :'])
+      expect(esBib.placeOfPublication()).to.deep.equal(['Ṛostov (Doni Vra)'])
     })
   })
 
@@ -426,7 +426,7 @@ describe('EsBib', function () {
     it('should return array with publisherLiteral', function () {
       const record = new SierraBib(require('../fixtures/bib-10001936.json'))
       const esBib = new EsBib(record)
-      expect(esBib.publisherLiteral()).to.deep.equal(['Tparan Hovhannu Tēr-Abrahamian,'])
+      expect(esBib.publisherLiteral()).to.deep.equal(['Tparan Hovhannu Tēr-Abrahamian'])
     })
   })
 
@@ -547,7 +547,7 @@ describe('EsBib', function () {
           index: 0,
           value: '长沙市 : 湖南人民出版社 : 湖南省新華書店发行, 1984.'
         },
-        { fieldName: 'placeOfPublication', index: 0, value: '长沙市 :' },
+        { fieldName: 'placeOfPublication', index: 0, value: '长沙市' },
         { fieldName: 'editionStatement', index: 0, value: '第1版.' }
       ])
     })
