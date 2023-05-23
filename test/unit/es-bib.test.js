@@ -4,26 +4,6 @@ const SierraBib = require('../../lib/sierra-models/bib')
 const EsBib = require('../../lib/es-models/bib')
 
 describe('EsBib', function () {
-  describe('_valueToIndexFromBasicMapping', () => {
-    it('should return an array of primary values', () => {
-      const field = 'title'
-      const primary = true
-      const bib = new EsBib(new SierraBib(require('../fixtures/bib-11606020.json')))
-      expect(bib._valueToIndexFromBasicMapping(field, primary)).to.deep.equal(['Sefer Toldot Yeshu = The gospel according to the Jews, called Toldoth Jesu : the generations of Jesus, now first translated from the Hebrew.'
-      ])
-    })
-    it('should return array of parallel titles', function () {
-      const record = new SierraBib(require('../fixtures/bib-11606020.json'))
-      const esBib = new EsBib(record)
-      const primary = false
-      const field = 'title'
-      expect(esBib._valueToIndexFromBasicMapping(field, primary)).to.deep.equal(
-        [
-          'ספר תולדות ישו = The gospel according to the Jews, called Toldoth Jesu : the generations of Jesus, now first translated from the Hebrew.'
-        ]
-      )
-    })
-  })
   describe('constructor', function () {
     it('initializes an EsBib with a \'bib\' property', function () {
       const record = new SierraBib(require('../fixtures/bib-10001936.json'))
