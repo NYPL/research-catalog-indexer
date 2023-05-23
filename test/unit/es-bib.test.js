@@ -504,13 +504,13 @@ describe('EsBib', function () {
     it('should return the source for partner items', function () {
       const record = new SierraBib(require('../fixtures/bib-hl990000453050203941.json'))
       const esBib = new EsBib(record)
-      expect(esBib.nyplSource()).to.equal('recap-hl')
+      expect(esBib.nyplSource()).to.equal(['recap-hl'])
     })
 
     it('should return the source for NYPL items', function () {
       const record = new SierraBib(require('../fixtures/bib-10001936.json'))
       const esBib = new EsBib(record)
-      expect(esBib.nyplSource()).to.equal('sierra-nypl')
+      expect(esBib.nyplSource()).to.equal(['sierra-nypl'])
     })
   })
 
