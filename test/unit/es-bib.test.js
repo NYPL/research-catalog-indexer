@@ -180,8 +180,8 @@ describe('EsBib', function () {
           'Lower and middle Egypt (Delta and Cairo to Asyût).',
           'Upper Egypt: sites (Deir Rîfa to Aswân, excluding Thebes and the temples of Abydos, Dendera, Esna, Edfu, Kôm Ombo and Philae).',
           'Upper Egypt : chief temples (excluding Thebes) : Abydos, Dendera, Esna, Edfu, Kôm Ombo, and Philae.',
-          'Nubia, the deserts, and outside Egypt /',
-          'Objects of provenance not known. Royal Statues. private Statues (Predynastic to Dynasty XVII) -- Private Statues (Dynasty XVIII to the Roman Periiod). Statues of Deities -- Indices to parts 1 and 2, Statues -- Stelae (Dynasty XVIII to the Roman Period) 803-044-050 to 803-099-990 /'
+          'Nubia, the deserts, and outside Egypt',
+          'Objects of provenance not known. Royal Statues. private Statues (Predynastic to Dynasty XVII) -- Private Statues (Dynasty XVIII to the Roman Periiod). Statues of Deities -- Indices to parts 1 and 2, Statues -- Stelae (Dynasty XVIII to the Roman Period) 803-044-050 to 803-099-990'
         ]
       )
     })
@@ -410,7 +410,7 @@ describe('EsBib', function () {
     it('should return array with placeOfPublication', function () {
       const record = new SierraBib(require('../fixtures/bib-10001936.json'))
       const esBib = new EsBib(record)
-      expect(esBib.placeOfPublication()).to.deep.equal(['Ṛostov (Doni Vra) :'])
+      expect(esBib.placeOfPublication()).to.deep.equal(['Ṛostov (Doni Vra)'])
     })
   })
 
@@ -426,7 +426,7 @@ describe('EsBib', function () {
     it('should return array with publisherLiteral', function () {
       const record = new SierraBib(require('../fixtures/bib-10001936.json'))
       const esBib = new EsBib(record)
-      expect(esBib.publisherLiteral()).to.deep.equal(['Tparan Hovhannu Tēr-Abrahamian,'])
+      expect(esBib.publisherLiteral()).to.deep.equal(['Tparan Hovhannu Tēr-Abrahamian'])
     })
   })
 
@@ -547,7 +547,7 @@ describe('EsBib', function () {
           index: 0,
           value: '长沙市 : 湖南人民出版社 : 湖南省新華書店发行, 1984.'
         },
-        { fieldName: 'placeOfPublication', index: 0, value: '长沙市 :' },
+        { fieldName: 'placeOfPublication', index: 0, value: '长沙市' },
         { fieldName: 'editionStatement', index: 0, value: '第1版.' }
       ])
     })
