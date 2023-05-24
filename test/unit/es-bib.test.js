@@ -453,7 +453,7 @@ describe('EsBib', function () {
       expect(esBib.publisherLiteral()).to.deep.equal(['Tparan Hovhannu Tēr-Abrahamian'])
     })
     it('parallelPublisherLiteral', () => {
-      expect(esBib.parallelPublisherLiteral()).to.deep.equal(['parallel for Tparan Hovhannu Tēr-Abrahamian,'])
+      expect(esBib.parallelPublisherLiteral()).to.deep.equal(['parallel for Tparan Hovhannu Tēr-Abrahamian'])
     })
   })
 
@@ -539,13 +539,13 @@ describe('EsBib', function () {
     it('should return the source for partner items', function () {
       const record = new SierraBib(require('../fixtures/bib-hl990000453050203941.json'))
       const esBib = new EsBib(record)
-      expect(esBib.nyplSource()).to.equal(['recap-hl'])
+      expect(esBib.nyplSource()).to.deep.equal(['recap-hl'])
     })
 
     it('should return the source for NYPL items', function () {
       const record = new SierraBib(require('../fixtures/bib-10001936.json'))
       const esBib = new EsBib(record)
-      expect(esBib.nyplSource()).to.equal(['sierra-nypl'])
+      expect(esBib.nyplSource()).to.deep.equal(['sierra-nypl'])
     })
   })
 
