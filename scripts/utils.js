@@ -67,10 +67,11 @@ function printDiff (remote, local, verbose) {
   const noChildren = (bib) => Object.assign({}, bib, { items: null, holdings: null, uris: null, localAt: null })
   if (Object.keys(diff(noChildren(remote), noChildren(local))).length > 0) {
     const metaDiff = detailedDiff(noChildren(remote), noChildren(local))
-    logObject(metaDiff)
     if (verbose) {
       const verboseDiff = buildVerboseDiff(metaDiff, remote, local)
       logObject(verboseDiff)
+    } else {
+      logObject(metaDiff)
     }
   } else {
     console.log('  No diff')
