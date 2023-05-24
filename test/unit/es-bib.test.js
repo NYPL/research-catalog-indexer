@@ -1,4 +1,5 @@
 const expect = require('chai').expect
+const sinon = require('sinon')
 
 const SierraBib = require('../../lib/sierra-models/bib')
 const EsBib = require('../../lib/es-models/bib')
@@ -336,6 +337,27 @@ describe('EsBib', function () {
     })
   })
 
+  describe('materialType', () => {
+    it('should return materialType based on ldr rectype', () => {
+      const sierraBib = new SierraBib({})
+      sinon.stub(sierraBib, 'ldr').returns({ recType: 'h' })
+      const esBib = new EsBib(sierraBib)
+      expect(esBib.materialType()).to.deep.equal([{ id: 'resourcetypes:txt', label: 'Text' }])
+    })
+    it('should return null for rectype not present in lookup', () => {
+      const sierraBib = new SierraBib({})
+      sinon.stub(sierraBib, 'ldr').returns({ recType: 'lol' })
+      const esBib = new EsBib(sierraBib)
+      expect(esBib.materialType()).to.equal(null)
+    })
+    it('materialType_packed returns packed', () => {
+      const sierraBib = new SierraBib({})
+      sinon.stub(sierraBib, 'ldr').returns({ recType: 'h' })
+      const esBib = new EsBib(sierraBib)
+      expect(esBib.materialType_packed()).to.deep.equal(['resourcetypes:txt||Text'])
+    })
+  })
+
   describe('note', () => {
     it('should return array of primary note values', () => {
       const record = new SierraBib(require('../fixtures/bib-notes.json'))
@@ -423,18 +445,24 @@ describe('EsBib', function () {
   })
 
   describe('publisherLiteral', () => {
+    const record = new SierraBib(require('../fixtures/bib-10001936.json'))
+    const esBib = new EsBib(record)
     it('should return array with publisherLiteral', function () {
-      const record = new SierraBib(require('../fixtures/bib-10001936.json'))
-      const esBib = new EsBib(record)
       expect(esBib.publisherLiteral()).to.deep.equal(['Tparan Hovhannu Tēr-Abrahamian,'])
+    })
+    it('parallelPublisherLiteral', () => {
+      expect(esBib.parallelPublisherLiteral()).to.deep.equal(['parallel for Tparan Hovhannu Tēr-Abrahamian,'])
     })
   })
 
   describe('seriesStatement', () => {
+    const record = new SierraBib(require('../fixtures/bib-parallels-party.json'))
+    const esBib = new EsBib(record)
     it('should return array with seriesStatement', function () {
-      const record = new SierraBib(require('../fixtures/bib-parallels-party.json'))
-      const esBib = new EsBib(record)
       expect(esBib.seriesStatement()).to.deep.equal(['content for 440$a', 'content for 440$a (2)', 'content for 490$a', 'content for 800$a'])
+    })
+    it('parallelSeriesStatement', () => {
+      expect(esBib.parallelSeriesStatement()).to.deep.equal(['parallel content for 440$a', 'parallel content for 440$a (2)', '', 'parallel content for 800$a'])
     })
   })
 
@@ -478,11 +506,16 @@ describe('EsBib', function () {
   })
 
   describe('uniformTitle', () => {
+    const record = new SierraBib(require('../fixtures/bib-11606020.json'))
+    const esBib = new EsBib(record)
     it('should return display titles', function () {
-      const record = new SierraBib(require('../fixtures/bib-11606020.json'))
-      const esBib = new EsBib(record)
       expect(esBib.uniformTitle()).to.deep.equal(
         ['Toledot Yeshu.']
+      )
+    })
+    it('parallelUniformTitle', () => {
+      expect(esBib.parallelUniformTitle()).to.deep.equal(
+        ['‏תולדות ישו.']
       )
     })
   })
@@ -536,7 +569,18 @@ describe('EsBib', function () {
       const esBib = new EsBib(record)
       expect(esBib.subjectLiteral()).to.deep.equal(['600 primary value a 600 primary value b'])
     })
+    it('subjectLiteral_exploded', () => {
+      const record = new EsBib(new SierraBib({}))
+      sinon.stub(record, 'subjectLiteral').returns(['Arabian Peninsula -- Religion -- Ancient History.'])
+      expect(record.subjectLiteral_exploded()).to.deep.equal(['Arabian Peninsula', 'Arabian Peninsula -- Religion', 'Arabian Peninsula -- Religion -- Ancient History'])
+    })
+    it('parallelSubjectLiteral', () => {
+      const record = new SierraBib(require('../fixtures/bib-parallels-chaos.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.parallelSubjectLiteral()).to.deep.equal(['‏600 parallel value a 600 parallel value b'])
+    })
   })
+
   describe('parallelDisplayField', () => {
     it('returns parallel display fields', () => {
       const record = new SierraBib(require('../fixtures/bib-parallel-display-fields.json'))
