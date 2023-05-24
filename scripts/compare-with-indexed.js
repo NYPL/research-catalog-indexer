@@ -45,7 +45,7 @@ const buildLocalEsDocFromUri = async (nyplSource, id) => {
 if (type === 'bib') {
   Promise.all([buildLocalEsDocFromUri(nyplSource, id), currentDocument(argv.uri, indexName)])
     .then(([[localEsRecord], liveEsRecord]) => {
-      printDiff(liveEsRecord, localEsRecord)
+      printDiff(liveEsRecord, localEsRecord, argv.verbose === 'true')
     }).catch(e => {
       logger.error(e.message)
       die()

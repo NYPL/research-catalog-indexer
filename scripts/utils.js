@@ -25,6 +25,30 @@ function removeEmpty (obj) {
   )
 }
 
+const verboseDiffPerType = (diffedProperties, remote, local) => {
+  return Object.keys(diffedProperties).reduce((acc, prop) => {
+    if (remote[prop] || local[prop]) {
+      return {
+        ...acc,
+        [prop]: {
+          actualIndexedValue: remote[prop],
+          locallyBuiltValue: local[prop]
+        }
+      }
+    } else return acc
+  }, {})
+}
+
+const buildVerboseDiff = (diffObj, remote, local) => {
+  // there are three first level properties on the diff obj, added, local, and
+  // deleted.
+  const updateTypes = Object.keys(diffObj, remote, local)
+  return updateTypes.reduce((acc, type) => ({
+    ...acc,
+    [type]: verboseDiffPerType(diffObj[type], remote, local)
+  }), {})
+}
+
 function logObject (obj, indent = 2) {
   obj = removeEmpty(obj)
   let s = JSON.stringify(
@@ -38,40 +62,45 @@ function logObject (obj, indent = 2) {
   console.log(s)
 }
 
-function printDiff (orig, updated) {
-  console.log(`Bib metadata diff for ${orig.uri}:`)
-  const noChildren = (bib) => Object.assign({}, bib, { items: null, holdings: null, uris: null, updatedAt: null })
-  if (Object.keys(diff(noChildren(orig), noChildren(updated))).length > 0) {
-    const metaDiff = detailedDiff(noChildren(orig), noChildren(updated))
+function printDiff (remote, local, verbose) {
+  console.log(`Bib metadata diff for ${remote.uri}:`)
+  const noChildren = (bib) => Object.assign({}, bib, { items: null, holdings: null, uris: null, localAt: null })
+  if (Object.keys(diff(noChildren(remote), noChildren(local))).length > 0) {
+    const metaDiff = detailedDiff(noChildren(remote), noChildren(local))
     logObject(metaDiff)
+    if (verbose) {
+      const verboseDiff = buildVerboseDiff(metaDiff, remote, local)
+      logObject(verboseDiff)
+    }
   } else {
     console.log('  No diff')
   }
 
-  ;['items', 'holdings'].forEach((prop) => {
-    console.log(`${prop[0].toUpperCase() + prop.substring(1)} diff:`)
+  ;['items', 'holdings'].forEach((holdingsOrItems) => {
+    console.log(`${holdingsOrItems[0].toUpperCase() + holdingsOrItems.substring(1)} diff:`)
 
-    if (orig[prop] || updated[prop]) {
-      if (!orig[prop]) console.log(`  No ${prop} in orig (${updated[prop].length} ${prop} in updated doc)`)
-      else if (!updated[prop]) console.log(`  No ${prop} in updated doc (${orig[prop].length} ${prop} in orig doc)`)
-      else if (orig[prop].length !== updated[prop].length) {
-        console.log(`  Orig ${prop}: ${orig[prop].length}, new ${prop} length: ${updated[prop].length}`)
+    if (remote[holdingsOrItems] || local[holdingsOrItems]) {
+      if (!remote[holdingsOrItems]) console.log(`  No ${holdingsOrItems} in remote (${local[holdingsOrItems].length} ${holdingsOrItems} in local doc)`)
+      else if (!local[holdingsOrItems]) console.log(`  No ${holdingsOrItems} in local doc (${remote[holdingsOrItems].length} ${holdingsOrItems} in remote doc)`)
+      else if (remote[holdingsOrItems].length !== local[holdingsOrItems].length) {
+        console.log(`  remote ${holdingsOrItems}: ${remote[holdingsOrItems].length}, new ${holdingsOrItems} length: ${local[holdingsOrItems].length}`)
       } else {
-        console.log(`  Both documents have ${orig[prop].length} ${prop}`)
+        console.log(`  Both documents have ${remote[holdingsOrItems].length} ${holdingsOrItems}`)
       }
 
-      if (orig[prop] && updated[prop]) {
-        orig[prop].forEach((origItem) => {
-          if (!updated[prop]) {
-            console.log(`  Can not find ${prop} in updated doc`)
+      if (remote[holdingsOrItems] && local[holdingsOrItems]) {
+        remote[holdingsOrItems].forEach((remoteItem) => {
+          if (!local[holdingsOrItems]) {
+            console.log(`  Can not find ${holdingsOrItems} in local doc`)
             return
           }
-          const updatedItem = updated[prop].find((i) => i.uri === origItem.uri)
-          if (!updatedItem) console.log(`  Can not find ${origItem.uri} in ${prop} in updated doc`)
+          const localItem = local[holdingsOrItems].find((i) => i.uri === remoteItem.uri)
+          if (!localItem) console.log(`  Can not find ${remoteItem.uri} in ${holdingsOrItems} in local doc`)
           else {
-            if (Object.keys(diff(origItem, updatedItem)).length > 0) {
-              const itemDiff = detailedDiff(origItem, updatedItem)
-              console.log(`  Diff in ${prop} ${origItem.uri}:`)
+            const diffed = diff(remoteItem, localItem)
+            if (Object.keys(diffed).length > 0) {
+              const itemDiff = detailedDiff(remoteItem, localItem)
+              console.log(`  Diff in ${holdingsOrItems} ${remoteItem.uri}:`)
               logObject(itemDiff, 4)
             }
           }
