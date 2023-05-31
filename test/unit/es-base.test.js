@@ -1,8 +1,31 @@
 const { expect } = require('chai')
 
 const EsBase = require('../../lib/es-models/base')
+const EsBib = require('../../lib/es-models/bib')
+const SierraBib = require('../../lib/sierra-models/bib')
 
 describe('EsBase', function () {
+  describe('_valueToIndexFromBasicMapping', () => {
+    it('should return an array of primary values', () => {
+      const field = 'title'
+      const primary = true
+      const bib = new EsBib(new SierraBib(require('../fixtures/bib-11606020.json')))
+      expect(bib._valueToIndexFromBasicMapping(field, primary)).to.deep.equal(['Sefer Toldot Yeshu = The gospel according to the Jews, called Toldoth Jesu : the generations of Jesus, now first translated from the Hebrew.'
+      ])
+    })
+    it('should return array of parallel titles', function () {
+      const record = new SierraBib(require('../fixtures/bib-11606020.json'))
+      const esBib = new EsBib(record)
+      const primary = false
+      const field = 'title'
+      expect(esBib._valueToIndexFromBasicMapping(field, primary)).to.deep.equal(
+        [
+          'ספר תולדות ישו = The gospel according to the Jews, called Toldoth Jesu : the generations of Jesus, now first translated from the Hebrew.'
+        ]
+      )
+    })
+  })
+
   describe('toJson', () => {
     it('should return a plainobject representation of a descendent instance', async () => {
       class Foo extends EsBase {
