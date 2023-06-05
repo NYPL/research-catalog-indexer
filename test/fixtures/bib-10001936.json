@@ -261,6 +261,23 @@
         {
           "tag": "c",
           "content": "1890 [i.e. 1891]"
+        },
+        {
+          "tag": "6",
+          "content": "880-01"
+        }
+      ]
+    },
+    {
+      "marcTag": "880",
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "260-01"
+        },
+        {
+          "tag": "b",
+          "content": "parallel for Tparan Hovhannu Tēr-Abrahamian,"
         }
       ]
     },

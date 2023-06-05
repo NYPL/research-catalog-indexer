@@ -126,24 +126,24 @@ describe('platform api methods', () => {
       }])
     })
     it('adds items to bibs', async () => {
-      const items = [{ bibIds: ['123'] }, { bibIds: ['456'] }, { bibIds: ['789'] }]
+      const items = [[{ bibIds: ['123'] }], [{ bibIds: ['456'] }], [{ bibIds: ['789'] }]]
       setUpTests([], items)
       await requests.modelPrefetch(bibs)
       expect(bibs).to.deep.equal([{
         nyplSource: 'sierra-nypl',
         id: '123',
         _holdings: [],
-        _items: [items[0]]
+        _items: items[0]
       }, {
         nyplSource: 'sierra-nypl',
         id: '456',
         _holdings: [],
-        _items: [items[1]]
+        _items: items[1]
       }, {
         nyplSource: 'sierra-nypl',
         id: '789',
         _holdings: [],
-        _items: [items[2]]
+        _items: items[2]
       }])
     })
   })

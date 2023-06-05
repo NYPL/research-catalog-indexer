@@ -1,29 +1,10 @@
 const expect = require('chai').expect
+const sinon = require('sinon')
 
 const SierraBib = require('../../lib/sierra-models/bib')
 const EsBib = require('../../lib/es-models/bib')
 
 describe('EsBib', function () {
-  describe('_valueToIndexFromBasicMapping', () => {
-    it('should return an array of primary values', () => {
-      const field = 'title'
-      const primary = true
-      const bib = new EsBib(new SierraBib(require('../fixtures/bib-11606020.json')))
-      expect(bib._valueToIndexFromBasicMapping(field, primary)).to.deep.equal(['Sefer Toldot Yeshu = The gospel according to the Jews, called Toldoth Jesu : the generations of Jesus, now first translated from the Hebrew.'
-      ])
-    })
-    it('should return array of parallel titles', function () {
-      const record = new SierraBib(require('../fixtures/bib-11606020.json'))
-      const esBib = new EsBib(record)
-      const primary = false
-      const field = 'title'
-      expect(esBib._valueToIndexFromBasicMapping(field, primary)).to.deep.equal(
-        [
-          'ספר תולדות ישו = The gospel according to the Jews, called Toldoth Jesu : the generations of Jesus, now first translated from the Hebrew.'
-        ]
-      )
-    })
-  })
   describe('constructor', function () {
     it('initializes an EsBib with a \'bib\' property', function () {
       const record = new SierraBib(require('../fixtures/bib-10001936.json'))
@@ -101,7 +82,7 @@ describe('EsBib', function () {
     it('should return the creator transformed for sorting', () => {
       const record = new SierraBib(require('../fixtures/bib-10001936.json'))
       const esBib = new EsBib(record)
-      expect(esBib.creator_sort()).to.deep.equal('shermazanian, galust.')
+      expect(esBib.creator_sort()).to.deep.equal(['shermazanian, galust.'])
     })
   })
 
@@ -121,13 +102,13 @@ describe('EsBib', function () {
       const record = new SierraBib(require('../fixtures/bib-10554371.json'))
       delete record.publishYear
       const esBib = new EsBib(record)
-      expect(esBib.dateStartYear()).to.deep.equal(1977)
+      expect(esBib.dateStartYear()).to.deep.equal([1977])
     })
     it('created returns _dateCreated value', () => {
       const record = new SierraBib(require('../fixtures/bib-10554371.json'))
       delete record.publishYear
       const esBib = new EsBib(record)
-      expect(esBib.created()).to.deep.equal(1977)
+      expect(esBib.createdYear()).to.deep.equal([1977])
     })
   })
 
@@ -173,8 +154,8 @@ describe('EsBib', function () {
 
   describe('_sortify', () => {
     it('should return the first value of the array, truncated, and lower cased', () => {
-      const _this = { stub: () => [Array.from(90).map(() => 'A').join(), 'another'] }
-      expect(EsBib.prototype._sortify('stub', _this)).to.equal(Array.from(80).map(() => 'a').join())
+      const _this = { stub: () => [Array(90).fill('A').join(''), 'another'] }
+      expect(EsBib.prototype._sortify('stub', _this)).to.deep.equal([Array(80).fill('a').join('')])
     })
   })
 
@@ -200,8 +181,8 @@ describe('EsBib', function () {
           'Lower and middle Egypt (Delta and Cairo to Asyût).',
           'Upper Egypt: sites (Deir Rîfa to Aswân, excluding Thebes and the temples of Abydos, Dendera, Esna, Edfu, Kôm Ombo and Philae).',
           'Upper Egypt : chief temples (excluding Thebes) : Abydos, Dendera, Esna, Edfu, Kôm Ombo, and Philae.',
-          'Nubia, the deserts, and outside Egypt /',
-          'Objects of provenance not known. Royal Statues. private Statues (Predynastic to Dynasty XVII) -- Private Statues (Dynasty XVIII to the Roman Periiod). Statues of Deities -- Indices to parts 1 and 2, Statues -- Stelae (Dynasty XVIII to the Roman Period) 803-044-050 to 803-099-990 /'
+          'Nubia, the deserts, and outside Egypt',
+          'Objects of provenance not known. Royal Statues. private Statues (Predynastic to Dynasty XVII) -- Private Statues (Dynasty XVIII to the Roman Periiod). Statues of Deities -- Indices to parts 1 and 2, Statues -- Stelae (Dynasty XVIII to the Roman Period) 803-044-050 to 803-099-990'
         ]
       )
     })
@@ -211,7 +192,7 @@ describe('EsBib', function () {
     it('should return the first contributor literal, truncated to 80 characters and lower case', function () {
       const record = new SierraBib(require('../fixtures/bib-hl990000453050203941.json'))
       const esBib = new EsBib(record)
-      expect(esBib.contributor_sort()).to.equal('ginosar, sh. (shaleṿ), 1902-')
+      expect(esBib.contributor_sort()).to.deep.equal(['ginosar, sh. (shaleṿ), 1902-'])
     })
   })
 
@@ -327,12 +308,12 @@ describe('EsBib', function () {
     it('should return array containing issuance object', () => {
       const record = new SierraBib(require('../fixtures/bib-10001936.json'))
       const esBib = new EsBib(record)
-      expect(esBib.issuance()).to.deep.equal([{ id: 'urn:biblevelm', label: 'monograph/item' }])
+      expect(esBib.issuance()).to.deep.equal([{ id: 'urn:biblevel:m', label: 'monograph/item' }])
     })
     it('should pack properly', () => {
       const record = new SierraBib(require('../fixtures/bib-10001936.json'))
       const esBib = new EsBib(record)
-      expect(esBib.issuance_packed()).to.deep.equal(['urn:biblevelm||monograph/item'])
+      expect(esBib.issuance_packed()).to.deep.equal(['urn:biblevel:m||monograph/item'])
     })
   })
 
@@ -356,6 +337,27 @@ describe('EsBib', function () {
     })
   })
 
+  describe('materialType', () => {
+    it('should return materialType based on ldr rectype', () => {
+      const sierraBib = new SierraBib({})
+      sinon.stub(sierraBib, 'ldr').returns({ recType: 'h' })
+      const esBib = new EsBib(sierraBib)
+      expect(esBib.materialType()).to.deep.equal([{ id: 'resourcetypes:txt', label: 'Text' }])
+    })
+    it('should return null for rectype not present in lookup', () => {
+      const sierraBib = new SierraBib({})
+      sinon.stub(sierraBib, 'ldr').returns({ recType: 'lol' })
+      const esBib = new EsBib(sierraBib)
+      expect(esBib.materialType()).to.equal(null)
+    })
+    it('materialType_packed returns packed', () => {
+      const sierraBib = new SierraBib({})
+      sinon.stub(sierraBib, 'ldr').returns({ recType: 'h' })
+      const esBib = new EsBib(sierraBib)
+      expect(esBib.materialType_packed()).to.deep.equal(['resourcetypes:txt||Text'])
+    })
+  })
+
   describe('note', () => {
     it('should return array of primary note values', () => {
       const record = new SierraBib(require('../fixtures/bib-notes.json'))
@@ -363,52 +365,52 @@ describe('EsBib', function () {
       expect(esBib.note()).to.deep.equal([
         {
           label: 'Title devised by cataloger.',
-          type: 'bf:note',
+          type: 'bf:Note',
           noteType: 'Note'
         },
         {
           label: "Many items have photographer's handstamp on verso; some items have studio blindstamp on recto.",
-          type: 'bf:note',
+          type: 'bf:Note',
           noteType: 'Note'
         },
         {
           label: 'Some photographs have captions on verso or recto.',
-          type: 'bf:note',
+          type: 'bf:Note',
           noteType: 'Note'
         },
         {
           label: 'Some photographs are airbrushed; some are cropped; some have cropping marks.',
-          type: 'bf:note',
+          type: 'bf:Note',
           noteType: 'Note'
         },
         {
           label: 'Collection is under copyright; permission of the copyright holder is required for duplication.',
-          type: 'bf:note',
+          type: 'bf:Note',
           noteType: 'Terms of Use'
         },
         {
           label: 'Photo negatives are closed to research.',
-          type: 'bf:note',
+          type: 'bf:Note',
           noteType: 'Terms of Use'
         },
         {
           label: 'Austin Hansen, known primarily as a Harlem studio photographer, has had a career in photography that spans nearly seventy years, from the mid-1920s to the present.',
-          type: 'bf:note',
+          type: 'bf:Note',
           noteType: 'Biography'
         },
         {
           label: 'Finding aid:',
-          type: 'bf:note',
+          type: 'bf:Note',
           noteType: 'Indexes/Finding Aids'
         },
         {
           label: "Hansen's Harlem. New York : New York Public Library, 1989.",
-          type: 'bf:note',
+          type: 'bf:Note',
           noteType: 'Publications'
         },
         {
           label: 'Exhibited: "Hansen\'s Harlem," an exhibition at the Schomburg Center for Research in Black Culture, 1989.',
-          type: 'bf:note',
+          type: 'bf:Note',
           noteType: 'Exhibitions'
         }
       ])
@@ -430,7 +432,7 @@ describe('EsBib', function () {
     it('should return array with placeOfPublication', function () {
       const record = new SierraBib(require('../fixtures/bib-10001936.json'))
       const esBib = new EsBib(record)
-      expect(esBib.placeOfPublication()).to.deep.equal(['Ṛostov (Doni Vra) :'])
+      expect(esBib.placeOfPublication()).to.deep.equal(['Ṛostov (Doni Vra)'])
     })
   })
 
@@ -443,18 +445,26 @@ describe('EsBib', function () {
   })
 
   describe('publisherLiteral', () => {
+    const record = new SierraBib(require('../fixtures/bib-10001936.json'))
+    const esBib = new EsBib(record)
     it('should return array with publisherLiteral', function () {
       const record = new SierraBib(require('../fixtures/bib-10001936.json'))
       const esBib = new EsBib(record)
-      expect(esBib.publisherLiteral()).to.deep.equal(['Tparan Hovhannu Tēr-Abrahamian,'])
+      expect(esBib.publisherLiteral()).to.deep.equal(['Tparan Hovhannu Tēr-Abrahamian'])
+    })
+    it('parallelPublisherLiteral', () => {
+      expect(esBib.parallelPublisherLiteral()).to.deep.equal(['parallel for Tparan Hovhannu Tēr-Abrahamian'])
     })
   })
 
   describe('seriesStatement', () => {
+    const record = new SierraBib(require('../fixtures/bib-parallels-party.json'))
+    const esBib = new EsBib(record)
     it('should return array with seriesStatement', function () {
-      const record = new SierraBib(require('../fixtures/bib-parallels-party.json'))
-      const esBib = new EsBib(record)
       expect(esBib.seriesStatement()).to.deep.equal(['content for 440$a', 'content for 440$a (2)', 'content for 490$a', 'content for 800$a'])
+    })
+    it('parallelSeriesStatement', () => {
+      expect(esBib.parallelSeriesStatement()).to.deep.equal(['parallel content for 440$a', 'parallel content for 440$a (2)', '', 'parallel content for 800$a'])
     })
   })
 
@@ -498,11 +508,16 @@ describe('EsBib', function () {
   })
 
   describe('uniformTitle', () => {
+    const record = new SierraBib(require('../fixtures/bib-11606020.json'))
+    const esBib = new EsBib(record)
     it('should return display titles', function () {
-      const record = new SierraBib(require('../fixtures/bib-11606020.json'))
-      const esBib = new EsBib(record)
       expect(esBib.uniformTitle()).to.deep.equal(
         ['Toledot Yeshu.']
+      )
+    })
+    it('parallelUniformTitle', () => {
+      expect(esBib.parallelUniformTitle()).to.deep.equal(
+        ['‏תולדות ישו.']
       )
     })
   })
@@ -524,13 +539,13 @@ describe('EsBib', function () {
     it('should return the source for partner items', function () {
       const record = new SierraBib(require('../fixtures/bib-hl990000453050203941.json'))
       const esBib = new EsBib(record)
-      expect(esBib.nyplSource()).to.equal('recap-hl')
+      expect(esBib.nyplSource()).to.deep.equal(['recap-hl'])
     })
 
     it('should return the source for NYPL items', function () {
       const record = new SierraBib(require('../fixtures/bib-10001936.json'))
       const esBib = new EsBib(record)
-      expect(esBib.nyplSource()).to.equal('sierra-nypl')
+      expect(esBib.nyplSource()).to.deep.equal(['sierra-nypl'])
     })
   })
 
@@ -556,7 +571,18 @@ describe('EsBib', function () {
       const esBib = new EsBib(record)
       expect(esBib.subjectLiteral()).to.deep.equal(['600 primary value a 600 primary value b'])
     })
+    it('subjectLiteral_exploded', () => {
+      const record = new EsBib(new SierraBib({}))
+      sinon.stub(record, 'subjectLiteral').returns(['Arabian Peninsula -- Religion -- Ancient History.'])
+      expect(record.subjectLiteral_exploded()).to.deep.equal(['Arabian Peninsula', 'Arabian Peninsula -- Religion', 'Arabian Peninsula -- Religion -- Ancient History'])
+    })
+    it('parallelSubjectLiteral', () => {
+      const record = new SierraBib(require('../fixtures/bib-parallels-chaos.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.parallelSubjectLiteral()).to.deep.equal(['‏600 parallel value a 600 parallel value b'])
+    })
   })
+
   describe('parallelDisplayField', () => {
     it('returns parallel display fields', () => {
       const record = new SierraBib(require('../fixtures/bib-parallel-display-fields.json'))
@@ -567,7 +593,7 @@ describe('EsBib', function () {
           index: 0,
           value: '长沙市 : 湖南人民出版社 : 湖南省新華書店发行, 1984.'
         },
-        { fieldName: 'placeOfPublication', index: 0, value: '长沙市 :' },
+        { fieldName: 'placeOfPublication', index: 0, value: '长沙市' },
         { fieldName: 'editionStatement', index: 0, value: '第1版.' }
       ])
     })
