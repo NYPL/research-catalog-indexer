@@ -1,11 +1,11 @@
-const expect = require('chai').expect
+// const expect = require('chai').expect
 
-const SierraItem = require('../../lib/sierra-models/item')
+// const SierraItem = require('../../lib/sierra-models/item')
 
 describe('SierraItem', function () {
   describe('getSuppressionWithRationale', function () {
     describe('unsuppressed record', function () {
-      const item = new SierraItem('')
+      // const item = new SierraItem('')
       // expect(item.getSuppressedWithRationale()).to.deep.equal({
       //   suppressed: false,
       //   rationale: null
@@ -13,7 +13,7 @@ describe('SierraItem', function () {
     })
 
     describe('suppressed record', function () {
-      const item = new SierraItem('')
+      // const item = new SierraItem('')
       // expect(item.getSuppressedWithRationale()).to.deep.equal({
       //   suppressed: true,
       //   rationale: ['suppressed']
@@ -21,7 +21,7 @@ describe('SierraItem', function () {
     })
 
     describe('deleted record', function () {
-      const item = new SierraItem('')
+      // const item = new SierraItem('')
       // expect(item.getSuppressedWithRationale()).to.deep.equal({
       //   suppressed: true,
       //   rationale: ['deleted']
@@ -29,7 +29,7 @@ describe('SierraItem', function () {
     })
 
     describe('deleted and suppressed', function () {
-      const item = new SierraItem('')
+      // const item = new SierraItem('')
       // expect(item.getSuppressedWithRationale()).to.deep.equal({
       //   suppressed: true,
       //   rationale: ['deleted', 'suppressed']
