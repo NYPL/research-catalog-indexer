@@ -1,0 +1,6786 @@
+{
+    "id": "15109087",
+    "nyplSource": "sierra-nypl",
+    "nyplType": "bib",
+    "updatedDate": "2021-11-10T05:41:30-05:00",
+    "createdDate": "2008-12-19T07:34:00-05:00",
+    "deletedDate": null,
+    "deleted": false,
+    "locations": [
+      {
+        "code": "mal",
+        "name": "SASB - Service Desk Rm 315"
+      }
+    ],
+    "suppressed": false,
+    "lang": {
+      "code": "fre",
+      "name": "French"
+    },
+    "title": "L'Esprit des journaux, françois et étrangers",
+    "author": "",
+    "materialType": {
+      "code": "a  ",
+      "value": "BOOK/TEXT"
+    },
+    "bibLevel": {
+      "code": "s",
+      "value": "SERIAL"
+    },
+    "publishYear": null,
+    "catalogDate": "2001-08-16",
+    "country": {
+      "code": "fr ",
+      "name": "France"
+    },
+    "normTitle": "lesprit des journaux françois et étrangers",
+    "normAuthor": "",
+    "standardNumbers": [],
+    "controlNumber": "1568232",
+    "fixedFields": {
+      "24": {
+        "label": "Language",
+        "value": "fre",
+        "display": "French"
+      },
+      "25": {
+        "label": "Skip",
+        "value": "2",
+        "display": null
+      },
+      "26": {
+        "label": "Location",
+        "value": "mal  ",
+        "display": "SASB - Service Desk Rm 315"
+      },
+      "27": {
+        "label": "COPIES",
+        "value": "370",
+        "display": null
+      },
+      "28": {
+        "label": "Cat. Date",
+        "value": "2001-08-16",
+        "display": null
+      },
+      "29": {
+        "label": "Bib Level",
+        "value": "s",
+        "display": "SERIAL"
+      },
+      "30": {
+        "label": "Material Type",
+        "value": "a  ",
+        "display": "BOOK/TEXT"
+      },
+      "31": {
+        "label": "Bib Code 3",
+        "value": "-",
+        "display": null
+      },
+      "80": {
+        "label": "Record Type",
+        "value": "b",
+        "display": null
+      },
+      "81": {
+        "label": "Record Number",
+        "value": "15109087",
+        "display": null
+      },
+      "83": {
+        "label": "Created Date",
+        "value": "2008-12-19T07:34:00Z",
+        "display": null
+      },
+      "84": {
+        "label": "Updated Date",
+        "value": "2021-11-10T05:41:30Z",
+        "display": null
+      },
+      "85": {
+        "label": "No. of Revisions",
+        "value": "380",
+        "display": null
+      },
+      "86": {
+        "label": "Agency",
+        "value": "1",
+        "display": null
+      },
+      "89": {
+        "label": "Country",
+        "value": "fr ",
+        "display": "France"
+      },
+      "98": {
+        "label": "PDATE",
+        "value": "2021-10-22T03:11:35Z",
+        "display": null
+      },
+      "107": {
+        "label": "MARC Type",
+        "value": " ",
+        "display": null
+      }
+    },
+    "varFields": [
+      {
+        "fieldTag": "b",
+        "marcTag": "710",
+        "ind1": "2",
+        "ind2": " ",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "a",
+            "content": "Société de gens de lettres."
+          }
+        ]
+      },
+      {
+        "fieldTag": "c",
+        "marcTag": "852",
+        "ind1": "8",
+        "ind2": " ",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "h",
+            "content": "*DM (Esprit des Journaux, françois et etrangers)"
+          },
+          {
+            "tag": "z",
+            "content": "Library has: July, 1772-April, 1818; Table des Matieres v. 1-5 (1772-1784, 1803-05)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "d",
+        "marcTag": "650",
+        "ind1": " ",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "a",
+            "content": "Periodicals."
+          }
+        ]
+      },
+      {
+        "fieldTag": "l",
+        "marcTag": "035",
+        "ind1": " ",
+        "ind2": " ",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "a",
+            "content": "0246617"
+          },
+          {
+            "tag": "b",
+            "content": "MULS"
+          }
+        ]
+      },
+      {
+        "fieldTag": "l",
+        "marcTag": "035",
+        "ind1": " ",
+        "ind2": " ",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "a",
+            "content": "(WaOLN)Z150000218"
+          }
+        ]
+      },
+      {
+        "fieldTag": "n",
+        "marcTag": "500",
+        "ind1": " ",
+        "ind2": " ",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "a",
+            "content": "Published at Bruxelles, 1773-1775; at Liége, 1776-1781."
+          }
+        ]
+      },
+      {
+        "fieldTag": "n",
+        "marcTag": "500",
+        "ind1": " ",
+        "ind2": " ",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "a",
+            "content": "Description based on: 19th année, t. 10 (Oct. 1790)."
+          }
+        ]
+      },
+      {
+        "fieldTag": "o",
+        "marcTag": "001",
+        "ind1": " ",
+        "ind2": " ",
+        "content": "1568232",
+        "subfields": null
+      },
+      {
+        "fieldTag": "p",
+        "marcTag": "260",
+        "ind1": " ",
+        "ind2": " ",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "a",
+            "content": "Paris :"
+          },
+          {
+            "tag": "b",
+            "content": "Valade,"
+          }
+        ]
+      },
+      {
+        "fieldTag": "q",
+        "marcTag": "852",
+        "ind1": "8",
+        "ind2": " ",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "h",
+            "content": "*DM (Esprit des Journaux, françois et etrangers)"
+          },
+          {
+            "tag": "z",
+            "content": "Library has: July, 1772-April, 1818; Table des Matieres v. 1-5 (1772-1784, 1803-05)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "r",
+        "marcTag": "300",
+        "ind1": " ",
+        "ind2": " ",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "a",
+            "content": "v. :"
+          },
+          {
+            "tag": "b",
+            "content": "ill. ;"
+          },
+          {
+            "tag": "c",
+            "content": "15 cm."
+          }
+        ]
+      },
+      {
+        "fieldTag": "r",
+        "marcTag": "310",
+        "ind1": " ",
+        "ind2": " ",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "a",
+            "content": "Monthly"
+          }
+        ]
+      },
+      {
+        "fieldTag": "t",
+        "marcTag": "245",
+        "ind1": "0",
+        "ind2": "2",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "a",
+            "content": "L'Esprit des journaux, françois et étrangers /"
+          },
+          {
+            "tag": "c",
+            "content": "par une Société de gens-de-lettres."
+          }
+        ]
+      },
+      {
+        "fieldTag": "u",
+        "marcTag": "246",
+        "ind1": "1",
+        "ind2": "6",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "a",
+            "content": "Esprit des journaux"
+          }
+        ]
+      },
+      {
+        "fieldTag": "u",
+        "marcTag": "299",
+        "ind1": "0",
+        "ind2": "2",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "a",
+            "content": "L'Esprit des journaux, françois et étrangers /"
+          }
+        ]
+      },
+      {
+        "fieldTag": "u",
+        "marcTag": "299",
+        "ind1": "1",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "a",
+            "content": "Esprit des journaux"
+          }
+        ]
+      },
+      {
+        "fieldTag": "v",
+        "marcTag": "959",
+        "ind1": " ",
+        "ind2": " ",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "a",
+            "content": ".b67752834"
+          },
+          {
+            "tag": "b",
+            "content": "11-09-07"
+          },
+          {
+            "tag": "c",
+            "content": "08-16-01"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "003",
+        "ind1": " ",
+        "ind2": " ",
+        "content": "OCoLC",
+        "subfields": null
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "005",
+        "ind1": " ",
+        "ind2": " ",
+        "content": "20010816091236.4",
+        "subfields": null
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "008",
+        "ind1": " ",
+        "ind2": " ",
+        "content": "750824d17uu1uuufr mr p       0    0fre dcasIa ",
+        "subfields": null
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "040",
+        "ind1": " ",
+        "ind2": " ",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "a",
+            "content": "MUL"
+          },
+          {
+            "tag": "c",
+            "content": "MUL"
+          },
+          {
+            "tag": "d",
+            "content": "OCL"
+          },
+          {
+            "tag": "d",
+            "content": "KUK"
+          },
+          {
+            "tag": "d",
+            "content": "SLU"
+          },
+          {
+            "tag": "d",
+            "content": "NYP"
+          },
+          {
+            "tag": "d",
+            "content": "WaOLN"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "049",
+        "ind1": " ",
+        "ind2": " ",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "a",
+            "content": "NYPG"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743126"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--Table (1782-1784)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743134"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 4 (1818)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743142"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 2-3 (1818)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743159"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 12, 1817-no. 1, 1818"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743167"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 10-11 (1817)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743175"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 8-9 (1817)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743183"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 6-7 (1817)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743191"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 4-5 (1817)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743209"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 11-12 (1814)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743217"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 9-10 (1814)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743225"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 7-8 (1814)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743233"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 5-6 (1814)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743241"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 3-4 (1814)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743258"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 1-2 (1814)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743266"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 11-12 (1809)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743274"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 9-10 (1809)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743282"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 7-8 (1809)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743290"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 5-6 (1809)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743308"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 3-4 (1809)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743316"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 1-2 (1809)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743324"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 11-12 (1808)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743332"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 9-10 (1808)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743340"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 5-6 (1808)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743357"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 3-4 (1808)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743365"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 1-2 (1808)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743373"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 11-12 (1807)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743381"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 9-10 (1807)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743399"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 7-8 (1807)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743407"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 5-6 (1807)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743423"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 11-12 (1806)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743431"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 9-10 (1806)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743449"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 7-8 (1806)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743456"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 5-6 (1806)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743464"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 3-4 (1806)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743472"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 1-2 (1806)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743480"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 11-12 (1805)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743498"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 9-10 (1805)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743506"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 7-8 (1805)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743514"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 11-12 (1813)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743522"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 9-10 (1813)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743530"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 7-8 (1813)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743548"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 5-6 (1813)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743555"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 3-4 (1813)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743563"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 1-2 (1813)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743571"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 11-12 (1812)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743589"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 9-10 (1812)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743597"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 7-8 (1812)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743605"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 5-6 (1812)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743613"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 3-4 (1812)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743621"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 1-2 (1812)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743639"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 11-12 (1811)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743647"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 9-10 (1811)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743654"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 7-8 (1811)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743662"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--v. 5-6 (1811)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743670"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 3-4 (1811)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743688"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 1-2 (1811)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743696"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 11-12 (1810)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743704"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 9-10 (1810)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743712"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 7-8 (1810)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743720"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 7-8 (1808)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743738"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 5-6 (1810)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743746"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 3-4 (1810)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743753"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 1-2 (1810)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743761"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 2 (1793)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743779"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 1 (1793)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743787"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 12 (1792)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743795"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 11 (1792)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743803"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 10 (1792)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743811"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 9 (1792)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743829"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 8 (1792)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743837"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 7 (1792)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743845"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 6 (1792)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743852"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 5 (1792)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743860"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 4 (1792)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743878"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 3 (1792)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743886"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 2 (1792)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743894"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 1 (1792)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743902"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 12 (1791)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743910"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 11 (1791)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743928"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 10 (1791)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743936"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 9 (1791)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743944"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 8 (1791)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743951"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 7 (1791)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743969"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 6 (1791)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743977"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 5 (1791)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743985"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 4 (1791)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081743993"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 3 (1791)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744009"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 2 (1791)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744017"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 1 (1791)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744025"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 12 (1790)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744033"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 11 (1790)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744041"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 10 (1790)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744058"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 9 (1790)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744066"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 8 (1790)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744074"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 7 (1790)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744082"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 6 (1790)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744090"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 5 (1790)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744108"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 4 (1790)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744116"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 3 (1790)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744124"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 2 (1790)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744132"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 1 (1790)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744140"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 12 (1789)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744157"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 11 (1789)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744165"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 10 (1789)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744173"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 9 (1789)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744181"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 8 (1789)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744199"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 7 (1789)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744207"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 6 (1789)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744215"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 5 (1789)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://hdl.handle.net/2027/nyp.33433081744223"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 4 (1789)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744231"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 3 (1789)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744249"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 2 (1789)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744256"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 1 (1789)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744264"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 9-12 (1795)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744272"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 5-8 (1795)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744280"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 1-4 (1795)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744298"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 12 (1794)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744306"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 11 (1794)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744314"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 10 (1794)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744322"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 9 (1794)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744330"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 8 (1794)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744348"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 7 (1794)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744355"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 6 (1794)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744363"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 5 (1794)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744371"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 4 (1794)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744389"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 3 (1794)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744397"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 2 (1794)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744405"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 1 (1794)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744413"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 12 (1793)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744421"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 11 (1793)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744439"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 10 (1793)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744447"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 9 (1793)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744454"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 8 (1793)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744462"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 7 (1793)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744470"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 6 (1793)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744488"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 5 (1793)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744496"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 4 (1793)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744504"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 3 (1793)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744512"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 1-2 (1801)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744520"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 11-12 (1800)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744538"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 9-10 (1800)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744546"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 7-8 (1800)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744553"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 5-6 (1800)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744561"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 3-4 (1800)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744579"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 1-2 (1800)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744587"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 11-12 (1799)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744595"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 9-10 (1799)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744603"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 7-8 (1799)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744611"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 5-6 (1799)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744629"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 3-4 (1799)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744637"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 1-2 (1799)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744645"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 11-12 (1798)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744652"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 9-10 (1798)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744660"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 7-8 (1798)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744678"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 5-6 (1798)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744686"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 3-4 (1798)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744694"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 1-2 (1798)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744702"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 9-12 (1797)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744710"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 5-8 (1797)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744728"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 1-4 (1797)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744736"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 9-12 (1796)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744744"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 5-8 (1796)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744751"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 1-4 (1796)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744769"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 3-4 (1807)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744777"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 5-6 (1805)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744785"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 3-4 (1805)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744793"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 1-2 (1805)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744801"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--Table Generale 1-28 (1803-1805)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744819"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 11-12 (1804)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744827"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 9-10 (1804)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744835"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 7-8 (1804)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744843"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 5-6 (1804)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744850"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 3-4 (1804)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744868"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 1-2 (1804)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744876"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 11-12 (1803)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744884"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 9-10 (1803)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744892"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 1-3 (1803)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744900"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 11-12 (1802)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744918"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 9-10 (1802)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744926"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 7-8 (1802)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744934"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 5-6 (1802)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744942"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 3-4 (1802)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744959"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 1-2 (1802)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744967"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 11-12 (1801)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744975"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 9-10 (1801)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744983"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 7-8 (1801)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081744991"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 5-6 (1801)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745006"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 3-4 (1801)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745014"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 9 (1782)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745022"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 8 (1782)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745030"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 7 (1782)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745048"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 6 (1782)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745055"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 5 (1782)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745063"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 4 (1782)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745071"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 3 (1782)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745089"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 2 (1782)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745097"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 1 (1782)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745105"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--Table (1779-1781)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745113"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 12 (1781)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745121"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 11 (1781)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745139"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 10 (1781)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745147"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 9 (1781)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745154"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 8 (1781)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745162"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 3 (1781)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745170"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 7 (1781)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745188"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 6 (1781)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745196"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 4 (1781)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745204"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 5 (1781)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745212"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 12 (1780)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745220"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 2 (1781)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745238"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 1 (1781)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745246"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 11 (1780)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745253"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 10 (1780)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745261"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 9 (1780)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745279"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 8 (1780)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745287"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 7 (1780)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745295"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 6 (1780)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745303"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 5 (1780)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745311"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 4 (1780)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745329"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 3 (1780)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745337"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 2 (1780)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745345"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 1 (1780)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745352"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 12 (1779)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745360"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 11 (1779)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745378"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 10 (1779)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745386"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 9 (1779)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745394"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 8 (1779)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745402"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 7 (1779)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745410"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 6 (1779)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745428"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 5 (1779)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745436"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 4 (1779)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745444"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 3 (1779)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745451"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 2 (1779)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745469"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 1 (1779)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745477"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--Table (1776-1778)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745485"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 12 (1778)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745493"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 11 (1778)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745501"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 10 (1778)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745519"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 10 (1784)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745527"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 9 (1784)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745535"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 8 (1784)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745543"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 7 (1784)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745550"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 6 (1784)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745568"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 5 (1784)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745576"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 4 (1784)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745584"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 3 (1784)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745592"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 2 (1784)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745600"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 1 (1784)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745618"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 12 (1783)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745626"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 11 (1783)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745634"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 10 (1783)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745642"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 9 (1783)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745659"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 8 (1783)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745667"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 7 (1783)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745675"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 6 (1783)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745683"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 5 (1783)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745691"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 4 (1783)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745709"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 3 (1783)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745717"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 2 (1783)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745725"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 1 (1783)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745733"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 12 (1782)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745741"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 11 (1782)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745758"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 10 (1782)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745766"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 6 (1787)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745774"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 1 (1787)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745782"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 5 (1787)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745790"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 4 (1787)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745808"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 8 (1785)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745816"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 9 (1785)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745824"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 7 (1785)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745832"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 6 (1785)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745840"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 5 (1785)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745857"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 4 (1785)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745865"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 3 (1785)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745873"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 8 (1786)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745881"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 7 (1786)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745899"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 6 (1786)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745907"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 5 (1786)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745915"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 4 (1786)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745923"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 3 (1786)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745931"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 2 (1786)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745949"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 1 (1786)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745956"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 12 (1785)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745964"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 11 (1785)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745972"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 10 (1785)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745980"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 1 (1785)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081745998"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 12 (1784)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081746004"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 11 (1784)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081746012"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 12 (1788)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081746020"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 11 (1788)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081746038"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 10 (1788)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081746046"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 9 (1788)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081746053"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 8 (1788)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081746061"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 7 (1788)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081746079"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 6 (1788)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081746087"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 5 (1788)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081746095"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 4 (1788)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081746103"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 3 (1788)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081746111"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 2 (1788)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081746129"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 1 (1788)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081746137"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 12 (1787)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081746145"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 11 (1787)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081746152"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 10 (1787)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081746160"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 9 (1787)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081746178"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 8 (1787)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081746186"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 7 (1787)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081746194"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 12 (1786)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081746202"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 11 (1786)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081746210"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 10 (1786)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081746228"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 9 (1786)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081746236"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 2 (1785)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081746244"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 3 (1787)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081746764"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 10-12 (1773)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081746772"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 7-9 (1773)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081746780"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 4-6 (1773)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081746798"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 1-3 (1773)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081746806"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 10-12 (1772)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081746814"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 7-9 (1772)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081747010"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 12 (1776)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081747028"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 11 (1776)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081747036"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 10 (1776)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081747044"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 9 (1776)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081747051"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 7 (1776)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081747069"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 8 (1776)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081747077"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 6 (1776)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081747085"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 5 (1776)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081747093"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 4 (1776)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081747101"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 3 (1776)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081747119"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 11 (1776)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081747127"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 10 (1775)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081747135"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 9 (1775)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081747143"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 8 (1775)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081747150"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 7 (1775)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081747168"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 6 (1775)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081747176"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 5 (1775)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081747184"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 4 (1775)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081747192"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 3 (1775)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081747200"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 2 (1775)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081747218"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 1 (1775)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081747226"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 10-12 (1774)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081747234"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 7-9 (1774)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081747242"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 4-6 (1774)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081747259"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 1-3 (1774)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081747267"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 9 (1778)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081747275"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 8 (1778)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081747283"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 7 (1778)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081747291"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 6 (1778)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081747309"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 5 (1778)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081747317"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 4 (1778)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081747325"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 3 (1778)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081747333"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 2 (1778)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081747341"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 1 (1778)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081747358"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 12 (1777)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081747366"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 11 (1777)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081747374"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 10 (1777)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081747382"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 9 (1777)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081747390"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 8 (1777)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081747408"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 7 (1777)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081747416"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 6 (1777)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081747424"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 5 (1777)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081747432"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 4 (1777)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081747440"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 3 (1777)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081747457"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 2 (1777)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081747465"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 1 (1777)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081747473"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 2 (1776)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081747481"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 1 (1776)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081747499"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--Table (1772-1775)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "856",
+        "ind1": "4",
+        "ind2": "0",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "u",
+            "content": "http://babel.hathitrust.org/cgi/pt?id=nyp.33433081747507"
+          },
+          {
+            "tag": "z",
+            "content": "Full text available via HathiTrust--no. 12 (1775)"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "946",
+        "ind1": " ",
+        "ind2": " ",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "a",
+            "content": "q"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "997",
+        "ind1": " ",
+        "ind2": " ",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "a",
+            "content": "hg"
+          },
+          {
+            "tag": "b",
+            "content": "08-16-01"
+          },
+          {
+            "tag": "c",
+            "content": "s"
+          },
+          {
+            "tag": "d",
+            "content": "a"
+          },
+          {
+            "tag": "e",
+            "content": "-"
+          },
+          {
+            "tag": "f",
+            "content": "fre"
+          },
+          {
+            "tag": "g",
+            "content": "fr "
+          },
+          {
+            "tag": "h",
+            "content": "2"
+          }
+        ]
+      },
+      {
+        "fieldTag": "y",
+        "marcTag": "910",
+        "ind1": " ",
+        "ind2": " ",
+        "content": null,
+        "subfields": [
+          {
+            "tag": "a",
+            "content": "RL"
+          }
+        ]
+      },
+      {
+        "fieldTag": "_",
+        "marcTag": null,
+        "ind1": null,
+        "ind2": null,
+        "content": "00000cas  2200301Ia 4500",
+        "subfields": null
+      }
+    ]
+  }
