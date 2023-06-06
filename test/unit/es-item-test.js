@@ -291,7 +291,7 @@ describe('EsItem', function () {
     it('should return [{id: \'bf:Item\'}]', function () {
       const record = new SierraItem(require('../fixtures/item-17145801.json'))
       const esItem = new EsItem(record)
-      expect(esItem.type()).to.deep.equal([{ id: 'bf:Item' }])
+      expect(esItem.type()).to.deep.equal(['bf:Item'])
     })
   })
 
