@@ -166,6 +166,7 @@ describe('platform api methods', () => {
     it('returns null when no holdings are found', async () => {
       stubPlatformApiGetRequest(nullGetStub)
       const holdings = await requests._holdingsForBibs(bibs)
+      console.log('holdings: ', holdings)
       expect(holdings.some(h => h === null)).to.equal(true)
     })
   })
