@@ -12,19 +12,11 @@ describe('SierraHolding', function () {
       // })
     })
 
-    describe('partner record with 876 x', function () {
+    describe('suppressed record', function () {
       // const holding = new SierraHolding('')
       // expect(holding.getSuppressedWithRationale()).to.deep.equal({
       //   suppressed: true,
-      //   rationale: ['876 $x']
-      // })
-    })
-
-    describe('partner record with 900 a', function () {
-      // const holding = new SierraHolding('')
-      // expect(holding.getSuppressedWithRationale()).to.deep.equal({
-      //   suppressed: true,
-      //   rationale: ['900 $a']
+      //   rationale: ['suppressed']
       // })
     })
 
@@ -36,27 +28,11 @@ describe('SierraHolding', function () {
       // })
     })
 
-    describe('nypl record with item type 50', function () {
+    describe('deleted and suppressed', function () {
       // const holding = new SierraHolding('')
       // expect(holding.getSuppressedWithRationale()).to.deep.equal({
       //   suppressed: true,
-      //   rationale: ['catalogItemType']
-      // })
-    })
-
-    describe('nypl record with fixed item code s/w/d/p', function () {
-      // const holding = new SierraHolding('')
-      // expect(holding.getSuppressedWithRationale()).to.deep.equal({
-      //   suppressed: true,
-      //   rationale: ['fixed "Item Code 2"']
-      // })
-    })
-
-    describe('record with multiple suppression rationales', function () {
-      // const holding = new SierraHolding('')
-      // expect(holding.getSuppressionWithRationale()).to.deep.equal({
-      //   suppressed: true,
-      //   rationale: []
+      //   rationale: ['deleted', 'suppressed']
       // })
     })
   })
