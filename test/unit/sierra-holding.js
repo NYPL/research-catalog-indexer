@@ -1,39 +1,47 @@
-// const expect = require('chai').expect
+const expect = require('chai').expect
 
-// const SierraHolding = require('../../lib/sierra-models/holding')
+const SierraHolding = require('../../lib/sierra-models/holding')
 
 describe('SierraHolding', function () {
   describe('getSuppressionWithRationale', function () {
     describe('unsuppressed record', function () {
-      // const holding = new SierraHolding('')
-      // expect(holding.getSuppressedWithRationale()).to.deep.equal({
-      //   suppressed: false,
-      //   rationale: null
-      // })
+      it('should not suppress record', () => {
+        const holding = new SierraHolding({})
+        expect(holding.getSuppressionWithRationale()).to.deep.equal({
+          suppressed: false,
+          rationale: []
+        })
+      })
     })
 
     describe('suppressed record', function () {
-      // const holding = new SierraHolding('')
-      // expect(holding.getSuppressedWithRationale()).to.deep.equal({
-      //   suppressed: true,
-      //   rationale: ['suppressed']
-      // })
+      it('should show that the record is suppressed', () => {
+        const holding = new SierraHolding({ suppressed: true })
+        expect(holding.getSuppressionWithRationale()).to.deep.equal({
+          suppressed: true,
+          rationale: ['suppressed']
+        })
+      })
     })
 
     describe('deleted record', function () {
-      // const holding = new SierraHolding('')
-      // expect(holding.getSuppressedWithRationale()).to.deep.equal({
-      //   suppressed: true,
-      //   rationale: ['deleted']
-      // })
+      it('should show that the record is deleted', () => {
+        const holding = new SierraHolding({ deleted: true })
+        expect(holding.getSuppressionWithRationale()).to.deep.equal({
+          suppressed: true,
+          rationale: ['deleted']
+        })
+      })
     })
 
     describe('deleted and suppressed', function () {
-      // const holding = new SierraHolding('')
-      // expect(holding.getSuppressedWithRationale()).to.deep.equal({
-      //   suppressed: true,
-      //   rationale: ['deleted', 'suppressed']
-      // })
+      it('should show both suppressed and deleted', () => {
+        const holding = new SierraHolding({ deleted: true, suppressed: true })
+        expect(holding.getSuppressionWithRationale()).to.deep.equal({
+          suppressed: true,
+          rationale: ['deleted', 'suppressed']
+        })
+      })
     })
   })
 })
