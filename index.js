@@ -1,6 +1,7 @@
 const logger = require('./lib/logger')
 const eventDecoder = require('./lib/event-decoder')
 const elastic = require('./lib/elastic-search/requests')
+const { suppressBibs } = require('./lib/utils/suppressBibs')
 const { buildEsDocument } = require('./lib/build-es-document')
 
 /**
@@ -13,15 +14,24 @@ const handler = async (event, context, callback) => {
 
     logger.info(`Handling ${decodedEvent.type} event: ${decodedEvent.records.map((r) => `${r.nyplSource || ''}/${r.id}`).join(', ')}`)
 
-    const recordsToIndex = await buildEsDocument(decodedEvent)
+    const { recordsToIndex, recordsToDelete } = await buildEsDocument(decodedEvent)
 
-    let message = 'Nothing to do.'
+    let message = ''
     if (recordsToIndex.length) {
       await elastic.writeRecords(recordsToIndex)
 
       message = `Wrote ${recordsToIndex.length} doc(s)`
-      logger.info(message)
     }
+
+    if (recordsToDelete.length) {
+      await suppressBibs(recordsToDelete)
+
+      message += `Deleted ${recordsToDelete.length} doc(s)`
+    }
+
+    if (!message) message = 'Nothing to do.'
+
+    logger.info(message)
 
     callback(null, message)
   } catch (e) {

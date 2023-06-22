@@ -163,10 +163,10 @@ describe('platform api methods', () => {
       const holdings = await requests._holdingsForBibs(bibs)
       expect(holdings).to.be.an('Array')
     })
-    it('returns null when no holdings are found', async () => {
+    it('returns empty array when no holdings are found', async () => {
       stubPlatformApiGetRequest(nullGetStub)
       const holdings = await requests._holdingsForBibs(bibs)
-      expect(holdings.some(h => h === null)).to.equal(true)
+      expect(holdings.length).to.equal(0)
     })
   })
 

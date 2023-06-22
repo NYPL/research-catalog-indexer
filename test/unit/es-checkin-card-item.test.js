@@ -187,7 +187,7 @@ describe('EsCheckinCardItem', function () {
       const items = EsCheckinCardItem.fromSierraHolding(fakeHolding)
       // Status "A" checkin-card item is Available:
       expect(items[0].status()).to.deep.equal([
-        { id: 'status:a', label: 'Available ' } // (sic)
+        { id: 'status:a', label: 'Available' } // (sic)
       ])
       // Status "B" checkin-card item is Not available:
       expect(items[1].status()).to.deep.equal([
@@ -210,7 +210,7 @@ describe('EsCheckinCardItem', function () {
       }
       const items = EsCheckinCardItem.fromSierraHolding(fakeHolding)
       expect(items[0].status_packed()).to.deep.equal([
-        'status:a||Available '
+        'status:a||Available'
       ])
       expect(items[1].status_packed()).to.deep.equal([
         'status:na||Not available'
