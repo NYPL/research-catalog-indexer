@@ -297,10 +297,18 @@ describe('EsBib', function () {
   })
 
   describe('idOclc', () => {
-    it('should return array containing oclc numbers', () => {
+    it('should extact prefixed OCLC numbers from 035', () => {
       const record = new SierraBib(require('../fixtures/bib-11055155.json'))
       const esBib = new EsBib(record)
+      // This is also a test of uniqueness since the OCLC in this fixture is
+      // stored in both the 035 and 001:
       expect(esBib.idOclc()).to.deep.equal(['2362202'])
+    })
+
+    it('should extract OCLC numbers from 001', () => {
+      const record = new SierraBib(require('../fixtures/bib-10001936.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.idOclc()).to.deep.equal(['NYPG002001377-B'])
     })
   })
 
@@ -892,8 +900,8 @@ describe('EsBib', function () {
       expect(supplementaryContentRecord.electronicResources()).to.equal(null)
     })
     it('numElectronicResources', () => {
-      expect(electronicResourcesRecord.numElectronicResources()).to.equal(2)
-      expect(supplementaryContentRecord.numElectronicResources()).to.equal(0)
+      expect(electronicResourcesRecord.numElectronicResources()).to.deep.equal([2])
+      expect(supplementaryContentRecord.numElectronicResources()).to.deep.equal([0])
     })
     it('electronic resources, aeonlinks, and supplementary content', () => {
       const record = new SierraBib({
@@ -974,7 +982,7 @@ describe('EsBib', function () {
       })
       const esRecord = new EsBib(record)
       expect(esRecord.supplementaryContent().length).to.equal(1)
-      expect(esRecord.numElectronicResources()).to.equal(2)
+      expect(esRecord.numElectronicResources()).to.deep.equal([2])
       expect(esRecord._aeonUrls().length).to.equal(1)
     })
   })

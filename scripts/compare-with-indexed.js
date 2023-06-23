@@ -44,8 +44,14 @@ const buildLocalEsDocFromUri = async (nyplSource, id) => {
 
 if (type === 'bib') {
   Promise.all([buildLocalEsDocFromUri(nyplSource, id), currentDocument(argv.uri, indexName)])
-    .then(([[localEsRecord], liveEsRecord]) => {
-      printDiff(liveEsRecord, localEsRecord, argv.verbose === 'true')
+    .then(([{ recordsToIndex, recordsToDelete }, liveEsRecord]) => {
+      if (recordsToDelete.length) {
+        console.log('Indexer would delete this bib', recordsToDelete)
+      } else {
+        // The local ES record is the sole element in recordsToIndex
+        const localEsRecord = recordsToIndex[0]
+        printDiff(liveEsRecord, localEsRecord, argv.verbose === 'true')
+      }
     }).catch(e => {
       logger.error(e.message)
       die()

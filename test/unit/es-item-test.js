@@ -246,7 +246,7 @@ describe('EsItem', function () {
     describe('nypl record with recapCustomerCode', function () {
       it('should return the recapCustomerCode', function () {
         const record = new SierraItem(require('../fixtures/item-17145801.json'))
-        record.recapCustomerCode = 'NA'
+        record._recapCustomerCode = 'NA'
         const esItem = new EsItem(record)
         expect(esItem.recapCustomerCode()).to.deep.equal(['NA'])
       })
