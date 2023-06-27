@@ -10,7 +10,11 @@
  *   node scripts/compare-with-indexed --envfile [path to .env] --uri [bnum] --activeIndex [boolean]
  */
 
-const argv = require('minimist')(process.argv.slice(2))
+const argv = require('minimist')(process.argv.slice(2), {
+  default: {
+    verbose: false
+  }
+})
 const dotenv = require('dotenv')
 dotenv.config({ path: argv.envfile || './config/qa.env' })
 
@@ -50,10 +54,11 @@ if (type === 'bib') {
       } else {
         // The local ES record is the sole element in recordsToIndex
         const localEsRecord = recordsToIndex[0]
-        printDiff(liveEsRecord, localEsRecord, argv.verbose === 'true')
+        printDiff(liveEsRecord, localEsRecord, argv.verbose)
       }
     }).catch(e => {
-      logger.error(e.message)
+      console.error(`Compare-With-Indexed encountered an error: ${e.message}`)
+      console.error(e.stack)
       die()
     })
 } else {

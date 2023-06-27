@@ -2,6 +2,7 @@ const expect = require('chai').expect
 const sinon = require('sinon')
 
 const SierraBib = require('../../lib/sierra-models/bib')
+const SierraItem = require('../../lib/sierra-models/item')
 const EsBib = require('../../lib/es-models/bib')
 
 describe('EsBib', function () {
@@ -90,21 +91,27 @@ describe('EsBib', function () {
     it('_dateCreated returns date by publishYear', () => {
       const record = new SierraBib(require('../fixtures/bib-10554371.json'))
       const esBib = new EsBib(record)
-      expect(esBib._dateCreated()).to.deep.equal(1977)
+      expect(esBib._dateCreatedString()).to.deep.equal('1977')
     })
-    it('_dateCreated returns date by 008', () => {
+    it('_dateCreatedString returns date by 008', () => {
       const record = new SierraBib(require('../fixtures/bib-10554371.json'))
       delete record.publishYear
       const esBib = new EsBib(record)
-      expect(esBib._dateCreated()).to.deep.equal(1977)
+      expect(esBib._dateCreatedString()).to.deep.equal('1977')
     })
-    it('dateStartYear returns _dateCreated value', () => {
+    it('createdString returns date as string by 008', () => {
+      const record = new SierraBib(require('../fixtures/bib-10554371.json'))
+      delete record.publishYear
+      const esBib = new EsBib(record)
+      expect(esBib.createdString()).to.deep.equal(['1977'])
+    })
+    it('dateStartYear returns _dateCreatedString value', () => {
       const record = new SierraBib(require('../fixtures/bib-10554371.json'))
       delete record.publishYear
       const esBib = new EsBib(record)
       expect(esBib.dateStartYear()).to.deep.equal([1977])
     })
-    it('created returns _dateCreated value', () => {
+    it('created returns _dateCreatedString value', () => {
       const record = new SierraBib(require('../fixtures/bib-10554371.json'))
       delete record.publishYear
       const esBib = new EsBib(record)
@@ -574,20 +581,28 @@ describe('EsBib', function () {
   })
 
   describe('subjectLiteral', () => {
-    it('should return an array of subject literals ', () => {
+    it('should return an array of subject literals with " -- " joiner (1)', () => {
       const record = new SierraBib(require('../fixtures/bib-parallels-chaos.json'))
       const esBib = new EsBib(record)
-      expect(esBib.subjectLiteral()).to.deep.equal(['600 primary value a 600 primary value b'])
+      expect(esBib.subjectLiteral()).to.deep.equal(['600 primary value a -- 600 primary value b'])
     })
+
+    it('should return an array of subject literals with " -- " joiner (2)', () => {
+      const record = new SierraBib(require('../fixtures/bib-10001936.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.subjectLiteral()).to.deep.equal(['Armenians -- Iran -- History.'])
+    })
+
     it('subjectLiteral_exploded', () => {
       const record = new EsBib(new SierraBib({}))
       sinon.stub(record, 'subjectLiteral').returns(['Arabian Peninsula -- Religion -- Ancient History.'])
       expect(record.subjectLiteral_exploded()).to.deep.equal(['Arabian Peninsula', 'Arabian Peninsula -- Religion', 'Arabian Peninsula -- Religion -- Ancient History'])
     })
-    it('parallelSubjectLiteral', () => {
+
+    it('should return parallelSubjectLiteral values with -- joiner', () => {
       const record = new SierraBib(require('../fixtures/bib-parallels-chaos.json'))
       const esBib = new EsBib(record)
-      expect(esBib.parallelSubjectLiteral()).to.deep.equal(['‏600 parallel value a 600 parallel value b'])
+      expect(esBib.parallelSubjectLiteral()).to.deep.equal(['‏600 parallel value a -- 600 parallel value b'])
     })
   })
 
@@ -812,6 +827,9 @@ describe('EsBib', function () {
       expect((new EsBib(record)).language()).to.deep.equal([
         { id: 'lang:rum', label: 'Romanian' }
       ])
+      expect((new EsBib(record)).language_packed()).to.deep.equal([
+        'lang:rum||Romanian'
+      ])
     })
 
     it('should return language from 041 $a if not found in leader', () => {
@@ -986,10 +1004,43 @@ describe('EsBib', function () {
       expect(esRecord._aeonUrls().length).to.equal(1)
     })
   })
+
   describe('_extractElectronicResources', () => {
     it('returns null when supplementary content is not present', () => {
       const record = new EsBib(new SierraBib(require('../fixtures/bib-aeon.json')))
       expect(record._extractElectronicResourcesFromBibMarc('supplementary content')).to.equal(null)
+    })
+  })
+
+  describe('items', () => {
+    let bib
+
+    beforeEach(() => {
+      const sierraBib = new SierraBib(require('../fixtures/bib-10001936.json'))
+      // Adopt some random items:
+      sierraBib._items = [
+        new SierraItem(require('../fixtures/item-10003973.json')),
+        new SierraItem(require('../fixtures/item-17145801.json'))
+      ]
+      bib = new EsBib(sierraBib)
+    })
+
+    it('items() returns array of items', () => {
+      expect(bib.items()).to.be.a('array')
+      expect(bib.items()).to.have.lengthOf(2)
+      expect(bib.items()[0].idBarcode()).to.deep.equal(['33433107664710'])
+    })
+
+    it('numItemsTotal()', () => {
+      expect(bib.numItemsTotal()).to.deep.equal([2])
+    })
+
+    it('numCheckinCardItems()', () => {
+      expect(bib.numCheckinCardItems()).to.deep.equal([0])
+    })
+
+    it('numItemVolumesParsed()', () => {
+      expect(bib.numItemVolumesParsed()).to.deep.equal([1])
     })
   })
 })

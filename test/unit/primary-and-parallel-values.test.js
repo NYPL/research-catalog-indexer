@@ -59,8 +59,9 @@ describe('primary and parallel values', () => {
       let mappings
 
       // This bib has a single primary 600 with a linked parallel that is tagged RTL
+      // Note the non-standard ' -- ' joiner, which is controlled by the subjectLiteral mapping
       mappings = BibMappings.get('subjectLiteral', bib)
-      expect(parallelValues(bib.varFieldsMulti(mappings))).to.deep.equal(['\u200F600 parallel value a 600 parallel value b'])
+      expect(parallelValues(bib.varFieldsMulti(mappings))).to.deep.equal(['\u200F600 parallel value a -- 600 parallel value b'])
 
       // This bib has a single orphaned parallel for marc 100 that is tagged RTL
       mappings = BibMappings.get('creatorLiteral', bib)
