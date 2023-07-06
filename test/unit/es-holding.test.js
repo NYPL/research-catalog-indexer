@@ -9,20 +9,24 @@ describe('EsHolding model', () => {
       const holding = new EsHolding(new SierraHolding(require('../fixtures/holding-1089484.json')))
       expect(holding.checkInBoxes()).to.deep.equal([
         {
-          copies: null,
           coverage: '20 (--)',
           position: 1,
           status: 'Bound',
           type: 'nypl:CheckInBox',
-          shelfMark: '*R-SIBL NK9509 .T722 Latest ed.'
+          shelfMark: [
+            '*R-SIBL NK9509 .T722 Latest ed.',
+            'JBM 07-158 Bound vols.'
+          ]
         },
         {
-          copies: null,
           coverage: '21 (--)',
           position: 2,
           status: 'Expected',
           type: 'nypl:CheckInBox',
-          shelfMark: 'JBM 07-158 Bound vols.'
+          shelfMark: [
+            '*R-SIBL NK9509 .T722 Latest ed.',
+            'JBM 07-158 Bound vols.'
+          ]
         }
       ])
     })
@@ -43,8 +47,8 @@ describe('EsHolding model', () => {
     it('returns holdingStatement', () => {
       const holding = new EsHolding(new SierraHolding(require('../fixtures/holding-1032862.json')))
       expect(holding.holdingStatement()).to.deep.equal([
-        ['1 v. no. (year) (month)', '1.1   2012 01/02'],
-        ['1 v. no. (year) (month)', '1.1   2012 01/02']
+        'Jan 1997-2011. INCOMPLETE',
+        '2012-01/02'
       ])
     })
   })
@@ -59,7 +63,7 @@ describe('EsHolding model', () => {
   describe('location', () => {
     const holding = new EsHolding(new SierraHolding(require('../fixtures/holding-1089484.json')))
     it('returns location for valid sierra code', () => {
-      expect(holding.location()).to.deep.equal([{ id: 'loc:slrb1', label: 'Science, Industry and Business Library (SIBL) - Reference' }])
+      expect(holding.location()).to.deep.equal([{ code: 'loc:slrb1', label: 'Science, Industry and Business Library (SIBL) - Reference' }])
     })
     it('returns null for unrecognized location', () => {
       const holding = new EsHolding(new SierraHolding({ location: { code: 'not a sierra code' } }))

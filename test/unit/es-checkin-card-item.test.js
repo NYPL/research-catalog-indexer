@@ -221,7 +221,7 @@ describe('EsCheckinCardItem', function () {
   describe('type', () => {
     it('returns static CheckinCardItem type', () => {
       expect(checkinCardItems[0].type()).to.deep.equal([
-        { id: 'nypl:CheckinCardItem' }
+        'nypl:CheckinCardItem'
       ])
     })
   })

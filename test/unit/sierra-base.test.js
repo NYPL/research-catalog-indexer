@@ -62,6 +62,16 @@ describe('SierraBase', function () {
       expect(title[0].value).to.eq('Niwtʻer azgayin patmutʻian hamar Ereveli hay kazunkʻ ; Parskastan / Ashkhatasirutʻiamb Galust Shermazaniani.')
     })
 
+    it('returns varField top-level content (i.e. not subfields) when subfields are not specified', function () {
+      const record = new SierraBase(require('../fixtures/bib-10001936.json'))
+      const oclc = record.varField('001')
+      expect(oclc).to.deep.equal([
+        {
+          value: 'NYPG002001377-B'
+        }
+      ])
+    })
+
     it('able to return single string from all subfields, excluding some subfields', function () {
       const record = new SierraBase(require('../fixtures/bib-10001936.json'))
       // Get title using all subfields

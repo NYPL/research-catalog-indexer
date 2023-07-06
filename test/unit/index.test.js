@@ -99,6 +99,7 @@ describe('index handler function', () => {
       expect(callback).to.have.been.calledWith(null, 'Wrote 1 doc(s)')
     })
   })
+
   describe('modelPrefetch', () => {
     it('calls platformApi#modelPrefetch', async () => {
       eventDecoderStub('Item')
