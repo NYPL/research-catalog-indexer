@@ -1,14 +1,14 @@
 rm -r build
 mkdir build
-# Build dependencies:
 cd build
+
+# Build dependencies:
 npm i
 ls
 
 # Move required application files into build:
-cp *.py .
-cp -R lib .
-cp -R config .
-cp -R routes .
+cp ../*.js .
+cp -R ../lib .
+cp -R ../config .
 
 zip -qr build.zip *
