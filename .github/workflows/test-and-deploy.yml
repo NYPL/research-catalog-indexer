@@ -12,7 +12,6 @@ jobs:
           cache: 'npm'
       - name: Install dependencies
         run: |
-          nvm use
           npm i
       - name: Run linter and test suite
         run: npm test
