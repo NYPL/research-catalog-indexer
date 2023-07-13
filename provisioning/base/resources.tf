@@ -13,6 +13,11 @@ variable "environment" {
   }
 }
 
+variable "vpc_config" {
+  type = map
+  description = "VPC config params"
+}
+
 # Upload the zipped app to S3:
 resource "aws_s3_object" "uploaded_zip" {
   bucket = "nypl-travis-builds-${var.environment}"
@@ -27,10 +32,10 @@ resource "aws_lambda_function" "lambda_instance" {
   description   = "Serves endpoints relating to locations services"
   function_name = "ResearchCatalogIndexer-${var.environment}"
   handler       = "index.handler"
-  memory_size   = 128
+  memory_size   = 512
   role          = "arn:aws:iam::946183545209:role/lambda-full-access"
-  runtime       = "node18"
-  timeout       = 60
+  runtime       = "nodejs18.x"
+  timeout       = 300
 
   # Location of the zipped code in S3:
   s3_bucket     = aws_s3_object.uploaded_zip.bucket
