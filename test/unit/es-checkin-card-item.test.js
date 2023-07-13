@@ -2,6 +2,7 @@ const expect = require('chai').expect
 
 const SierraHolding = require('../../lib/sierra-models/holding')
 const EsCheckinCardItem = require('../../lib/es-models/checkin-card-item')
+const EsBib = require('../../lib/es-models/bib')
 
 describe('EsCheckinCardItem', function () {
   const holding = new SierraHolding(require('../fixtures/holding-1032862.json'))
@@ -110,13 +111,16 @@ describe('EsCheckinCardItem', function () {
       ])
     })
 
-    it('returns holding format', () => {
+    it('returns parent bib material type label as holding format when holding lacks 843', () => {
+      // Create a holding from which to extract checkin card items:
       const holding = new SierraHolding(require('../fixtures/holding-1044923.json'))
-      const items = EsCheckinCardItem.fromSierraHolding(holding)
-      // First item has null enumeration.enumeration
-      // and start_date "Jul. 10, 1999" (and null end_date), so:
+      // Create a esBib instance with a "Text" materialType:
+      const esBib = new EsBib(new SierraHolding(require('../fixtures/bib-10554371.json')))
+      const items = EsCheckinCardItem.fromSierraHolding(holding, esBib)
+      // Because the holding record doesn't have a 843, we expect checkin card
+      // items to derive formatLiteral from the esBib.materialType:
       expect(items[0].formatLiteral()).to.deep.equal([
-        'PRINT'
+        'Text'
       ])
     })
   })
