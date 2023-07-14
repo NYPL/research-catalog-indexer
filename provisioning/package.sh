@@ -7,7 +7,7 @@ cp package-lock.json build/.
 cp -R lib build/.
 cp -R config build/.
 cp -R routes build/.
-npm i
 
 cd build/
+npm i
 zip -qr build.zip *
