@@ -5,6 +5,6 @@ describe('elastic search schema', () => {
   it('returns the schema', () => {
     const properties = Object.keys(schema())
     expect(properties).to.include('carrierType')
-    expect(properties.length).to.equal(84)
+    expect(properties.length).to.equal(88)
   })
 })
