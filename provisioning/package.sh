@@ -1,14 +1,13 @@
 rm -r build
 mkdir build
-cd build
-
-# Build dependencies:
-npm i
-ls
 
 # Move required application files into build:
-cp ../*.js .
-cp -R ../lib .
-cp -R ../config .
+cp package.json build/.
+cp package-lock.json build/.
+cp -R lib build/.
+cp -R config build/.
+cp -R routes build/.
+npm i
 
+cd build/
 zip -qr build.zip *

@@ -11,8 +11,7 @@ jobs:
           node-version: 18.x
           cache: 'npm'
       - name: Install dependencies
-        run: |
-          npm i
+        run: npm i
       - name: Run linter and test suite
         run: npm test
   deploy-qa:
