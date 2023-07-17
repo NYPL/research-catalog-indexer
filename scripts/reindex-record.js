@@ -42,7 +42,7 @@ if (!argv.envfile) usage() && die('--envfile required')
 dotenv.config({ path: argv.envfile })
 
 const logger = require('../lib/logger')
-logger.setLevel(process.env.LOGLEVEL || 'info')
+logger.setLevel(process.env.LOG_LEVEL || 'info')
 
 const streamsClient = new NyplStreamsClient({ nyplDataApiClientBase: process.env.NYPL_API_BASE_URL })
 

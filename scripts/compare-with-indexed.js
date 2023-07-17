@@ -25,7 +25,7 @@ const { buildEsDocument } = require('../lib/build-es-document')
 const { currentDocument } = require('../lib/elastic-search/requests')
 
 const logger = require('../lib/logger')
-logger.setLevel(process.env.LOGLEVEL || 'info')
+logger.setLevel(process.env.LOG_LEVEL || 'info')
 
 const usage = () => {
   console.log('Usage: node scripts/compare-with-indexed --envfile [path to .env] [--uri bnum]')

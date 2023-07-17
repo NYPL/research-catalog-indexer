@@ -8,7 +8,7 @@ const { buildEsDocument } = require('./lib/build-es-document')
  * Main lambda handler receiving Bib, Item, and Holding events
  */
 const handler = async (event, context, callback) => {
-  logger.setLevel(process.env.LOGLEVEL || 'info')
+  logger.setLevel(process.env.LOG_LEVEL || 'info')
   try {
     const decodedEvent = await eventDecoder.decodeRecordsFromEvent(event)
 
