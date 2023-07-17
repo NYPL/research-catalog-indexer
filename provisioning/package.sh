@@ -6,8 +6,6 @@ cp package.json build/.
 cp package-lock.json build/.
 cp index.js build/.
 cp -R lib build/.
-cp -R config build/.
-cp -R routes build/.
 cp -R data build/.
 
 cd build/

@@ -1,3 +1,5 @@
 node_modules/*
 .terraform*
 terraform*
+node_modules
+build/
