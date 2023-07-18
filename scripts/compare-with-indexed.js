@@ -41,7 +41,7 @@ let indexName = process.env.ELASTIC_RESOURCES_INDEX_NAME
 if (!argv.uri) usage() && die('Must specify event file or uri')
 if (argv.activeIndex === 'true') indexName = process.env.HYBRID_ES_INDEX
 
-const { id, type, nyplSource } = (new NyplSourceMapper()).splitIdentifier(argv.uri)
+const { id, type, nyplSource } = NyplSourceMapper.instance().splitIdentifier(argv.uri)
 
 const buildLocalEsDocFromUri = async (nyplSource, id) => {
   const bib = await bibById(nyplSource, id)
