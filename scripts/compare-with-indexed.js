@@ -20,7 +20,7 @@ const argv = require('minimist')(process.argv.slice(2), {
 const dotenv = require('dotenv')
 dotenv.config({ path: argv.envfile || './config/qa.env' })
 
-const NyplSourceMapper = require('discovery-store-models/lib/nypl-source-mapper')
+const NyplSourceMapper = require('../lib/utils/nypl-source-mapper')
 const { awsInit, die, printDiff } = require('./utils')
 const { bibById } = require('../lib/platform-api/requests')
 const { buildEsDocument } = require('../lib/build-es-document')
@@ -41,7 +41,7 @@ let indexName = process.env.ELASTIC_RESOURCES_INDEX_NAME
 if (!argv.uri) usage() && die('Must specify event file or uri')
 if (argv.activeIndex === 'true') indexName = process.env.HYBRID_ES_INDEX
 
-const { id, type, nyplSource } = NyplSourceMapper.instance().splitIdentifier(argv.uri)
+const { id, type, nyplSource } = (new NyplSourceMapper()).splitIdentifier(argv.uri)
 
 const buildLocalEsDocFromUri = async (nyplSource, id) => {
   const bib = await bibById(nyplSource, id)

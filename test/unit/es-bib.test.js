@@ -1012,7 +1012,7 @@ describe('EsBib', function () {
     })
   })
 
-  describe.only('dateEnd', () => {
+  describe('dateEnd', () => {
     it('dateEndString should return null for no year', () => {
       const bib = new EsBib(new SierraBib(require('../fixtures/bib-10001936')))
       expect(bib.dateEndString()).to.equal(null)
