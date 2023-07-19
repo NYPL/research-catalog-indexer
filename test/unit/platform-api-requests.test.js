@@ -1,7 +1,9 @@
 const expect = require('chai').expect
 const rewire = require('rewire')
 const sinon = require('sinon')
+const nock = require('nock')
 
+const esClient = require('../../lib/elastic-search/client')
 let requests = require('../../lib/platform-api/requests')
 const platformApi = require('../../lib/platform-api/client')
 const { genericGetStub, nullGetStub, stubPlatformApiGetRequest } = require('./utils')
@@ -211,19 +213,56 @@ describe('platform api methods', () => {
 
   describe('bibsForHoldingsORItems - items', () => {
     const items = Array.from(Array(10).keys()).map((n) => ({ id: 'i' + n }))
+    const response = {
+      'sierra-nypl': {
+        organization: 'nyplOrg:0001',
+        bibPrefix: 'b',
+        holdingPrefix: 'h',
+        itemPrefix: 'i'
+      },
+      'recap-pul': { organization: 'nyplOrg:0003', bibPrefix: 'pb', itemPrefix: 'pi' },
+      'recap-cul': { organization: 'nyplOrg:0002', bibPrefix: 'cb', itemPrefix: 'ci' },
+      'recap-hl': { organization: 'nyplOrg:0004', bibPrefix: 'hb', itemPrefix: 'hi' }
+    }
+    before(() => {
+      nock('https://raw.githubusercontent.com/NYPL/nypl-core/master/mappings/recap-discovery/nypl-source-mapping.json')
+        .defaultReplyHeaders({
+          'access-control-allow-origin': '*',
+          'access-control-allow-credentials': 'true'
+        })
+        .get(/.*/)
+        .reply(200, () => {
+          return response
+        })
+      const searchStub = sinon.stub().resolves({
+        hits: {
+          hits: [{ _source: { uri: 'b' + 1234567 } }]
+        }
+      })
+      sinon.stub(esClient, 'client').resolves({ search: searchStub })
+    })
     afterEach(() => {
-      if (platformApi.client.restore) {
-        platformApi.client.restore()
-      }
+      if (platformApi.client.restore) platformApi.client.restore()
+    })
+    after(() => {
+      if (esClient.client.restore) esClient.client.restore()
     })
     it('should make get requests per bib identifier', async () => {
+      // stub request made by bibById
       stubPlatformApiGetRequest(genericGetStub)
+      // let's pretend _bibIdentifiersForItems finds 10 bib ids associated with
+      // provided item id
+      const idSpy = sinon.stub().resolves(Array.from(Array(10).keys()).map((n) => ({ id: 'b' + n, nyplSource: 'sierra-nypl' })))
+      requests = rewire('../../lib/platform-api/requests')
+      requests.__set__('_bibIdentifiersForItems', idSpy)
 
       const bibs = await requests.bibsForHoldingsOrItems('Item', items)
 
+      // bibById should be called for all 10 bib ids returned
       expect(genericGetStub.callCount).to.equal(10)
       expect(bibs).to.have.length(10)
-      expect(genericGetStub).to.have.been.calledWith('bibs/Tatooine/bi0')
+      // platform api call should be made with provided nyplsource and id.
+      expect(genericGetStub).to.have.been.calledWith('bibs/sierra-nypl/b1')
     })
 
     it('should call _bibidentifiersforitems', async () => {
@@ -237,7 +276,9 @@ describe('platform api methods', () => {
       expect(idSpy.calledOnce).to.equal(true)
     })
     it('should filter out bad responses', async () => {
-      requests = require('../../lib/platform-api/requests')
+      const idSpy = sinon.stub().resolves(Array.from(Array(10).keys()).map((n) => ({ id: 'b' + n, nyplSource: 'sierra-nypl' })))
+      requests = rewire('../../lib/platform-api/requests')
+      requests.__set__('_bibIdentifiersForItems', idSpy)
       genericGetStub.onCall(3).resolves(null)
       stubPlatformApiGetRequest(genericGetStub)
 
@@ -267,6 +308,25 @@ describe('platform api methods', () => {
     it('returns a 1-D array', () => {
       const bibIds = requests._bibIdentifiersForHoldings(holdings)
       expect(bibIds).to.deep.equal(bibIds.flat())
+    })
+  })
+
+  describe('_bibIdentifiersForItems', () => {
+    const itemsWithBibIds = [{ bibIds: ['b12345678'], nyplSource: 'recap-pul' },
+      { bibIds: ['b12345679'], nyplSource: 'sierra-nypl' }]
+    const itemsNoBibIds = [{ id: 'i123', nyplSource: 'sierra-nypl' }]
+    it('returns bib identifiers for items with bibIds', async () => {
+      const bibs = await requests._bibIdentifiersForItems(itemsWithBibIds)
+      expect(bibs).to.deep.equal([{ nyplSource: 'recap-pul', id: 'b12345678' }, { nyplSource: 'sierra-nypl', id: 'b12345679' }])
+    })
+
+    it('returns bibs for items with no bib ids', async () => {
+      const idSpy = sinon.stub()
+        .callsFake((nyplSource, id) => ({ id: 'b' + id, nyplSource }))
+      requests = rewire('../../lib/platform-api/requests')
+      requests.__set__('getBibIdentifiersForItemId', idSpy)
+      const bibs = await requests._bibIdentifiersForItems(itemsNoBibIds)
+      expect(bibs).to.deep.equal([{ id: 'bi123', nyplSource: 'sierra-nypl' }])
     })
   })
 })

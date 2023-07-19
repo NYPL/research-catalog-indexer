@@ -3,11 +3,13 @@
  * Given a bib uri, generates the ES doc using local code and then
  * fetches the same record from the remote index to perform a comparison.
  * When true is provided for active-index, the script  will query the index
- * that is updated by the DHI. Otherwise, it will go to the research-catalog-indexer
- * test index.
+ * that is updated by the DHI (provided in the config file as HYBRID_ES_INDEX).
+ * Otherwise, it will compare against the research-catalog-indexer test index.
+ * If --verbose is true, the diff will show the differing values from each record,
+ * instead of reporting only that there is a diff.
  *
  * Usage:
- *   node scripts/compare-with-indexed --envfile [path to .env] --uri [bnum] --activeIndex [boolean]
+ *   node scripts/compare-with-indexed --envfile [path to .env] --uri [bnum] --activeIndex [boolean] --verbose [boolean]
  */
 
 const argv = require('minimist')(process.argv.slice(2), {
@@ -18,7 +20,7 @@ const argv = require('minimist')(process.argv.slice(2), {
 const dotenv = require('dotenv')
 dotenv.config({ path: argv.envfile || './config/qa.env' })
 
-const NyplSourceMapper = require('discovery-store-models/lib/nypl-source-mapper')
+const NyplSourceMapper = require('../lib/utils/nypl-source-mapper')
 const { awsInit, die, printDiff } = require('./utils')
 const { bibById } = require('../lib/platform-api/requests')
 const { buildEsDocument } = require('../lib/build-es-document')
@@ -39,7 +41,7 @@ let indexName = process.env.ELASTIC_RESOURCES_INDEX_NAME
 if (!argv.uri) usage() && die('Must specify event file or uri')
 if (argv.activeIndex === 'true') indexName = process.env.HYBRID_ES_INDEX
 
-const { id, type, nyplSource } = NyplSourceMapper.instance().splitIdentifier(argv.uri)
+const { id, type, nyplSource } = (new NyplSourceMapper()).splitIdentifier(argv.uri)
 
 const buildLocalEsDocFromUri = async (nyplSource, id) => {
   const bib = await bibById(nyplSource, id)
