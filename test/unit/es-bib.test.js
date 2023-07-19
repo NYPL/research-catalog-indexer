@@ -1012,6 +1012,25 @@ describe('EsBib', function () {
     })
   })
 
+  describe('dateEnd', () => {
+    it('dateEndString should return null for no year', () => {
+      const bib = new EsBib(new SierraBib(require('../fixtures/bib-10001936')))
+      expect(bib.dateEndString()).to.equal(null)
+    })
+    it('dateEndString should return array with year', () => {
+      const bib = new EsBib(new SierraBib(require('../fixtures/bib-11606020.json')))
+      expect(bib.dateEndString()).to.deep.equal(['2000'])
+    })
+    it('dateEndYear should return null for no year', () => {
+      const bib = new EsBib(new SierraBib(require('../fixtures/bib-10001936')))
+      expect(bib.dateEndYear()).to.equal(null)
+    })
+    it('dateEndYear should return year as int', () => {
+      const bib = new EsBib(new SierraBib(require('../fixtures/bib-11606020.json')))
+      expect(bib.dateEndYear()).to.deep.equal([2000])
+    })
+  })
+
   describe('items', () => {
     let bib
 
