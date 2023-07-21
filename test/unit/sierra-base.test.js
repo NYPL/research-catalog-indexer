@@ -195,7 +195,65 @@ describe('SierraBase', function () {
       expect(varField300[1].value).to.be.a('undefined')
       expect(varField300[1].parallel.value).to.eq('300 orphaned parallel value a 300 orphaned parallel value b')
     })
+
+    it('dedupes VarFieldMatches based on primary and parallel values', () => {
+      // Contrive a record with 3 varfield 100 entries, two of them effectively dupes
+      const record = new SierraBase({
+        varFields: [
+          // This one stands alone without a parallel:
+          {
+            marcTag: '100',
+            subfields: [
+              { tag: 'a', content: '$a content' }
+            ]
+          },
+          // This one has a parallel:
+          {
+            marcTag: '100',
+            subfields: [
+              { tag: 'a', content: '$a content' },
+              { tag: '6', content: '880-01' }
+            ]
+          },
+          {
+            marcTag: '880',
+            subfields: [
+              { tag: 'a', content: '$a parallel content' },
+              { tag: '6', content: '100-01/...' }
+            ]
+          },
+          // This one has different subfields in primary and parallel blocks
+          // to the one above, but should be de-deduped because we're only
+          // querying for $a
+          {
+            marcTag: '100',
+            subfields: [
+              { tag: 'a', content: '$a content' },
+              { tag: 'b', content: '$b content' },
+              { tag: '6', content: '880-02' }
+            ]
+          },
+          {
+            marcTag: '880',
+            subfields: [
+              { tag: 'a', content: '$a parallel content' },
+              { tag: 'b', content: '$b parallel content' },
+              { tag: '6', content: '100-02/...' }
+            ]
+          }
+        ]
+      })
+
+      const varField100 = record.varField(100, ['a'])
+      expect(varField100).to.be.a('array')
+      expect(varField100).to.have.lengthOf(2)
+      expect(varField100[0].value).to.equal('$a content')
+      expect(varField100[0].parallel).to.be.a('undefined')
+      expect(varField100[1].value).to.equal('$a content')
+      expect(varField100[1].parallel.value).to.equal('$a parallel content')
+    })
   })
+
   describe('varFieldsMulti', () => {
     it('more paths in bib-mappings.json than fields in fixture', () => {
       const bib = new SierraBib(require('../fixtures/bib-11606020.json'))

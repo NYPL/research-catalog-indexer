@@ -14,8 +14,10 @@
 
 const argv = require('minimist')(process.argv.slice(2), {
   default: {
-    verbose: false
-  }
+    verbose: false,
+    printDocument: false
+  },
+  boolean: ['activeIndex', 'printDocument']
 })
 const dotenv = require('dotenv')
 dotenv.config({ path: argv.envfile || './config/qa.env' })
@@ -39,30 +41,42 @@ awsInit()
 
 let indexName = process.env.ELASTIC_RESOURCES_INDEX_NAME
 if (!argv.uri) usage() && die('Must specify event file or uri')
-if (argv.activeIndex === 'true') indexName = process.env.HYBRID_ES_INDEX
+if (argv.activeIndex) indexName = process.env.HYBRID_ES_INDEX
 
-const { id, type, nyplSource } = (new NyplSourceMapper()).splitIdentifier(argv.uri)
+const run = async () => {
+  console.log(`Comparing local ES doc against the one in ${indexName}`)
+  const mapper = (new NyplSourceMapper())
+  const { id, type, nyplSource } = await mapper.splitIdentifier(argv.uri)
 
-const buildLocalEsDocFromUri = async (nyplSource, id) => {
-  const bib = await bibById(nyplSource, id)
-  return buildEsDocument({ type: 'Bib', records: [bib] })
+  const buildLocalEsDocFromUri = async (nyplSource, id) => {
+    const bib = await bibById(nyplSource, id)
+    return buildEsDocument({ type: 'Bib', records: [bib] })
+  }
+
+  if (type === 'bib') {
+    Promise.all([buildLocalEsDocFromUri(nyplSource, id), currentDocument(argv.uri, indexName)])
+      .then(([{ recordsToIndex, recordsToDelete }, liveEsRecord]) => {
+        if (recordsToDelete.length) {
+          console.log('Indexer would delete this bib', recordsToDelete)
+        } else {
+          // The local ES record is the sole element in recordsToIndex
+          const localEsRecord = recordsToIndex[0]
+
+          if (argv.printDocument) {
+            console.log('Built document:\n_______________________________________________________')
+            console.log(JSON.stringify(localEsRecord, null, 2))
+          }
+
+          printDiff(liveEsRecord, localEsRecord, argv.verbose)
+        }
+      }).catch(e => {
+        console.error(`Compare-With-Indexed encountered an error: ${e.message}`)
+        console.error(e.stack)
+        die()
+      })
+  } else {
+    die(`Only configured for bib uris, ${type} uri specified`)
+  }
 }
 
-if (type === 'bib') {
-  Promise.all([buildLocalEsDocFromUri(nyplSource, id), currentDocument(argv.uri, indexName)])
-    .then(([{ recordsToIndex, recordsToDelete }, liveEsRecord]) => {
-      if (recordsToDelete.length) {
-        console.log('Indexer would delete this bib', recordsToDelete)
-      } else {
-        // The local ES record is the sole element in recordsToIndex
-        const localEsRecord = recordsToIndex[0]
-        printDiff(liveEsRecord, localEsRecord, argv.verbose)
-      }
-    }).catch(e => {
-      console.error(`Compare-With-Indexed encountered an error: ${e.message}`)
-      console.error(e.stack)
-      die()
-    })
-} else {
-  die(`Only configured for bib uris, ${type} uri specified`)
-}
+run()
