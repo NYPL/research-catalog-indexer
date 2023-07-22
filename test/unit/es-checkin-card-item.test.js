@@ -163,9 +163,7 @@ describe('EsCheckinCardItem', function () {
 
   describe('shelfMark_sort', () => {
     it('returns sortable form of shelfMark when available', () => {
-      expect(checkinCardItems[0].shelfMark_sort()).to.deep.equal([
-        'aSc Ser.-M .N000489'
-      ])
+      expect(checkinCardItems[0].shelfMark_sort()).to.equal('aSc Ser.-M .N000489')
     })
 
     it('returns sortable form of uri when no shelfmark available', () => {
@@ -174,8 +172,8 @@ describe('EsCheckinCardItem', function () {
         checkInCards: [{}, {}]
       }
       const items = EsCheckinCardItem.fromSierraHolding(new SierraHolding(fakeHolding))
-      expect(items[0].shelfMark_sort()).to.deep.equal(['bi-h1234-0'])
-      expect(items[1].shelfMark_sort()).to.deep.equal(['bi-h1234-1'])
+      expect(items[0].shelfMark_sort()).to.equal('bi-h1234-0')
+      expect(items[1].shelfMark_sort()).to.equal('bi-h1234-1')
     })
   })
 
