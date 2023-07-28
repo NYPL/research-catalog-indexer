@@ -276,4 +276,67 @@ describe('SierraBase', function () {
       ])
     })
   })
+
+  describe('_removeRedundantOrphans', () => {
+    it('de-dupes redundant orphaned parallels', () => {
+      let matches = [
+        { value: 'v1' },
+        {
+          value: 'v2',
+          parallel: {
+            value: 'v2 parallel'
+          }
+        },
+        // We expect this one to be removed because it's redundant next to the one above:
+        { parallel: { value: 'v2 parallel' } }
+      ]
+      expect(SierraBase.prototype._uniqueVarFieldMatches(matches)).to.deep.equal(matches.slice(0, 2))
+
+      matches = [
+        // We expect this one to be removed because it's redundant given the last one:
+        { value: 'v1' },
+        {
+          value: 'v2',
+          parallel: {
+            value: 'v2 parallel'
+          }
+        },
+        { value: 'v1', parallel: { value: 'v1 parallel' } }
+      ]
+      expect(SierraBase.prototype._removeRedundantOrphans(matches)).to.deep.equal(matches.slice(1, 3))
+    })
+  })
+
+  describe('_uniqueVarFieldMatches', () => {
+    it('de-dupes matches with identical primary and parallel values', () => {
+      const matches = [
+        { value: 'v1' },
+        {
+          value: 'v2',
+          parallel: {
+            value: 'v2 parallel'
+          }
+        },
+        // We expect these next two to be removed because they exactly match
+        // the first two:
+        { value: 'v1' },
+        {
+          value: 'v2',
+          parallel: {
+            value: 'v2 parallel'
+          }
+        }
+      ]
+      expect(SierraBase.prototype._uniqueVarFieldMatches(matches)).to.deep.equal(matches.slice(0, 2))
+
+      // Add a redundant orphan:
+      matches.push({
+        parallel: {
+          value: 'v2 parallel'
+        }
+      })
+      // Should remove redundant orphan:
+      expect(SierraBase.prototype._uniqueVarFieldMatches(matches)).to.deep.equal(matches.slice(0, 2))
+    })
+  })
 })
