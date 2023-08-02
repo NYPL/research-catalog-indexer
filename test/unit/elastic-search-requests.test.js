@@ -10,13 +10,20 @@ const logger = require('../../lib/logger')
 describe('elastic search requests', () => {
   let bulkSpy
   let dateStub
+  let records
+
   before(() => {
     dateStub = sinon.stub(Date, 'now').returns('11:11pm')
   })
+
   after(() => {
     dateStub.restore()
   })
-  const records = [12345, 23456, 34567].map((uri) => ({ uri, _type: 'resource', _parent: 'mom', otherMetadata: 'meep morp' }))
+
+  beforeEach(() => {
+    records = [12345, 23456, 34567].map((uri) => ({ uri, _type: 'resource', _parent: 'mom', otherMetadata: 'meep morp' }))
+  })
+
   describe('_indexGeneric', () => {
     before(() => {
       bulkSpy = sinon.stub().callsFake((body) => Promise.resolve(body))
@@ -26,6 +33,7 @@ describe('elastic search requests', () => {
     after(() => {
       esClient.client.restore()
     })
+
     it('builds index statements - update', async () => {
       await esRequests.internal._indexGeneric('indexName', records, true)
 
@@ -74,7 +82,7 @@ describe('elastic search requests', () => {
         await esRequests.writeRecords(records)
       } catch (e) {}
 
-      expect(loggerSpy.calledWith('Indexing error: ya: messed up')).to.eq(true)
+      expect(loggerSpy.calledWith('Indexing error: Error updating 12345: ya: messed up')).to.eq(true)
     })
   })
 })

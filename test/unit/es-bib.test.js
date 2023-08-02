@@ -54,7 +54,7 @@ describe('EsBib', function () {
       const record = new SierraBib(require('../fixtures/bib-11606020.json'))
       const esBib = new EsBib(record)
       expect(esBib.title_sort()).to.deep.equal(
-        ['sefer toldot yeshu  the gospel according to the jews called toldoth jesu  the generations of jesus now first translated from the hebrew']
+        ['sefer toldot yeshu  the gospel according to the jews called toldoth jesu  the gener...'.substring(0, 80)]
       )
     })
   })
@@ -232,11 +232,11 @@ describe('EsBib', function () {
       const record = new SierraBib(require('../fixtures/bib-identifiers.json'))
       const esBib = new EsBib(record)
       expect(esBib.identifier()).to.deep.equal([
+        'urn:shelfmark:ReCAP 16-64126',
         'urn:bnum:21071947',
         'urn:isbn:9782810703753 (pbk.)',
         'urn:oclc:953527732',
-        'urn:identifier:(OCoLC)953527732',
-        'urn:identifier:ReCAP 16-64126'
+        'urn:identifier:(OCoLC)953527732'
       ])
     })
   })
@@ -247,6 +247,10 @@ describe('EsBib', function () {
       const esBib = new EsBib(record)
 
       expect(esBib.identifierV2()).to.deep.equal([
+        {
+          value: 'ReCAP 16-64126',
+          type: 'bf:ShelfMark'
+        },
         {
           value: '21071947',
           type: 'nypl:Bnumber'
@@ -262,10 +266,6 @@ describe('EsBib', function () {
         {
           value: '(OCoLC)953527732',
           type: 'bf:Identifier'
-        },
-        {
-          value: 'ReCAP 16-64126',
-          type: 'bf:ShelfMark'
         }
       ])
     })
@@ -581,13 +581,13 @@ describe('EsBib', function () {
   })
 
   describe('subjectLiteral', () => {
-    it('should return an array of subject literals with " -- " joiner (1)', () => {
+    it('should return an array of subject literals with " " joiner around certain subfields', () => {
       const record = new SierraBib(require('../fixtures/bib-parallels-chaos.json'))
       const esBib = new EsBib(record)
-      expect(esBib.subjectLiteral()).to.deep.equal(['600 primary value a -- 600 primary value b'])
+      expect(esBib.subjectLiteral()).to.deep.equal(['600 primary value a 600 primary value b'])
     })
 
-    it('should return an array of subject literals with " -- " joiner (2)', () => {
+    it('should return an array of subject literals with " -- " joiner around other subfields', () => {
       const record = new SierraBib(require('../fixtures/bib-10001936.json'))
       const esBib = new EsBib(record)
       expect(esBib.subjectLiteral()).to.deep.equal(['Armenians -- Iran -- History.'])
@@ -599,10 +599,26 @@ describe('EsBib', function () {
       expect(record.subjectLiteral_exploded()).to.deep.equal(['Arabian Peninsula', 'Arabian Peninsula -- Religion', 'Arabian Peninsula -- Religion -- Ancient History'])
     })
 
-    it('should return parallelSubjectLiteral values with -- joiner', () => {
+    it('subjectLiteral_exploded de-dedupes', () => {
+      const record = new EsBib(new SierraBib({}))
+      // When subjectLiteral contains two subjects with a common root:
+      sinon.stub(record, 'subjectLiteral').returns([
+        'Social security -- Law and legislation -- Uruguay',
+        'Social security -- Latin America'
+      ])
+      // Expect the root subject to only occur once:
+      expect(record.subjectLiteral_exploded()).to.deep.equal([
+        'Social security',
+        'Social security -- Law and legislation',
+        'Social security -- Law and legislation -- Uruguay',
+        'Social security -- Latin America'
+      ])
+    })
+
+    it('should return parallelSubjectLiteral values', () => {
       const record = new SierraBib(require('../fixtures/bib-parallels-chaos.json'))
       const esBib = new EsBib(record)
-      expect(esBib.parallelSubjectLiteral()).to.deep.equal(['‏600 parallel value a -- 600 parallel value b'])
+      expect(esBib.parallelSubjectLiteral()).to.deep.equal(['‏600 parallel value a 600 parallel value b'])
     })
   })
 

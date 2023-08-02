@@ -42,7 +42,7 @@ const verboseDiffPerType = (diffedProperties, remote, local) => {
 const buildVerboseDiff = (diffObj, remote, local) => {
   // there are three first level properties on the diff obj, added, local, and
   // deleted.
-  const updateTypes = Object.keys(diffObj, remote, local)
+  const updateTypes = Object.keys(diffObj)
   return updateTypes.reduce((acc, type) => ({
     ...acc,
     [type]: verboseDiffPerType(diffObj[type], remote, local)
@@ -102,7 +102,12 @@ function printDiff (remote, local, verbose) {
             if (Object.keys(diffed).length > 0) {
               const itemDiff = detailedDiff(remoteItem, localItem)
               console.log(`  Diff in ${holdingsOrItems} ${remoteItem.uri}:`)
-              logObject(itemDiff, 4)
+              if (verbose) {
+                const verboseDiff = buildVerboseDiff(itemDiff, remoteItem, localItem)
+                logObject(verboseDiff, 4)
+              } else {
+                logObject(itemDiff, 4)
+              }
             }
           }
         })

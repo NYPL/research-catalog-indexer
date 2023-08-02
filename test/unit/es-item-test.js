@@ -141,7 +141,7 @@ describe('EsItem', function () {
         const record = new SierraItem(require('../fixtures/item-17145801.json'))
         const esItem = new EsItem(record)
         expect(esItem.identifier()).to.deep.equal([
-          'urn:identifier:*DM (Esprit des Journaux, françois et etrangers) no. 12 (1784)',
+          'urn:shelfmark:*DM (Esprit des Journaux, françois et etrangers) no. 12 (1784)',
           'urn:barcode:33433081745998'
         ])
       })
@@ -296,10 +296,18 @@ describe('EsItem', function () {
   })
 
   describe('uri', function () {
-    it('should return the id', function () {
+    it('should return the id', async function () {
       const record = new SierraItem(require('../fixtures/item-17145801.json'))
       const esItem = new EsItem(record)
-      expect(esItem.uri()).to.equal('i17145801')
+      const uri = await esItem.uri()
+      expect(uri).to.equal('i17145801')
+    })
+
+    it('should return the right prefixed id if partner', async function () {
+      const record = new SierraItem(require('../fixtures/item-pul-7834127.json'))
+      const esItem = new EsItem(record)
+      const uri = await esItem.uri()
+      expect(uri).to.equal('pi7834127')
     })
   })
 })
