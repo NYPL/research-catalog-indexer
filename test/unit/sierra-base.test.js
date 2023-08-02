@@ -207,7 +207,8 @@ describe('SierraBase', function () {
               { tag: 'a', content: '$a content' }
             ]
           },
-          // This one has a parallel:
+          // This one has a parallel and identical primary content to the
+          // one above:
           {
             marcTag: '100',
             subfields: [
@@ -244,13 +245,15 @@ describe('SierraBase', function () {
         ]
       })
 
+      // Of the three possible hits, the first is invalidated because it's a
+      // redundant parallel next to the second. The last is invalidated because
+      // - although it differs in subfield content - the specific query used
+      // ignores the differing subfields, making it identical to the second hit
       const varField100 = record.varField(100, ['a'])
       expect(varField100).to.be.a('array')
-      expect(varField100).to.have.lengthOf(2)
+      expect(varField100).to.have.lengthOf(1)
       expect(varField100[0].value).to.equal('$a content')
-      expect(varField100[0].parallel).to.be.a('undefined')
-      expect(varField100[1].value).to.equal('$a content')
-      expect(varField100[1].parallel.value).to.equal('$a parallel content')
+      expect(varField100[0].parallel.value).to.equal('$a parallel content')
     })
   })
 
