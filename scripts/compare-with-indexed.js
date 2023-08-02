@@ -54,7 +54,9 @@ const run = async () => {
   }
 
   if (type === 'bib') {
-    Promise.all([buildLocalEsDocFromUri(nyplSource, id), currentDocument(argv.uri, indexName)])
+    const current = currentDocument(argv.uri, indexName)
+      .catch((e) => null)
+    Promise.all([buildLocalEsDocFromUri(nyplSource, id), current])
       .then(([{ recordsToIndex, recordsToDelete }, liveEsRecord]) => {
         if (recordsToDelete.length) {
           console.log('Indexer would delete this bib', recordsToDelete)
@@ -67,7 +69,11 @@ const run = async () => {
             console.log(JSON.stringify(localEsRecord, null, 2))
           }
 
-          printDiff(liveEsRecord, localEsRecord, argv.verbose)
+          if (liveEsRecord) {
+            printDiff(liveEsRecord, localEsRecord, argv.verbose)
+          } else {
+            console.log('Can\'t display diff because record doesn\'t exist in live index')
+          }
         }
       }).catch(e => {
         console.error(`Compare-With-Indexed encountered an error: ${e.message}`)

@@ -78,7 +78,7 @@ describe('EsHolding model', () => {
     })
   })
 
-  describe('note', () => {
+  describe('notes', () => {
     it('returns notes array', () => {
       const holding = new EsHolding(new SierraHolding({
         varFields: [{
@@ -98,7 +98,7 @@ describe('EsHolding model', () => {
           subfields: null
         }]
       }))
-      expect(holding.note()).to.deep.equal(['Checkin **EDITION SPECIALE** here.', 'IRREGULAR'])
+      expect(holding.notes()).to.deep.equal(['Checkin **EDITION SPECIALE** here.', 'IRREGULAR'])
     })
   })
 
