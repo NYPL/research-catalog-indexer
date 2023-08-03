@@ -67,4 +67,22 @@ describe('utils', () => {
       })
     })
   })
+
+  describe('addSierraCheckDigit', () => {
+    it('handles invalid inputs', () => {
+      expect(utils.addSierraCheckDigit(new Date())).to.equal(null)
+      expect(utils.addSierraCheckDigit('foo')).to.equal(null)
+    })
+
+    it('handles integers', () => {
+      expect(utils.addSierraCheckDigit(1234)).to.equal('12348')
+      expect(utils.addSierraCheckDigit(987654321)).to.equal('9876543210')
+    })
+
+    it('handles prefixed ids', () => {
+      expect(utils.addSierraCheckDigit('b1234')).to.equal('b12348')
+      expect(utils.addSierraCheckDigit('b987654321')).to.equal('b9876543210')
+      expect(utils.addSierraCheckDigit('cb987654321')).to.equal('cb9876543210')
+    })
+  })
 })

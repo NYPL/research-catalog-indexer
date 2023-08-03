@@ -1,14 +1,22 @@
 const expect = require('chai').expect
 const rewire = require('rewire')
 const sinon = require('sinon')
-const nock = require('nock')
 
 const esClient = require('../../lib/elastic-search/client')
 let requests = require('../../lib/platform-api/requests')
 const platformApi = require('../../lib/platform-api/client')
-const { genericGetStub, nullGetStub, stubPlatformApiGetRequest } = require('./utils')
+const {
+  genericGetStub,
+  nullGetStub,
+  stubPlatformApiGetRequest,
+  stubNyplSourceMapper
+} = require('./utils')
 
 describe('platform api methods', () => {
+  before(() => {
+    stubNyplSourceMapper()
+  })
+
   afterEach(() => {
     if (platformApi.client.restore) platformApi.client.restore()
     genericGetStub.resetHistory()
@@ -213,27 +221,8 @@ describe('platform api methods', () => {
 
   describe('bibsForHoldingsORItems - items', () => {
     const items = Array.from(Array(10).keys()).map((n) => ({ id: 'i' + n }))
-    const response = {
-      'sierra-nypl': {
-        organization: 'nyplOrg:0001',
-        bibPrefix: 'b',
-        holdingPrefix: 'h',
-        itemPrefix: 'i'
-      },
-      'recap-pul': { organization: 'nyplOrg:0003', bibPrefix: 'pb', itemPrefix: 'pi' },
-      'recap-cul': { organization: 'nyplOrg:0002', bibPrefix: 'cb', itemPrefix: 'ci' },
-      'recap-hl': { organization: 'nyplOrg:0004', bibPrefix: 'hb', itemPrefix: 'hi' }
-    }
+
     before(() => {
-      nock('https://raw.githubusercontent.com/NYPL/nypl-core/master/mappings/recap-discovery/nypl-source-mapping.json')
-        .defaultReplyHeaders({
-          'access-control-allow-origin': '*',
-          'access-control-allow-credentials': 'true'
-        })
-        .get(/.*/)
-        .reply(200, () => {
-          return response
-        })
       const searchStub = sinon.stub().resolves({
         hits: {
           hits: [{ _source: { uri: 'b' + 1234567 } }]

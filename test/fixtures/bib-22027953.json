@@ -1,0 +1,1197 @@
+ {
+  "id": "22027953",
+  "nyplSource": "sierra-nypl",
+  "nyplType": "bib",
+  "updatedDate": "2023-05-04T01:31:33-04:00",
+  "createdDate": "2019-11-21T21:42:27-05:00",
+  "deletedDate": null,
+  "deleted": false,
+  "locations": [
+    {
+      "code": "scb",
+      "name": "Schomburg Center - Moving Image & Recorded Sound"
+    },
+    {
+      "code": "scb",
+      "name": "Schomburg Center - Moving Image & Recorded Sound"
+    }
+  ],
+  "suppressed": false,
+  "lang": {
+    "code": "eng",
+    "name": "English"
+  },
+  "title": "Documenting history in your own backyard : a symposium for archiving & preserving hip-hop culture",
+  "author": "",
+  "materialType": {
+    "code": "v  ",
+    "value": "DVD"
+  },
+  "bibLevel": {
+    "code": "m",
+    "value": "MONOGRAPH"
+  },
+  "publishYear": 2012,
+  "catalogDate": "2019-11-21",
+  "country": {
+    "code": "nyu",
+    "name": "New York (State)"
+  },
+  "normTitle": "documenting history in your own backyard a symposium for archiving and preserving hip hop culture",
+  "normAuthor": "",
+  "standardNumbers": [],
+  "controlNumber": "1128191166",
+  "fixedFields": {
+    "24": {
+      "label": "Language",
+      "value": "eng",
+      "display": "English"
+    },
+    "25": {
+      "label": "Skip",
+      "value": "0",
+      "display": null
+    },
+    "26": {
+      "label": "Location",
+      "value": "scb  ",
+      "display": "Schomburg Center - Moving Image & Recorded Sound"
+    },
+    "27": {
+      "label": "",
+      "value": "7",
+      "display": null
+    },
+    "28": {
+      "label": "Cat. Date",
+      "value": "2019-11-21",
+      "display": null
+    },
+    "29": {
+      "label": "Bib Level",
+      "value": "m",
+      "display": "MONOGRAPH"
+    },
+    "30": {
+      "label": "Material Type",
+      "value": "v  ",
+      "display": "DVD"
+    },
+    "31": {
+      "label": "Bib Code 3",
+      "value": "-",
+      "display": null
+    },
+    "80": {
+      "label": "Record Type",
+      "value": "b",
+      "display": null
+    },
+    "81": {
+      "label": "Record Number",
+      "value": "22027953",
+      "display": null
+    },
+    "83": {
+      "label": "Created Date",
+      "value": "2019-11-21T21:42:27Z",
+      "display": null
+    },
+    "84": {
+      "label": "Updated Date",
+      "value": "2023-05-04T01:31:33Z",
+      "display": null
+    },
+    "85": {
+      "label": "No. of Revisions",
+      "value": "6",
+      "display": null
+    },
+    "86": {
+      "label": "Agency",
+      "value": "1",
+      "display": null
+    },
+    "89": {
+      "label": "Country",
+      "value": "nyu",
+      "display": "New York (State)"
+    },
+    "98": {
+      "label": "",
+      "value": "2023-05-04T00:46:18Z",
+      "display": null
+    },
+    "107": {
+      "label": "MARC Type",
+      "value": " ",
+      "display": null
+    }
+  },
+  "varFields": [
+    {
+      "fieldTag": "b",
+      "marcTag": "700",
+      "ind1": "1",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Adler, B.,"
+        },
+        {
+          "tag": "e",
+          "content": "speaker."
+        }
+      ]
+    },
+    {
+      "fieldTag": "b",
+      "marcTag": "700",
+      "ind1": "1",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Diaz, Martha,"
+        },
+        {
+          "tag": "e",
+          "content": "moderator."
+        }
+      ]
+    },
+    {
+      "fieldTag": "b",
+      "marcTag": "700",
+      "ind1": "1",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Fullwood, Steven G.,"
+        },
+        {
+          "tag": "e",
+          "content": "speaker."
+        }
+      ]
+    },
+    {
+      "fieldTag": "b",
+      "marcTag": "700",
+      "ind1": "1",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Gray, Paradise,"
+        },
+        {
+          "tag": "e",
+          "content": "speaker."
+        }
+      ]
+    },
+    {
+      "fieldTag": "b",
+      "marcTag": "700",
+      "ind1": "1",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Muhammad, Khalil Gibran,"
+        },
+        {
+          "tag": "d",
+          "content": "1972-"
+        },
+        {
+          "tag": "e",
+          "content": "speaker."
+        }
+      ]
+    },
+    {
+      "fieldTag": "b",
+      "marcTag": "700",
+      "ind1": "1",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Ortiz, Ben,"
+        },
+        {
+          "tag": "e",
+          "content": "speaker."
+        }
+      ]
+    },
+    {
+      "fieldTag": "b",
+      "marcTag": "700",
+      "ind1": "1",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Richardson, Deborra A.,"
+        },
+        {
+          "tag": "e",
+          "content": "speaker."
+        }
+      ]
+    },
+    {
+      "fieldTag": "b",
+      "marcTag": "700",
+      "ind1": "1",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Reagan, Katherine,"
+        },
+        {
+          "tag": "e",
+          "content": "speaker."
+        }
+      ]
+    },
+    {
+      "fieldTag": "b",
+      "marcTag": "710",
+      "ind1": "2",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Schomburg Center for Research in Black Culture."
+        }
+      ]
+    },
+    {
+      "fieldTag": "d",
+      "marcTag": "650",
+      "ind1": " ",
+      "ind2": "0",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Archives."
+        }
+      ]
+    },
+    {
+      "fieldTag": "d",
+      "marcTag": "650",
+      "ind1": " ",
+      "ind2": "0",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Hip-hop"
+        },
+        {
+          "tag": "x",
+          "content": "Archival resources."
+        }
+      ]
+    },
+    {
+      "fieldTag": "d",
+      "marcTag": "650",
+      "ind1": " ",
+      "ind2": "0",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Hip-hop"
+        },
+        {
+          "tag": "x",
+          "content": "Influence."
+        }
+      ]
+    },
+    {
+      "fieldTag": "d",
+      "marcTag": "650",
+      "ind1": " ",
+      "ind2": "0",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Hip-hop"
+        },
+        {
+          "tag": "x",
+          "content": "History."
+        }
+      ]
+    },
+    {
+      "fieldTag": "d",
+      "marcTag": "650",
+      "ind1": " ",
+      "ind2": "0",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Hip-hop"
+        },
+        {
+          "tag": "x",
+          "content": "Social aspects"
+        },
+        {
+          "tag": "z",
+          "content": "United States."
+        }
+      ]
+    },
+    {
+      "fieldTag": "d",
+      "marcTag": "655",
+      "ind1": " ",
+      "ind2": "7",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Nonfictions films."
+        },
+        {
+          "tag": "2",
+          "content": "lcgft"
+        }
+      ]
+    },
+    {
+      "fieldTag": "d",
+      "marcTag": "655",
+      "ind1": " ",
+      "ind2": "7",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Panel discussions."
+        },
+        {
+          "tag": "2",
+          "content": "lcgft"
+        }
+      ]
+    },
+    {
+      "fieldTag": "e",
+      "marcTag": "257",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "United States."
+        }
+      ]
+    },
+    {
+      "fieldTag": "l",
+      "marcTag": "035",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "(OCoLC)1128191166"
+        }
+      ]
+    },
+    {
+      "fieldTag": "n",
+      "marcTag": "520",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "A symposium to discuss the preservation and documentation of the history of hip-hop culture at various archival institutions; what collectors and artists need to know about the archival process and the importance of moving artifacts into an institutional collection; tool kits available for collectors and archvists; building a community of archives and planning for the future."
+        }
+      ]
+    },
+    {
+      "fieldTag": "n",
+      "marcTag": "500",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Moderator, Martha Diaz (Hip Hop scholar, Schomburg Center).  Participants include: Bill Adler (author); Paradise Gray (author); Ben Ortiz (Cornell University); Katherine Reagan (Cornell University); Deborra A. Richardson (Smithsonian Institution)"
+        }
+      ]
+    },
+    {
+      "fieldTag": "n",
+      "marcTag": "505",
+      "ind1": "0",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Disc 1 (56 min.) Welcome (Dr. Kahil Gibran Muhammad and Stephen G. Fullwood, Schomburg Center).  Symposium Review and Introduction of Participants (Martha Diaz).  Preserving History in Institutional Archives: What Collectors/Creators Need to Know (Deborra Richardson) --  Disc 2 (53 min.)  An Example of an Institutional Collecting Model (Katherine Reagan and Ben Ortiz) -- Disc 3. (63 min.)  Private Collectors : Documenting and Preserving Hip Hop History (Bill Adler and Paradise Gray) -- Disc 4 (63 min.) Paradise Gray, (continued).  How to Document Your Community: a Tool Kit  (Deborra A. Richardson) -- Disc 5. How to Document Your community: a Tool Kit (continued).  Questions and Answers/General Discussion -- Disc 6 (62 min.) Questions and Answers/General Discussion (continued) -- Disc 7 (31 min.) Questions and Answers/General Discussion (continued).  Next Steps (Dr. Kahil Gibran Muhammad)"
+        }
+      ]
+    },
+    {
+      "fieldTag": "n",
+      "marcTag": "518",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "o",
+          "content": "Symposium held"
+        },
+        {
+          "tag": "d",
+          "content": "October 19, 2012, at the"
+        },
+        {
+          "tag": "p",
+          "content": "Schomburg Center for Research in Black Culture."
+        }
+      ]
+    },
+    {
+      "fieldTag": "o",
+      "marcTag": "001",
+      "ind1": " ",
+      "ind2": " ",
+      "content": "1128191166",
+      "subfields": null
+    },
+    {
+      "fieldTag": "p",
+      "marcTag": "264",
+      "ind1": " ",
+      "ind2": "0",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "New York :"
+        },
+        {
+          "tag": "b",
+          "content": "Schomburg Center for Research in Black Culture,"
+        },
+        {
+          "tag": "c",
+          "content": "2012."
+        }
+      ]
+    },
+    {
+      "fieldTag": "q",
+      "marcTag": "852",
+      "ind1": "8",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "h",
+          "content": "Sc Visual DVD-362"
+        }
+      ]
+    },
+    {
+      "fieldTag": "r",
+      "marcTag": "300",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "7 videodiscs (ca. 420 min.) :"
+        },
+        {
+          "tag": "b",
+          "content": "sound, color ;"
+        },
+        {
+          "tag": "c",
+          "content": "4 3/4 in."
+        }
+      ]
+    },
+    {
+      "fieldTag": "r",
+      "marcTag": "336",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "two-dimensional moving image"
+        },
+        {
+          "tag": "2",
+          "content": "rdacontent"
+        }
+      ]
+    },
+    {
+      "fieldTag": "r",
+      "marcTag": "337",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "video"
+        },
+        {
+          "tag": "2",
+          "content": "rdamedia"
+        }
+      ]
+    },
+    {
+      "fieldTag": "r",
+      "marcTag": "338",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "videodisc"
+        },
+        {
+          "tag": "2",
+          "content": "rdacarrier"
+        }
+      ]
+    },
+    {
+      "fieldTag": "r",
+      "marcTag": "347",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "video file"
+        },
+        {
+          "tag": "b",
+          "content": "DVD video"
+        }
+      ]
+    },
+    {
+      "fieldTag": "t",
+      "marcTag": "245",
+      "ind1": "0",
+      "ind2": "0",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Documenting history in your own backyard :"
+        },
+        {
+          "tag": "b",
+          "content": "a symposium for archiving & preserving hip-hop culture /"
+        },
+        {
+          "tag": "c",
+          "content": "hosted by the Schomburg Center for Research in Black Culture."
+        }
+      ]
+    },
+    {
+      "fieldTag": "u",
+      "marcTag": "246",
+      "ind1": "3",
+      "ind2": "0",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Symposium for archiving & preserving hip-hop culture"
+        }
+      ]
+    },
+    {
+      "fieldTag": "u",
+      "marcTag": "246",
+      "ind1": "3",
+      "ind2": "0",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Symposium for archiving and preserving hip-hop culture"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "856",
+      "ind1": "4",
+      "ind2": "0",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "u",
+          "content": "https://specialcollections.nypl.org/aeon/Aeon.dll?Action=10&Form=30&Title=Documenting+history+in+your+own+backyard+:+a+symposium+for+archiving+and+preserving+hip-hop+culture+/&Site=SCHMIRS&CallNumber=Sc+Visual+DVD-362&ItemInfo3=https://catalog.nypl.org/record=b22027953&ReferenceNumber=b220279536&Genre=DVD&Location=Schomburg+Moving+Images+and+Recorded+Sound"
+        },
+        {
+          "tag": "z",
+          "content": "Request Access to Schomburg Moving Images and Recorded Sound"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "003",
+      "ind1": " ",
+      "ind2": " ",
+      "content": "OCoLC",
+      "subfields": null
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "007",
+      "ind1": " ",
+      "ind2": " ",
+      "content": "vf cvahzs",
+      "subfields": null
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "008",
+      "ind1": " ",
+      "ind2": " ",
+      "content": "191121e20121019nyu420            vleng dngmIi ",
+      "subfields": null
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "005",
+      "ind1": " ",
+      "ind2": " ",
+      "content": "20191121044227.0",
+      "subfields": null
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "033",
+      "ind1": "0",
+      "ind2": "0",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "20121019"
+        },
+        {
+          "tag": "b",
+          "content": "3804"
+        },
+        {
+          "tag": "c",
+          "content": "N4"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "040",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "NYP"
+        },
+        {
+          "tag": "b",
+          "content": "eng"
+        },
+        {
+          "tag": "e",
+          "content": "rda"
+        },
+        {
+          "tag": "c",
+          "content": "NYP"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "043",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "n-us---"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "049",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "NYPP"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "901",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "MARS"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "901",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "JC"
+        },
+        {
+          "tag": "b",
+          "content": "SCL"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "946",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "m"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "Sc Visual DVD-362"
+        },
+        {
+          "tag": "c",
+          "content": "Disc 1"
+        },
+        {
+          "tag": "l",
+          "content": "SCBB2"
+        },
+        {
+          "tag": "h",
+          "content": "031"
+        },
+        {
+          "tag": "o",
+          "content": "1"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "t",
+          "content": "014"
+        },
+        {
+          "tag": "v",
+          "content": "SCL/JC"
+        },
+        {
+          "tag": "i",
+          "content": "33433092980592"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "Sc Visual DVD-362"
+        },
+        {
+          "tag": "c",
+          "content": "Disc 2"
+        },
+        {
+          "tag": "l",
+          "content": "SCBB2"
+        },
+        {
+          "tag": "h",
+          "content": "031"
+        },
+        {
+          "tag": "o",
+          "content": "1"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "t",
+          "content": "014"
+        },
+        {
+          "tag": "v",
+          "content": "SCL/JC"
+        },
+        {
+          "tag": "i",
+          "content": "33433092980584"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "Sc Visual DVD-362"
+        },
+        {
+          "tag": "c",
+          "content": "Disc 3"
+        },
+        {
+          "tag": "l",
+          "content": "SCBB2"
+        },
+        {
+          "tag": "h",
+          "content": "031"
+        },
+        {
+          "tag": "o",
+          "content": "1"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "t",
+          "content": "014"
+        },
+        {
+          "tag": "v",
+          "content": "SCL/JC"
+        },
+        {
+          "tag": "i",
+          "content": "33433092980576"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "Sc Visual DVD-362"
+        },
+        {
+          "tag": "c",
+          "content": "Disc 4"
+        },
+        {
+          "tag": "l",
+          "content": "SCBB2"
+        },
+        {
+          "tag": "h",
+          "content": "031"
+        },
+        {
+          "tag": "o",
+          "content": "1"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "t",
+          "content": "014"
+        },
+        {
+          "tag": "v",
+          "content": "SCL/JC"
+        },
+        {
+          "tag": "i",
+          "content": "33433092980568"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "Sc Visual DVD-362"
+        },
+        {
+          "tag": "c",
+          "content": "Disc 5"
+        },
+        {
+          "tag": "l",
+          "content": "SCBB2"
+        },
+        {
+          "tag": "h",
+          "content": "031"
+        },
+        {
+          "tag": "o",
+          "content": "1"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "t",
+          "content": "014"
+        },
+        {
+          "tag": "v",
+          "content": "SCL/JC"
+        },
+        {
+          "tag": "i",
+          "content": "33433092980550"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "Sc Visual DVD-362"
+        },
+        {
+          "tag": "c",
+          "content": "Disc 6"
+        },
+        {
+          "tag": "l",
+          "content": "SCBB2"
+        },
+        {
+          "tag": "h",
+          "content": "031"
+        },
+        {
+          "tag": "o",
+          "content": "1"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "t",
+          "content": "014"
+        },
+        {
+          "tag": "v",
+          "content": "SCL/JC"
+        },
+        {
+          "tag": "i",
+          "content": "33433092980543"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "Sc Visual DVD-362"
+        },
+        {
+          "tag": "c",
+          "content": "Disc 7"
+        },
+        {
+          "tag": "l",
+          "content": "SCBB2"
+        },
+        {
+          "tag": "h",
+          "content": "031"
+        },
+        {
+          "tag": "o",
+          "content": "1"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "t",
+          "content": "014"
+        },
+        {
+          "tag": "v",
+          "content": "SCL/JC"
+        },
+        {
+          "tag": "i",
+          "content": "33433092980535"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "910",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "RL"
+        }
+      ]
+    },
+    {
+      "fieldTag": "_",
+      "marcTag": null,
+      "ind1": null,
+      "ind2": null,
+      "content": "00000ngm a2200649Ii 4500",
+      "subfields": null
+    }
+  ]
+}
