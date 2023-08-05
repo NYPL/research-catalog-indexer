@@ -48,41 +48,48 @@ const run = async () => {
   const mapper = (new NyplSourceMapper())
   const { id, type, nyplSource } = await mapper.splitIdentifier(argv.uri)
 
-  const buildLocalEsDocFromUri = async (nyplSource, id) => {
-    const bib = await bibById(nyplSource, id)
-    return buildEsDocument({ type: 'Bib', records: [bib] })
+  const buildLocalEsDocFromUri = async (type, nyplSource, id) => {
+    switch (type) {
+      case 'bib':
+        const bib = await bibById(nyplSource, id)
+        return buildEsDocument({ type: 'Bib', records: [bib] })
+      case 'item':
+        const item = await itemById(nyplSource, id)
+        return buildEsDocument({ type: 'Item', records: [item] })
+      case 'holding':
+        const holding = await holdingById(id)
+        return buildEsDocument({ type: 'Holding', records: [holding] })
+    }
   }
 
   if (type === 'bib') {
     const current = currentDocument(argv.uri, indexName)
       .catch((e) => null)
-    Promise.all([buildLocalEsDocFromUri(nyplSource, id), current])
-      .then(([{ recordsToIndex, recordsToDelete }, liveEsRecord]) => {
-        if (recordsToDelete.length) {
-          console.log('Indexer would delete this bib', recordsToDelete)
-        } else {
-          // The local ES record is the sole element in recordsToIndex
-          const localEsRecord = recordsToIndex[0]
-
-          if (argv.printDocument) {
-            console.log('Built document:\n_______________________________________________________')
-            console.log(JSON.stringify(localEsRecord, null, 2))
-          }
-
-          if (liveEsRecord) {
-            printDiff(liveEsRecord, localEsRecord, argv.verbose)
-          } else {
-            console.log('Can\'t display diff because record doesn\'t exist in live index')
-          }
-        }
-      }).catch(e => {
-        console.error(`Compare-With-Indexed encountered an error: ${e.message}`)
-        console.error(e.stack)
-        die()
-      })
-  } else {
-    die(`Only configured for bib uris, ${type} uri specified`)
   }
+  Promise.all([buildLocalEsDocFromUri(type, nyplSource, id), current])
+    .then(([{ recordsToIndex, recordsToDelete }, liveEsRecord]) => {
+      if (recordsToDelete.length) {
+        console.log('Indexer would delete this bib', recordsToDelete)
+      } else {
+        // The local ES record is the sole element in recordsToIndex
+        const localEsRecord = recordsToIndex[0]
+
+        if (argv.printDocument) {
+          console.log('Built document:\n_______________________________________________________')
+          console.log(JSON.stringify(localEsRecord, null, 2))
+        }
+
+        if (liveEsRecord) {
+          printDiff(liveEsRecord, localEsRecord, argv.verbose)
+        } else {
+          console.log('Can\'t display diff because record doesn\'t exist in live index')
+        }
+      }
+    }).catch(e => {
+      console.error(`Compare-With-Indexed encountered an error: ${e.message}`)
+      console.error(e.stack)
+      die()
+    })
 }
 
 run()
