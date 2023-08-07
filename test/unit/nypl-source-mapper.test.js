@@ -1,9 +1,9 @@
 const expect = require('chai').expect
 const nock = require('nock')
+const NyplSourceMapper = require('../../lib/utils/nypl-source-mapper')
 
 describe('NyplSourceMapper', async function () {
   describe('nyplSourceMapping', async function () {
-    const NyplSourceMapper = require('../../lib/utils/nypl-source-mapper')
     const response = {
       'sierra-nypl': {
         organization: 'nyplOrg:0001',
@@ -47,7 +47,6 @@ describe('NyplSourceMapper', async function () {
 
   describe('splitIdentifier', async () => {
     let sourceMapperInstance
-    const NyplSourceMapper = require('../../lib/utils/nypl-source-mapper')
     const response = {
       'sierra-nypl': {
         organization: 'nyplOrg:0001',
@@ -71,6 +70,9 @@ describe('NyplSourceMapper', async function () {
           return response
         })
       sourceMapperInstance = await NyplSourceMapper.instance()
+    })
+    after(() => {
+      NyplSourceMapper.__resetInstance()
     })
 
     it('should reject unrecognized identifier', function () {
@@ -148,7 +150,6 @@ describe('NyplSourceMapper', async function () {
 
   describe('prefix', async function () {
     let sourceMapperInstance
-    const NyplSourceMapper = require('../../lib/utils/nypl-source-mapper')
     const response = {
       'sierra-nypl': {
         organization: 'nyplOrg:0001',
@@ -172,6 +173,9 @@ describe('NyplSourceMapper', async function () {
           return response
         })
       sourceMapperInstance = await NyplSourceMapper.instance()
+    })
+    after(() => {
+      NyplSourceMapper.__resetInstance()
     })
 
     it('should get correct prefix for sierra-nypl', function () {
