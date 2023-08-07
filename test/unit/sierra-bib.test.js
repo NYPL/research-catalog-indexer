@@ -16,7 +16,7 @@ describe('SierraBib', function () {
       const bib = new SierraBib(require('../fixtures/bib-10001936-suppressed.json'))
       expect(bib.getSuppressionWithRationale()).to.deep.equal({
         suppressed: true,
-        rationale: 'suppressed'
+        rationale: 'Suppressed'
       })
     })
 
@@ -24,7 +24,7 @@ describe('SierraBib', function () {
       const bib = new SierraBib(require('../fixtures/bib-10001936-deleted.json'))
       expect(bib.getSuppressionWithRationale()).to.deep.equal({
         suppressed: true,
-        rationale: 'deleted'
+        rationale: 'Deleted'
       })
     })
 
@@ -33,7 +33,7 @@ describe('SierraBib', function () {
         const bib = new SierraBib(require('../fixtures/bib-10001936-os.json'))
         expect(bib.getSuppressionWithRationale()).to.deep.equal({
           suppressed: true,
-          rationale: 'is-otf'
+          rationale: 'Is OTF'
         })
       })
 
@@ -41,7 +41,7 @@ describe('SierraBib', function () {
         const bib = new SierraBib(require('../fixtures/bib-10001936-910a.json'))
         expect(bib.getSuppressionWithRationale()).to.deep.equal({
           suppressed: true,
-          rationale: 'is-otf'
+          rationale: 'Is OTF'
         })
       })
     })
