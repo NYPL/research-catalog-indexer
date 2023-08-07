@@ -1,10 +1,9 @@
 const expect = require('chai').expect
 const nock = require('nock')
-const NyplSourceMapper = require('../../lib/utils/nypl-source-mapper')
 
 describe('NyplSourceMapper', async function () {
   describe('nyplSourceMapping', async function () {
-    const sourceMapper = new NyplSourceMapper()
+    const NyplSourceMapper = require('../../lib/utils/nypl-source-mapper')
     const response = {
       'sierra-nypl': {
         organization: 'nyplOrg:0001',
@@ -19,6 +18,7 @@ describe('NyplSourceMapper', async function () {
     let callCount = 0
 
     before(() => {
+      NyplSourceMapper.__resetInstance()
       nock('https://raw.githubusercontent.com/NYPL/nypl-core/master/mappings/recap-discovery/nypl-source-mapping.json')
         .defaultReplyHeaders({
           'access-control-allow-origin': '*',
@@ -30,22 +30,24 @@ describe('NyplSourceMapper', async function () {
           return response
         })
     })
+    after(() => NyplSourceMapper.__resetInstance())
 
     it('should fetch data from nypl core if not initialized', async function () {
-      const mapping = await sourceMapper.nyplSourceMapping()
-      expect(mapping).to.deep.equal(response)
+      const mapping = await NyplSourceMapper.instance()
+      expect(mapping.nyplSourceMap).to.deep.equal(response)
       expect(callCount).to.equal(1)
     })
 
     it('should return pre-fetched data if initialized', async function () {
-      const mapping = await sourceMapper.nyplSourceMapping()
-      expect(mapping).to.deep.equal(response)
+      const mapping = await NyplSourceMapper.instance()
+      expect(mapping.nyplSourceMap).to.deep.equal(response)
       expect(callCount).to.equal(1)
     })
   })
 
-  describe('splitIdentifier', async function () {
-    const sourceMapper = new NyplSourceMapper()
+  describe('splitIdentifier', async () => {
+    let sourceMapperInstance
+    const NyplSourceMapper = require('../../lib/utils/nypl-source-mapper')
     const response = {
       'sierra-nypl': {
         organization: 'nyplOrg:0001',
@@ -58,7 +60,7 @@ describe('NyplSourceMapper', async function () {
       'recap-hl': { organization: 'nyplOrg:0004', bibPrefix: 'hb', itemPrefix: 'hi' }
     }
 
-    before(() => {
+    before(async () => {
       nock('https://raw.githubusercontent.com/NYPL/nypl-core/master/mappings/recap-discovery/nypl-source-mapping.json')
         .defaultReplyHeaders({
           'access-control-allow-origin': '*',
@@ -68,74 +70,75 @@ describe('NyplSourceMapper', async function () {
         .reply(200, () => {
           return response
         })
+      sourceMapperInstance = await NyplSourceMapper.instance()
     })
 
-    it('should reject unrecognized identifier', async function () {
-      const split = await sourceMapper.splitIdentifier('fladeedle')
+    it('should reject unrecognized identifier', function () {
+      const split = sourceMapperInstance.splitIdentifier('fladeedle')
       expect(split).to.be.a('object')
       expect(split.type).to.be.a('undefined')
       expect(split.nyplSource).to.be.a('undefined')
       expect(split.id).to.be.a('undefined')
     })
 
-    it('should split sierra-nypl bib identifier', async function () {
-      const split = await sourceMapper.splitIdentifier('b12082323')
+    it('should split sierra-nypl bib identifier', function () {
+      const split = sourceMapperInstance.splitIdentifier('b12082323')
       expect(split).to.be.a('object')
       expect(split.type).to.be.eq('bib')
       expect(split.nyplSource).to.be.eq('sierra-nypl')
       expect(split.id).to.be.eq('12082323')
     })
 
-    it('should split sierra-nypl item identifier', async function () {
-      const split = await sourceMapper.splitIdentifier('i123')
+    it('should split sierra-nypl item identifier', function () {
+      const split = sourceMapperInstance.splitIdentifier('i123')
       expect(split).to.be.a('object')
       expect(split.type).to.eq('item')
       expect(split.nyplSource).to.eq('sierra-nypl')
       expect(split.id).to.be.eq('123')
     })
 
-    it('should split recap-pul bib identifier', async function () {
-      const split = await sourceMapper.splitIdentifier('pb123')
+    it('should split recap-pul bib identifier', function () {
+      const split = sourceMapperInstance.splitIdentifier('pb123')
       expect(split).to.be.a('object')
       expect(split.type).to.eq('bib')
       expect(split.nyplSource).to.eq('recap-pul')
       expect(split.id).to.be.eq('123')
     })
 
-    it('should split recap-pul bib identifier', async function () {
-      const split = await sourceMapper.splitIdentifier('pi123')
+    it('should split recap-pul bib identifier', function () {
+      const split = sourceMapperInstance.splitIdentifier('pi123')
       expect(split).to.be.a('object')
       expect(split.type).to.eq('item')
       expect(split.nyplSource).to.eq('recap-pul')
       expect(split.id).to.be.eq('123')
     })
 
-    it('should split recap-cul bib identifier', async function () {
-      const split = await sourceMapper.splitIdentifier('cb123')
+    it('should split recap-cul bib identifier', function () {
+      const split = sourceMapperInstance.splitIdentifier('cb123')
       expect(split).to.be.a('object')
       expect(split.type).to.eq('bib')
       expect(split.nyplSource).to.eq('recap-cul')
       expect(split.id).to.be.eq('123')
     })
 
-    it('should split recap-cul bib identifier', async function () {
-      const split = await sourceMapper.splitIdentifier('ci123')
+    it('should split recap-cul bib identifier', function () {
+      const split = sourceMapperInstance.splitIdentifier('ci123')
       expect(split).to.be.a('object')
       expect(split.type).to.eq('item')
       expect(split.nyplSource).to.eq('recap-cul')
       expect(split.id).to.be.eq('123')
     })
 
-    it('should split recap-hl bib identifier', async function () {
-      const split = await sourceMapper.splitIdentifier('hb123')
+    it('should split recap-hl bib identifier', function () {
+      const split = sourceMapperInstance.splitIdentifier('hb123')
       expect(split).to.be.a('object')
       expect(split.type).to.eq('bib')
       expect(split.nyplSource).to.eq('recap-hl')
       expect(split.id).to.be.eq('123')
     })
 
-    it('should split recap-hl bib identifier', async function () {
-      const split = await sourceMapper.splitIdentifier('hi123')
+    it('should split recap-hl bib identifier', function () {
+      const split = sourceMapperInstance.splitIdentifier('hi123')
       expect(split).to.be.a('object')
       expect(split.type).to.eq('item')
       expect(split.nyplSource).to.eq('recap-hl')
@@ -144,7 +147,8 @@ describe('NyplSourceMapper', async function () {
   })
 
   describe('prefix', async function () {
-    const sourceMapper = new NyplSourceMapper()
+    let sourceMapperInstance
+    const NyplSourceMapper = require('../../lib/utils/nypl-source-mapper')
     const response = {
       'sierra-nypl': {
         organization: 'nyplOrg:0001',
@@ -157,7 +161,7 @@ describe('NyplSourceMapper', async function () {
       'recap-hl': { organization: 'nyplOrg:0004', bibPrefix: 'hb', itemPrefix: 'hi' }
     }
 
-    before(() => {
+    before(async () => {
       nock('https://raw.githubusercontent.com/NYPL/nypl-core/master/mappings/recap-discovery/nypl-source-mapping.json')
         .defaultReplyHeaders({
           'access-control-allow-origin': '*',
@@ -167,25 +171,26 @@ describe('NyplSourceMapper', async function () {
         .reply(200, () => {
           return response
         })
+      sourceMapperInstance = await NyplSourceMapper.instance()
     })
 
-    it('should get correct prefix for sierra-nypl', async function () {
-      const prefix = await sourceMapper.prefix('sierra-nypl')
+    it('should get correct prefix for sierra-nypl', function () {
+      const prefix = sourceMapperInstance.prefix('sierra-nypl')
       expect(prefix).to.equal('b')
     })
 
-    it('should get correct prefix for recap-hl', async function () {
-      const prefix = await sourceMapper.prefix('recap-hl')
+    it('should get correct prefix for recap-hl', function () {
+      const prefix = sourceMapperInstance.prefix('recap-hl')
       expect(prefix).to.equal('hb')
     })
 
-    it('should get correct prefix for recap-pul', async function () {
-      const prefix = await sourceMapper.prefix('recap-pul')
+    it('should get correct prefix for recap-pul', function () {
+      const prefix = sourceMapperInstance.prefix('recap-pul')
       expect(prefix).to.equal('pb')
     })
 
-    it('should get correct prefix for recap-cul', async function () {
-      const prefix = await sourceMapper.prefix('recap-cul')
+    it('should get correct prefix for recap-cul', function () {
+      const prefix = sourceMapperInstance.prefix('recap-cul')
       expect(prefix).to.equal('cb')
     })
   })
