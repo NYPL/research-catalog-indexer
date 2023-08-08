@@ -14,7 +14,7 @@ describe('utils/locations', () => {
 
     it('returns false for location with non-matching collectionType', () => {
       expect(locationHasExclusiveCollectionType('mal92', 'Branch')).to.equal(false)
-      expect(locationHasExclusiveCollectionType('aga01', 'Resaerch')).to.equal(false)
+      expect(locationHasExclusiveCollectionType('aga01', 'Research')).to.equal(false)
     })
 
     it('returns false for location with non-exclusive matching collectionType', () => {
