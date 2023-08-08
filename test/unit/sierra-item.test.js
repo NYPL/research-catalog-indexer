@@ -25,7 +25,7 @@ describe('SierraItem', function () {
 
         expect(item.getSuppressionWithRationale()).to.deep.equal({
           suppressed: true,
-          rationale: ['876 $x']
+          rationale: ['Partner 876 $x']
         })
       })
     })
@@ -47,7 +47,7 @@ describe('SierraItem', function () {
 
         expect(item.getSuppressionWithRationale()).to.deep.equal({
           suppressed: true,
-          rationale: ['900 $a']
+          rationale: ['Partner 900 $a']
         })
       })
     })
@@ -60,7 +60,7 @@ describe('SierraItem', function () {
 
         expect(item.getSuppressionWithRationale()).to.deep.equal({
           suppressed: true,
-          rationale: ['deleted']
+          rationale: ['Deleted']
         })
       })
     })
@@ -78,7 +78,7 @@ describe('SierraItem', function () {
 
         expect(item.getSuppressionWithRationale()).to.deep.equal({
           suppressed: true,
-          rationale: ['catalogItemType']
+          rationale: ['Item Type 50']
         })
       })
     })
@@ -100,7 +100,7 @@ describe('SierraItem', function () {
         items.forEach((item) => {
           return expect(item.getSuppressionWithRationale()).to.deep.equal({
             suppressed: true,
-            rationale: ['fixed "Item Code 2"']
+            rationale: ['Restricted icode2']
           })
         })
       })
@@ -131,9 +131,10 @@ describe('SierraItem', function () {
         })
       const item = new SierraItem(itemData)
 
+      console.log(item.getSuppressionWithRationale())
       expect(item.getSuppressionWithRationale()).to.deep.equal({
         suppressed: true,
-        rationale: ['deleted', 'catalogItemType']
+        rationale: ['Deleted', 'Item Type 50']
       })
     })
   })
