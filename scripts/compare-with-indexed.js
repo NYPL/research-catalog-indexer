@@ -24,8 +24,12 @@ dotenv.config({ path: argv.envfile || './config/qa.env' })
 
 const NyplSourceMapper = require('../lib/utils/nypl-source-mapper')
 const { awsInit, die, printDiff } = require('./utils')
-const { bibById, itemById, holdingById } = require('../lib/platform-api/requests')
+const { bibById, itemById, holdingById, bibsForHoldingsOrItems } = require('../lib/platform-api/requests')
 const { buildEsDocument } = require('../lib/build-es-document')
+const EsBib = require('../lib/es-models/bib')
+const SierraBib = require('../lib/sierra-models/bib')
+const SierraItem = require('../lib/sierra-models/item')
+const SierraHolding = require('../lib/sierra-models/holding')
 const { currentDocument } = require('../lib/elastic-search/requests')
 
 const logger = require('../lib/logger')
@@ -43,45 +47,105 @@ let indexName = process.env.ELASTIC_RESOURCES_INDEX_NAME
 if (!argv.uri) usage() && die('Must specify event file or uri')
 if (argv.activeIndex) indexName = process.env.HYBRID_ES_INDEX
 
-const run = async () => {
-  console.log(`Comparing local ES doc against the one in ${indexName}`)
-  const mapper = (new NyplSourceMapper())
-  const { id, type, nyplSource } = await mapper.splitIdentifier(argv.uri)
+const buildSierraModelFromUri = async (uri) => {
+  const { id, type, nyplSource } = await mapper.splitIdentifier(uri)
 
-  const buildLocalEsDocFromUri = async (type, nyplSource, id) => {
-    if (type === 'bib') {
-      const bib = await bibById(nyplSource, id)
-      return buildEsDocument({ type: 'Bib', records: [bib] })
-    } else if (type === 'item') {
-      const item = await itemById(nyplSource, id)
-      return buildEsDocument({ type: 'Item', records: [item] })
-    } else if (type === 'holding') {
-      const holding = await holdingById(id)
-      return buildEsDocument({ type: 'Holding', records: [holding] })
-    }
+  if (type === 'bib') {
+    const bib = await bibById(nyplSource, id)
+    return new SierraBib(bib)
+  } else if (type === 'item') {
+    const item = await itemById(nyplSource, id)
+    return new SierraItem(item)
+  } else if (type === 'holding') {
+    const holding = await holdingById(id)
+    return new SierraHolding(holding)
+  }
+}
+
+const capitalize = (s) => {
+  return s.replace(/(?:^|\s|["'([{])+\S/g, match => match.toUpperCase())
+}
+
+const buildLocalEsDocFromUri = async (uri) => {
+  const record = await buildSierraModelFromUri(uri)
+
+  const { type } = await mapper.splitIdentifier(argv.uri)
+  return buildEsDocument({ type: capitalize(type), records: [record] })
+}
+
+const suppressionReport = async (uri) => {
+  const record = await buildSierraModelFromUri(uri)
+  return suppressionReportForModel(record)
+}
+
+const suppressionReportForModel = async (record) => {
+  const type = record instanceof SierraBib
+    ? 'Bib'
+    : (record instanceof SierraHolding ? 'Holding' : 'Item')
+  if (type !== 'Bib') {
+    const bibs = await bibsForHoldingsOrItems('Holding', [record])
+      .map((bib) => new SierraBib(bib))
+    await Promise.all(
+      bibs.map((bib) => suppressionReportForModel(bib))
+    )
+  }
+  const recordIdentifier = (record.nyplSource ? `${record.nyplSource}/` : '') + record.id
+  const { suppressed, rationale: suppressionRationale } = record.getSuppressionWithRationale()
+  if (suppressed) {
+    console.log(`  ${type} ${recordIdentifier} is ${suppressed ? '' : 'not '}suppressed: ${suppressionRationale}`)
   }
 
-  try {
-    const { recordsToIndex, recordsToDelete } = await buildLocalEsDocFromUri(type, nyplSource, id)
-    if (recordsToDelete.length) {
-      console.log('Indexer would delete this bib', recordsToDelete)
-    } else if (!recordsToIndex.length) {
-      console.log(`Indexer filtered out this ${type}`)
-    } else {
-      // The local ES record is the sole element in recordsToIndex
-      const localEsRecord = recordsToIndex[0]
-      const liveEsRecord = await currentDocument(localEsRecord.uri, indexName)
-        .catch((e) => console.log(`Could not find ${localEsRecord.uri} in ${indexName}`))
+  if (record.getIsResearchWithRationale) {
+    const { isResearch, rationale: isResearchRationale } = record.getIsResearchWithRationale()
+    if (!isResearch) {
+      console.log(`  ${type} ${recordIdentifier} is ${isResearch ? '' : 'not '}Research: ${isResearchRationale}`)
+    }
+  }
+}
 
+let mapper
+const run = async () => {
+  console.log(`Comparing local ES doc against the one in ${indexName}`)
+  mapper = await (new NyplSourceMapper())
+  const { type } = await mapper.splitIdentifier(argv.uri)
+
+  try {
+    const { recordsToIndex, recordsToDelete } = await buildLocalEsDocFromUri(argv.uri)
+    // The local ES record is the sole element in recordsToIndex
+    const localEsRecord = recordsToIndex[0]
+
+    // Get bibUri so we can look up the currently indexed document:
+    let bibUri
+    if (localEsRecord) {
+      bibUri = localEsRecord.uri
+    } else if (recordsToDelete.length) {
+      bibUri = await new EsBib(recordsToDelete[0]).uri()
+    }
+    // Get currently indexed document:
+    const liveEsRecord = !bibUri
+      ? Promise.resolve()
+      : await currentDocument(bibUri, indexName)
+        .catch((e) => console.log(`Could not find ${bibUri} in ${indexName}`))
+
+    // Would indexer delete it?
+    if (recordsToDelete.length) {
+      console.log(`Indexer would delete bib ${bibUri} (which ${liveEsRecord ? 'exists' : 'doesn\'t exist'} in ${indexName})`)
+      suppressionReport(argv.uri)
+    // Would indexer ignore it?
+    } else if (!recordsToIndex.length) {
+      console.log(`Indexer found no bibs to index from this ${type}`)
+      suppressionReport(argv.uri)
+    } else {
       if (argv.printDocument) {
         console.log('Built document:\n_______________________________________________________')
         console.log(JSON.stringify(localEsRecord, null, 2))
       }
 
+      // Show diff:
       if (liveEsRecord) {
         printDiff(liveEsRecord, localEsRecord, argv.verbose)
       } else {
-        console.log('Can\'t display diff because record doesn\'t exist in live index')
+        console.log(`Can't display diff because record doesn't exist in live index (${indexName})`)
       }
     }
   } catch (e) {
