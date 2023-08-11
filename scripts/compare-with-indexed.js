@@ -56,8 +56,8 @@ const buildLocalEsDocFromUri = async (uri) => {
     process.exit()
   }
 
-  const mapper = await (new NyplSourceMapper())
-  const { type } = await mapper.splitIdentifier(argv.uri)
+  const mapper = await NyplSourceMapper.instance()
+  const { type } = mapper.splitIdentifier(uri)
   return buildEsDocument({ type: capitalize(type), records: [record] })
 }
 
@@ -106,8 +106,8 @@ const suppressionReportForModel = async (record) => {
  */
 const run = async () => {
   console.log(`Comparing local ES doc against the one in ${indexName}`)
-  const mapper = await (new NyplSourceMapper())
-  const { type } = await mapper.splitIdentifier(argv.uri)
+  const mapper = await NyplSourceMapper.instance()
+  const { type } = mapper.splitIdentifier(argv.uri)
 
   try {
     const { recordsToIndex, recordsToDelete } = await buildLocalEsDocFromUri(argv.uri)

@@ -79,8 +79,8 @@ const capitalize = (s) => {
  *  instance
  */
 const buildSierraModelFromUri = async (uri) => {
-  const mapper = await (new NyplSourceMapper())
-  const { id, type, nyplSource } = await mapper.splitIdentifier(uri)
+  const mapper = await NyplSourceMapper.instance()
+  const { id, type, nyplSource } = mapper.splitIdentifier(uri)
 
   const {
     fetcher,
