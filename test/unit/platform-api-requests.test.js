@@ -102,11 +102,11 @@ describe('platform api methods', () => {
 
   describe('modelPrefetch', () => {
     let bibs
-    const setUpTests = (h, i) => {
+    const setUpTests = (holdings, items) => {
       bibs = [{ nyplSource: 'sierra-nypl', id: '123' }, { nyplSource: 'sierra-nypl', id: '456' }, { nyplSource: 'sierra-nypl', id: '789' }]
       requests = rewire('../../lib/platform-api/requests')
-      requests.__set__('_holdingsForBibs', () => Promise.resolve(h))
-      requests.__set__('_itemsForArrayOfBibs', () => Promise.resolve(i))
+      requests.__set__('_holdingsForBibs', () => Promise.resolve(holdings))
+      requests.__set__('_itemsForArrayOfBibs', () => Promise.resolve(items))
     }
     it('adds holdings to bibs - 1:1', async () => {
       const holdings = [{ id: '1', bibIds: ['123'] }, { id: '2', bibIds: ['456'] }, { id: '3', bibIds: ['789'] }]

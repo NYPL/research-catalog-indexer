@@ -6,6 +6,8 @@ const eventDecoder = require('../../lib/event-decoder')
 const index = require('../../index')
 const platformApi = require('../../lib/platform-api/requests')
 const elastic = require('../../lib/elastic-search/requests')
+const SierraItem = require('../../lib/sierra-models/item')
+const SierraHolding = require('../../lib/sierra-models/holding')
 
 describe('index handler function', () => {
   const eventDecoderStub = (type) => stub(eventDecoder, 'decodeRecordsFromEvent').callsFake(async () => {
@@ -23,8 +25,8 @@ describe('index handler function', () => {
 
     modelPrefetchStub = stub(platformApi, 'modelPrefetch').callsFake(async (bibs) => {
       return await Promise.all(bibs.map((bib) => {
-        bib._holdings = [{ id: 1 }]
-        bib._items = [{ id: 1 }]
+        bib._holdings = [new SierraHolding({ id: 1 })]
+        bib._items = [new SierraItem({ id: 1 })]
         return bib
       }))
     })

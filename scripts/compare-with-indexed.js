@@ -23,12 +23,11 @@ const dotenv = require('dotenv')
 dotenv.config({ path: argv.envfile || './config/qa.env' })
 
 const NyplSourceMapper = require('../lib/utils/nypl-source-mapper')
-const { awsInit, die, printDiff } = require('./utils')
-const { bibById, itemById, holdingById, bibsForHoldingsOrItems } = require('../lib/platform-api/requests')
+const { awsInit, die, printDiff, buildSierraModelFromUri, capitalize } = require('./utils')
+const { bibsForHoldingsOrItems } = require('../lib/platform-api/requests')
 const { buildEsDocument } = require('../lib/build-es-document')
 const EsBib = require('../lib/es-models/bib')
 const SierraBib = require('../lib/sierra-models/bib')
-const SierraItem = require('../lib/sierra-models/item')
 const SierraHolding = require('../lib/sierra-models/holding')
 const { currentDocument } = require('../lib/elastic-search/requests')
 
@@ -47,37 +46,36 @@ let indexName = process.env.ELASTIC_RESOURCES_INDEX_NAME
 if (!argv.uri) usage() && die('Must specify event file or uri')
 if (argv.activeIndex) indexName = process.env.HYBRID_ES_INDEX
 
-const buildSierraModelFromUri = async (uri) => {
-  const { id, type, nyplSource } = await mapper.splitIdentifier(uri)
-
-  if (type === 'bib') {
-    const bib = await bibById(nyplSource, id)
-    return new SierraBib(bib)
-  } else if (type === 'item') {
-    const item = await itemById(nyplSource, id)
-    return new SierraItem(item)
-  } else if (type === 'holding') {
-    const holding = await holdingById(id)
-    return new SierraHolding(holding)
-  }
-}
-
-const capitalize = (s) => {
-  return s.replace(/(?:^|\s|["'([{])+\S/g, match => match.toUpperCase())
-}
-
+/**
+ *  Given a uri (e.g. b123, i987, hb99887766), returns the relevant EsModel
+ *  instance
+ */
 const buildLocalEsDocFromUri = async (uri) => {
   const record = await buildSierraModelFromUri(uri)
+  if (!record) {
+    process.exit()
+  }
 
+  const mapper = await (new NyplSourceMapper())
   const { type } = await mapper.splitIdentifier(argv.uri)
   return buildEsDocument({ type: capitalize(type), records: [record] })
 }
 
+/**
+ *  Given a uri (e.g. b123, i987, hb99887766), prints detailed report on
+ *  whether and why record is suppressed and is Research
+ */
 const suppressionReport = async (uri) => {
   const record = await buildSierraModelFromUri(uri)
+  if (!record) return null
+
   return suppressionReportForModel(record)
 }
 
+/**
+ *  Given a {SierraBib|SierraHolding|SierraItem} instance, prints detailed
+ *  report on whether and why record is suppressed and is Research
+ */
 const suppressionReportForModel = async (record) => {
   const type = record instanceof SierraBib
     ? 'Bib'
@@ -103,10 +101,12 @@ const suppressionReportForModel = async (record) => {
   }
 }
 
-let mapper
+/**
+ *  Run the compare-with-indexed report over the document identified by --uri
+ */
 const run = async () => {
   console.log(`Comparing local ES doc against the one in ${indexName}`)
-  mapper = await (new NyplSourceMapper())
+  const mapper = await (new NyplSourceMapper())
   const { type } = await mapper.splitIdentifier(argv.uri)
 
   try {
