@@ -45,8 +45,7 @@ if (argv.activeIndex) indexName = process.env.HYBRID_ES_INDEX
 
 const run = async () => {
   console.log(`Comparing local ES doc against the one in ${indexName}`)
-  const mapper = (new NyplSourceMapper())
-  const { id, type, nyplSource } = await mapper.splitIdentifier(argv.uri)
+  const { id, type, nyplSource } = await NyplSourceMapper.instance().splitIdentifier(argv.uri)
 
   const buildLocalEsDocFromUri = async (type, nyplSource, id) => {
     if (type === 'bib') {
