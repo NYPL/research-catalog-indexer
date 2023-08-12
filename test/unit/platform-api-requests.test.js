@@ -328,12 +328,28 @@ describe('platform api methods', () => {
       const bibIds = requests._bibIdentifiersForHoldings(holdings)
       expect(bibIds).to.deep.equal(bibIds.flat())
     })
+
+    it('de-dupes common bib ids', () => {
+      const holdings = [
+        { bibIds: [1] },
+        { bibIds: [1, 2] },
+        { bibIds: [2, 3] },
+        { bibIds: [1] }
+      ]
+
+      expect(requests._bibIdentifiersForHoldings(holdings)).to.deep.equal([
+        { nyplSource: 'sierra-nypl', id: 1 },
+        { nyplSource: 'sierra-nypl', id: 2 },
+        { nyplSource: 'sierra-nypl', id: 3 }
+      ])
+    })
   })
 
   describe('_bibIdentifiersForItems', () => {
     const itemsWithBibIds = [{ bibIds: ['b12345678'], nyplSource: 'recap-pul' },
       { bibIds: ['b12345679'], nyplSource: 'sierra-nypl' }]
     const itemsNoBibIds = [{ id: 'i123', nyplSource: 'sierra-nypl' }]
+
     it('returns bib identifiers for items with bibIds', async () => {
       const bibs = await requests._bibIdentifiersForItems(itemsWithBibIds)
       expect(bibs).to.deep.equal([{ nyplSource: 'recap-pul', id: 'b12345678' }, { nyplSource: 'sierra-nypl', id: 'b12345679' }])
@@ -346,6 +362,22 @@ describe('platform api methods', () => {
       requests.__set__('getBibIdentifiersForItemId', idSpy)
       const bibs = await requests._bibIdentifiersForItems(itemsNoBibIds)
       expect(bibs).to.deep.equal([{ id: 'bi123', nyplSource: 'sierra-nypl' }])
+    })
+
+    it('de-dupes bib identifiers for common bibs', async () => {
+      const items = [
+        { bibIds: [1], nyplSource: 'sierra-nypl' },
+        { bibIds: [1, 2], nyplSource: 'sierra-nypl' },
+        { bibIds: [2, 3], nyplSource: 'recap-pul' },
+        { bibIds: [1], nyplSource: 'sierra-nypl' }
+      ]
+      const bibIdentifiers = await requests._bibIdentifiersForItems(items)
+      expect(bibIdentifiers).to.deep.equal([
+        { nyplSource: 'sierra-nypl', id: 1 },
+        { nyplSource: 'sierra-nypl', id: 2 },
+        { nyplSource: 'recap-pul', id: 2 },
+        { nyplSource: 'recap-pul', id: 3 }
+      ])
     })
   })
 })
