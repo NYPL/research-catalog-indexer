@@ -108,12 +108,14 @@ describe('platform api methods', () => {
       requests.__set__('_holdingsForBibs', () => Promise.resolve(holdings))
       requests.__set__('_itemsForArrayOfBibs', () => Promise.resolve(items))
     }
+
     it('adds holdings to bibs - 1:1', async () => {
       const holdings = [{ id: '1', bibIds: ['123'] }, { id: '2', bibIds: ['456'] }, { id: '3', bibIds: ['789'] }]
       setUpTests(holdings, [])
       await requests.modelPrefetch(bibs)
       expect(bibs.every((bib) => bib._holdings.length === 1))
     })
+
     it('adds holdings to bibs - 1:N', async () => {
       const holdings = [{ id: '1', bibIds: ['123', '456', '789'] }, { id: '2', bibIds: ['456'] }, { id: '3', bibIds: ['789'] }]
       setUpTests(holdings, [])
@@ -135,6 +137,7 @@ describe('platform api methods', () => {
         _items: []
       }])
     })
+
     it('adds items to bibs', async () => {
       const items = [[{ bibIds: ['123'] }], [{ bibIds: ['456'] }], [{ bibIds: ['789'] }]]
       setUpTests([], items)
@@ -155,6 +158,33 @@ describe('platform api methods', () => {
         _holdings: [],
         _items: items[2]
       }])
+    })
+
+    it('adds references to parent bib to each holding and item', async () => {
+      const items = [
+        [{ bibIds: ['123'] }, { bibIds: ['123'] }],
+        [{ bibIds: ['456'] }],
+        [{ bibIds: ['789'] }]
+      ]
+      const holdings = [{ bibIds: ['456'] }]
+      setUpTests(holdings, items)
+      await requests.modelPrefetch(bibs)
+
+      expect(bibs[0]._items).to.have.lengthOf(2)
+      expect(bibs[0]._items[0]._bibs).to.be.a('array')
+      expect(bibs[0]._items[0]._bibs).to.have.lengthOf(1)
+      // Assert both of the first bib's two items have back references:
+      expect(bibs[0]._items[0]._bibs[0]).to.deep.equal(bibs[0])
+      expect(bibs[0]._items[1]._bibs[0]).to.deep.equal(bibs[0])
+
+      expect(bibs[1]._items[0]._bibs).to.be.a('array')
+      expect(bibs[1]._items[0]._bibs).to.have.lengthOf(1)
+      expect(bibs[1]._items[0]._bibs[0]).to.deep.equal(bibs[1])
+      // Also assert back references exist on this bib's holdings:
+      expect(bibs[1]._holdings).to.be.a('array')
+      expect(bibs[1]._holdings).to.have.lengthOf(1)
+      expect(bibs[1]._holdings[0]._bibs).to.have.lengthOf(1)
+      expect(bibs[1]._holdings[0]._bibs[0]).to.deep.equal(bibs[1])
     })
   })
 
