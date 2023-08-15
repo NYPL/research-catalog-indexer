@@ -131,7 +131,6 @@ describe('SierraItem', function () {
         })
       const item = new SierraItem(itemData)
 
-      console.log(item.getSuppressionWithRationale())
       expect(item.getSuppressionWithRationale()).to.deep.equal({
         suppressed: true,
         rationale: ['Deleted', 'Item Type 50']

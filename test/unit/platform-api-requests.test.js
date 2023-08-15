@@ -102,18 +102,20 @@ describe('platform api methods', () => {
 
   describe('modelPrefetch', () => {
     let bibs
-    const setUpTests = (h, i) => {
+    const setUpTests = (holdings, items) => {
       bibs = [{ nyplSource: 'sierra-nypl', id: '123' }, { nyplSource: 'sierra-nypl', id: '456' }, { nyplSource: 'sierra-nypl', id: '789' }]
       requests = rewire('../../lib/platform-api/requests')
-      requests.__set__('_holdingsForBibs', () => Promise.resolve(h))
-      requests.__set__('_itemsForArrayOfBibs', () => Promise.resolve(i))
+      requests.__set__('_holdingsForBibs', () => Promise.resolve(holdings))
+      requests.__set__('_itemsForArrayOfBibs', () => Promise.resolve(items))
     }
+
     it('adds holdings to bibs - 1:1', async () => {
       const holdings = [{ id: '1', bibIds: ['123'] }, { id: '2', bibIds: ['456'] }, { id: '3', bibIds: ['789'] }]
       setUpTests(holdings, [])
       await requests.modelPrefetch(bibs)
       expect(bibs.every((bib) => bib._holdings.length === 1))
     })
+
     it('adds holdings to bibs - 1:N', async () => {
       const holdings = [{ id: '1', bibIds: ['123', '456', '789'] }, { id: '2', bibIds: ['456'] }, { id: '3', bibIds: ['789'] }]
       setUpTests(holdings, [])
@@ -135,6 +137,7 @@ describe('platform api methods', () => {
         _items: []
       }])
     })
+
     it('adds items to bibs', async () => {
       const items = [[{ bibIds: ['123'] }], [{ bibIds: ['456'] }], [{ bibIds: ['789'] }]]
       setUpTests([], items)
@@ -155,6 +158,33 @@ describe('platform api methods', () => {
         _holdings: [],
         _items: items[2]
       }])
+    })
+
+    it('adds references to parent bib to each holding and item', async () => {
+      const items = [
+        [{ bibIds: ['123'] }, { bibIds: ['123'] }],
+        [{ bibIds: ['456'] }],
+        [{ bibIds: ['789'] }]
+      ]
+      const holdings = [{ bibIds: ['456'] }]
+      setUpTests(holdings, items)
+      await requests.modelPrefetch(bibs)
+
+      expect(bibs[0]._items).to.have.lengthOf(2)
+      expect(bibs[0]._items[0]._bibs).to.be.a('array')
+      expect(bibs[0]._items[0]._bibs).to.have.lengthOf(1)
+      // Assert both of the first bib's two items have back references:
+      expect(bibs[0]._items[0]._bibs[0]).to.deep.equal(bibs[0])
+      expect(bibs[0]._items[1]._bibs[0]).to.deep.equal(bibs[0])
+
+      expect(bibs[1]._items[0]._bibs).to.be.a('array')
+      expect(bibs[1]._items[0]._bibs).to.have.lengthOf(1)
+      expect(bibs[1]._items[0]._bibs[0]).to.deep.equal(bibs[1])
+      // Also assert back references exist on this bib's holdings:
+      expect(bibs[1]._holdings).to.be.a('array')
+      expect(bibs[1]._holdings).to.have.lengthOf(1)
+      expect(bibs[1]._holdings[0]._bibs).to.have.lengthOf(1)
+      expect(bibs[1]._holdings[0]._bibs[0]).to.deep.equal(bibs[1])
     })
   })
 
@@ -298,12 +328,28 @@ describe('platform api methods', () => {
       const bibIds = requests._bibIdentifiersForHoldings(holdings)
       expect(bibIds).to.deep.equal(bibIds.flat())
     })
+
+    it('de-dupes common bib ids', () => {
+      const holdings = [
+        { bibIds: [1] },
+        { bibIds: [1, 2] },
+        { bibIds: [2, 3] },
+        { bibIds: [1] }
+      ]
+
+      expect(requests._bibIdentifiersForHoldings(holdings)).to.deep.equal([
+        { nyplSource: 'sierra-nypl', id: 1 },
+        { nyplSource: 'sierra-nypl', id: 2 },
+        { nyplSource: 'sierra-nypl', id: 3 }
+      ])
+    })
   })
 
   describe('_bibIdentifiersForItems', () => {
     const itemsWithBibIds = [{ bibIds: ['b12345678'], nyplSource: 'recap-pul' },
       { bibIds: ['b12345679'], nyplSource: 'sierra-nypl' }]
     const itemsNoBibIds = [{ id: 'i123', nyplSource: 'sierra-nypl' }]
+
     it('returns bib identifiers for items with bibIds', async () => {
       const bibs = await requests._bibIdentifiersForItems(itemsWithBibIds)
       expect(bibs).to.deep.equal([{ nyplSource: 'recap-pul', id: 'b12345678' }, { nyplSource: 'sierra-nypl', id: 'b12345679' }])
@@ -316,6 +362,22 @@ describe('platform api methods', () => {
       requests.__set__('getBibIdentifiersForItemId', idSpy)
       const bibs = await requests._bibIdentifiersForItems(itemsNoBibIds)
       expect(bibs).to.deep.equal([{ id: 'bi123', nyplSource: 'sierra-nypl' }])
+    })
+
+    it('de-dupes bib identifiers for common bibs', async () => {
+      const items = [
+        { bibIds: [1], nyplSource: 'sierra-nypl' },
+        { bibIds: [1, 2], nyplSource: 'sierra-nypl' },
+        { bibIds: [2, 3], nyplSource: 'recap-pul' },
+        { bibIds: [1], nyplSource: 'sierra-nypl' }
+      ]
+      const bibIdentifiers = await requests._bibIdentifiersForItems(items)
+      expect(bibIdentifiers).to.deep.equal([
+        { nyplSource: 'sierra-nypl', id: 1 },
+        { nyplSource: 'sierra-nypl', id: 2 },
+        { nyplSource: 'recap-pul', id: 2 },
+        { nyplSource: 'recap-pul', id: 3 }
+      ])
     })
   })
 })

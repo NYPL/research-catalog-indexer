@@ -1,5 +1,10 @@
 const { diff, detailedDiff } = require('deep-object-diff')
 const aws = require('aws-sdk')
+const NyplSourceMapper = require('../lib/utils/nypl-source-mapper')
+const { bibById, itemById, holdingById } = require('../lib/platform-api/requests')
+const SierraBib = require('../lib/sierra-models/bib')
+const SierraItem = require('../lib/sierra-models/item')
+const SierraHolding = require('../lib/sierra-models/holding')
 
 const awsInit = (profile) => {
   // Set aws creds:
@@ -62,6 +67,48 @@ function logObject (obj, indent = 2) {
   console.log(s)
 }
 
+/**
+ *  Given a string, returns same string with first character capitalized
+ */
+const capitalize = (s) => {
+  return s.replace(/(?:^|\s|["'([{])+\S/g, match => match.toUpperCase())
+}
+
+/**
+ *  Given a uri (e.g. b123, i987, hb99887766), returns the relevant SierraModel
+ *  instance
+ */
+const buildSierraModelFromUri = async (uri) => {
+  const mapper = await NyplSourceMapper.instance()
+  const { id, type, nyplSource } = mapper.splitIdentifier(uri)
+
+  const {
+    fetcher,
+    Klass
+  } = {
+    bib: {
+      fetcher: bibById,
+      Klass: SierraBib
+    },
+    item: {
+      fetcher: itemById,
+      Klass: SierraItem
+    },
+    holding: {
+      fetcher: (_, id) => holdingById(id),
+      Klass: SierraHolding
+    }
+  }[type]
+
+  const data = await fetcher(nyplSource, id)
+  if (!data) {
+    console.log(`${type} ${nyplSource}/${id} not found`)
+    return null
+  }
+
+  return new Klass(data)
+}
+
 function printDiff (remote, local, verbose) {
   console.log(`Bib metadata diff for ${remote.uri}:`)
   const noChildren = (bib) => Object.assign({}, bib, { items: null, holdings: null, uris: null, localAt: null })
@@ -78,7 +125,7 @@ function printDiff (remote, local, verbose) {
   }
 
   ;['items', 'holdings'].forEach((holdingsOrItems) => {
-    console.log(`${holdingsOrItems[0].toUpperCase() + holdingsOrItems.substring(1)} diff:`)
+    console.log(`${capitalize(holdingsOrItems)} diff:`)
 
     if (remote[holdingsOrItems] || local[holdingsOrItems]) {
       if (!remote[holdingsOrItems]) console.log(`  No ${holdingsOrItems} in remote (${local[holdingsOrItems].length} ${holdingsOrItems} in local doc)`)
@@ -114,18 +161,12 @@ function printDiff (remote, local, verbose) {
       }
     }
   })
-
-  // console.log("Difference between live and new record:")
-  // console.log(JSON.stringify(diff(liveRecord, newRecord), null, 2))
-  // console.log("Deletions:")
-  // console.log(JSON.stringify(deletedDiff(liveRecord, newRecord), null, 2))
-
-  // console.log(JSON.stringify(addedDiff(liveRecord, records[0]), null, 2))
-  // console.log(JSON.stringify(detailedDiff(liveRecord, records[0]), null, 2))
 }
 
 module.exports = {
   awsInit,
   die,
-  printDiff
+  printDiff,
+  capitalize,
+  buildSierraModelFromUri
 }
