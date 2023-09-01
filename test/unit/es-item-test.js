@@ -310,4 +310,23 @@ describe('EsItem', function () {
       expect(uri).to.equal('pi7834127')
     })
   })
+
+  describe('dueDate', function () {
+    it('should return the item dueDate', async function () {
+      // Create a fake checked-out item:
+      const itemData = Object.assign({}, require('../fixtures/item-17145801.json'))
+      // Make sure cached fixture isn't changed:
+      itemData.status = Object.assign({}, itemData.status, { duedate: '2022-09-26T08:00:00+00:00' })
+
+      const esItem = new EsItem(new SierraItem(itemData))
+      expect(esItem.dueDate()).to.deep.equal(['2022-09-26'])
+    })
+
+    it('should return null if item is not checked out', async function () {
+      const itemData = require('../fixtures/item-17145801.json')
+
+      const esItem = new EsItem(new SierraItem(itemData))
+      expect(esItem.dueDate()).to.equal(null)
+    })
+  })
 })
