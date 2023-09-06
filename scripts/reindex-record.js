@@ -22,7 +22,7 @@
  *  node scripts/reindex-record --envfile config/qa.env --all --uri b10128427
  */
 
-const NyplSourceMapper = require('lib/nypl-source-mapper')
+const NyplSourceMapper = require('../lib/utils/nypl-source-mapper')
 const NyplStreamsClient = require('@nypl/nypl-streams-client')
 
 const { bibById, modelPrefetch } = require('../lib/platform-api/requests')
