@@ -1047,6 +1047,24 @@ describe('EsBib', function () {
     })
   })
 
+  describe('genreForm', () => {
+    it('formats genreForm with " - " joiner', () => {
+      const bib = new EsBib(new SierraBib(require('../fixtures/bib-notes.json')))
+      expect(bib.genreForm()).to.deep.equal([
+        'Portrait photographs - 1930-1989.',
+        'Group portraits - 1930-1989.',
+        'Cityscape photographs - 1930-1989.',
+        'Legal photographs - 1930-1989.',
+        'Fashion photographs - 1930-1989.',
+        'Photographic prints - 1930-1989.',
+        'Gelatin silver prints - 1930-1989.',
+        'Dye coupler prints - 1940-1989.',
+        'Panoramic photographs - 1940-1989.',
+        'Hand coloring.'
+      ])
+    })
+  })
+
   describe('items', () => {
     let bib
 
