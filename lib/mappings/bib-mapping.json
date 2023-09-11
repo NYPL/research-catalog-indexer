@@ -342,7 +342,7 @@
           "z"
         ],
         "description": "Genre/Form literal",
-        "subfieldJoiner": " - "
+        "subfieldJoiner": " – "
       }
     ]
   },
