@@ -22,7 +22,7 @@
  *  node scripts/reindex-record --envfile config/qa.env --all --uri b10128427
  */
 
-const NyplSourceMapper = require('lib/nypl-source-mapper')
+const NyplSourceMapper = require('../lib/utils/nypl-source-mapper')
 const NyplStreamsClient = require('@nypl/nypl-streams-client')
 
 const { bibById, modelPrefetch } = require('../lib/platform-api/requests')
@@ -80,10 +80,12 @@ const reindexBib = async (nyplSource, id) => {
 }
 
 if (argv.uri) {
-  const { id, type, nyplSource } = NyplSourceMapper.instance().then((mapper) => mapper.splitIdentifier(argv.uri))
-  switch (type) {
-    case 'bib':
-      reindexBib(nyplSource, id)
-      break
-  }
+  NyplSourceMapper.instance().then((mapper) => {
+    const { id, type, nyplSource } = mapper.splitIdentifier(argv.uri)
+    switch (type) {
+      case 'bib':
+        reindexBib(nyplSource, id)
+        break
+    }
+  })
 } else usage()
