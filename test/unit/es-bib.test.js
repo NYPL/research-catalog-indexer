@@ -414,7 +414,7 @@ describe('EsBib', function () {
           noteType: 'Biography'
         },
         {
-          label: 'Finding aid:',
+          label: 'Finding aid',
           type: 'bf:Note',
           noteType: 'Indexes/Finding Aids'
         },
