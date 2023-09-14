@@ -141,7 +141,7 @@ describe('EsItem', function () {
         const record = new SierraItem(require('../fixtures/item-17145801.json'))
         const esItem = new EsItem(record)
         expect(esItem.identifier()).to.deep.equal([
-          'urn:identifier:*DM (Esprit des Journaux, françois et etrangers) no. 12 (1784)',
+          'urn:shelfmark:*DM (Esprit des Journaux, françois et etrangers) no. 12 (1784)',
           'urn:barcode:33433081745998'
         ])
       })
@@ -185,10 +185,11 @@ describe('EsItem', function () {
 
   describe('shelfMark_sort', function () {
     describe('for an item with callNumber', function () {
-      it('should return the call number', function () {
+      it('should return the call number', async function () {
         const record = new SierraItem(require('../fixtures/item-17145801.json'))
         const esItem = new EsItem(record)
-        expect(esItem.shelfMark_sort()).to.equal(
+        const v = await esItem.shelfMark_sort()
+        expect(v).to.equal(
           'a*DM (Esprit des Journaux, françois et etrangers) no. 000012 (1784)'
         )
       })
@@ -296,10 +297,37 @@ describe('EsItem', function () {
   })
 
   describe('uri', function () {
-    it('should return the id', function () {
+    it('should return the id', async function () {
       const record = new SierraItem(require('../fixtures/item-17145801.json'))
       const esItem = new EsItem(record)
-      expect(esItem.uri()).to.equal('i17145801')
+      const uri = await esItem.uri()
+      expect(uri).to.equal('i17145801')
+    })
+
+    it('should return the right prefixed id if partner', async function () {
+      const record = new SierraItem(require('../fixtures/item-pul-7834127.json'))
+      const esItem = new EsItem(record)
+      const uri = await esItem.uri()
+      expect(uri).to.equal('pi7834127')
+    })
+  })
+
+  describe('dueDate', function () {
+    it('should return the item dueDate', async function () {
+      // Create a fake checked-out item:
+      const itemData = Object.assign({}, require('../fixtures/item-17145801.json'))
+      // Make sure cached fixture isn't changed:
+      itemData.status = Object.assign({}, itemData.status, { duedate: '2022-09-26T08:00:00+00:00' })
+
+      const esItem = new EsItem(new SierraItem(itemData))
+      expect(esItem.dueDate()).to.deep.equal(['2022-09-26'])
+    })
+
+    it('should return null if item is not checked out', async function () {
+      const itemData = require('../fixtures/item-17145801.json')
+
+      const esItem = new EsItem(new SierraItem(itemData))
+      expect(esItem.dueDate()).to.equal(null)
     })
   })
 })

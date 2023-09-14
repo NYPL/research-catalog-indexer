@@ -1,0 +1,326 @@
+ {
+  "id": "18101449",
+  "nyplSource": "sierra-nypl",
+  "nyplType": "bib",
+  "updatedDate": "2021-11-30T13:18:58-05:00",
+  "createdDate": "2009-07-31T13:04:21-04:00",
+  "deletedDate": null,
+  "deleted": false,
+  "locations": [
+    {
+      "code": "bca",
+      "name": "Bronx Library Center Adult"
+    },
+    {
+      "code": "mma",
+      "name": "Mid-Manhattan Adult"
+    }
+  ],
+  "suppressed": false,
+  "lang": {
+    "code": "   ",
+    "name": "---"
+  },
+  "title": "Por Ti [sound recording]",
+  "author": "La Apuesta.",
+  "materialType": {
+    "code": "j  ",
+    "value": "MUSIC NON-CD"
+  },
+  "bibLevel": {
+    "code": "m",
+    "value": "MONOGRAPH"
+  },
+  "publishYear": null,
+  "catalogDate": null,
+  "country": {
+    "code": "   ",
+    "name": "No country"
+  },
+  "normTitle": "por ti sound recording",
+  "normAuthor": "la apuesta",
+  "standardNumbers": [],
+  "controlNumber": "",
+  "fixedFields": {
+    "24": {
+      "label": "Language",
+      "value": "   ",
+      "display": "---"
+    },
+    "25": {
+      "label": "Skip",
+      "value": "0",
+      "display": null
+    },
+    "26": {
+      "label": "Location",
+      "value": "multi",
+      "display": null
+    },
+    "27": {
+      "label": "COPIES",
+      "value": "0",
+      "display": null
+    },
+    "29": {
+      "label": "Bib Level",
+      "value": "m",
+      "display": "MONOGRAPH"
+    },
+    "30": {
+      "label": "Material Type",
+      "value": "j  ",
+      "display": "MUSIC NON-CD"
+    },
+    "31": {
+      "label": "Bib Code 3",
+      "value": "-",
+      "display": null
+    },
+    "80": {
+      "label": "Record Type",
+      "value": "b",
+      "display": null
+    },
+    "81": {
+      "label": "Record Number",
+      "value": "18101449",
+      "display": null
+    },
+    "83": {
+      "label": "Created Date",
+      "value": "2009-07-31T13:04:21Z",
+      "display": null
+    },
+    "84": {
+      "label": "Updated Date",
+      "value": "2021-11-30T13:18:58Z",
+      "display": null
+    },
+    "85": {
+      "label": "No. of Revisions",
+      "value": "4",
+      "display": null
+    },
+    "86": {
+      "label": "Agency",
+      "value": "1",
+      "display": null
+    },
+    "89": {
+      "label": "Country",
+      "value": "   ",
+      "display": "No country"
+    },
+    "98": {
+      "label": "PDATE",
+      "value": "2011-07-05T22:12:38Z",
+      "display": null
+    },
+    "107": {
+      "label": "MARC Type",
+      "value": " ",
+      "display": null
+    }
+  },
+  "varFields": [
+    {
+      "fieldTag": "a",
+      "marcTag": "100",
+      "ind1": "1",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "La Apuesta."
+        }
+      ]
+    },
+    {
+      "fieldTag": "i",
+      "marcTag": "020",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": ""
+        },
+        {
+          "tag": "c",
+          "content": "$13.99"
+        }
+      ]
+    },
+    {
+      "fieldTag": "i",
+      "marcTag": "024",
+      "ind1": "1",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "827865369123"
+        }
+      ]
+    },
+    {
+      "fieldTag": "i",
+      "marcTag": "028",
+      "ind1": "4",
+      "ind2": "2",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "UMM369123C"
+        }
+      ]
+    },
+    {
+      "fieldTag": "n",
+      "marcTag": "500",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Compact disc."
+        }
+      ]
+    },
+    {
+      "fieldTag": "n",
+      "marcTag": "500",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "05/26/2009"
+        }
+      ]
+    },
+    {
+      "fieldTag": "n",
+      "marcTag": "505",
+      "ind1": "0",
+      "ind2": "0",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "t",
+          "content": "Por ti"
+        },
+        {
+          "tag": "t",
+          "content": "El muchacho alegre"
+        },
+        {
+          "tag": "t",
+          "content": "Si supieras"
+        },
+        {
+          "tag": "t",
+          "content": "Procuro olvidarte"
+        },
+        {
+          "tag": "t",
+          "content": "El venadito"
+        },
+        {
+          "tag": "t",
+          "content": "Abrazame y perdoname"
+        },
+        {
+          "tag": "t",
+          "content": "Nieves de enero"
+        },
+        {
+          "tag": "t",
+          "content": "Cada dia mas"
+        },
+        {
+          "tag": "t",
+          "content": "Alma"
+        },
+        {
+          "tag": "t",
+          "content": "El taconazo"
+        },
+        {
+          "tag": "t",
+          "content": "Juan colorado"
+        },
+        {
+          "tag": "t",
+          "content": "Dos seres que se aman."
+        }
+      ]
+    },
+    {
+      "fieldTag": "p",
+      "marcTag": "260",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "b",
+          "content": "Universal Music Latino,"
+        },
+        {
+          "tag": "c",
+          "content": "2009."
+        }
+      ]
+    },
+    {
+      "fieldTag": "t",
+      "marcTag": "245",
+      "ind1": "1",
+      "ind2": "0",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Por Ti"
+        },
+        {
+          "tag": "h",
+          "content": "[sound recording] /"
+        },
+        {
+          "tag": "c",
+          "content": "La Apuesta."
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "910",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "BL"
+        }
+      ]
+    },
+    {
+      "fieldTag": "_",
+      "marcTag": null,
+      "ind1": null,
+      "ind2": null,
+      "content": "00000njm  22001572a 4500",
+      "subfields": null
+    }
+  ]
+}

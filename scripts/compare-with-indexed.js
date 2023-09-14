@@ -14,16 +14,21 @@
 
 const argv = require('minimist')(process.argv.slice(2), {
   default: {
-    verbose: false
-  }
+    verbose: false,
+    printDocument: false
+  },
+  boolean: ['activeIndex', 'printDocument']
 })
 const dotenv = require('dotenv')
 dotenv.config({ path: argv.envfile || './config/qa.env' })
 
 const NyplSourceMapper = require('../lib/utils/nypl-source-mapper')
-const { awsInit, die, printDiff } = require('./utils')
-const { bibById } = require('../lib/platform-api/requests')
+const { awsInit, die, printDiff, buildSierraModelFromUri, capitalize } = require('./utils')
+const { bibsForHoldingsOrItems } = require('../lib/platform-api/requests')
 const { buildEsDocument } = require('../lib/build-es-document')
+const EsBib = require('../lib/es-models/bib')
+const SierraBib = require('../lib/sierra-models/bib')
+const SierraHolding = require('../lib/sierra-models/holding')
 const { currentDocument } = require('../lib/elastic-search/requests')
 
 const logger = require('../lib/logger')
@@ -39,30 +44,115 @@ awsInit()
 
 let indexName = process.env.ELASTIC_RESOURCES_INDEX_NAME
 if (!argv.uri) usage() && die('Must specify event file or uri')
-if (argv.activeIndex === 'true') indexName = process.env.HYBRID_ES_INDEX
+if (argv.activeIndex) indexName = process.env.HYBRID_ES_INDEX
 
-const { id, type, nyplSource } = (new NyplSourceMapper()).splitIdentifier(argv.uri)
+/**
+ *  Given a uri (e.g. b123, i987, hb99887766), returns the relevant EsModel
+ *  instance
+ */
+const buildLocalEsDocFromUri = async (uri) => {
+  const record = await buildSierraModelFromUri(uri)
+  if (!record) {
+    process.exit()
+  }
 
-const buildLocalEsDocFromUri = async (nyplSource, id) => {
-  const bib = await bibById(nyplSource, id)
-  return buildEsDocument({ type: 'Bib', records: [bib] })
+  const mapper = await NyplSourceMapper.instance()
+  const { type } = mapper.splitIdentifier(uri)
+  return buildEsDocument({ type: capitalize(type), records: [record] })
 }
 
-if (type === 'bib') {
-  Promise.all([buildLocalEsDocFromUri(nyplSource, id), currentDocument(argv.uri, indexName)])
-    .then(([{ recordsToIndex, recordsToDelete }, liveEsRecord]) => {
-      if (recordsToDelete.length) {
-        console.log('Indexer would delete this bib', recordsToDelete)
-      } else {
-        // The local ES record is the sole element in recordsToIndex
-        const localEsRecord = recordsToIndex[0]
-        printDiff(liveEsRecord, localEsRecord, argv.verbose)
+/**
+ *  Given a uri (e.g. b123, i987, hb99887766), prints detailed report on
+ *  whether and why record is suppressed and is Research
+ */
+const suppressionReport = async (uri) => {
+  const record = await buildSierraModelFromUri(uri)
+  if (!record) return null
+
+  return suppressionReportForModel(record)
+}
+
+/**
+ *  Given a {SierraBib|SierraHolding|SierraItem} instance, prints detailed
+ *  report on whether and why record is suppressed and is Research
+ */
+const suppressionReportForModel = async (record) => {
+  const type = record instanceof SierraBib
+    ? 'Bib'
+    : (record instanceof SierraHolding ? 'Holding' : 'Item')
+  if (type !== 'Bib') {
+    const bibs = await bibsForHoldingsOrItems('Holding', [record])
+      .map((bib) => new SierraBib(bib))
+    await Promise.all(
+      bibs.map((bib) => suppressionReportForModel(bib))
+    )
+  }
+  const recordIdentifier = (record.nyplSource ? `${record.nyplSource}/` : '') + record.id
+  const { suppressed, rationale: suppressionRationale } = record.getSuppressionWithRationale()
+  if (suppressed) {
+    console.log(`  ${type} ${recordIdentifier} is ${suppressed ? '' : 'not '}suppressed: ${suppressionRationale}`)
+  }
+
+  if (record.getIsResearchWithRationale) {
+    const { isResearch, rationale: isResearchRationale } = record.getIsResearchWithRationale()
+    if (!isResearch) {
+      console.log(`  ${type} ${recordIdentifier} is ${isResearch ? '' : 'not '}Research: ${isResearchRationale}`)
+    }
+  }
+}
+
+/**
+ *  Run the compare-with-indexed report over the document identified by --uri
+ */
+const run = async () => {
+  console.log(`Comparing local ES doc against the one in ${indexName}`)
+  const mapper = await NyplSourceMapper.instance()
+  const { type } = mapper.splitIdentifier(argv.uri)
+
+  try {
+    const { recordsToIndex, recordsToDelete } = await buildLocalEsDocFromUri(argv.uri)
+    // The local ES record is the sole element in recordsToIndex
+    const localEsRecord = recordsToIndex[0]
+
+    // Get bibUri so we can look up the currently indexed document:
+    let bibUri
+    if (localEsRecord) {
+      bibUri = localEsRecord.uri
+    } else if (recordsToDelete.length) {
+      bibUri = await new EsBib(recordsToDelete[0]).uri()
+    }
+    // Get currently indexed document:
+    const liveEsRecord = !bibUri
+      ? Promise.resolve()
+      : await currentDocument(bibUri, indexName)
+        .catch((e) => console.log(`Could not find ${bibUri} in ${indexName}`))
+
+    // Would indexer delete it?
+    if (recordsToDelete.length) {
+      console.log(`Indexer would delete bib ${bibUri} (which ${liveEsRecord ? 'exists' : 'doesn\'t exist'} in ${indexName})`)
+      suppressionReport(argv.uri)
+    // Would indexer ignore it?
+    } else if (!recordsToIndex.length) {
+      console.log(`Indexer found no bibs to index from this ${type}`)
+      suppressionReport(argv.uri)
+    } else {
+      if (argv.printDocument) {
+        console.log('Built document:\n_______________________________________________________')
+        console.log(JSON.stringify(localEsRecord, null, 2))
       }
-    }).catch(e => {
-      console.error(`Compare-With-Indexed encountered an error: ${e.message}`)
-      console.error(e.stack)
-      die()
-    })
-} else {
-  die(`Only configured for bib uris, ${type} uri specified`)
+
+      // Show diff:
+      if (liveEsRecord) {
+        printDiff(liveEsRecord, localEsRecord, argv.verbose)
+      } else {
+        console.log(`Can't display diff because record doesn't exist in live index (${indexName})`)
+      }
+    }
+  } catch (e) {
+    console.error(`Compare-With-Indexed encountered an error: ${e.message}`)
+    console.error(e.stack)
+    die()
+  }
 }
+
+run()

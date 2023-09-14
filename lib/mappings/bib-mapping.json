@@ -328,7 +328,7 @@
       }
     ]
   },
-  "genreFormLiteral": {
+  "genreForm": {
     "paths": [
       {
         "marc": "655",
@@ -341,7 +341,8 @@
           "y",
           "z"
         ],
-        "description": "Genre/Form literal"
+        "description": "Genre/Form literal",
+        "subfieldJoiner": " – "
       }
     ]
   },
@@ -1073,7 +1074,6 @@
           "y",
           "z"
         ],
-        "options": { "subfieldJoiner": " -- " },
         "description": "Subject Added Entry-Personal Name"
       },
       {
@@ -1091,7 +1091,6 @@
           "y",
           "z"
         ],
-        "options": { "subfieldJoiner": " -- " },
         "description": "Subject Added Entry-Personal Name"
       },
       {
@@ -1109,7 +1108,6 @@
           "y",
           "z"
         ],
-        "options": { "subfieldJoiner": " -- " },
         "description": "Subject Added Entry-Personal Name"
       },
       {
@@ -1127,7 +1125,6 @@
           "y",
           "z"
         ],
-        "options": { "subfieldJoiner": " -- " },
         "description": "Subject Added Entry-Personal Name"
       },
       {
@@ -1145,7 +1142,6 @@
           "y",
           "z"
         ],
-        "options": { "subfieldJoiner": " -- " },
         "description": "Subject Added Entry-Personal Name"
       },
       {
@@ -1163,7 +1159,6 @@
           "y",
           "z"
         ],
-        "options": { "subfieldJoiner": " -- " },
         "description": "Subject Added Entry-Personal Name"
       },
       {
@@ -1181,7 +1176,6 @@
           "y",
           "z"
         ],
-        "options": { "subfieldJoiner": " -- " },
         "description": "Subject Added Entry-Personal Name"
       },
       {
@@ -1199,7 +1193,6 @@
           "y",
           "z"
         ],
-        "options": { "subfieldJoiner": " -- " },
         "description": "Subject Added Entry-Personal Name"
       }
     ]

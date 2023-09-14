@@ -23,15 +23,14 @@ describe('primary and parallel values', () => {
     })
     it('should return empty array for orphaned parallel with no .value', () => {
       const mappings = BibMappings.get('creatorLiteral', bib)
-      expect(primaryValues(bib.varFieldsMulti(mappings))).to.deep.equal([''])
+      expect(primaryValues(bib.varFieldsMulti(mappings))).to.deep.equal([])
     })
     it('orphaned parallel subfields and primary subfields with parallels', () => {
       // This bib has a single primary 200 with a linked parallel and one orphaned parallel:
       bib = new SierraBib(require('../fixtures/bib-parallels-chaos.json'))
       const mappings = [{ marc: '200', subfields: ['a', 'b'] }]
       expect(primaryValues(bib.varFieldsMulti(mappings))).to.deep.equal([
-        '200 primary value a 200 primary value b',
-        ''
+        '200 primary value a 200 primary value b'
       ])
     })
   })
@@ -59,9 +58,8 @@ describe('primary and parallel values', () => {
       let mappings
 
       // This bib has a single primary 600 with a linked parallel that is tagged RTL
-      // Note the non-standard ' -- ' joiner, which is controlled by the subjectLiteral mapping
       mappings = BibMappings.get('subjectLiteral', bib)
-      expect(parallelValues(bib.varFieldsMulti(mappings))).to.deep.equal(['\u200F600 parallel value a -- 600 parallel value b'])
+      expect(parallelValues(bib.varFieldsMulti(mappings))).to.deep.equal(['\u200F600 parallel value a 600 parallel value b'])
 
       // This bib has a single orphaned parallel for marc 100 that is tagged RTL
       mappings = BibMappings.get('creatorLiteral', bib)
