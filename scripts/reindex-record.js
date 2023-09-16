@@ -80,10 +80,12 @@ const reindexBib = async (nyplSource, id) => {
 }
 
 if (argv.uri) {
-  const { id, type, nyplSource } = NyplSourceMapper.instance().then((mapper) => mapper.splitIdentifier(argv.uri))
-  switch (type) {
-    case 'bib':
-      reindexBib(nyplSource, id)
-      break
-  }
+  NyplSourceMapper.instance().then((mapper) => {
+    const { id, type, nyplSource } = mapper.splitIdentifier(argv.uri)
+    switch (type) {
+      case 'bib':
+        reindexBib(nyplSource, id)
+        break
+    }
+  })
 } else usage()
