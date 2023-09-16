@@ -269,6 +269,24 @@ describe('EsBib', function () {
         }
       ])
     })
+
+    it('should use bf:Lccn', () => {
+      const record = new SierraBib(require('../fixtures/bib-11806560.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.identifierV2().find((identifier) => identifier.type === 'bf:Lccn').value).to.deep.equal('91060775')
+    })
+
+    it('should use bf:Isbn', function () {
+      const record = new SierraBib(require('../fixtures/bib-11806560.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.identifierV2().find((identifier) => identifier.type === 'bf:Isbn').value).to.deep.equal('0935661204 (tr)')
+    })
+
+    it('should use bf:Lccn', () => {
+      const record = new SierraBib(require('../fixtures/bib-11806560.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.identifierV2().find((identifier) => identifier.type === 'bf:Lccn').value).to.deep.equal('91060775')
+    })
   })
 
   describe('idIsbn', () => {
