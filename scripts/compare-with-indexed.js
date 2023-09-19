@@ -123,7 +123,7 @@ const run = async () => {
     }
     // Get currently indexed document:
     const liveEsRecord = !bibUri
-      ? Promise.resolve()
+      ? null
       : await currentDocument(bibUri, indexName)
         .catch((e) => console.log(`Could not find ${bibUri} in ${indexName}`))
 
