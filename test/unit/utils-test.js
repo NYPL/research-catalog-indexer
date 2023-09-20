@@ -86,4 +86,49 @@ describe('utils', () => {
       expect(utils.addSierraCheckDigit('i15897007')).to.equal('i15897007x')
     })
   })
+
+  describe('sortByAsyncSortKey', () => {
+    it('sorts array of values by an async getter', async () => {
+      const input = ['element 2', 'element 1', 'element 4', 'element 3']
+      const sorted = await utils.sortByAsyncSortKey(input, (element) => Promise.resolve(element))
+      expect(sorted).to.deep.equal([
+        'element 1', 'element 2', 'element 3', 'element 4'
+      ])
+    })
+
+    it('sorts array of values by an async member function', async () => {
+      const input = [
+        { id: 'element 2', sortKey: () => Promise.resolve(2) },
+        { id: 'element 1', sortKey: () => Promise.resolve(1) },
+        { id: 'element 4', sortKey: () => Promise.resolve(4) },
+        { id: 'element 3', sortKey: () => Promise.resolve(3) }
+      ]
+      const sorted = await utils.sortByAsyncSortKey(input, (element) => element.sortKey())
+      expect(sorted.map((el) => el.id)).to.deep.equal([
+        'element 1', 'element 2', 'element 3', 'element 4'
+      ])
+    })
+
+    it('supports reverse sorting', async () => {
+      const input = ['element 2', 'element 1', 'element 4', 'element 3']
+      const sorted = await utils.sortByAsyncSortKey(input, (element) => Promise.resolve(element), 'desc')
+      expect(sorted).to.deep.equal([
+        'element 4', 'element 3', 'element 2', 'element 1'
+      ])
+    })
+  })
+
+  describe('truncate', () => {
+    it('returns original value if unable to truncate', () => {
+      expect(utils.truncate('')).to.equal('')
+      expect(utils.truncate(false)).to.equal(false)
+      expect(utils.truncate(undefined)).to.equal(undefined)
+    })
+
+    it('truncates strings to length', () => {
+      expect(utils.truncate('123456789', 4)).to.equal('123…')
+      expect(utils.truncate('123456789', 4)).to.have.lengthOf(4)
+      expect(utils.truncate('123456789', 40)).to.equal('123456789')
+    })
+  })
 })
