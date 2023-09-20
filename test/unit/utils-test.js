@@ -83,6 +83,7 @@ describe('utils', () => {
       expect(utils.addSierraCheckDigit('b1234')).to.equal('b12348')
       expect(utils.addSierraCheckDigit('b987654321')).to.equal('b9876543210')
       expect(utils.addSierraCheckDigit('cb987654321')).to.equal('cb9876543210')
+      expect(utils.addSierraCheckDigit('i15897007')).to.equal('i15897007x')
     })
   })
 })

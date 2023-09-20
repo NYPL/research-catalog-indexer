@@ -1,0 +1,4331 @@
+{
+  "id": "19834195",
+  "nyplSource": "sierra-nypl",
+  "nyplType": "bib",
+  "updatedDate": "2023-07-21T00:58:02-04:00",
+  "createdDate": "2013-06-12T15:09:00-04:00",
+  "deletedDate": null,
+  "deleted": false,
+  "locations": [
+    {
+      "code": "pat",
+      "name": "Performing Arts Research Collections - Theatre"
+    }
+  ],
+  "suppressed": false,
+  "lang": {
+    "code": "eng",
+    "name": "English"
+  },
+  "title": "Ken Dewey collection, (bulk 1959-1972).",
+  "author": "Dewey, Ken.",
+  "materialType": {
+    "code": "p  ",
+    "value": "ARCHIVAL MIX"
+  },
+  "bibLevel": {
+    "code": "7",
+    "value": "ARCHIVES & MSS"
+  },
+  "publishYear": 1943,
+  "catalogDate": "2013-06-12",
+  "country": {
+    "code": "nyu",
+    "name": "New York (State)"
+  },
+  "normTitle": "ken dewey collection bulk 1959 1972",
+  "normAuthor": "dewey ken",
+  "standardNumbers": [],
+  "controlNumber": "847665674",
+  "fixedFields": {
+    "24": {
+      "label": "Language",
+      "value": "eng",
+      "display": "English"
+    },
+    "25": {
+      "label": "Skip",
+      "value": "0",
+      "display": null
+    },
+    "26": {
+      "label": "Location",
+      "value": "pat  ",
+      "display": "Performing Arts Research Collections - Theatre"
+    },
+    "27": {
+      "label": "",
+      "value": "71",
+      "display": null
+    },
+    "28": {
+      "label": "Cat. Date",
+      "value": "2013-06-12",
+      "display": null
+    },
+    "29": {
+      "label": "Bib Level",
+      "value": "7",
+      "display": "ARCHIVES & MSS"
+    },
+    "30": {
+      "label": "Material Type",
+      "value": "p  ",
+      "display": "ARCHIVAL MIX"
+    },
+    "31": {
+      "label": "Bib Code 3",
+      "value": "-",
+      "display": null
+    },
+    "80": {
+      "label": "Record Type",
+      "value": "b",
+      "display": null
+    },
+    "81": {
+      "label": "Record Number",
+      "value": "19834195",
+      "display": null
+    },
+    "83": {
+      "label": "Created Date",
+      "value": "2013-06-12T15:09:00Z",
+      "display": null
+    },
+    "84": {
+      "label": "Updated Date",
+      "value": "2023-07-21T00:58:02Z",
+      "display": null
+    },
+    "85": {
+      "label": "No. of Revisions",
+      "value": "63",
+      "display": null
+    },
+    "86": {
+      "label": "Agency",
+      "value": "1",
+      "display": null
+    },
+    "89": {
+      "label": "Country",
+      "value": "nyu",
+      "display": "New York (State)"
+    },
+    "98": {
+      "label": "",
+      "value": "2023-07-19T15:00:58Z",
+      "display": null
+    },
+    "107": {
+      "label": "MARC Type",
+      "value": " ",
+      "display": null
+    }
+  },
+  "varFields": [
+    {
+      "fieldTag": "a",
+      "marcTag": "100",
+      "ind1": "1",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Dewey, Ken."
+        }
+      ]
+    },
+    {
+      "fieldTag": "d",
+      "marcTag": "600",
+      "ind1": "1",
+      "ind2": "0",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Donner, Henrik Otto,"
+        },
+        {
+          "tag": "d",
+          "content": "1939-"
+        }
+      ]
+    },
+    {
+      "fieldTag": "d",
+      "marcTag": "600",
+      "ind1": "1",
+      "ind2": "0",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Kaprow, Allan."
+        }
+      ]
+    },
+    {
+      "fieldTag": "d",
+      "marcTag": "600",
+      "ind1": "1",
+      "ind2": "0",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Moore, Barbara,"
+        },
+        {
+          "tag": "d",
+          "content": "1936-"
+        }
+      ]
+    },
+    {
+      "fieldTag": "d",
+      "marcTag": "600",
+      "ind1": "1",
+      "ind2": "0",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Ono, Yōko."
+        }
+      ]
+    },
+    {
+      "fieldTag": "d",
+      "marcTag": "600",
+      "ind1": "1",
+      "ind2": "0",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Rabe, Folke,"
+        },
+        {
+          "tag": "d",
+          "content": "1935-"
+        }
+      ]
+    },
+    {
+      "fieldTag": "d",
+      "marcTag": "600",
+      "ind1": "1",
+      "ind2": "0",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Riley, Terry,"
+        },
+        {
+          "tag": "d",
+          "content": "1935-"
+        }
+      ]
+    },
+    {
+      "fieldTag": "d",
+      "marcTag": "610",
+      "ind1": "2",
+      "ind2": "0",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Action Theatre."
+        }
+      ]
+    },
+    {
+      "fieldTag": "d",
+      "marcTag": "610",
+      "ind1": "2",
+      "ind2": "0",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Actor's Workshop (San Francisco)"
+        }
+      ]
+    },
+    {
+      "fieldTag": "d",
+      "marcTag": "610",
+      "ind1": "2",
+      "ind2": "0",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "American Cooperative Theatre."
+        }
+      ]
+    },
+    {
+      "fieldTag": "d",
+      "marcTag": "610",
+      "ind1": "1",
+      "ind2": "0",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "New York (State)."
+        },
+        {
+          "tag": "b",
+          "content": "Commission on Cultural Resources."
+        }
+      ]
+    },
+    {
+      "fieldTag": "d",
+      "marcTag": "610",
+      "ind1": "2",
+      "ind2": "0",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "New York State Council on the Arts."
+        }
+      ]
+    },
+    {
+      "fieldTag": "d",
+      "marcTag": "610",
+      "ind1": "2",
+      "ind2": "0",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Planning Corporation of the Arts."
+        }
+      ]
+    },
+    {
+      "fieldTag": "d",
+      "marcTag": "611",
+      "ind1": "2",
+      "ind2": "0",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Avant Garde Festival of New York."
+        }
+      ]
+    },
+    {
+      "fieldTag": "d",
+      "marcTag": "650",
+      "ind1": " ",
+      "ind2": "0",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Arts, Modern"
+        },
+        {
+          "tag": "y",
+          "content": "20th century."
+        }
+      ]
+    },
+    {
+      "fieldTag": "d",
+      "marcTag": "650",
+      "ind1": " ",
+      "ind2": "0",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Conceptual art."
+        }
+      ]
+    },
+    {
+      "fieldTag": "d",
+      "marcTag": "650",
+      "ind1": " ",
+      "ind2": "0",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Happenings (Art)"
+        }
+      ]
+    },
+    {
+      "fieldTag": "d",
+      "marcTag": "650",
+      "ind1": " ",
+      "ind2": "0",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Performance art."
+        }
+      ]
+    },
+    {
+      "fieldTag": "d",
+      "marcTag": "650",
+      "ind1": " ",
+      "ind2": "0",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Theater."
+        }
+      ]
+    },
+    {
+      "fieldTag": "d",
+      "marcTag": "655",
+      "ind1": " ",
+      "ind2": "7",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Clippings."
+        },
+        {
+          "tag": "2",
+          "content": "aat"
+        }
+      ]
+    },
+    {
+      "fieldTag": "d",
+      "marcTag": "655",
+      "ind1": " ",
+      "ind2": "7",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Diaries."
+        },
+        {
+          "tag": "2",
+          "content": "aat"
+        }
+      ]
+    },
+    {
+      "fieldTag": "d",
+      "marcTag": "655",
+      "ind1": " ",
+      "ind2": "7",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Drawings."
+        },
+        {
+          "tag": "2",
+          "content": "aat"
+        }
+      ]
+    },
+    {
+      "fieldTag": "d",
+      "marcTag": "655",
+      "ind1": " ",
+      "ind2": "7",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Engravings."
+        },
+        {
+          "tag": "2",
+          "content": "aat"
+        }
+      ]
+    },
+    {
+      "fieldTag": "d",
+      "marcTag": "655",
+      "ind1": " ",
+      "ind2": "7",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Photographs."
+        },
+        {
+          "tag": "2",
+          "content": "aat"
+        }
+      ]
+    },
+    {
+      "fieldTag": "d",
+      "marcTag": "655",
+      "ind1": " ",
+      "ind2": "7",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Posters."
+        },
+        {
+          "tag": "2",
+          "content": "aat"
+        }
+      ]
+    },
+    {
+      "fieldTag": "d",
+      "marcTag": "655",
+      "ind1": " ",
+      "ind2": "7",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Promptbooks."
+        },
+        {
+          "tag": "2",
+          "content": "aat"
+        }
+      ]
+    },
+    {
+      "fieldTag": "d",
+      "marcTag": "655",
+      "ind1": " ",
+      "ind2": "7",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Scripts."
+        },
+        {
+          "tag": "2",
+          "content": "aat"
+        }
+      ]
+    },
+    {
+      "fieldTag": "d",
+      "marcTag": "655",
+      "ind1": " ",
+      "ind2": "7",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Sheet music."
+        },
+        {
+          "tag": "2",
+          "content": "aat"
+        }
+      ]
+    },
+    {
+      "fieldTag": "d",
+      "marcTag": "655",
+      "ind1": " ",
+      "ind2": "7",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Slides."
+        },
+        {
+          "tag": "2",
+          "content": "aat"
+        }
+      ]
+    },
+    {
+      "fieldTag": "d",
+      "marcTag": "655",
+      "ind1": " ",
+      "ind2": "7",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Sound recordings."
+        },
+        {
+          "tag": "2",
+          "content": "aat"
+        }
+      ]
+    },
+    {
+      "fieldTag": "d",
+      "marcTag": "655",
+      "ind1": " ",
+      "ind2": "7",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Video recordings."
+        },
+        {
+          "tag": "2",
+          "content": "aat"
+        }
+      ]
+    },
+    {
+      "fieldTag": "l",
+      "marcTag": "035",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "(OCoLC)847665674"
+        }
+      ]
+    },
+    {
+      "fieldTag": "n",
+      "marcTag": "506",
+      "ind1": "1",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Collection is open to the public. Library policy on photocopying will apply. Advance notice may be required. Inquiries regarding audio and video materials in the series may be directed to the Billy Rose Theatre Division (theatre@nypl.org). Audio/visual materials may be subject to preservation evaluation and migration prior to access."
+        }
+      ]
+    },
+    {
+      "fieldTag": "n",
+      "marcTag": "520",
+      "ind1": "3",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Ken Dewey (1934-1972) was a performance artist, playwright, director, and arts administrator who was active in the Happenings movement of the 1960s. The Ken Dewey collection contains project files, photographs and slides, writings and audio and visual recordings that represent Dewey's creative work; files that represent Dewey's work as an arts administrator at the American Cooperative Theatre, Action Theatre, the New York State Council on the Arts, the New York State Commission on Cultural Resources, and the Planning Corporation of the Arts; material pertaining the exhibition Action Theatre: The Happenings of Ken Dewey, a posthumous retrospective curated by Barbara Moore at Franklin Furnace in 1987; and a small amount of personal files and art by other artists."
+        }
+      ]
+    },
+    {
+      "fieldTag": "n",
+      "marcTag": "540",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Material may not be duplicated without written permission of the rights holder."
+        }
+      ]
+    },
+    {
+      "fieldTag": "n",
+      "marcTag": "544",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "d",
+          "content": "Dewey, Kenneth/Selma Last Year Collection;"
+        },
+        {
+          "tag": "a",
+          "content": "Schomburg Center for Research in Black Culture, New York Public Library."
+        }
+      ]
+    },
+    {
+      "fieldTag": "o",
+      "marcTag": "001",
+      "ind1": " ",
+      "ind2": " ",
+      "content": "847665674",
+      "subfields": null
+    },
+    {
+      "fieldTag": "q",
+      "marcTag": "852",
+      "ind1": "8",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "h",
+          "content": "*T-Mss 1991-010"
+        }
+      ]
+    },
+    {
+      "fieldTag": "r",
+      "marcTag": "300",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "32 linear feet (69 boxes, 2 tubes)"
+        }
+      ]
+    },
+    {
+      "fieldTag": "t",
+      "marcTag": "245",
+      "ind1": "1",
+      "ind2": "0",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Ken Dewey collection,"
+        },
+        {
+          "tag": "f",
+          "content": "1943-1987"
+        },
+        {
+          "tag": "g",
+          "content": "(bulk 1959-1972)."
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "856",
+      "ind1": "4",
+      "ind2": "0",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "u",
+          "content": "https://specialcollections.nypl.org/aeon/Aeon.dll?Action=10&Form=30&Title=Ken+Dewey+collection,+1943-1987+(bulk+1959-1972).&Site=LPATH&CallNumber=*T-Mss+1991-010&Author=Dewey,+Ken.&ItemInfo3=https://catalog.nypl.org/record=b19834195&ReferenceNumber=b198341957&ItemInfo2=Material+may+not+be+duplicated+without+written+permission+of+the+rights+holder.+Collection+is+open+to+the+public.+Library+policy+on+photocopying+will+apply.+Advance+notice+may+be+required.+Inquiries+regarding+audio+and+video+materials+in+the+series+may+be+directed+to+the+Billy+Rose+Theatre+Division+(theatre@nypl.org).+Audio/visual+materials+may+be+subject+to+preservation+evaluation+and+migration+prior+to+access.&Genre=Archival+Mix&Location=Performing+Arts+Theatre+Division"
+        },
+        {
+          "tag": "z",
+          "content": "Request Access to Theatre Division Special Collections material"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "856",
+      "ind1": "4",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "u",
+          "content": "https://digitalcollections.nypl.org/collections/ae4193a0-b810-0139-c001-0242ac110005"
+        },
+        {
+          "tag": "z",
+          "content": "NYPL Digital Collections"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "008",
+      "ind1": " ",
+      "ind2": " ",
+      "content": "130611i19431987nyu                 eng dnpcIaa",
+      "subfields": null
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "003",
+      "ind1": " ",
+      "ind2": " ",
+      "content": "OCoLC",
+      "subfields": null
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "005",
+      "ind1": " ",
+      "ind2": " ",
+      "content": "20130611114219.0",
+      "subfields": null
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "040",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "NYP"
+        },
+        {
+          "tag": "c",
+          "content": "NYP"
+        },
+        {
+          "tag": "e",
+          "content": "dacs"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "049",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "NYPP"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "856",
+      "ind1": "4",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "3",
+          "content": " Finding Aid "
+        },
+        {
+          "tag": "u",
+          "content": " http://archives.nypl.org/the/18853"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "901",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "MSS"
+        },
+        {
+          "tag": "b",
+          "content": "MSS"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "901",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "MARS"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "946",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "m"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "*T-Mss 1991-010"
+        },
+        {
+          "tag": "l",
+          "content": "myt42"
+        },
+        {
+          "tag": "i",
+          "content": "33433102626482"
+        },
+        {
+          "tag": "c",
+          "content": "box 1"
+        },
+        {
+          "tag": "t",
+          "content": "021"
+        },
+        {
+          "tag": "h",
+          "content": "32"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "o",
+          "content": "u"
+        },
+        {
+          "tag": "v",
+          "content": "MSS/MSS"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "*T-Mss 1991-010"
+        },
+        {
+          "tag": "l",
+          "content": "myt42"
+        },
+        {
+          "tag": "i",
+          "content": "33433102626425"
+        },
+        {
+          "tag": "c",
+          "content": "box 2"
+        },
+        {
+          "tag": "t",
+          "content": "021"
+        },
+        {
+          "tag": "h",
+          "content": "32"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "o",
+          "content": "u"
+        },
+        {
+          "tag": "v",
+          "content": "MSS/MSS"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "*T-Mss 1991-010"
+        },
+        {
+          "tag": "l",
+          "content": "myt42"
+        },
+        {
+          "tag": "i",
+          "content": "33433102626433"
+        },
+        {
+          "tag": "c",
+          "content": "box 3"
+        },
+        {
+          "tag": "t",
+          "content": "021"
+        },
+        {
+          "tag": "h",
+          "content": "32"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "o",
+          "content": "u"
+        },
+        {
+          "tag": "v",
+          "content": "MSS/MSS"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "*T-Mss 1991-010"
+        },
+        {
+          "tag": "l",
+          "content": "myt42"
+        },
+        {
+          "tag": "i",
+          "content": "33433102626441"
+        },
+        {
+          "tag": "c",
+          "content": "box 4"
+        },
+        {
+          "tag": "t",
+          "content": "021"
+        },
+        {
+          "tag": "h",
+          "content": "32"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "o",
+          "content": "u"
+        },
+        {
+          "tag": "v",
+          "content": "MSS/MSS"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "*T-Mss 1991-010"
+        },
+        {
+          "tag": "l",
+          "content": "myt42"
+        },
+        {
+          "tag": "i",
+          "content": "33433102626458"
+        },
+        {
+          "tag": "c",
+          "content": "box 5"
+        },
+        {
+          "tag": "t",
+          "content": "021"
+        },
+        {
+          "tag": "h",
+          "content": "32"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "o",
+          "content": "u"
+        },
+        {
+          "tag": "v",
+          "content": "MSS/MSS"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "*T-Mss 1991-010"
+        },
+        {
+          "tag": "l",
+          "content": "myt42"
+        },
+        {
+          "tag": "i",
+          "content": "33433102626466"
+        },
+        {
+          "tag": "c",
+          "content": "box 6"
+        },
+        {
+          "tag": "t",
+          "content": "021"
+        },
+        {
+          "tag": "h",
+          "content": "32"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "o",
+          "content": "u"
+        },
+        {
+          "tag": "v",
+          "content": "MSS/MSS"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "*T-Mss 1991-010"
+        },
+        {
+          "tag": "l",
+          "content": "myt42"
+        },
+        {
+          "tag": "i",
+          "content": "33433102626474"
+        },
+        {
+          "tag": "c",
+          "content": "box 7"
+        },
+        {
+          "tag": "t",
+          "content": "021"
+        },
+        {
+          "tag": "h",
+          "content": "32"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "o",
+          "content": "u"
+        },
+        {
+          "tag": "v",
+          "content": "MSS/MSS"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "*T-Mss 1991-010"
+        },
+        {
+          "tag": "l",
+          "content": "myt42"
+        },
+        {
+          "tag": "i",
+          "content": "33433102626490"
+        },
+        {
+          "tag": "c",
+          "content": "box 8"
+        },
+        {
+          "tag": "t",
+          "content": "021"
+        },
+        {
+          "tag": "h",
+          "content": "32"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "o",
+          "content": "u"
+        },
+        {
+          "tag": "v",
+          "content": "MSS/MSS"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "*T-Mss 1991-010"
+        },
+        {
+          "tag": "l",
+          "content": "myt42"
+        },
+        {
+          "tag": "i",
+          "content": "33433102626508"
+        },
+        {
+          "tag": "c",
+          "content": "box 9"
+        },
+        {
+          "tag": "t",
+          "content": "021"
+        },
+        {
+          "tag": "h",
+          "content": "32"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "o",
+          "content": "u"
+        },
+        {
+          "tag": "v",
+          "content": "MSS/MSS"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "*T-Mss 1991-010"
+        },
+        {
+          "tag": "l",
+          "content": "myt42"
+        },
+        {
+          "tag": "i",
+          "content": "33433102626516"
+        },
+        {
+          "tag": "c",
+          "content": "box 10"
+        },
+        {
+          "tag": "t",
+          "content": "021"
+        },
+        {
+          "tag": "h",
+          "content": "32"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "o",
+          "content": "u"
+        },
+        {
+          "tag": "v",
+          "content": "MSS/MSS"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "*T-Mss 1991-010"
+        },
+        {
+          "tag": "l",
+          "content": "myt42"
+        },
+        {
+          "tag": "i",
+          "content": "33433102626524"
+        },
+        {
+          "tag": "c",
+          "content": "box 11"
+        },
+        {
+          "tag": "t",
+          "content": "021"
+        },
+        {
+          "tag": "h",
+          "content": "32"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "o",
+          "content": "u"
+        },
+        {
+          "tag": "v",
+          "content": "MSS/MSS"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "*T-Mss 1991-010"
+        },
+        {
+          "tag": "l",
+          "content": "myt42"
+        },
+        {
+          "tag": "i",
+          "content": "33433102626532"
+        },
+        {
+          "tag": "c",
+          "content": "box 12"
+        },
+        {
+          "tag": "t",
+          "content": "021"
+        },
+        {
+          "tag": "h",
+          "content": "32"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "o",
+          "content": "u"
+        },
+        {
+          "tag": "v",
+          "content": "MSS/MSS"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "*T-Mss 1991-010"
+        },
+        {
+          "tag": "l",
+          "content": "myt42"
+        },
+        {
+          "tag": "i",
+          "content": "33433102626540"
+        },
+        {
+          "tag": "c",
+          "content": "box 13"
+        },
+        {
+          "tag": "t",
+          "content": "021"
+        },
+        {
+          "tag": "h",
+          "content": "32"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "o",
+          "content": "u"
+        },
+        {
+          "tag": "v",
+          "content": "MSS/MSS"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "*T-Mss 1991-010"
+        },
+        {
+          "tag": "l",
+          "content": "myt42"
+        },
+        {
+          "tag": "i",
+          "content": "33433102626557"
+        },
+        {
+          "tag": "c",
+          "content": "box 14"
+        },
+        {
+          "tag": "t",
+          "content": "021"
+        },
+        {
+          "tag": "h",
+          "content": "32"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "o",
+          "content": "u"
+        },
+        {
+          "tag": "v",
+          "content": "MSS/MSS"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "*T-Mss 1991-010"
+        },
+        {
+          "tag": "l",
+          "content": "myt42"
+        },
+        {
+          "tag": "i",
+          "content": "33433102626565"
+        },
+        {
+          "tag": "c",
+          "content": "box 15"
+        },
+        {
+          "tag": "t",
+          "content": "021"
+        },
+        {
+          "tag": "h",
+          "content": "32"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "o",
+          "content": "u"
+        },
+        {
+          "tag": "v",
+          "content": "MSS/MSS"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "*T-Mss 1991-010"
+        },
+        {
+          "tag": "l",
+          "content": "myt42"
+        },
+        {
+          "tag": "i",
+          "content": "33433102626573"
+        },
+        {
+          "tag": "c",
+          "content": "box 16"
+        },
+        {
+          "tag": "t",
+          "content": "021"
+        },
+        {
+          "tag": "h",
+          "content": "32"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "o",
+          "content": "u"
+        },
+        {
+          "tag": "v",
+          "content": "MSS/MSS"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "*T-Mss 1991-010"
+        },
+        {
+          "tag": "l",
+          "content": "myt42"
+        },
+        {
+          "tag": "i",
+          "content": "33433102626599"
+        },
+        {
+          "tag": "c",
+          "content": "box 17"
+        },
+        {
+          "tag": "t",
+          "content": "021"
+        },
+        {
+          "tag": "h",
+          "content": "32"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "o",
+          "content": "u"
+        },
+        {
+          "tag": "v",
+          "content": "MSS/MSS"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "*T-Mss 1991-010"
+        },
+        {
+          "tag": "l",
+          "content": "myt42"
+        },
+        {
+          "tag": "i",
+          "content": "33433102626581"
+        },
+        {
+          "tag": "c",
+          "content": "box 18"
+        },
+        {
+          "tag": "t",
+          "content": "021"
+        },
+        {
+          "tag": "h",
+          "content": "32"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "o",
+          "content": "u"
+        },
+        {
+          "tag": "v",
+          "content": "MSS/MSS"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "*T-Mss 1991-010"
+        },
+        {
+          "tag": "l",
+          "content": "myt42"
+        },
+        {
+          "tag": "i",
+          "content": "33433102626607"
+        },
+        {
+          "tag": "c",
+          "content": "box 19"
+        },
+        {
+          "tag": "t",
+          "content": "021"
+        },
+        {
+          "tag": "h",
+          "content": "32"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "o",
+          "content": "u"
+        },
+        {
+          "tag": "v",
+          "content": "MSS/MSS"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "*T-Mss 1991-010"
+        },
+        {
+          "tag": "l",
+          "content": "myt42"
+        },
+        {
+          "tag": "i",
+          "content": "33433102626615"
+        },
+        {
+          "tag": "c",
+          "content": "box 20"
+        },
+        {
+          "tag": "t",
+          "content": "021"
+        },
+        {
+          "tag": "h",
+          "content": "32"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "o",
+          "content": "u"
+        },
+        {
+          "tag": "v",
+          "content": "MSS/MSS"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "*T-Mss 1991-010"
+        },
+        {
+          "tag": "l",
+          "content": "myt42"
+        },
+        {
+          "tag": "i",
+          "content": "33433102626623"
+        },
+        {
+          "tag": "c",
+          "content": "box 21"
+        },
+        {
+          "tag": "t",
+          "content": "021"
+        },
+        {
+          "tag": "h",
+          "content": "32"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "o",
+          "content": "u"
+        },
+        {
+          "tag": "v",
+          "content": "MSS/MSS"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "*T-Mss 1991-010"
+        },
+        {
+          "tag": "l",
+          "content": "myt42"
+        },
+        {
+          "tag": "i",
+          "content": "33433102626631"
+        },
+        {
+          "tag": "c",
+          "content": "box 22"
+        },
+        {
+          "tag": "t",
+          "content": "021"
+        },
+        {
+          "tag": "h",
+          "content": "32"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "o",
+          "content": "u"
+        },
+        {
+          "tag": "v",
+          "content": "MSS/MSS"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "*T-Mss 1991-010"
+        },
+        {
+          "tag": "l",
+          "content": "myt42"
+        },
+        {
+          "tag": "i",
+          "content": "33433102626649"
+        },
+        {
+          "tag": "c",
+          "content": "box 23"
+        },
+        {
+          "tag": "t",
+          "content": "021"
+        },
+        {
+          "tag": "h",
+          "content": "32"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "o",
+          "content": "u"
+        },
+        {
+          "tag": "v",
+          "content": "MSS/MSS"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "*T-Mss 1991-010"
+        },
+        {
+          "tag": "l",
+          "content": "myt42"
+        },
+        {
+          "tag": "i",
+          "content": "33433102626656"
+        },
+        {
+          "tag": "c",
+          "content": "box 24"
+        },
+        {
+          "tag": "t",
+          "content": "021"
+        },
+        {
+          "tag": "h",
+          "content": "32"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "o",
+          "content": "u"
+        },
+        {
+          "tag": "v",
+          "content": "MSS/MSS"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "*T-Mss 1991-010"
+        },
+        {
+          "tag": "l",
+          "content": "myt42"
+        },
+        {
+          "tag": "i",
+          "content": "33433102626664"
+        },
+        {
+          "tag": "c",
+          "content": "box 25"
+        },
+        {
+          "tag": "t",
+          "content": "021"
+        },
+        {
+          "tag": "h",
+          "content": "32"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "o",
+          "content": "u"
+        },
+        {
+          "tag": "v",
+          "content": "MSS/MSS"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "*T-Mss 1991-010"
+        },
+        {
+          "tag": "l",
+          "content": "myt42"
+        },
+        {
+          "tag": "i",
+          "content": "33433102626672"
+        },
+        {
+          "tag": "c",
+          "content": "box 26"
+        },
+        {
+          "tag": "t",
+          "content": "021"
+        },
+        {
+          "tag": "h",
+          "content": "32"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "o",
+          "content": "u"
+        },
+        {
+          "tag": "v",
+          "content": "MSS/MSS"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "*T-Mss 1991-010"
+        },
+        {
+          "tag": "l",
+          "content": "myt42"
+        },
+        {
+          "tag": "i",
+          "content": "33433102626706"
+        },
+        {
+          "tag": "c",
+          "content": "box 27"
+        },
+        {
+          "tag": "t",
+          "content": "021"
+        },
+        {
+          "tag": "h",
+          "content": "32"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "o",
+          "content": "u"
+        },
+        {
+          "tag": "v",
+          "content": "MSS/MSS"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "*T-Mss 1991-010"
+        },
+        {
+          "tag": "l",
+          "content": "myt42"
+        },
+        {
+          "tag": "i",
+          "content": "33433102626698"
+        },
+        {
+          "tag": "c",
+          "content": "box 28"
+        },
+        {
+          "tag": "t",
+          "content": "021"
+        },
+        {
+          "tag": "h",
+          "content": "32"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "o",
+          "content": "u"
+        },
+        {
+          "tag": "v",
+          "content": "MSS/MSS"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "*T-Mss 1991-010"
+        },
+        {
+          "tag": "l",
+          "content": "myt42"
+        },
+        {
+          "tag": "i",
+          "content": "33433102626680"
+        },
+        {
+          "tag": "c",
+          "content": "box 29"
+        },
+        {
+          "tag": "t",
+          "content": "021"
+        },
+        {
+          "tag": "h",
+          "content": "32"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "o",
+          "content": "u"
+        },
+        {
+          "tag": "v",
+          "content": "MSS/MSS"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "*T-Mss 1991-010"
+        },
+        {
+          "tag": "l",
+          "content": "myt42"
+        },
+        {
+          "tag": "i",
+          "content": "33433102626839"
+        },
+        {
+          "tag": "c",
+          "content": "box 30"
+        },
+        {
+          "tag": "t",
+          "content": "021"
+        },
+        {
+          "tag": "h",
+          "content": "32"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "o",
+          "content": "u"
+        },
+        {
+          "tag": "v",
+          "content": "MSS/MSS"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "*T-Mss 1991-010"
+        },
+        {
+          "tag": "l",
+          "content": "myt42"
+        },
+        {
+          "tag": "i",
+          "content": "33433102626797"
+        },
+        {
+          "tag": "c",
+          "content": "box 31"
+        },
+        {
+          "tag": "t",
+          "content": "021"
+        },
+        {
+          "tag": "h",
+          "content": "32"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "o",
+          "content": "u"
+        },
+        {
+          "tag": "v",
+          "content": "MSS/MSS"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "*T-Mss 1991-010"
+        },
+        {
+          "tag": "l",
+          "content": "myt42"
+        },
+        {
+          "tag": "i",
+          "content": "33433102626805"
+        },
+        {
+          "tag": "c",
+          "content": "box 32"
+        },
+        {
+          "tag": "t",
+          "content": "021"
+        },
+        {
+          "tag": "h",
+          "content": "32"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "o",
+          "content": "u"
+        },
+        {
+          "tag": "v",
+          "content": "MSS/MSS"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "*T-Mss 1991-010"
+        },
+        {
+          "tag": "l",
+          "content": "myt42"
+        },
+        {
+          "tag": "i",
+          "content": "33433102626813"
+        },
+        {
+          "tag": "c",
+          "content": "box 33"
+        },
+        {
+          "tag": "t",
+          "content": "021"
+        },
+        {
+          "tag": "h",
+          "content": "32"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "o",
+          "content": "u"
+        },
+        {
+          "tag": "v",
+          "content": "MSS/MSS"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "*T-Mss 1991-010"
+        },
+        {
+          "tag": "l",
+          "content": "myt42"
+        },
+        {
+          "tag": "i",
+          "content": "33433102626821"
+        },
+        {
+          "tag": "c",
+          "content": "box 34"
+        },
+        {
+          "tag": "t",
+          "content": "021"
+        },
+        {
+          "tag": "h",
+          "content": "32"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "o",
+          "content": "u"
+        },
+        {
+          "tag": "v",
+          "content": "MSS/MSS"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "*T-Mss 1991-010"
+        },
+        {
+          "tag": "l",
+          "content": "myt42"
+        },
+        {
+          "tag": "i",
+          "content": "33433102626789"
+        },
+        {
+          "tag": "c",
+          "content": "box 35"
+        },
+        {
+          "tag": "t",
+          "content": "021"
+        },
+        {
+          "tag": "h",
+          "content": "32"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "o",
+          "content": "u"
+        },
+        {
+          "tag": "v",
+          "content": "MSS/MSS"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "*T-Mss 1991-010"
+        },
+        {
+          "tag": "l",
+          "content": "myt42"
+        },
+        {
+          "tag": "i",
+          "content": "33433102626748"
+        },
+        {
+          "tag": "c",
+          "content": "box 36"
+        },
+        {
+          "tag": "t",
+          "content": "021"
+        },
+        {
+          "tag": "h",
+          "content": "32"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "o",
+          "content": "u"
+        },
+        {
+          "tag": "v",
+          "content": "MSS/MSS"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "*T-Mss 1991-010"
+        },
+        {
+          "tag": "l",
+          "content": "myt42"
+        },
+        {
+          "tag": "i",
+          "content": "33433102626755"
+        },
+        {
+          "tag": "c",
+          "content": "box 37"
+        },
+        {
+          "tag": "t",
+          "content": "021"
+        },
+        {
+          "tag": "h",
+          "content": "32"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "o",
+          "content": "u"
+        },
+        {
+          "tag": "v",
+          "content": "MSS/MSS"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "*T-Mss 1991-010"
+        },
+        {
+          "tag": "l",
+          "content": "myt42"
+        },
+        {
+          "tag": "i",
+          "content": "33433102626763"
+        },
+        {
+          "tag": "c",
+          "content": "box 38"
+        },
+        {
+          "tag": "t",
+          "content": "021"
+        },
+        {
+          "tag": "h",
+          "content": "32"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "o",
+          "content": "u"
+        },
+        {
+          "tag": "v",
+          "content": "MSS/MSS"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "*T-Mss 1991-010"
+        },
+        {
+          "tag": "l",
+          "content": "myt42"
+        },
+        {
+          "tag": "i",
+          "content": "33433102626771"
+        },
+        {
+          "tag": "c",
+          "content": "box 39"
+        },
+        {
+          "tag": "t",
+          "content": "021"
+        },
+        {
+          "tag": "h",
+          "content": "32"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "o",
+          "content": "u"
+        },
+        {
+          "tag": "v",
+          "content": "MSS/MSS"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "*T-Mss 1991-010"
+        },
+        {
+          "tag": "l",
+          "content": "myt42"
+        },
+        {
+          "tag": "i",
+          "content": "33433102626714"
+        },
+        {
+          "tag": "c",
+          "content": "box 40"
+        },
+        {
+          "tag": "t",
+          "content": "021"
+        },
+        {
+          "tag": "h",
+          "content": "32"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "o",
+          "content": "u"
+        },
+        {
+          "tag": "v",
+          "content": "MSS/MSS"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "*T-Mss 1991-010"
+        },
+        {
+          "tag": "l",
+          "content": "myt42"
+        },
+        {
+          "tag": "i",
+          "content": "33433102626722"
+        },
+        {
+          "tag": "c",
+          "content": "box 41"
+        },
+        {
+          "tag": "t",
+          "content": "021"
+        },
+        {
+          "tag": "h",
+          "content": "32"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "o",
+          "content": "u"
+        },
+        {
+          "tag": "v",
+          "content": "MSS/MSS"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "*T-Mss 1991-010"
+        },
+        {
+          "tag": "l",
+          "content": "myt42"
+        },
+        {
+          "tag": "i",
+          "content": "33433102626730"
+        },
+        {
+          "tag": "c",
+          "content": "box 42"
+        },
+        {
+          "tag": "t",
+          "content": "021"
+        },
+        {
+          "tag": "h",
+          "content": "32"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "o",
+          "content": "u"
+        },
+        {
+          "tag": "v",
+          "content": "MSS/MSS"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "*T-Mss 1991-010"
+        },
+        {
+          "tag": "l",
+          "content": "myt42"
+        },
+        {
+          "tag": "i",
+          "content": "33433102626979"
+        },
+        {
+          "tag": "c",
+          "content": "box 43"
+        },
+        {
+          "tag": "t",
+          "content": "021"
+        },
+        {
+          "tag": "h",
+          "content": "32"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "o",
+          "content": "u"
+        },
+        {
+          "tag": "v",
+          "content": "MSS/MSS"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "*T-Mss 1991-010"
+        },
+        {
+          "tag": "l",
+          "content": "myt42"
+        },
+        {
+          "tag": "i",
+          "content": "33433102626987"
+        },
+        {
+          "tag": "c",
+          "content": "box 44"
+        },
+        {
+          "tag": "t",
+          "content": "021"
+        },
+        {
+          "tag": "h",
+          "content": "32"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "o",
+          "content": "u"
+        },
+        {
+          "tag": "v",
+          "content": "MSS/MSS"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "*T-Mss 1991-010"
+        },
+        {
+          "tag": "l",
+          "content": "myt42"
+        },
+        {
+          "tag": "i",
+          "content": "33433102626995"
+        },
+        {
+          "tag": "c",
+          "content": "box 45"
+        },
+        {
+          "tag": "t",
+          "content": "021"
+        },
+        {
+          "tag": "h",
+          "content": "32"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "o",
+          "content": "u"
+        },
+        {
+          "tag": "v",
+          "content": "MSS/MSS"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "*T-Mss 1991-010"
+        },
+        {
+          "tag": "l",
+          "content": "myt42"
+        },
+        {
+          "tag": "i",
+          "content": "33433102627001"
+        },
+        {
+          "tag": "c",
+          "content": "box 46"
+        },
+        {
+          "tag": "t",
+          "content": "021"
+        },
+        {
+          "tag": "h",
+          "content": "32"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "o",
+          "content": "u"
+        },
+        {
+          "tag": "v",
+          "content": "MSS/MSS"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "*T-Mss 1991-010"
+        },
+        {
+          "tag": "l",
+          "content": "myt42"
+        },
+        {
+          "tag": "i",
+          "content": "33433102626953"
+        },
+        {
+          "tag": "c",
+          "content": "box 47"
+        },
+        {
+          "tag": "t",
+          "content": "021"
+        },
+        {
+          "tag": "h",
+          "content": "32"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "o",
+          "content": "u"
+        },
+        {
+          "tag": "v",
+          "content": "MSS/MSS"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "*T-Mss 1991-010"
+        },
+        {
+          "tag": "l",
+          "content": "myt42"
+        },
+        {
+          "tag": "i",
+          "content": "33433102626961"
+        },
+        {
+          "tag": "c",
+          "content": "box 48"
+        },
+        {
+          "tag": "t",
+          "content": "021"
+        },
+        {
+          "tag": "h",
+          "content": "32"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "o",
+          "content": "u"
+        },
+        {
+          "tag": "v",
+          "content": "MSS/MSS"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "*T-Mss 1991-010"
+        },
+        {
+          "tag": "l",
+          "content": "myt42"
+        },
+        {
+          "tag": "i",
+          "content": "33433102626946"
+        },
+        {
+          "tag": "c",
+          "content": "box 49"
+        },
+        {
+          "tag": "t",
+          "content": "021"
+        },
+        {
+          "tag": "h",
+          "content": "32"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "o",
+          "content": "u"
+        },
+        {
+          "tag": "v",
+          "content": "MSS/MSS"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "*T-Mss 1991-010"
+        },
+        {
+          "tag": "l",
+          "content": "myt42"
+        },
+        {
+          "tag": "i",
+          "content": "33433102626912"
+        },
+        {
+          "tag": "c",
+          "content": "box 50"
+        },
+        {
+          "tag": "t",
+          "content": "021"
+        },
+        {
+          "tag": "h",
+          "content": "32"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "o",
+          "content": "u"
+        },
+        {
+          "tag": "v",
+          "content": "MSS/MSS"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "*T-Mss 1991-010"
+        },
+        {
+          "tag": "l",
+          "content": "myt42"
+        },
+        {
+          "tag": "i",
+          "content": "33433102626920"
+        },
+        {
+          "tag": "c",
+          "content": "box 51"
+        },
+        {
+          "tag": "t",
+          "content": "021"
+        },
+        {
+          "tag": "h",
+          "content": "32"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "o",
+          "content": "u"
+        },
+        {
+          "tag": "v",
+          "content": "MSS/MSS"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "*T-Mss 1991-010"
+        },
+        {
+          "tag": "l",
+          "content": "myt42"
+        },
+        {
+          "tag": "i",
+          "content": "33433102626938"
+        },
+        {
+          "tag": "c",
+          "content": "box 52"
+        },
+        {
+          "tag": "t",
+          "content": "021"
+        },
+        {
+          "tag": "h",
+          "content": "32"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "o",
+          "content": "u"
+        },
+        {
+          "tag": "v",
+          "content": "MSS/MSS"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "*T-Mss 1991-010"
+        },
+        {
+          "tag": "l",
+          "content": "myt42"
+        },
+        {
+          "tag": "i",
+          "content": "33433102626904"
+        },
+        {
+          "tag": "c",
+          "content": "box 53"
+        },
+        {
+          "tag": "t",
+          "content": "021"
+        },
+        {
+          "tag": "h",
+          "content": "32"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "o",
+          "content": "u"
+        },
+        {
+          "tag": "v",
+          "content": "MSS/MSS"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "*T-Mss 1991-010"
+        },
+        {
+          "tag": "l",
+          "content": "myt42"
+        },
+        {
+          "tag": "i",
+          "content": "33433108755749"
+        },
+        {
+          "tag": "c",
+          "content": "box 54"
+        },
+        {
+          "tag": "t",
+          "content": "021"
+        },
+        {
+          "tag": "h",
+          "content": "32"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "o",
+          "content": "u"
+        },
+        {
+          "tag": "v",
+          "content": "MSS/MSS"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "*T-Mss 1991-010"
+        },
+        {
+          "tag": "l",
+          "content": "myt42"
+        },
+        {
+          "tag": "i",
+          "content": "33433108755756"
+        },
+        {
+          "tag": "c",
+          "content": "box 55"
+        },
+        {
+          "tag": "t",
+          "content": "021"
+        },
+        {
+          "tag": "h",
+          "content": "32"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "o",
+          "content": "u"
+        },
+        {
+          "tag": "v",
+          "content": "MSS/MSS"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "*T-Mss 1991-010"
+        },
+        {
+          "tag": "l",
+          "content": "myt42"
+        },
+        {
+          "tag": "i",
+          "content": "33433108755764"
+        },
+        {
+          "tag": "c",
+          "content": "box 56"
+        },
+        {
+          "tag": "t",
+          "content": "021"
+        },
+        {
+          "tag": "h",
+          "content": "32"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "o",
+          "content": "u"
+        },
+        {
+          "tag": "v",
+          "content": "MSS/MSS"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "*T-Mss 1991-010"
+        },
+        {
+          "tag": "l",
+          "content": "myt42"
+        },
+        {
+          "tag": "i",
+          "content": "33433108755772"
+        },
+        {
+          "tag": "c",
+          "content": "box 57"
+        },
+        {
+          "tag": "t",
+          "content": "021"
+        },
+        {
+          "tag": "h",
+          "content": "32"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "o",
+          "content": "u"
+        },
+        {
+          "tag": "v",
+          "content": "MSS/MSS"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "*T-Mss 1991-010"
+        },
+        {
+          "tag": "l",
+          "content": "myt42"
+        },
+        {
+          "tag": "i",
+          "content": "33433108755780"
+        },
+        {
+          "tag": "c",
+          "content": "box 58"
+        },
+        {
+          "tag": "t",
+          "content": "021"
+        },
+        {
+          "tag": "h",
+          "content": "32"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "o",
+          "content": "u"
+        },
+        {
+          "tag": "v",
+          "content": "MSS/MSS"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "*T-Mss 1991-010"
+        },
+        {
+          "tag": "l",
+          "content": "myt42"
+        },
+        {
+          "tag": "i",
+          "content": "33433108755798"
+        },
+        {
+          "tag": "c",
+          "content": "box 59"
+        },
+        {
+          "tag": "t",
+          "content": "021"
+        },
+        {
+          "tag": "h",
+          "content": "32"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "o",
+          "content": "u"
+        },
+        {
+          "tag": "v",
+          "content": "MSS/MSS"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "*T-Mss 1991-010"
+        },
+        {
+          "tag": "l",
+          "content": "myt42"
+        },
+        {
+          "tag": "i",
+          "content": "33433108755806"
+        },
+        {
+          "tag": "c",
+          "content": "box 60"
+        },
+        {
+          "tag": "t",
+          "content": "021"
+        },
+        {
+          "tag": "h",
+          "content": "32"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "o",
+          "content": "u"
+        },
+        {
+          "tag": "v",
+          "content": "MSS/MSS"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "*T-Mss 1991-010"
+        },
+        {
+          "tag": "l",
+          "content": "myt42"
+        },
+        {
+          "tag": "i",
+          "content": "33433102626888"
+        },
+        {
+          "tag": "c",
+          "content": "box 61"
+        },
+        {
+          "tag": "t",
+          "content": "021"
+        },
+        {
+          "tag": "h",
+          "content": "32"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "o",
+          "content": "u"
+        },
+        {
+          "tag": "v",
+          "content": "MSS/MSS"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "*T-Mss 1991-010"
+        },
+        {
+          "tag": "l",
+          "content": "myt42"
+        },
+        {
+          "tag": "i",
+          "content": "33433102626870"
+        },
+        {
+          "tag": "c",
+          "content": "box 62"
+        },
+        {
+          "tag": "t",
+          "content": "021"
+        },
+        {
+          "tag": "h",
+          "content": "32"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "o",
+          "content": "u"
+        },
+        {
+          "tag": "v",
+          "content": "MSS/MSS"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "*T-Mss 1991-010"
+        },
+        {
+          "tag": "l",
+          "content": "myt42"
+        },
+        {
+          "tag": "i",
+          "content": "33433102626862"
+        },
+        {
+          "tag": "c",
+          "content": "box 63"
+        },
+        {
+          "tag": "t",
+          "content": "021"
+        },
+        {
+          "tag": "h",
+          "content": "32"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "o",
+          "content": "u"
+        },
+        {
+          "tag": "v",
+          "content": "MSS/MSS"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "*T-Mss 1991-010"
+        },
+        {
+          "tag": "l",
+          "content": "myt42"
+        },
+        {
+          "tag": "i",
+          "content": "33433102626896"
+        },
+        {
+          "tag": "c",
+          "content": "box 64"
+        },
+        {
+          "tag": "t",
+          "content": "021"
+        },
+        {
+          "tag": "h",
+          "content": "32"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "o",
+          "content": "u"
+        },
+        {
+          "tag": "v",
+          "content": "MSS/MSS"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "*T-Mss 1991-010"
+        },
+        {
+          "tag": "l",
+          "content": "myt42"
+        },
+        {
+          "tag": "i",
+          "content": "33433102625278"
+        },
+        {
+          "tag": "c",
+          "content": "box 65"
+        },
+        {
+          "tag": "t",
+          "content": "021"
+        },
+        {
+          "tag": "h",
+          "content": "32"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "o",
+          "content": "u"
+        },
+        {
+          "tag": "v",
+          "content": "MSS/MSS"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "*T-Mss 1991-010"
+        },
+        {
+          "tag": "l",
+          "content": "myt42"
+        },
+        {
+          "tag": "i",
+          "content": "33433102625260"
+        },
+        {
+          "tag": "c",
+          "content": "box 66"
+        },
+        {
+          "tag": "t",
+          "content": "021"
+        },
+        {
+          "tag": "h",
+          "content": "32"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "o",
+          "content": "u"
+        },
+        {
+          "tag": "v",
+          "content": "MSS/MSS"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "*T-Mss 1991-010"
+        },
+        {
+          "tag": "l",
+          "content": "myt42"
+        },
+        {
+          "tag": "i",
+          "content": "33433102625252"
+        },
+        {
+          "tag": "c",
+          "content": "box 67"
+        },
+        {
+          "tag": "t",
+          "content": "021"
+        },
+        {
+          "tag": "h",
+          "content": "32"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "o",
+          "content": "u"
+        },
+        {
+          "tag": "v",
+          "content": "MSS/MSS"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "*T-Mss 1991-010"
+        },
+        {
+          "tag": "l",
+          "content": "myt42"
+        },
+        {
+          "tag": "i",
+          "content": "33433102625286"
+        },
+        {
+          "tag": "c",
+          "content": "box 68"
+        },
+        {
+          "tag": "t",
+          "content": "021"
+        },
+        {
+          "tag": "h",
+          "content": "32"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "o",
+          "content": "u"
+        },
+        {
+          "tag": "v",
+          "content": "MSS/MSS"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "*T-Mss 1991-010"
+        },
+        {
+          "tag": "l",
+          "content": "myt42"
+        },
+        {
+          "tag": "i",
+          "content": "33433108755731"
+        },
+        {
+          "tag": "c",
+          "content": "tube 69"
+        },
+        {
+          "tag": "t",
+          "content": "021"
+        },
+        {
+          "tag": "h",
+          "content": "32"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "o",
+          "content": "u"
+        },
+        {
+          "tag": "v",
+          "content": "MSS/MSS"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "949",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "*T-Mss 1991-010"
+        },
+        {
+          "tag": "l",
+          "content": "myt42"
+        },
+        {
+          "tag": "i",
+          "content": "33433108755723"
+        },
+        {
+          "tag": "c",
+          "content": "tube 70"
+        },
+        {
+          "tag": "t",
+          "content": "021"
+        },
+        {
+          "tag": "h",
+          "content": "32"
+        },
+        {
+          "tag": "s",
+          "content": "-"
+        },
+        {
+          "tag": "o",
+          "content": "u"
+        },
+        {
+          "tag": "v",
+          "content": "MSS/MSS"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "910",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "RL"
+        }
+      ]
+    },
+    {
+      "fieldTag": "_",
+      "marcTag": null,
+      "ind1": null,
+      "ind2": null,
+      "content": "00000npca 2201453Ia 4500",
+      "subfields": null
+    }
+  ]
+}

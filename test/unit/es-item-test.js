@@ -185,10 +185,11 @@ describe('EsItem', function () {
 
   describe('shelfMark_sort', function () {
     describe('for an item with callNumber', function () {
-      it('should return the call number', function () {
+      it('should return the call number', async function () {
         const record = new SierraItem(require('../fixtures/item-17145801.json'))
         const esItem = new EsItem(record)
-        expect(esItem.shelfMark_sort()).to.equal(
+        const v = await esItem.shelfMark_sort()
+        expect(v).to.equal(
           'a*DM (Esprit des Journaux, françois et etrangers) no. 000012 (1784)'
         )
       })

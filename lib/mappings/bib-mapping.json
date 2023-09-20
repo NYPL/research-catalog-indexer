@@ -328,7 +328,7 @@
       }
     ]
   },
-  "genreFormLiteral": {
+  "genreForm": {
     "paths": [
       {
         "marc": "655",
@@ -341,7 +341,8 @@
           "y",
           "z"
         ],
-        "description": "Genre/Form literal"
+        "description": "Genre/Form literal",
+        "subfieldJoiner": " – "
       }
     ]
   },

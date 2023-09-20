@@ -414,7 +414,7 @@ describe('EsBib', function () {
           noteType: 'Biography'
         },
         {
-          label: 'Finding aid:',
+          label: 'Finding aid',
           type: 'bf:Note',
           noteType: 'Indexes/Finding Aids'
         },
@@ -1044,6 +1044,26 @@ describe('EsBib', function () {
     it('dateEndYear should return year as int', () => {
       const bib = new EsBib(new SierraBib(require('../fixtures/bib-11606020.json')))
       expect(bib.dateEndYear()).to.deep.equal([2000])
+    })
+  })
+
+  describe('genreForm', () => {
+    it('formats genreForm with " - " joiner', () => {
+      const bib = new EsBib(new SierraBib(require('../fixtures/bib-notes.json')))
+      // Note that these are not plain hyphens; These are en-dashes
+      // ( https://www.compart.com/en/unicode/U+2013 )
+      expect(bib.genreForm()).to.deep.equal([
+        'Portrait photographs – 1930-1989.',
+        'Group portraits – 1930-1989.',
+        'Cityscape photographs – 1930-1989.',
+        'Legal photographs – 1930-1989.',
+        'Fashion photographs – 1930-1989.',
+        'Photographic prints – 1930-1989.',
+        'Gelatin silver prints – 1930-1989.',
+        'Dye coupler prints – 1940-1989.',
+        'Panoramic photographs – 1940-1989.',
+        'Hand coloring.'
+      ])
     })
   })
 

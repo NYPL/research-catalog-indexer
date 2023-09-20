@@ -162,18 +162,21 @@ describe('EsCheckinCardItem', function () {
   })
 
   describe('shelfMark_sort', () => {
-    it('returns sortable form of shelfMark when available', () => {
-      expect(checkinCardItems[0].shelfMark_sort()).to.equal('aSc Ser.-M .N000489')
+    it('returns sortable form of shelfMark when available', async () => {
+      const v = await checkinCardItems[0].shelfMark_sort()
+      expect(v).to.equal('aSc Ser.-M .N000489')
     })
 
-    it('returns sortable form of uri when no shelfmark available', () => {
+    it('returns sortable form of uri when no shelfmark available', async () => {
       const fakeHolding = {
         id: '1234',
         checkInCards: [{}, {}]
       }
       const items = EsCheckinCardItem.fromSierraHolding(new SierraHolding(fakeHolding))
-      expect(items[0].shelfMark_sort()).to.equal('bi-h1234-0')
-      expect(items[1].shelfMark_sort()).to.equal('bi-h1234-1')
+      const v0 = await items[0].shelfMark_sort()
+      const v1 = await items[1].shelfMark_sort()
+      expect(v0).to.equal('bi-h1234-0')
+      expect(v1).to.equal('bi-h1234-1')
     })
   })
 
