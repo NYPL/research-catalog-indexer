@@ -117,4 +117,18 @@ describe('utils', () => {
       ])
     })
   })
+
+  describe('truncate', () => {
+    it('returns original value if unable to truncate', () => {
+      expect(utils.truncate('')).to.equal('')
+      expect(utils.truncate(false)).to.equal(false)
+      expect(utils.truncate(undefined)).to.equal(undefined)
+    })
+
+    it('truncates strings to length', () => {
+      expect(utils.truncate('123456789', 4)).to.equal('123…')
+      expect(utils.truncate('123456789', 4)).to.have.lengthOf(4)
+      expect(utils.truncate('123456789', 40)).to.equal('123456789')
+    })
+  })
 })
