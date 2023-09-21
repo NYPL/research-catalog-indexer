@@ -28,7 +28,7 @@ data "archive_file" "lambda_zip" {
 
 # Upload the zipped app to S3:
 resource "aws_s3_object" "uploaded_zip" {
-  bucket = "nypl-travis-builds-${var.environment}"
+  bucket = "nypl-github-actions-builds-${var.environment}"
   key    = "research-catalog-indexer-${var.environment}-dist.zip"
   acl    = "private"
   source = data.archive_file.lambda_zip.output_path
@@ -36,7 +36,7 @@ resource "aws_s3_object" "uploaded_zip" {
 }
 # Create the lambda:
 resource "aws_lambda_function" "lambda_instance" {
-  description   = "Serves endpoints relating to locations services"
+  description   = "Indexes bib data for the DiscoveryAPI, which powers the Research Catalog"
   function_name = "ResearchCatalogIndexer-${var.environment}"
   handler       = "index.handler"
   memory_size   = 512

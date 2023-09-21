@@ -269,6 +269,24 @@ describe('EsBib', function () {
         }
       ])
     })
+
+    it('should use bf:Lccn', () => {
+      const record = new SierraBib(require('../fixtures/bib-11806560.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.identifierV2().find((identifier) => identifier.type === 'bf:Lccn').value).to.deep.equal('91060775')
+    })
+
+    it('should use bf:Isbn', function () {
+      const record = new SierraBib(require('../fixtures/bib-11806560.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.identifierV2().find((identifier) => identifier.type === 'bf:Isbn').value).to.deep.equal('0935661204 (tr)')
+    })
+
+    it('should use bf:Lccn', () => {
+      const record = new SierraBib(require('../fixtures/bib-11806560.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.identifierV2().find((identifier) => identifier.type === 'bf:Lccn').value).to.deep.equal('91060775')
+    })
   })
 
   describe('idIsbn', () => {
@@ -1080,22 +1098,44 @@ describe('EsBib', function () {
       bib = new EsBib(sierraBib)
     })
 
-    it('items() returns array of items', () => {
-      expect(bib.items()).to.be.a('array')
-      expect(bib.items()).to.have.lengthOf(2)
-      expect(bib.items()[0].idBarcode()).to.deep.equal(['33433107664710'])
+    it('items() returns array of items', async () => {
+      const items = await bib.items()
+      expect(items).to.be.a('array')
+      expect(items).to.have.lengthOf(2)
+      expect(items[0].idBarcode()).to.deep.equal(['33433107664710'])
     })
 
-    it('numItemsTotal()', () => {
-      expect(bib.numItemsTotal()).to.deep.equal([2])
+    it('numItemsTotal()', async () => {
+      const itemsCount = await bib.numItemsTotal()
+      expect(itemsCount).to.deep.equal([2])
     })
 
-    it('numCheckinCardItems()', () => {
-      expect(bib.numCheckinCardItems()).to.deep.equal([0])
+    it('numCheckinCardItems()', async () => {
+      const numCheckinCards = await bib.numCheckinCardItems()
+      expect(numCheckinCards).to.deep.equal([0])
     })
 
-    it('numItemVolumesParsed()', () => {
-      expect(bib.numItemVolumesParsed()).to.deep.equal([1])
+    it('numItemVolumesParsed()', async () => {
+      const numParsed = await bib.numItemVolumesParsed()
+      expect(numParsed).to.deep.equal([1])
+    })
+
+    it('sorts by shelfMark_sort()', async () => {
+      let items = await bib.items()
+      let uris = await Promise.all(items.map((i) => i.uri()))
+      expect(uris[0]).to.equal('i10003973')
+      expect(uris[1]).to.equal('i17145801')
+
+      // Reverse the items stored in the bib:
+      bib.bib._items.reverse()
+      items = await bib.items()
+      uris = await Promise.all(items.map((i) => i.uri()))
+      // Verify order has been reversed:
+      expect(bib.bib._items[0].id).to.equal('17145801')
+      expect(bib.bib._items[1].id).to.equal('10003973')
+      // Verify they're still returned ordered by shelfMark:
+      expect(uris[0]).to.equal('i10003973')
+      expect(uris[1]).to.equal('i17145801')
     })
   })
 })
