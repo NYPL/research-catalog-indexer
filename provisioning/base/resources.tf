@@ -36,7 +36,7 @@ resource "aws_s3_object" "uploaded_zip" {
 }
 # Create the lambda:
 resource "aws_lambda_function" "lambda_instance" {
-  description   = "Serves endpoints relating to locations services"
+  description   = "Indexes bib data for the DiscoveryAPI, which powers the Research Catalog"
   function_name = "ResearchCatalogIndexer-${var.environment}"
   handler       = "index.handler"
   memory_size   = 512
