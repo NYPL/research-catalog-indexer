@@ -43,7 +43,7 @@ describe('aeonn-urls', () => {
 
     const url = await aeonUrlForItem(esItem)
     // Note no esBib is associated, so fields are unnaturally light:
-    expect(url).to.eq('https://specialcollections.nypl.org/aeon/Aeon.dll?Action=10&CallNumber=Sc+Visual+DVD-362+Disc+2&Form=30&ItemInfo1=Use+in+library&ItemISxN=i375287097&ItemNumber=33433124443791&Location=Schomburg+Moving+Image+and+Recorded+Sound&Site=SCHMIRS')
+    expect(url).to.eq('https://specialcollections.nypl.org/aeon/Aeon.dll?Action=10&CallNumber=Sc+Visual+DVD-362&Form=30&ItemInfo1=Use+in+library&ItemISxN=i375287097&ItemNumber=33433124443791&ItemVolume=Disc+2&Location=Schomburg+Moving+Image+and+Recorded+Sound&Site=SCHMIRS')
   })
 
   it('returns Aeon URL with metadata fields pulled from bib', async () => {
@@ -58,7 +58,7 @@ describe('aeonn-urls', () => {
     expect(baseUrl).to.equal('https://specialcollections.nypl.org/aeon/Aeon.dll')
     expect(parseQueryString(queryString)).to.deep.equal({
       Action: '10',
-      CallNumber: 'Sc Visual DVD-362 Disc 2',
+      CallNumber: 'Sc Visual DVD-362',
       Date: '2012',
       Form: '30',
       Genre: 'DVD',
@@ -69,6 +69,7 @@ describe('aeonn-urls', () => {
       ItemNumber: '33433124443791',
       ItemPlace: 'New York',
       ItemPublisher: 'Schomburg Center for Research in Black Culture',
+      ItemVolume: 'Disc 2',
       ReferenceNumber: 'b220279536',
       Site: 'SCHMIRS',
       Title: 'Documenting history in your own backyard : a symposium for archiving & preserving hip-hop culture'
@@ -78,6 +79,8 @@ describe('aeonn-urls', () => {
   it('encodes diacritics', async () => {
     const sierraItem = new SierraItem(require('../fixtures/item-37528709.json'))
     const sierraBib = new SierraBib({
+      nyplSource: 'sierra-nypl',
+      id: '1234',
       varFields: [
         {
           marcTag: '245',
@@ -95,7 +98,7 @@ describe('aeonn-urls', () => {
     const esItem = new EsItem(sierraItem, new EsBib(sierraBib))
 
     const url = await aeonUrlForItem(esItem)
-    expect(url).to.eq('https://specialcollections.nypl.org/aeon/Aeon.dll?Action=10&CallNumber=Sc+Visual+DVD-362+Disc+2&Form=30&ItemInfo1=Use+in+library&ItemInfo3=https%3A%2F%2Fcatalog.nypl.org%2Frecord%3Dundefined&ItemISxN=i375287097&ItemNumber=33433124443791&Location=Schomburg+Moving+Image+and+Recorded+Sound&Site=SCHMIRS&Title=Token1+T%C3%B6ken2+Tok%C3%A9n3+Toke%C3%B14+Token5')
+    expect(url).to.eq('https://specialcollections.nypl.org/aeon/Aeon.dll?Action=10&CallNumber=Sc+Visual+DVD-362&Form=30&ItemInfo1=Use+in+library&ItemInfo3=https%3A%2F%2Fcatalog.nypl.org%2Frecord%3Db1234&ItemISxN=i375287097&ItemNumber=33433124443791&ItemVolume=Disc+2&Location=Schomburg+Moving+Image+and+Recorded+Sound&ReferenceNumber=b12348&Site=SCHMIRS&Title=Token1+T%C3%B6ken2+Tok%C3%A9n3+Toke%C3%B14+Token5')
 
     const [, queryString] = url.split('?')
     expect(parseQueryString(queryString).Title).to.equal(
