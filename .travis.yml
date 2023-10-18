@@ -1,8 +1,0 @@
-dist: focal
-language: node_js
-install:
-- npm i
-jobs:
-  include:
-  - stage: test
-    script: npm test
