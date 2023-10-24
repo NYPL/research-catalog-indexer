@@ -1,0 +1,719 @@
+{
+  "id": "99122517373506421",
+  "nyplSource": "recap-pul",
+  "nyplType": "bib",
+  "updatedDate": "2023-10-06T04:59:11-04:00",
+  "createdDate": "2023-10-06T01:02:31-04:00",
+  "deletedDate": null,
+  "deleted": false,
+  "locations": null,
+  "suppressed": false,
+  "lang": {
+    "code": "0chi",
+    "name": null
+  },
+  "title": "880-01 Xinjiang dang wei gong zuo ji shi / Zhong gong Xinjiang Weiwu'er Zizhiqu wei yuan hui ban gong ting, Zhong gong Xinjiang Weiwu'er Zizhiqu wei yuan hui dang shi yan jiu shi bian.",
+  "author": null,
+  "materialType": {
+    "code": "a",
+    "value": "BOOK/TEXT"
+  },
+  "bibLevel": {
+    "code": "s",
+    "value": "SERIAL"
+  },
+  "publishYear": 2010,
+  "catalogDate": null,
+  "country": null,
+  "normTitle": null,
+  "normAuthor": null,
+  "standardNumbers": [],
+  "controlNumber": "",
+  "fixedFields": {
+    "24": {
+      "label": "Language",
+      "value": "0chi",
+      "display": null
+    },
+    "25": {
+      "label": "Skip",
+      "value": "0",
+      "display": null
+    },
+    "26": {
+      "label": "Location",
+      "value": "rcpul",
+      "display": null
+    },
+    "27": {
+      "label": "COPIES",
+      "value": "1",
+      "display": null
+    },
+    "28": {
+      "label": "Cat. Date",
+      "value": null,
+      "display": null
+    },
+    "29": {
+      "label": "Bib Level",
+      "value": "s",
+      "display": "SERIAL"
+    },
+    "30": {
+      "label": "Material Type",
+      "value": "a",
+      "display": "BOOK/TEXT"
+    },
+    "31": {
+      "label": "Bib Code 3",
+      "value": null,
+      "display": null
+    },
+    "80": {
+      "label": "Record Type",
+      "value": "b",
+      "display": null
+    },
+    "81": {
+      "label": "Record Number",
+      "value": "99122517373506421",
+      "display": null
+    },
+    "83": {
+      "label": "Created Date",
+      "value": null,
+      "display": null
+    },
+    "84": {
+      "label": "Updated Date",
+      "value": "2023-10-06T04:59:11Z",
+      "display": null
+    },
+    "85": {
+      "label": "No. of Revisions",
+      "value": "1",
+      "display": null
+    },
+    "86": {
+      "label": "Agency",
+      "value": "6",
+      "display": null
+    },
+    "98": {
+      "label": "PDATE",
+      "value": null,
+      "display": null
+    },
+    "107": {
+      "label": "MARC Type",
+      "value": " ",
+      "display": null
+    }
+  },
+  "varFields": [
+    {
+      "fieldTag": null,
+      "marcTag": "035",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "(NjP)12251737-princetondb"
+        }
+      ]
+    },
+    {
+      "fieldTag": null,
+      "marcTag": "035",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "(OCoLC)on1332986305"
+        }
+      ]
+    },
+    {
+      "fieldTag": null,
+      "marcTag": "035",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "(NjP)Voyager12251737"
+        }
+      ]
+    },
+    {
+      "fieldTag": null,
+      "marcTag": "040",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "PUL"
+        },
+        {
+          "tag": "b",
+          "content": "eng"
+        },
+        {
+          "tag": "e",
+          "content": "rda"
+        },
+        {
+          "tag": "c",
+          "content": "PUL"
+        }
+      ]
+    },
+    {
+      "fieldTag": null,
+      "marcTag": "043",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "a-cc-su"
+        }
+      ]
+    },
+    {
+      "fieldTag": null,
+      "marcTag": "050",
+      "ind1": " ",
+      "ind2": "4",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "DS793.S62"
+        },
+        {
+          "tag": "b",
+          "content": "X5643"
+        }
+      ]
+    },
+    {
+      "fieldTag": null,
+      "marcTag": "245",
+      "ind1": "0",
+      "ind2": "0",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "880-01"
+        },
+        {
+          "tag": "a",
+          "content": "Xinjiang dang wei gong zuo ji shi /"
+        },
+        {
+          "tag": "c",
+          "content": "Zhong gong Xinjiang Weiwu'er Zizhiqu wei yuan hui ban gong ting, Zhong gong Xinjiang Weiwu'er Zizhiqu wei yuan hui dang shi yan jiu shi bian."
+        }
+      ]
+    },
+    {
+      "fieldTag": null,
+      "marcTag": "880",
+      "ind1": "0",
+      "ind2": "0",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "245-01"
+        },
+        {
+          "tag": "a",
+          "content": "新疆党委工作纪事 /"
+        },
+        {
+          "tag": "c",
+          "content": "中共新疆维吾尔自治区委员会办公厅, 中共新疆维吾尔自治区委员会党史研究室编."
+        }
+      ]
+    },
+    {
+      "fieldTag": null,
+      "marcTag": "264",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "880-02"
+        },
+        {
+          "tag": "a",
+          "content": "Wulumuqi :"
+        },
+        {
+          "tag": "b",
+          "content": "Xinjiang ren min chu ban she,"
+        },
+        {
+          "tag": "c",
+          "content": "2010-"
+        }
+      ]
+    },
+    {
+      "fieldTag": null,
+      "marcTag": "880",
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "264-02"
+        },
+        {
+          "tag": "a",
+          "content": "乌鲁木齐 :"
+        },
+        {
+          "tag": "b",
+          "content": "新疆人民出版社,"
+        },
+        {
+          "tag": "c",
+          "content": "2010-"
+        }
+      ]
+    },
+    {
+      "fieldTag": null,
+      "marcTag": "300",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "volumes ;"
+        },
+        {
+          "tag": "c",
+          "content": "29 cm"
+        }
+      ]
+    },
+    {
+      "fieldTag": null,
+      "marcTag": "310",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Annual"
+        }
+      ]
+    },
+    {
+      "fieldTag": null,
+      "marcTag": "336",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "text"
+        },
+        {
+          "tag": "b",
+          "content": "txt"
+        },
+        {
+          "tag": "2",
+          "content": "rdacontent"
+        }
+      ]
+    },
+    {
+      "fieldTag": null,
+      "marcTag": "337",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "unmediated"
+        },
+        {
+          "tag": "b",
+          "content": "n"
+        },
+        {
+          "tag": "2",
+          "content": "rdamedia"
+        }
+      ]
+    },
+    {
+      "fieldTag": null,
+      "marcTag": "338",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "volume"
+        },
+        {
+          "tag": "b",
+          "content": "nc"
+        },
+        {
+          "tag": "2",
+          "content": "rdacarrier"
+        }
+      ]
+    },
+    {
+      "fieldTag": null,
+      "marcTag": "610",
+      "ind1": "2",
+      "ind2": "0",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "880-03"
+        },
+        {
+          "tag": "a",
+          "content": "Zhong gong Xinjiang Weiwuer Zizhiqu wei yuan hui"
+        },
+        {
+          "tag": "x",
+          "content": "Party work"
+        },
+        {
+          "tag": "v",
+          "content": "Periodicals."
+        }
+      ]
+    },
+    {
+      "fieldTag": null,
+      "marcTag": "880",
+      "ind1": "2",
+      "ind2": "4",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "610-03"
+        },
+        {
+          "tag": "a",
+          "content": "中共新疆维吾尔自治区委员会"
+        },
+        {
+          "tag": "x",
+          "content": "Party work"
+        },
+        {
+          "tag": "v",
+          "content": "Periodicals."
+        }
+      ]
+    },
+    {
+      "fieldTag": null,
+      "marcTag": "651",
+      "ind1": " ",
+      "ind2": "0",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Xinjiang Uygur Zizhiqu (China)"
+        },
+        {
+          "tag": "x",
+          "content": "Politics and government"
+        },
+        {
+          "tag": "y",
+          "content": "21st century"
+        },
+        {
+          "tag": "v",
+          "content": "Periodicals."
+        }
+      ]
+    },
+    {
+      "fieldTag": null,
+      "marcTag": "655",
+      "ind1": " ",
+      "ind2": "7",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Periodicals."
+        },
+        {
+          "tag": "2",
+          "content": "lcgft"
+        }
+      ]
+    },
+    {
+      "fieldTag": null,
+      "marcTag": "710",
+      "ind1": "2",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "880-04"
+        },
+        {
+          "tag": "a",
+          "content": "Zhong gong Xinjiang Weiwuer Zizhiqu wei yuan hui."
+        },
+        {
+          "tag": "b",
+          "content": "Ban gong ting,"
+        },
+        {
+          "tag": "e",
+          "content": "editor."
+        }
+      ]
+    },
+    {
+      "fieldTag": null,
+      "marcTag": "880",
+      "ind1": "2",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "710-04"
+        },
+        {
+          "tag": "a",
+          "content": "中共新疆维吾尔自治区委员会."
+        },
+        {
+          "tag": "b",
+          "content": "办公厅,"
+        },
+        {
+          "tag": "e",
+          "content": "editor."
+        }
+      ]
+    },
+    {
+      "fieldTag": null,
+      "marcTag": "710",
+      "ind1": "2",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "880-05"
+        },
+        {
+          "tag": "a",
+          "content": "Zhong gong Xinjiang Weiwuer Zizhiqu wei yuan hui."
+        },
+        {
+          "tag": "b",
+          "content": "Dang shi yan jiu shi,"
+        },
+        {
+          "tag": "e",
+          "content": "editor."
+        }
+      ]
+    },
+    {
+      "fieldTag": null,
+      "marcTag": "880",
+      "ind1": "2",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "710-05"
+        },
+        {
+          "tag": "a",
+          "content": "中共新疆维吾尔自治区委员会."
+        },
+        {
+          "tag": "b",
+          "content": "党史研究室,"
+        },
+        {
+          "tag": "e",
+          "content": "editor."
+        }
+      ]
+    },
+    {
+      "fieldTag": null,
+      "marcTag": "880",
+      "ind1": "0",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "588-00"
+        },
+        {
+          "tag": "a",
+          "content": "2014 (2015年10月); title from title page."
+        }
+      ]
+    },
+    {
+      "fieldTag": null,
+      "marcTag": "902",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "960035005"
+        },
+        {
+          "tag": "w",
+          "content": "original"
+        },
+        {
+          "tag": "1",
+          "content": "20220624152750.0"
+        }
+      ]
+    },
+    {
+      "fieldTag": null,
+      "marcTag": "904",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "ww"
+        },
+        {
+          "tag": "b",
+          "content": "o"
+        },
+        {
+          "tag": "h",
+          "content": "m"
+        },
+        {
+          "tag": "c",
+          "content": "t"
+        },
+        {
+          "tag": "e",
+          "content": "20210111"
+        }
+      ]
+    },
+    {
+      "fieldTag": null,
+      "marcTag": "914",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "(OCoLC)on1332986305"
+        },
+        {
+          "tag": "b",
+          "content": "OCoLC"
+        },
+        {
+          "tag": "c",
+          "content": "replace"
+        },
+        {
+          "tag": "d",
+          "content": "11172022"
+        },
+        {
+          "tag": "e",
+          "content": "processed"
+        },
+        {
+          "tag": "f",
+          "content": "1332986305"
+        }
+      ]
+    },
+    {
+      "fieldTag": null,
+      "marcTag": "001",
+      "ind1": null,
+      "ind2": null,
+      "content": "SCSB-14574969",
+      "subfields": null
+    },
+    {
+      "fieldTag": null,
+      "marcTag": "005",
+      "ind1": null,
+      "ind2": null,
+      "content": "20221219235718.0",
+      "subfields": null
+    },
+    {
+      "fieldTag": null,
+      "marcTag": "008",
+      "ind1": null,
+      "ind2": null,
+      "content": "220624c20109999cc ar p       0    0chi d",
+      "subfields": null
+    },
+    {
+      "fieldTag": "_",
+      "marcTag": null,
+      "ind1": null,
+      "ind2": null,
+      "content": "02456nas a2200373 i 4500",
+      "subfields": null
+    }
+  ]
+}

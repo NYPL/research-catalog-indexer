@@ -29,6 +29,13 @@ describe('utils/locations', () => {
       expect(locationHasResearchCenterPrefix('mal')).to.equal(true)
       expect(locationHasResearchCenterPrefix('sc1234')).to.equal(true)
       expect(locationHasResearchCenterPrefix('pathispartcanbeanything')).to.equal(true)
+      expect(locationHasResearchCenterPrefix('rcwhatever')).to.equal(true)
+    })
+
+    it('returns false for not-Research prefixed location ids', () => {
+      expect(locationHasResearchCenterPrefix('zzz')).to.equal(false)
+      expect(locationHasResearchCenterPrefix('')).to.equal(false)
+      expect(locationHasResearchCenterPrefix('aga01')).to.equal(false)
     })
   })
 })
