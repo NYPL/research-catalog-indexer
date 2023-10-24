@@ -137,4 +137,57 @@ describe('SierraItem', function () {
       })
     })
   })
+
+  describe('getIsResearchWithRationale', () => {
+    it('returns true for partner items', () => {
+      const item = new SierraItem(require('../fixtures/item-pul-189241.json'))
+      expect(item.getIsResearchWithRationale()).to.deep.equal({
+        isResearch: true,
+        rationale: 'Is partner record'
+      })
+    })
+
+    it('returns true for items with locations tagged Research in NYPL-Core', () => {
+      const item = new SierraItem(require('../fixtures/item-10003973.json'))
+      expect(item.getIsResearchWithRationale()).to.deep.equal({
+        isResearch: true,
+        rationale: 'Has research location'
+      })
+    })
+
+    it('returns true for items with rc location that is not yet tagged Research in NYPL-Core', () => {
+      const itemData = JSON.parse(JSON.stringify(require('../fixtures/item-10003973.json')))
+      itemData.location.code = 'rc-new-location-id'
+      const item = new SierraItem(itemData)
+      expect(item.getIsResearchWithRationale()).to.deep.equal({
+        isResearch: true,
+        rationale: 'Has likely Research location: rc-new-location-id'
+      })
+    })
+
+    it('returns true for items with Ressearch item types', () => {
+      const item = new SierraItem({
+        id: '1234',
+        nyplSource: 'sierra-nypl',
+        fixedFields: [{ label: 'Item Type', value: '6' }]
+      })
+      expect(item.getIsResearchWithRationale()).to.deep.equal({
+        isResearch: true,
+        rationale: 'Item type 6 implies research'
+      })
+    })
+
+    it('returns false for items that fail all Research checks', () => {
+      const item = new SierraItem({
+        id: '1234',
+        nyplSource: 'sierra-nypl',
+        location: { code: 'zzzzz' },
+        fixedFields: [{ label: 'Item Type', value: '123' }]
+      })
+      expect(item.getIsResearchWithRationale()).to.deep.equal({
+        isResearch: false,
+        rationale: 'Location (zzzzz) and Item Type (123) collectionTypes are not Research'
+      })
+    })
+  })
 })
