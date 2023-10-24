@@ -460,6 +460,13 @@ describe('EsBib', function () {
         { value: 'parallel for 545 a ', index: 6, fieldName: 'note' }
       ])
     })
+
+    it('excludes notes with 1st indicator 0', () => {
+      const record = new SierraBib(require('../fixtures/bib-pul-99122517373506421.json'))
+      const esBib = new EsBib(record)
+      // This record has a single note with 1st indicator '0', so it is excluded:
+      expect(esBib.note()).to.equal(null)
+    })
   })
   describe('placeOfPublication', () => {
     it('should return array with placeOfPublication', function () {
