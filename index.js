@@ -3,6 +3,7 @@ const eventDecoder = require('./lib/event-decoder')
 const elastic = require('./lib/elastic-search/requests')
 const { suppressBibs } = require('./lib/utils/suppressBibs')
 const { buildEsDocument } = require('./lib/build-es-document')
+const { truncate } = require('./lib/utils')
 
 /**
  * Main lambda handler receiving Bib, Item, and Holding events
@@ -20,7 +21,9 @@ const handler = async (event, context, callback) => {
     if (recordsToIndex.length) {
       await elastic.writeRecords(recordsToIndex)
 
-      message = `Wrote ${recordsToIndex.length} doc(s)`
+      // Log out a summary of records updated:
+      const summary = truncate(recordsToIndex.map((record) => record.uri).join(','), 100)
+      message = `Wrote ${recordsToIndex.length} doc(s): ${summary}`
     }
 
     if (recordsToDelete.length) {
