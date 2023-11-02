@@ -15,26 +15,7 @@ const handler = async (event, context, callback) => {
 
     logger.info(`Handling ${decodedEvent.type} event: ${decodedEvent.records.map((r) => `${r.nyplSource || ''}/${r.id}`).join(', ')}`)
 
-    const { recordsToIndex, recordsToDelete } = await buildEsDocument(decodedEvent)
-
-    let message = ''
-    if (recordsToIndex.length) {
-      await elastic.writeRecords(recordsToIndex)
-
-      // Log out a summary of records updated:
-      const summary = truncate(recordsToIndex.map((record) => record.uri).join(','), 100)
-      message = `Wrote ${recordsToIndex.length} doc(s): ${summary}`
-    }
-
-    if (recordsToDelete.length) {
-      await suppressBibs(recordsToDelete)
-
-      message += `Deleted ${recordsToDelete.length} doc(s)`
-    }
-
-    if (!message) message = 'Nothing to do.'
-
-    logger.info(message)
+    const { message } = await processRecords(decodedEvent.type, decodedEvent.records)
 
     callback(null, message)
   } catch (e) {
@@ -43,4 +24,44 @@ const handler = async (event, context, callback) => {
   }
 }
 
-module.exports = { handler }
+const processRecords = async (type, records, options = {}) => {
+  options = Object.assign({
+    dryrun: false
+  }, options)
+
+  const { recordsToIndex, recordsToDelete } = await buildEsDocument({ type, records })
+
+  const messages = []
+
+  if (recordsToIndex.length) {
+    if (options.dryrun) {
+      console.log(`DRYRUN: Skipping writing ${recordsToIndex.length} records`)
+    } else {
+      await elastic.writeRecords(recordsToIndex)
+    }
+
+    // Log out a summary of records updated:
+    const summary = truncate(recordsToIndex.map((record) => record.uri).join(','), 100)
+    messages.push(`Wrote ${recordsToIndex.length} doc(s): ${summary}`)
+  }
+
+  if (recordsToDelete.length) {
+    if (options.dryrun) {
+      console.log(`DRYRUN: Skipping removing ${recordsToDelete.length} records`)
+    } else {
+      await suppressBibs(recordsToDelete)
+    }
+
+    messages.push(`Deleted ${recordsToDelete.length} doc(s)`)
+  }
+
+  const message = messages.length ? messages.join('; ') : 'Nothing to do.'
+
+  logger.info(message)
+
+  return {
+    message
+  }
+}
+
+module.exports = { handler, processRecords }
