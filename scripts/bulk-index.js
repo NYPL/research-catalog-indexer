@@ -224,7 +224,6 @@ const updateBibs = async () => {
       argv.nyplSource,
       argv.bibId
     ]
-
   } else if (argv.hasMarc) {
     sqlFromAndWhere = `bib B,
       json_array_elements(B.var_fields::json) jV
