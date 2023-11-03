@@ -7,11 +7,9 @@
  *  Usage:
  *    node scripts/bulk-index --type (item|bib) [--hasMarc MARC] [--nyplSource NYPLSOURCE]
  *
- *  Required arguments:
- *    type {string}: One of item or bib
+ *  Arguments:
+ *    type {string}: Required. One of item or bib
  *    hasMarc {string}: Marc tag that must be present in the record
- *
- *  Optional arguments:
  *    nyplSource {string}: NYPL Source value. Default 'sierra-nypl'
  *    orderBy {string}: Columns to order query by. e.g. `--orderBy id`. Default ''
  *    limit {int}: How many records to process. Default null (no limit)
@@ -19,6 +17,11 @@
  *    batchSize {int}: How many records to index at one time. Default 100
  *    dryrun {boolean}: Set to true to perform all work, but skip writing to index.
  *    envfile {string}: Path to local .env file. Default ./config/qa-bulk-index.env
+ *
+ *  One of these mutually exclusive arguments must be used so that the script
+ *  has something to query on:
+ *   - hasMarc
+ *   - bibId
  *
  *  Note that omitting --limit may cause the query to take a long time to
  *  return due to the size of the databases.
@@ -53,7 +56,7 @@ const argv = require('minimist')(process.argv.slice(2), {
     dryrun: false,
     envfile: './config/qa-bulk-index.env'
   },
-  string: ['hasMarc'],
+  string: ['hasMarc', 'bibId'],
   integer: ['limit', 'offset', 'batchSize']
 })
 const dotenv = require('dotenv')
@@ -64,7 +67,7 @@ const logger = require('../lib/logger')
 logger.setLevel(process.env.LOG_LEVEL || 'info')
 
 const usage = () => {
-  console.log('Usage: node scripts/bulk-index --type (bib|item) --hasMarc \'001\'')
+  console.log('Usage: node scripts/bulk-index --type (bib|item) [--hasMarc MARC] [--bibId BIBID]')
   return true
 }
 
@@ -213,7 +216,16 @@ const updateBibs = async () => {
 
   let sqlFromAndWhere = null
   let sqlParams = []
-  if (argv.hasMarc) {
+  if (argv.bibId) {
+    sqlFromAndWhere = `bib B
+      WHERE B.nypl_source = $1
+      AND B.id = $2`
+    sqlParams = [
+      argv.nyplSource,
+      argv.bibId
+    ]
+
+  } else if (argv.hasMarc) {
     sqlFromAndWhere = `bib B,
       json_array_elements(B.var_fields::json) jV
       WHERE B.nypl_source = $1
@@ -266,9 +278,9 @@ const updateBibs = async () => {
   endPools()
 }
 
-if (!argv.type || !argv.hasMarc) {
+if (!argv.type || !(argv.hasMarc || argv.bibId)) {
   usage()
-  die('Missing --type or --hasMarc')
+  die('Missing --type and/or a --hasMarc or --bibId query')
 }
 
 updateBibs()
