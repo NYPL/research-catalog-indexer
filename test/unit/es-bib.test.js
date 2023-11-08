@@ -1161,8 +1161,14 @@ describe('EsBib', function () {
       // Add holdings with Offsite location to check that they are filtered out
       const holding = require('../fixtures/holding-1032862.json')
       holding.location.code = 'rcmg8'
+
+      // Add a holding with no location to make sure it doesn't cause an error
+      const holding2 = JSON.parse(JSON.stringify(holding))
+      holding2.location = null
+
       sierraBib._holdings = [
-        new SierraHolding(holding)
+        new SierraHolding(holding),
+        new SierraHolding(holding2)
       ]
       bib = new EsBib(sierraBib)
     })
@@ -1170,7 +1176,7 @@ describe('EsBib', function () {
     it('filters out checkInCards with offsite locations', async () => {
       const items = await bib.items()
       expect(items).to.be.a('array')
-      expect(items).to.have.lengthOf(2)
+      expect(items).to.have.lengthOf(4)
     })
   })
 })
