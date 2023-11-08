@@ -20,8 +20,9 @@ const handler = async (event, context, callback) => {
     let message = ''
     if (recordsToIndex.length) {
       await elastic.writeRecords(recordsToIndex)
-      const summary = truncate(recordsToIndex.map((record) => record.uri).join(','), 100)
 
+      // Log out a summary of records updated:
+      const summary = truncate(recordsToIndex.map((record) => record.uri).join(','), 100)
       message = `Wrote ${recordsToIndex.length} doc(s): ${summary}`
     }
 

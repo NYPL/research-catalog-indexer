@@ -146,4 +146,27 @@ describe('aeonn-urls', () => {
     )
     expect(useStatement.length).to.equal(255)
   })
+
+  it('uses parallel title when it exists', async () => {
+    const sierraItem = new SierraItem(require('../fixtures/item-37528709.json'))
+    const sierraBib = new SierraBib({
+      nyplSource: 'sierra-nypl',
+      id: '1234',
+      varFields: [
+        {
+          marcTag: '880',
+          subfields: [
+            { tag: '6', content: '245-01/(3/r' },
+            { tag: 'a', content: 'parallel value 1' },
+            { tag: 'b', content: 'parallel value 2' }
+          ]
+        }
+      ]
+    })
+    sierraItem._bibs = [sierraBib]
+    const esItem = new EsItem(sierraItem, new EsBib(sierraBib))
+
+    const url = await aeonUrlForItem(esItem)
+    expect(url).to.eq('https://specialcollections.nypl.org/aeon/Aeon.dll?Action=10&CallNumber=Sc+Visual+DVD-362&Form=30&ItemInfo1=Use+in+library&ItemInfo3=https%3A%2F%2Fcatalog.nypl.org%2Frecord%3Db1234&ItemISxN=i375287097&ItemNumber=33433124443791&ItemVolume=Disc+2&Location=Schomburg+Moving+Image+and+Recorded+Sound&ReferenceNumber=b12348&Site=SCHMIRS&Title=parallel+value+1+parallel+value+2')
+  })
 })
