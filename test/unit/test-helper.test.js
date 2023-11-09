@@ -3,8 +3,11 @@ chai.use(require('chai-as-promised'))
 chai.use(require('sinon-chai'))
 
 const sinon = require('sinon')
+const dotenv = require('dotenv')
 
 const kms = require('../../lib/kms')
+
+dotenv.config({ path: './config/test.env' })
 
 before(() => {
   sinon.stub(kms, 'decrypt').callsFake((val) => {

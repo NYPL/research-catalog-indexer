@@ -92,13 +92,13 @@ describe('index handler function', () => {
     })
     it('calls lambda callback on successful indexing', async () => {
       eventDecoderStub('Item')
-      stub(platformApi, 'bibsForHoldingsOrItems').resolves([{ id: '1', locations: [{ code: 'mal92' }] }])
+      stub(platformApi, 'bibsForHoldingsOrItems').resolves([{ id: '1', nyplSource: 'sierra-nypl', locations: [{ code: 'mal92' }] }])
 
       // Note we can send in an invalid event because of above eventDecoder
       // stub, which always returns a fake item:
       await index.handler('some fake event data', null, callback)
       expect(callback.calledOnce).to.equal(true)
-      expect(callback).to.have.been.calledWith(null, 'Wrote 1 doc(s): 1')
+      expect(callback).to.have.been.calledWith(null, 'Wrote 1 doc(s): b1')
     })
   })
 
