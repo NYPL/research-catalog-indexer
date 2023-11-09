@@ -4,6 +4,7 @@ const elastic = require('./lib/elastic-search/requests')
 const { suppressBibs } = require('./lib/utils/suppressBibs')
 const { buildEsDocument } = require('./lib/build-es-document')
 const { truncate } = require('./lib/utils')
+const { notifyDocumentProcessed } = require('./lib/streams-client')
 
 /**
  * Main lambda handler receiving Bib, Item, and Holding events
@@ -19,7 +20,11 @@ const handler = async (event, context, callback) => {
 
     let message = ''
     if (recordsToIndex.length) {
+      // Write records to ES:
       await elastic.writeRecords(recordsToIndex)
+
+      // Write to IndexDocumentProcessed Kinesis stream:
+      await notifyDocumentProcessed(recordsToIndex)
 
       // Log out a summary of records updated:
       const summary = truncate(recordsToIndex.map((record) => record.uri).join(','), 100)
