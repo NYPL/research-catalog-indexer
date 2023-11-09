@@ -11,7 +11,9 @@
  *    type {string}: Required. One of item or bib
  *    hasMarc {string}: Marc tag that must be present in the record
  *    nyplSource {string}: NYPL Source value. Default 'sierra-nypl'
- *    orderBy {string}: Columns to order query by. e.g. `--orderBy id`. Default ''
+ *    orderBy {string}: Columns to order query by. Default '' (no sort).
+ *      e.g. `--orderBy id`. Sortable columns include `id`, `updated_date`,
+ *      `created_date`.
  *    limit {int}: How many records to process. Default null (no limit)
  *    offset {int}: How many records to skip over. Default 0
  *    batchSize {int}: How many records to index at one time. Default 100
