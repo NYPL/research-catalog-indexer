@@ -3,6 +3,7 @@ const sinon = require('sinon')
 
 const SierraBib = require('../../lib/sierra-models/bib')
 const SierraItem = require('../../lib/sierra-models/item')
+const SierraHolding = require('../../lib/sierra-models/holding')
 const EsBib = require('../../lib/es-models/bib')
 
 describe('EsBib', function () {
@@ -1143,6 +1144,39 @@ describe('EsBib', function () {
       // Verify they're still returned ordered by shelfMark:
       expect(uris[0]).to.equal('i10003973')
       expect(uris[1]).to.equal('i17145801')
+    })
+  })
+
+  describe('items with offsite checkInCards', () => {
+    let bib
+
+    beforeEach(() => {
+      const sierraBib = new SierraBib(require('../fixtures/bib-10001936.json'))
+      // Adopt some random items:
+      sierraBib._items = [
+        new SierraItem(require('../fixtures/item-10003973.json')),
+        new SierraItem(require('../fixtures/item-17145801.json'))
+      ]
+
+      // Add holdings with Offsite location to check that they are filtered out
+      const holding = require('../fixtures/holding-1032862.json')
+      holding.location.code = 'rcmg8'
+
+      // Add a holding with no location to make sure it doesn't cause an error
+      const holding2 = JSON.parse(JSON.stringify(holding))
+      holding2.location = null
+
+      sierraBib._holdings = [
+        new SierraHolding(holding),
+        new SierraHolding(holding2)
+      ]
+      bib = new EsBib(sierraBib)
+    })
+
+    it('filters out checkInCards with offsite locations', async () => {
+      const items = await bib.items()
+      expect(items).to.be.a('array')
+      expect(items).to.have.lengthOf(4)
     })
   })
 })

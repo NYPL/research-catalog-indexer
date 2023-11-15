@@ -4,6 +4,7 @@ const elastic = require('./lib/elastic-search/requests')
 const { suppressBibs } = require('./lib/utils/suppressBibs')
 const { buildEsDocument } = require('./lib/build-es-document')
 const { truncate } = require('./lib/utils')
+const { notifyDocumentProcessed } = require('./lib/streams-client')
 
 /**
  * Main lambda handler receiving Bib, Item, and Holding events
@@ -38,6 +39,16 @@ const processRecords = async (type, records, options = {}) => {
       console.log(`DRYRUN: Skipping writing ${recordsToIndex.length} records`)
     } else {
       await elastic.writeRecords(recordsToIndex)
+
+      // Write records to ES:
+      await elastic.writeRecords(recordsToIndex)
+
+      // Write to IndexDocumentProcessed Kinesis stream:
+      await notifyDocumentProcessed(recordsToIndex)
+
+      // Log out a summary of records updated:
+      const summary = truncate(recordsToIndex.map((record) => record.uri).join(','), 100)
+      messages.push(`Wrote ${recordsToIndex.length} doc(s): ${summary}`)
     }
 
     // Log out a summary of records updated:
