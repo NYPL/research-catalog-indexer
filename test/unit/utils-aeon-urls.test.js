@@ -43,7 +43,7 @@ describe('aeonn-urls', () => {
 
     const url = await aeonUrlForItem(esItem)
     // Note no esBib is associated, so fields are unnaturally light:
-    expect(url).to.eq('https://specialcollections.nypl.org/aeon/Aeon.dll?Action=10&CallNumber=Sc+Visual+DVD-362&Form=30&ItemInfo1=Use+in+library&ItemISxN=i375287097&ItemNumber=33433124443791&ItemVolume=Disc+2&Location=Schomburg+Moving+Image+and+Recorded+Sound&Site=SCHMIRS')
+    expect(url).to.eq('https://specialcollections.nypl.org/aeon/Aeon.dll?Action=10&CallNumber=Sc+Visual+DVD-362&Form=30&Genre=moving+image&ItemInfo1=Use+in+library&ItemISxN=i375287097&ItemNumber=33433124443791&ItemVolume=Disc+2&Location=Schomburg+Moving+Image+and+Recorded+Sound&Site=SCHMIRS')
   })
 
   it('returns Aeon URL with metadata fields pulled from bib', async () => {
@@ -61,7 +61,7 @@ describe('aeonn-urls', () => {
       CallNumber: 'Sc Visual DVD-362',
       Date: '2012',
       Form: '30',
-      Genre: 'DVD',
+      Genre: 'moving image',
       Location: 'Schomburg Moving Image and Recorded Sound',
       ItemInfo1: 'Use in library',
       ItemInfo3: 'https://catalog.nypl.org/record=b22027953',
@@ -98,7 +98,7 @@ describe('aeonn-urls', () => {
     const esItem = new EsItem(sierraItem, new EsBib(sierraBib))
 
     const url = await aeonUrlForItem(esItem)
-    expect(url).to.eq('https://specialcollections.nypl.org/aeon/Aeon.dll?Action=10&CallNumber=Sc+Visual+DVD-362&Form=30&ItemInfo1=Use+in+library&ItemInfo3=https%3A%2F%2Fcatalog.nypl.org%2Frecord%3Db1234&ItemISxN=i375287097&ItemNumber=33433124443791&ItemVolume=Disc+2&Location=Schomburg+Moving+Image+and+Recorded+Sound&ReferenceNumber=b12348&Site=SCHMIRS&Title=Token1+T%C3%B6ken2+Tok%C3%A9n3+Toke%C3%B14+Token5')
+    expect(url).to.eq('https://specialcollections.nypl.org/aeon/Aeon.dll?Action=10&CallNumber=Sc+Visual+DVD-362&Form=30&Genre=moving+image&ItemInfo1=Use+in+library&ItemInfo3=https%3A%2F%2Fcatalog.nypl.org%2Frecord%3Db1234&ItemISxN=i375287097&ItemNumber=33433124443791&ItemVolume=Disc+2&Location=Schomburg+Moving+Image+and+Recorded+Sound&ReferenceNumber=b12348&Site=SCHMIRS&Title=Token1+T%C3%B6ken2+Tok%C3%A9n3+Toke%C3%B14+Token5')
 
     const [, queryString] = url.split('?')
     expect(parseQueryString(queryString).Title).to.equal(
@@ -167,6 +167,6 @@ describe('aeonn-urls', () => {
     const esItem = new EsItem(sierraItem, new EsBib(sierraBib))
 
     const url = await aeonUrlForItem(esItem)
-    expect(url).to.eq('https://specialcollections.nypl.org/aeon/Aeon.dll?Action=10&CallNumber=Sc+Visual+DVD-362&Form=30&ItemInfo1=Use+in+library&ItemInfo3=https%3A%2F%2Fcatalog.nypl.org%2Frecord%3Db1234&ItemISxN=i375287097&ItemNumber=33433124443791&ItemVolume=Disc+2&Location=Schomburg+Moving+Image+and+Recorded+Sound&ReferenceNumber=b12348&Site=SCHMIRS&Title=parallel+value+1+parallel+value+2')
+    expect(url).to.eq('https://specialcollections.nypl.org/aeon/Aeon.dll?Action=10&CallNumber=Sc+Visual+DVD-362&Form=30&Genre=moving+image&ItemInfo1=Use+in+library&ItemInfo3=https%3A%2F%2Fcatalog.nypl.org%2Frecord%3Db1234&ItemISxN=i375287097&ItemNumber=33433124443791&ItemVolume=Disc+2&Location=Schomburg+Moving+Image+and+Recorded+Sound&ReferenceNumber=b12348&Site=SCHMIRS&Title=parallel+value+1+parallel+value+2')
   })
 })
