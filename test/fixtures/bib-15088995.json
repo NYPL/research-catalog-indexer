@@ -1,0 +1,491 @@
+{
+  "id": "15088995",
+  "nyplSource": "sierra-nypl",
+  "nyplType": "bib",
+  "updatedDate": "2022-03-01T02:02:07-05:00",
+  "createdDate": "2008-12-19T07:07:19-05:00",
+  "deletedDate": null,
+  "deleted": false,
+  "locations": [
+    {
+      "code": "map",
+      "name": "SASB - Map Division - Rm 117"
+    }
+  ],
+  "suppressed": false,
+  "lang": {
+    "code": "por",
+    "name": "Portuguese"
+  },
+  "title": "Atlas do império do Brazil : os mapas de Cândido Mendes 1868",
+  "author": "Mendes, Cândiado, 1818-1881.",
+  "materialType": {
+    "code": "e  ",
+    "value": "MAP"
+  },
+  "bibLevel": {
+    "code": "m",
+    "value": "MONOGRAPH"
+  },
+  "publishYear": 2000,
+  "catalogDate": "2001-11-13",
+  "country": {
+    "code": "bl ",
+    "name": "Brazil"
+  },
+  "normTitle": "atlas do império do brazil os mapas de cândido mendes 1868",
+  "normAuthor": "mendes cândiado 1818 1881",
+  "standardNumbers": [],
+  "controlNumber": "48384516",
+  "fixedFields": {
+    "24": {
+      "label": "Language",
+      "value": "por",
+      "display": "Portuguese"
+    },
+    "25": {
+      "label": "Skip",
+      "value": "0",
+      "display": null
+    },
+    "26": {
+      "label": "Location",
+      "value": "map  ",
+      "display": "SASB - Map Division - Rm 117"
+    },
+    "27": {
+      "label": "COPIES",
+      "value": "2",
+      "display": null
+    },
+    "28": {
+      "label": "Cat. Date",
+      "value": "2001-11-13",
+      "display": null
+    },
+    "29": {
+      "label": "Bib Level",
+      "value": "m",
+      "display": "MONOGRAPH"
+    },
+    "30": {
+      "label": "Material Type",
+      "value": "e  ",
+      "display": "MAP"
+    },
+    "31": {
+      "label": "Bib Code 3",
+      "value": "-",
+      "display": null
+    },
+    "80": {
+      "label": "Record Type",
+      "value": "b",
+      "display": null
+    },
+    "81": {
+      "label": "Record Number",
+      "value": "15088995",
+      "display": null
+    },
+    "83": {
+      "label": "Created Date",
+      "value": "2008-12-19T07:07:19Z",
+      "display": null
+    },
+    "84": {
+      "label": "Updated Date",
+      "value": "2022-03-01T02:02:07Z",
+      "display": null
+    },
+    "85": {
+      "label": "No. of Revisions",
+      "value": "9",
+      "display": null
+    },
+    "86": {
+      "label": "Agency",
+      "value": "1",
+      "display": null
+    },
+    "89": {
+      "label": "Country",
+      "value": "bl ",
+      "display": "Brazil"
+    },
+    "98": {
+      "label": "PDATE",
+      "value": "2021-11-10T01:28:04Z",
+      "display": null
+    },
+    "107": {
+      "label": "MARC Type",
+      "value": " ",
+      "display": null
+    }
+  },
+  "varFields": [
+    {
+      "fieldTag": "a",
+      "marcTag": "100",
+      "ind1": "1",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Mendes, Cândiado,"
+        },
+        {
+          "tag": "d",
+          "content": "1818-1881."
+        }
+      ]
+    },
+    {
+      "fieldTag": "c",
+      "marcTag": "852",
+      "ind1": "8",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "h",
+          "content": "Map Div.++ 01-10930"
+        }
+      ]
+    },
+    {
+      "fieldTag": "d",
+      "marcTag": "651",
+      "ind1": " ",
+      "ind2": "0",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Brazil"
+        },
+        {
+          "tag": "v",
+          "content": "Maps."
+        }
+      ]
+    },
+    {
+      "fieldTag": "d",
+      "marcTag": "650",
+      "ind1": " ",
+      "ind2": "0",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Early maps"
+        },
+        {
+          "tag": "z",
+          "content": "Brazil."
+        }
+      ]
+    },
+    {
+      "fieldTag": "e",
+      "marcTag": "255",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Scales differ."
+        }
+      ]
+    },
+    {
+      "fieldTag": "l",
+      "marcTag": "035",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "(WaOLN)M120000142"
+        }
+      ]
+    },
+    {
+      "fieldTag": "o",
+      "marcTag": "001",
+      "ind1": " ",
+      "ind2": " ",
+      "content": "48384516",
+      "subfields": null
+    },
+    {
+      "fieldTag": "p",
+      "marcTag": "260",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Rio de Janeiro :"
+        },
+        {
+          "tag": "b",
+          "content": "Arte & História,"
+        },
+        {
+          "tag": "c",
+          "content": "2000."
+        }
+      ]
+    },
+    {
+      "fieldTag": "q",
+      "marcTag": "852",
+      "ind1": "8",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "h",
+          "content": "Map Div.++ 01-10930"
+        }
+      ]
+    },
+    {
+      "fieldTag": "r",
+      "marcTag": "300",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "7 p., 24 maps, [5] folded :"
+        },
+        {
+          "tag": "b",
+          "content": "col. ;"
+        },
+        {
+          "tag": "c",
+          "content": "42 x 20 cm."
+        }
+      ]
+    },
+    {
+      "fieldTag": "t",
+      "marcTag": "245",
+      "ind1": "1",
+      "ind2": "0",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Atlas do império do Brazil :"
+        },
+        {
+          "tag": "b",
+          "content": "os mapas de Cândido Mendes 1868 /"
+        },
+        {
+          "tag": "c",
+          "content": "Cândido Mendes."
+        }
+      ]
+    },
+    {
+      "fieldTag": "v",
+      "marcTag": "959",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": ".b67527115"
+        },
+        {
+          "tag": "b",
+          "content": "08-24-07"
+        },
+        {
+          "tag": "c",
+          "content": "07-20-01"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "003",
+      "ind1": " ",
+      "ind2": " ",
+      "content": "OCoLC",
+      "subfields": null
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "005",
+      "ind1": " ",
+      "ind2": " ",
+      "content": "20011113095846.0",
+      "subfields": null
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "007",
+      "ind1": " ",
+      "ind2": " ",
+      "content": "aj cafzn",
+      "subfields": null
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "008",
+      "ind1": " ",
+      "ind2": " ",
+      "content": "011108s2000    bl        a     0   por dnemIa ",
+      "subfields": null
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "034",
+      "ind1": "0",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "a"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "040",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "NYP"
+        },
+        {
+          "tag": "c",
+          "content": "NYP"
+        },
+        {
+          "tag": "d",
+          "content": "WaOLN"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "043",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "s-bl---"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "049",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "NYPK"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "946",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "m"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "997",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "hm"
+        },
+        {
+          "tag": "b",
+          "content": "11-13-01"
+        },
+        {
+          "tag": "c",
+          "content": "m"
+        },
+        {
+          "tag": "d",
+          "content": "e"
+        },
+        {
+          "tag": "e",
+          "content": "-"
+        },
+        {
+          "tag": "f",
+          "content": "por"
+        },
+        {
+          "tag": "g",
+          "content": "bl "
+        },
+        {
+          "tag": "h",
+          "content": "0"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "910",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "RL"
+        }
+      ]
+    },
+    {
+      "fieldTag": "_",
+      "marcTag": null,
+      "ind1": null,
+      "ind2": null,
+      "content": "00000nem  2200277Ia 4500",
+      "subfields": null
+    }
+  ]
+}
