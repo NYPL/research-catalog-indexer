@@ -10,7 +10,7 @@ const EsBib = require('../../lib/es-models/bib')
 
 const { aeonUrlForItem } = require('../../lib/utils/aeon-urls')
 
-describe('aeonn-urls', () => {
+describe('aeon-urls', () => {
   beforeEach(() => {
     stubNyplSourceMapper()
   })
@@ -168,5 +168,54 @@ describe('aeonn-urls', () => {
 
     const url = await aeonUrlForItem(esItem)
     expect(url).to.eq('https://specialcollections.nypl.org/aeon/Aeon.dll?Action=10&CallNumber=Sc+Visual+DVD-362&Form=30&Genre=moving+image&ItemInfo1=Use+in+library&ItemInfo3=https%3A%2F%2Fcatalog.nypl.org%2Frecord%3Db1234&ItemISxN=i375287097&ItemNumber=33433124443791&ItemVolume=Disc+2&Location=Schomburg+Moving+Image+and+Recorded+Sound&ReferenceNumber=b12348&Site=SCHMIRS&Title=parallel+value+1+parallel+value+2')
+  })
+
+  it('extracts bib 651', async () => {
+    const sierraItem = new SierraItem(require('../fixtures/item-37528709.json'))
+    const sierraBib = new SierraBib(require('../fixtures/bib-15088995.json'))
+    sierraItem._bibs = [sierraBib]
+
+    const esItem = new EsItem(sierraItem, new EsBib(sierraBib))
+
+    const url = await aeonUrlForItem(esItem)
+
+    const [, queryString] = url.split('?')
+    expect(parseQueryString(queryString)['Transaction.CustomFields.Custom651']).to.equal(
+      'Brazil Maps.'
+    )
+  })
+
+  it('extracts MapsLocationNote from item 852', async () => {
+    const sierraItem = new SierraItem(require('../fixtures/item-19885371.json'))
+    const esItem = new EsItem(sierraItem)
+
+    const url = await aeonUrlForItem(esItem)
+
+    const [, queryString] = url.split('?')
+    expect(parseQueryString(queryString)['Transaction.CustomFields.MapsLocationNote']).to.equal(
+      '[Oversize - Filed with Oversize Asia Whole,Part & Local]'
+    )
+  })
+
+  it('extracts SierraLocationCode for Maps items', async () => {
+    const sierraItem = new SierraItem(require('../fixtures/item-19885371.json'))
+    const esItem = new EsItem(sierraItem)
+
+    const url = await aeonUrlForItem(esItem)
+
+    const [, queryString] = url.split('?')
+    expect(parseQueryString(queryString)['Transaction.CustomFields.SierraLocationCode']).to.equal(
+      'mapp1'
+    )
+  })
+
+  it('excludes SierraLocationCode for non-Maps items', async () => {
+    const sierraItem = new SierraItem(require('../fixtures/item-37528709.json'))
+    const esItem = new EsItem(sierraItem)
+
+    const url = await aeonUrlForItem(esItem)
+
+    const [, queryString] = url.split('?')
+    expect(parseQueryString(queryString)['Transaction.CustomFields.SierraLocationCode']).to.be.a('undefined')
   })
 })
