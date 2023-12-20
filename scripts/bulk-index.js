@@ -46,7 +46,8 @@ const kms = require('../lib/kms.js')
 const modelPrefetcher = require('../lib/model-prefetch')
 const { processRecords } = require('../index')
 const {
-  filteredSierraItemsForItems
+  filteredSierraItemsForItems,
+  filteredSierraHoldingsForHoldings
 } = require('../lib/prefilter')
 
 const argv = require('minimist')(process.argv.slice(2), {
@@ -103,7 +104,8 @@ let dbConnectionPools = null
 const initPools = async () => {
   dbConnectionPools = {
     itemService: await initPool('ITEM'),
-    bibService: await initPool('BIB')
+    bibService: await initPool('BIB'),
+    holdingsService: await initPool('HOLDINGS')
   }
 }
 
@@ -169,6 +171,36 @@ const sierraItemsByBibIds = async (bibIds) => {
 }
 
 /**
+ *  Given an array of bib ids, returns a hash relating each of those bib ids to
+ *  an array of holdings for that bib
+ */
+const sierraHoldingsByBibIds = async (bibIds) => {
+  const holdingsClient = await dbConnectionPools.holdingsService.connect()
+
+  const query = `SELECT * FROM records
+    WHERE "bibIds" && array[${bibIds.join(',')}]`
+  const result = await holdingsClient.query(query)
+
+  const holdings = convertCommonModelProperties(result.rows)
+
+  const holdingsByBibId = holdings.reduce((byBibId, item) => {
+    item.bibIds.forEach((bibId) => {
+      if (!byBibId[bibId]) {
+        byBibId[bibId] = []
+      }
+      byBibId[bibId].push(item)
+    })
+    return byBibId
+  }, {})
+
+  logger.debug(`HoldinsgService DB: Retrieved ${holdings.length} holdings(s) for ${bibIds.length} bib id(s) using query ${query}`)
+
+  holdingsClient.release()
+
+  return holdingsByBibId
+}
+
+/**
  *  Here we're overwriting the application modelPrefetch routine to prefetch
  *  items and holdings by direct sql connection to the Item- and
  *  HoldingsService databases
@@ -179,10 +211,16 @@ modelPrefetcher.modelPrefetch = async (bibs) => {
   // Get distinct bib ids:
   const bibIds = Array.from(new Set(bibs.map((b) => b.id)))
 
-  const itemsByBibId = await sierraItemsByBibIds(bibIds)
+  // Fetch all items and holdings for this set of bibs:
+  const [itemsByBibId, holdingsByBibId] = await Promise.all([
+    sierraItemsByBibIds(bibIds),
+    sierraHoldingsByBibIds(bibIds)
+  ])
 
+  // Attach holdings and items to bibs:
   bibs = bibs.map((bib) => {
-    bib._holdings = [] // TODO Add holdings db lookup
+    // Wrap in SierraHolding class and apply suppression:
+    bib._holdings = filteredSierraHoldingsForHoldings(holdingsByBibId[bib.id] || [])
     // Apply suppression/is-research filtering to items:
     bib._items = filteredSierraItemsForItems(itemsByBibId[bib.id]) || []
     return bib
@@ -204,8 +242,8 @@ const printProgress = (count, total, startTime) => {
   const recordsPerSecond = count / ellapsed
   const recordsPerHour = recordsPerSecond * 60 * 60
   console.log([
-    `Reading bibs ${count} - ${count + argv.batchSize} of ${total}`,
-    `: ${(progress * 100).toFixed(2)}%`,
+    `Reading bibs ${count} - ${count + argv.batchSize} of ${total || '?'}`,
+    progress ? `: ${(progress * 100).toFixed(2)}%` : '',
     recordsPerHour ? ` (${Math.round(recordsPerHour).toLocaleString()} records/h)` : '' //,
   ].join(''))
 }
@@ -226,7 +264,7 @@ const updateBibs = async () => {
       argv.nyplSource,
       argv.bibId
     ]
-  } else if (argv.hasMarc) {
+  } else if (argv.type === 'bib' && argv.hasMarc) {
     sqlFromAndWhere = `bib B,
       json_array_elements(B.var_fields::json) jV
       WHERE B.nypl_source = $1
@@ -250,7 +288,7 @@ const updateBibs = async () => {
   const total = argv.limit
   let count = 0
   const startTime = new Date()
-  while (count < argv.limit) {
+  while (count < argv.limit || !argv.limit) {
     // Log out progress os far:
     printProgress(count, total, startTime)
 
