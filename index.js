@@ -45,10 +45,6 @@ const processRecords = async (type, records, options = {}) => {
 
       // Write to IndexDocumentProcessed Kinesis stream:
       await notifyDocumentProcessed(recordsToIndex)
-
-      // Log out a summary of records updated:
-      const summary = truncate(recordsToIndex.map((record) => record.uri).join(','), 100)
-      messages.push(`Wrote ${recordsToIndex.length} doc(s): ${summary}`)
     }
 
     // Log out a summary of records updated:
