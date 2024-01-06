@@ -39,17 +39,6 @@
  *
  *
  */
-const { Pool } = require('pg')
-const Cursor = require('pg-cursor')
-
-const kms = require('../lib/kms.js')
-const modelPrefetcher = require('../lib/model-prefetch')
-const { processRecords } = require('../index')
-const {
-  filteredSierraItemsForItems,
-  filteredSierraHoldingsForHoldings
-} = require('../lib/prefilter')
-
 const argv = require('minimist')(process.argv.slice(2), {
   default: {
     limit: null,
@@ -64,6 +53,25 @@ const argv = require('minimist')(process.argv.slice(2), {
 })
 const dotenv = require('dotenv')
 dotenv.config({ path: argv.envfile })
+
+// Build NR app-name based on envfile:
+const newrelicEnvironment = argv.envfile.includes('production') ? 'Prod' : 'QA'
+process.env.NEW_RELIC_APP_NAME = `Research Catalog Indexer (${newrelicEnvironment})`
+if (process.env.NEW_RELIC_LICENSE_KEY && process.env.NEW_RELIC_APP_NAME) {
+  console.log(`Enabling NewRelic reporting for ${process.env.NEW_RELIC_APP_NAME}`)
+}
+const newrelic = require('newrelic')
+
+const { Pool } = require('pg')
+const Cursor = require('pg-cursor')
+
+const kms = require('../lib/kms.js')
+const modelPrefetcher = require('../lib/model-prefetch')
+const indexer = require('../index')
+const {
+  filteredSierraItemsForItems,
+  filteredSierraHoldingsForHoldings
+} = require('../lib/prefilter')
 
 const { awsInit, die, camelize } = require('./utils')
 const logger = require('../lib/logger')
@@ -252,62 +260,74 @@ const printProgress = (count, total, startTime) => {
  *  Reindex a bunch of bibs based on a BibService query
  */
 const updateBibs = async () => {
-  await initPools()
-
   let sqlFromAndWhere = null
   let sqlParams = []
-  if (argv.bibId) {
-    sqlFromAndWhere = `bib B
-      WHERE B.nypl_source = $1
-      AND B.id = $2`
-    sqlParams = [
-      argv.nyplSource,
-      argv.bibId
-    ]
-  } else if (argv.type === 'bib' && argv.hasMarc) {
-    sqlFromAndWhere = `bib B,
-      json_array_elements(B.var_fields::json) jV
-      WHERE B.nypl_source = $1
-      AND jV->>'marcTag' = $2`
-    sqlParams = [
-      argv.nyplSource,
-      argv.hasMarc
-    ]
-  }
 
-  const query = `SELECT * FROM ${sqlFromAndWhere}` +
-    (argv.orderBy ? ` ORDER BY ${argv.orderBy}` : '') +
-    (argv.limit ? ` LIMIT ${argv.limit}` : '') +
-    (argv.offset ? ` OFFSET ${argv.offset}` : '')
+  let cursor
+  let bibClient
 
-  console.log(`Querying BibService: ${query} | ${JSON.stringify(sqlParams)}`)
+  await newrelic.startBackgroundTransaction('Bulk-index initial query', async () => {
+    await initPools()
 
-  const bibClient = await dbConnectionPools.bibService.connect()
-  const cursor = bibClient.query(new Cursor(query, sqlParams))
+    if (argv.bibId) {
+      sqlFromAndWhere = `bib B
+        WHERE B.nypl_source = $1
+        AND B.id = $2`
+      sqlParams = [
+        argv.nyplSource,
+        argv.bibId
+      ]
+
+      argv.limit = 1
+    } else if (argv.type === 'bib' && argv.hasMarc) {
+      sqlFromAndWhere = `bib B,
+        json_array_elements(B.var_fields::json) jV
+        WHERE B.nypl_source = $1
+        AND jV->>'marcTag' = $2`
+      sqlParams = [
+        argv.nyplSource,
+        argv.hasMarc
+      ]
+    }
+
+    const query = `SELECT * FROM ${sqlFromAndWhere}` +
+      (argv.orderBy ? ` ORDER BY ${argv.orderBy}` : '') +
+      (argv.limit ? ` LIMIT ${argv.limit}` : '') +
+      (argv.offset ? ` OFFSET ${argv.offset}` : '')
+
+    console.log(`Querying BibService: ${query} | ${JSON.stringify(sqlParams)}`)
+
+    bibClient = await dbConnectionPools.bibService.connect()
+    cursor = bibClient.query(new Cursor(query, sqlParams))
+  })
 
   const total = argv.limit
   let count = 0
   const startTime = new Date()
   while (count < argv.limit || !argv.limit) {
-    // Log out progress os far:
-    printProgress(count, total, startTime)
+    await newrelic.startBackgroundTransaction('Bulk-index batch', async () => {
+      // Log out progress os far:
+      printProgress(count, total, startTime)
 
-    // Pull next batch of bibs from the cursor:
-    const rows = await cursor.read(argv.batchSize)
+      // Pull next batch of bibs from the cursor:
+      const rows = await cursor.read(argv.batchSize)
 
-    // Did we reach the end?
-    if (rows.length === 0) {
-      console.log(`Cursor reached the end. Stopping after ${count} processed.`)
-      break
-    }
+      // Did we reach the end?
+      if (rows.length === 0) {
+        console.log(`Cursor reached the end. Stopping after ${count} processed.`)
+        return
+      }
 
-    // Transform bib properties to match what BibService would have returned:
-    const bibs = convertCommonModelProperties(rows)
+      // Transform bib properties to match what BibService would have returned:
+      const bibs = convertCommonModelProperties(rows)
 
-    // Trigger reindex:
-    await processRecords('Bib', bibs, { dryrun: argv.dryrun })
+      // Trigger reindex:
+      await indexer.processRecords('Bib', bibs, { dryrun: argv.dryrun })
 
-    count += rows.length
+      count += rows.length
+
+      console.log(`Processed ${count}..`)
+    })
   }
 
   cursor.close(() => {
@@ -322,8 +342,12 @@ if (!argv.type || !(argv.hasMarc || argv.bibId)) {
   die('Missing --type and/or a --hasMarc or --bibId query')
 }
 
-updateBibs()
-  .catch((e) => {
-    console.log('Error ', e)
-    console.log(e.stack)
-  })
+const run = async () => {
+  updateBibs()
+    .catch((e) => {
+      console.log('Error ', e)
+      console.log(e.stack)
+    })
+}
+
+run()
