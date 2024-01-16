@@ -306,7 +306,7 @@ const updateBibs = async () => {
   const startTime = new Date()
   while (count < argv.limit || !argv.limit) {
     await newrelic.startBackgroundTransaction('Bulk-index batch', async () => {
-      // Log out progress os far:
+      // Log out progress so far:
       printProgress(count, total, startTime)
 
       // Pull next batch of bibs from the cursor:
