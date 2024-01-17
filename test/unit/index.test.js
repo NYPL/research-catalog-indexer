@@ -8,6 +8,7 @@ const platformApi = require('../../lib/platform-api/requests')
 const elastic = require('../../lib/elastic-search/requests')
 const SierraItem = require('../../lib/sierra-models/item')
 const SierraHolding = require('../../lib/sierra-models/holding')
+const NyplStreamsClient = require('@nypl/nypl-streams-client')
 
 describe('index handler function', () => {
   const eventDecoderStub = (type) => stub(eventDecoder, 'decodeRecordsFromEvent').callsFake(async () => {
@@ -93,12 +94,24 @@ describe('index handler function', () => {
     it('calls lambda callback on successful indexing', async () => {
       eventDecoderStub('Item')
       stub(platformApi, 'bibsForHoldingsOrItems').resolves([{ id: '1', nyplSource: 'sierra-nypl', locations: [{ code: 'mal92' }] }])
+      // This one will succeed, so will attempt to write to the
+      // IndexDocumentProcessed stream:
+      const streamStub = stub(NyplStreamsClient.prototype, 'write')
+        .callsFake((streamName, records) => {
+          return Promise.resolve({ Records: records })
+        })
 
       // Note we can send in an invalid event because of above eventDecoder
       // stub, which always returns a fake item:
       await index.handler('some fake event data', null, callback)
       expect(callback.calledOnce).to.equal(true)
       expect(callback).to.have.been.calledWith(null, 'Wrote 1 doc(s): b1')
+      expect(streamStub.calledOnceWith(
+        'IndexDocumentProcessed-test',
+        [{ id: '1', nyplSource: 'sierra-nypl', nyplType: 'bib' }]
+      )).to.equal(true)
+
+      streamStub.restore()
     })
   })
 
