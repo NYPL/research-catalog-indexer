@@ -75,6 +75,19 @@ const capitalize = (s) => {
 }
 
 /**
+ *  Given a name in dash/underscore (shish-kebab/snake) case, returns same name
+ *  in camel case
+ */
+const camelize = (s) => {
+  return s.toLowerCase().replace(/([-_][a-z])/g, group =>
+    group
+      .toUpperCase()
+      .replace('-', '')
+      .replace('_', '')
+  )
+}
+
+/**
  *  Given a uri (e.g. b123, i987, hb99887766), returns the relevant SierraModel
  *  instance
  */
@@ -168,5 +181,6 @@ module.exports = {
   die,
   printDiff,
   capitalize,
+  camelize,
   buildSierraModelFromUri
 }
