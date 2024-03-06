@@ -748,6 +748,26 @@ describe('EsBib', function () {
         label: 'some label'
       }])
     })
+
+    it('ignores 337 with no content (i.e. just parallel content)', () => {
+      const record = new SierraBib({
+        nyplSource: 'recap-pul',
+        varFields: [
+          {
+            marcTag: '880',
+            subfields: [
+              { tag: '6', content: '337-01/(3/r' },
+              { tag: 'a', content: 'some parallel content' },
+              { tag: 'b', content: 'some other parallel content' }
+            ]
+          }
+        ]
+      })
+      expect((new EsBib(record)).mediaType()).to.deep.equal([{
+        id: 'mediatypes:n',
+        label: 'unmediated'
+      }])
+    })
   })
 
   describe('mediaType_packed', () => {
