@@ -865,6 +865,26 @@ describe('EsBib', function () {
         label: 'some label'
       }])
     })
+
+    it('parses 338 for partner record with only parallel content', () => {
+      const record = new SierraBib({
+        nyplSource: 'recap-pul',
+        varFields: [
+          {
+            marcTag: '880',
+            subfields: [
+              { tag: '6', content: '338-01/(3/r' },
+              { tag: 'a', content: 'some parallel content' },
+              { tag: 'b', content: 'some other parallel content' }
+            ]
+          }
+        ]
+      })
+      expect((new EsBib(record)).carrierType()).to.deep.equal([{
+        id: 'carriertypes:nc',
+        label: 'volume'
+      }])
+    })
   })
 
   describe('carrierType_packed', () => {
