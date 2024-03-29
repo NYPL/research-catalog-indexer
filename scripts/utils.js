@@ -176,11 +176,51 @@ function printDiff (remote, local, verbose) {
   })
 }
 
+/**
+* Given a number of seconds, returns an object that defines:
+*  - days: Number of whole days
+*  - hours: Number of whole hours
+*  - minutes: Number of whole minutes
+*  - seconds: Number of whole seconds
+*  - display: A string representation of the duration incorporating above properties
+*/
+const secondsAsFriendlyDuration = (seconds) => {
+  const secondsPerHour = 60 * 60
+  const secondsPerDay = secondsPerHour * 24
+
+  const days = Math.floor(seconds / secondsPerDay)
+  seconds -= days * secondsPerDay
+
+  const hours = Math.floor(seconds / secondsPerHour)
+  seconds -= hours * secondsPerHour
+
+  const minutes = Math.floor(seconds / 60)
+  seconds -= minutes * 60
+
+  seconds = Math.floor(seconds)
+
+  return {
+    days,
+    hours,
+    minutes,
+    seconds,
+    display: [
+      days ? `${days}d` : null,
+      hours ? `${hours}h` : null,
+      minutes ? `${minutes}m` : null,
+      seconds ? `${seconds}s` : null
+    ]
+      .filter((statement) => statement)
+      .join(' ')
+  }
+}
+
 module.exports = {
   awsInit,
   die,
   printDiff,
   capitalize,
   camelize,
-  buildSierraModelFromUri
+  buildSierraModelFromUri,
+  secondsAsFriendlyDuration
 }
