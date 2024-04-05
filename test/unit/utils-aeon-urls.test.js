@@ -68,7 +68,7 @@ describe('aeon-urls', () => {
       ItemISxN: 'i375287097',
       ItemNumber: '33433124443791',
       ItemPlace: 'New York',
-      ItemPublisher: 'Schomburg Center for Research in Black Culture',
+      ItemPublisher: 'Schomburg Center for Research in Black Culture, 2012.',
       ItemVolume: 'Disc 2',
       ReferenceNumber: 'b220279536',
       Site: 'SCHMIRS',
@@ -217,5 +217,20 @@ describe('aeon-urls', () => {
 
     const [, queryString] = url.split('?')
     expect(parseQueryString(queryString)['Transaction.CustomFields.SierraLocationCode']).to.be.a('undefined')
+  })
+
+  it('includes 260 $b in ItemPublisher', async () => {
+    const sierraItem = new SierraItem(require('../fixtures/item-37528709.json'))
+    const sierraBib = new SierraBib(require('../fixtures/bib-15088995.json'))
+    sierraItem._bibs = [sierraBib]
+
+    const esItem = new EsItem(sierraItem, new EsBib(sierraBib))
+
+    const url = await aeonUrlForItem(esItem)
+
+    const [, queryString] = url.split('?')
+    expect(parseQueryString(queryString).ItemPublisher).to.equal(
+      'Arte & História, 2000.'
+    )
   })
 })
