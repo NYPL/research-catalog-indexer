@@ -583,6 +583,9 @@ const run = async () => {
     cancelRun('Insufficient params')
   }
 
+  // Enable direct-db access to Item, Bib, and Holdings services:
+  overwriteModelPrefetch()
+
   if (
     argv.bibId ||
     argv.itemId ||
@@ -596,12 +599,15 @@ const run = async () => {
       })
     db.endPools()
   } else if (argv.csv) {
-    updateByCsv(argv)
+    await updateByCsv(argv)
       .catch((e) => {
         logger.error('Error ', e)
         logger.error(e.stack)
       })
   }
+
+  // Disable direct-db access to Item, Bib, and Holdings services (formality)
+  restoreModelPrefetch()
 }
 
 if (isCalledViaCommandLine) {
