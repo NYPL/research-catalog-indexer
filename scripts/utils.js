@@ -1,10 +1,12 @@
 const { diff, detailedDiff } = require('deep-object-diff')
 const aws = require('aws-sdk')
+
 const NyplSourceMapper = require('../lib/utils/nypl-source-mapper')
 const { bibById, itemById, holdingById } = require('../lib/platform-api/requests')
 const SierraBib = require('../lib/sierra-models/bib')
 const SierraItem = require('../lib/sierra-models/item')
 const SierraHolding = require('../lib/sierra-models/holding')
+const logger = require('../lib/logger')
 
 const awsInit = (profile) => {
   // Set aws creds:
@@ -18,7 +20,7 @@ const awsInit = (profile) => {
 }
 
 const die = (message) => {
-  console.log('Error: ' + message)
+  logger.error('Error: ' + message)
   process.exit()
 }
 
@@ -215,12 +217,73 @@ const secondsAsFriendlyDuration = (seconds) => {
   }
 }
 
+/**
+* Given an array of identifiers (e.g. ['b123', 'pb456']) and a batchSize
+*  1. converts the identifiers into objects that define `type`, `nyplSource`, and `id`
+*  2. groups the mapped identifiers by type and nyplSource
+*  3. returns a new 2d array where each array contains no more than `batchSize` elements
+*
+* For example:
+* batchByTypeAndNyplSource(['b123', 'b456', 'b789', 'pb987'], 2)
+* => [
+*      [
+*        { type: 'bib', nyplSource: 'sierra-nypl', id: '123' },
+*        { type: 'bib', nyplSource: 'sierra-nypl', id: '456' }
+*      ],
+*      [
+*        { type: 'bib', nyplSource: 'sierra-nypl', id: '789' }
+*      ],
+*      [
+*        { type: 'bib', nyplSource: 'recap-pul', id: '987' }
+*      ]
+*    ]
+*/
+const batchIdentifiersByTypeAndNyplSource = async (identifiers, batchSize = 100) => {
+  const mapper = await NyplSourceMapper.instance()
+
+  if (!/^[a-z]+\d+$/.test(identifiers[0])) {
+    logger.error(`Invalid prefixed id: ${identifiers[0]}`)
+    return
+  }
+  const splitIdentifiers = identifiers
+    .map(mapper.splitIdentifier.bind(mapper))
+
+  const batches = splitIdentifiers.reduce((h, ident) => {
+    if (!h[ident.type]) h[ident.type] = []
+    if (!h[ident.type][ident.nyplSource]) h[ident.type][ident.nyplSource] = [[]]
+    let currentBucket = h[ident.type][ident.nyplSource][h[ident.type][ident.nyplSource].length - 1]
+    if (currentBucket.length === batchSize) {
+      currentBucket = []
+      h[ident.type][ident.nyplSource].push(currentBucket)
+    }
+    currentBucket.push(ident)
+
+    return h
+  }, {})
+  let all = []
+  Object.keys(batches).forEach((type) => {
+    Object.keys(batches[type]).forEach((nyplSource) => {
+      all = all.concat(batches[type][nyplSource])
+    })
+  })
+  // Log out the groupings:
+  logger.info(`Grouped ${identifiers.length} identifiers into ${all.length} batches of length ${batchSize} by type and nyplSource:`)
+  Object.keys(batches).forEach((type) => {
+    Object.keys(batches[type]).forEach((nyplSource) => {
+      logger.info(`  ${type} ${nyplSource}: ${batches[type][nyplSource].length} batches`)
+    })
+  })
+
+  return all
+}
+
 module.exports = {
   awsInit,
+  batchIdentifiersByTypeAndNyplSource,
+  buildSierraModelFromUri,
+  camelize,
+  capitalize,
   die,
   printDiff,
-  capitalize,
-  camelize,
-  buildSierraModelFromUri,
   secondsAsFriendlyDuration
 }

@@ -58,7 +58,6 @@
  */
 const fs = require('fs')
 const { parse: csvParse } = require('csv-parse/sync')
-const NyplSourceMapper = require('../lib/utils/nypl-source-mapper')
 
 const argv = require('minimist')(process.argv.slice(2), {
   default: {
@@ -72,13 +71,28 @@ const argv = require('minimist')(process.argv.slice(2), {
   string: ['hasMarc', 'bibId'],
   integer: ['limit', 'offset', 'batchSize']
 })
-const dotenv = require('dotenv')
-dotenv.config({ path: argv.envfile })
 
-// Build NR app-name based on envfile:
-const newrelicEnvironment = argv.envfile.includes('production') ? 'Prod' : 'QA'
-process.env.NEW_RELIC_APP_NAME = `Research Catalog Indexer (${newrelicEnvironment})`
-const newrelic = require('newrelic')
+const isCalledViaCommandLine = /scripts\/bulk-index(.js)?/.test(fs.realpathSync(process.argv[1]))
+
+const dotenv = require('dotenv')
+
+// Conditionally set up NR instrumentation
+// Initialize `instrument` as a pass-through
+let instrument = (label, cb) => cb()
+// If NR is enablable..
+if (isCalledViaCommandLine && process.env.NEW_RELIC_LICENSE_KEY) {
+  // Build NR app-name based on envfile:
+  const newrelicEnvironment = argv.envfile.includes('production') ? 'Prod' : 'QA'
+  process.env.NEW_RELIC_APP_NAME = `Research Catalog Indexer (${newrelicEnvironment})`
+  const newrelic = require('newrelic')
+
+  // Overwrite `instrument` with appropriate NR function:
+  instrument = newrelic.startBackgroundTransaction.bind(newrelic)
+
+  /* (label, cb) => {
+    return newrelic.startBackgroundTransaction(label, cb)
+  } */
+}
 
 const { Pool } = require('pg')
 const Cursor = require('pg-cursor')
@@ -90,8 +104,14 @@ const {
   filteredSierraItemsForItems,
   filteredSierraHoldingsForHoldings
 } = require('../lib/prefilter')
-
-const { awsInit, die, camelize, capitalize, secondsAsFriendlyDuration } = require('./utils')
+const {
+  awsInit,
+  batchIdentifiersByTypeAndNyplSource,
+  die,
+  camelize,
+  capitalize,
+  secondsAsFriendlyDuration
+} = require('./utils')
 const logger = require('../lib/logger')
 logger.setLevel(process.env.LOG_LEVEL || 'info')
 
@@ -115,51 +135,58 @@ const usage = () => {
 // Ensure we're looking at the right profile and region
 awsInit()
 
-/**
- *  Given a db name (ITEM, BIB, HOLDINGS), decrypts related config and returns
- *  a db Pool instance
- */
-const initPool = async (prefix) => {
-  const [user, password, host] = await Promise.all([
-    kms.decrypt(process.env[`${prefix}_SERVICE_DB_USER`]),
-    kms.decrypt(process.env[`${prefix}_SERVICE_DB_PW`]),
-    kms.decrypt(process.env[`${prefix}_SERVICE_DB_HOST`])
-  ])
-    .catch((e) => {
-      logger.error('Error decrypting db config. Be sure to specify an --envfile with encrypted db connection info.')
-      process.exit()
-    })
-  const config = {
-    user,
-    host,
-    database: process.env[`${prefix}_SERVICE_DB_NAME`],
-    password
+const db = {
+  dbConnectionPools: null,
+
+  /**
+   *  Initialize all db connection pools
+   */
+  initPools: async () => {
+    db.dbConnectionPools = {
+      itemService: await db.initPool('ITEM'),
+      bibService: await db.initPool('BIB'),
+      holdingsService: await db.initPool('HOLDINGS')
+    }
+  },
+
+  /**
+   *  Given a db name (ITEM, BIB, HOLDINGS), decrypts related config and returns
+   *  a db Pool instance
+   */
+  initPool: async (prefix) => {
+    const [user, password, host] = await Promise.all([
+      kms.decrypt(process.env[`${prefix}_SERVICE_DB_USER`]),
+      kms.decrypt(process.env[`${prefix}_SERVICE_DB_PW`]),
+      kms.decrypt(process.env[`${prefix}_SERVICE_DB_HOST`])
+    ])
+      .catch((e) => {
+        logger.error('Error decrypting db config. Be sure to specify an --envfile with encrypted db connection info.')
+        process.exit()
+      })
+    const config = {
+      user,
+      host,
+      database: process.env[`${prefix}_SERVICE_DB_NAME`],
+      password
+    }
+    return new Pool(config)
+  },
+
+  /**
+   *  Get db connection for named db
+   */
+  connect: (name) => db.dbConnectionPools[name].connect(),
+
+  /**
+   *  Sever connections will all db connection pools
+   */
+  endPools: () => {
+    Object.entries(db.dbConnectionPools)
+      .forEach(([name, pool]) => {
+        logger.debug(`Stopping ${name} pool`)
+        pool.end()
+      })
   }
-  return new Pool(config)
-}
-
-let dbConnectionPools = null
-
-/**
- *  Initialize all db connection pools
- */
-const initPools = async () => {
-  dbConnectionPools = {
-    itemService: await initPool('ITEM'),
-    bibService: await initPool('BIB'),
-    holdingsService: await initPool('HOLDINGS')
-  }
-}
-
-/**
- *  Sever connections will all db connection pools
- */
-const endPools = () => {
-  Object.entries(dbConnectionPools)
-    .forEach(([name, pool]) => {
-      logger.debug(`Stopping ${name} pool`)
-      pool.end()
-    })
 }
 
 /**
@@ -186,7 +213,7 @@ const convertCommonModelProperties = (models) => {
  *  an array of items for that bib
  */
 const sierraItemsByBibIds = async (bibIds) => {
-  const itemClient = await dbConnectionPools.itemService.connect()
+  const itemClient = await db.connect('itemService')
 
   const query = `SELECT * FROM item
     WHERE nypl_source = 'sierra-nypl'
@@ -217,7 +244,7 @@ const sierraItemsByBibIds = async (bibIds) => {
  *  an array of holdings for that bib
  */
 const sierraHoldingsByBibIds = async (bibIds) => {
-  const holdingsClient = await dbConnectionPools.holdingsService.connect()
+  const holdingsClient = await db.connect('holdingsService')
 
   const query = `SELECT * FROM records
     WHERE "bibIds" && array[${bibIds.join(',')}]`
@@ -247,32 +274,46 @@ const sierraHoldingsByBibIds = async (bibIds) => {
  *  items and holdings by direct sql connection to the Item- and
  *  HoldingsService databases
  */
-modelPrefetcher.modelPrefetch = async (bibs) => {
-  if (bibs.length === 0) return bibs
 
-  // Get distinct bib ids:
-  const bibIds = Array.from(new Set(bibs.map((b) => b.id)))
+const overwriteModelPrefetch = () => {
+  const originalFunction = modelPrefetcher.modelPrefetch
 
-  // Fetch all items and holdings for this set of bibs:
-  const [itemsByBibId, holdingsByBibId] = await Promise.all([
-    sierraItemsByBibIds(bibIds),
-    sierraHoldingsByBibIds(bibIds)
-  ])
+  modelPrefetcher.modelPrefetch = async (bibs) => {
+    if (bibs.length === 0) return bibs
 
-  // Attach holdings and items to bibs:
-  bibs = bibs.map((bib) => {
-    // Wrap in SierraHolding class and apply suppression:
-    bib._holdings = filteredSierraHoldingsForHoldings(holdingsByBibId[bib.id] || [])
-    // Apply suppression/is-research filtering to items:
-    bib._items = filteredSierraItemsForItems(itemsByBibId[bib.id]) || []
-    // Ensure items have a reference to their bib:
-    bib._items.forEach((item) => {
-      item._bibs = [bib]
+    // Get distinct bib ids:
+    const bibIds = Array.from(new Set(bibs.map((b) => b.id)))
+
+    // Fetch all items and holdings for this set of bibs:
+    const [itemsByBibId, holdingsByBibId] = await Promise.all([
+      sierraItemsByBibIds(bibIds),
+      sierraHoldingsByBibIds(bibIds)
+    ])
+
+    // Attach holdings and items to bibs:
+    bibs = bibs.map((bib) => {
+      // Wrap in SierraHolding class and apply suppression:
+      bib._holdings = filteredSierraHoldingsForHoldings(holdingsByBibId[bib.id] || [])
+      // Apply suppression/is-research filtering to items:
+      bib._items = filteredSierraItemsForItems(itemsByBibId[bib.id]) || []
+      // Ensure items have a reference to their bib:
+      bib._items.forEach((item) => {
+        item._bibs = [bib]
+      })
+      return bib
     })
-    return bib
-  })
 
-  return bibs
+    return bibs
+  }
+
+  modelPrefetcher.modelPrefetch.originalFunction = originalFunction
+}
+
+const restoreModelPrefetch = () => {
+  if (modelPrefetcher.modelPrefetch.originalFunction) {
+    modelPrefetcher.modelPrefetch = modelPrefetcher.modelPrefetch.originalFunction
+      .bind(modelPrefetcher)
+  }
 }
 
 /**
@@ -325,7 +366,7 @@ const buildSqlQuery = (options) => {
   let type = null
 
   // Just querying a single bib/item id?
-  if (options.bibId || options.itemId) {
+  if (options.nyplSource && (options.bibId || options.itemId)) {
     type = options.bibId ? 'bib' : 'item'
     sqlFromAndWhere = `${type}
       WHERE nypl_source = $1
@@ -338,7 +379,7 @@ const buildSqlQuery = (options) => {
     options.limit = 1
 
   // Querying a collection of ids?
-  } else if (options.type && options.ids) {
+  } else if (options.nyplSource && options.type && options.ids) {
     type = options.type
     sqlFromAndWhere = `${type}
       WHERE nypl_source = $1
@@ -349,7 +390,7 @@ const buildSqlQuery = (options) => {
     options.limit = options.ids.length
 
   // Querying by existance of a marc field?
-  } else if (options.type && options.hasMarc) {
+  } else if (options.nyplSource && options.type && options.hasMarc) {
     type = options.type
     sqlFromAndWhere = `${type},
       json_array_elements(var_fields::json) jV
@@ -385,10 +426,10 @@ const updateByBibOrItemServiceQuery = async (options) => {
 
   const { query, params, type } = buildSqlQuery(options)
 
-  await newrelic.startBackgroundTransaction('Bulk-index initial query', async () => {
+  await instrument('Bulk-index initial query', async () => {
     logger.info(`Querying ${capitalize(type)}Service: ${query} | ${JSON.stringify(params)}`)
 
-    client = await dbConnectionPools[`${type}Service`].connect()
+    client = await db.connect(`${type}Service`)
     cursor = client.query(new Cursor(query, params))
   })
 
@@ -397,7 +438,7 @@ const updateByBibOrItemServiceQuery = async (options) => {
   const startTime = new Date()
   let done = false
   while (!done && (count < options.limit || !options.limit)) {
-    await newrelic.startBackgroundTransaction('Bulk-index batch', async () => {
+    await instrument('Bulk-index batch', async () => {
       // Log out progress so far:
       options.progressCallback(count, total, startTime)
 
@@ -449,9 +490,9 @@ const updateByBibOrItemServiceQuery = async (options) => {
 *  - offset {int} - 0-indexed line number to start at. Default 0
 *  - limit {int}  - Number of rows to process. Default no-limit.
 */
-const updateByCsv = async (options) => {
-  if (!options.csv) return die('--csv is required')
-  if (options.csvPrefixedIdColumn === null) return die('--csvPrefixedIdColumn is required')
+const updateByCsv = async (options = {}) => {
+  if (!options.csv) throw new Error('--csv is required')
+  if (isNaN(options.csvPrefixedIdColumn)) throw new Error('--csvPrefixedIdColumn is required')
 
   const rawContent = fs.readFileSync(options.csv, 'utf8')
   const rows = csvParse(rawContent)
@@ -467,12 +508,12 @@ const updateByCsv = async (options) => {
 
   // Test first row:
   if (!/^[a-z]+\d+$/.test(rowsToProcess[0])) {
-    console.log('First few rows: ', rowsToProcess.slice(0, 3))
+    logger.info('First few rows: ', rowsToProcess.slice(0, 3))
     throw new Error(`Invalid uri found in first row: ${rowsToProcess[0]}. Aborting.`)
   } else {
-    const batches = options.csvPrefixedIdColumn !== null ? await batchByTypeAndNyplSource(rowsToProcess, argv.batchSize) : [] // TODO
+    const batches = options.csvPrefixedIdColumn !== null ? await batchIdentifiersByTypeAndNyplSource(rowsToProcess, argv.batchSize) : [] // TODO
 
-    await initPools()
+    await db.initPools()
     // Add stats to options object (for progress reporting):
     const optionsWithStats = Object.assign(options, {
       count: 0,
@@ -480,68 +521,8 @@ const updateByCsv = async (options) => {
       startTime: new Date()
     })
     await processCsvBatch(batches, 0, optionsWithStats)
-    endPools()
+    db.endPools()
   }
-}
-
-/**
-* Given an array of identifiers (e.g. ['b123', 'pb456']) and a batchSize
-*  1. converts the identifiers into objects that define `type`, `nyplSource`, and `id`
-*  2. groups the mapped identifiers by type and nyplSource
-*  3. returns a new 2d array where each array contains no more than `batchSize` elements
-*
-* For example:
-* batchByTypeAndNyplSource(['b123', 'b456', 'b789', 'pb987'], 2)
-* => [
-*      [
-*        { type: 'bib', nyplSource: 'sierra-nypl', id: 1234 },
-*        { type: 'bib', nyplSource: 'sierra-nypl', id: 456 }
-*      ],
-*      [
-*        { type: 'bib', nyplSource: 'sierra-nypl', id: 789 }
-*      ],
-*      [
-*        { type: 'bib', nyplSource: 'recap-pul', id: 987}
-*      ]
-*    ]
-*/
-const batchByTypeAndNyplSource = async (identifiers, batchSize) => {
-  const mapper = await NyplSourceMapper.instance()
-
-  if (!/^[a-z]+\d+$/.test(identifiers[0])) {
-    logger.error(`Invalid prefixed id: ${identifiers[0]}`)
-    return
-  }
-  const splitIdentifiers = identifiers
-    .map(mapper.splitIdentifier.bind(mapper))
-
-  const batches = splitIdentifiers.reduce((h, ident) => {
-    if (!h[ident.type]) h[ident.type] = []
-    if (!h[ident.type][ident.nyplSource]) h[ident.type][ident.nyplSource] = [[]]
-    let currentBucket = h[ident.type][ident.nyplSource][h[ident.type][ident.nyplSource].length - 1]
-    if (currentBucket.length === batchSize) {
-      currentBucket = []
-      h[ident.type][ident.nyplSource].push(currentBucket)
-    }
-    currentBucket.push(ident)
-
-    return h
-  }, {})
-  let all = []
-  Object.keys(batches).forEach((type) => {
-    Object.keys(batches[type]).forEach((nyplSource) => {
-      all = all.concat(batches[type][nyplSource])
-    })
-  })
-  // Log out the groupings:
-  logger.info(`Grouped ${identifiers.length} identifiers into ${all.length} batches of length ${batchSize} by type and nyplSource:`)
-  Object.keys(batches).forEach((type) => {
-    Object.keys(batches[type]).forEach((nyplSource) => {
-      logger.info(`  ${type} ${nyplSource}: ${batches[type][nyplSource].length} batches`)
-    })
-  })
-
-  return all
 }
 
 /**
@@ -578,31 +559,42 @@ const processCsvBatch = async (batches, index = 0, options) => {
   }
 }
 
-// Validate args:
-if (
-  !(argv.type && argv.hasMarc) &&
-  !argv.bibId &&
-  !argv.itemId &&
-  !argv.csv
-) {
-  usage()
-  die('Insufficient params')
+/**
+* Abort a run for a named reason. When invoked via CLI, calls `die`
+* to kill process. Otherwise just logs error.
+*/
+const cancelRun = (message) => {
+  if (isCalledViaCommandLine) die(message)
+  else logger.error('Error: ' + message)
 }
 
 // Main dispatcher:
 const run = async () => {
+  dotenv.config({ path: argv.envfile })
+
+  // Validate args:
+  if (
+    !(argv.type && argv.hasMarc) &&
+    !argv.bibId &&
+    !argv.itemId &&
+    !argv.csv
+  ) {
+    usage()
+    cancelRun('Insufficient params')
+  }
+
   if (
     argv.bibId ||
     argv.itemId ||
     (argv.type && argv.hasMarc)
   ) {
-    await initPools()
-    updateByBibOrItemServiceQuery(argv)
+    await db.initPools()
+    await updateByBibOrItemServiceQuery(argv)
       .catch((e) => {
         logger.error('Error ', e)
         logger.error(e.stack)
       })
-    endPools()
+    db.endPools()
   } else if (argv.csv) {
     updateByCsv(argv)
       .catch((e) => {
@@ -612,4 +604,14 @@ const run = async () => {
   }
 }
 
-run()
+if (isCalledViaCommandLine) {
+  run()
+}
+
+module.exports = {
+  updateByCsv,
+  db,
+  buildSqlQuery,
+  overwriteModelPrefetch,
+  restoreModelPrefetch
+}
