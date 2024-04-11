@@ -239,6 +239,39 @@ const secondsAsFriendlyDuration = (seconds) => {
 *    ]
 */
 const batchIdentifiersByTypeAndNyplSource = async (identifiers, batchSize = 100) => {
+  const grouped = await groupIdentifiersByTypeAndNyplSource(identifiers)
+  const batches = grouped
+    // Apply batching to each group:
+    .map((group) => batch(group, batchSize))
+    // Flatten into a 1D array of grouped batches:
+    .flat()
+
+  // Log out the groupings:
+  logger.info(`Grouped ${identifiers.length} identifiers into ${batches.length} batches of length ${batchSize} by type and nyplSource`)
+
+  return batches
+}
+
+/**
+* Given an array of identifiers (e.g. ['b123', 'pb456']):
+*  1. converts the identifiers into objects that define `type`, `nyplSource`, and `id`
+*  2. groups the mapped identifiers by type and nyplSource
+*  3. returns a new 2d array where each array contains only identifers of the same type and nyplSource
+*
+* For example:
+* groupByTypeAndNyplSource(['b123', 'b456', 'b789', 'pb987'], 2)
+* => [
+*      [
+*        { type: 'bib', nyplSource: 'sierra-nypl', id: '123' },
+*        { type: 'bib', nyplSource: 'sierra-nypl', id: '456' },
+*        { type: 'bib', nyplSource: 'sierra-nypl', id: '789' }
+*      ],
+*      [
+*        { type: 'bib', nyplSource: 'recap-pul', id: '987' }
+*      ]
+*    ]
+*/
+const groupIdentifiersByTypeAndNyplSource = async (identifiers) => {
   const mapper = await NyplSourceMapper.instance()
 
   if (!/^[a-z]+\d+$/.test(identifiers[0])) {
@@ -248,42 +281,40 @@ const batchIdentifiersByTypeAndNyplSource = async (identifiers, batchSize = 100)
   const splitIdentifiers = identifiers
     .map(mapper.splitIdentifier.bind(mapper))
 
-  const batches = splitIdentifiers.reduce((h, ident) => {
+  const grouped = splitIdentifiers.reduce((h, ident) => {
     if (!h[ident.type]) h[ident.type] = []
-    if (!h[ident.type][ident.nyplSource]) h[ident.type][ident.nyplSource] = [[]]
-    let currentBucket = h[ident.type][ident.nyplSource][h[ident.type][ident.nyplSource].length - 1]
-    if (currentBucket.length === batchSize) {
-      currentBucket = []
-      h[ident.type][ident.nyplSource].push(currentBucket)
-    }
-    currentBucket.push(ident)
-
+    if (!h[ident.type][ident.nyplSource]) h[ident.type][ident.nyplSource] = []
+    h[ident.type][ident.nyplSource].push(ident)
     return h
   }, {})
-  let all = []
-  Object.keys(batches).forEach((type) => {
-    Object.keys(batches[type]).forEach((nyplSource) => {
-      all = all.concat(batches[type][nyplSource])
-    })
-  })
-  // Log out the groupings:
-  logger.info(`Grouped ${identifiers.length} identifiers into ${all.length} batches of length ${batchSize} by type and nyplSource:`)
-  Object.keys(batches).forEach((type) => {
-    Object.keys(batches[type]).forEach((nyplSource) => {
-      logger.info(`  ${type} ${nyplSource}: ${batches[type][nyplSource].length} batches`)
-    })
-  })
 
-  return all
+  // Flatten:
+  return Object.keys(grouped).reduce((all, type) => {
+    return all.concat(Object.values(grouped[type]))
+  }, [])
+}
+
+const batch = (things, batchSize = 100) => {
+  return things.reduce((batches, thing) => {
+    let currentBucket = batches[batches.length - 1]
+    if (!currentBucket || currentBucket.length === batchSize) {
+      currentBucket = []
+      batches.push(currentBucket)
+    }
+    currentBucket.push(thing)
+    return batches
+  }, [])
 }
 
 module.exports = {
   awsInit,
+  batch,
   batchIdentifiersByTypeAndNyplSource,
   buildSierraModelFromUri,
   camelize,
   capitalize,
   die,
+  groupIdentifiersByTypeAndNyplSource,
   printDiff,
   secondsAsFriendlyDuration
 }

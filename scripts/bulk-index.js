@@ -41,13 +41,13 @@
  *
  *  II. Updating by CSV:
  *
- *      node scripts/bulk-index --csv CSVFILE --csvPrefixedIdColumn 0 [--csvDropChecksum]
+ *      node scripts/bulk-index --csv CSVFILE --csvIdColumn 0 [--csvDropChecksum]
  *
  *    CSV is may contain any number of columns, but one of them must contain prefixed ids (e.g. b1234)
  *
  *    Arguments:
  *      csv {string}: Path to local CSV. Required.
- *      csvPrefixedIdColumn {int}: Column index (0-indexed) in CSV from which to extract the id. Required.
+ *      csvIdColumn {int}: Column index (0-indexed) in CSV from which to extract the id. Required.
  *      csvDropChecksum {boolean}: Whether or not to remove the Sierra check-digit from extracted ids. Default false.
  *      limit {int}: How many records to process. Default null (no limit)
  *      offset {int}: How many records to skip over in the CSV. Default 0
@@ -106,6 +106,7 @@ const {
 } = require('../lib/prefilter')
 const {
   awsInit,
+  batch,
   batchIdentifiersByTypeAndNyplSource,
   die,
   camelize,
@@ -127,7 +128,7 @@ const usage = () => {
     'Reindex by has-marc:',
     '  node reindex-record --envfile [path to .env] --type bib --hasMarc 001',
     'Reindex by CSV (containing prefixed ids):',
-    '  node reindex-record --envfile [path to .env] --csv FILE --csvPrefixedIdColumn 0'
+    '  node reindex-record --envfile [path to .env] --csv FILE --csvIdColumn 0'
   ].join('\n'))
   return true
 }
@@ -485,14 +486,18 @@ const updateByBibOrItemServiceQuery = async (options) => {
 *
 * Options param may include:
 *  - csv {string} - Path to local CSV file. Required.
-*  - csvPrefixedIdColumn {int} - Column index (0-indexed) in CSV from which to extract the id. Required.
+*  - csvIdColumn {int} - Column index (0-indexed) in CSV from which to extract the id. Required.
+*  - type {string} - Type of record (item, bib, holding). Required if CSV contains numeric ids.
+*  - nyplSource {string} - NyplSource value (e.g. sierra-nypl). Required if CSV contains numeric ids.
 *  - csvDropChecksum {boolean} - Whether or not to remove the Sierra check-digit from extracted ids. Default false.
 *  - offset {int} - 0-indexed line number to start at. Default 0
 *  - limit {int}  - Number of rows to process. Default no-limit.
 */
 const updateByCsv = async (options = {}) => {
   if (!options.csv) throw new Error('--csv is required')
-  if (isNaN(options.csvPrefixedIdColumn)) throw new Error('--csvPrefixedIdColumn is required')
+  if (isNaN(options.csvIdColumn)) {
+    throw new Error('--csvIdColumn is required')
+  }
 
   const rawContent = fs.readFileSync(options.csv, 'utf8')
   const rows = csvParse(rawContent)
@@ -500,18 +505,31 @@ const updateByCsv = async (options = {}) => {
   // Slice rows-to-process using --offset and --limit:
   const end = options.limit ? options.limit + options.offset : rows.length - 1
   const rowsToProcess = rows.slice(options.offset, end)
-    .map((row) => row[options.csvPrefixedIdColumn])
+    .map((row) => row[options.csvIdColumn])
     // Do input values have Sierra check digit? Remove them:
     .map((uri) => options.csvDropChecksum ? uri.substring(0, uri.length - 1) : uri)
 
   logger.info(`Processing ${options.csv} rows ${options.offset} to ${end} (${rowsToProcess.length} rows)`)
 
-  // Test first row:
-  if (!/^[a-z]+\d+$/.test(rowsToProcess[0])) {
+  // Test first row to determine whether we need to interpret as prefixed
+  // identifiers or just plain numeric ids:
+  const isPrefixedIds = /^[a-z]+\d+$/.test(rowsToProcess[0])
+  const isNumericIds = /^\d+$/.test(rowsToProcess[0])
+  if (!isPrefixedIds && !isNumericIds) {
     logger.info('First few rows: ', rowsToProcess.slice(0, 3))
-    throw new Error(`Invalid uri found in first row: ${rowsToProcess[0]}. Aborting.`)
+    throw new Error(`Invalid id found in first row: ${rowsToProcess[0]}. Aborting.`)
+  } else if (isNumericIds && (!options.type || !options.nyplSource)) {
+    throw new Error('CSV has numeric ids but no `type` specified')
   } else {
-    const batches = options.csvPrefixedIdColumn !== null ? await batchIdentifiersByTypeAndNyplSource(rowsToProcess, argv.batchSize) : [] // TODO
+    const batches = isPrefixedIds
+      ? await batchIdentifiersByTypeAndNyplSource(rowsToProcess, argv.batchSize)
+      : batch(
+        // Convert numeric ids to identifier objects (with nyplSource & type props):
+        rowsToProcess.map((id) => {
+          return { id, nyplSource: options.nyplSource, type: options.type }
+        }),
+        argv.batchSize
+      )
 
     await db.initPools()
     // Add stats to options object (for progress reporting):
@@ -527,7 +545,7 @@ const updateByCsv = async (options = {}) => {
 
 /**
 * Process a single CSV batch.
-* @param batches {object[][]} - 2D array of identifier objects
+* @param batches {object[][]} - 2D array of identifier objects (with nyplSource, type, and id props)
 * @param index {int} - Index of the batch to process.
 */
 const processCsvBatch = async (batches, index = 0, options) => {
@@ -601,8 +619,7 @@ const run = async () => {
   } else if (argv.csv) {
     await updateByCsv(argv)
       .catch((e) => {
-        logger.error('Error ', e)
-        logger.error(e.stack)
+        logger.error(`Error: ${e.message}`, e)
       })
   }
 

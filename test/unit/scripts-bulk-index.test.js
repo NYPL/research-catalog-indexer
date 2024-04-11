@@ -110,12 +110,33 @@ describe('scripts/bulk-index', () => {
 
     it('throws error when csv invalid', async () => {
       const csv = './nonexistantfile'
-      await expect(bulkIndexer.updateByCsv({ csv, csvPrefixedIdColumn: 0 })).to.be.rejectedWith('no such file or directory')
+      await expect(bulkIndexer.updateByCsv({ csv, csvIdColumn: 0 })).to.be.rejectedWith('no such file or directory')
+    })
+
+    it('given a csv with numeric ids, throws error if type or nyplSource not given', async () => {
+      const csv = './test/fixtures/bulk-index-by-csv-numeric-ids.csv'
+      await expect(bulkIndexer.updateByCsv({ csv, csvIdColumn: 0 })).to.be.rejected
+      await expect(bulkIndexer.updateByCsv({ csv, csvIdColumn: 0, type: 'bib' })).to.be.rejected
+      await expect(bulkIndexer.updateByCsv({ csv, csvIdColumn: 0, nyplSource: 'sierra-nypl' })).to.be.rejected
     })
 
     it('given a csv, processes identified records', async () => {
-      const csv = './test/fixtures/bulk-index-by-csv.csv'
-      await expect(bulkIndexer.updateByCsv({ csv, csvPrefixedIdColumn: 0 })).to.be.fulfilled
+      const csv = './test/fixtures/bulk-index-by-csv-numeric-ids.csv'
+      await expect(bulkIndexer.updateByCsv({ csv, csvIdColumn: 0, type: 'bib', nyplSource: 'sierra-nypl' })).to.be.fulfilled
+
+      // What records were processed?
+      const [type, records] = index.processRecords.getCall(0).args
+      expect(type).to.eq('Bib')
+      expect(records).to.have.lengthOf(1)
+      expect(records[0]).to.deep.include({
+        id: 1234,
+        nyplSource: 'sierra-nypl'
+      })
+    })
+
+    it('given a csv, processes identified records', async () => {
+      const csv = './test/fixtures/bulk-index-by-csv-prefixed-ids.csv'
+      await expect(bulkIndexer.updateByCsv({ csv, csvIdColumn: 0 })).to.be.fulfilled
 
       // What records were processed?
       const [type, records] = index.processRecords.getCall(0).args
