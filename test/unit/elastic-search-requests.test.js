@@ -66,14 +66,16 @@ describe('elastic search requests', () => {
       esRequests.__set__(
         '_indexGeneric',
         () => Promise.resolve({
-          errors: true,
-          items: [
-            {
-              index: {
-                error: { type: 'ya', reason: 'messed up' }
+          body: {
+            errors: true,
+            items: [
+              {
+                index: {
+                  error: { type: 'ya', reason: 'messed up' }
+                }
               }
-            }
-          ]
+            ]
+          }
         })
       )
       const loggerSpy = sinon.spy(logger, 'error')
