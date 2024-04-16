@@ -11,7 +11,7 @@ dotenv.config({ path: './config/test.env' })
 
 before(() => {
   sinon.stub(kms, 'decrypt').callsFake((val) => {
-    // If updating fixtures, pass the origianl value through because local
+    // If updating fixtures, pass the original value through because local
     // config is decrypted
     return Promise.resolve(process.UPDATE_FIXTURES ? val : 'decrypted!')
   })

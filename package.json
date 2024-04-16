@@ -31,7 +31,7 @@
     "pg": "^8.11.3",
     "pg-cursor": "^2.10.3",
     "sync-request": "^6.1.0",
-    "winston": "^3.8.2"
+    "winston": "^3.12.0"
   },
   "standard": {
     "globals": [
