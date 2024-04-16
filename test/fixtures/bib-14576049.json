@@ -1,0 +1,500 @@
+{
+  "id": "14576049",
+  "nyplSource": "sierra-nypl",
+  "nyplType": "bib",
+  "updatedDate": "2023-07-18T14:20:31-04:00",
+  "createdDate": "2008-12-18T20:30:00-05:00",
+  "deletedDate": null,
+  "deleted": false,
+  "locations": [
+    {
+      "code": "pat",
+      "name": "Performing Arts Research Collections - Theatre"
+    }
+  ],
+  "suppressed": false,
+  "lang": {
+    "code": "eng",
+    "name": "English"
+  },
+  "title": "Anon. A play in 3 acts.",
+  "author": "",
+  "materialType": {
+    "code": "t  ",
+    "value": "MANUSCRIPT"
+  },
+  "bibLevel": {
+    "code": "m",
+    "value": "MONOGRAPH"
+  },
+  "publishYear": null,
+  "catalogDate": "2000-05-02",
+  "country": {
+    "code": "enk",
+    "name": "England"
+  },
+  "normTitle": "anon a play in 3 acts",
+  "normAuthor": "",
+  "standardNumbers": [],
+  "controlNumber": "43950332",
+  "fixedFields": {
+    "24": {
+      "label": "Language",
+      "value": "eng",
+      "display": "English"
+    },
+    "25": {
+      "label": "Skip",
+      "value": "0",
+      "display": null
+    },
+    "26": {
+      "label": "Location",
+      "value": "pat  ",
+      "display": "Performing Arts Research Collections - Theatre"
+    },
+    "27": {
+      "label": "",
+      "value": "1",
+      "display": null
+    },
+    "28": {
+      "label": "Cat. Date",
+      "value": "2000-05-02",
+      "display": null
+    },
+    "29": {
+      "label": "Bib Level",
+      "value": "m",
+      "display": "MONOGRAPH"
+    },
+    "30": {
+      "label": "Material Type",
+      "value": "t  ",
+      "display": "MANUSCRIPT"
+    },
+    "31": {
+      "label": "Bib Code 3",
+      "value": "-",
+      "display": null
+    },
+    "80": {
+      "label": "Record Type",
+      "value": "b",
+      "display": null
+    },
+    "81": {
+      "label": "Record Number",
+      "value": "14576049",
+      "display": null
+    },
+    "83": {
+      "label": "Created Date",
+      "value": "2008-12-18T20:30:00Z",
+      "display": null
+    },
+    "84": {
+      "label": "Updated Date",
+      "value": "2023-07-18T14:20:31Z",
+      "display": null
+    },
+    "85": {
+      "label": "No. of Revisions",
+      "value": "13",
+      "display": null
+    },
+    "86": {
+      "label": "Agency",
+      "value": "1",
+      "display": null
+    },
+    "89": {
+      "label": "Country",
+      "value": "enk",
+      "display": "England"
+    },
+    "98": {
+      "label": "",
+      "value": "2023-06-07T20:57:26Z",
+      "display": null
+    },
+    "107": {
+      "label": "MARC Type",
+      "value": " ",
+      "display": null
+    }
+  },
+  "varFields": [
+    {
+      "fieldTag": "b",
+      "marcTag": "700",
+      "ind1": "1",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Barrie, J. M."
+        },
+        {
+          "tag": "q",
+          "content": "(James Matthew),"
+        },
+        {
+          "tag": "d",
+          "content": "1860-1937."
+        },
+        {
+          "tag": "t",
+          "content": "Peter Pan."
+        }
+      ]
+    },
+    {
+      "fieldTag": "d",
+      "marcTag": "650",
+      "ind1": " ",
+      "ind2": "0",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "English drama."
+        }
+      ]
+    },
+    {
+      "fieldTag": "d",
+      "marcTag": "655",
+      "ind1": " ",
+      "ind2": "7",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Promptbooks."
+        },
+        {
+          "tag": "2",
+          "content": "lcsh"
+        }
+      ]
+    },
+    {
+      "fieldTag": "l",
+      "marcTag": "035",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "(WaOLN)R290000011"
+        }
+      ]
+    },
+    {
+      "fieldTag": "n",
+      "marcTag": "500",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Typescript with staging directions underlined in red."
+        }
+      ]
+    },
+    {
+      "fieldTag": "n",
+      "marcTag": "500",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Includes floor plans."
+        }
+      ]
+    },
+    {
+      "fieldTag": "n",
+      "marcTag": "500",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Based on J.M. Barrie's Peter Pan."
+        }
+      ]
+    },
+    {
+      "fieldTag": "o",
+      "marcTag": "001",
+      "ind1": " ",
+      "ind2": " ",
+      "content": "43950332",
+      "subfields": null
+    },
+    {
+      "fieldTag": "p",
+      "marcTag": "260",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "[London]"
+        },
+        {
+          "tag": "b",
+          "content": "Miss Dicken's Type-Writing Office"
+        },
+        {
+          "tag": "c",
+          "content": "[n.d.]"
+        }
+      ]
+    },
+    {
+      "fieldTag": "q",
+      "marcTag": "852",
+      "ind1": "8",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "h",
+          "content": "NCOF (Anon)"
+        }
+      ]
+    },
+    {
+      "fieldTag": "r",
+      "marcTag": "300",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "50, 68, 78 l."
+        },
+        {
+          "tag": "c",
+          "content": "21 cm."
+        }
+      ]
+    },
+    {
+      "fieldTag": "t",
+      "marcTag": "245",
+      "ind1": "0",
+      "ind2": "0",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Anon."
+        },
+        {
+          "tag": "b",
+          "content": "A play in 3 acts."
+        }
+      ]
+    },
+    {
+      "fieldTag": "v",
+      "marcTag": "959",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": ".b62001899"
+        },
+        {
+          "tag": "b",
+          "content": "11-16-07"
+        },
+        {
+          "tag": "c",
+          "content": "05-02-00"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "856",
+      "ind1": "4",
+      "ind2": "0",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "u",
+          "content": "https://specialcollections.nypl.org/aeon/Aeon.dll?Action=10&Form=30&Title=Anon.+A+play+in+3+acts.&Site=LPATH&CallNumber=NCOF+(Anon)&ItemPlace=[London]&ItemPublisher=Miss+Dicken's+Type-Writing+Office&Date=[n.d.]&ItemInfo3=https://catalog.nypl.org/record=b14576049&ReferenceNumber=b145760492&ItemInfo1=SUPERVISED+USE&ItemNumber=33433063626562&ItemISxN=i170519466&Genre=Manuscript&Subdivision=rcpt8&Location=ReCAP"
+        },
+        {
+          "tag": "z",
+          "content": "Request Access to Theatre Division Special Collections material"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "856",
+      "ind1": "4",
+      "ind2": "1",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "u",
+          "content": "https://digitalcollections.nypl.org/items/5dffeff0-381e-0131-9fcc-58d385a7bbd0"
+        },
+        {
+          "tag": "z",
+          "content": "NYPL Digital Collections"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "008",
+      "ind1": " ",
+      "ind2": " ",
+      "content": "000429nuuuuuuuuenk           000 d eng dntmK  ",
+      "subfields": null
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "003",
+      "ind1": " ",
+      "ind2": " ",
+      "content": "OCoLC",
+      "subfields": null
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "005",
+      "ind1": " ",
+      "ind2": " ",
+      "content": "20000501210553.5",
+      "subfields": null
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "040",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "NYP"
+        },
+        {
+          "tag": "c",
+          "content": "NYP"
+        },
+        {
+          "tag": "d",
+          "content": "WaOLN"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "049",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "NYPT"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "946",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "r"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "997",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "pt"
+        },
+        {
+          "tag": "b",
+          "content": "05-02-00"
+        },
+        {
+          "tag": "c",
+          "content": "m"
+        },
+        {
+          "tag": "d",
+          "content": "t"
+        },
+        {
+          "tag": "e",
+          "content": "-"
+        },
+        {
+          "tag": "f",
+          "content": "eng"
+        },
+        {
+          "tag": "g",
+          "content": "enk"
+        },
+        {
+          "tag": "h",
+          "content": "0"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "910",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "RL"
+        }
+      ]
+    },
+    {
+      "fieldTag": "_",
+      "marcTag": null,
+      "ind1": null,
+      "ind2": null,
+      "content": "00000ntm  2200265K  4500",
+      "subfields": null
+    }
+  ]
+}
