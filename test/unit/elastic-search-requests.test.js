@@ -59,7 +59,6 @@ describe('elastic search requests', () => {
     })
   })
   describe('writeRecords', () => {
-    process.env.ELASTIC_RESOURCES_INDEX_NAME = 'indexName'
     it('logs errors', async () => {
       esRequests = rewire('../../lib/elastic-search/requests')
 

@@ -1,10 +1,12 @@
 const { diff, detailedDiff } = require('deep-object-diff')
 const aws = require('aws-sdk')
+
 const NyplSourceMapper = require('../lib/utils/nypl-source-mapper')
 const { bibById, itemById, holdingById } = require('../lib/platform-api/requests')
 const SierraBib = require('../lib/sierra-models/bib')
 const SierraItem = require('../lib/sierra-models/item')
 const SierraHolding = require('../lib/sierra-models/holding')
+const logger = require('../lib/logger')
 
 const awsInit = (profile) => {
   // Set aws creds:
@@ -18,7 +20,7 @@ const awsInit = (profile) => {
 }
 
 const die = (message) => {
-  console.log('Error: ' + message)
+  logger.error('Error: ' + message)
   process.exit()
 }
 
@@ -176,11 +178,143 @@ function printDiff (remote, local, verbose) {
   })
 }
 
+/**
+* Given a number of seconds, returns an object that defines:
+*  - days: Number of whole days
+*  - hours: Number of whole hours
+*  - minutes: Number of whole minutes
+*  - seconds: Number of whole seconds
+*  - display: A string representation of the duration incorporating above properties
+*/
+const secondsAsFriendlyDuration = (seconds) => {
+  const secondsPerHour = 60 * 60
+  const secondsPerDay = secondsPerHour * 24
+
+  const days = Math.floor(seconds / secondsPerDay)
+  seconds -= days * secondsPerDay
+
+  const hours = Math.floor(seconds / secondsPerHour)
+  seconds -= hours * secondsPerHour
+
+  const minutes = Math.floor(seconds / 60)
+  seconds -= minutes * 60
+
+  seconds = Math.floor(seconds)
+
+  return {
+    days,
+    hours,
+    minutes,
+    seconds,
+    display: [
+      days ? `${days}d` : null,
+      hours ? `${hours}h` : null,
+      minutes ? `${minutes}m` : null,
+      seconds ? `${seconds}s` : null
+    ]
+      .filter((statement) => statement)
+      .join(' ')
+  }
+}
+
+/**
+* Given an array of identifiers (e.g. ['b123', 'pb456']) and a batchSize
+*  1. converts the identifiers into objects that define `type`, `nyplSource`, and `id`
+*  2. groups the mapped identifiers by type and nyplSource
+*  3. returns a new 2d array where each array contains no more than `batchSize` elements
+*
+* For example:
+* batchByTypeAndNyplSource(['b123', 'b456', 'b789', 'pb987'], 2)
+* => [
+*      [
+*        { type: 'bib', nyplSource: 'sierra-nypl', id: '123' },
+*        { type: 'bib', nyplSource: 'sierra-nypl', id: '456' }
+*      ],
+*      [
+*        { type: 'bib', nyplSource: 'sierra-nypl', id: '789' }
+*      ],
+*      [
+*        { type: 'bib', nyplSource: 'recap-pul', id: '987' }
+*      ]
+*    ]
+*/
+const batchIdentifiersByTypeAndNyplSource = async (identifiers, batchSize = 100) => {
+  const grouped = await groupIdentifiersByTypeAndNyplSource(identifiers)
+  const batches = grouped
+    // Apply batching to each group:
+    .map((group) => batch(group, batchSize))
+    // Flatten into a 1D array of grouped batches:
+    .flat()
+
+  // Log out the groupings:
+  logger.info(`Grouped ${identifiers.length} identifiers into ${batches.length} batches of length ${batchSize} by type and nyplSource`)
+
+  return batches
+}
+
+/**
+* Given an array of identifiers (e.g. ['b123', 'pb456']):
+*  1. converts the identifiers into objects that define `type`, `nyplSource`, and `id`
+*  2. groups the mapped identifiers by type and nyplSource
+*  3. returns a new 2d array where each array contains only identifers of the same type and nyplSource
+*
+* For example:
+* groupByTypeAndNyplSource(['b123', 'b456', 'b789', 'pb987'], 2)
+* => [
+*      [
+*        { type: 'bib', nyplSource: 'sierra-nypl', id: '123' },
+*        { type: 'bib', nyplSource: 'sierra-nypl', id: '456' },
+*        { type: 'bib', nyplSource: 'sierra-nypl', id: '789' }
+*      ],
+*      [
+*        { type: 'bib', nyplSource: 'recap-pul', id: '987' }
+*      ]
+*    ]
+*/
+const groupIdentifiersByTypeAndNyplSource = async (identifiers) => {
+  const mapper = await NyplSourceMapper.instance()
+
+  if (!/^[a-z]+\d+$/.test(identifiers[0])) {
+    logger.error(`Invalid prefixed id: ${identifiers[0]}`)
+    return
+  }
+  const splitIdentifiers = identifiers
+    .map(mapper.splitIdentifier.bind(mapper))
+
+  const grouped = splitIdentifiers.reduce((h, ident) => {
+    if (!h[ident.type]) h[ident.type] = []
+    if (!h[ident.type][ident.nyplSource]) h[ident.type][ident.nyplSource] = []
+    h[ident.type][ident.nyplSource].push(ident)
+    return h
+  }, {})
+
+  // Flatten:
+  return Object.keys(grouped).reduce((all, type) => {
+    return all.concat(Object.values(grouped[type]))
+  }, [])
+}
+
+const batch = (things, batchSize = 100) => {
+  return things.reduce((batches, thing) => {
+    let currentBucket = batches[batches.length - 1]
+    if (!currentBucket || currentBucket.length === batchSize) {
+      currentBucket = []
+      batches.push(currentBucket)
+    }
+    currentBucket.push(thing)
+    return batches
+  }, [])
+}
+
 module.exports = {
   awsInit,
-  die,
-  printDiff,
-  capitalize,
+  batch,
+  batchIdentifiersByTypeAndNyplSource,
+  buildSierraModelFromUri,
   camelize,
-  buildSierraModelFromUri
+  capitalize,
+  die,
+  groupIdentifiersByTypeAndNyplSource,
+  printDiff,
+  secondsAsFriendlyDuration
 }

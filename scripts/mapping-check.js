@@ -9,11 +9,12 @@
 *
 */
 const dotenv = require('dotenv')
+const fs = require('fs')
 const assert = require('assert')
 const argv = require('minimist')(process.argv.slice(2))
 const logger = require('../lib/logger')
 const { die } = require('./utils')
-const { client: esClient } = require('../lib/elastic-search/client')
+const esClient = require('../lib/elastic-search/client')
 const { schema } = require('../lib/elastic-search/index-schema')
 
 const usage = () => {
@@ -21,28 +22,28 @@ const usage = () => {
   return true
 }
 
-if (!argv.envfile) usage() && die('--envfile required')
-
-dotenv.config({ path: argv.envfile })
-logger.setLevel(process.env.LOG_LEVEL || 'info')
-
 /**
 * Given an index name, returns the remote mapping object
 */
-const getMapping = async (index) => {
-  const client = await esClient()
+exports.getMapping = async (index) => {
+  const client = await esClient.client()
   const resp = await client.indices.getMapping({ index })
   return resp.body[index].mappings.resource.properties
 }
+
+/**
+* Get the current schema
+*/
+exports.currentSchema = schema
 
 /**
  * Given an indexname, queries the remote mapping active on the server
  * and produces a hash with `msisingProperties` and `misMappedProperties`
  */
 const mappingCheck = async (indexName) => {
-  const remoteMapping = await getMapping(indexName)
+  const remoteMapping = await exports.getMapping(indexName)
 
-  const report = mappingsDiff(schema(), remoteMapping)
+  const report = exports.mappingsDiff(exports.currentSchema(), remoteMapping)
 
   return report
 }
@@ -82,13 +83,13 @@ const deepEqual = function (o1, o2) {
 * - local {object} - The mapping definition for the local mapping (if present)
 * - rmote {object} - The mapping definition for the remote mapping (if present)
 **/
-const mappingsDiff = (localMapping, remoteMapping) => {
+exports.mappingsDiff = (localMapping, remoteMapping) => {
   // Create a report consisting of { localOnlyProperties: [...], unequalMappings: [...], remoteOnlyMappings: [] }
   const report = Object.keys(localMapping)
     .reduce((report, property) => {
       // If it's nested/object, recurse:
       if (localMapping[property].properties) {
-        const nestedReport = mappingsDiff(localMapping[property].properties, remoteMapping[property] ? remoteMapping[property].properties : {})
+        const nestedReport = exports.mappingsDiff(localMapping[property].properties, remoteMapping[property] ? remoteMapping[property].properties : {})
         return Object.keys(nestedReport).reduce((newReport, key) => {
           newReport[key] = newReport[key].concat(nestedReport[key].map((instance) => {
             return Object.assign({}, instance, { property: `${property}.${instance.property}` })
@@ -167,8 +168,9 @@ const reportOn = function (heading, instances) {
 /**
 * Main script function.
 */
-const run = async () => {
-  const indexName = argv.index || process.env.ELASTIC_RESOURCES_INDEX_NAME
+exports.run = async (options = {}) => {
+  console.info(options.index, process.env.ELASTIC_RESOURCES_INDEX_NAME)
+  const indexName = options.index || process.env.ELASTIC_RESOURCES_INDEX_NAME
   console.log(`Running mapping-check on ${indexName}`)
   const mapping = await mappingCheck(indexName)
 
@@ -200,4 +202,12 @@ const run = async () => {
   }
 }
 
-run()
+const isCalledViaCommandLine = /scripts\/mapping-check(.js)?/.test(fs.realpathSync(process.argv[1]))
+if (isCalledViaCommandLine) {
+  if (!argv.envfile) usage() && die('--envfile required')
+
+  dotenv.config({ path: argv.envfile })
+  logger.setLevel(process.env.LOG_LEVEL || 'info')
+
+  exports.run(argv)
+}
