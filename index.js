@@ -36,10 +36,8 @@ const processRecords = async (type, records, options = {}) => {
 
   if (recordsToIndex.length) {
     if (options.dryrun) {
-      console.log(`DRYRUN: Skipping writing ${recordsToIndex.length} records`)
+      logger.info(`DRYRUN: Skipping writing ${recordsToIndex.length} records`)
     } else {
-      await elastic.writeRecords(recordsToIndex)
-
       // Write records to ES:
       await elastic.writeRecords(recordsToIndex)
 
@@ -64,7 +62,7 @@ const processRecords = async (type, records, options = {}) => {
 
   const message = messages.length ? messages.join('; ') : 'Nothing to do.'
 
-  logger.info(message)
+  logger.info((options.dryrun ? 'DRYRUN: ' : '') + message)
 
   return {
     message
