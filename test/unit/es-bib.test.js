@@ -1219,4 +1219,12 @@ describe('EsBib', function () {
       expect(items).to.have.lengthOf(4)
     })
   })
+
+  describe('addedAuthorTitle', function () {
+    it('should return array of author titles', function () {
+      const record = new SierraBib(require('../fixtures/bib-14576049.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.addedAuthorTitle()).to.deep.equal(['Peter Pan.'])
+    })
+  })
 })
