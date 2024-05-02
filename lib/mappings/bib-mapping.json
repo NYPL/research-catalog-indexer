@@ -6,10 +6,13 @@
       }
     ]
   },
-  "aeonURL": {
+  "addedAuthorTitle": {
     "paths": [
       {
-        "notes": "856 $u matching Aeon base URLs"
+        "marc": "700",
+        "subfields": [
+          "t"
+        ]
       }
     ]
   },

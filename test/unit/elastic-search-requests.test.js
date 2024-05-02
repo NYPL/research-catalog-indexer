@@ -59,21 +59,22 @@ describe('elastic search requests', () => {
     })
   })
   describe('writeRecords', () => {
-    process.env.ELASTIC_RESOURCES_INDEX_NAME = 'indexName'
     it('logs errors', async () => {
       esRequests = rewire('../../lib/elastic-search/requests')
 
       esRequests.__set__(
         '_indexGeneric',
         () => Promise.resolve({
-          errors: true,
-          items: [
-            {
-              index: {
-                error: { type: 'ya', reason: 'messed up' }
+          body: {
+            errors: true,
+            items: [
+              {
+                index: {
+                  error: { type: 'ya', reason: 'messed up' }
+                }
               }
-            }
-          ]
+            ]
+          }
         })
       )
       const loggerSpy = sinon.spy(logger, 'error')
