@@ -1,0 +1,556 @@
+{
+  "id": "13966829",
+  "nyplSource": "sierra-nypl",
+  "nyplType": "bib",
+  "updatedDate": "2021-11-09T03:26:37-05:00",
+  "createdDate": "2008-12-17T17:50:11-05:00",
+  "deletedDate": null,
+  "deleted": false,
+  "locations": [
+    {
+      "code": "map",
+      "name": "SASB - Map Division - Rm 117"
+    }
+  ],
+  "suppressed": false,
+  "lang": {
+    "code": "eng",
+    "name": "English"
+  },
+  "title": "Geographers' street plan of Oxford",
+  "author": "Geographers' A-Z Map Company.",
+  "materialType": {
+    "code": "e  ",
+    "value": "MAP"
+  },
+  "bibLevel": {
+    "code": "m",
+    "value": "MONOGRAPH"
+  },
+  "publishYear": 1975,
+  "catalogDate": "2000-12-27",
+  "country": {
+    "code": "enk",
+    "name": "England"
+  },
+  "normTitle": "geographers street plan of oxford",
+  "normAuthor": "geographers a z map company",
+  "standardNumbers": [],
+  "controlNumber": "40604779",
+  "fixedFields": {
+    "24": {
+      "label": "Language",
+      "value": "eng",
+      "display": "English"
+    },
+    "25": {
+      "label": "Skip",
+      "value": "0",
+      "display": null
+    },
+    "26": {
+      "label": "Location",
+      "value": "map  ",
+      "display": "SASB - Map Division - Rm 117"
+    },
+    "27": {
+      "label": "COPIES",
+      "value": "1",
+      "display": null
+    },
+    "28": {
+      "label": "Cat. Date",
+      "value": "2000-12-27",
+      "display": null
+    },
+    "29": {
+      "label": "Bib Level",
+      "value": "m",
+      "display": "MONOGRAPH"
+    },
+    "30": {
+      "label": "Material Type",
+      "value": "e  ",
+      "display": "MAP"
+    },
+    "31": {
+      "label": "Bib Code 3",
+      "value": "-",
+      "display": null
+    },
+    "80": {
+      "label": "Record Type",
+      "value": "b",
+      "display": null
+    },
+    "81": {
+      "label": "Record Number",
+      "value": "13966829",
+      "display": null
+    },
+    "83": {
+      "label": "Created Date",
+      "value": "2008-12-17T17:50:11Z",
+      "display": null
+    },
+    "84": {
+      "label": "Updated Date",
+      "value": "2021-11-09T03:26:37Z",
+      "display": null
+    },
+    "85": {
+      "label": "No. of Revisions",
+      "value": "10",
+      "display": null
+    },
+    "86": {
+      "label": "Agency",
+      "value": "1",
+      "display": null
+    },
+    "89": {
+      "label": "Country",
+      "value": "enk",
+      "display": "England"
+    },
+    "98": {
+      "label": "PDATE",
+      "value": "2021-10-21T01:58:01Z",
+      "display": null
+    },
+    "107": {
+      "label": "MARC Type",
+      "value": " ",
+      "display": null
+    }
+  },
+  "varFields": [
+    {
+      "fieldTag": "a",
+      "marcTag": "110",
+      "ind1": "2",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Geographers' A-Z Map Company."
+        }
+      ]
+    },
+    {
+      "fieldTag": "b",
+      "marcTag": "700",
+      "ind1": "1",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Pearsall, Phyllis."
+        }
+      ]
+    },
+    {
+      "fieldTag": "c",
+      "marcTag": "852",
+      "ind1": "8",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "h",
+          "content": "Map Div. 98-1111"
+        },
+        {
+          "tag": "m",
+          "content": "[Filed flat]"
+        }
+      ]
+    },
+    {
+      "fieldTag": "d",
+      "marcTag": "651",
+      "ind1": " ",
+      "ind2": "0",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Oxford (England)"
+        },
+        {
+          "tag": "v",
+          "content": "Maps."
+        }
+      ]
+    },
+    {
+      "fieldTag": "e",
+      "marcTag": "255",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Scale [1:14,080]. 4 1/2 in. to 1 mile."
+        }
+      ]
+    },
+    {
+      "fieldTag": "l",
+      "marcTag": "035",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "(WaOLN)nyp0553946"
+        }
+      ]
+    },
+    {
+      "fieldTag": "n",
+      "marcTag": "500",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Includes \"Index to streets,\" \"Reference to colleges,\" and inset."
+        }
+      ]
+    },
+    {
+      "fieldTag": "n",
+      "marcTag": "500",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "In lower left margin: BDH."
+        }
+      ]
+    },
+    {
+      "fieldTag": "n",
+      "marcTag": "590",
+      "ind1": "1",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "NYPL copy lacks cover."
+        }
+      ]
+    },
+    {
+      "fieldTag": "o",
+      "marcTag": "001",
+      "ind1": " ",
+      "ind2": " ",
+      "content": "40604779",
+      "subfields": null
+    },
+    {
+      "fieldTag": "p",
+      "marcTag": "260",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Sevenoaks, Kent :"
+        },
+        {
+          "tag": "b",
+          "content": "Geographers' A-Z Map Co.,"
+        },
+        {
+          "tag": "c",
+          "content": "[1975?]"
+        }
+      ]
+    },
+    {
+      "fieldTag": "q",
+      "marcTag": "852",
+      "ind1": "8",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "h",
+          "content": "Map Div. 98-1111"
+        },
+        {
+          "tag": "m",
+          "content": "[Filed flat]"
+        }
+      ]
+    },
+    {
+      "fieldTag": "r",
+      "marcTag": "300",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "1 map ;"
+        },
+        {
+          "tag": "c",
+          "content": "54 x 73 cm. folded in cover 21 x 11 cm."
+        }
+      ]
+    },
+    {
+      "fieldTag": "s",
+      "marcTag": "490",
+      "ind1": "0",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Geographers' A to Z series"
+        }
+      ]
+    },
+    {
+      "fieldTag": "t",
+      "marcTag": "245",
+      "ind1": "1",
+      "ind2": "0",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Geographers' street plan of Oxford /"
+        },
+        {
+          "tag": "c",
+          "content": "produced under the direction of Phyllis Pearsall."
+        }
+      ]
+    },
+    {
+      "fieldTag": "u",
+      "marcTag": "246",
+      "ind1": "1",
+      "ind2": "4",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Oxford street plan and index"
+        }
+      ]
+    },
+    {
+      "fieldTag": "v",
+      "marcTag": "959",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": ".b55504863"
+        },
+        {
+          "tag": "b",
+          "content": "08-21-07"
+        },
+        {
+          "tag": "c",
+          "content": "01-13-99"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "003",
+      "ind1": " ",
+      "ind2": " ",
+      "content": "OCoLC",
+      "subfields": null
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "005",
+      "ind1": " ",
+      "ind2": " ",
+      "content": "20001116200400.2",
+      "subfields": null
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "007",
+      "ind1": " ",
+      "ind2": " ",
+      "content": "aj aanzn",
+      "subfields": null
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "008",
+      "ind1": " ",
+      "ind2": " ",
+      "content": "990112s1975    enk       a     1   eng dnemIa ",
+      "subfields": null
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "034",
+      "ind1": "1",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "a"
+        },
+        {
+          "tag": "b",
+          "content": "14080"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "040",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "NYP"
+        },
+        {
+          "tag": "c",
+          "content": "NYP"
+        },
+        {
+          "tag": "d",
+          "content": "WaOLN"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "049",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "NYPK"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "052",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "5754"
+        },
+        {
+          "tag": "b",
+          "content": "O9"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "946",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "m"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "997",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "hm"
+        },
+        {
+          "tag": "b",
+          "content": "12-27-00"
+        },
+        {
+          "tag": "c",
+          "content": "m"
+        },
+        {
+          "tag": "d",
+          "content": "e"
+        },
+        {
+          "tag": "e",
+          "content": "-"
+        },
+        {
+          "tag": "f",
+          "content": "eng"
+        },
+        {
+          "tag": "g",
+          "content": "enk"
+        },
+        {
+          "tag": "h",
+          "content": "0"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "910",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "RL"
+        }
+      ]
+    },
+    {
+      "fieldTag": "_",
+      "marcTag": null,
+      "ind1": null,
+      "ind2": null,
+      "content": "00000nem  2200349Ia 4500",
+      "subfields": null
+    }
+  ]
+}

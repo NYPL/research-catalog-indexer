@@ -197,6 +197,24 @@ describe('aeon-urls', () => {
     )
   })
 
+  it('extracts MapsLocationNote from bib 852 when item 852 is missing', async () => {
+    // This item has no 852$m
+    const sierraItem = new SierraItem(require('../fixtures/item-14441624.json'))
+    // But its bib does:
+    const sierraBib = new SierraBib(require('../fixtures/bib-13966829.json'))
+    sierraItem._bibs = [sierraBib]
+    const esItem = new EsItem(sierraItem)
+
+    const url = await aeonUrlForItem(esItem)
+    expect(url).to.be.a('string')
+
+    const [, queryString] = url.split('?')
+    // Expect the bib 852$m value:
+    expect(parseQueryString(queryString)['Transaction.CustomFields.MapsLocationNote']).to.equal(
+      '[Filed flat]'
+    )
+  })
+
   it('extracts SierraLocationCode for Maps items', async () => {
     const sierraItem = new SierraItem(require('../fixtures/item-19885371.json'))
     const esItem = new EsItem(sierraItem)
