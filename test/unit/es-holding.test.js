@@ -62,9 +62,14 @@ describe('EsHolding model', () => {
 
   describe('location', () => {
     const holding = new EsHolding(new SierraHolding(require('../fixtures/holding-1089484.json')))
+
     it('returns location for valid sierra code', () => {
-      expect(holding.location()).to.deep.equal([{ code: 'loc:slrb1', label: 'Science, Industry and Business Library (SIBL) - Reference' }])
+      expect(holding.location()).to.deep.equal([{
+        code: 'loc:mal72',
+        label: 'SASB - SIBL - General Research - Room 315'
+      }])
     })
+
     it('returns null for unrecognized location', () => {
       const holding = new EsHolding(new SierraHolding({ location: { code: 'not a sierra code' } }))
       expect(holding.location()).to.equal(null)
