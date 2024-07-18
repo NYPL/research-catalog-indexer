@@ -23,10 +23,14 @@
  */
 
 const NyplSourceMapper = require('../lib/utils/nypl-source-mapper')
-const NyplStreamsClient = require('@nypl/nypl-streams-client')
 
 const { bibById, modelPrefetch } = require('../lib/platform-api/requests')
-const { awsInit, die } = require('./utils')
+const { awsCredentialsFromIni, die } = require('./utils')
+const { setCredentials: kmsSetCredentials } = require('../lib/kms')
+const {
+  setCredentials: kinesisSetCredentials,
+  client: makeStreamsClient
+} = require('../lib/streams-client')
 
 const argv = require('minimist')(process.argv.slice(2))
 
@@ -44,7 +48,12 @@ dotenv.config({ path: argv.envfile })
 const logger = require('../lib/logger')
 logger.setLevel(process.env.LOG_LEVEL || 'info')
 
-const streamsClient = new NyplStreamsClient({ nyplDataApiClientBase: process.env.NYPL_API_BASE_URL })
+// Ensure we're looking at the right profile
+const awsCreds = awsCredentialsFromIni()
+kmsSetCredentials(awsCreds)
+kinesisSetCredentials(awsCreds)
+
+const streamsClient = makeStreamsClient()
 
 const writeToStream = (schemaName, records) => {
   if (records.length === 0) return Promise.resolve()
@@ -59,8 +68,6 @@ const writeToStream = (schemaName, records) => {
 }
 
 const reindexBib = async (nyplSource, id) => {
-  awsInit()
-
   const bib = await bibById(nyplSource, id)
   const [{ _items: items, _holdings: holdings }] = await modelPrefetch([bib])
 

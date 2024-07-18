@@ -105,7 +105,7 @@ const {
   filteredSierraHoldingsForHoldings
 } = require('../lib/prefilter')
 const {
-  awsInit,
+  awsCredentialsFromIni,
   batch,
   batchIdentifiersByTypeAndNyplSource,
   die,
@@ -113,6 +113,7 @@ const {
   capitalize,
   secondsAsFriendlyDuration
 } = require('./utils')
+const { setCredentials: kmsSetCredentials } = require('../lib/kms')
 const logger = require('../lib/logger')
 logger.setLevel(process.env.LOG_LEVEL || 'info')
 
@@ -133,8 +134,8 @@ const usage = () => {
   return true
 }
 
-// Ensure we're looking at the right profile and region
-awsInit()
+const awsCreds = awsCredentialsFromIni()
+kmsSetCredentials(awsCreds)
 
 const db = {
   dbConnectionPools: null,

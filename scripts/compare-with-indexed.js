@@ -23,13 +23,15 @@ const dotenv = require('dotenv')
 dotenv.config({ path: argv.envfile || './config/qa.env' })
 
 const NyplSourceMapper = require('../lib/utils/nypl-source-mapper')
-const { awsInit, die, printDiff, buildSierraModelFromUri, capitalize } = require('./utils')
+const { awsCredentialsFromIni, die, printDiff, buildSierraModelFromUri, capitalize } = require('./utils')
 const { bibsForHoldingsOrItems } = require('../lib/platform-api/requests')
 const { buildEsDocument } = require('../lib/build-es-document')
 const EsBib = require('../lib/es-models/bib')
 const SierraBib = require('../lib/sierra-models/bib')
 const SierraHolding = require('../lib/sierra-models/holding')
 const { currentDocument } = require('../lib/elastic-search/requests')
+
+const { setCredentials: kmsSetCredentials } = require('../lib/kms')
 
 const logger = require('../lib/logger')
 logger.setLevel(process.env.LOG_LEVEL || 'info')
@@ -39,8 +41,9 @@ const usage = () => {
   return true
 }
 
-// Ensure we're looking at the right profile and region
-awsInit()
+// Ensure we're looking at the right profile
+const awsCreds = awsCredentialsFromIni()
+kmsSetCredentials(awsCreds)
 
 let indexName = process.env.ELASTIC_RESOURCES_INDEX_NAME
 if (!argv.uri) usage() && die('Must specify event file or uri')

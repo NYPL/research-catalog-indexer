@@ -1,5 +1,4 @@
 const { diff, detailedDiff } = require('deep-object-diff')
-const aws = require('aws-sdk')
 
 const NyplSourceMapper = require('../lib/utils/nypl-source-mapper')
 const { bibById, itemById, holdingById } = require('../lib/platform-api/requests')
@@ -8,15 +7,14 @@ const SierraItem = require('../lib/sierra-models/item')
 const SierraHolding = require('../lib/sierra-models/holding')
 const logger = require('../lib/logger')
 
-const awsInit = (profile) => {
-  // Set aws creds:
-  aws.config.credentials = new aws.SharedIniFileCredentials({
-    profile: profile || 'nypl-digital-dev'
-  })
+const { fromIni } = require('@aws-sdk/credential-providers')
 
-  // Set aws region:
-  const awsSecurity = { region: 'us-east-1' }
-  aws.config.update(awsSecurity)
+/**
+* Given a named profile, returns a `credentials` value suitable for sending
+* into any AWS SDK client class
+*/
+const awsCredentialsFromIni = (profile = 'nypl-digital-dev') => {
+  return fromIni({ profile })
 }
 
 const die = (message) => {
@@ -307,7 +305,7 @@ const batch = (things, batchSize = 100) => {
 }
 
 module.exports = {
-  awsInit,
+  awsCredentialsFromIni,
   batch,
   batchIdentifiersByTypeAndNyplSource,
   buildSierraModelFromUri,
