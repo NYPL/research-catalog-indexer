@@ -14,7 +14,7 @@
 
 const argv = require('minimist')(process.argv.slice(2), {
   default: {
-    verbose: false,
+    verbose: true,
     printDocument: false
   },
   boolean: ['activeIndex', 'printDocument']
@@ -128,7 +128,7 @@ const run = async () => {
     const liveEsRecord = !bibUri
       ? null
       : await currentDocument(bibUri, indexName)
-        .catch((e) => console.log(`Could not find ${bibUri} in ${indexName}`))
+        .catch((e) => console.log(`Could not find ${bibUri} in ${indexName} (${e})`))
 
     // Would indexer delete it?
     if (recordsToDelete.length) {

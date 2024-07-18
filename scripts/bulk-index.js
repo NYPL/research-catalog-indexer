@@ -214,11 +214,11 @@ const convertCommonModelProperties = (models) => {
  *  Given an array of bib ids, returns a hash relating each of those bib ids to
  *  an array of items for that bib
  */
-const sierraItemsByBibIds = async (bibIds) => {
+const sierraItemsByBibIds = async (bibIds, nyplSource) => {
   const itemClient = await db.connect('itemService')
 
   const query = `SELECT * FROM item
-    WHERE nypl_source = 'sierra-nypl'
+    WHERE nypl_source = '${nyplSource}'
     AND bib_ids ?| array[${bibIds.map((id) => `'${id}'`).join(',')}]`
   const result = await itemClient.query(query)
 
@@ -246,6 +246,8 @@ const sierraItemsByBibIds = async (bibIds) => {
  *  an array of holdings for that bib
  */
 const sierraHoldingsByBibIds = async (bibIds) => {
+  if (bibIds.length === 0) return {}
+
   const holdingsClient = await db.connect('holdingsService')
 
   const query = `SELECT * FROM records
@@ -282,14 +284,18 @@ const overwriteModelPrefetch = () => {
 
   modelPrefetcher.modelPrefetch = async (bibs) => {
     if (bibs.length === 0) return bibs
+    if (Array.from(new Set(bibs.map((b) => b.nyplSource))).length > 1) {
+      throw new Error('Model prefetch encountered batch with multiple nyplSources')
+    }
 
     // Get distinct bib ids:
     const bibIds = Array.from(new Set(bibs.map((b) => b.id)))
+    const nyplSource = bibs[0].nyplSource
 
     // Fetch all items and holdings for this set of bibs:
     const [itemsByBibId, holdingsByBibId] = await Promise.all([
-      sierraItemsByBibIds(bibIds),
-      sierraHoldingsByBibIds(bibIds)
+      sierraItemsByBibIds(bibIds, nyplSource),
+      nyplSource === 'sierra-nypl' ? sierraHoldingsByBibIds(bibIds) : Promise.resolve({})
     ])
 
     // Attach holdings and items to bibs:
@@ -468,6 +474,7 @@ const updateByBibOrItemServiceQuery = async (options) => {
           })
           .catch(async (e) => {
             logger.warn(`Retrying due to error: ${e}`)
+            console.trace(e)
             await delay(3000)
             retries -= 1
           })
