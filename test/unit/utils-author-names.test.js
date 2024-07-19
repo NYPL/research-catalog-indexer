@@ -62,7 +62,19 @@ describe('utils/author-names', () => {
       expect(authorNamesUtils.withoutDates('Louis XVI, King of France, 1754-1793.'))
         .to.equal('Louis XVI, King of France')
       expect(authorNamesUtils.withoutDates('Lastname-hyphenated, Firstname, 1979-'))
-        .to.deep.equal('Lastname-hyphenated, Firstname')
+        .to.equal('Lastname-hyphenated, Firstname')
+      // We say "dates", but really it's about stripping anything after the name:
+      expect(authorNamesUtils.withoutDates('Lastname, firstname, other stuff'))
+        .to.equal('Lastname, firstname')
+      // Support mononyms:
+      expect(authorNamesUtils.withoutDates('Cher, 1946-')).to.equal('Cher')
+      expect(authorNamesUtils.withoutDates('Gurudatta, 1894-1989'))
+        .to.equal('Gurudatta')
+      expect(authorNamesUtils.withoutDates('Lastname, 1234'))
+        .to.equal('Lastname')
+      // We identify dates by 4 digits, so this isn't stripped:
+      expect(authorNamesUtils.withoutDates('Lastname, 123'))
+        .to.equal('Lastname, 123')
     })
   })
 })
