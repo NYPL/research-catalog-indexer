@@ -51,6 +51,8 @@ describe('utils/author-names', () => {
 
   describe('withoutDates', () => {
     it('removes dates from author string', () => {
+      expect(authorNamesUtils.withoutDates('Lastname'))
+        .to.equal('Lastname')
       expect(authorNamesUtils.withoutDates('Lastname, firstname'))
         .to.equal('Lastname, firstname')
       expect(authorNamesUtils.withoutDates('Lastname, firstname, 1979-2024'))
@@ -71,6 +73,8 @@ describe('utils/author-names', () => {
       expect(authorNamesUtils.withoutDates('Gurudatta, 1894-1989'))
         .to.equal('Gurudatta')
       expect(authorNamesUtils.withoutDates('Lastname, 1234'))
+        .to.equal('Lastname')
+      expect(authorNamesUtils.withoutDates('Lastname, 1234, other stuff'))
         .to.equal('Lastname')
       // We identify dates by 4 digits, so this isn't stripped:
       expect(authorNamesUtils.withoutDates('Lastname, 123'))
