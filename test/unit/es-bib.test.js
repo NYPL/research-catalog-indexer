@@ -80,6 +80,20 @@ describe('EsBib', function () {
     })
   })
 
+  describe('creatorLiteralNormalized', () => {
+    it('should reverse creatorLiteral name parts', () => {
+      const esBib = new EsBib(new SierraBib(require('../fixtures/bib-10001936.json')))
+      expect(esBib.creatorLiteralNormalized()).to.deep.equal(['Galust Shermazanian'])
+    })
+  })
+
+  describe('creatorLiteralWithoutDates', () => {
+    it('should strip dates from creatorLiteral', () => {
+      const esBib = new EsBib(new SierraBib(require('../fixtures/bib-15088995.json')))
+      expect(esBib.creatorLiteralWithoutDates()).to.deep.equal(['Mendes, Cândiado'])
+    })
+  })
+
   describe('creator_sort', () => {
     it('should return the creator transformed for sorting', () => {
       const record = new SierraBib(require('../fixtures/bib-10001936.json'))
@@ -213,6 +227,69 @@ describe('EsBib', function () {
           'Ginosar, Sh. (Shaleṿ), 1902-'
         ]
       )
+    })
+
+    it('should filter out contributors that are also creators', function () {
+      const record = new SierraBib({
+        varFields: [
+          // Two creatorLiterals:
+          { marcTag: '100', subfields: [{ tag: 'a', content: 'Lastname1, firstname1' }] },
+          { marcTag: '100', subfields: [{ tag: 'a', content: 'Lastname2, firstname2, 1918-2024' }] },
+          // Two [redundant] contributorLiterals:
+          { marcTag: '700', subfields: [{ tag: 'a', content: 'Lastname1, firstname1' }] },
+          { marcTag: '700', subfields: [{ tag: 'a', content: 'Lastname2, firstname2' }] },
+          // And one novel contributorLiteral:
+          { marcTag: '700', subfields: [{ tag: 'a', content: 'Lastname3, firstname3' }] }
+        ]
+      })
+      const esBib = new EsBib(record)
+      expect(esBib.creatorLiteral()).to.deep.equal([
+        'Lastname1, firstname1',
+        'Lastname2, firstname2, 1918-2024'
+      ])
+      expect(esBib.contributorLiteral()).to.deep.equal([
+        'Lastname3, firstname3'
+      ])
+    })
+
+    it('should nullify contributorLiteral if all contributors are redundant', function () {
+      const record = new SierraBib({
+        varFields: [
+          { marcTag: '100', subfields: [{ tag: 'a', content: 'Lastname1, firstname1' }] },
+          { marcTag: '700', subfields: [{ tag: 'a', content: 'Lastname1, firstname1' }] }
+        ]
+      })
+      const esBib = new EsBib(record)
+      expect(esBib.creatorLiteral()).to.deep.equal([
+        'Lastname1, firstname1'
+      ])
+      expect(esBib.contributorLiteral()).to.deep.equal(null)
+    })
+  })
+
+  describe('contributorLiteralNormalized', function () {
+    it('should reverse contributorLiteral name parts', () => {
+      const esBib = new EsBib(new SierraBib(require('../fixtures/bib-11055155.json')))
+      expect(esBib.contributorLiteralNormalized()).to.deep.equal([
+        'Rosalind Moss',
+        'Rosalind L. Moss',
+        'Rosalind L. B. Moss',
+        'Ethel Burney',
+        'Ethel W. Burney',
+        'Jaromír Málek',
+        'Diana Magee',
+        'Elizabeth Miles'
+      ])
+    })
+  })
+
+  describe('contributorLiteralWithoutDates', function () {
+    it('should strip dates from contributorLiterals', () => {
+      const record = new SierraBib(require('../fixtures/bib-hl990000453050203941.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.contributorLiteralWithoutDates()).to.deep.equal([
+        'Ginosar, Sh. (Shaleṿ)'
+      ])
     })
   })
 
@@ -1225,6 +1302,24 @@ describe('EsBib', function () {
       const record = new SierraBib(require('../fixtures/bib-14576049.json'))
       const esBib = new EsBib(record)
       expect(esBib.addedAuthorTitle()).to.deep.equal(['Peter Pan.'])
+    })
+  })
+
+  describe('popularity', () => {
+    let bib
+
+    beforeEach(() => {
+      const sierraBib = new SierraBib(require('../fixtures/bib-10001936.json'))
+      // Adopt some random items:
+      sierraBib._items = [
+        new SierraItem(require('../fixtures/item-10003973.json')),
+        new SierraItem(require('../fixtures/item-17145801.json'))
+      ]
+      bib = new EsBib(sierraBib)
+    })
+
+    it('should derive popularity from item checkouts', async () => {
+      expect(await bib.popularity()).to.deep.equal(4)
     })
   })
 })

@@ -13,14 +13,19 @@ const fs = require('fs')
 const assert = require('assert')
 const argv = require('minimist')(process.argv.slice(2))
 const logger = require('../lib/logger')
-const { die } = require('./utils')
 const esClient = require('../lib/elastic-search/client')
 const { schema } = require('../lib/elastic-search/index-schema')
+const { awsCredentialsFromIni, die } = require('./utils')
+const { setCredentials: kmsSetCredentials } = require('../lib/kms')
 
 const usage = () => {
   console.log('Usage: node mapping-check --envfile [path to .env] [--index INDEX]')
   return true
 }
+
+// Ensure we're looking at the right profile
+const awsCreds = awsCredentialsFromIni()
+kmsSetCredentials(awsCreds)
 
 /**
 * Given an index name, returns the remote mapping object
