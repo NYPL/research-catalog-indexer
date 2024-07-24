@@ -1,5 +1,4 @@
 const { diff, detailedDiff } = require('deep-object-diff')
-const aws = require('aws-sdk')
 
 const NyplSourceMapper = require('../lib/utils/nypl-source-mapper')
 const { bibById, itemById, holdingById } = require('../lib/platform-api/requests')
@@ -8,15 +7,14 @@ const SierraItem = require('../lib/sierra-models/item')
 const SierraHolding = require('../lib/sierra-models/holding')
 const logger = require('../lib/logger')
 
-const awsInit = (profile) => {
-  // Set aws creds:
-  aws.config.credentials = new aws.SharedIniFileCredentials({
-    profile: profile || 'nypl-digital-dev'
-  })
+const { fromIni } = require('@aws-sdk/credential-providers')
 
-  // Set aws region:
-  const awsSecurity = { region: 'us-east-1' }
-  aws.config.update(awsSecurity)
+/**
+* Given a named profile, returns a `credentials` value suitable for sending
+* into any AWS SDK client class
+*/
+const awsCredentialsFromIni = (profile = 'nypl-digital-dev') => {
+  return fromIni({ profile })
 }
 
 const die = (message) => {
@@ -124,6 +122,16 @@ const buildSierraModelFromUri = async (uri) => {
   return new Klass(data)
 }
 
+const diffHasSomethingToSay = (diff) => {
+  if (!diff || Object.keys(diff).length === 0) return false
+
+  for (const prop of ['added', 'deleted', 'updated']) {
+    const truthyValues = Object.values(diff[prop])
+      .filter((v) => v)
+    if (truthyValues.length >= 1) return true
+  }
+}
+
 function printDiff (remote, local, verbose) {
   console.log(`Bib metadata diff for ${remote.uri}:`)
   const noChildren = (bib) => Object.assign({}, bib, { items: null, holdings: null, uris: null, localAt: null })
@@ -160,9 +168,8 @@ function printDiff (remote, local, verbose) {
           const localItem = local[holdingsOrItems].find((i) => i.uri === remoteItem.uri)
           if (!localItem) console.log(`  Can not find ${remoteItem.uri} in ${holdingsOrItems} in local doc`)
           else {
-            const diffed = diff(remoteItem, localItem)
-            if (Object.keys(diffed).length > 0) {
-              const itemDiff = detailedDiff(remoteItem, localItem)
+            const itemDiff = detailedDiff(remoteItem, localItem)
+            if (diffHasSomethingToSay(itemDiff)) {
               console.log(`  Diff in ${holdingsOrItems} ${remoteItem.uri}:`)
               if (verbose) {
                 const verboseDiff = buildVerboseDiff(itemDiff, remoteItem, localItem)
@@ -278,8 +285,22 @@ const groupIdentifiersByTypeAndNyplSource = async (identifiers) => {
     logger.error(`Invalid prefixed id: ${identifiers[0]}`)
     return
   }
-  const splitIdentifiers = identifiers
-    .map(mapper.splitIdentifier.bind(mapper))
+  // Attempt to split all identifiers, capturing invalids
+  const { splitIdentifiers, invalid } = identifiers
+    .reduce((h, ident) => {
+      const split = mapper.splitIdentifier(ident)
+      if (!split || !split.type || !split.nyplSource) {
+        h.invalid.push(ident)
+      } else {
+        h.splitIdentifiers.push(split)
+      }
+      return h
+    }, { invalid: [], splitIdentifiers: [] })
+
+  // Report if some were not parsable:
+  if (invalid.length) {
+    console.warn(`Found ${invalid.length} invalid identifiers: `, invalid.slice(0, 10))
+  }
 
   const grouped = splitIdentifiers.reduce((h, ident) => {
     if (!h[ident.type]) h[ident.type] = []
@@ -307,7 +328,7 @@ const batch = (things, batchSize = 100) => {
 }
 
 module.exports = {
-  awsInit,
+  awsCredentialsFromIni,
   batch,
   batchIdentifiersByTypeAndNyplSource,
   buildSierraModelFromUri,
