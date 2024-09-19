@@ -7,7 +7,7 @@
  *
  *  I. Updating by Bib/Item Service query:
  *
- *    node scripts/bulk-index --type (item|bib) [--hasMarc MARC] [--hasSubfield S] [--nyplSource NYPLSOURCE]
+ *    node scripts/bulk-index.js --type (item|bib) [--hasMarc MARC] [--hasSubfield S] [--nyplSource NYPLSOURCE]
  *
  *    Arguments:
  *      type {string}: Required. One of item or bib
@@ -38,10 +38,10 @@
  *    Examples
  *
  *    To reindex all NYPL bibs with marc 001 in QA:
- *      node scripts/bulk-index --type bib --hasMarc 001
+ *      node scripts/bulk-index.js --type bib --hasMarc 001
  *
  *    To reindex all NYPL bibs with 700 $t in QA:
- *      node scripts/bulk-index --type bib --hasMarc 700 --hasSubfield t
+ *      node scripts/bulk-index.js --type bib --hasMarc 700 --hasSubfield t
  *
  *  II. Updating by CSV:
  *
