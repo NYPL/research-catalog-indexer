@@ -76,7 +76,7 @@ describe('EsBib', function () {
     it('should return the creator literal', function () {
       const record = new SierraBib(require('../fixtures/bib-10001936.json'))
       const esBib = new EsBib(record)
-      expect(esBib.creatorLiteral()).to.deep.equal(['Shermazanian, Galust.'])
+      expect(esBib.creatorLiteral()).to.deep.equal(['Shermazanian, Galust'])
     })
   })
 
@@ -98,7 +98,7 @@ describe('EsBib', function () {
     it('should return the creator transformed for sorting', () => {
       const record = new SierraBib(require('../fixtures/bib-10001936.json'))
       const esBib = new EsBib(record)
-      expect(esBib.creator_sort()).to.deep.equal(['shermazanian, galust.'])
+      expect(esBib.creator_sort()).to.deep.equal(['shermazanian, galust'])
     })
   })
 
@@ -289,6 +289,16 @@ describe('EsBib', function () {
       const esBib = new EsBib(record)
       expect(esBib.contributorLiteralWithoutDates()).to.deep.equal([
         'Ginosar, Sh. (Shaleṿ)'
+      ])
+    })
+
+    it('should remove contributorLiteralWithoutDates that duplicate creatorLiteralWithoutDates', function () {
+      const record = new SierraBib(require('../fixtures/bib-10027451.json'))
+      const esBib = new EsBib(record)
+      // This bib has a 700 with "Dickens, Charles", but it duplicates a 100,
+      // so we don't want to see it repeated in this field:
+      expect(esBib.contributorLiteralWithoutDates()).to.deep.equal([
+        'Leyris, Pierre'
       ])
     })
   })
