@@ -7,11 +7,12 @@
  *
  *  I. Updating by Bib/Item Service query:
  *
- *    node scripts/bulk-index --type (item|bib) [--hasMarc MARC] [--nyplSource NYPLSOURCE]
+ *    node scripts/bulk-index.js --type (item|bib) [--hasMarc MARC] [--hasSubfield S] [--nyplSource NYPLSOURCE]
  *
  *    Arguments:
  *      type {string}: Required. One of item or bib
  *      hasMarc {string}: Marc tag that must be present in the record
+ *      hasSubfield {string}: When used with hasMarc, restricts to records matching both marc tag and subfield
  *      nyplSource {string}: NYPL Source value. Default 'sierra-nypl'
  *      orderBy {string}: Columns to order query by. Default '' (no sort).
  *        e.g. `--orderBy id`. Sortable columns include `id`, `updated_date`,
@@ -37,7 +38,10 @@
  *    Examples
  *
  *    To reindex all NYPL bibs with marc 001 in QA:
- *      node scripts/bulk-index --type bib --hasMarc 001
+ *      node scripts/bulk-index.js --type bib --hasMarc 001
+ *
+ *    To reindex all NYPL bibs with 700 $t in QA:
+ *      node scripts/bulk-index.js --type bib --hasMarc 700 --hasSubfield t
  *
  *  II. Updating by CSV:
  *
@@ -68,7 +72,7 @@ const argv = require('minimist')(process.argv.slice(2), {
     dryrun: false,
     envfile: './config/qa-bulk-index.env'
   },
-  string: ['hasMarc', 'bibId'],
+  string: ['hasMarc', 'hasSubfield', 'bibId'],
   integer: ['limit', 'offset', 'batchSize']
 })
 
@@ -127,7 +131,7 @@ const usage = () => {
     'Reindex a single record:',
     '  node reindex-record --envfile [path to .env] (--bibId id|--itemId id)',
     'Reindex by has-marc:',
-    '  node reindex-record --envfile [path to .env] --type bib --hasMarc 001',
+    '  node reindex-record --envfile [path to .env] --type bib --hasMarc 001 [--hasSubfield S]',
     'Reindex by CSV (containing prefixed ids):',
     '  node reindex-record --envfile [path to .env] --csv FILE --csvIdColumn 0'
   ].join('\n'))
@@ -284,8 +288,9 @@ const overwriteModelPrefetch = () => {
 
   modelPrefetcher.modelPrefetch = async (bibs) => {
     if (bibs.length === 0) return bibs
-    if (Array.from(new Set(bibs.map((b) => b.nyplSource))).length > 1) {
-      throw new Error('Model prefetch encountered batch with multiple nyplSources')
+    const distinctSources = Array.from(new Set(bibs.map((b) => b.nyplSource)))
+    if (distinctSources.length > 1) {
+      throw new Error(`Model prefetch encountered batch with multiple nyplSources: ${distinctSources.join(',')}`)
     }
 
     // Get distinct bib ids:
@@ -364,6 +369,7 @@ const delay = (howLong) => new Promise((resolve, reject) => { setTimeout(resolve
 * - type {string} - Either 'bib' or 'item'
 * - nyplSource {string}
 * - hasMarc {string} - Query by presence of a marc field (e.g. '001')
+* - hasSubfield {string} - When used with hasMarc, restricts to records with given marc tag and subfield (e.g. 't')
 * - limit {integer} - Limit query to count
 * - offset {integer} - Start query at offset
 * - orderBy {string} - SQL phrase to use in ORDER BY ...
@@ -400,22 +406,44 @@ const buildSqlQuery = (options) => {
   // Querying by existance of a marc field?
   } else if (options.nyplSource && options.type && options.hasMarc) {
     type = options.type
-    sqlFromAndWhere = `${type},
-      json_array_elements(var_fields::json) jV
-      WHERE nypl_source = $1
-      AND jV->>'marcTag' = $2`
+
+    // Build array of SELECT clauses:
+    const selects = [type, 'json_array_elements(var_fields::json) jV']
+    // Build array of WHERE clauses:
+    const wheres = [
+      'nypl_source = $1',
+      "jV->>'marcTag' = $2"
+    ]
+    // Collect user input:
     params = [
       options.nyplSource,
       options.hasMarc
     ]
+
+    // If filtering on existence of specific subfield, add clause:
+    if (options.hasSubfield) {
+      selects.push("json_array_elements(jV->'subfields') jVS")
+      wheres.push("jVS->>'tag' = $3")
+      params.push(options.hasSubfield)
+    }
+
+    sqlFromAndWhere = selects.join(',\n') +
+      '\nWHERE ' + wheres.join('\nAND ')
   } else {
     throw new Error('Insufficient options to buildSqlQuery')
   }
 
-  const query = `SELECT * FROM ${sqlFromAndWhere}` +
+  // Some queries will return bibs multiple times because a matched var/subfield repeats.
+  // To ensure we only handle such bibs once, we must de-deupe the results on id & nypl_source.
+  // We use an inner-select to identify all of the distinct bibs (by id and nypl_source)
+  // which we then JOIN to retrieve all fields.
+  const innerSelect = `SELECT DISTINCT id, nypl_source FROM ${sqlFromAndWhere}` +
     (options.orderBy ? ` ORDER BY ${options.orderBy}` : '') +
     (options.limit ? ` LIMIT ${options.limit}` : '') +
     (options.offset ? ` OFFSET ${options.offset}` : '')
+  const query = 'SELECT R.*' +
+    ` FROM (\n${innerSelect}\n) _R` +
+    ` INNER JOIN ${type} R ON _R.id=R.id AND _R.nypl_source=R.nypl_source`
 
   return { query, params, type }
 }
