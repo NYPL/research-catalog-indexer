@@ -81,4 +81,39 @@ describe('utils/author-names', () => {
         .to.equal('Lastname, 123')
     })
   })
+
+  describe('nameIsRedundant', () => {
+    it('returns true if name is redundant', () => {
+      const names = ['Doe, Jane', 'Dickens, Charles, 1812-1870']
+
+      expect(authorNamesUtils.nameIsRedundant('Dickens, Charles', names))
+        .to.equal(true)
+      expect(authorNamesUtils.nameIsRedundant('Doe, Jane', names))
+        .to.equal(true)
+    })
+
+    it('returns false if name is not matched', () => {
+      const names = ['Doe, Jane', 'Dickens, Charles, 1812-1870']
+
+      expect(authorNamesUtils.nameIsRedundant('Dickens, Charlesregard', names))
+        .to.equal(false)
+      expect(authorNamesUtils.nameIsRedundant('Shelley, Mary', names))
+        .to.equal(false)
+    })
+  })
+
+  describe('trimTrailingPeriod', () => {
+    it('removes trailing period', () => {
+      expect(authorNamesUtils.trimTrailingPeriod('Doe, Jane'))
+        .to.equal('Doe, Jane')
+      expect(authorNamesUtils.trimTrailingPeriod('Doe, Jane.'))
+        .to.equal('Doe, Jane')
+
+      // Assert meaningful periods not removed:
+      expect(authorNamesUtils.trimTrailingPeriod('Michael K.'))
+        .to.equal('Michael K.')
+      expect(authorNamesUtils.trimTrailingPeriod('Michael k.'))
+        .to.equal('Michael k.')
+    })
+  })
 })

@@ -17,7 +17,7 @@ const removeDupeWhitespace = (sql) => {
 // Map anticipated SQL queries to mocked data to return:
 const pgFixtures = [
   {
-    match: /^SELECT \* FROM bib WHERE nypl_source = \$1 AND id IN \('1234'\) LIMIT 1$/,
+    match: /^SELECT R.\* FROM \(SELECT DISTINCT id, nypl_source FROM bib WHERE nypl_source = \$1 AND id IN \('1234'\) LIMIT 1\) _R INNER JOIN bib R ON _R.id=R.id AND _R.nypl_source=R.nypl_source$/,
     rows: [
       {
         id: 1234,
@@ -27,7 +27,7 @@ const pgFixtures = [
     ]
   },
   {
-    match: /^SELECT \* FROM item WHERE nypl_source = 'sierra-nypl' AND bib_ids \?\| array\['1234'\]$/,
+    match: /^SELECT R.\* FROM \(SELECT \* FROM item WHERE nypl_source = 'sierra-nypl' AND bib_ids \?\| array\['1234'\]\) _R INNER JOIN bib R ON _R.id=R.id AND _R.nypl_source=R.nypl_source$/,
     rows: [
       {
         id: 456,
@@ -38,6 +38,18 @@ const pgFixtures = [
     ]
   },
   {
+    match: /SELECT \* FROM item WHERE nypl_source = 'sierra-nypl' AND bib_ids \?\| array\['1234'\]$/,
+    rows: [
+      {
+        id: 456,
+        bibIds: [1234],
+        nypl_source: 'sierra-nypl',
+        var_fields: []
+      }
+    ]
+  },
+  {
+    // match: /SELECT \* FROM item WHERE nypl_source = 'sierra-nypl' AND bib_ids \?\| array\['1234'\]/,
     match: /^SELECT \* FROM records WHERE "bibIds" && array\[1234\]$/,
     rows: [
       {
@@ -58,6 +70,7 @@ const mockedRowsForQuery = (sql) => {
   const matchingFixture = pgFixtures.find((fixture) => fixture.match.test(sql))
   if (!matchingFixture) {
     console.error('Unmocked SQL query:', sql)
+    console.info('Add SQL fixture?\n  /' + sql.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '/')
     throw new Error(`Un-mocked sql query: "${sql}"`)
   }
   return matchingFixture.rows
@@ -180,7 +193,13 @@ describe('scripts/bulk-index', () => {
     it('builds sql for single bib', () => {
       expect(bulkIndexer.buildSqlQuery({ bibId: '1234', nyplSource: 'sierra-nypl' }))
         .to.deep.eq({
-          query: 'SELECT * FROM bib\n      WHERE nypl_source = $1\n      AND id = $2 LIMIT 1',
+          query: [
+            'SELECT R.* FROM (',
+            'SELECT DISTINCT id, nypl_source FROM bib',
+            '      WHERE nypl_source = $1',
+            '      AND id = $2 LIMIT 1',
+            ') _R INNER JOIN bib R ON _R.id=R.id AND _R.nypl_source=R.nypl_source'
+          ].join('\n'),
           params: ['sierra-nypl', '1234'],
           type: 'bib'
         })
@@ -189,7 +208,13 @@ describe('scripts/bulk-index', () => {
     it('builds sql for array of ids', () => {
       expect(bulkIndexer.buildSqlQuery({ ids: ['1234'], nyplSource: 'some-source', type: 'table_name' }))
         .to.deep.eq({
-          query: 'SELECT * FROM table_name\n      WHERE nypl_source = $1\n      AND id IN (\'1234\') LIMIT 1',
+          query: [
+            'SELECT R.* FROM (',
+            'SELECT DISTINCT id, nypl_source FROM table_name',
+            '      WHERE nypl_source = $1',
+            "      AND id IN ('1234') LIMIT 1",
+            ') _R INNER JOIN table_name R ON _R.id=R.id AND _R.nypl_source=R.nypl_source'
+          ].join('\n'),
           params: ['some-source'],
           type: 'table_name'
         })
@@ -199,10 +224,12 @@ describe('scripts/bulk-index', () => {
       expect(bulkIndexer.buildSqlQuery({ hasMarc: '123', nyplSource: 'some-source', type: 'table_name' }))
         .to.deep.eq({
           query: [
-            'SELECT * FROM table_name,',
-            '      json_array_elements(var_fields::json) jV',
-            '      WHERE nypl_source = $1',
-            '      AND jV->>\'marcTag\' = $2'
+            'SELECT R.* FROM (',
+            'SELECT DISTINCT id, nypl_source FROM table_name,',
+            'json_array_elements(var_fields::json) jV',
+            'WHERE nypl_source = $1',
+            "AND jV->>'marcTag' = $2",
+            ') _R INNER JOIN table_name R ON _R.id=R.id AND _R.nypl_source=R.nypl_source'
           ].join('\n'),
           params: ['some-source', '123'],
           type: 'table_name'
