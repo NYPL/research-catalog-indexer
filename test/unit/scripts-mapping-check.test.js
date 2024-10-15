@@ -105,7 +105,7 @@ describe('scripts/mapping-check', () => {
       await mappingCheck.run()
 
       expect(output).to.have.lengthOf.above(15)
-      expect(output[0][0]).to.eq('Running mapping-check on indexName')
+      expect(output[0][0]).to.eq('Running mapping-check on index-name')
       expect(output.find((log) => log[0].includes('Mis-mapped Properties'))).to.be.a('array')
       expect(output.find((log) => log[0].includes('Missing (local-only) Propertie'))).to.be.a('array')
     })
