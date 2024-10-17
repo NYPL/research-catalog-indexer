@@ -32,20 +32,34 @@ describe('utils/author-names', () => {
       expect(authorNamesUtils.normalizeAuthorName('Lastname')).to.deep.equal(['Lastname'])
       expect(authorNamesUtils.normalizeAuthorName('Big long company name'))
         .to.deep.equal(['Big long company name'])
-      expect(authorNamesUtils.normalizeAuthorName('Big long company name, with commas'))
-        .to.deep.equal(['Big long company name, with commas'])
-      expect(authorNamesUtils.normalizeAuthorName('Louis XVI, King of France, 1754-1793.'))
-        .to.deep.equal(['Louis XVI, King of France, 1754-1793.'])
       expect(authorNamesUtils.normalizeAuthorName('Voltaire, 1694-1778.'))
         .to.deep.equal(['Voltaire, 1694-1778.'])
-      expect(authorNamesUtils.normalizeAuthorName('Merce Cunningham Dance Foundation, donor.'))
-        .to.deep.equal(['Merce Cunningham Dance Foundation, donor.'])
       expect(authorNamesUtils.normalizeAuthorName('WNYC (Radio station : New York, N.Y.)'))
         .to.deep.equal(['WNYC (Radio station : New York, N.Y.)'])
 
       // FIXME Unfortunately, we don't support this diacritic style for some reason:
       expect(authorNamesUtils.normalizeAuthorName('Dvořák, Antonín, 1841-1904.'))
         .to.deep.equal(['Dvořák, Antonín, 1841-1904.'])
+
+      // Multiple surnames:
+      expect(authorNamesUtils.normalizeAuthorName('García Márquez, Gabriel, 1927-2014.'))
+        .to.deep.equal(['Gabriel García Márquez'])
+
+      // Note that, in order to support authors with multiple surnames, we may
+      // sometimes normalize poorly (but not adversely):
+      expect(authorNamesUtils.normalizeAuthorName('Big long company name, with commas'))
+        .to.deep.equal([
+          'with Big long company name',
+          'with commas Big long company name'
+        ])
+      expect(authorNamesUtils.normalizeAuthorName('Louis XVI, King of France, 1754-1793.'))
+        .to.deep.equal([
+          'King Louis XVI',
+          'King of Louis XVI',
+          'King of France Louis XVI'
+        ])
+      expect(authorNamesUtils.normalizeAuthorName('Merce Cunningham Dance Foundation, donor.'))
+        .to.deep.equal(['donor Merce Cunningham Dance Foundation'])
     })
   })
 
@@ -114,6 +128,10 @@ describe('utils/author-names', () => {
         .to.equal('Michael K.')
       expect(authorNamesUtils.trimTrailingPeriod('Michael k.'))
         .to.equal('Michael k.')
+
+      // Assert period following author dates removed:
+      expect(authorNamesUtils.trimTrailingPeriod('Doyle, Arthur Conan, 1859-1930.'))
+        .to.equal('Doyle, Arthur Conan, 1859-1930')
     })
   })
 })
