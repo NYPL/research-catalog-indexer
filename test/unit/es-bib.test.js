@@ -1353,5 +1353,11 @@ describe('EsBib', function () {
       bib._items = [new SierraItem(require('../fixtures/item-37528709.json'))]
       expect(await (new EsBib(bib)).buildingLocationIds()).to.deep.equal(['sc'])
     })
+
+    it('returns just "rc" if partner bib', async () => {
+      const bib = new SierraBib(require('../fixtures/bib-hl990000453050203941.json'))
+      const esBib = new EsBib(bib)
+      expect(await (esBib.buildingLocationIds())).to.deep.equal(['rc'])
+    })
   })
 })

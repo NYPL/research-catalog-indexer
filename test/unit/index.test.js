@@ -64,11 +64,13 @@ describe('index handler function', () => {
 
   describe('lambda callback', () => {
     const callback = spy()
+
     afterEach(() => {
       callback.resetHistory()
       platformApi.bibsForHoldingsOrItems.restore()
       eventDecoder.decodeRecordsFromEvent.restore()
     })
+
     it('calls lambda callback on error', async () => {
       try {
         const error = new Error('meep morp')
@@ -84,6 +86,7 @@ describe('index handler function', () => {
         }
       }
     })
+
     it('calls lambda callback on no record', async () => {
       eventDecoderStub('Holding')
       stub(platformApi, 'bibsForHoldingsOrItems').resolves([])
@@ -91,6 +94,7 @@ describe('index handler function', () => {
       expect(callback.calledOnce).to.equal(true)
       expect(callback).to.have.been.calledWith(null, 'Nothing to do.')
     })
+
     it('calls lambda callback on successful indexing', async () => {
       eventDecoderStub('Item')
       stub(platformApi, 'bibsForHoldingsOrItems').resolves([{ id: '1', nyplSource: 'sierra-nypl', locations: [{ code: 'mal92' }] }])

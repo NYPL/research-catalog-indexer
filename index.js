@@ -11,6 +11,7 @@ const { notifyDocumentProcessed } = require('./lib/streams-client')
  */
 const handler = async (event, context, callback) => {
   logger.setLevel(process.env.LOG_LEVEL || 'info')
+
   try {
     const decodedEvent = await eventDecoder.decodeRecordsFromEvent(event)
 
