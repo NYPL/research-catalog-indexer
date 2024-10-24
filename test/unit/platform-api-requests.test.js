@@ -8,15 +8,10 @@ const platformApi = require('../../lib/platform-api/client')
 const {
   genericGetStub,
   nullGetStub,
-  stubPlatformApiGetRequest,
-  stubNyplSourceMapper
+  stubPlatformApiGetRequest
 } = require('./utils')
 
 describe('platform api methods', () => {
-  before(() => {
-    stubNyplSourceMapper()
-  })
-
   afterEach(() => {
     if (platformApi.client.restore) platformApi.client.restore()
     genericGetStub.resetHistory()
