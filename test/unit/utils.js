@@ -9,7 +9,12 @@ const errorGetStub = sinon.stub().throws()
 // This is a convenience function for stubbing the platformApi.
 const stubPlatformApiGetRequest = (get) => sinon.stub(platformApi, 'client').resolves({ get })
 
-const stubNyplSourceMapper = () => {
+let _nyplSourceMapperInterceptor
+
+/**
+* Add mock for github hosted nypl-source-mapper file
+*/
+const stubNyplSourceMapper = (howManyTimes = 1) => {
   const response = {
     'sierra-nypl': {
       organization: 'nyplOrg:0001',
@@ -22,15 +27,23 @@ const stubNyplSourceMapper = () => {
     'recap-hl': { organization: 'nyplOrg:0004', bibPrefix: 'hb', itemPrefix: 'hi' }
   }
 
-  nock('https://raw.githubusercontent.com')
+  _nyplSourceMapperInterceptor = nock('https://raw.githubusercontent.com')
     .defaultReplyHeaders({
       'access-control-allow-origin': '*',
       'access-control-allow-credentials': 'true'
     })
-    .get('/NYPL/nypl-core/master/mappings/recap-discovery/nypl-source-mapping.json')
+    .get(/.*/)
+    .times(howManyTimes)
     .reply(200, () => {
       return response
     })
+}
+
+/**
+* Remove mock from nypl-source-mapper file
+*/
+const unstubNyplSourceMapper = () => {
+  nock.removeInterceptor(_nyplSourceMapperInterceptor)
 }
 
 module.exports = {
@@ -38,5 +51,6 @@ module.exports = {
   nullGetStub,
   errorGetStub,
   stubPlatformApiGetRequest,
-  stubNyplSourceMapper
+  stubNyplSourceMapper,
+  unstubNyplSourceMapper
 }

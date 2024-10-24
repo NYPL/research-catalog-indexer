@@ -1,8 +1,6 @@
 const expect = require('chai').expect
 const { parse: parseQueryString } = require('querystring')
 
-const { stubNyplSourceMapper } = require('./utils')
-
 const SierraItem = require('../../lib/sierra-models/item')
 const EsItem = require('../../lib/es-models/item')
 const SierraBib = require('../../lib/sierra-models/bib')
@@ -11,10 +9,6 @@ const EsBib = require('../../lib/es-models/bib')
 const { aeonUrlForItem } = require('../../lib/utils/aeon-urls')
 
 describe('aeon-urls', () => {
-  beforeEach(() => {
-    stubNyplSourceMapper()
-  })
-
   it('returns nothing for item with no Aeon site code', async () => {
     const record = new SierraItem(require('../fixtures/item-10003973.json'))
     const esItem = new EsItem(record)
