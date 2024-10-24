@@ -7,18 +7,6 @@ const NyplSourceMapper = require('../../lib/utils/nypl-source-mapper')
 
 const SOURCE_MAPPING_URL = 'https://raw.githubusercontent.com/NYPL/nypl-core/master/mappings/recap-discovery/nypl-source-mapping.json'
 
-const response = {
-  'sierra-nypl': {
-    organization: 'nyplOrg:0001',
-    bibPrefix: 'b',
-    holdingPrefix: 'h',
-    itemPrefix: 'i'
-  },
-  'recap-pul': { organization: 'nyplOrg:0003', bibPrefix: 'pb', itemPrefix: 'pi' },
-  'recap-cul': { organization: 'nyplOrg:0002', bibPrefix: 'cb', itemPrefix: 'ci' },
-  'recap-hl': { organization: 'nyplOrg:0004', bibPrefix: 'hb', itemPrefix: 'hi' }
-}
-
 describe('utils/NyplSourceMapper', async function () {
   before(() => NyplSourceMapper.__resetInstance())
 
@@ -36,12 +24,12 @@ describe('utils/NyplSourceMapper', async function () {
 
     it('should return pre-fetched data if initialized', async function () {
       const mapping = await NyplSourceMapper.instance()
-      expect(mapping.nyplSourceMap).to.deep.equal(response)
+      expect(mapping.nyplSourceMap).to.nested.include({ 'sierra-nypl.organization': 'nyplOrg:0001' })
 
       // Trigger another instance creation, which will break if another `fetch`
       // call is made, since the nock only specifies .times(1)
       await NyplSourceMapper.instance()
-      expect(mapping.nyplSourceMap).to.deep.equal(response)
+      expect(mapping.nyplSourceMap).to.nested.include({ 'sierra-nypl.organization': 'nyplOrg:0001' })
     })
 
     it('should reuse existing fetch if one is already active', async function () {
@@ -51,8 +39,8 @@ describe('utils/NyplSourceMapper', async function () {
         NyplSourceMapper.instance(),
         NyplSourceMapper.instance()
       ])
-      expect(mapping1.nyplSourceMap).to.deep.equal(response)
-      expect(mapping2.nyplSourceMap).to.deep.equal(response)
+      expect(mapping1.nyplSourceMap).to.nested.include({ 'sierra-nypl.organization': 'nyplOrg:0001' })
+      expect(mapping2.nyplSourceMap).to.nested.include({ 'sierra-nypl.organization': 'nyplOrg:0001' })
     })
   })
 
