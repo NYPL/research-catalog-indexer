@@ -10,6 +10,7 @@ const errorGetStub = sinon.stub().throws()
 const stubPlatformApiGetRequest = (get) => sinon.stub(platformApi, 'client').resolves({ get })
 
 let _nyplSourceMapperInterceptor
+let _nyplSourceMapperRequestsCount = 0
 
 /**
 * Add mock for github hosted nypl-source-mapper file
@@ -37,6 +38,13 @@ const stubNyplSourceMapper = (howManyTimes = 1) => {
     .reply(200, () => {
       return response
     })
+
+  // Record number of requests intercepted:
+  _nyplSourceMapperInterceptor.on('request', (req) => {
+    _nyplSourceMapperRequestsCount += 1
+  })
+
+  _nyplSourceMapperRequestsCount = 0
 }
 
 /**
@@ -46,11 +54,20 @@ const unstubNyplSourceMapper = () => {
   nock.removeInterceptor(_nyplSourceMapperInterceptor)
 }
 
+/**
+* Expose request count for those tests making assertions about distinct request
+* counts
+*/
+const interceptedNyplSourceMapperRequestsCount = () => {
+  return _nyplSourceMapperRequestsCount
+}
+
 module.exports = {
   genericGetStub,
   nullGetStub,
   errorGetStub,
   stubPlatformApiGetRequest,
   stubNyplSourceMapper,
+  interceptedNyplSourceMapperRequestsCount,
   unstubNyplSourceMapper
 }

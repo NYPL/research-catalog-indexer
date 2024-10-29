@@ -1,16 +1,20 @@
 const expect = require('chai').expect
 const nock = require('nock')
 
-const { stubNyplSourceMapper, unstubNyplSourceMapper } = require('./utils')
+const {
+  stubNyplSourceMapper,
+  unstubNyplSourceMapper,
+  interceptedNyplSourceMapperRequestsCount
+} = require('./utils')
 
 const NyplSourceMapper = require('../../lib/utils/nypl-source-mapper')
 
 const SOURCE_MAPPING_URL = 'https://raw.githubusercontent.com/NYPL/nypl-core/master/mappings/recap-discovery/nypl-source-mapping.json'
 
-describe('utils/NyplSourceMapper', async function () {
+describe('utils/NyplSourceMapper', function () {
   before(() => NyplSourceMapper.__resetInstance())
 
-  describe('instance', async function () {
+  describe('instance', function () {
     beforeEach(stubNyplSourceMapper)
     afterEach(() => {
       unstubNyplSourceMapper()
@@ -23,13 +27,21 @@ describe('utils/NyplSourceMapper', async function () {
     })
 
     it('should return pre-fetched data if initialized', async function () {
+      // We expect no fetches made yet:
+      expect(interceptedNyplSourceMapperRequestsCount()).to.eq(0)
+
       const mapping = await NyplSourceMapper.instance()
       expect(mapping.nyplSourceMap).to.nested.include({ 'sierra-nypl.organization': 'nyplOrg:0001' })
+      // We expect one initial fetch made on the source mapper file
+      expect(interceptedNyplSourceMapperRequestsCount()).to.eq(1)
 
       // Trigger another instance creation, which will break if another `fetch`
       // call is made, since the nock only specifies .times(1)
       await NyplSourceMapper.instance()
       expect(mapping.nyplSourceMap).to.nested.include({ 'sierra-nypl.organization': 'nyplOrg:0001' })
+
+      // We expect no additional fetches made on the source mapper file:
+      expect(interceptedNyplSourceMapperRequestsCount()).to.eq(1)
     })
 
     it('should reuse existing fetch if one is already active', async function () {
@@ -44,7 +56,7 @@ describe('utils/NyplSourceMapper', async function () {
     })
   })
 
-  describe('splitIdentifier', async () => {
+  describe('splitIdentifier', () => {
     let sourceMapperInstance
 
     beforeEach(async () => {
