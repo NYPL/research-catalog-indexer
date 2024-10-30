@@ -1,77 +1,70 @@
 const expect = require('chai').expect
 const nock = require('nock')
+
+const {
+  stubNyplSourceMapper,
+  unstubNyplSourceMapper,
+  interceptedNyplSourceMapperRequestsCount
+} = require('./utils')
+
 const NyplSourceMapper = require('../../lib/utils/nypl-source-mapper')
 
-describe('NyplSourceMapper', async function () {
-  describe('nyplSourceMapping', async function () {
-    const response = {
-      'sierra-nypl': {
-        organization: 'nyplOrg:0001',
-        bibPrefix: 'b',
-        holdingPrefix: 'h',
-        itemPrefix: 'i'
-      },
-      'recap-pul': { organization: 'nyplOrg:0003', bibPrefix: 'pb', itemPrefix: 'pi' },
-      'recap-cul': { organization: 'nyplOrg:0002', bibPrefix: 'cb', itemPrefix: 'ci' },
-      'recap-hl': { organization: 'nyplOrg:0004', bibPrefix: 'hb', itemPrefix: 'hi' }
-    }
-    let callCount = 0
+const SOURCE_MAPPING_URL = 'https://raw.githubusercontent.com/NYPL/nypl-core/master/mappings/recap-discovery/nypl-source-mapping.json'
 
-    before(() => {
+describe('utils/NyplSourceMapper', function () {
+  before(() => NyplSourceMapper.__resetInstance())
+
+  describe('instance', function () {
+    beforeEach(stubNyplSourceMapper)
+    afterEach(() => {
+      unstubNyplSourceMapper()
       NyplSourceMapper.__resetInstance()
-      nock('https://raw.githubusercontent.com/NYPL/nypl-core/master/mappings/recap-discovery/nypl-source-mapping.json')
-        .defaultReplyHeaders({
-          'access-control-allow-origin': '*',
-          'access-control-allow-credentials': 'true'
-        })
-        .get(/.*/)
-        .reply(200, () => {
-          callCount += 1
-          return response
-        })
     })
-    after(() => NyplSourceMapper.__resetInstance())
 
-    it('should fetch data from nypl core if not initialized', async function () {
+    it('should fetch data from nypl core', async function () {
       const mapping = await NyplSourceMapper.instance()
-      expect(mapping.nyplSourceMap).to.deep.equal(response)
-      expect(callCount).to.equal(1)
+      expect(mapping.nyplSourceMap).to.nested.include({ 'sierra-nypl.organization': 'nyplOrg:0001' })
     })
 
     it('should return pre-fetched data if initialized', async function () {
+      // We expect no fetches made yet:
+      expect(interceptedNyplSourceMapperRequestsCount()).to.eq(0)
+
       const mapping = await NyplSourceMapper.instance()
-      expect(mapping.nyplSourceMap).to.deep.equal(response)
-      expect(callCount).to.equal(1)
+      expect(mapping.nyplSourceMap).to.nested.include({ 'sierra-nypl.organization': 'nyplOrg:0001' })
+      // We expect one initial fetch made on the source mapper file
+      expect(interceptedNyplSourceMapperRequestsCount()).to.eq(1)
+
+      // Trigger another instance creation, which will break if another `fetch`
+      // call is made, since the nock only specifies .times(1)
+      await NyplSourceMapper.instance()
+      expect(mapping.nyplSourceMap).to.nested.include({ 'sierra-nypl.organization': 'nyplOrg:0001' })
+
+      // We expect no additional fetches made on the source mapper file:
+      expect(interceptedNyplSourceMapperRequestsCount()).to.eq(1)
+    })
+
+    it('should reuse existing fetch if one is already active', async function () {
+      // Trigger multiple instance creations simultaneously to assert the mock
+      // is only used once:
+      const [mapping1, mapping2] = await Promise.all([
+        NyplSourceMapper.instance(),
+        NyplSourceMapper.instance()
+      ])
+      expect(mapping1.nyplSourceMap).to.nested.include({ 'sierra-nypl.organization': 'nyplOrg:0001' })
+      expect(mapping2.nyplSourceMap).to.nested.include({ 'sierra-nypl.organization': 'nyplOrg:0001' })
     })
   })
 
-  describe('splitIdentifier', async () => {
+  describe('splitIdentifier', () => {
     let sourceMapperInstance
-    const response = {
-      'sierra-nypl': {
-        organization: 'nyplOrg:0001',
-        bibPrefix: 'b',
-        holdingPrefix: 'h',
-        itemPrefix: 'i'
-      },
-      'recap-pul': { organization: 'nyplOrg:0003', bibPrefix: 'pb', itemPrefix: 'pi' },
-      'recap-cul': { organization: 'nyplOrg:0002', bibPrefix: 'cb', itemPrefix: 'ci' },
-      'recap-hl': { organization: 'nyplOrg:0004', bibPrefix: 'hb', itemPrefix: 'hi' }
-    }
 
-    before(async () => {
-      nock('https://raw.githubusercontent.com/NYPL/nypl-core/master/mappings/recap-discovery/nypl-source-mapping.json')
-        .defaultReplyHeaders({
-          'access-control-allow-origin': '*',
-          'access-control-allow-credentials': 'true'
-        })
-        .get(/.*/)
-        .reply(200, () => {
-          return response
-        })
+    beforeEach(async () => {
+      stubNyplSourceMapper()
       sourceMapperInstance = await NyplSourceMapper.instance()
     })
-    after(() => {
+    afterEach(() => {
+      unstubNyplSourceMapper()
       NyplSourceMapper.__resetInstance()
     })
 
@@ -150,31 +143,13 @@ describe('NyplSourceMapper', async function () {
 
   describe('prefix', async function () {
     let sourceMapperInstance
-    const response = {
-      'sierra-nypl': {
-        organization: 'nyplOrg:0001',
-        bibPrefix: 'b',
-        holdingPrefix: 'h',
-        itemPrefix: 'i'
-      },
-      'recap-pul': { organization: 'nyplOrg:0003', bibPrefix: 'pb', itemPrefix: 'pi' },
-      'recap-cul': { organization: 'nyplOrg:0002', bibPrefix: 'cb', itemPrefix: 'ci' },
-      'recap-hl': { organization: 'nyplOrg:0004', bibPrefix: 'hb', itemPrefix: 'hi' }
-    }
 
     before(async () => {
-      nock('https://raw.githubusercontent.com/NYPL/nypl-core/master/mappings/recap-discovery/nypl-source-mapping.json')
-        .defaultReplyHeaders({
-          'access-control-allow-origin': '*',
-          'access-control-allow-credentials': 'true'
-        })
-        .get(/.*/)
-        .reply(200, () => {
-          return response
-        })
+      stubNyplSourceMapper()
       sourceMapperInstance = await NyplSourceMapper.instance()
     })
     after(() => {
+      unstubNyplSourceMapper()
       NyplSourceMapper.__resetInstance()
     })
 
@@ -196,6 +171,42 @@ describe('NyplSourceMapper', async function () {
     it('should get correct prefix for recap-cul', function () {
       const prefix = sourceMapperInstance.prefix('recap-cul')
       expect(prefix).to.equal('cb')
+    })
+  })
+
+  describe('nyplSourceMapping error conditions', async function () {
+    beforeEach(() => NyplSourceMapper.__resetInstance())
+    afterEach(() => {
+      unstubNyplSourceMapper()
+      NyplSourceMapper.__resetInstance()
+    })
+
+    it('should fail if mapping json returns a non-2xx', async () => {
+      nock(SOURCE_MAPPING_URL)
+        .defaultReplyHeaders({
+          'access-control-allow-origin': '*',
+          'access-control-allow-credentials': 'true'
+        })
+        .get(/.*/)
+        .times(1)
+        .reply(503, () => '{}')
+
+      const call = NyplSourceMapper.instance()
+      return expect(call).to.be.rejectedWith(`Error retrieving ${SOURCE_MAPPING_URL} - got status 503`)
+    })
+
+    it('should fail if mapping json returns a 200 but is malformed', async () => {
+      nock(SOURCE_MAPPING_URL)
+        .defaultReplyHeaders({
+          'access-control-allow-origin': '*',
+          'access-control-allow-credentials': 'true'
+        })
+        .get(/.*/)
+        .times(1)
+        .reply(200, () => '{ "oh": "no" }')
+
+      const call = NyplSourceMapper.instance()
+      return expect(call).to.be.rejectedWith(`Error parsing data at ${SOURCE_MAPPING_URL}`)
     })
   })
 })

@@ -9,7 +9,13 @@ const errorGetStub = sinon.stub().throws()
 // This is a convenience function for stubbing the platformApi.
 const stubPlatformApiGetRequest = (get) => sinon.stub(platformApi, 'client').resolves({ get })
 
-const stubNyplSourceMapper = () => {
+let _nyplSourceMapperInterceptor
+let _nyplSourceMapperRequestsCount = 0
+
+/**
+* Add mock for github hosted nypl-source-mapper file
+*/
+const stubNyplSourceMapper = (howManyTimes = 1) => {
   const response = {
     'sierra-nypl': {
       organization: 'nyplOrg:0001',
@@ -22,15 +28,38 @@ const stubNyplSourceMapper = () => {
     'recap-hl': { organization: 'nyplOrg:0004', bibPrefix: 'hb', itemPrefix: 'hi' }
   }
 
-  nock('https://raw.githubusercontent.com')
+  _nyplSourceMapperInterceptor = nock('https://raw.githubusercontent.com')
     .defaultReplyHeaders({
       'access-control-allow-origin': '*',
       'access-control-allow-credentials': 'true'
     })
-    .get('/NYPL/nypl-core/master/mappings/recap-discovery/nypl-source-mapping.json')
+    .get(/.*/)
+    .times(howManyTimes)
     .reply(200, () => {
       return response
     })
+
+  // Record number of requests intercepted:
+  _nyplSourceMapperInterceptor.on('request', (req) => {
+    _nyplSourceMapperRequestsCount += 1
+  })
+
+  _nyplSourceMapperRequestsCount = 0
+}
+
+/**
+* Remove mock from nypl-source-mapper file
+*/
+const unstubNyplSourceMapper = () => {
+  nock.removeInterceptor(_nyplSourceMapperInterceptor)
+}
+
+/**
+* Expose request count for those tests making assertions about distinct request
+* counts
+*/
+const interceptedNyplSourceMapperRequestsCount = () => {
+  return _nyplSourceMapperRequestsCount
 }
 
 module.exports = {
@@ -38,5 +67,7 @@ module.exports = {
   nullGetStub,
   errorGetStub,
   stubPlatformApiGetRequest,
-  stubNyplSourceMapper
+  stubNyplSourceMapper,
+  interceptedNyplSourceMapperRequestsCount,
+  unstubNyplSourceMapper
 }
