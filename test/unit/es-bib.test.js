@@ -458,6 +458,27 @@ describe('EsBib', function () {
     })
   })
 
+  describe('recordTypeId', () => {
+    it('should return recordTypeId based on ldr rectype', () => {
+      const sierraBib = new SierraBib({})
+      sinon.stub(sierraBib, 'ldr').returns({ recType: 'h' })
+      const esBib = new EsBib(sierraBib)
+      expect(esBib.recordTypeId()).to.deep.equal('h')
+    })
+    it('should return null for empty rectype', () => {
+      const sierraBib = new SierraBib({})
+      sinon.stub(sierraBib, 'ldr').returns({ recType: '' })
+      const esBib = new EsBib(sierraBib)
+      expect(esBib.materialType()).to.equal(null)
+    })
+    it('should not break if ldr is undefined', () => {
+      const sierraBib = new SierraBib({})
+      sinon.stub(sierraBib, 'ldr').returns()
+      const esBib = new EsBib(sierraBib)
+      expect(esBib.materialType()).to.equal(null)
+    })
+  })
+
   describe('materialType', () => {
     it('should return materialType based on ldr rectype', () => {
       const sierraBib = new SierraBib({})
