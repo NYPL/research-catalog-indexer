@@ -458,12 +458,12 @@ describe('EsBib', function () {
     })
   })
 
-  describe('recordTypeId', () => {
-    it('should return recordTypeId based on ldr rectype', () => {
+  describe('recordType', () => {
+    it('should return recordType based on ldr rectype', () => {
       const sierraBib = new SierraBib({})
       sinon.stub(sierraBib, 'ldr').returns({ recType: 'h' })
       const esBib = new EsBib(sierraBib)
-      expect(esBib.recordTypeId()).to.deep.equal('h')
+      expect(esBib.recordType()).to.deep.equal('h')
     })
     it('should return null for empty rectype', () => {
       const sierraBib = new SierraBib({})
