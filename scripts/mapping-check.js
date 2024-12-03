@@ -33,7 +33,7 @@ kmsSetCredentials(awsCreds)
 exports.getMapping = async (index) => {
   const client = await esClient.client()
   const resp = await client.indices.getMapping({ index })
-  return resp.body[index].mappings.resource.properties
+  return resp.body[index].mappings.properties
 }
 
 /**

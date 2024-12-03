@@ -40,9 +40,8 @@ describe('scripts/mapping-check', () => {
       return {
         body: {
           [index]: {
-            mappings: {
-              resource: { properties: fakeMappings }
-            }
+            mappings: { properties: fakeMappings }
+
           }
         }
       }
