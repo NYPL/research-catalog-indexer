@@ -1,12 +1,27 @@
 /**
+* Update a single property in many ES documents based on a CSV of any length.
+* For example, this can be used to update the `recordTypeId` for every bib in
+* the index if you have a CSV containing columns id, nyplSource, recordTypeId.
 *
 * Usage:
-*   node scripts/update-property-by-csv.js --csv CSV --propertyName PROP [--limit L] [--offset O]
+*   node scripts/update-property-by-csv.js --csv CSV --propertyName PROP --envfile FILE
 *
-*   Where:
-*     - CSV {string} - A path to a local CSV containing id, nyplSource,
-*                      & propertyValue columns (strictly, in that order)
-*     - PROP {string} - The name of the property to update
+*   Arguments:
+*     csv {string}: A path to a local CSV containing id, nyplSource,
+*            & propertyValue columns (strictly, in that order)
+*     propertyName {string}: The name of the property to update
+*     envfile {string}: Path to local envfile (e.g. config/qa.env)
+*     batchSize {int}: Number of documents to update at a time. Default 100
+*     dryrun {boolean}: When set, talks about ES call it will make without
+*            making it.
+*     haltOn404 {boolean}: When set, cause script to bail when a target bib
+*            does not exist in the index.
+*     no-headers {boolean}: When set, indicates the input CSV does not have a
+*            header row
+*     limit {int}: Specify max number of records to process. Default Infinity
+*     offset {int}: Specify starting index in input CSV. Default 0
+*     verbose {boolean}: When set, script is a little more chatty about ops.
+*
 **/
 const fs = require('fs')
 const csv = require('csv')
