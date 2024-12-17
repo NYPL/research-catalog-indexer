@@ -1,4 +1,5 @@
 const { diff, detailedDiff } = require('deep-object-diff')
+const fs = require('fs')
 
 const NyplSourceMapper = require('../lib/utils/nypl-source-mapper')
 const { bibById, itemById, holdingById } = require('../lib/platform-api/requests')
@@ -30,6 +31,39 @@ function removeEmpty (obj) {
   )
 }
 
+/**
+ *  Print a summary of progress so far given:
+ *
+ *  @param count {int} - Number of records processed to date
+ *  @param total {int} - Total number of records in the job
+ *  @param total {batchSize} - How many records processed in each batch
+ *  @param startTime {Date} - When did the job begin?
+ */
+const printProgress = (count, total, batchSize, startTime) => {
+  const progress = count / total
+  const ellapsed = (new Date() - startTime) / 1000
+  const recordsPerSecond = count / ellapsed
+  const recordsPerHour = recordsPerSecond * 60 * 60
+
+  // Calculate ETA:
+  const etaSeconds = Math.ceil((total - count) / recordsPerSecond)
+  const { display: etaDisplay } = secondsAsFriendlyDuration(etaSeconds, { simplified: true })
+
+  const startIndex = count - (count % batchSize === 0 ? batchSize : count % batchSize)
+
+  logger.info([
+    `Processed ${startIndex + 1} - ${count} of ${total || '?'}`,
+    progress ? `: ${(progress * 100).toFixed(2)}%` : '',
+    recordsPerHour ? ` (${Math.round(recordsPerHour).toLocaleString()} records/h)` : '',
+    ' ETA: ' + etaDisplay
+  ].join(''))
+}
+
+/**
+* Returns a promise that resolves after `howLong` ms
+**/
+const delay = (howLong) => new Promise((resolve) => setTimeout(resolve, howLong))
+
 const verboseDiffPerType = (diffedProperties, remote, local) => {
   return Object.keys(diffedProperties).reduce((acc, prop) => {
     if (remote[prop] || local[prop]) {
@@ -52,6 +86,23 @@ const buildVerboseDiff = (diffObj, remote, local) => {
     ...acc,
     [type]: verboseDiffPerType(diffObj[type], remote, local)
   }), {})
+}
+
+/**
+* Given a parseArgs object and an array of arg names, attempts to cast named
+* arguments to integers if set. Raises error if non-empty and invalid.
+*
+* Updates argv in place.
+**/
+const castArgsToInts = (argv, argNames) => {
+  argNames.forEach((argName) => {
+    const value = argv.values[argName]
+
+    if (!value) return
+    if (isNaN(parseInt(value))) throw new Error(`Invalid int arg: ${argName}=${value}`)
+
+    argv.values[argName] = parseInt(value)
+  })
 }
 
 function logObject (obj, indent = 2) {
@@ -192,8 +243,14 @@ function printDiff (remote, local, verbose) {
 *  - minutes: Number of whole minutes
 *  - seconds: Number of whole seconds
 *  - display: A string representation of the duration incorporating above properties
+*
+* @param {object} options - An object defining:
+*    - simplified {boolean} - Simplify precision. Default false
 */
-const secondsAsFriendlyDuration = (seconds) => {
+const secondsAsFriendlyDuration = (seconds, options = {}) => {
+  options = Object.assign({
+    simplified: false
+  }, options)
   const secondsPerHour = 60 * 60
   const secondsPerDay = secondsPerHour * 24
 
@@ -203,10 +260,20 @@ const secondsAsFriendlyDuration = (seconds) => {
   const hours = Math.floor(seconds / secondsPerHour)
   seconds -= hours * secondsPerHour
 
-  const minutes = Math.floor(seconds / 60)
+  let minutes = Math.floor(seconds / 60)
   seconds -= minutes * 60
 
   seconds = Math.floor(seconds)
+
+  // If options.simplified, reduce precision of large duration values:
+  if (options.simplified) {
+    if (days) {
+      seconds = minutes = null
+    }
+    if (hours) {
+      seconds = null
+    }
+  }
 
   return {
     days,
@@ -327,6 +394,66 @@ const batch = (things, batchSize = 100) => {
   }, [])
 }
 
+/**
+* Return number of lines in file
+**/
+const lineCount = (file) => {
+  if (!fs.existsSync(file)) return Promise.reject(new Error('Invalid path'))
+
+  const exec = require('child_process').exec
+
+  return new Promise((resolve, reject) => {
+    exec(`wc -l ${file}`, (error, results) => {
+      if (error) return reject(error)
+
+      const count = parseInt(
+        results.trim()
+          .split(/\s+/)
+          .shift()
+      )
+      resolve(count)
+    })
+  })
+}
+
+/**
+* Retry an async call on error. Returns an async function that retries the
+* given call the given amount of times. Resolves when any call succeeds. Errors
+* when retries exhausted.
+*
+* Usage:
+*   doSomethingAsync()
+*     .catch(retry(doSomethingAsync, 3))
+**/
+const retry = (call, retries = 3, retryIndex = 0) => {
+  return async (error) => {
+    // Have we exhausted retries?
+    if (retryIndex === retries) {
+      console.error('Encountered error. Exhausted retries.', error)
+      // Failed after 3 retries? Fail hard:
+      throw new Error(`Exhausted ${retries} retries`)
+    }
+
+    console.error('Encountered error. Will retry:', error)
+    const retryLabel = `Retry ${retryIndex + 1} of ${retries}`
+    // Back off 3s, 9s, 27s:
+    const howLong = Math.pow(3, retryIndex + 1)
+    console.log(`${retryLabel}: Waiting ${howLong}s`)
+    await module.exports.delay(howLong * 1000)
+
+    // Execute call:
+    console.log(`${retryLabel}: Executing`)
+    return call()
+      // If retry succeeded, brag about it and return:
+      .then((res) => {
+        console.log(`${retryLabel}: Succeeded!`)
+        return res
+      })
+      // If call failed again, retry:
+      .catch(retry(call, retries, retryIndex + 1))
+  }
+}
+
 module.exports = {
   awsCredentialsFromIni,
   batch,
@@ -334,8 +461,13 @@ module.exports = {
   buildSierraModelFromUri,
   camelize,
   capitalize,
+  castArgsToInts,
+  delay,
   die,
   groupIdentifiersByTypeAndNyplSource,
+  lineCount,
   printDiff,
+  printProgress,
+  retry,
   secondsAsFriendlyDuration
 }

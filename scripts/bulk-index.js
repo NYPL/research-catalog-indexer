@@ -112,10 +112,11 @@ const {
   awsCredentialsFromIni,
   batch,
   batchIdentifiersByTypeAndNyplSource,
+  delay,
   die,
   camelize,
   capitalize,
-  secondsAsFriendlyDuration
+  printProgress
 } = require('./utils')
 const { setCredentials: kmsSetCredentials } = require('../lib/kms')
 const logger = require('../lib/logger')
@@ -330,36 +331,6 @@ const restoreModelPrefetch = () => {
 }
 
 /**
- *  Print a summary of progress so far given:
- *
- *  @param count {int} - Number of records processed to date
- *  @param total {int} Total number of records in the job
- *  @param startTime {Date} - When did the job begin?
- */
-const printProgress = (count, total, startTime) => {
-  const progress = count / total
-  const ellapsed = (new Date() - startTime) / 1000
-  const recordsPerSecond = count / ellapsed
-  const recordsPerHour = recordsPerSecond * 60 * 60
-
-  // Calculate ETA:
-  const etaSeconds = Math.ceil((total - count) / recordsPerSecond)
-  const { display: etaDisplay } = secondsAsFriendlyDuration(etaSeconds)
-
-  logger.info([
-    `Processing ${count} - ${Math.min(count + argv.batchSize, total)} of ${total || '?'}`,
-    progress ? `: ${(progress * 100).toFixed(2)}%` : '',
-    recordsPerHour ? ` (${Math.round(recordsPerHour).toLocaleString()} records/h)` : '',
-    ' ETA: ' + etaDisplay
-  ].join(''))
-}
-
-/**
-* Returns a promise that resolves after `howLong` ms
-**/
-const delay = (howLong) => new Promise((resolve, reject) => { setTimeout(resolve, howLong) })
-
-/**
 * Build a Bib/Item Service db query based on given options.
 *
 * Supported options:
@@ -454,7 +425,7 @@ const buildSqlQuery = (options) => {
 const updateByBibOrItemServiceQuery = async (options) => {
   options = Object.assign({
     // Default progress logger:
-    progressCallback: (count, total, startTime) => printProgress(count, total, startTime)
+    progressCallback: (count, total, startTime) => printProgress(count, total, argv.batchSize, startTime)
   }, options)
 
   let cursor
@@ -475,9 +446,6 @@ const updateByBibOrItemServiceQuery = async (options) => {
   let done = false
   while (!done && (count < options.limit || !options.limit)) {
     await instrument('Bulk-index batch', async () => {
-      // Log out progress so far:
-      options.progressCallback(count, total, startTime)
-
       // Pull next batch of records from the cursor:
       const rows = await cursor.read(options.batchSize)
 
@@ -507,8 +475,10 @@ const updateByBibOrItemServiceQuery = async (options) => {
             retries -= 1
           })
       }
-
       count += rows.length
+
+      // Log out progress so far:
+      options.progressCallback(count, total, startTime)
     })
   }
 
