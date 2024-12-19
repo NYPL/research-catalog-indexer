@@ -210,14 +210,25 @@ const postEsBulkOperations = async (operations, options) => {
   if (bulkResponse.body.errors) {
     const { errored, missing } = parseErroredDocuments(bulkResponse.body, operations)
     if (errored.length) {
-      console.log('Error updating some documents:', errored)
+      console.error('Error updating some documents:', errored)
       throw new Error('Error updating some documents')
     }
     if (options.haltOn404 && missing.length) {
-      console.log('Encountered 404 updating some documents:', missing)
+      console.error('Encountered 404 updating some documents:', missing)
       throw new Error('Error updating some documents')
     }
+
+    // console.log('Missing: ', missing.map((m) => m.operation.update._id))
     missingCount = missing.length
+    const stalePrincetonBibsErrored = missing
+      .map((m) => m.operation.update._id)
+      .filter((uri) => /^pb/.test(uri))
+      .filter((uri) => !/^pb99.*6421$/.test(uri))
+    if (stalePrincetonBibsErrored.length) {
+      const allNote = stalePrincetonBibsErrored.length === missingCount ? '(ALL!) ' : ''
+      console.log(`  Overlooking ${stalePrincetonBibsErrored.length} ${allNote}stale PUL bibs: ${stalePrincetonBibsErrored.join(',')}`)
+      missingCount -= stalePrincetonBibsErrored.length
+    }
   }
 
   const docsSummary = bulkResponse.body.items
@@ -238,14 +249,13 @@ const processBatch = (options) => {
 
     if (options.dryrun) {
       console.log('[Dryrun] Would post: ', operations)
-      await delay(1000)
     } else {
       const bulkCall = () => postEsBulkOperations(operations, options)
       await bulkCall()
         // Retry 3 times with back-off:
         .catch(retry(bulkCall, 3))
-      await delay(200)
     }
+    await delay(1000)
 
     processedCount += rows.length
     done(null, rows)
@@ -277,7 +287,6 @@ const processCsv = async (options) => {
   if (options.offset) {
     csvOptions.skipLines += options.offset
   }
-  console.log({ csvOptions })
   const readStream = fs.createReadStream(options.csv)
     .pipe(csvParser(csvOptions))
 
