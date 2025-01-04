@@ -135,9 +135,14 @@ const batchAndLimitTransform = (size, total) => {
 }
 
 /**
-* Given a ES _bulk response, analyzes the response for errors. Returns an object that defines:
+* Given a ES _bulk response (and the array of operations that produced it),
+* analyzes the response for errors. Returns an object that defines:
 *  - errored {object[]} - Array of objects representing non-404 errors, one per document
 *  - missing {object[]} - Array of objects representing 404 errors, one per document
+*
+* @param {Object} bulkResponse - ES bulk-api response body -
+*            See https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html#bulk-api-response-body
+* @param {Object[]} operations - Array of ES _bulk operations (see buildEsBulkOperations)
 **/
 const parseErroredDocuments = (bulkResponse, operations) => {
   // The items array has the same order of the dataset we just indexed.
@@ -170,6 +175,16 @@ const parseErroredDocuments = (bulkResponse, operations) => {
 * Given an array of CSV rows, builds an array of ES _bulk operations
 *
 * @param {Object[]} rows - Array of CSV rows
+*
+* @returns {Object[]} Array of objects representing a stream of bulk operations
+*     For example:
+*       [
+*         { update: { _index: 'index-name', _id: 'b1' } },
+*         { doc: { myProp: 'new prop value 1' } },
+*         { update: { _index: 'index-name', _id: 'b2' } },
+*         { doc: { myProp: 'new prop value 2' } },
+*         ...
+*       ]
 **/
 const buildEsBulkOperations = async (rows, propertyName) => {
   const nyplSourceMapper = await NyplSourceMapper.instance()
@@ -196,7 +211,7 @@ const buildEsBulkOperations = async (rows, propertyName) => {
 * Given an array of ES _bulk operations, commits the operations, parses the
 * response, and rejects if any non-skippable errors encountered.
 *
-* @param {Object[]} operations - Array of ES _bulk operations
+* @param {Object[]} operations - Array of ES _bulk operations (see buildEsBulkOperations)
 **/
 const postEsBulkOperations = async (operations, options) => {
   if (options.verbose) {
