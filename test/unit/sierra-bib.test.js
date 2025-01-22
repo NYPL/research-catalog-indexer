@@ -44,6 +44,24 @@ describe('SierraBib', function () {
           rationale: 'Is OTF'
         })
       })
+
+      it('should return true/otf for record with varfield 910a RLOTF alonside varfield BL', function () {
+        const bib = new SierraBib(require('../fixtures/bib-10001936-rlotf.json'))
+        expect(bib.getSuppressionWithRationale()).to.deep.equal({
+          suppressed: true,
+          rationale: 'Is OTF'
+        })
+      })
+    })
+
+    describe('rlAndBlRecord', function () {
+      it('should return true for record with BL and RL in 910a', function () {
+        const bib = new SierraBib(require('../fixtures/bib-11606020.json'))
+        expect(bib.getIsResearchWithRationale()).to.deep.equal({
+          isResearch: true,
+          rationale: '910 $a is BL,RL'
+        })
+      })
     })
   })
 })
