@@ -560,6 +560,19 @@
       "subfields": [
         {
           "tag": "a",
+          "content": "BL"
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "910",
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "a",
           "content": "RL"
         }
       ]
