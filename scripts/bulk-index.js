@@ -600,7 +600,7 @@ const processCsvBatch = async (batches, index = 0, options) => {
   )
 
   // Log out progress so far:
-  printProgress(options.count + batch.length, options.total, options.startTime)
+  printProgress(options.count + batch.length, options.total, options.batchSize, options.startTime)
 
   if (batches.length > index + 1) {
     // Update `count` (for progress stats):
