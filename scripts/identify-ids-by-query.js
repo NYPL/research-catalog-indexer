@@ -66,10 +66,12 @@ const parseArguments = () => {
         type: 'string',
         default: '0'
       },
-      outfile: { type: 'string' },
-      query: {
-        type: 'string'
+      outfile: {
+        type: 'string',
+        default: './out.csv'
       },
+      limit: { type: 'string' },
+      query: { type: 'string' },
       size: {
         type: 'string',
         default: '100'
@@ -81,7 +83,7 @@ const parseArguments = () => {
     }
   })
 
-  castArgsToInts(argv, ['batchSize', 'limit', 'offset'])
+  castArgsToInts(argv, ['limit'])
 
   return argv.values
 }
