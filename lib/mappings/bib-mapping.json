@@ -744,7 +744,8 @@
       {
         "marc": "545",
         "subfields": [
-          "a"
+          "a",
+          "b"
         ],
         "description": "Biography"
       },

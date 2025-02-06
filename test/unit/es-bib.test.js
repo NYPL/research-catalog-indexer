@@ -536,9 +536,24 @@ describe('EsBib', function () {
           noteType: 'Terms of Use'
         },
         {
-          label: 'Austin Hansen, known primarily as a Harlem studio photographer, has had a career in photography that spans nearly seventy years, from the mid-1920s to the present.',
+          label: 'Austin Hansen, known primarily as a Harlem studio photographer, has had a career in photography that spans nearly seventy years, from the mid-1920s to the present. Hansen was born in St. Thomas, in the Virgin Islands, on January 28, 1910, where he began his photographic career as a student of Clair Taylor, the Islands\' official photographer.  Among the first images that he produced were depictions of the hurricane damage done to St. Thomas in 1926 which he sold to the Virgin Islands\' government for $4.00.  When Charles Lindburgh stopped in the Virgin Islands after his 1927 transatlantic solo flight, Hansen recorded his visit and later sold these pictures to the New York Amsterdam News for $2.00.',
           type: 'bf:Note',
           noteType: 'Biography'
+        },
+        {
+          label: 'Moving to Harlem in 1928, Hansen worked at various jobs including messenger, elevator operator, and professional drummer in local Harlem nightclubs.  He also continued to pursue a career in professional photography by bringing his camera to gigs and photographing club patrons for a fee.  In 1929, he sold an image to the New York Amsterdam News of an African American woman singer performing for Eleanor Roosevelt at the Essex Hotel, for which Hansen was paid $2.00.  This would begin his long association with the local African American press as a freelance photojournalist.',
+          noteType: 'Biography',
+          type: 'bf:Note'
+        },
+        {
+          label: 'In the 1930s, Hansen joined the musicians\' union, Local 802, which enabled him to play and travel with larger bands.  He also studied art and started to expand his photographic output with the assistance of his younger brother, Aubrey, who had arrived in New York in 1939.  It was at this time that he began to photograph the Harlem nightclub scene; it also marked the beginning of his photographic record of both the day-to-day occurences in the local community, as well as the activities of notable Harlem residents and distinguished visitors.  During this time he also opened his first studio on West 116th Street in Harlem.  In 1942, Hansen began to do freelance work for the People\'s Voice, the newspaper founded and edited by Adam Clayton Powell, Jr., both as a contributing photographer, and as "The Mystery Photographer" for the Voice\'s promotional campaign.',
+          noteType: 'Biography',
+          type: 'bf:Note'
+        },
+        {
+          label: 'Hansen was drafted into the Navy during World War II, and served from July 17, 1943 to January 26, 1945.  He was trained as a war photographer and given the rank of Photographer\'s Mate, 2nd class, later serving on Manus Island in the Admiralty Islands in the South Pacific.  In 1945, after his discharge from the Navy, he was employed for over a year as a darkroom technician and photographer for the Office of War Information in New York City.  After the war, Hansen opened a photo studio on Eagle Ave. in the Bronx.  He later owned and operated a studio at 232 W. 135th Street, Harlem, where, for over forty years, he produced an archive of thousands of images depicting Harlem\'s architecture, religious institutions, businesses, professional schools, social and fraternal organizations, events, and weddings, along with a sizable studio portrait collection of families, clergy, political leaders, entertainers, athletes, police, and writers.  As a freelance photographer, Hansen was on assignment for or sold images to such publications as the New York Amsterdam News, the People\'s Voice, the New York Age, the Pittsburgh Courier (New York edition), African Opinion, and the Afro-American.  Austin Hansen died in New York City on January 23, 1996, a few days short of his 86th birthday.',
+          noteType: 'Biography',
+          type: 'bf:Note'
         },
         {
           label: 'Finding aid',
