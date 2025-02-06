@@ -21,7 +21,7 @@
  * nyplSource value (see example usage below):
  *
  * Usage:
- *   node scripts/identify-ids-by-query --envfile [path to .env] [--outfile out.csv] --query '{"query": {
+ *   node scripts/identify-ids-by-es-query --envfile [path to .env] [--outfile out.csv] --query '{"query": {
  *      "bool": {
  *          "must": [
  *              {
@@ -185,7 +185,7 @@ const run = async () => {
 }
 console.log('fs: ', process.argv[1])
 
-const isCalledViaCommandLine = /scripts\/identify-ids-by-query(.js)?/.test(fs.realpathSync(process.argv[1]))
+const isCalledViaCommandLine = /scripts\/identify-ids-by-es-query(.js)?/.test(fs.realpathSync(process.argv[1]))
 if (isCalledViaCommandLine) {
   run()
 }
