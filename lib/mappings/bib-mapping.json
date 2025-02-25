@@ -260,7 +260,8 @@
       {
         "marc": "520",
         "subfields": [
-          "a"
+          "a",
+          "b"
         ],
         "description": "Summary, Etc."
       }
