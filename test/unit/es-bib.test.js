@@ -469,7 +469,9 @@ describe('EsBib', function () {
     it('should return fixed field materialType for nypl records', () => {
       const sierraBib = new SierraBib({})
       sinon.stub(sierraBib, 'isPartnerRecord').returns(false)
-      sinon.stub(sierraBib, 'fixed').returns('spaghetti')
+      sinon.stub(sierraBib, 'fixed').callsFake((field) => {
+        if (field === 'Material type') return 'spaghetti'
+      })
       const esBib = new EsBib(sierraBib)
       expect(esBib.formatId()).to.deep.equal('spaghetti')
     })
