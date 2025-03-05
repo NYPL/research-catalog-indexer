@@ -473,6 +473,14 @@ describe('EsBib', function () {
       const esBib = new EsBib(sierraBib)
       expect(esBib.formatId()).to.deep.equal('a')
     })
+    it('should return trimmed fixed field materialType for nypl records', () => {
+      const sierraBib = new SierraBib(require('../fixtures/bib-10001936.json'))
+      const esBib = new EsBib(sierraBib)
+      sinon.stub(sierraBib, 'fixed').callsFake((field) => {
+        return field === 'Material Type' && 'a '
+      })
+      expect(esBib.formatId()).to.deep.equal('a')
+    })
   })
 
   describe('recordTypeId', () => {
