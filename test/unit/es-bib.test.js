@@ -459,16 +459,17 @@ describe('EsBib', function () {
   })
 
   describe('formatId', () => {
-    it('should return formatId based on ldr rectype for partner records', () => {
+    it('should return formatId based on recordTypeId logic for partner records', () => {
       const sierraBib = new SierraBib(require('../fixtures/bib-10001936.json'))
       sinon.stub(sierraBib, 'ldr').returns({ recType: 'h' })
       sinon.stub(sierraBib, 'isPartnerRecord').returns(true)
       const esBib = new EsBib(sierraBib)
+      const recordTypeSpy = sinon.spy(esBib, 'recordTypeId')
       expect(esBib.formatId()).to.deep.equal('h')
+      expect(recordTypeSpy.calledOnce).to.equal(true)
     })
     it('should return fixed field materialType for nypl records', () => {
       const sierraBib = new SierraBib(require('../fixtures/bib-10001936.json'))
-      sinon.stub(sierraBib, 'isPartnerRecord').returns(false)
       const esBib = new EsBib(sierraBib)
       expect(esBib.formatId()).to.deep.equal('a')
     })
