@@ -11,6 +11,15 @@ describe('EsItem', function () {
       expect(esItem.item).to.eq(record)
     })
   })
+  describe('formatLiteral', function () {
+    it('returns nypl core label from parent bib format id', () => {
+      const record = new SierraItem(require('../fixtures/item-17145801.json'))
+      const esItem = new EsItem(record, { formatId: () => 'r' })
+      expect(esItem.formatLiteral()).to.deep.equal([
+        '3-D Object'
+      ])
+    })
+  })
 
   describe('accessMessage', function () {
     // describe('for a partner record', function () {
@@ -132,7 +141,7 @@ describe('EsItem', function () {
 
     })
 
-    describe('for an item with missing barcode', function () {})
+    describe('for an item with missing barcode', function () { })
   })
 
   describe('identifier', function () {
