@@ -1,5 +1,7 @@
 const expect = require('chai').expect
+const sinon = require('sinon')
 
+const logger = require('../../lib/logger')
 const utils = require('../../scripts/utils')
 
 describe('scripts/utils', () => {
@@ -122,6 +124,101 @@ describe('scripts/utils', () => {
         days: 0,
         display: '3h 2m 14s'
       })
+    })
+
+    it('reduces precision for `simplified` mode', () => {
+      // 2 days + 71s:
+      expect(utils.secondsAsFriendlyDuration(2 * 24 * 3600 + 71, { simplified: true })).to.deep.equal({
+        days: 2,
+        hours: 0,
+        minutes: null,
+        seconds: null,
+        display: '2d'
+      })
+      // 3h, + 74s:
+      expect(utils.secondsAsFriendlyDuration(3 * 3600 + 60 * 2 + 14, { simplified: true })).to.deep.equal({
+        seconds: null,
+        minutes: 2,
+        hours: 3,
+        days: 0,
+        display: '3h 2m'
+      })
+    })
+  })
+
+  describe('retry', () => {
+    before(() => {
+      sinon.stub(utils, 'delay').callsFake(() => Promise.resolve())
+    })
+
+    after(() => utils.delay.restore())
+
+    it('retries a failing function N times', async () => {
+      const call = () => Promise.reject(new Error('Error!'))
+
+      await expect(call().catch(utils.retry(call, 1))).to.be.rejectedWith('Exhausted 1 retries')
+      await expect(call().catch(utils.retry(call, 3))).to.be.rejectedWith('Exhausted 3 retries')
+    })
+
+    it('resolves a temporarily failing function', async () => {
+      // Set up an async function that succeeds after 3rd error:
+      let errorCount = 0
+      const call = () => {
+        // Succeed after 3 successive errors:
+        if (errorCount === 3) return Promise.resolve('toast')
+
+        errorCount += 1
+        return Promise.reject(new Error('Error!'))
+      }
+
+      // First, confirm fails if only allowed to retry twice:
+      await expect(call().catch(utils.retry(call, 2))).to.be.rejectedWith('Exhausted 2 retries')
+
+      // Next, confirm it succeeds if allowed to retry thrice:
+      errorCount = 0
+      await expect(call().catch(utils.retry(call, 3))).to.eventually.equal('toast')
+    })
+  })
+
+  describe('printProgress', () => {
+    it('prints progress', () => {
+      const loggerSpy = sinon.spy(logger, 'info')
+
+      const lastLogLine = () => {
+        return loggerSpy.getCalls()
+          .pop()
+          .args.shift()
+      }
+
+      const start = new Date() - 1000
+      utils.printProgress(50, 10000, 50, start)
+      expect(lastLogLine()).to.match(/^Processed 1 - 50 of 10000: 0.50%/)
+
+      utils.printProgress(100, 10000, 50, start)
+      expect(lastLogLine()).to.match(/^Processed 51 - 100 of 10000: 1.00%/)
+
+      utils.printProgress(10000, 10000, 50, start)
+      expect(lastLogLine()).to.match(/^Processed 9951 - 10000 of 10000: 100.00%/)
+    })
+  })
+
+  describe('castArgsToInts', () => {
+    it('casts args to ints', () => {
+      // Mock `parseArgs` result:
+      const inp = { values: { num1: '123', num2: '456' } }
+
+      utils.castArgsToInts(inp, ['num1', 'num2'])
+
+      expect(inp.values.num1).to.eq(123)
+      expect(inp.values.num2).to.eq(456)
+    })
+
+    it('rejects invalid ints', () => {
+      // Mock `parseArgs` result:
+      const inp = { values: { str1: 'foo' } }
+
+      const call = () => utils.castArgsToInts(inp, ['str1'])
+      expect(call).to.throw('Invalid int arg: str1=foo')
     })
   })
 })

@@ -11,6 +11,15 @@ describe('EsItem', function () {
       expect(esItem.item).to.eq(record)
     })
   })
+  describe('formatLiteral', function () {
+    it('returns nypl core label from parent bib format id', () => {
+      const record = new SierraItem(require('../fixtures/item-17145801.json'))
+      const esItem = new EsItem(record, { formatId: () => 'r' })
+      expect(esItem.formatLiteral()).to.deep.equal([
+        '3-D Object'
+      ])
+    })
+  })
 
   describe('accessMessage', function () {
     // describe('for a partner record', function () {
@@ -132,7 +141,7 @@ describe('EsItem', function () {
 
     })
 
-    describe('for an item with missing barcode', function () {})
+    describe('for an item with missing barcode', function () { })
   })
 
   describe('identifier', function () {
@@ -141,7 +150,7 @@ describe('EsItem', function () {
         const record = new SierraItem(require('../fixtures/item-17145801.json'))
         const esItem = new EsItem(record)
         expect(esItem.identifier()).to.deep.equal([
-          'urn:shelfmark:*DM (Esprit des Journaux, françois et etrangers) no. 12 (1784)',
+          'urn:shelfmark:*DM (Esprit des Journaux, françois et etrangers)',
           'urn:barcode:33433081745998'
         ])
       })
@@ -156,7 +165,7 @@ describe('EsItem', function () {
         expect(esItem.identifierV2()).to.deep.equal(
           [
             {
-              value: '*DM (Esprit des Journaux, françois et etrangers) no. 12 (1784)',
+              value: '*DM (Esprit des Journaux, françois et etrangers)',
               type: 'bf:ShelfMark'
             },
             {
@@ -176,7 +185,7 @@ describe('EsItem', function () {
         const esItem = new EsItem(record)
         expect(esItem.shelfMark()).to.deep.equal(
           [
-            '*DM (Esprit des Journaux, françois et etrangers) no. 12 (1784)'
+            '*DM (Esprit des Journaux, françois et etrangers)'
           ]
         )
       })
@@ -190,7 +199,7 @@ describe('EsItem', function () {
         const esItem = new EsItem(record)
         const v = await esItem.shelfMark_sort()
         expect(v).to.equal(
-          'a*DM (Esprit des Journaux, françois et etrangers) no. 000012 (1784)'
+          'a*DM (Esprit des Journaux, françois et etrangers)'
         )
       })
     })

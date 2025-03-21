@@ -309,7 +309,13 @@ describe('EsBib', function () {
       const esBib = new EsBib(record)
       expect(esBib.description()).to.deep.equal(
         [
-          'The Austin Hansen Collection primarily documents the people, places, and events in Harlem during the period from approximately the 1930s to the late 1980s.'
+          'The Austin Hansen Collection primarily documents the people, places, and events in Harlem during the period from approximately the 1930s to the late 1980s. The Navy photography, produced when Hansen served on Manus Island in the South Pacific during the Second World War (1944-45), includes individual and group portraits of sailors, officers, South Seas inhabitants, and self-portraits.  Also included are views of daily military life and various construction projects.',
+          'The Personalities series includes many well-known political, civil rights, labor, entertainment, literary, and sports figures. Among the more notable are Mary McLeod Bethune, Coretta Scott King, Canada Lee, Joe Louis, Adam Clayton Powell, Jr., A. Philip Randolph, Jackie Robinson, and Eleanor Roosevelt.',
+          "The Organization series depicts the numerous benevolent, civic, social, fraternal and professional organizations in Harlem.  This includes individual and group portraits of officers and membership; meetings and assemblies; dinners; ceremonies; cotillions; parties; community service events; and miscellaneous events.  Among the organizations represented are the New York Club of the National Association of Negro Business & Professional Women's Clubs, the Virgin Islands Professional League, Club \"75\" Inc., the Harlem Branch of the Young Men's Christian Association, and a large representation of fraternal groups.  The latter includes the Ancient Egyptian Arabic Order Nobles Mystic Shrine (Prince Hall Affiliated), the Prince Hall Grand Lodge (N.Y.), the Improved Benevolent Protective Order of Elks of the World, and the Scottish Rite Masonic order.",
+          "Church photography documents clergy, parishioners, confirmation classes, clubs and associations, architectural views, rites and ceremonies, special events, and other activities of the mostly Protestant denominations in the Harlem area.  Included in this series are Abyssinian Baptist Church, Mother A.M.E. Zion, St. Luke's A.M.E., St. Martin's Episcopal, St. Philip's Episcopal, Salem United Methodist, and the Cathedral of St. John the Divine.",
+          'The wedding photography records the participants and activities in a variety of weddings that Hansen photographed from the 1940s to the 1980s.  The collection is a mixture of both black and white and color photographs which include portraits of the bride and groom, bridal parties, prenuptial bridal preparations, views of ceremonies, wedding guests, and receptions.  Most notable among this group is the wedding of former New York City mayor David N. Dinkins to Joyce Burrows.',
+          'Studio portraits primarily depict residents of the Harlem community and include images of babies, children, couples, and families.  Images consist of individual and group portraits, including head shots, medium close-ups and full-length shots.  Some of the prints have been hand-colored, and several were done on the occasion of graduations, confirmations or first communions, formal occasions, or for modeling portfolios.',
+          "The remainder of the collection represents the variety of assignments and projects that Hansen carried out for specific clients, as well as some of the work that he produced for New York's major African American newspapers.  These images include views of accidents and legal photos; architectural views and street scenes; miscellaneous unidentified organization and church functions; interior views of bars and nightclubs; various gospel singers and other musical groups in performance; police and fire department activities, including a series of portraits of the officers of the New York Police Department 32nd Precinct; funerals; parties; local banks and businesses; and events, such as the Joe Louis Day Parade (1946) and the Poor People's Campaign March on Washington, D.C. (1968)."
         ]
       )
     })
@@ -458,6 +464,31 @@ describe('EsBib', function () {
     })
   })
 
+  describe('formatId', () => {
+    it('should return formatId based on recordTypeId logic for partner records', () => {
+      const sierraBib = new SierraBib(require('../fixtures/bib-10001936.json'))
+      sinon.stub(sierraBib, 'ldr').returns({ recType: 'h' })
+      sinon.stub(sierraBib, 'isPartnerRecord').returns(true)
+      const esBib = new EsBib(sierraBib)
+      const recordTypeSpy = sinon.spy(esBib, 'recordTypeId')
+      expect(esBib.formatId()).to.deep.equal('h')
+      expect(recordTypeSpy.calledOnce).to.equal(true)
+    })
+    it('should return fixed field materialType for nypl records', () => {
+      const sierraBib = new SierraBib(require('../fixtures/bib-10001936.json'))
+      const esBib = new EsBib(sierraBib)
+      expect(esBib.formatId()).to.deep.equal('a')
+    })
+    it('should return trimmed fixed field materialType for nypl records', () => {
+      const sierraBib = new SierraBib(require('../fixtures/bib-10001936.json'))
+      const esBib = new EsBib(sierraBib)
+      sinon.stub(sierraBib, 'fixed').callsFake((field) => {
+        return field === 'Material Type' && 'a '
+      })
+      expect(esBib.formatId()).to.deep.equal('a')
+    })
+  })
+
   describe('recordTypeId', () => {
     it('should return recordTypeId based on ldr rectype', () => {
       const sierraBib = new SierraBib({})
@@ -536,9 +567,24 @@ describe('EsBib', function () {
           noteType: 'Terms of Use'
         },
         {
-          label: 'Austin Hansen, known primarily as a Harlem studio photographer, has had a career in photography that spans nearly seventy years, from the mid-1920s to the present.',
+          label: 'Austin Hansen, known primarily as a Harlem studio photographer, has had a career in photography that spans nearly seventy years, from the mid-1920s to the present. Hansen was born in St. Thomas, in the Virgin Islands, on January 28, 1910, where he began his photographic career as a student of Clair Taylor, the Islands\' official photographer.  Among the first images that he produced were depictions of the hurricane damage done to St. Thomas in 1926 which he sold to the Virgin Islands\' government for $4.00.  When Charles Lindburgh stopped in the Virgin Islands after his 1927 transatlantic solo flight, Hansen recorded his visit and later sold these pictures to the New York Amsterdam News for $2.00.',
           type: 'bf:Note',
           noteType: 'Biography'
+        },
+        {
+          label: 'Moving to Harlem in 1928, Hansen worked at various jobs including messenger, elevator operator, and professional drummer in local Harlem nightclubs.  He also continued to pursue a career in professional photography by bringing his camera to gigs and photographing club patrons for a fee.  In 1929, he sold an image to the New York Amsterdam News of an African American woman singer performing for Eleanor Roosevelt at the Essex Hotel, for which Hansen was paid $2.00.  This would begin his long association with the local African American press as a freelance photojournalist.',
+          noteType: 'Biography',
+          type: 'bf:Note'
+        },
+        {
+          label: 'In the 1930s, Hansen joined the musicians\' union, Local 802, which enabled him to play and travel with larger bands.  He also studied art and started to expand his photographic output with the assistance of his younger brother, Aubrey, who had arrived in New York in 1939.  It was at this time that he began to photograph the Harlem nightclub scene; it also marked the beginning of his photographic record of both the day-to-day occurences in the local community, as well as the activities of notable Harlem residents and distinguished visitors.  During this time he also opened his first studio on West 116th Street in Harlem.  In 1942, Hansen began to do freelance work for the People\'s Voice, the newspaper founded and edited by Adam Clayton Powell, Jr., both as a contributing photographer, and as "The Mystery Photographer" for the Voice\'s promotional campaign.',
+          noteType: 'Biography',
+          type: 'bf:Note'
+        },
+        {
+          label: 'Hansen was drafted into the Navy during World War II, and served from July 17, 1943 to January 26, 1945.  He was trained as a war photographer and given the rank of Photographer\'s Mate, 2nd class, later serving on Manus Island in the Admiralty Islands in the South Pacific.  In 1945, after his discharge from the Navy, he was employed for over a year as a darkroom technician and photographer for the Office of War Information in New York City.  After the war, Hansen opened a photo studio on Eagle Ave. in the Bronx.  He later owned and operated a studio at 232 W. 135th Street, Harlem, where, for over forty years, he produced an archive of thousands of images depicting Harlem\'s architecture, religious institutions, businesses, professional schools, social and fraternal organizations, events, and weddings, along with a sizable studio portrait collection of families, clergy, political leaders, entertainers, athletes, police, and writers.  As a freelance photographer, Hansen was on assignment for or sold images to such publications as the New York Amsterdam News, the People\'s Voice, the New York Age, the Pittsburgh Courier (New York edition), African Opinion, and the Afro-American.  Austin Hansen died in New York City on January 23, 1996, a few days short of his 86th birthday.',
+          noteType: 'Biography',
+          type: 'bf:Note'
         },
         {
           label: 'Finding aid',
