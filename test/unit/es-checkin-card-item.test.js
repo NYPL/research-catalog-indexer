@@ -111,7 +111,7 @@ describe('EsCheckinCardItem', function () {
       ])
     })
 
-    it('returns parent bib material type label as holding format when holding lacks 843', () => {
+    it('returns nypl core label from parent bib format id when holding lacks 843', () => {
       // Create a holding from which to extract checkin card items:
       const holding = new SierraHolding(require('../fixtures/holding-1044923.json'))
       // Create a esBib instance with a "Text" materialType:
@@ -120,7 +120,7 @@ describe('EsCheckinCardItem', function () {
       // Because the holding record doesn't have a 843, we expect checkin card
       // items to derive formatLiteral from the esBib.materialType:
       expect(items[0].formatLiteral()).to.deep.equal([
-        'Text'
+        'Book/Text'
       ])
     })
   })

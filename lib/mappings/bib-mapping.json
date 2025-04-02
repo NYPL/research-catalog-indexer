@@ -260,7 +260,8 @@
       {
         "marc": "520",
         "subfields": [
-          "a"
+          "a",
+          "b"
         ],
         "description": "Summary, Etc."
       }
@@ -744,7 +745,8 @@
       {
         "marc": "545",
         "subfields": [
-          "a"
+          "a",
+          "b"
         ],
         "description": "Biography"
       },
