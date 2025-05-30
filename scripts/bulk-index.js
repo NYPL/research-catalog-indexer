@@ -509,7 +509,7 @@ const updateByCsv = async (options = {}) => {
   const rows = csvParse(rawContent)
 
   // Slice rows-to-process using --offset and --limit:
-  const end = options.limit ? options.limit + options.offset : rows.length - 1
+  const end = options.limit ? options.limit + options.offset : rows.length
   const rowsToProcess = rows.slice(options.offset, end)
     .map((row) => row[options.csvIdColumn])
     // Do input values have Sierra check digit? Remove them:
