@@ -7,6 +7,15 @@ const SierraHolding = require('../../lib/sierra-models/holding')
 const EsBib = require('../../lib/es-models/bib')
 
 describe('EsBib', function () {
+  describe('newSubjectLiteral', function () {
+    it('does the thing', function () {
+      const record = new SierraBib(require('../fixtures/bib-parallels-chaos.json'))
+      const esBib = new EsBib(record)
+      console.dir(esBib.newSubjectLiteral(), { depth: null })
+      expect(esBib.newSubjectLiteral()).to.eq()
+    })
+  })
+
   describe('constructor', function () {
     it('initializes an EsBib with a \'bib\' property', function () {
       const record = new SierraBib(require('../fixtures/bib-10001936.json'))
