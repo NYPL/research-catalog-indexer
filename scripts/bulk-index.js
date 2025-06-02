@@ -363,7 +363,7 @@ const buildSqlQuery = (options) => {
 
     options.limit = 1
 
-  // Querying a collection of ids?
+    // Querying a collection of ids?
   } else if (options.nyplSource && options.type && options.ids) {
     type = options.type
     sqlFromAndWhere = `${type}
@@ -374,7 +374,7 @@ const buildSqlQuery = (options) => {
     ]
     options.limit = options.ids.length
 
-  // Querying by existance of a marc field?
+    // Querying by existance of a marc field?
   } else if (options.nyplSource && options.type && options.hasMarc) {
     type = options.type
 
@@ -499,7 +499,7 @@ const updateByBibOrItemServiceQuery = async (options) => {
 *  - offset {int} - 0-indexed line number to start at. Default 0
 *  - limit {int}  - Number of rows to process. Default no-limit.
 */
-const updateByCsv = async (options = {}) => {
+const updateByCsv = async (options = { offset: 0 }) => {
   if (!options.csv) throw new Error('--csv is required')
   if (isNaN(options.csvIdColumn)) {
     throw new Error('--csvIdColumn is required')

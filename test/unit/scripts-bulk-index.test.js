@@ -17,10 +17,15 @@ const removeDupeWhitespace = (sql) => {
 // Map anticipated SQL queries to mocked data to return:
 const pgFixtures = [
   {
-    match: /^SELECT R.\* FROM \(SELECT DISTINCT id, nypl_source FROM bib WHERE nypl_source = \$1 AND id IN \('1234', '5678'\) LIMIT 2\) _R INNER JOIN bib R ON _R.id=R.id AND _R.nypl_source=R.nypl_source$/,
+    match: /SELECT R\.\* FROM \(SELECT DISTINCT id, nypl_source FROM bib WHERE nypl_source = \$1 AND id IN \('1234','5678'\) LIMIT 2\) _R INNER JOIN bib R ON _R\.id=R\.id AND _R\.nypl_source=R\.nypl_source/,
     rows: [
       {
         id: 1234,
+        nypl_source: 'sierra-nypl',
+        var_fields: [{ marcTag: '910', subfields: [{ code: 'a', value: 'RL' }] }]
+      },
+      {
+        id: 5678,
         nypl_source: 'sierra-nypl',
         var_fields: [{ marcTag: '910', subfields: [{ code: 'a', value: 'RL' }] }]
       }
@@ -31,14 +36,14 @@ const pgFixtures = [
     rows: [
       {
         id: 456,
-        bibIds: [1234],
+        bibIds: [1234, 5678],
         nypl_source: 'sierra-nypl',
         var_fields: []
       }
     ]
   },
   {
-    match: /SELECT \* FROM item WHERE nypl_source = 'sierra-nypl' AND bib_ids \?\| array\['1234', '5678'\]$/,
+    match: /SELECT \* FROM item WHERE nypl_source = 'sierra-nypl' AND bib_ids \?\| array\['1234'\]$/,
     rows: [
       {
         id: 456,
@@ -67,6 +72,7 @@ const pgFixtures = [
 **/
 const mockedRowsForQuery = (sql) => {
   sql = removeDupeWhitespace(sql)
+  console.log(sql)
   const matchingFixture = pgFixtures.find((fixture) => fixture.match.test(sql))
   if (!matchingFixture) {
     console.error('Unmocked SQL query:', sql)
@@ -140,7 +146,7 @@ describe('scripts/bulk-index', () => {
       // What records were processed?
       const [type, records] = index.processRecords.getCall(0).args
       expect(type).to.eq('Bib')
-      expect(records).to.have.lengthOf(1)
+      expect(records).to.have.lengthOf(2)
       expect(records[0]).to.deep.include({
         id: 1234,
         nyplSource: 'sierra-nypl'
@@ -154,7 +160,7 @@ describe('scripts/bulk-index', () => {
       // What records were processed?
       const [type, records] = index.processRecords.getCall(0).args
       expect(type).to.eq('Bib')
-      expect(records).to.have.lengthOf(1)
+      expect(records).to.have.lengthOf(2)
       expect(records[0]).to.deep.include({
         id: 1234,
         nyplSource: 'sierra-nypl'
