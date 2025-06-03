@@ -72,7 +72,6 @@ const pgFixtures = [
 **/
 const mockedRowsForQuery = (sql) => {
   sql = removeDupeWhitespace(sql)
-  console.log(sql)
   const matchingFixture = pgFixtures.find((fixture) => fixture.match.test(sql))
   if (!matchingFixture) {
     console.error('Unmocked SQL query:', sql)
