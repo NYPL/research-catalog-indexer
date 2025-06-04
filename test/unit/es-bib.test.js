@@ -794,7 +794,6 @@ describe('EsBib', function () {
         'Social security -- Latin America'
       ])
     })
-
     it('should return parallelSubjectLiteral values', () => {
       const record = new SierraBib(require('../fixtures/bib-parallels-chaos.json'))
       const esBib = new EsBib(record)
