@@ -799,6 +799,11 @@ describe('EsBib', function () {
       const esBib = new EsBib(record)
       expect(esBib.parallelSubjectLiteral()).to.deep.equal(['‏600 parallel value a 600 parallel value b'])
     })
+    it('parallelSubjectLiteral shouldn\t have a problem with no parallel', () => {
+      const record = new SierraBib(require('../fixtures/bib-10554371.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.parallelSubjectLiteral())
+    })
   })
 
   describe('parallelDisplayField', () => {
