@@ -351,59 +351,72 @@ const buildSqlQuery = (options) => {
   let type = null
 
   // Just querying a single bib/item id?
-  if (options.nyplSource && (options.bibId || options.itemId)) {
-    type = options.bibId ? 'bib' : 'item'
-    sqlFromAndWhere = `${type}
-      WHERE nypl_source = $1
-      AND id = $2`
-    params = [
-      options.nyplSource,
-      options.bibId || options.itemId
-    ]
+  // if (options.nyplSource && (options.bibId || options.itemId)) {
+  //   type = options.bibId ? 'bib' : 'item'
+  //   sqlFromAndWhere = `${type}
+  //     WHERE nypl_source = $1
+  //     AND id = $2`
+  //   params = [
+  //     options.nyplSource,
+  //     options.bibId || options.itemId
+  //   ]
 
-    options.limit = 1
+  //   options.limit = 1
 
-    // Querying a collection of ids?
-  } else if (options.nyplSource && options.type && options.ids) {
-    type = options.type
-    sqlFromAndWhere = `${type}
-      WHERE nypl_source = $1
-      AND id IN (${options.ids.map((id) => `'${id}'`).join(',')})`
-    params = [
-      options.nyplSource
-    ]
-    options.limit = options.ids.length
+  //   // Querying a collection of ids?
+  // } else if (options.nyplSource && options.type && options.ids) {
+  //   type = options.type
+  //   sqlFromAndWhere = `${type}
+  //     WHERE nypl_source = $1
+  //     AND id IN (${options.ids.map((id) => `'${id}'`).join(',')})`
+  //   params = [
+  //     options.nyplSource
+  //   ]
+  //   options.limit = options.ids.length
 
-    // Querying by existance of a marc field?
-  } else if (options.nyplSource && options.type && options.hasMarc) {
-    type = options.type
+  //   // Querying by existance of a marc field?
+  // } else if (options.nyplSource && options.type && options.hasMarc) {
+  //   type = 'bib'
 
-    // Build array of SELECT clauses:
-    const selects = [type, 'json_array_elements(var_fields::json) jV']
-    // Build array of WHERE clauses:
-    const wheres = [
-      'nypl_source = $1',
-      "jV->>'marcTag' = $2"
-    ]
-    // Collect user input:
-    params = [
-      options.nyplSource,
-      options.hasMarc
-    ]
+  //   // Build array of SELECT clauses:
+  //   const selects = [type, 'json_array_elements(var_fields::json) jV']
+  //   // Build array of WHERE clauses:
+  //   const wheres = [
+  //     'nypl_source = sierra-nypl'
+  //     // "jV->>'marcTag' = $2"
+  //   ]
+  //   // Collect user input:
+  //   params = [
+  //     options.nyplSource,
+  //     options.hasMarc
+  //   ]
 
-    // If filtering on existence of specific subfield, add clause:
-    if (options.hasSubfield) {
-      selects.push("json_array_elements(jV->'subfields') jVS")
-      wheres.push("jVS->>'tag' = $3")
-      params.push(options.hasSubfield)
-    }
+  //   // If filtering on existence of specific subfield, add clause:
+  //   if (options.hasSubfield) {
+  //     selects.push("json_array_elements(jV->'subfields') jVS")
+  //     wheres.push("jVS->>'tag' = $3")
+  //     params.push(options.hasSubfield)
+  //   }
 
-    sqlFromAndWhere = selects.join(',\n') +
-      '\nWHERE ' + wheres.join('\nAND ')
-  } else {
-    throw new Error('Insufficient options to buildSqlQuery')
-  }
+  //   sqlFromAndWhere = selects.join(',\n') +
+  //     '\nWHERE ' + wheres.join('\nAND ')
+  // } else {
+  //   throw new Error('Insufficient options to buildSqlQuery')
+  // }
 
+  // Build array of SELECT clauses:
+  const selects = [type, 'json_array_elements(var_fields::json) jV']
+  // Build array of WHERE clauses:
+  const wheres = [
+    'nypl_source = $1'
+  ]
+  // Collect user input:
+  params = [
+    options.nyplSource
+  ]
+
+  sqlFromAndWhere = selects.join(',\n') +
+    '\nWHERE ' + wheres.join('\nAND ')
   // Some queries will return bibs multiple times because a matched var/subfield repeats.
   // To ensure we only handle such bibs once, we must de-deupe the results on id & nypl_source.
   // We use an inner-select to identify all of the distinct bibs (by id and nypl_source)
