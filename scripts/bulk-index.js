@@ -347,8 +347,10 @@ const restoreModelPrefetch = () => {
 **/
 const buildSqlQuery = (options) => {
   let sqlFromAndWhere = null
-  let params = []
-  let type = null
+  const params = [
+    options.nyplSource
+  ]
+  const type = 'bib'
 
   // Just querying a single bib/item id?
   // if (options.nyplSource && (options.bibId || options.itemId)) {
@@ -409,10 +411,6 @@ const buildSqlQuery = (options) => {
   // Build array of WHERE clauses:
   const wheres = [
     'nypl_source = $1'
-  ]
-  // Collect user input:
-  params = [
-    options.nyplSource
   ]
 
   sqlFromAndWhere = selects.join(',\n') +
