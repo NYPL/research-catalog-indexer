@@ -1,11 +1,21 @@
 const expect = require('chai').expect
-const sinon = require('sinon')
-const { buildUnionOfSubjects } = require('../../lib/browse-terms')
+const { buildUnionOfSubjects, fetchStaleSubjectLiterals } = require('../../lib/browse-terms')
+const esResponses = require('../fixtures/browse-term.js/es-responses')
+
+const mockEsClient = {
+  mget: async (request) => {
+    const docs = request.body.docs.map(({ _id }) => esResponses[_id])
+    return Promise.resolve({
+      docs
+    })
+  }
+}
 
 describe('bib activity', () => {
-  describe('fetchStaleSubjects', ()=> {
-    it('can handle elastic search returning an error (for a record that does not exist yet)', () => {
-      // https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-mget
+  describe('fetchStaleSubjects', () => {
+    it.only('can handle elastic search returning an error (for a record that does not exist yet)', async () => {
+      const records = ['b1', 'b2', 'b3', 'b4'].map(id => { return { id } })
+      const staleSubjects = await fetchStaleSubjectLiterals(records, mockEsClient)
     })
   })
   describe('buildUnionOfSubjects', () => {
