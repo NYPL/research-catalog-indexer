@@ -34,9 +34,13 @@ const processRecords = async (type, records, options = {}) => {
 
   const { recordsToIndex, recordsToDelete } = await buildEsDocument({ type, records })
 
-  buildBibSubjectCountEvents([...recordsToIndex, ...recordsToDelete])
+
   const messages = []
 
+  if (type === "bib") {
+    const subjects = await buildBibSubjectCountEvents([...recordsToIndex, ...recordsToDelete])
+    emitCountsForSubjects(subjects)
+  }
   if (recordsToIndex.length) {
     if (options.dryrun) {
       logger.info(`DRYRUN: Skipping writing ${recordsToIndex.length} records`)
