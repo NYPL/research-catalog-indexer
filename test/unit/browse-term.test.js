@@ -3,6 +3,11 @@ const sinon = require('sinon')
 const { buildUnionOfSubjects } = require('../../lib/browse-terms')
 
 describe('bib activity', () => {
+  describe('fetchStaleSubjects', ()=> {
+    it('can handle elastic search returning an error (for a record that does not exist yet)', () => {
+      // https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-mget
+    })
+  })
   describe('buildUnionOfSubjects', () => {
     it('can handle when there is a missing stale record', () => {
       const fresh = [{ subjectLiteral: ['a', 'b', 'c', 'd'] }, { subjectLiteral: ['q'] }, { subjectLiteral: ['z', 'y', 'a', 'b'] }]
@@ -21,11 +26,15 @@ describe('bib activity', () => {
       const stale = [{ subjectLiteral: ['a', 'b', 'c', 'x'] }]
       expect(buildUnionOfSubjects(fresh, stale)).to.deep.equal(['a', 'b', 'c', 'd', 'x'])
     })
-    // it.todo('creation', () => {
-
-    // })
-    // it.todo('deletion', () => {
-
-    // })
+    it('creation', () => {
+      const fresh = [{ subjectLiteral: ['a', 'b', 'c', 'x'] }]
+      const stale = [{ subjectLiteral: null }]
+      expect(buildUnionOfSubjects(fresh, stale)).to.deep.equal(['a', 'b', 'c', 'x'])
+    })
+    it('deletion', () => {
+      const fresh = [{ subjectLiteral: null }]
+      const stale = [{ subjectLiteral: ['a', 'b', 'c', 'x'] }]
+      expect(buildUnionOfSubjects(fresh, stale)).to.deep.equal(['a', 'b', 'c', 'x'])
+    })
   })
 })
