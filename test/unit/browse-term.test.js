@@ -13,9 +13,25 @@ const mockEsClient = {
 
 describe('bib activity', () => {
   describe('fetchStaleSubjects', () => {
-    it.only('can handle elastic search returning an error (for a record that does not exist yet)', async () => {
+    it('can handle no records', async () => {
+      const noSubjects = await fetchStaleSubjectLiterals([], mockEsClient)
+      expect(noSubjects).to.deep.equal([])
+    })
+    it('can handle elastic search returning not found responses', async (done) => {
       const records = ['b1', 'b2', 'b3', 'b4'].map(id => { return { id } })
       const staleSubjects = await fetchStaleSubjectLiterals(records, mockEsClient)
+      expect(staleSubjects).to.deep.eq([
+        null,
+        'spaghetti',
+        'meatballs',
+        'Literature -- Collections -- Periodicals.',
+        'Intellectual life.',
+        'Literature.',
+        'Electronic journals.',
+        'New York (N.Y.) -- Intellectual life -- Directories.',
+        'New York (State) -- New York.',
+        null
+      ])
     })
   })
   describe('buildUnionOfSubjects', () => {
