@@ -36,10 +36,10 @@ const processRecords = async (type, records, options = {}) => {
 
   const messages = []
 
-  if (type === 'bib') {
-    const subjects = await buildBibSubjectCountEvents([...recordsToIndex, ...recordsToDelete])
-    await emitCountEvents(subjects)
-  }
+  // if (type === 'bib') {
+  //   const subjects = await buildBibSubjectCountEvents([...recordsToIndex, ...recordsToDelete])
+  //   await emitCountEvents(subjects)
+  // }
 
   if (recordsToIndex.length) {
     if (options.dryrun) {
