@@ -5,7 +5,6 @@ const { suppressBibs } = require('./lib/utils/suppressBibs')
 const { buildEsDocument } = require('./lib/build-es-document')
 const { truncate } = require('./lib/utils')
 const { notifyDocumentProcessed } = require('./lib/streams-client')
-const { buildBibSubjectCountEvents } = require('./lib/browse-terms')
 
 /**
  * Main lambda handler receiving Bib, Item, and Holding events
@@ -36,10 +35,10 @@ const processRecords = async (type, records, options = {}) => {
 
   const messages = []
 
-  if (type === "bib") {
-    const subjects = await buildBibSubjectCountEvents([...recordsToIndex, ...recordsToDelete])
-    emitCountsForSubjects(subjects)
-  }
+  // if (type === 'bib') {
+  //   const subjects = await buildBibSubjectCountEvents([...recordsToIndex, ...recordsToDelete])
+  //   emitCountsForSubjects(subjects)
+  // }
   if (recordsToIndex.length) {
     if (options.dryrun) {
       logger.info(`DRYRUN: Skipping writing ${recordsToIndex.length} records`)
