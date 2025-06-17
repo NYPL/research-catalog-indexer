@@ -7,7 +7,6 @@ const { mgetResponses, toIndex, toDelete } = require('../fixtures/browse-term.js
 const mockEsClient = {
   mget: async (request) => {
     const docs = request.body.docs.map(({ _id }) => {
-      console.log(_id)
       return mgetResponses[_id]
     })
     return Promise.resolve({
@@ -16,7 +15,7 @@ const mockEsClient = {
   }
 }
 
-describe.only('bib activity', () => {
+describe('bib activity', () => {
   describe('buildBibSubjectCountEvents', () => {
     it('combines es records and sierra records into an array of term count objects', async () => {
       const recordsToIndex = await Promise.all(toIndex.map((record) => new SierraBib(record)).map(async (record) => await new EsBib(record).toJson()))
@@ -44,7 +43,7 @@ describe.only('bib activity', () => {
   })
   describe('fetchStaleSubjects', () => {
     it('returns a flattened array of subjects for supplied records', async () => {
-      const records = ['b2', 'b3'].map(id => { return { id } })
+      const records = ['b2', 'b3'].map(uri => { return { uri } })
       const staleSubjects = await fetchStaleSubjectLiterals(records, mockEsClient)
       expect(staleSubjects).to.deep.equal([
         'spaghetti',
