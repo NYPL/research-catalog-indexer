@@ -768,9 +768,7 @@ describe('EsBib', function () {
     })
 
     it('should trim whitespace', () => {
-      const bibFixture = require('../fixtures/bib-parallels-chaos.json')
-      bibFixture.varFields = [bibFixture.varFields[0]]
-      const record = new SierraBib(require('../fixtures/bib-parallels-chaos.json'))
+      const record = new SierraBib(require('../fixtures/bib-subject-spaces.json'))
       const esBib = new EsBib(record)
       expect(esBib.subjectLiteral()).to.deep.equal(['600 primary value a 600 primary value b'])
     })
