@@ -767,6 +767,14 @@ describe('EsBib', function () {
       expect(esBib.subjectLiteral()).to.deep.equal(['600 primary value a 600 primary value b'])
     })
 
+    it('should trim whitespace', () => {
+      const bibFixture = require('../fixtures/bib-parallels-chaos.json')
+      bibFixture.varFields = [bibFixture.varFields[0]]
+      const record = new SierraBib(require('../fixtures/bib-parallels-chaos.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.subjectLiteral()).to.deep.equal(['600 primary value a 600 primary value b'])
+    })
+
     it('should return an array of subject literals with " -- " joiner around other subfields', () => {
       const record = new SierraBib(require('../fixtures/bib-10001936.json'))
       const esBib = new EsBib(record)
