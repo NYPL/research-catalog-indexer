@@ -34,7 +34,6 @@ const processRecords = async (type, records, options = {}) => {
 
   const { recordsToIndex, recordsToDelete } = await buildEsDocument({ type, records })
 
-
   const messages = []
 
   if (type === "bib") {

@@ -17,7 +17,7 @@ describe('bib activity', () => {
       const noSubjects = await fetchStaleSubjectLiterals([], mockEsClient)
       expect(noSubjects).to.deep.equal([])
     })
-    it('can handle elastic search returning not found responses', async (done) => {
+    it('can handle elastic search returning not found responses', async () => {
       const records = ['b1', 'b2', 'b3', 'b4'].map(id => { return { id } })
       const staleSubjects = await fetchStaleSubjectLiterals(records, mockEsClient)
       expect(staleSubjects).to.deep.eq([
