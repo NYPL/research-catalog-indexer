@@ -16,7 +16,7 @@ const mockEsClient = {
   }
 }
 
-describe('bib activity', () => {
+describe.only('bib activity', () => {
   describe('buildBibSubjectCountEvents', () => {
     it('combines es records and sierra records into an array of term count objects', async () => {
       const recordsToIndex = await Promise.all(toIndex.map((record) => new SierraBib(record)).map(async (record) => await new EsBib(record).toJson()))
@@ -24,11 +24,21 @@ describe('bib activity', () => {
       const countEvents = await buildBibSubjectCountEvents(recordsToIndex, recordsToDelete, mockEsClient)
       console.log(countEvents)
       expect(countEvents).to.deep.eq([
-        { term: 'University of Utah -- Periodicals.' },
-        { term: 'Education, Higher -- Utah -- Periodicals.' },
-        { term: 'English drama.' },
-        { term: 'Milestones -- Devon.' },
-        { term: 'Devon (England) -- Description and travel.' }
+        { type: 'subjectLiteral', term: 'University of Utah -- Periodicals.' },
+        {
+          type: 'subjectLiteral',
+          term: 'Education, Higher -- Utah -- Periodicals.'
+        },
+        { type: 'subjectLiteral', term: 'English drama.' },
+        { type: 'subjectLiteral', term: 'Milestones -- Devon.' },
+        {
+          type: 'subjectLiteral',
+          term: 'Devon (England) -- Description and travel.'
+        },
+        { type: 'subjectLiteral', term: 'an' },
+        { type: 'subjectLiteral', term: 'old' },
+        { type: 'subjectLiteral', term: 'subject' },
+        { type: 'subjectLiteral', term: 'stale' }
       ])
     })
   })
@@ -52,10 +62,9 @@ describe('bib activity', () => {
       expect(noSubjects).to.deep.equal([])
     })
     it('can handle elastic search returning not found responses', async () => {
-      const records = ['b1', 'b2', 'b3', 'b4'].map(id => { return { id } })
+      const records = ['b1', 'b2', 'b3', 'b4'].map(uri => { return { uri } })
       const staleSubjects = await fetchStaleSubjectLiterals(records, mockEsClient)
       expect(staleSubjects).to.deep.eq([
-        null,
         'spaghetti',
         'meatballs',
         'Literature -- Collections -- Periodicals.',
@@ -63,12 +72,11 @@ describe('bib activity', () => {
         'Literature.',
         'Electronic journals.',
         'New York (N.Y.) -- Intellectual life -- Directories.',
-        'New York (State) -- New York.',
-        null
+        'New York (State) -- New York.'
       ])
     })
   })
-  describe.only('buildUnionOfSubjects', () => {
+  describe('buildUnionOfSubjects', () => {
     it('can handle when there is a missing stale record', () => {
       const fresh = ['a', 'b', 'c', 'd', 'q', 'z', 'y', 'a', 'b']
       const stale = ['a', 'b', 'c', 'x', null, 'z', 'y', 'a', 'b']
