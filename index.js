@@ -5,7 +5,7 @@ const { suppressBibs } = require('./lib/utils/suppressBibs')
 const { buildEsDocument } = require('./lib/build-es-document')
 const { truncate } = require('./lib/utils')
 const { notifyDocumentProcessed } = require('./lib/streams-client')
-const { emitCountEvents, buildBibSubjectCountEvents } = require('./lib/browse-terms')
+// const { emitCountEvents, buildBibSubjectCountEvents } = require('./lib/browse-terms')
 
 /**
  * Main lambda handler receiving Bib, Item, and Holding events
