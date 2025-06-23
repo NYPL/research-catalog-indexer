@@ -3,6 +3,8 @@ const { buildUnionOfSubjects, fetchStaleSubjectLiterals, buildBibSubjectCountEve
 const EsBib = require('../../lib/es-models/bib')
 const SierraBib = require('../../lib/sierra-models/bib')
 const { mgetResponses, toIndex, toDelete } = require('../fixtures/browse-term.js/fixtures')
+const esClient = require('../../lib/elastic-search/client')
+const sinon = require('sinon')
 
 const mockEsClient = {
   mget: async (request) => {
@@ -15,7 +17,10 @@ const mockEsClient = {
   }
 }
 
-describe('bib activity', () => {
+describe.only('bib activity', () => {
+  before(() => {
+    sinon.stub(esClient, 'client').resolves(mockEsClient)
+  })
   describe('buildSubjectDiff', () => {
     it('subjects added', () => {
       expect(buildSubjectDiff(['a', 'b', 'c', 'd'], ['c', 'd'])).to.deep.equal(['a', 'b'])
@@ -28,7 +33,7 @@ describe('bib activity', () => {
     it('combines es records and sierra records into an array of term count objects', async () => {
       const recordsToIndex = await Promise.all(toIndex.map((record) => new SierraBib(record)).map(async (record) => await new EsBib(record).toJson()))
       const recordsToDelete = toDelete.map((record) => new SierraBib(record))
-      const countEvents = await buildBibSubjectCountEvents(recordsToIndex, recordsToDelete, mockEsClient)
+      const countEvents = await buildBibSubjectCountEvents(recordsToIndex, recordsToDelete)
       expect(countEvents).to.deep.eq([
         { type: 'subjectLiteral', term: 'University of Utah -- Periodicals.' },
         {
@@ -50,8 +55,8 @@ describe('bib activity', () => {
   })
   describe('fetchStaleSubjects', () => {
     it('returns a flattened array of subjects for supplied records', async () => {
-      const records = ['b2', 'b3'].map(uri => { return { uri } })
-      const staleSubjects = await fetchStaleSubjectLiterals(records, mockEsClient)
+      const records = ['b2', 'b3']
+      const staleSubjects = await fetchStaleSubjectLiterals(records)
       expect(staleSubjects).to.deep.equal([
         'spaghetti',
         'meatballs',
@@ -64,12 +69,12 @@ describe('bib activity', () => {
       ])
     })
     it('can handle no records', async () => {
-      const noSubjects = await fetchStaleSubjectLiterals(undefined, mockEsClient)
+      const noSubjects = await fetchStaleSubjectLiterals(undefined)
       expect(noSubjects).to.deep.equal([])
     })
     it('can handle elastic search returning not found responses', async () => {
-      const records = ['b1', 'b2', 'b3', 'b4'].map(uri => { return { uri } })
-      const staleSubjects = await fetchStaleSubjectLiterals(records, mockEsClient)
+      const records = ['b1', 'b2', 'b3', 'b4']
+      const staleSubjects = await fetchStaleSubjectLiterals(records)
       expect(staleSubjects).to.deep.eq([
         'spaghetti',
         'meatballs',
