@@ -2,10 +2,11 @@ const logger = require('./lib/logger')
 const eventDecoder = require('./lib/event-decoder')
 const elastic = require('./lib/elastic-search/requests')
 const { suppressBibs } = require('./lib/utils/suppressBibs')
-const { buildEsDocument } = require('./lib/build-es-document')
+const { buildEsDocument, transformIntoBibRecords } = require('./lib/build-es-document')
 const { truncate } = require('./lib/utils')
 const { notifyDocumentProcessed } = require('./lib/streams-client')
 const { emitCountEvents } = require('./lib/browse-terms')
+const { filteredSierraBibsForBibs } = require('./lib/prefilter')
 
 /**
  * Main lambda handler receiving Bib, Item, and Holding events
@@ -32,7 +33,15 @@ const processRecords = async (type, records, options = {}) => {
     dryrun: false
   }, options)
 
-  const { recordsToIndex, recordsToDelete } = await buildEsDocument({ type, records })
+  // Ensure event has Bib records:
+  records = await transformIntoBibRecords(type, records)
+
+  const { filteredBibs, removedBibs } = await filteredSierraBibsForBibs(records)
+
+  // If original event was a Bib event, delete the "removed" records:
+  const recordsToDelete = type === 'Bib' ? removedBibs : []
+
+  const recordsToIndex = await buildEsDocument(filteredBibs)
 
   const messages = []
 
