@@ -135,7 +135,9 @@ const usage = () => {
     'Reindex a single record:',
     '  node reindex-record --envfile [path to .env] (--bibId id|--itemId id)',
     'Reindex by has-marc:',
-    '  node reindex-record --envfile [path to .env] --type bib --hasMarc 001 [--hasSubfield S]',
+    '  node reindex-record --envfile [path to .env] --type (bib|item) --hasMarc 001 [--hasSubfield S]',
+    'Reindex by nypl-source:',
+    '  node reindex-record --envfile [path to .env] --type (bib|item) --nyplSource SOURCE [--hasSubfield S]',
     'Reindex by CSV (containing prefixed ids):',
     '  node reindex-record --envfile [path to .env] --csv FILE --csvIdColumn 0'
   ].join('\n'))
@@ -608,10 +610,15 @@ const run = async () => {
 
   // Validate args:
   if (
-    !(argv.type) &&
-    !argv.bibId &&
-    !argv.itemId &&
-    !argv.csv
+    (
+      !(argv.type) &&
+      !argv.bibId &&
+      !argv.itemId &&
+      !argv.csv
+    ) || (
+      argv.type &&
+      !['bib', 'item'].includes(argv.type)
+    )
   ) {
     usage()
     cancelRun('Insufficient params')
@@ -620,10 +627,19 @@ const run = async () => {
   // Enable direct-db access to Item, Bib, and Holdings services:
   overwriteModelPrefetch()
 
+  // Require either:
+  // - bib/item id
+  // - type, plus another qualifier (hasMarc or nyplSource)
   if (
     argv.bibId ||
     argv.itemId ||
-    (argv.type)
+    (
+      argv.type &&
+      (
+        argv.hasMarc ||
+        argv.nyplSource
+      )
+    )
   ) {
     await db.initPools()
     await updateByBibOrItemServiceQuery(argv)
