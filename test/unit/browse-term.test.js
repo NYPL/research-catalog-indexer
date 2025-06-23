@@ -17,9 +17,12 @@ const mockEsClient = {
   }
 }
 
-describe.only('bib activity', () => {
+describe('bib activity', () => {
   before(() => {
     sinon.stub(esClient, 'client').resolves(mockEsClient)
+  })
+  after(() => {
+    esClient.client.restore()
   })
   describe('buildSubjectDiff', () => {
     it('subjects added', () => {
