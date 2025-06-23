@@ -21,7 +21,6 @@ describe('bib activity', () => {
       const recordsToIndex = await Promise.all(toIndex.map((record) => new SierraBib(record)).map(async (record) => await new EsBib(record).toJson()))
       const recordsToDelete = toDelete.map((record) => new SierraBib(record))
       const countEvents = await buildBibSubjectCountEvents(recordsToIndex, recordsToDelete, mockEsClient)
-      console.log(countEvents)
       expect(countEvents).to.deep.eq([
         { type: 'subjectLiteral', term: 'University of Utah -- Periodicals.' },
         {
