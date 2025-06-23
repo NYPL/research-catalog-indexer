@@ -240,5 +240,18 @@ describe('scripts/bulk-index', () => {
           type: 'table_name'
         })
     })
+
+    it('builds sql for type query', () => {
+      expect(bulkIndexer.buildSqlQuery({ type: 'table_name' }))
+        .to.deep.eq({
+          query: [
+            'SELECT R.* FROM (',
+            'SELECT DISTINCT id, nypl_source FROM table_name',
+            ') _R INNER JOIN table_name R ON _R.id=R.id AND _R.nypl_source=R.nypl_source'
+          ].join('\n'),
+          params: [],
+          type: 'table_name'
+        })
+    })
   })
 })
