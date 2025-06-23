@@ -1,5 +1,5 @@
 const expect = require('chai').expect
-const { buildUnionOfSubjects, fetchStaleSubjectLiterals, buildBibSubjectCountEvents } = require('../../lib/browse-terms')
+const { buildUnionOfSubjects, fetchStaleSubjectLiterals, buildBibSubjectCountEvents, buildSubjectDiff } = require('../../lib/browse-terms')
 const EsBib = require('../../lib/es-models/bib')
 const SierraBib = require('../../lib/sierra-models/bib')
 const { mgetResponses, toIndex, toDelete } = require('../fixtures/browse-term.js/fixtures')
@@ -16,6 +16,14 @@ const mockEsClient = {
 }
 
 describe('bib activity', () => {
+  describe('buildSubjectDiff', () => {
+    it('subjects added', () => {
+      expect(buildSubjectDiff(['a', 'b', 'c', 'd'], ['c', 'd'])).to.deep.equal(['a', 'b'])
+    })
+    it('subjects deleted', () => {
+      expect(buildSubjectDiff(['c', 'd'], ['a', 'b', 'c', 'd'])).to.deep.equal(['a', 'b'])
+    })
+  })
   describe('buildBibSubjectCountEvents', () => {
     it('combines es records and sierra records into an array of term count objects', async () => {
       const recordsToIndex = await Promise.all(toIndex.map((record) => new SierraBib(record)).map(async (record) => await new EsBib(record).toJson()))
