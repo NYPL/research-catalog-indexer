@@ -1,6 +1,6 @@
 module.exports = {
   toDelete: [
-    require('../bib-10001936-suppressed.json'),
+    require('../bib-fake-suppressed.json'),
     require('../bib-10001936-deleted.json')
   ],
   toIndex: [
@@ -10,6 +10,11 @@ module.exports = {
   ],
   mgetResponses:
   {
+    b1234: {
+      _index: 'resources-2024-10-22',
+      _id: 'b1',
+      found: false
+    },
     b10001936: {
       _index: 'resources-2024-10-22',
       _id: 'b10001936',

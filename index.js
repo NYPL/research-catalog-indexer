@@ -46,7 +46,7 @@ const processRecords = async (type, records, options = {}) => {
   const messages = []
 
   if (type === 'bib') {
-    await emitCountEvents(recordsToIndex, recordsToDelete)
+    await emitCountEvents([...filteredBibs, ...removedBibs])
   }
 
   if (recordsToIndex.length) {

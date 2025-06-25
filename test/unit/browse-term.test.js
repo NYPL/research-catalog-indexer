@@ -1,6 +1,5 @@
 const expect = require('chai').expect
 const { buildUnionOfSubjects, fetchStaleSubjectLiterals, buildBibSubjectCountEvents, buildSubjectDiff } = require('../../lib/browse-terms')
-const EsBib = require('../../lib/es-models/bib')
 const SierraBib = require('../../lib/sierra-models/bib')
 const { mgetResponses, toIndex, toDelete } = require('../fixtures/browse-term.js/fixtures')
 const esClient = require('../../lib/elastic-search/client')
@@ -33,10 +32,9 @@ describe('bib activity', () => {
     })
   })
   describe('buildBibSubjectCountEvents', () => {
-    it('combines es records and sierra records into an array of term count objects', async () => {
-      const recordsToIndex = await Promise.all(toIndex.map((record) => new SierraBib(record)).map(async (record) => await new EsBib(record).toJson()))
-      const recordsToDelete = toDelete.map((record) => new SierraBib(record))
-      const countEvents = await buildBibSubjectCountEvents(recordsToIndex, recordsToDelete)
+    it('can handle a combination of deleted and updated sierra bibs', async () => {
+      const records = [...toIndex, ...toDelete].map((record) => new SierraBib(record))
+      const countEvents = await buildBibSubjectCountEvents(records)
       expect(countEvents).to.deep.eq([
         { type: 'subjectLiteral', term: 'University of Utah -- Periodicals.' },
         {
@@ -48,6 +46,14 @@ describe('bib activity', () => {
         {
           type: 'subjectLiteral',
           term: 'Devon (England) -- Description and travel.'
+        },
+        {
+          term: 'subject -- from -- suppressed bib.',
+          type: 'subjectLiteral'
+        },
+        {
+          term: 'Armenians -- Iran -- History.',
+          type: 'subjectLiteral'
         },
         { type: 'subjectLiteral', term: 'an' },
         { type: 'subjectLiteral', term: 'old' },
