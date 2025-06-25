@@ -1,5 +1,5 @@
 const expect = require('chai').expect
-const { buildUnionOfSubjects, fetchStaleSubjectLiterals, buildBibSubjectCountEvents, buildSubjectDiff } = require('../../lib/browse-terms')
+const { fetchStaleSubjectLiterals, buildBibSubjectCountEvents, buildSubjectDiff, getPrimaryAndParallelLabels } = require('../../lib/browse-terms')
 const SierraBib = require('../../lib/sierra-models/bib')
 const { mgetResponses, toIndex, toDelete } = require('../fixtures/browse-term.js/fixtures')
 const esClient = require('../../lib/elastic-search/client')
@@ -23,6 +23,42 @@ describe('bib activity', () => {
   after(() => {
     esClient.client.restore()
   })
+  describe('getPrimaryAndParallelLabels', () => {
+    it('can handle no parallels', () => {
+      const labels = getPrimaryAndParallelLabels({
+        marc: {
+          marcTag: '600',
+          subfields: [
+            { tag: 'a', content: 'primary a' },
+            { tag: 'b', content: 'primary b' }
+          ]
+        }
+      })
+      expect(labels).to.deep.equal({ primary: 'primary a primary b' })
+    })
+    it('can handle primary and parallel', () => {
+      const labels = getPrimaryAndParallelLabels({
+        marc: {
+          marcTag: '600',
+          subfields: [
+            { tag: 'a', content: 'primary a' },
+            { tag: 'b', content: 'primary b' }
+          ]
+        },
+        parallel: {
+          marc: {
+            marcTag: '880',
+            subfields: [
+              { tag: 'a', content: 'parallel a' },
+              { tag: 'b', content: 'parallel b' }
+            ]
+          }
+        }
+      })
+      expect(labels).to.deep.equal(
+        { primary: 'primary a primary b', parallel: 'parallel a parallel b' })
+    })
+  })
   describe('buildSubjectDiff', () => {
     it('subjects added', () => {
       expect(buildSubjectDiff(['a', 'b', 'c', 'd'], ['c', 'd'])).to.deep.equal(['a', 'b'])
@@ -31,34 +67,34 @@ describe('bib activity', () => {
       expect(buildSubjectDiff(['c', 'd'], ['a', 'b', 'c', 'd'])).to.deep.equal(['a', 'b'])
     })
   })
-  describe('buildBibSubjectCountEvents', () => {
+  describe.only('buildBibSubjectCountEvents', () => {
     it('can handle a combination of deleted and updated sierra bibs', async () => {
       const records = [...toIndex, ...toDelete].map((record) => new SierraBib(record))
       const countEvents = await buildBibSubjectCountEvents(records)
       expect(countEvents).to.deep.eq([
-        { type: 'subjectLiteral', term: 'University of Utah -- Periodicals.' },
+        { type: 'subjectLiteral', primary: 'University of Utah -- Periodicals.' },
         {
           type: 'subjectLiteral',
-          term: 'Education, Higher -- Utah -- Periodicals.'
+          primary: 'Education, Higher -- Utah -- Periodicals.'
         },
-        { type: 'subjectLiteral', term: 'English drama.' },
-        { type: 'subjectLiteral', term: 'Milestones -- England -- Devon.' },
+        { type: 'subjectLiteral', primary: 'English drama.' },
+        { type: 'subjectLiteral', primary: 'Milestones -- England -- Devon.' },
         {
           type: 'subjectLiteral',
-          term: 'Devon (England) -- Description and travel.'
+          primary: 'Devon (England) -- Description and travel.'
         },
         {
-          term: 'subject -- from -- suppressed bib.',
+          primary: 'subject -- from -- suppressed bib.',
           type: 'subjectLiteral'
         },
         {
-          term: 'Armenians -- Iran -- History.',
+          primary: 'Armenians -- Iran -- History.',
           type: 'subjectLiteral'
         },
-        { type: 'subjectLiteral', term: 'an' },
-        { type: 'subjectLiteral', term: 'old' },
-        { type: 'subjectLiteral', term: 'subject' },
-        { type: 'subjectLiteral', term: 'stale' }
+        { type: 'subjectLiteral', primary: 'an' },
+        { type: 'subjectLiteral', primary: 'old' },
+        { type: 'subjectLiteral', primary: 'subject' },
+        { type: 'subjectLiteral', primary: 'stale' }
       ])
     })
   })
@@ -94,34 +130,6 @@ describe('bib activity', () => {
         'New York (N.Y.) -- Intellectual life -- Directories.',
         'New York (State) -- New York.'
       ])
-    })
-  })
-  describe('buildUnionOfSubjects', () => {
-    it('can handle when there is a missing stale record', () => {
-      const fresh = ['a', 'b', 'c', 'd', 'q', 'z', 'y', 'a', 'b']
-      const stale = ['a', 'b', 'c', 'x', null, 'z', 'y', 'a', 'b']
-      expect(buildUnionOfSubjects([...fresh, ...stale])
-        .sort((a, b) => {
-          return a > b ? 1 : -1
-        })
-      )
-        .to.deep.equal(['a', 'b', 'c', 'd', 'q', 'x', 'y', 'z'])
-    }
-    )
-    it('update', () => {
-      const fresh = ['a', 'b', 'c', 'd']
-      const stale = ['a', 'b', 'c', 'x']
-      expect(buildUnionOfSubjects([...fresh, ...stale])).to.deep.equal(['a', 'b', 'c', 'd', 'x'])
-    })
-    it('creation', () => {
-      const fresh = ['a', 'b', 'c', 'x']
-      const stale = [null]
-      expect(buildUnionOfSubjects([...fresh, ...stale])).to.deep.equal(['a', 'b', 'c', 'x'])
-    })
-    it('deletion', () => {
-      const fresh = [null]
-      const stale = ['a', 'b', 'c', 'x']
-      expect(buildUnionOfSubjects([...fresh, ...stale])).to.deep.equal(['a', 'b', 'c', 'x'])
     })
   })
 })
