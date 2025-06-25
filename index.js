@@ -5,6 +5,7 @@ const { suppressBibs } = require('./lib/utils/suppressBibs')
 const { buildEsDocument } = require('./lib/build-es-document')
 const { truncate } = require('./lib/utils')
 const { notifyDocumentProcessed } = require('./lib/streams-client')
+const { emitCountEvents } = require('./lib/browse-terms')
 
 /**
  * Main lambda handler receiving Bib, Item, and Holding events
@@ -34,6 +35,10 @@ const processRecords = async (type, records, options = {}) => {
   const { recordsToIndex, recordsToDelete } = await buildEsDocument({ type, records })
 
   const messages = []
+
+  if (type === 'bib') {
+    await emitCountEvents(recordsToIndex, recordsToDelete)
+  }
 
   if (recordsToIndex.length) {
     if (options.dryrun) {
