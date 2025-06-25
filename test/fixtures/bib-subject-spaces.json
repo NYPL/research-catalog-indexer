@@ -1,0 +1,25 @@
+{
+  "varFields": [
+    {
+      "fieldTag": "d",
+      "marcTag": "600",
+      "ind1": "0",
+      "ind2": "0",
+      "content": null,
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "880-01"
+        },
+        {
+          "tag": "a",
+          "content": "   600 primary value a"
+        },
+        {
+          "tag": "b",
+          "content": "600 primary value b   "
+        }
+      ]
+    }
+  ]
+}

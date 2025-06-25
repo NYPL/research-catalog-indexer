@@ -14,7 +14,7 @@ const index = async () => {
   const results = await Promise.all(
     searchTerms.map(async (term) => {
       const searchBody = {
-        size: 200,
+        size: 2000,
         query: query(term),
         _source: ['uri']
       }
@@ -24,7 +24,7 @@ const index = async () => {
       })
     })
   )
-  const ids = results.map((result) => result.hits.hits.map((hit) => hit._id)).flat()
+  const ids = results.map((result) => result.body.hits.hits.map((hit) => hit._id)).flat()
   const dedupedIds = [...new Set(ids)].slice(0, NUM_URIS).join('\n')
   fs.writeFile('scripts/index-n-bibs/uris.csv', dedupedIds, (e) => { if (e) throw e })
 }
