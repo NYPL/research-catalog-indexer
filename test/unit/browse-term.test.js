@@ -44,7 +44,7 @@ describe('bib activity', () => {
           term: 'Education, Higher -- Utah -- Periodicals.'
         },
         { type: 'subjectLiteral', term: 'English drama.' },
-        { type: 'subjectLiteral', term: 'Milestones -- Devon.' },
+        { type: 'subjectLiteral', term: 'Milestones -- England -- Devon.' },
         {
           type: 'subjectLiteral',
           term: 'Devon (England) -- Description and travel.'
