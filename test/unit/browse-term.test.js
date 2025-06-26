@@ -56,7 +56,7 @@ describe('bib activity', () => {
         }
       })
       expect(labels).to.deep.equal(
-        { preferredTerm: 'preferredTerm a preferredTerm b', parallel: 'parallel a parallel b' })
+        { preferredTerm: 'preferredTerm a preferredTerm b', variant: 'parallel a parallel b' })
     })
   })
   describe('buildSubjectDiff', () => {
