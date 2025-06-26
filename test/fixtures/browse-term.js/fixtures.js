@@ -4,12 +4,18 @@ module.exports = {
     require('../bib-10001936-deleted.json')
   ],
   toIndex: [
+    require('../bib-parallels-chaos'),
     require('../bib-11655934.json'),
     require('../bib-14576049.json'),
     require('../bib-10554618.json')
   ],
   mgetResponses:
   {
+    parallelsChaos: {
+      _index: 'resources-2024-10-22',
+      _id: 'parallelsChaos',
+      found: false
+    },
     b1234: {
       _index: 'resources-2024-10-22',
       _id: 'b1',

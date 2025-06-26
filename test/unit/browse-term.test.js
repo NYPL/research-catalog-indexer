@@ -29,20 +29,20 @@ describe('bib activity', () => {
         marc: {
           marcTag: '600',
           subfields: [
-            { tag: 'a', content: 'primary a' },
-            { tag: 'b', content: 'primary b' }
+            { tag: 'a', content: 'preferredTerm a' },
+            { tag: 'b', content: 'preferredTerm b' }
           ]
         }
       })
-      expect(labels).to.deep.equal({ primary: 'primary a primary b' })
+      expect(labels).to.deep.equal({ preferredTerm: 'preferredTerm a preferredTerm b' })
     })
-    it('can handle primary and parallel', () => {
+    it('can handle preferredTerm and parallel', () => {
       const labels = getPrimaryAndParallelLabels({
         marc: {
           marcTag: '600',
           subfields: [
-            { tag: 'a', content: 'primary a' },
-            { tag: 'b', content: 'primary b' }
+            { tag: 'a', content: 'preferredTerm a' },
+            { tag: 'b', content: 'preferredTerm b' }
           ]
         },
         parallel: {
@@ -56,45 +56,62 @@ describe('bib activity', () => {
         }
       })
       expect(labels).to.deep.equal(
-        { primary: 'primary a primary b', parallel: 'parallel a parallel b' })
+        { preferredTerm: 'preferredTerm a preferredTerm b', parallel: 'parallel a parallel b' })
     })
   })
   describe('buildSubjectDiff', () => {
+    const makePreferredTermObject = (x) => ({ preferredTerm: x })
     it('subjects added', () => {
-      expect(buildSubjectDiff(['a', 'b', 'c', 'd'], ['c', 'd'])).to.deep.equal(['a', 'b'])
+      expect(buildSubjectDiff(['a', 'b', 'c', 'd'].map(makePreferredTermObject), ['c', 'd'].map(makePreferredTermObject))).to.deep.equal(['a', 'b'].map(makePreferredTermObject))
     })
     it('subjects deleted', () => {
-      expect(buildSubjectDiff(['c', 'd'], ['a', 'b', 'c', 'd'])).to.deep.equal(['a', 'b'])
+      expect(buildSubjectDiff(['c', 'd'].map(makePreferredTermObject), ['a', 'b', 'c', 'd'].map(makePreferredTermObject))).to.deep.equal(['a', 'b'].map(makePreferredTermObject))
     })
   })
-  describe.only('buildBibSubjectCountEvents', () => {
+  describe('buildBibSubjectCountEvents', () => {
     it('can handle a combination of deleted and updated sierra bibs', async () => {
       const records = [...toIndex, ...toDelete].map((record) => new SierraBib(record))
       const countEvents = await buildBibSubjectCountEvents(records)
-      expect(countEvents).to.deep.eq([
-        { type: 'subjectLiteral', primary: 'University of Utah -- Periodicals.' },
+      const sortedCountEvents = countEvents.sort((a, b) => {
+        return a.preferredTerm.toLowerCase() > b.preferredTerm.toLowerCase() ? 1 : -1
+      })
+      console.dir(sortedCountEvents, { depth: null })
+      expect(sortedCountEvents).to.deep.eq([
         {
-          type: 'subjectLiteral',
-          primary: 'Education, Higher -- Utah -- Periodicals.'
+          preferredTerm: '600 primary value a 600 primary value b',
+          variant: '‏600 parallel value a 600 parallel value b',
+          type: 'subjectLiteral'
         },
-        { type: 'subjectLiteral', primary: 'English drama.' },
-        { type: 'subjectLiteral', primary: 'Milestones -- England -- Devon.' },
+        { preferredTerm: 'an', type: 'subjectLiteral' },
         {
-          type: 'subjectLiteral',
-          primary: 'Devon (England) -- Description and travel.'
-        },
-        {
-          primary: 'subject -- from -- suppressed bib.',
+          preferredTerm: 'Armenians -- Iran -- History.',
           type: 'subjectLiteral'
         },
         {
-          primary: 'Armenians -- Iran -- History.',
+          preferredTerm: 'Devon (England) -- Description and travel.',
           type: 'subjectLiteral'
         },
-        { type: 'subjectLiteral', primary: 'an' },
-        { type: 'subjectLiteral', primary: 'old' },
-        { type: 'subjectLiteral', primary: 'subject' },
-        { type: 'subjectLiteral', primary: 'stale' }
+        {
+          preferredTerm: 'Education, Higher -- Utah -- Periodicals.',
+          type: 'subjectLiteral'
+        },
+        { preferredTerm: 'English drama.', type: 'subjectLiteral' },
+        {
+          preferredTerm: 'Milestones -- England -- Devon.',
+          type: 'subjectLiteral'
+        },
+        { preferredTerm: 'old', type: 'subjectLiteral' },
+        { preferredTerm: 'stale', type: 'subjectLiteral' },
+        { preferredTerm: 'subject', type: 'subjectLiteral' },
+        { preferredTerm: 'subject', type: 'subjectLiteral' },
+        {
+          preferredTerm: 'subject -- from -- suppressed bib.',
+          type: 'subjectLiteral'
+        },
+        {
+          preferredTerm: 'University of Utah -- Periodicals.',
+          type: 'subjectLiteral'
+        }
       ])
     })
   })
