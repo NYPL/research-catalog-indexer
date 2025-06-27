@@ -45,7 +45,7 @@ const processRecords = async (type, records, options = {}) => {
 
   const messages = []
 
-  if (type === 'bib') {
+  if (type === 'Bib') {
     await emitBibSubjectEvents([...filteredBibs, ...removedBibs])
   }
 
