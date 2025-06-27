@@ -1,7 +1,18 @@
 const expect = require('chai').expect
-const { fetchStaleSubjectLiterals, buildBibSubjectEvents, buildSubjectDiff, getPrimaryAndParallelLabels, getSubjectModels } = require('../../lib/browse-terms')
+const {
+  fetchStaleSubjectLiterals,
+  buildBibSubjectEvents,
+  buildSubjectDiff,
+  getPrimaryAndParallelLabels,
+  getSubjectModels,
+  buildBatchedCommands
+} = require('../../lib/browse-terms')
 const SierraBib = require('../../lib/sierra-models/bib')
-const { mgetResponses, toIndex, toDelete } = require('../fixtures/browse-term.js/fixtures')
+const {
+  mgetResponses,
+  toIndex,
+  toDelete
+} = require('../fixtures/browse-term.js/fixtures')
 const esClient = require('../../lib/elastic-search/client')
 const sinon = require('sinon')
 
@@ -24,9 +35,25 @@ describe('bib activity', () => {
     esClient.client.restore()
   })
   describe('buildBatchedCommands', () => {
-    it('1 subject')
-    it('10 subjects')
-    it('27 subjects')
+    const generateSubjects = (length) => (new Array(length)).fill(null).map((_, i) => ({ preferredTerm: `pref ${i}` }))
+    it('1 subject', () => {
+      const subject = generateSubjects(1)
+      const commands = buildBatchedCommands(subject, 'sqs url')
+      expect(commands.length).to.eq(1)
+      expect(commands[0].input.Entries.length).to.eq(1)
+    })
+    it('10 subjects', () => {
+      const subject = generateSubjects(10)
+      const commands = buildBatchedCommands(subject, 'sqs url')
+      expect(commands.length).to.eq(1)
+      expect(commands[0].input.Entries.length).to.eq(10)
+    })
+    it('27 subjects', () => {
+      const subject = generateSubjects(27)
+      const commands = buildBatchedCommands(subject, 'sqs url')
+      expect(commands.length).to.eq(3)
+      expect(commands[2].input.Entries.length).to.eq(7)
+    })
   })
   describe('getSubjectModels', () => {
     it('returns labels for preferred term and variants', () => {
