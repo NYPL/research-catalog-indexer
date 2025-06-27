@@ -12,7 +12,7 @@ const {
   mgetResponses,
   toIndex,
   toDelete
-} = require('../fixtures/browse-term.js/fixtures')
+} = require('../fixtures/browse-term/fixtures')
 const esClient = require('../../lib/elastic-search/client')
 const sinon = require('sinon')
 
