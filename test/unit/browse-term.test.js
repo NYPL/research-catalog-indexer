@@ -12,7 +12,7 @@ const {
   mgetResponses,
   toIndex,
   toDelete
-} = require('../fixtures/browse-term/fixtures')
+} = require('../fixtures/browse-term-fixtures')
 const esClient = require('../../lib/elastic-search/client')
 const sinon = require('sinon')
 
@@ -22,7 +22,7 @@ const mockEsClient = {
       return mgetResponses[_id]
     })
     return Promise.resolve({
-      docs
+      body: { docs }
     })
   }
 }
