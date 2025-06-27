@@ -1,13 +1,13 @@
 module.exports = {
   toDelete: [
-    require('../bib-fake-suppressed.json'),
-    require('../bib-10001936-deleted.json')
+    require('./bib-fake-suppressed.json'),
+    require('./bib-10001936-deleted.json')
   ],
   toIndex: [
-    require('../bib-parallels-chaos.json'),
-    require('../bib-11655934.json'),
-    require('../bib-14576049.json'),
-    require('../bib-10554618.json')
+    require('./bib-parallels-chaos.json'),
+    require('./bib-11655934.json'),
+    require('./bib-14576049.json'),
+    require('./bib-10554618.json')
   ],
   mgetResponses:
   {

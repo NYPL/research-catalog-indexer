@@ -45,9 +45,9 @@ const processRecords = async (type, records, options = {}) => {
 
   const messages = []
 
-  if (type === 'bib') {
-    await emitBibSubjectEvents([...filteredBibs, ...removedBibs])
-  }
+  // if (type === 'bib') {
+  //   await emitBibSubjectEvents([...filteredBibs, ...removedBibs])
+  // }
 
   if (recordsToIndex.length) {
     if (options.dryrun) {
