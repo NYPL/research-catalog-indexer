@@ -5,7 +5,7 @@ const { suppressBibs } = require('./lib/utils/suppressBibs')
 const { buildEsDocument, transformIntoBibRecords } = require('./lib/build-es-document')
 const { truncate } = require('./lib/utils')
 const { notifyDocumentProcessed } = require('./lib/streams-client')
-const { emitCountEvents } = require('./lib/browse-terms')
+const { emitBibSubjectEvents } = require('./lib/browse-terms')
 const { filteredSierraBibsForBibs } = require('./lib/prefilter')
 
 /**
@@ -46,7 +46,7 @@ const processRecords = async (type, records, options = {}) => {
   const messages = []
 
   if (type === 'bib') {
-    await emitCountEvents([...filteredBibs, ...removedBibs])
+    await emitBibSubjectEvents([...filteredBibs, ...removedBibs])
   }
 
   if (recordsToIndex.length) {

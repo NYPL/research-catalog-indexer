@@ -1,5 +1,5 @@
 const expect = require('chai').expect
-const { fetchStaleSubjectLiterals, buildBibSubjectCountEvents, buildSubjectDiff, getPrimaryAndParallelLabels } = require('../../lib/browse-terms')
+const { fetchStaleSubjectLiterals, buildBibSubjectEvents, buildSubjectDiff, getPrimaryAndParallelLabels } = require('../../lib/browse-terms')
 const SierraBib = require('../../lib/sierra-models/bib')
 const { mgetResponses, toIndex, toDelete } = require('../fixtures/browse-term.js/fixtures')
 const esClient = require('../../lib/elastic-search/client')
@@ -68,14 +68,13 @@ describe('bib activity', () => {
       expect(buildSubjectDiff(['c', 'd'].map(makePreferredTermObject), ['a', 'b', 'c', 'd'].map(makePreferredTermObject))).to.deep.equal(['a', 'b'].map(makePreferredTermObject))
     })
   })
-  describe('buildBibSubjectCountEvents', () => {
+  describe('buildBibSubjectEvents', () => {
     it('can handle a combination of deleted and updated sierra bibs', async () => {
       const records = [...toIndex, ...toDelete].map((record) => new SierraBib(record))
-      const countEvents = await buildBibSubjectCountEvents(records)
+      const countEvents = await buildBibSubjectEvents(records)
       const sortedCountEvents = countEvents.sort((a, b) => {
         return a.preferredTerm.toLowerCase() > b.preferredTerm.toLowerCase() ? 1 : -1
       })
-      console.dir(sortedCountEvents, { depth: null })
       expect(sortedCountEvents).to.deep.eq([
         {
           preferredTerm: '600 primary value a 600 primary value b',
