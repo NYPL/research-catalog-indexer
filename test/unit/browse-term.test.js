@@ -1,5 +1,5 @@
 const expect = require('chai').expect
-const { fetchStaleSubjectLiterals, buildBibSubjectEvents, buildSubjectDiff, getPrimaryAndParallelLabels } = require('../../lib/browse-terms')
+const { fetchStaleSubjectLiterals, buildBibSubjectEvents, buildSubjectDiff, getPrimaryAndParallelLabels, getSubjectModels } = require('../../lib/browse-terms')
 const SierraBib = require('../../lib/sierra-models/bib')
 const { mgetResponses, toIndex, toDelete } = require('../fixtures/browse-term.js/fixtures')
 const esClient = require('../../lib/elastic-search/client')
@@ -22,6 +22,58 @@ describe('bib activity', () => {
   })
   after(() => {
     esClient.client.restore()
+  })
+  describe('buildBatchedCommands', () => {
+    it('1 subject')
+    it('10 subjects')
+    it('27 subjects')
+  })
+  describe('getSubjectModels', () => {
+    it('returns labels for preferred term and variants', () => {
+      const bib = toIndex.find(({ id }) => id === 'parallelsChaos')
+      expect(getSubjectModels(new SierraBib(bib))).to.deep.eq([
+        {
+          preferredTerm: '600 primary value a 600 primary value b',
+          variant: '‏600 parallel value a 600 parallel value b'
+        }
+      ])
+    })
+    it('returns objects without parallels', () => {
+      const bib = toIndex.find(({ id }) => id === '11655934')
+      console.log(getSubjectModels(new SierraBib(bib)))
+      expect(getSubjectModels(new SierraBib(bib))).to.deep.eq([
+        { preferredTerm: 'University of Utah -- Periodicals.' },
+        { preferredTerm: 'Education, Higher -- Utah -- Periodicals.' }
+      ])
+    })
+    it('can handle orphan parallels', () => {
+      const bib = {
+        varFields: [{
+          fieldTag: 'y',
+          marcTag: '880',
+          ind1: '0',
+          ind2: ' ',
+          content: null,
+          subfields: [
+            {
+              tag: '6',
+              content: '600-02/(3/r'
+            },
+            {
+              tag: 'a',
+              content: '600 orphaned parallel value a'
+            },
+            {
+              tag: 'b',
+              content: '600 orphaned parallel value b'
+            }
+          ]
+        }]
+      }
+      expect(getSubjectModels(new SierraBib(bib))).to.deep.eq([
+        { variant: '‏600 orphaned parallel value a 600 orphaned parallel value b' }
+      ])
+    })
   })
   describe('getPrimaryAndParallelLabels', () => {
     it('can handle no parallels', () => {
