@@ -17,21 +17,26 @@ const removeDupeWhitespace = (sql) => {
 // Map anticipated SQL queries to mocked data to return:
 const pgFixtures = [
   {
-    match: /^SELECT R.\* FROM \(SELECT DISTINCT id, nypl_source FROM bib WHERE nypl_source = \$1 AND id IN \('1234'\) LIMIT 1\) _R INNER JOIN bib R ON _R.id=R.id AND _R.nypl_source=R.nypl_source$/,
+    match: /SELECT R\.\* FROM \(SELECT DISTINCT id, nypl_source FROM bib WHERE nypl_source = \$1 AND id IN \('1234','5678'\) LIMIT 2\) _R INNER JOIN bib R ON _R\.id=R\.id AND _R\.nypl_source=R\.nypl_source/,
     rows: [
       {
         id: 1234,
+        nypl_source: 'sierra-nypl',
+        var_fields: [{ marcTag: '910', subfields: [{ code: 'a', value: 'RL' }] }]
+      },
+      {
+        id: 5678,
         nypl_source: 'sierra-nypl',
         var_fields: [{ marcTag: '910', subfields: [{ code: 'a', value: 'RL' }] }]
       }
     ]
   },
   {
-    match: /^SELECT R.\* FROM \(SELECT \* FROM item WHERE nypl_source = 'sierra-nypl' AND bib_ids \?\| array\['1234'\]\) _R INNER JOIN bib R ON _R.id=R.id AND _R.nypl_source=R.nypl_source$/,
+    match: /^SELECT R.\* FROM \(SELECT \* FROM item WHERE nypl_source = 'sierra-nypl' AND bib_ids \?\| array\['1234', '5678'\]\) _R INNER JOIN bib R ON _R.id=R.id AND _R.nypl_source=R.nypl_source$/,
     rows: [
       {
         id: 456,
-        bibIds: [1234],
+        bibIds: [1234, 5678],
         nypl_source: 'sierra-nypl',
         var_fields: []
       }
@@ -140,7 +145,7 @@ describe('scripts/bulk-index', () => {
       // What records were processed?
       const [type, records] = index.processRecords.getCall(0).args
       expect(type).to.eq('Bib')
-      expect(records).to.have.lengthOf(1)
+      expect(records).to.have.lengthOf(2)
       expect(records[0]).to.deep.include({
         id: 1234,
         nyplSource: 'sierra-nypl'
@@ -154,7 +159,7 @@ describe('scripts/bulk-index', () => {
       // What records were processed?
       const [type, records] = index.processRecords.getCall(0).args
       expect(type).to.eq('Bib')
-      expect(records).to.have.lengthOf(1)
+      expect(records).to.have.lengthOf(2)
       expect(records[0]).to.deep.include({
         id: 1234,
         nyplSource: 'sierra-nypl'
