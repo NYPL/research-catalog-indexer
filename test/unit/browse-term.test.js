@@ -5,7 +5,7 @@ const {
   buildSubjectDiff,
   getPrimaryAndParallelLabels,
   getSubjectModels,
-  buildSqsCommand
+  buildBatchedCommands
 } = require('../../lib/browse-terms')
 const SierraBib = require('../../lib/sierra-models/bib')
 const {
@@ -34,12 +34,25 @@ describe('bib activity', () => {
   after(() => {
     esClient.client.restore()
   })
-  describe('buildSqsCommand', () => {
+  describe('buildBatchedCommands', () => {
     const generateSubjects = (length) => (new Array(length)).fill(null).map((_, i) => ({ preferredTerm: `pref ${i}` }))
+    it('1 subject', () => {
+      const subject = generateSubjects(1)
+      const commands = buildBatchedCommands(subject, 'sqs url')
+      expect(commands.length).to.eq(1)
+      expect(commands[0].input.Entries.length).to.eq(1)
+    })
+    it('10 subjects', () => {
+      const subject = generateSubjects(10)
+      const commands = buildBatchedCommands(subject, 'sqs url')
+      expect(commands.length).to.eq(1)
+      expect(commands[0].input.Entries.length).to.eq(10)
+    })
     it('27 subjects', () => {
       const subject = generateSubjects(27)
-      const commands = buildSqsCommand(subject, 'sqs url')
-      expect(commands.input.Entries.length).to.eq(27)
+      const commands = buildBatchedCommands(subject, 'sqs url')
+      expect(commands.length).to.eq(3)
+      expect(commands[2].input.Entries.length).to.eq(7)
     })
   })
   describe('getSubjectModels', () => {
