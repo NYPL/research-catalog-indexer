@@ -377,7 +377,7 @@ const buildSqlQuery = (options) => {
     ]
     options.limit = options.ids.length
 
-  // Querying by type (and possibly hasMarc / nyplSource):
+    // Querying by type (and possibly hasMarc / nyplSource):
   } else if (options.type) {
     type = options.type
 
@@ -566,7 +566,6 @@ const updateByCsv = async (options = { offset: 0 }) => {
 */
 const processCsvBatch = async (batches, index = 0, options) => {
   const batch = batches[index]
-
   await updateByBibOrItemServiceQuery(
     Object.assign(options, {
       // argv.offset should not influence sql offset:
@@ -619,8 +618,12 @@ const run = async () => {
 
   // Enable direct-db access to Item, Bib, and Holdings services:
   overwriteModelPrefetch()
-
-  if (
+  if (argv.csv) {
+    await updateByCsv(argv)
+      .catch((e) => {
+        logger.error(`Error: ${e.message}`, e)
+      })
+  } else if (
     argv.bibId ||
     argv.itemId ||
     (argv.type)
@@ -632,13 +635,7 @@ const run = async () => {
         logger.error(e.stack)
       })
     db.endPools()
-  } else if (argv.csv) {
-    await updateByCsv(argv)
-      .catch((e) => {
-        logger.error(`Error: ${e.message}`, e)
-      })
   }
-
   // Disable direct-db access to Item, Bib, and Holdings services (formality)
   restoreModelPrefetch()
 }
