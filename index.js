@@ -44,7 +44,6 @@ const processRecords = async (type, records, options = {}) => {
   const recordsToIndex = await buildEsDocument(filteredBibs)
 
   const messages = []
-
   if (type === 'Bib') {
     await emitBibSubjectEvents([...filteredBibs, ...removedBibs])
   }
