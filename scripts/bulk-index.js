@@ -43,6 +43,9 @@
  *    To reindex all NYPL bibs with 700 $t in QA:
  *      node scripts/bulk-index.js --type bib --hasMarc 700 --hasSubfield t
  *
+ *    To reindex all bibs in QA:
+ *      node scripts/bulk-index.js --type bib
+ *
  *  II. Updating by CSV:
  *
  *      node scripts/bulk-index --csv CSVFILE --csvIdColumn 0 [--csvDropChecksum]
@@ -374,32 +377,39 @@ const buildSqlQuery = (options) => {
     ]
     options.limit = options.ids.length
 
-    // Querying by existance of a marc field?
-  } else if (options.nyplSource && options.type && options.hasMarc) {
+    // Querying by type (and possibly hasMarc / nyplSource):
+  } else if (options.type) {
     type = options.type
 
     // Build array of SELECT clauses:
-    const selects = [type, 'json_array_elements(var_fields::json) jV']
+    const selects = [type]
     // Build array of WHERE clauses:
-    const wheres = [
-      'nypl_source = $1',
-      "jV->>'marcTag' = $2"
-    ]
-    // Collect user input:
-    params = [
-      options.nyplSource,
-      options.hasMarc
-    ]
+    const wheres = []
 
-    // If filtering on existence of specific subfield, add clause:
+    // Filter on nyplSource:
+    if (options.nyplSource) {
+      wheres.push('nypl_source = $1')
+      params.push(options.nyplSource)
+    }
+
+    // Filter on having a specific marc field:
+    if (options.hasMarc) {
+      selects.push('json_array_elements(var_fields::json) jV')
+      wheres.push("jV->>'marcTag' = $2")
+      params.push(options.hasMarc)
+    }
+
+    // Filter on existence of specific subfield:
     if (options.hasSubfield) {
       selects.push("json_array_elements(jV->'subfields') jVS")
       wheres.push("jVS->>'tag' = $3")
       params.push(options.hasSubfield)
     }
 
-    sqlFromAndWhere = selects.join(',\n') +
-      '\nWHERE ' + wheres.join('\nAND ')
+    sqlFromAndWhere = selects.join(',\n')
+    if (wheres.length) {
+      sqlFromAndWhere += '\nWHERE ' + wheres.join('\nAND ')
+    }
   } else {
     throw new Error('Insufficient options to buildSqlQuery')
   }
@@ -556,7 +566,6 @@ const updateByCsv = async (options = { offset: 0 }) => {
 */
 const processCsvBatch = async (batches, index = 0, options) => {
   const batch = batches[index]
-
   await updateByBibOrItemServiceQuery(
     Object.assign(options, {
       // argv.offset should not influence sql offset:
@@ -598,7 +607,7 @@ const run = async () => {
 
   // Validate args:
   if (
-    !(argv.type && argv.hasMarc) &&
+    !(argv.type) &&
     !argv.bibId &&
     !argv.itemId &&
     !argv.csv
@@ -609,11 +618,15 @@ const run = async () => {
 
   // Enable direct-db access to Item, Bib, and Holdings services:
   overwriteModelPrefetch()
-
-  if (
+  if (argv.csv) {
+    await updateByCsv(argv)
+      .catch((e) => {
+        logger.error(`Error: ${e.message}`, e)
+      })
+  } else if (
     argv.bibId ||
     argv.itemId ||
-    (argv.type && argv.hasMarc)
+    (argv.type)
   ) {
     await db.initPools()
     await updateByBibOrItemServiceQuery(argv)
@@ -622,13 +635,7 @@ const run = async () => {
         logger.error(e.stack)
       })
     db.endPools()
-  } else if (argv.csv) {
-    await updateByCsv(argv)
-      .catch((e) => {
-        logger.error(`Error: ${e.message}`, e)
-      })
   }
-
   // Disable direct-db access to Item, Bib, and Holdings services (formality)
   restoreModelPrefetch()
 }
