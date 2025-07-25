@@ -72,7 +72,7 @@ const argv = require('minimist')(process.argv.slice(2), {
     dryrun: false,
     envfile: './config/qa-bulk-index.env'
   },
-  string: ['hasMarc', 'hasSubfield', 'bibId'],
+  string: ['hasMarc', 'hasSubfield', 'bibId', 'fromDate', 'toDate'],
   integer: ['limit', 'offset', 'batchSize']
 })
 
@@ -344,16 +344,21 @@ const restoreModelPrefetch = () => {
 * - limit {integer} - Limit query to count
 * - offset {integer} - Start query at offset
 * - orderBy {string} - SQL phrase to use in ORDER BY ...
+* - fromDate {string} - Date string at the bottom of range for updated_date field
+* - toDate {string} - Date string at the top of range for updated_date field
+* - table {string} - Defaults to using the type (bib, item) as table name, but this field lets you specify a different table e.g. bib_v2 
 **/
 const buildSqlQuery = (options) => {
   let sqlFromAndWhere = null
   let params = []
   let type = null
+  let table = null
 
   // Just querying a single bib/item id?
   if (options.nyplSource && (options.bibId || options.itemId)) {
     type = options.bibId ? 'bib' : 'item'
-    sqlFromAndWhere = `${type}
+    table = options.table ? options.table : type
+    sqlFromAndWhere = `${table}
       WHERE nypl_source = $1
       AND id = $2`
     params = [
@@ -366,20 +371,32 @@ const buildSqlQuery = (options) => {
   // Querying a collection of ids?
   } else if (options.nyplSource && options.type && options.ids) {
     type = options.type
-    sqlFromAndWhere = `${type}
+    table = options.table ? options.table : type
+    sqlFromAndWhere = `${table}
       WHERE nypl_source = $1
-      AND id IN (${options.ids.map((id) => `'${id}'`).join(',')})`
+      AND id IN (${options.ids.map((id) => `${id}`).join(',')})`
     params = [
       options.nyplSource
     ]
     options.limit = options.ids.length
 
+  // Support for a date range query
+  } else if (options.type && options.fromDate) {
+    type = options.type
+    const fromDate = options.fromDate
+    const toDate = options.toDate != null ? options.toDate : new Date().toISOString().split('T')[0]
+
+    table = options.table ? options.table : type
+    sqlFromAndWhere = `${table}
+      WHERE updated_date BETWEEN '${fromDate}' AND '${toDate}'`
+
   // Querying by existance of a marc field?
   } else if (options.nyplSource && options.type && options.hasMarc) {
     type = options.type
+    table = options.table ? options.table : type
 
     // Build array of SELECT clauses:
-    const selects = [type, 'json_array_elements(var_fields::json) jV']
+    const selects = [table, 'json_array_elements(var_fields::json) jV']
     // Build array of WHERE clauses:
     const wheres = [
       'nypl_source = $1',
@@ -414,7 +431,7 @@ const buildSqlQuery = (options) => {
     (options.offset ? ` OFFSET ${options.offset}` : '')
   const query = 'SELECT R.*' +
     ` FROM (\n${innerSelect}\n) _R` +
-    ` INNER JOIN ${type} R ON _R.id=R.id AND _R.nypl_source=R.nypl_source`
+    ` INNER JOIN ${table} R ON _R.id=R.id AND _R.nypl_source=R.nypl_source`
 
   return { query, params, type }
 }
@@ -599,6 +616,7 @@ const run = async () => {
   // Validate args:
   if (
     !(argv.type && argv.hasMarc) &&
+    !(argv.type && argv.fromDate) &&
     !argv.bibId &&
     !argv.itemId &&
     !argv.csv
@@ -613,7 +631,8 @@ const run = async () => {
   if (
     argv.bibId ||
     argv.itemId ||
-    (argv.type && argv.hasMarc)
+    (argv.type && argv.hasMarc) ||
+    (argv.type && argv.fromDate)
   ) {
     await db.initPools()
     await updateByBibOrItemServiceQuery(argv)
