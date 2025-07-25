@@ -346,7 +346,7 @@ const restoreModelPrefetch = () => {
 * - orderBy {string} - SQL phrase to use in ORDER BY ...
 * - fromDate {string} - Date string at the bottom of range for updated_date field
 * - toDate {string} - Date string at the top of range for updated_date field
-* - table {string} - Defaults to using the type (bib, item) as table name, but this field lets you specify a different table e.g. bib_v2 
+* - table {string} - Defaults to using the type (bib, item) as table name, but this field lets you specify a different table e.g. bib_v2
 **/
 const buildSqlQuery = (options) => {
   let sqlFromAndWhere = null
@@ -374,7 +374,7 @@ const buildSqlQuery = (options) => {
     table = options.table ? options.table : type
     sqlFromAndWhere = `${table}
       WHERE nypl_source = $1
-      AND id IN (${options.ids.map((id) => `${id}`).join(',')})`
+      AND id IN (${options.ids.map((id) => `'${id}'`).join(',')})`
     params = [
       options.nyplSource
     ]
