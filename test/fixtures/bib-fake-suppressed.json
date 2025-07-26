@@ -1,5 +1,5 @@
 {
-  "id": "10001936b",
+  "id": "1234",
   "updatedDate": "2012-03-08T20:58:41Z",
   "createdDate": "2008-12-13T15:51:43Z",
   "deleted": false,
@@ -129,15 +129,15 @@
       "subfields": [
         {
           "tag": "a",
-          "content": "Armenians"
+          "content": "subject"
         },
         {
           "tag": "z",
-          "content": "Iran"
+          "content": "from"
         },
         {
           "tag": "x",
-          "content": "History."
+          "content": "suppressed bib."
         }
       ]
     },

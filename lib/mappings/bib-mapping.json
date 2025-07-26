@@ -847,6 +847,13 @@
           "a"
         ],
         "description": "Source of Description"
+      },
+      {
+        "marc": "590",
+        "subfields": [
+          "a"
+        ],
+        "description": "Local note"
       }
     ]
   },
