@@ -23,7 +23,7 @@ const dotenv = require('dotenv')
 dotenv.config({ path: argv.envfile || './config/qa.env' })
 
 const NyplSourceMapper = require('../lib/utils/nypl-source-mapper')
-const { awsCredentialsFromIni, die, printDiff, buildSierraModelFromUri, capitalize } = require('./utils')
+const { awsCredentialsFromIni, die, printDiff, buildSierraModelFromUri } = require('./utils')
 const { bibsForHoldingsOrItems } = require('../lib/platform-api/requests')
 const { buildEsDocument, transformIntoBibRecords } = require('../lib/build-es-document')
 const { filteredSierraBibsForBibs } = require('../lib/prefilter')
