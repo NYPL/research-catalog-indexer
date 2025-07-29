@@ -43,6 +43,9 @@
  *    To reindex all NYPL bibs with 700 $t in QA:
  *      node scripts/bulk-index.js --type bib --hasMarc 700 --hasSubfield t
  *
+ *    To reindex all bibs in QA:
+ *      node scripts/bulk-index.js --type bib
+ *
  *  II. Updating by CSV:
  *
  *      node scripts/bulk-index --csv CSVFILE --csvIdColumn 0 [--csvDropChecksum]
@@ -132,7 +135,9 @@ const usage = () => {
     'Reindex a single record:',
     '  node reindex-record --envfile [path to .env] (--bibId id|--itemId id)',
     'Reindex by has-marc:',
-    '  node reindex-record --envfile [path to .env] --type bib --hasMarc 001 [--hasSubfield S]',
+    '  node reindex-record --envfile [path to .env] --type (bib|item) --hasMarc 001 [--hasSubfield S]',
+    'Reindex by nypl-source:',
+    '  node reindex-record --envfile [path to .env] --type (bib|item) --nyplSource SOURCE [--hasSubfield S]',
     'Reindex by CSV (containing prefixed ids):',
     '  node reindex-record --envfile [path to .env] --csv FILE --csvIdColumn 0'
   ].join('\n'))
@@ -368,7 +373,7 @@ const buildSqlQuery = (options) => {
 
     options.limit = 1
 
-  // Querying a collection of ids?
+    // Querying a collection of ids?
   } else if (options.nyplSource && options.type && options.ids) {
     type = options.type
     table = options.table ? options.table : type
@@ -390,33 +395,40 @@ const buildSqlQuery = (options) => {
     sqlFromAndWhere = `${table}
       WHERE updated_date BETWEEN '${fromDate}' AND '${toDate}'`
 
-  // Querying by existance of a marc field?
-  } else if (options.nyplSource && options.type && options.hasMarc) {
+    // Querying by type (and possibly hasMarc / nyplSource):
+  } else if (options.type) {
     type = options.type
     table = options.table ? options.table : type
 
     // Build array of SELECT clauses:
-    const selects = [table, 'json_array_elements(var_fields::json) jV']
+    const selects = [table]
     // Build array of WHERE clauses:
-    const wheres = [
-      'nypl_source = $1',
-      "jV->>'marcTag' = $2"
-    ]
-    // Collect user input:
-    params = [
-      options.nyplSource,
-      options.hasMarc
-    ]
+    const wheres = []
 
-    // If filtering on existence of specific subfield, add clause:
+    // Filter on nyplSource:
+    if (options.nyplSource) {
+      wheres.push('nypl_source = $1')
+      params.push(options.nyplSource)
+    }
+
+    // Filter on having a specific marc field:
+    if (options.hasMarc) {
+      selects.push('json_array_elements(var_fields::json) jV')
+      wheres.push("jV->>'marcTag' = $2")
+      params.push(options.hasMarc)
+    }
+
+    // Filter on existence of specific subfield:
     if (options.hasSubfield) {
       selects.push("json_array_elements(jV->'subfields') jVS")
       wheres.push("jVS->>'tag' = $3")
       params.push(options.hasSubfield)
     }
 
-    sqlFromAndWhere = selects.join(',\n') +
-      '\nWHERE ' + wheres.join('\nAND ')
+    sqlFromAndWhere = selects.join(',\n')
+    if (wheres.length) {
+      sqlFromAndWhere += '\nWHERE ' + wheres.join('\nAND ')
+    }
   } else {
     throw new Error('Insufficient options to buildSqlQuery')
   }
@@ -516,7 +528,7 @@ const updateByBibOrItemServiceQuery = async (options) => {
 *  - offset {int} - 0-indexed line number to start at. Default 0
 *  - limit {int}  - Number of rows to process. Default no-limit.
 */
-const updateByCsv = async (options = {}) => {
+const updateByCsv = async (options = { offset: 0 }) => {
   if (!options.csv) throw new Error('--csv is required')
   if (isNaN(options.csvIdColumn)) {
     throw new Error('--csvIdColumn is required')
@@ -526,7 +538,7 @@ const updateByCsv = async (options = {}) => {
   const rows = csvParse(rawContent)
 
   // Slice rows-to-process using --offset and --limit:
-  const end = options.limit ? options.limit + options.offset : rows.length - 1
+  const end = options.limit ? options.limit + options.offset : rows.length
   const rowsToProcess = rows.slice(options.offset, end)
     .map((row) => row[options.csvIdColumn])
     // Do input values have Sierra check digit? Remove them:
@@ -573,7 +585,6 @@ const updateByCsv = async (options = {}) => {
 */
 const processCsvBatch = async (batches, index = 0, options) => {
   const batch = batches[index]
-
   await updateByBibOrItemServiceQuery(
     Object.assign(options, {
       // argv.offset should not influence sql offset:
@@ -615,11 +626,15 @@ const run = async () => {
 
   // Validate args:
   if (
-    !(argv.type && argv.hasMarc) &&
-    !(argv.type && argv.fromDate) &&
-    !argv.bibId &&
-    !argv.itemId &&
-    !argv.csv
+    (
+      !(argv.type) &&
+      !argv.bibId &&
+      !argv.itemId &&
+      !argv.csv
+    ) || (
+      argv.type &&
+      !['bib', 'item'].includes(argv.type)
+    )
   ) {
     usage()
     cancelRun('Insufficient params')
@@ -628,11 +643,26 @@ const run = async () => {
   // Enable direct-db access to Item, Bib, and Holdings services:
   overwriteModelPrefetch()
 
-  if (
+  // Require one of:
+  // - csv
+  // - bib/item id
+  // - type, plus another qualifier (hasMarc or nyplSource)
+  if (argv.csv) {
+    await updateByCsv(argv)
+      .catch((e) => {
+        logger.error(`Error: ${e.message}`, e)
+      })
+  } else if (
     argv.bibId ||
     argv.itemId ||
-    (argv.type && argv.hasMarc) ||
-    (argv.type && argv.fromDate)
+    (
+      argv.type &&
+      (
+        argv.hasMarc ||
+        argv.nyplSource ||
+        argv.fromDate
+      )
+    )
   ) {
     await db.initPools()
     await updateByBibOrItemServiceQuery(argv)
@@ -641,13 +671,7 @@ const run = async () => {
         logger.error(e.stack)
       })
     db.endPools()
-  } else if (argv.csv) {
-    await updateByCsv(argv)
-      .catch((e) => {
-        logger.error(`Error: ${e.message}`, e)
-      })
   }
-
   // Disable direct-db access to Item, Bib, and Holdings services (formality)
   restoreModelPrefetch()
 }

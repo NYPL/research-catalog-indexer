@@ -847,6 +847,13 @@
           "a"
         ],
         "description": "Source of Description"
+      },
+      {
+        "marc": "590",
+        "subfields": [
+          "a"
+        ],
+        "description": "Local note"
       }
     ]
   },
@@ -870,7 +877,7 @@
       }
     ]
   },
-"partOf": {
+  "partOf": {
     "paths": [
       {
         "marc": "773",
@@ -1066,139 +1073,39 @@
     "paths": [
       {
         "marc": "600",
-        "subfields": [
-          "a",
-          "b",
-          "c",
-          "d",
-          "e",
-          "g",
-          "4",
-          "v",
-          "x",
-          "y",
-          "z"
-        ],
         "description": "Subject Added Entry-Personal Name"
       },
       {
         "marc": "610",
-        "subfields": [
-          "a",
-          "b",
-          "c",
-          "d",
-          "e",
-          "g",
-          "4",
-          "v",
-          "x",
-          "y",
-          "z"
-        ],
-        "description": "Subject Added Entry-Personal Name"
+        "description": "Subject Added Entry-Corporate Name"
       },
       {
         "marc": "611",
-        "subfields": [
-          "a",
-          "b",
-          "c",
-          "d",
-          "e",
-          "g",
-          "4",
-          "v",
-          "x",
-          "y",
-          "z"
-        ],
-        "description": "Subject Added Entry-Personal Name"
+        "description": "Subject Added Entry-Meeting Name"
       },
       {
         "marc": "630",
-        "subfields": [
-          "a",
-          "b",
-          "c",
-          "d",
-          "e",
-          "g",
-          "4",
-          "v",
-          "x",
-          "y",
-          "z"
-        ],
-        "description": "Subject Added Entry-Personal Name"
+        "description": "Subject Added Entry-Uniform Title"
       },
       {
         "marc": "648",
-        "subfields": [
-          "a",
-          "b",
-          "c",
-          "d",
-          "e",
-          "g",
-          "4",
-          "v",
-          "x",
-          "y",
-          "z"
-        ],
-        "description": "Subject Added Entry-Personal Name"
+        "description": "Subject Added Entry-Chronological Term"
       },
       {
         "marc": "650",
-        "subfields": [
-          "a",
-          "b",
-          "c",
-          "d",
-          "e",
-          "g",
-          "4",
-          "v",
-          "x",
-          "y",
-          "z"
-        ],
-        "description": "Subject Added Entry-Personal Name"
+        "description": "Subject Added Entry-Topical Term"
       },
       {
         "marc": "651",
-        "subfields": [
-          "a",
-          "b",
-          "c",
-          "d",
-          "e",
-          "g",
-          "4",
-          "v",
-          "x",
-          "y",
-          "z"
-        ],
-        "description": "Subject Added Entry-Personal Name"
+        "description": "Subject Added Entry-Geographic Name"
       },
       {
         "marc": "653",
-        "subfields": [
-          "a",
-          "b",
-          "c",
-          "d",
-          "e",
-          "g",
-          "4",
-          "v",
-          "x",
-          "y",
-          "z"
-        ],
-        "description": "Subject Added Entry-Personal Name"
+        "description": "Index Term"
+      },
+      {
+        "marc": "690",
+        "description": "Local subject"
       }
     ]
   },

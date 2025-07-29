@@ -15,7 +15,9 @@
   "license": "ISC",
   "dependencies": {
     "@aws-sdk/client-kms": "^3.226.0",
+    "@aws-sdk/client-sqs": "^3.835.0",
     "@elastic/elasticsearch": "~7.12.0",
+    "@nypl/browse-term": "^0.1.1",
     "@nypl/nypl-core-objects": "^2.1.1",
     "@nypl/nypl-data-api-client": "^2.0.0",
     "@nypl/nypl-streams-client": "^2.0.0",
@@ -46,7 +48,7 @@
     ]
   },
   "devDependencies": {
-    "@aws-sdk/credential-providers": "^3.614.0",
+    "@aws-sdk/credential-providers": "^3.848.0",
     "@nypl/sierra-wrapper": "^1.1.1",
     "chai": "^4.3.7",
     "chai-as-promised": "^7.1.1",
