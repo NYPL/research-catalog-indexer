@@ -437,15 +437,15 @@ const buildSqlQuery = (options) => {
   // Determine whether or not to use an inner-select to de-dupe the records:
   const dedupe = !!options.hasMarc
 
-  // Some queries will return bibs multiple times because a matched var/subfield repeats.
-  // To ensure we only handle such bibs once, we must de-deupe the results on id & nypl_source.
-  // We use an inner-select to identify all of the distinct bibs (by id and nypl_source)
-  // which we then JOIN to retrieve all fields.
   const primaryColumns = dedupe ? 'DISTINCT id, nypl_source' : '*'
   let query = `SELECT ${primaryColumns} FROM ${sqlFromAndWhere}` +
     (options.orderBy ? ` ORDER BY ${options.orderBy}` : '') +
     (options.limit ? ` LIMIT ${options.limit}` : '') +
     (options.offset ? ` OFFSET ${options.offset}` : '')
+  // Some queries will return bibs multiple times because a matched var/subfield repeats.
+  // To ensure we only handle such bibs once, we must de-deupe the results on id & nypl_source.
+  // We use an inner-select to identify all of the distinct bibs (by id and nypl_source)
+  // which we then JOIN to retrieve all fields.
   if (dedupe) {
     query = 'SELECT R.*' +
       ` FROM (\n${query}\n) _R` +
