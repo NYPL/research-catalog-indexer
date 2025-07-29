@@ -61,6 +61,7 @@
  *      batchSize {int}: How many records to index at one time. Default 100
  *      dryrun {boolean}: Set to true to perform all work, but skip writing to index.
  *      envfile {string}: Path to local .env file. Default ./config/qa-bulk-index.env
+ *      tablename {string}: Override primary table name used (e.g. bib_v2)
  *
  */
 const fs = require('fs')
@@ -73,6 +74,7 @@ const argv = require('minimist')(process.argv.slice(2), {
     batchSize: 100,
     nyplSource: 'sierra-nypl',
     dryrun: false,
+    tablename: null,
     envfile: './config/qa-bulk-index.env'
   },
   string: ['hasMarc', 'hasSubfield', 'bibId'],
@@ -382,7 +384,7 @@ const buildSqlQuery = (options) => {
     type = options.type
 
     // Build array of SELECT clauses:
-    const selects = [type]
+    const selects = [argv.tablename || type]
     // Build array of WHERE clauses:
     const wheres = []
 
@@ -414,17 +416,23 @@ const buildSqlQuery = (options) => {
     throw new Error('Insufficient options to buildSqlQuery')
   }
 
+  // Determine whether or not to use an inner-select to de-dupe the records:
+  const dedupe = !!options.hasMarc
+
   // Some queries will return bibs multiple times because a matched var/subfield repeats.
   // To ensure we only handle such bibs once, we must de-deupe the results on id & nypl_source.
   // We use an inner-select to identify all of the distinct bibs (by id and nypl_source)
   // which we then JOIN to retrieve all fields.
-  const innerSelect = `SELECT DISTINCT id, nypl_source FROM ${sqlFromAndWhere}` +
+  const primaryColumns = dedupe ? 'DISTINCT id, nypl_source' : '*'
+  let query = `SELECT ${primaryColumns} FROM ${sqlFromAndWhere}` +
     (options.orderBy ? ` ORDER BY ${options.orderBy}` : '') +
     (options.limit ? ` LIMIT ${options.limit}` : '') +
     (options.offset ? ` OFFSET ${options.offset}` : '')
-  const query = 'SELECT R.*' +
-    ` FROM (\n${innerSelect}\n) _R` +
-    ` INNER JOIN ${type} R ON _R.id=R.id AND _R.nypl_source=R.nypl_source`
+  if (dedupe) {
+    query = 'SELECT R.*' +
+      ` FROM (\n${query}\n) _R` +
+      ` INNER JOIN ${type} R ON _R.id=R.id AND _R.nypl_source=R.nypl_source`
+  }
 
   return { query, params, type }
 }
