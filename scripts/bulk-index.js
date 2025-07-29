@@ -384,7 +384,7 @@ const buildSqlQuery = (options) => {
     type = options.type
 
     // Build array of SELECT clauses:
-    const selects = [type]
+    const selects = ["bib_v2"]
     // Build array of WHERE clauses:
     const wheres = []
 
@@ -420,13 +420,15 @@ const buildSqlQuery = (options) => {
   // To ensure we only handle such bibs once, we must de-deupe the results on id & nypl_source.
   // We use an inner-select to identify all of the distinct bibs (by id and nypl_source)
   // which we then JOIN to retrieve all fields.
-  const innerSelect = `SELECT DISTINCT id, nypl_source FROM ${sqlFromAndWhere}` +
+  const innerSelect = `SELECT * FROM ${sqlFromAndWhere}` +
     (options.orderBy ? ` ORDER BY ${options.orderBy}` : '') +
     (options.limit ? ` LIMIT ${options.limit}` : '') +
     (options.offset ? ` OFFSET ${options.offset}` : '')
-  const query = 'SELECT R.*' +
-    ` FROM (\n${innerSelect}\n) _R` +
-    ` INNER JOIN ${type} R ON _R.id=R.id AND _R.nypl_source=R.nypl_source`
+  const query = innerSelect
+  // const query = 'SELECT *' +
+  //   ' FROM bib_v2'
+  // // ` FROM (\n${innerSelect}\n) _R` +
+  // ` WHERE `
 
   return { query, params, type }
 }
