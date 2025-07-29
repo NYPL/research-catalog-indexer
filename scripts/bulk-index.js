@@ -433,17 +433,25 @@ const buildSqlQuery = (options) => {
     throw new Error('Insufficient options to buildSqlQuery')
   }
 
-  // Some queries will return bibs multiple times because a matched var/subfield repeats.
-  // To ensure we only handle such bibs once, we must de-deupe the results on id & nypl_source.
-  // We use an inner-select to identify all of the distinct bibs (by id and nypl_source)
-  // which we then JOIN to retrieve all fields.
-  const innerSelect = `SELECT DISTINCT id, nypl_source FROM ${sqlFromAndWhere}` +
+  let query = `SELECT * FROM ${sqlFromAndWhere}` +
     (options.orderBy ? ` ORDER BY ${options.orderBy}` : '') +
     (options.limit ? ` LIMIT ${options.limit}` : '') +
     (options.offset ? ` OFFSET ${options.offset}` : '')
-  const query = 'SELECT R.*' +
-    ` FROM (\n${innerSelect}\n) _R` +
-    ` INNER JOIN ${table} R ON _R.id=R.id AND _R.nypl_source=R.nypl_source`
+
+  if (!options.fromDate) {
+    // Some queries will return bibs multiple times because a matched var/subfield repeats.
+    // To ensure we only handle such bibs once, we must de-deupe the results on id & nypl_source.
+    // We use an inner-select to identify all of the distinct bibs (by id and nypl_source)
+    // which we then JOIN to retrieve all fields.
+    const innerSelect = `SELECT DISTINCT id, nypl_source FROM ${sqlFromAndWhere}` +
+      (options.orderBy ? ` ORDER BY ${options.orderBy}` : '') +
+      (options.limit ? ` LIMIT ${options.limit}` : '') +
+      (options.offset ? ` OFFSET ${options.offset}` : '')
+
+    query = 'SELECT R.*' +
+      ` FROM (\n${innerSelect}\n) _R` +
+      ` INNER JOIN ${table} R ON _R.id=R.id AND _R.nypl_source=R.nypl_source`
+  }
 
   return { query, params, type }
 }
