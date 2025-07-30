@@ -61,6 +61,7 @@
  *      batchSize {int}: How many records to index at one time. Default 100
  *      dryrun {boolean}: Set to true to perform all work, but skip writing to index.
  *      envfile {string}: Path to local .env file. Default ./config/qa-bulk-index.env
+ *      table {string}: Override primary table name used (e.g. bib_v2)
  *
  */
 const fs = require('fs')
@@ -75,7 +76,7 @@ const argv = require('minimist')(process.argv.slice(2), {
     dryrun: false,
     envfile: './config/qa-bulk-index.env'
   },
-  string: ['hasMarc', 'hasSubfield', 'bibId'],
+  string: ['hasMarc', 'hasSubfield', 'bibId', 'fromDate', 'toDate'],
   integer: ['limit', 'offset', 'batchSize']
 })
 
@@ -349,16 +350,21 @@ const restoreModelPrefetch = () => {
 * - limit {integer} - Limit query to count
 * - offset {integer} - Start query at offset
 * - orderBy {string} - SQL phrase to use in ORDER BY ...
+* - fromDate {string} - Date string at the bottom of range for updated_date field
+* - toDate {string} - Date string at the top of range for updated_date field
+* - table {string} - Defaults to using the type (bib, item) as table name, but this field lets you specify a different table e.g. bib_v2
 **/
 const buildSqlQuery = (options) => {
   let sqlFromAndWhere = null
   let params = []
   let type = null
+  let table = null
 
   // Just querying a single bib/item id?
   if (options.nyplSource && (options.bibId || options.itemId)) {
     type = options.bibId ? 'bib' : 'item'
-    sqlFromAndWhere = `${type}
+    table = options.table ? options.table : type
+    sqlFromAndWhere = `${table}
       WHERE nypl_source = $1
       AND id = $2`
     params = [
@@ -371,7 +377,8 @@ const buildSqlQuery = (options) => {
     // Querying a collection of ids?
   } else if (options.nyplSource && options.type && options.ids) {
     type = options.type
-    sqlFromAndWhere = `${type}
+    table = options.table ? options.table : type
+    sqlFromAndWhere = `${table}
       WHERE nypl_source = $1
       AND id IN (${options.ids.map((id) => `'${id}'`).join(',')})`
     params = [
@@ -379,12 +386,23 @@ const buildSqlQuery = (options) => {
     ]
     options.limit = options.ids.length
 
+  // Support for a date range query
+  } else if (options.type && options.fromDate) {
+    type = options.type
+    const fromDate = options.fromDate
+    const toDate = options.toDate != null ? options.toDate : new Date().toISOString().split('T')[0]
+
+    table = options.table ? options.table : type
+    sqlFromAndWhere = `${table}
+      WHERE updated_date BETWEEN '${fromDate}' AND '${toDate}'`
+
     // Querying by type (and possibly hasMarc / nyplSource):
   } else if (options.type) {
     type = options.type
+    table = options.table ? options.table : type
 
     // Build array of SELECT clauses:
-    const selects = [type]
+    const selects = [table]
     // Build array of WHERE clauses:
     const wheres = []
 
@@ -416,17 +434,23 @@ const buildSqlQuery = (options) => {
     throw new Error('Insufficient options to buildSqlQuery')
   }
 
+  // Determine whether or not to use an inner-select to de-dupe the records:
+  const dedupe = !!options.hasMarc
+
+  const primaryColumns = dedupe ? 'DISTINCT id, nypl_source' : '*'
+  let query = `SELECT ${primaryColumns} FROM ${sqlFromAndWhere}` +
+    (options.orderBy ? ` ORDER BY ${options.orderBy}` : '') +
+    (options.limit ? ` LIMIT ${options.limit}` : '') +
+    (options.offset ? ` OFFSET ${options.offset}` : '')
   // Some queries will return bibs multiple times because a matched var/subfield repeats.
   // To ensure we only handle such bibs once, we must de-deupe the results on id & nypl_source.
   // We use an inner-select to identify all of the distinct bibs (by id and nypl_source)
   // which we then JOIN to retrieve all fields.
-  const innerSelect = `SELECT DISTINCT id, nypl_source FROM ${sqlFromAndWhere}` +
-    (options.orderBy ? ` ORDER BY ${options.orderBy}` : '') +
-    (options.limit ? ` LIMIT ${options.limit}` : '') +
-    (options.offset ? ` OFFSET ${options.offset}` : '')
-  const query = 'SELECT R.*' +
-    ` FROM (\n${innerSelect}\n) _R` +
-    ` INNER JOIN ${type} R ON _R.id=R.id AND _R.nypl_source=R.nypl_source`
+  if (dedupe) {
+    query = 'SELECT R.*' +
+      ` FROM (\n${query}\n) _R` +
+      ` INNER JOIN ${type} R ON _R.id=R.id AND _R.nypl_source=R.nypl_source`
+  }
 
   return { query, params, type }
 }
@@ -642,7 +666,8 @@ const run = async () => {
       argv.type &&
       (
         argv.hasMarc ||
-        argv.nyplSource
+        argv.nyplSource ||
+        argv.fromDate
       )
     )
   ) {
