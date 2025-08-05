@@ -745,7 +745,7 @@ describe('EsBib', function () {
   })
 
   describe('partOf', () => {
-    it('should return an array of subject literals ', () => {
+    it('should return an array of partOf statements ', () => {
       const record = new SierraBib(require('../fixtures/bib-10554618.json'))
       const esBib = new EsBib(record)
       expect(esBib.partOf()).to.deep.equal(['The Devon historian, no. 5 (1972), p. 16-[22]'])
@@ -761,6 +761,11 @@ describe('EsBib', function () {
   })
 
   describe('subjectLiteral', () => {
+    it('should respect the order that subjects were catalogged in', () => {
+      const record = new SierraBib(require('../fixtures/bib-subject-order.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.subjectLiteral()[0]).to.deep.equal('Motion picture actors and actresses.')
+    })
     it('should return an array of subject literals with " " joiner around certain subfields', () => {
       const record = new SierraBib(require('../fixtures/bib-parallels-chaos.json'))
       const esBib = new EsBib(record)
