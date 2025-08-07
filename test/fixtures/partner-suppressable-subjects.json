@@ -1,0 +1,1131 @@
+{
+  "id": "17901782",
+  "nyplSource": "recap-cul",
+  "title": "Through the wilderness : my journey of redemption and healing in the American wild / Brad Orsted.",
+  "author": "Orsted, Brad,",
+  "publishYear": 2023,
+  "nyplType": "bib",
+  "controlNumber": "",
+  "standardNumbers": [],
+  "updatedDate": "2024-02-01T08:35:01",
+  "createdDate": "2024-02-01T03:35:31",
+  "deletedDate": null,
+  "catalogDate": null,
+  "deleted": false,
+  "suppressed": false,
+  "locations": null,
+  "lang": {
+    "code": "aeng",
+    "name": null
+  },
+  "materialType": {
+    "code": "a",
+    "value": "BOOK/TEXT"
+  },
+  "bibLevel": {
+    "code": "m",
+    "value": "MONOGRAPH"
+  },
+  "country": null,
+  "normTitle": null,
+  "normAuthor": null,
+  "fixedFields": {
+    "24": {
+      "label": "Language",
+      "value": "aeng",
+      "display": null
+    },
+    "25": {
+      "label": "Skip",
+      "value": "0",
+      "display": null
+    },
+    "26": {
+      "label": "Location",
+      "value": "rccul",
+      "display": null
+    },
+    "27": {
+      "label": "COPIES",
+      "value": "1",
+      "display": null
+    },
+    "28": {
+      "label": "Cat. Date",
+      "value": null,
+      "display": null
+    },
+    "29": {
+      "label": "Bib Level",
+      "value": "m",
+      "display": "MONOGRAPH"
+    },
+    "30": {
+      "label": "Material Type",
+      "value": "a",
+      "display": "BOOK/TEXT"
+    },
+    "31": {
+      "label": "Bib Code 3",
+      "value": null,
+      "display": null
+    },
+    "80": {
+      "label": "Record Type",
+      "value": "b",
+      "display": null
+    },
+    "81": {
+      "label": "Record Number",
+      "value": "17901782",
+      "display": null
+    },
+    "83": {
+      "label": "Created Date",
+      "value": null,
+      "display": null
+    },
+    "84": {
+      "label": "Updated Date",
+      "value": "2024-02-01T08:35:01Z",
+      "display": null
+    },
+    "85": {
+      "label": "No. of Revisions",
+      "value": "1",
+      "display": null
+    },
+    "86": {
+      "label": "Agency",
+      "value": "6",
+      "display": null
+    },
+    "98": {
+      "label": "PDATE",
+      "value": null,
+      "display": null
+    },
+    "107": {
+      "label": "MARC Type",
+      "value": " ",
+      "display": null
+    }
+  },
+  "varFields": [
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "010",
+      "fieldTag": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "  2022058099"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "035",
+      "fieldTag": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "(OCoLC)on1368218330"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "040",
+      "fieldTag": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "DLC"
+        },
+        {
+          "tag": "b",
+          "content": "eng"
+        },
+        {
+          "tag": "e",
+          "content": "rda"
+        },
+        {
+          "tag": "c",
+          "content": "DLC"
+        },
+        {
+          "tag": "d",
+          "content": "BDX"
+        },
+        {
+          "tag": "d",
+          "content": "OCLCF"
+        },
+        {
+          "tag": "d",
+          "content": "TOH"
+        },
+        {
+          "tag": "d",
+          "content": "IEB"
+        },
+        {
+          "tag": "d",
+          "content": "FM0"
+        },
+        {
+          "tag": "d",
+          "content": "JQM"
+        },
+        {
+          "tag": "d",
+          "content": "VP@"
+        },
+        {
+          "tag": "d",
+          "content": "IMD"
+        },
+        {
+          "tag": "d",
+          "content": "QS3"
+        },
+        {
+          "tag": "d",
+          "content": "OCLCO"
+        },
+        {
+          "tag": "d",
+          "content": "YDX"
+        },
+        {
+          "tag": "d",
+          "content": "T3Q"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "019",
+      "fieldTag": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "1383673563"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "020",
+      "fieldTag": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "9781250284693"
+        },
+        {
+          "tag": "q",
+          "content": "(hardcover)"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "020",
+      "fieldTag": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "1250284694"
+        },
+        {
+          "tag": "q",
+          "content": "(hardcover)"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "020",
+      "fieldTag": null,
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "9781250284709"
+        },
+        {
+          "tag": "q",
+          "content": "(ebook)"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "035",
+      "fieldTag": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "(OCoLC)1368218330"
+        },
+        {
+          "tag": "z",
+          "content": "(OCoLC)1383673563"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "042",
+      "fieldTag": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "pcc"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "043",
+      "fieldTag": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "n-us---"
+        }
+      ]
+    },
+    {
+      "ind1": "0",
+      "ind2": "0",
+      "content": null,
+      "marcTag": "050",
+      "fieldTag": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "TR140.O77"
+        },
+        {
+          "tag": "b",
+          "content": "A3 2023"
+        }
+      ]
+    },
+    {
+      "ind1": "0",
+      "ind2": "0",
+      "content": null,
+      "marcTag": "082",
+      "fieldTag": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "778.9/32092"
+        },
+        {
+          "tag": "a",
+          "content": "B"
+        },
+        {
+          "tag": "2",
+          "content": "23/eng/20230203"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "049",
+      "fieldTag": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "ZCUA"
+        }
+      ]
+    },
+    {
+      "ind1": "1",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "100",
+      "fieldTag": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Orsted, Brad,"
+        },
+        {
+          "tag": "e",
+          "content": "author."
+        }
+      ]
+    },
+    {
+      "ind1": "1",
+      "ind2": "0",
+      "content": null,
+      "marcTag": "245",
+      "fieldTag": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Through the wilderness :"
+        },
+        {
+          "tag": "b",
+          "content": "my journey of redemption and healing in the American wild /"
+        },
+        {
+          "tag": "c",
+          "content": "Brad Orsted."
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "250",
+      "fieldTag": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "First edition."
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "marcTag": "264",
+      "fieldTag": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "New York :"
+        },
+        {
+          "tag": "b",
+          "content": "St. Martin's Press,"
+        },
+        {
+          "tag": "c",
+          "content": "2023."
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "4",
+      "content": null,
+      "marcTag": "264",
+      "fieldTag": null,
+      "subfields": [
+        {
+          "tag": "c",
+          "content": "©2023"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "300",
+      "fieldTag": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "245 pages, 16 unnumbered pages of plates :"
+        },
+        {
+          "tag": "b",
+          "content": "illustrations (chiefly color) ;"
+        },
+        {
+          "tag": "c",
+          "content": "25 cm"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "336",
+      "fieldTag": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "text"
+        },
+        {
+          "tag": "b",
+          "content": "txt"
+        },
+        {
+          "tag": "2",
+          "content": "rdacontent"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "337",
+      "fieldTag": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "unmediated"
+        },
+        {
+          "tag": "b",
+          "content": "n"
+        },
+        {
+          "tag": "2",
+          "content": "rdamedia"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "338",
+      "fieldTag": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "volume"
+        },
+        {
+          "tag": "b",
+          "content": "nc"
+        },
+        {
+          "tag": "2",
+          "content": "rdacarrier"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "520",
+      "fieldTag": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "\"Award-winning Yellowstone photographer and documentary filmmaker Brad Orsted's seven-year search for refuge and redemption in America's greatest wilderness. When Brad Orsted's fifteen-month-old daughter, Marley, died mysteriously at the home of Brad's mother, he descended into madness. Blaming himself, he plunged into an abyss of grief, guilt, and self-recrimination, fueled by prescription drugs and alcohol. He planned his suicide as his wife, Stacey, searched for a new beginning. She finally found a job in Yellowstone National Park and, with their daughters, Mazzy and Chloe, the pair fled Michigan, looking for refuge and redemption in the 2.2 million acres of glorious American wilderness. Through the Wilderness begins in Yellowstone, five months after the family's arrival in 2012, when, in an alcoholic haze, Brad stumbled into a field of sage and survived a face-to-face encounter with an adult male grizzly bear. For the first time in almost two years, he realized he wanted to live--he just didn't know how. Desperate for help, Brad invited himself to a Crow sweat lodge ceremony, where an elder told him it was time to stop grieving. The elder's words started Brad on a journey towards sobriety and inner peace, only possible because of lessons he learned in the wild, his new job as a wildlife photographer and filmmaker, and two orphan grizzly cubs who carried him back home and taught him how to live again. Brad's ten-year odyssey is about finding the wild inside the human heart. It is a journey of the spirit- a journey to forgiveness and sobriety, to love and life, to memory, and ultimately, to Marley\"--"
+        },
+        {
+          "tag": "c",
+          "content": "Provided by publisher."
+        }
+      ]
+    },
+    {
+      "ind1": "0",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "505",
+      "fieldTag": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Here and now -- Then. A grizzly conferment ; Howling wolves ; Centripetal ; The crow sweat hot ; The long walk back ; Run for the hills ; Kindred spirits ; Hard side of the mountain ; Dirt prayer ; North star ; Closing the hoop -- Breathe."
+        }
+      ]
+    },
+    {
+      "ind1": "1",
+      "ind2": "0",
+      "content": null,
+      "marcTag": "600",
+      "fieldTag": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Orsted, Brad."
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "0",
+      "content": null,
+      "marcTag": "650",
+      "fieldTag": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Wildlife photographers"
+        },
+        {
+          "tag": "z",
+          "content": "United States"
+        },
+        {
+          "tag": "v",
+          "content": "Biography."
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "0",
+      "content": null,
+      "marcTag": "650",
+      "fieldTag": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Alcoholics"
+        },
+        {
+          "tag": "z",
+          "content": "United States"
+        },
+        {
+          "tag": "v",
+          "content": "Biography."
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "0",
+      "content": null,
+      "marcTag": "650",
+      "fieldTag": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Parental grief."
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "0",
+      "content": null,
+      "marcTag": "650",
+      "fieldTag": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Adventure therapy."
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "0",
+      "content": null,
+      "marcTag": "650",
+      "fieldTag": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Grizzly bear."
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "0",
+      "content": null,
+      "marcTag": "651",
+      "fieldTag": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Yellowstone National Park."
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "marcTag": "650",
+      "fieldTag": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Grizzly bears."
+        },
+        {
+          "tag": "0",
+          "content": "(DLC)sj2021051212"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "6",
+      "content": null,
+      "marcTag": "650",
+      "fieldTag": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Photographes de la nature"
+        },
+        {
+          "tag": "0",
+          "content": "(CaQQLa)201-0369077"
+        },
+        {
+          "tag": "z",
+          "content": "États-Unis"
+        },
+        {
+          "tag": "0",
+          "content": "(CaQQLa)201-0407727"
+        },
+        {
+          "tag": "v",
+          "content": "Biographies."
+        },
+        {
+          "tag": "0",
+          "content": "(CaQQLa)201-0378258"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "6",
+      "content": null,
+      "marcTag": "650",
+      "fieldTag": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Alcooliques"
+        },
+        {
+          "tag": "0",
+          "content": "(CaQQLa)201-0022767"
+        },
+        {
+          "tag": "z",
+          "content": "États-Unis"
+        },
+        {
+          "tag": "0",
+          "content": "(CaQQLa)201-0407727"
+        },
+        {
+          "tag": "v",
+          "content": "Biographies."
+        },
+        {
+          "tag": "0",
+          "content": "(CaQQLa)201-0378258"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "6",
+      "content": null,
+      "marcTag": "650",
+      "fieldTag": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Chagrin chez les parents."
+        },
+        {
+          "tag": "0",
+          "content": "(CaQQLa)000268898"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "6",
+      "content": null,
+      "marcTag": "650",
+      "fieldTag": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Intervention en contexte de nature et d'aventure."
+        },
+        {
+          "tag": "0",
+          "content": "(CaQQLa)201-0284971"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "6",
+      "content": null,
+      "marcTag": "650",
+      "fieldTag": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Grizzly."
+        },
+        {
+          "tag": "0",
+          "content": "(CaQQLa)201-0026840"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "6",
+      "content": null,
+      "marcTag": "651",
+      "fieldTag": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Yellowstone National Park."
+        },
+        {
+          "tag": "0",
+          "content": "(CaQQLa)201-0145005"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "7",
+      "content": null,
+      "marcTag": "650",
+      "fieldTag": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "PHOTOGRAPHY / General."
+        },
+        {
+          "tag": "2",
+          "content": "bisacsh"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "7",
+      "content": null,
+      "marcTag": "650",
+      "fieldTag": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Adventure therapy"
+        },
+        {
+          "tag": "2",
+          "content": "fast"
+        },
+        {
+          "tag": "0",
+          "content": "(OCoLC)fst00797498"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "7",
+      "content": null,
+      "marcTag": "650",
+      "fieldTag": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Alcoholics"
+        },
+        {
+          "tag": "2",
+          "content": "fast"
+        },
+        {
+          "tag": "0",
+          "content": "(OCoLC)fst00804414"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "7",
+      "content": null,
+      "marcTag": "650",
+      "fieldTag": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Grizzly bear"
+        },
+        {
+          "tag": "2",
+          "content": "fast"
+        },
+        {
+          "tag": "0",
+          "content": "(OCoLC)fst00948013"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "7",
+      "content": null,
+      "marcTag": "650",
+      "fieldTag": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Parental grief"
+        },
+        {
+          "tag": "2",
+          "content": "fast"
+        },
+        {
+          "tag": "0",
+          "content": "(OCoLC)fst01745741"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "7",
+      "content": null,
+      "marcTag": "650",
+      "fieldTag": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Wildlife photographers"
+        },
+        {
+          "tag": "2",
+          "content": "fast"
+        },
+        {
+          "tag": "0",
+          "content": "(OCoLC)fst01175380"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "7",
+      "content": null,
+      "marcTag": "651",
+      "fieldTag": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "United States"
+        },
+        {
+          "tag": "2",
+          "content": "fast"
+        },
+        {
+          "tag": "0",
+          "content": "(OCoLC)fst01204155"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "7",
+      "content": null,
+      "marcTag": "651",
+      "fieldTag": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "United States"
+        },
+        {
+          "tag": "z",
+          "content": "Yellowstone National Park"
+        },
+        {
+          "tag": "2",
+          "content": "fast"
+        },
+        {
+          "tag": "0",
+          "content": "(OCoLC)fst01285604"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "0",
+      "content": null,
+      "marcTag": "655",
+      "fieldTag": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Biographies."
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "7",
+      "content": null,
+      "marcTag": "655",
+      "fieldTag": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "autobiographies (literary works)"
+        },
+        {
+          "tag": "2",
+          "content": "aat"
+        },
+        {
+          "tag": "0",
+          "content": "(CStmoGRI)aatgf300080104"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "7",
+      "content": null,
+      "marcTag": "655",
+      "fieldTag": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Biographies"
+        },
+        {
+          "tag": "2",
+          "content": "fast"
+        },
+        {
+          "tag": "0",
+          "content": "(OCoLC)fst01919896"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "7",
+      "content": null,
+      "marcTag": "655",
+      "fieldTag": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Autobiographies."
+        },
+        {
+          "tag": "2",
+          "content": "lcgft"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "7",
+      "content": null,
+      "marcTag": "655",
+      "fieldTag": null,
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Autobiographies."
+        },
+        {
+          "tag": "2",
+          "content": "rvmgf"
+        },
+        {
+          "tag": "0",
+          "content": "(CaQQLa)RVMGF-000000520"
+        }
+      ]
+    },
+    {
+      "ind1": null,
+      "ind2": null,
+      "content": "SCSB-14667920",
+      "marcTag": "001",
+      "fieldTag": null,
+      "subfields": null
+    },
+    {
+      "ind1": null,
+      "ind2": null,
+      "content": "NNC",
+      "marcTag": "003",
+      "fieldTag": null,
+      "subfields": null
+    },
+    {
+      "ind1": null,
+      "ind2": null,
+      "content": "20231219124523.0",
+      "marcTag": "005",
+      "fieldTag": null,
+      "subfields": null
+    },
+    {
+      "ind1": null,
+      "ind2": null,
+      "content": "230114t20232023nyuaf  e      000 0aeng  ",
+      "marcTag": "008",
+      "fieldTag": null,
+      "subfields": null
+    },
+    {
+      "ind1": null,
+      "ind2": null,
+      "content": "04682cam a2200685 i 4500",
+      "marcTag": null,
+      "fieldTag": "_",
+      "subfields": null
+    }
+  ]
+}
