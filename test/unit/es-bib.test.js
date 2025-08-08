@@ -761,6 +761,11 @@ describe('EsBib', function () {
   })
 
   describe('subjectLiteral', () => {
+    it('should not build subjectLiterals that are suppressed', () => {
+      const record = new SierraBib(require('../fixtures/partner-suppressable-subjects.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.subjectLiteral().length).to.equal(7)
+    })
     it('should respect the order that subjects were catalogged in', () => {
       const record = new SierraBib(require('../fixtures/bib-subject-order.json'))
       const esBib = new EsBib(record)
