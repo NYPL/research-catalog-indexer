@@ -15,6 +15,7 @@ const {
 } = require('../fixtures/browse-term-fixtures')
 const esClient = require('../../lib/elastic-search/client')
 const sinon = require('sinon')
+const EsBib = require('../../lib/es-models/bib')
 
 const mockEsClient = {
   mget: async (request) => {
@@ -56,9 +57,9 @@ describe('bib activity', () => {
     })
   })
   describe('getSubjectModels', () => {
-    it('returns labels for preferred term and variants', () => {
+    it('returns labels for preferred term and variants', async () => {
       const bib = toIndex.find(({ id }) => id === 'parallelsChaos')
-      expect(getSubjectModels(new SierraBib(bib))).to.deep.eq([
+      expect(await getSubjectModels(new EsBib(new SierraBib(bib)))).to.deep.eq([
         {
           sourceId: 'parallelsChaos',
           preferredTerm: '600 primary value a 600 primary value b',
@@ -66,15 +67,14 @@ describe('bib activity', () => {
         }
       ])
     })
-    it('returns objects without parallels', () => {
+    it('returns objects without parallels', async () => {
       const bib = toIndex.find(({ id }) => id === '11655934')
-      console.log(getSubjectModels(new SierraBib(bib)))
-      expect(getSubjectModels(new SierraBib(bib))).to.deep.eq([
-        { preferredTerm: 'University of Utah -- Periodicals.', sourceId: '11655934' },
-        { preferredTerm: 'Education, Higher -- Utah -- Periodicals.', sourceId: '11655934' }
+      expect(await getSubjectModels(new EsBib(new SierraBib(bib)))).to.deep.eq([
+        { preferredTerm: 'University of Utah -- Periodicals.', sourceId: 'b11655934' },
+        { preferredTerm: 'Education, Higher -- Utah -- Periodicals.', sourceId: 'b11655934' }
       ])
     })
-    it('can handle orphan parallels', () => {
+    it('can handle orphan parallels', async () => {
       const bib = {
         id: '123',
         varFields: [{
@@ -99,7 +99,7 @@ describe('bib activity', () => {
           ]
         }]
       }
-      expect(getSubjectModels(new SierraBib(bib))).to.deep.eq([
+      expect(await getSubjectModels(new EsBib(new SierraBib(bib)))).to.deep.eq([
         {
           sourceId: '123',
           variant: '‏600 orphaned parallel value a 600 orphaned parallel value b'
@@ -153,14 +153,13 @@ describe('bib activity', () => {
     })
   })
   describe('buildBibSubjectEvents', () => {
-    it('can handle a combination of deleted and updated sierra bibs', async () => {
+    it('can handle a combination of deleted and updated sierra bibs, and filters non research', async () => {
       const records = [...toIndex, ...toDelete].map((record) => new SierraBib(record))
       const countEvents = await buildBibSubjectEvents(records)
       const sortedCountEvents = countEvents.sort((a, b) => {
         return a.preferredTerm.toLowerCase() > b.preferredTerm.toLowerCase() ? 1 : -1
       })
       expect(sortedCountEvents.map((event) => event.preferredTerm)).to.deep.eq([
-        '600 primary value a 600 primary value b',
         'an',
         'Armenians -- Iran -- History.',
         'Devon (England) -- Description and travel.',
