@@ -44,9 +44,6 @@ const processRecords = async (type, records, options = {}) => {
   const recordsToIndex = await buildEsDocument(filteredBibs)
 
   const messages = []
-  if (type === 'Bib') {
-    await emitBibSubjectEvents([...filteredBibs, ...removedBibs])
-  }
 
   if (recordsToIndex.length) {
     if (options.dryrun) {
@@ -72,6 +69,10 @@ const processRecords = async (type, records, options = {}) => {
     }
 
     messages.push(`Deleted ${recordsToDelete.length} doc(s)`)
+  }
+
+  if (type === 'Bib') {
+    await emitBibSubjectEvents([...filteredBibs, ...removedBibs])
   }
 
   const message = messages.length ? messages.join('; ') : 'Nothing to do.'
