@@ -4,6 +4,9 @@ const { parseVolume } = require('../../lib/utils/volume-parse')
 
 describe('utils/volume-parse', () => {
   describe('parseVolume', () => {
+    it('returns negative values for boxes so archive sorts will be ascending', () => {
+      expect(parseVolume('Box 36')).to.deep.equal([[9964, 9964]])
+    })
     it('v. 36-37 (Nov. 1965-Oct. 1967)', () => {
       expect(parseVolume('v. 36-37 (Nov. 1965-Oct. 1967)')).to.deep.equal([[36, 37]])
     })
