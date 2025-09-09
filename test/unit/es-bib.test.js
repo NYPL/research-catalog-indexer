@@ -132,6 +132,185 @@ describe('EsBib', function () {
       const esBib = new EsBib(record)
       expect(esBib.createdYear()).to.deep.equal([1977])
     })
+    it('creates a range of dates', () => {
+      const record = new SierraBib(require('../fixtures/bib-10554371.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.dates()).to.deep.equal([
+        {
+          range: {
+            gte: '1977',
+            lt: '2000'
+          },
+          raw: [
+            {
+              value: '790530u197719uupl uu m||     0    |pol|ncas   '
+            }
+          ],
+          tag: 'u'
+        }
+      ])
+    })
+    it('creates a multiple dates', () => {
+      const record = new SierraBib(require('../fixtures/bib-10554371.json'))
+      record.varFields = record.varFields.filter(field => field.marcTag !== '008')
+      record.varFields.push({
+        fieldTag: 'y',
+        marcTag: '008',
+        ind1: ' ',
+        ind2: ' ',
+        content: '790530m19771999pl uu m||     0    |pol|ncas   ',
+        subfields: null
+      })
+      const esBib = new EsBib(record)
+      expect(esBib.dates()).to.deep.equal([
+        {
+          range: {
+            gte: '1977',
+            lt: '1978'
+          },
+          raw: [
+            {
+              value: '790530m19771999pl uu m||     0    |pol|ncas   '
+            }
+          ],
+          tag: 'm'
+        },
+        {
+          range: {
+            gte: '1999',
+            lt: '2000'
+          },
+          raw: [
+            {
+              value: '790530m19771999pl uu m||     0    |pol|ncas   '
+            }
+          ],
+          tag: 'm'
+        }
+      ])
+    })
+    it('creates single dates', () => {
+      const record = new SierraBib(require('../fixtures/bib-10554371.json'))
+      record.varFields = record.varFields.filter(field => field.marcTag !== '008')
+      record.varFields.push({
+        fieldTag: 'y',
+        marcTag: '008',
+        ind1: ' ',
+        ind2: ' ',
+        content: '790530s1977uuuupl uu m||     0    |pol|ncas   ',
+        subfields: null
+      })
+      const esBib = new EsBib(record)
+      expect(esBib.dates()).to.deep.equal([
+        {
+          range: {
+            gte: '1977',
+            lt: '1978'
+          },
+          raw: [
+            {
+              value: '790530s1977uuuupl uu m||     0    |pol|ncas   '
+            }
+          ],
+          tag: 's'
+        }
+      ])
+    })
+    it('creates detailed dates', () => {
+      const record = new SierraBib(require('../fixtures/bib-10554371.json'))
+      record.varFields = record.varFields.filter(field => field.marcTag !== '008')
+      record.varFields.push({
+        fieldTag: 'y',
+        marcTag: '008',
+        ind1: ' ',
+        ind2: ' ',
+        content: '790530e19770605pl uu m||     0    |pol|ncas   ',
+        subfields: null
+      })
+      const esBib = new EsBib(record)
+      expect(esBib.dates()).to.deep.equal([
+        {
+          range: {
+            gte: '1977-06-05',
+            lte: '1977-06-05T23:59:59'
+          },
+          raw: [
+            {
+              value: '790530e19770605pl uu m||     0    |pol|ncas   '
+            }
+          ],
+          tag: 'e'
+        }
+      ])
+    })
+    it('rounds fuzzy dates up', () => {
+      const record = new SierraBib(require('../fixtures/bib-10554371.json'))
+      record.varFields = record.varFields.filter(field => field.marcTag !== '008')
+      record.varFields.push({
+        fieldTag: 'y',
+        marcTag: '008',
+        ind1: ' ',
+        ind2: ' ',
+        content: '790530u197719--5pl uu m||     0    |pol|ncas   ',
+        subfields: null
+      })
+      const esBib = new EsBib(record)
+      expect(esBib.dates()).to.deep.equal([
+        {
+          range: {
+            gte: '1977',
+            lt: '2000'
+          },
+          raw: [
+            {
+              value: '790530u197719--5pl uu m||     0    |pol|ncas   '
+            }
+          ],
+          tag: 'u'
+        }
+      ])
+    })
+    it('rounds fuzzy dates down', () => {
+      const record = new SierraBib(require('../fixtures/bib-10554371.json'))
+      record.varFields = record.varFields.filter(field => field.marcTag !== '008')
+      record.varFields.push({
+        fieldTag: 'y',
+        marcTag: '008',
+        ind1: ' ',
+        ind2: ' ',
+        content: '790530u19--19uupl uu m||     0    |pol|ncas   ',
+        subfields: null
+      })
+      const esBib = new EsBib(record)
+      expect(esBib.dates()).to.deep.equal([
+        {
+          range: {
+            gte: '1900',
+            lt: '2000'
+          },
+          raw: [
+            {
+              value: '790530u19--19uupl uu m||     0    |pol|ncas   '
+            }
+          ],
+          tag: 'u'
+        }
+      ])
+    })
+    it('rejects missing start dates', () => {
+      const record = new SierraBib(require('../fixtures/bib-10554371.json'))
+      record.varFields = record.varFields.filter(field => field.marcTag !== '008')
+      record.varFields.push({
+        fieldTag: 'y',
+        marcTag: '008',
+        ind1: ' ',
+        ind2: ' ',
+        content: '790530uuuuu19uupl uu m||     0    |pol|ncas   ',
+        subfields: null
+      })
+      const esBib = new EsBib(record)
+      expect(esBib.dates()).to.deep.equal([])
+    })
   })
 
   describe('dimensions', () => {
