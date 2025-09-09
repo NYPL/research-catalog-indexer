@@ -216,6 +216,33 @@ describe('EsBib', function () {
         }
       ])
     })
+    it('handles dates with 9999', () => {
+      const record = new SierraBib(require('../fixtures/bib-10554371.json'))
+      record.varFields = record.varFields.filter(field => field.marcTag !== '008')
+      record.varFields.push({
+        fieldTag: 'y',
+        marcTag: '008',
+        ind1: ' ',
+        ind2: ' ',
+        content: '790530s9999uuuupl uu m||     0    |pol|ncas   ',
+        subfields: null
+      })
+      const esBib = new EsBib(record)
+      expect(esBib.dates()).to.deep.equal([
+        {
+          range: {
+            gte: '9999',
+            lte: '9999'
+          },
+          raw: [
+            {
+              value: '790530s9999uuuupl uu m||     0    |pol|ncas   '
+            }
+          ],
+          tag: 's'
+        }
+      ])
+    })
     it('creates detailed dates', () => {
       const record = new SierraBib(require('../fixtures/bib-10554371.json'))
       record.varFields = record.varFields.filter(field => field.marcTag !== '008')
