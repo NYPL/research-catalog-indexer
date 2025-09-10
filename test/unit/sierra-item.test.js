@@ -165,7 +165,7 @@ describe('SierraItem', function () {
       })
     })
 
-    it('returns true for items with Ressearch item types', () => {
+    it('returns true for items with Research item types', () => {
       const item = new SierraItem({
         id: '1234',
         nyplSource: 'sierra-nypl',
