@@ -72,27 +72,27 @@ describe('EsBib', function () {
     })
   })
 
-  describe('collectionId', function () {
+  describe('collectionIds', function () {
     it('returns collection id(s) that correspond to item holding locations', async () => {
       const bib = new SierraBib(require('../fixtures/bib-11606020.json'))
       bib._items = []
       // An item from Maps
       bib._items.push(new SierraItem(require('../fixtures/item-14441624.json')))
-      expect(await (new EsBib(bib)).collectionId()).to.deep.equal(['map'])
+      expect(await (new EsBib(bib)).collectionIds()).to.deep.equal(['map'])
 
       // Another item from Maps
       bib._items.push(new SierraItem(require('../fixtures/item-19885371.json')))
-      expect(await (new EsBib(bib)).collectionId()).to.deep.equal(['map'])
+      expect(await (new EsBib(bib)).collectionIds()).to.deep.equal(['map'])
 
       // An item from Moving Image and Sound Division
       bib._items.push(new SierraItem(require('../fixtures/item-37528709.json')))
-      expect(await (new EsBib(bib)).collectionId()).to.deep.equal(['scb', 'map'])
+      expect(await (new EsBib(bib)).collectionIds()).to.deep.equal(['scb', 'map'])
     })
     it('returns an empty array for partner records', async () => {
       const bib = new SierraBib(require('../fixtures/bib-pul-99122517373506421.json'))
       bib._items = []
       bib._items.push(new SierraItem(require('../fixtures/item-pul-7834127.json')))
-      expect(await (new EsBib(bib)).collectionId()).to.deep.equal([])
+      expect(await (new EsBib(bib)).collectionIds()).to.deep.equal([])
     })
   })
 
