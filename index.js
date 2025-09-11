@@ -8,14 +8,12 @@ const { notifyDocumentProcessed } = require('./lib/streams-client')
 const { emitBibSubjectEvents } = require('./lib/browse-terms')
 const { filteredSierraBibsForBibs } = require('./lib/prefilter')
 const { loadNyplCoreData } = require('./lib/load-core-data')
+
 /**
  * Main lambda handler receiving Bib, Item, and Holding events
  */
-
-const initPromise = loadNyplCoreData()
-
 const handler = async (event, context, callback) => {
-  await initPromise
+  await loadNyplCoreData()
   logger.setLevel(process.env.LOG_LEVEL || 'info')
 
   try {
