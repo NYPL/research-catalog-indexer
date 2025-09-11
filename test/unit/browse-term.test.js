@@ -15,6 +15,7 @@ const {
 } = require('../fixtures/browse-term-fixtures')
 const esClient = require('../../lib/elastic-search/client')
 const sinon = require('sinon')
+const EsBib = require('../../lib/es-models/bib')
 
 const mockEsClient = {
   mget: async (request) => {
@@ -56,25 +57,26 @@ describe('bib activity', () => {
     })
   })
   describe('getSubjectModels', () => {
-    it('returns labels for preferred term and variants', () => {
+    it('returns labels for preferred term and variants', async () => {
       const bib = toIndex.find(({ id }) => id === 'parallelsChaos')
-      expect(getSubjectModels(new SierraBib(bib))).to.deep.eq([
+      expect(await getSubjectModels(new EsBib(new SierraBib(bib)))).to.deep.eq([
         {
+          sourceId: 'parallelsChaos',
           preferredTerm: '600 primary value a 600 primary value b',
           variant: '‏600 parallel value a 600 parallel value b'
         }
       ])
     })
-    it('returns objects without parallels', () => {
+    it('returns objects without parallels', async () => {
       const bib = toIndex.find(({ id }) => id === '11655934')
-      console.log(getSubjectModels(new SierraBib(bib)))
-      expect(getSubjectModels(new SierraBib(bib))).to.deep.eq([
-        { preferredTerm: 'University of Utah -- Periodicals.' },
-        { preferredTerm: 'Education, Higher -- Utah -- Periodicals.' }
+      expect(await getSubjectModels(new EsBib(new SierraBib(bib)))).to.deep.eq([
+        { preferredTerm: 'University of Utah -- Periodicals.', sourceId: 'b11655934' },
+        { preferredTerm: 'Education, Higher -- Utah -- Periodicals.', sourceId: 'b11655934' }
       ])
     })
-    it('can handle orphan parallels', () => {
+    it('can handle orphan parallels', async () => {
       const bib = {
+        id: '123',
         varFields: [{
           fieldTag: 'y',
           marcTag: '880',
@@ -97,8 +99,11 @@ describe('bib activity', () => {
           ]
         }]
       }
-      expect(getSubjectModels(new SierraBib(bib))).to.deep.eq([
-        { variant: '‏600 orphaned parallel value a 600 orphaned parallel value b' }
+      expect(await getSubjectModels(new EsBib(new SierraBib(bib)))).to.deep.eq([
+        {
+          sourceId: '123',
+          variant: '‏600 orphaned parallel value a 600 orphaned parallel value b'
+        }
       ])
     })
   })
@@ -148,48 +153,22 @@ describe('bib activity', () => {
     })
   })
   describe('buildBibSubjectEvents', () => {
-    it('can handle a combination of deleted and updated sierra bibs', async () => {
+    it('can handle a combination of deleted and updated sierra bibs, and filters non research', async () => {
       const records = [...toIndex, ...toDelete].map((record) => new SierraBib(record))
       const countEvents = await buildBibSubjectEvents(records)
       const sortedCountEvents = countEvents.sort((a, b) => {
         return a.preferredTerm.toLowerCase() > b.preferredTerm.toLowerCase() ? 1 : -1
       })
-      expect(sortedCountEvents).to.deep.eq([
-        {
-          preferredTerm: '600 primary value a 600 primary value b',
-          variant: '‏600 parallel value a 600 parallel value b',
-          type: 'subjectLiteral'
-        },
-        { preferredTerm: 'an', type: 'subjectLiteral' },
-        {
-          preferredTerm: 'Armenians -- Iran -- History.',
-          type: 'subjectLiteral'
-        },
-        {
-          preferredTerm: 'Devon (England) -- Description and travel.',
-          type: 'subjectLiteral'
-        },
-        {
-          preferredTerm: 'Education, Higher -- Utah -- Periodicals.',
-          type: 'subjectLiteral'
-        },
-        { preferredTerm: 'English drama.', type: 'subjectLiteral' },
-        {
-          preferredTerm: 'Milestones -- England -- Devon.',
-          type: 'subjectLiteral'
-        },
-        { preferredTerm: 'old', type: 'subjectLiteral' },
-        { preferredTerm: 'stale', type: 'subjectLiteral' },
-        { preferredTerm: 'subject', type: 'subjectLiteral' },
-        { preferredTerm: 'subject', type: 'subjectLiteral' },
-        {
-          preferredTerm: 'subject -- from -- suppressed bib.',
-          type: 'subjectLiteral'
-        },
-        {
-          preferredTerm: 'University of Utah -- Periodicals.',
-          type: 'subjectLiteral'
-        }
+      expect(sortedCountEvents.map((event) => event.preferredTerm)).to.deep.eq([
+        'an',
+        'Armenians -- Iran -- History.',
+        'Devon (England) -- Description and travel.',
+        'Education, Higher -- Utah -- Periodicals.',
+        'English drama.',
+        'Milestones -- England -- Devon.',
+        'old', 'stale', 'subject', 'subject',
+        'subject -- from -- suppressed bib.',
+        'University of Utah -- Periodicals.'
       ])
     })
   })

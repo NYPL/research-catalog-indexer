@@ -8,14 +8,19 @@ const SierraItem = require('../lib/sierra-models/item')
 const SierraHolding = require('../lib/sierra-models/holding')
 const logger = require('../lib/logger')
 
-const { fromIni } = require('@aws-sdk/credential-providers')
+const { createCredentialChain, fromIni, fromEnv } = require('@aws-sdk/credential-providers')
 
 /**
 * Given a named profile, returns a `credentials` value suitable for sending
 * into any AWS SDK client class
 */
 const awsCredentialsFromIni = (profile = 'nypl-digital-dev') => {
-  return fromIni({ profile })
+  return createCredentialChain(
+    // First try using named profile in ~/.aws/credentials
+    fromIni({ profile }),
+    // Next, fall back on ENV vars:
+    fromEnv()
+  )
 }
 
 const die = (message) => {

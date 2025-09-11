@@ -1,0 +1,1231 @@
+{
+        "id": "20890707",
+        "nyplSource": "sierra-nypl",
+        "title": "Elaine Stritch papers, (bulk 1943-2011).",
+        "author": "Stritch, Elaine.",
+        "publishYear": 1925,
+        "nyplType": "bib",
+        "controlNumber": "936448662",
+        "standardNumbers": [],
+        "updatedDate": "2025-07-10T20:34:22",
+        "createdDate": "2016-02-11T19:47:33",
+        "deletedDate": null,
+        "catalogDate": "2016-02-11T00:00:00",
+        "deleted": false,
+        "suppressed": false,
+        "locations": [
+            {
+                "code": "pat",
+                "name": "Performing Arts Research Collections - Theatre"
+            }
+        ],
+        "lang": {
+            "code": "eng",
+            "name": "English"
+        },
+        "materialType": {
+            "code": "p  ",
+            "value": "ARCHIVAL MIX"
+        },
+        "bibLevel": {
+            "code": "7",
+            "value": "ARCHIVES & MSS"
+        },
+        "country": {
+            "code": "nyu",
+            "name": "New York (State)"
+        },
+        "normTitle": "elaine stritch papers bulk 1943 2011",
+        "normAuthor": "stritch elaine",
+        "fixedFields": {
+            "24": {
+                "label": "Language",
+                "value": "eng",
+                "display": "English"
+            },
+            "25": {
+                "label": "Skip",
+                "value": "0",
+                "display": null
+            },
+            "26": {
+                "label": "Location",
+                "value": "pat  ",
+                "display": "Performing Arts Research Collections - Theatre"
+            },
+            "27": {
+                "label": "",
+                "value": "10",
+                "display": null
+            },
+            "28": {
+                "label": "Cat. Date",
+                "value": "2016-02-11",
+                "display": null
+            },
+            "29": {
+                "label": "Bib Level",
+                "value": "7",
+                "display": "ARCHIVES & MSS"
+            },
+            "30": {
+                "label": "Material Type",
+                "value": "p  ",
+                "display": "ARCHIVAL MIX"
+            },
+            "31": {
+                "label": "Bib Code 3",
+                "value": "-",
+                "display": null
+            },
+            "80": {
+                "label": "Record Type",
+                "value": "b",
+                "display": null
+            },
+            "81": {
+                "label": "Record Number",
+                "value": "20890707",
+                "display": null
+            },
+            "83": {
+                "label": "Created Date",
+                "value": "2016-02-11T19:47:33Z",
+                "display": null
+            },
+            "84": {
+                "label": "Updated Date",
+                "value": "2025-07-10T20:34:22Z",
+                "display": null
+            },
+            "85": {
+                "label": "No. of Revisions",
+                "value": "17",
+                "display": null
+            },
+            "86": {
+                "label": "Agency",
+                "value": "1",
+                "display": "53rd Street"
+            },
+            "89": {
+                "label": "Country",
+                "value": "nyu",
+                "display": "New York (State)"
+            },
+            "98": {
+                "label": "",
+                "value": "2025-06-09T22:30:00Z",
+                "display": null
+            },
+            "107": {
+                "label": "MARC Type",
+                "value": " ",
+                "display": null
+            }
+        },
+        "varFields": [
+            {
+                "ind1": "1",
+                "ind2": " ",
+                "content": null,
+                "marcTag": "100",
+                "fieldTag": "a",
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "Stritch, Elaine."
+                    }
+                ]
+            },
+            {
+                "ind1": " ",
+                "ind2": "0",
+                "content": null,
+                "marcTag": "650",
+                "fieldTag": "d",
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "Motion picture actors and actresses."
+                    }
+                ]
+            },
+            {
+                "ind1": "1",
+                "ind2": "0",
+                "content": null,
+                "marcTag": "600",
+                "fieldTag": "d",
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "Coward, Noël,"
+                    },
+                    {
+                        "tag": "d",
+                        "content": "1899-1973."
+                    },
+                    {
+                        "tag": "t",
+                        "content": "Sail away."
+                    }
+                ]
+            },
+            {
+                "ind1": "1",
+                "ind2": "0",
+                "content": null,
+                "marcTag": "600",
+                "fieldTag": "d",
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "Sondheim, Stephen."
+                    },
+                    {
+                        "tag": "t",
+                        "content": "Company."
+                    }
+                ]
+            },
+            {
+                "ind1": "1",
+                "ind2": "0",
+                "content": null,
+                "marcTag": "600",
+                "fieldTag": "d",
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "Sondheim, Stephen."
+                    },
+                    {
+                        "tag": "t",
+                        "content": "Little night music."
+                    }
+                ]
+            },
+            {
+                "ind1": " ",
+                "ind2": "0",
+                "content": null,
+                "marcTag": "650",
+                "fieldTag": "d",
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "Musical theater"
+                    },
+                    {
+                        "tag": "z",
+                        "content": "New York (State)"
+                    },
+                    {
+                        "tag": "z",
+                        "content": "New York."
+                    }
+                ]
+            },
+            {
+                "ind1": " ",
+                "ind2": "0",
+                "content": null,
+                "marcTag": "650",
+                "fieldTag": "d",
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "Musicals."
+                    }
+                ]
+            },
+            {
+                "ind1": " ",
+                "ind2": "0",
+                "content": null,
+                "marcTag": "650",
+                "fieldTag": "d",
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "Television actors and actresses."
+                    }
+                ]
+            },
+            {
+                "ind1": " ",
+                "ind2": "0",
+                "content": null,
+                "marcTag": "650",
+                "fieldTag": "d",
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "Theater"
+                    },
+                    {
+                        "tag": "z",
+                        "content": "United States"
+                    },
+                    {
+                        "tag": "y",
+                        "content": "20th century. "
+                    }
+                ]
+            },
+            {
+                "ind1": " ",
+                "ind2": "0",
+                "content": null,
+                "marcTag": "651",
+                "fieldTag": "d",
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "Birmingham (Mich.)"
+                    }
+                ]
+            },
+            {
+                "ind1": " ",
+                "ind2": "0",
+                "content": null,
+                "marcTag": "651",
+                "fieldTag": "d",
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "Broadway (New York, N.Y.)"
+                    }
+                ]
+            },
+            {
+                "ind1": " ",
+                "ind2": "7",
+                "content": null,
+                "marcTag": "655",
+                "fieldTag": "d",
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "Clippings."
+                    },
+                    {
+                        "tag": "2",
+                        "content": "aat"
+                    }
+                ]
+            },
+            {
+                "ind1": " ",
+                "ind2": "7",
+                "content": null,
+                "marcTag": "655",
+                "fieldTag": "d",
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "Correspondence."
+                    },
+                    {
+                        "tag": "2",
+                        "content": "aat"
+                    }
+                ]
+            },
+            {
+                "ind1": " ",
+                "ind2": "7",
+                "content": null,
+                "marcTag": "655",
+                "fieldTag": "d",
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "Photographs."
+                    },
+                    {
+                        "tag": "2",
+                        "content": "aat"
+                    }
+                ]
+            },
+            {
+                "ind1": " ",
+                "ind2": "7",
+                "content": null,
+                "marcTag": "655",
+                "fieldTag": "d",
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "Scripts (documents)"
+                    },
+                    {
+                        "tag": "2",
+                        "content": "aat"
+                    }
+                ]
+            },
+            {
+                "ind1": " ",
+                "ind2": "7",
+                "content": null,
+                "marcTag": "655",
+                "fieldTag": "d",
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "Sound recordings."
+                    },
+                    {
+                        "tag": "2",
+                        "content": "aat"
+                    }
+                ]
+            },
+            {
+                "ind1": " ",
+                "ind2": "7",
+                "content": null,
+                "marcTag": "655",
+                "fieldTag": "d",
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "Theater programs."
+                    },
+                    {
+                        "tag": "2",
+                        "content": "aat"
+                    }
+                ]
+            },
+            {
+                "ind1": " ",
+                "ind2": "7",
+                "content": null,
+                "marcTag": "655",
+                "fieldTag": "d",
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "Video recordings."
+                    },
+                    {
+                        "tag": "2",
+                        "content": "aat"
+                    }
+                ]
+            },
+            {
+                "ind1": " ",
+                "ind2": "7",
+                "content": null,
+                "marcTag": "656",
+                "fieldTag": "d",
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "Actresses."
+                    },
+                    {
+                        "tag": "2",
+                        "content": "lcsh"
+                    }
+                ]
+            },
+            {
+                "ind1": " ",
+                "ind2": "7",
+                "content": null,
+                "marcTag": "656",
+                "fieldTag": "d",
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "Singers."
+                    },
+                    {
+                        "tag": "2",
+                        "content": "lcsh"
+                    }
+                ]
+            },
+            {
+                "ind1": " ",
+                "ind2": " ",
+                "content": null,
+                "marcTag": "035",
+                "fieldTag": "l",
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "(OCoLC)936448662"
+                    }
+                ]
+            },
+            {
+                "ind1": "1",
+                "ind2": " ",
+                "content": null,
+                "marcTag": "541",
+                "fieldTag": "m",
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "Donated by Elaine Stritch Bay Trust, 2015."
+                    }
+                ]
+            },
+            {
+                "ind1": "1",
+                "ind2": " ",
+                "content": null,
+                "marcTag": "506",
+                "fieldTag": "n",
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "Collection is open to the public. Library policy on photography and photocopying will apply. Advance notice may be required. Sound and video recordings are unavailable pending digitization. For more information, please contact the Theatre Division at theatre@nypl.org."
+                    }
+                ]
+            },
+            {
+                "ind1": "3",
+                "ind2": " ",
+                "content": null,
+                "marcTag": "520",
+                "fieldTag": "n",
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "Elaine Stritch was an actress and singer in theatre, film and television whose show business career spanned nearly seventy years. She was especially well-known for her leading roles in plays by Edward Albee, William Inge, Neil Simon and Tennessee Williams; musicals by Noel Coward and Stephen Sondheim; as well as for her own solo shows. The Elaine Stritch papers date from 1925 to 2012 (bulk dates 1943-2011), and contain correspondence, photographs, and promotional materials that chronicle her personal life and performance career."
+                    }
+                ]
+            },
+            {
+                "ind1": " ",
+                "ind2": " ",
+                "content": null,
+                "marcTag": "540",
+                "fieldTag": "n",
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "The author/creator retains copyright of materials. For information on obtaining permission to publish, contact the Theatre Division at theatre@nypl.org."
+                    }
+                ]
+            },
+            {
+                "ind1": " ",
+                "ind2": " ",
+                "content": "936448662",
+                "marcTag": "001",
+                "fieldTag": "o",
+                "subfields": null
+            },
+            {
+                "ind1": "8",
+                "ind2": " ",
+                "content": null,
+                "marcTag": "852",
+                "fieldTag": "q",
+                "subfields": [
+                    {
+                        "tag": "h",
+                        "content": "*T-Mss 2014-172"
+                    }
+                ]
+            },
+            {
+                "ind1": " ",
+                "ind2": " ",
+                "content": null,
+                "marcTag": "300",
+                "fieldTag": "r",
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "4.61 linear feet (10 boxes)"
+                    }
+                ]
+            },
+            {
+                "ind1": "1",
+                "ind2": "0",
+                "content": null,
+                "marcTag": "245",
+                "fieldTag": "t",
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "Elaine Stritch papers,"
+                    },
+                    {
+                        "tag": "f",
+                        "content": "1925-2012"
+                    },
+                    {
+                        "tag": "g",
+                        "content": "(bulk 1943-2011)."
+                    }
+                ]
+            },
+            {
+                "ind1": " ",
+                "ind2": " ",
+                "content": "OCoLC",
+                "marcTag": "003",
+                "fieldTag": "y",
+                "subfields": null
+            },
+            {
+                "ind1": " ",
+                "ind2": " ",
+                "content": "20160211024704.0",
+                "marcTag": "005",
+                "fieldTag": "y",
+                "subfields": null
+            },
+            {
+                "ind1": " ",
+                "ind2": " ",
+                "content": "160203i19252012nyu                 eng dnpcIaa",
+                "marcTag": "008",
+                "fieldTag": "y",
+                "subfields": null
+            },
+            {
+                "ind1": " ",
+                "ind2": " ",
+                "content": null,
+                "marcTag": "040",
+                "fieldTag": "y",
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "NYP"
+                    },
+                    {
+                        "tag": "c",
+                        "content": "NYP"
+                    },
+                    {
+                        "tag": "e",
+                        "content": "dacs"
+                    },
+                    {
+                        "tag": "d",
+                        "content": "NYP"
+                    }
+                ]
+            },
+            {
+                "ind1": " ",
+                "ind2": " ",
+                "content": null,
+                "marcTag": "049",
+                "fieldTag": "y",
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "NYPP"
+                    }
+                ]
+            },
+            {
+                "ind1": "4",
+                "ind2": "0",
+                "content": null,
+                "marcTag": "856",
+                "fieldTag": "y",
+                "subfields": [
+                    {
+                        "tag": "u",
+                        "content": "https://specialcollections.nypl.org/aeon/Aeon.dll?Action=10&Form=30&Title=Elaine+Stritch+papers,+1925-2012+(bulk+1943-2011).&Site=LPATH&CallNumber=*T-Mss+2014-172&Author=Stritch,+Elaine.&ItemInfo3=https://catalog.nypl.org/record=b20890707&ReferenceNumber=b208907075&ItemInfo2=The+author/creator+retains+copyright+of+materials.+For+information+on+obtaining+permission+to+publish,+contact+the+Theatre+Division+at+theatre@nypl.org.+Collection+is+open+to+the+public.+Library+policy+on+photography+and+photocopying+will+apply.+Advance+notice+may+be+required.+Sound+and+video+recordings+are+unavailable+pending+digitization.+For+more+information,+please+contact+the+Theatre+Division+at+theatre@nypl.org.&Genre=Archival+Mix&Location=Performing+Arts+Theatre+Division"
+                    },
+                    {
+                        "tag": "z",
+                        "content": "Request Access to Theatre Division Special Collections material"
+                    }
+                ]
+            },
+            {
+                "ind1": "4",
+                "ind2": "1",
+                "content": null,
+                "marcTag": "856",
+                "fieldTag": "y",
+                "subfields": [
+                    {
+                        "tag": "u",
+                        "content": "https://digitalcollections.nypl.org/collections/61ea6630-11b1-0135-a898-332cf6f5b431"
+                    },
+                    {
+                        "tag": "z",
+                        "content": "Selections available in NYPL Digital Collections"
+                    }
+                ]
+            },
+            {
+                "ind1": "4",
+                "ind2": "2",
+                "content": null,
+                "marcTag": "856",
+                "fieldTag": "y",
+                "subfields": [
+                    {
+                        "tag": "3",
+                        "content": "Finding aid"
+                    },
+                    {
+                        "tag": "u",
+                        "content": "http://archives.nypl.org/the/23013 "
+                    }
+                ]
+            },
+            {
+                "ind1": " ",
+                "ind2": " ",
+                "content": null,
+                "marcTag": "901",
+                "fieldTag": "y",
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "ARCHV"
+                    },
+                    {
+                        "tag": "b",
+                        "content": "ARCHV"
+                    }
+                ]
+            },
+            {
+                "ind1": " ",
+                "ind2": " ",
+                "content": null,
+                "marcTag": "946",
+                "fieldTag": "y",
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "m"
+                    }
+                ]
+            },
+            {
+                "ind1": " ",
+                "ind2": "1",
+                "content": null,
+                "marcTag": "949",
+                "fieldTag": "y",
+                "subfields": [
+                    {
+                        "tag": "z",
+                        "content": "8528"
+                    },
+                    {
+                        "tag": "a",
+                        "content": "*T-Mss 2014-172"
+                    },
+                    {
+                        "tag": "l",
+                        "content": "myt38"
+                    },
+                    {
+                        "tag": "i",
+                        "content": "33433117007207"
+                    },
+                    {
+                        "tag": "c",
+                        "content": "box 1"
+                    },
+                    {
+                        "tag": "t",
+                        "content": "021"
+                    },
+                    {
+                        "tag": "h",
+                        "content": "32"
+                    },
+                    {
+                        "tag": "s",
+                        "content": "-"
+                    },
+                    {
+                        "tag": "o",
+                        "content": "u"
+                    },
+                    {
+                        "tag": "v",
+                        "content": "ARCHV/ARCHV"
+                    }
+                ]
+            },
+            {
+                "ind1": " ",
+                "ind2": "1",
+                "content": null,
+                "marcTag": "949",
+                "fieldTag": "y",
+                "subfields": [
+                    {
+                        "tag": "z",
+                        "content": "8528"
+                    },
+                    {
+                        "tag": "a",
+                        "content": "*T-Mss 2014-172"
+                    },
+                    {
+                        "tag": "l",
+                        "content": "myt38"
+                    },
+                    {
+                        "tag": "i",
+                        "content": "33433117007215"
+                    },
+                    {
+                        "tag": "c",
+                        "content": "box 2"
+                    },
+                    {
+                        "tag": "t",
+                        "content": "021"
+                    },
+                    {
+                        "tag": "h",
+                        "content": "32"
+                    },
+                    {
+                        "tag": "s",
+                        "content": "-"
+                    },
+                    {
+                        "tag": "o",
+                        "content": "u"
+                    },
+                    {
+                        "tag": "v",
+                        "content": "ARCHV/ARCHV"
+                    }
+                ]
+            },
+            {
+                "ind1": " ",
+                "ind2": "1",
+                "content": null,
+                "marcTag": "949",
+                "fieldTag": "y",
+                "subfields": [
+                    {
+                        "tag": "z",
+                        "content": "8528"
+                    },
+                    {
+                        "tag": "a",
+                        "content": "*T-Mss 2014-172"
+                    },
+                    {
+                        "tag": "l",
+                        "content": "myt38"
+                    },
+                    {
+                        "tag": "i",
+                        "content": "33433117004584"
+                    },
+                    {
+                        "tag": "c",
+                        "content": "box 3"
+                    },
+                    {
+                        "tag": "t",
+                        "content": "021"
+                    },
+                    {
+                        "tag": "h",
+                        "content": "32"
+                    },
+                    {
+                        "tag": "s",
+                        "content": "-"
+                    },
+                    {
+                        "tag": "o",
+                        "content": "u"
+                    },
+                    {
+                        "tag": "v",
+                        "content": "ARCHV/ARCHV"
+                    }
+                ]
+            },
+            {
+                "ind1": " ",
+                "ind2": "1",
+                "content": null,
+                "marcTag": "949",
+                "fieldTag": "y",
+                "subfields": [
+                    {
+                        "tag": "z",
+                        "content": "8528"
+                    },
+                    {
+                        "tag": "a",
+                        "content": "*T-Mss 2014-172"
+                    },
+                    {
+                        "tag": "l",
+                        "content": "myt38"
+                    },
+                    {
+                        "tag": "i",
+                        "content": "33433117007223"
+                    },
+                    {
+                        "tag": "c",
+                        "content": "box 4"
+                    },
+                    {
+                        "tag": "t",
+                        "content": "021"
+                    },
+                    {
+                        "tag": "h",
+                        "content": "32"
+                    },
+                    {
+                        "tag": "s",
+                        "content": "-"
+                    },
+                    {
+                        "tag": "o",
+                        "content": "u"
+                    },
+                    {
+                        "tag": "v",
+                        "content": "ARCHV/ARCHV"
+                    }
+                ]
+            },
+            {
+                "ind1": " ",
+                "ind2": "1",
+                "content": null,
+                "marcTag": "949",
+                "fieldTag": "y",
+                "subfields": [
+                    {
+                        "tag": "z",
+                        "content": "8528"
+                    },
+                    {
+                        "tag": "a",
+                        "content": "*T-Mss 2014-172"
+                    },
+                    {
+                        "tag": "l",
+                        "content": "myt38"
+                    },
+                    {
+                        "tag": "i",
+                        "content": "33433117007231"
+                    },
+                    {
+                        "tag": "c",
+                        "content": "box 5"
+                    },
+                    {
+                        "tag": "t",
+                        "content": "021"
+                    },
+                    {
+                        "tag": "h",
+                        "content": "32"
+                    },
+                    {
+                        "tag": "s",
+                        "content": "-"
+                    },
+                    {
+                        "tag": "o",
+                        "content": "u"
+                    },
+                    {
+                        "tag": "v",
+                        "content": "ARCHV/ARCHV"
+                    }
+                ]
+            },
+            {
+                "ind1": " ",
+                "ind2": "1",
+                "content": null,
+                "marcTag": "949",
+                "fieldTag": "y",
+                "subfields": [
+                    {
+                        "tag": "z",
+                        "content": "8528"
+                    },
+                    {
+                        "tag": "a",
+                        "content": "*T-Mss 2014-172"
+                    },
+                    {
+                        "tag": "l",
+                        "content": "myt38"
+                    },
+                    {
+                        "tag": "i",
+                        "content": "33433117004592"
+                    },
+                    {
+                        "tag": "c",
+                        "content": "box 6"
+                    },
+                    {
+                        "tag": "t",
+                        "content": "021"
+                    },
+                    {
+                        "tag": "h",
+                        "content": "32"
+                    },
+                    {
+                        "tag": "s",
+                        "content": "-"
+                    },
+                    {
+                        "tag": "o",
+                        "content": "u"
+                    },
+                    {
+                        "tag": "v",
+                        "content": "ARCHV/ARCHV"
+                    }
+                ]
+            },
+            {
+                "ind1": " ",
+                "ind2": "1",
+                "content": null,
+                "marcTag": "949",
+                "fieldTag": "y",
+                "subfields": [
+                    {
+                        "tag": "z",
+                        "content": "8528"
+                    },
+                    {
+                        "tag": "a",
+                        "content": "*T-Mss 2014-172"
+                    },
+                    {
+                        "tag": "l",
+                        "content": "myt38"
+                    },
+                    {
+                        "tag": "i",
+                        "content": "33433117004600"
+                    },
+                    {
+                        "tag": "c",
+                        "content": "box 7"
+                    },
+                    {
+                        "tag": "t",
+                        "content": "021"
+                    },
+                    {
+                        "tag": "h",
+                        "content": "32"
+                    },
+                    {
+                        "tag": "s",
+                        "content": "-"
+                    },
+                    {
+                        "tag": "o",
+                        "content": "u"
+                    },
+                    {
+                        "tag": "v",
+                        "content": "ARCHV/ARCHV"
+                    }
+                ]
+            },
+            {
+                "ind1": " ",
+                "ind2": "1",
+                "content": null,
+                "marcTag": "949",
+                "fieldTag": "y",
+                "subfields": [
+                    {
+                        "tag": "z",
+                        "content": "8528"
+                    },
+                    {
+                        "tag": "a",
+                        "content": "*T-Mss 2014-172"
+                    },
+                    {
+                        "tag": "l",
+                        "content": "myt38"
+                    },
+                    {
+                        "tag": "i",
+                        "content": "33433117007249"
+                    },
+                    {
+                        "tag": "c",
+                        "content": "box 8"
+                    },
+                    {
+                        "tag": "t",
+                        "content": "021"
+                    },
+                    {
+                        "tag": "h",
+                        "content": "32"
+                    },
+                    {
+                        "tag": "s",
+                        "content": "-"
+                    },
+                    {
+                        "tag": "o",
+                        "content": "u"
+                    },
+                    {
+                        "tag": "v",
+                        "content": "ARCHV/ARCHV"
+                    }
+                ]
+            },
+            {
+                "ind1": " ",
+                "ind2": "1",
+                "content": null,
+                "marcTag": "949",
+                "fieldTag": "y",
+                "subfields": [
+                    {
+                        "tag": "z",
+                        "content": "8528"
+                    },
+                    {
+                        "tag": "a",
+                        "content": "*T-Mss 2014-172"
+                    },
+                    {
+                        "tag": "l",
+                        "content": "myt38"
+                    },
+                    {
+                        "tag": "i",
+                        "content": "33433087959387"
+                    },
+                    {
+                        "tag": "c",
+                        "content": "box 9"
+                    },
+                    {
+                        "tag": "t",
+                        "content": "021"
+                    },
+                    {
+                        "tag": "h",
+                        "content": "32"
+                    },
+                    {
+                        "tag": "s",
+                        "content": "-"
+                    },
+                    {
+                        "tag": "o",
+                        "content": "u"
+                    },
+                    {
+                        "tag": "v",
+                        "content": "ARCHV/ARCHV"
+                    }
+                ]
+            },
+            {
+                "ind1": " ",
+                "ind2": "1",
+                "content": null,
+                "marcTag": "949",
+                "fieldTag": "y",
+                "subfields": [
+                    {
+                        "tag": "z",
+                        "content": "8528"
+                    },
+                    {
+                        "tag": "a",
+                        "content": "*T-Mss 2014-172"
+                    },
+                    {
+                        "tag": "l",
+                        "content": "myt38"
+                    },
+                    {
+                        "tag": "i",
+                        "content": "33433087959395"
+                    },
+                    {
+                        "tag": "c",
+                        "content": "box 10"
+                    },
+                    {
+                        "tag": "t",
+                        "content": "021"
+                    },
+                    {
+                        "tag": "h",
+                        "content": "32"
+                    },
+                    {
+                        "tag": "s",
+                        "content": "-"
+                    },
+                    {
+                        "tag": "o",
+                        "content": "u"
+                    },
+                    {
+                        "tag": "v",
+                        "content": "ARCHV/ARCHV"
+                    }
+                ]
+            },
+            {
+                "ind1": " ",
+                "ind2": " ",
+                "content": null,
+                "marcTag": "910",
+                "fieldTag": "y",
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "RL"
+                    }
+                ]
+            },
+            {
+                "ind1": null,
+                "ind2": null,
+                "content": "00000npca 2200565Ia 4500",
+                "marcTag": null,
+                "fieldTag": "_",
+                "subfields": null
+            }
+        ]
+}
