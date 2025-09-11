@@ -8,7 +8,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "./node_modules/.bin/standard && ./node_modules/.bin/mocha test/unit",
+    "test": "./node_modules/.bin/standard && ./node_modules/.bin/mocha --file test/bootstrap.mjs test/unit",
     "test-no-standard": "./node_modules/.bin/mocha test/unit"
   },
   "author": "",
