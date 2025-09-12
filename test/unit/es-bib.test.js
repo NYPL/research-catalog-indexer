@@ -141,11 +141,7 @@ describe('EsBib', function () {
             gte: '1977',
             lt: '2000'
           },
-          raw: [
-            {
-              value: '790530u197719uupl uu m||     0    |pol|ncas   '
-            }
-          ],
+          raw: '790530u197719uupl uu m||     0    |pol|ncas   ',
           tag: 'u'
         }
       ])
@@ -168,11 +164,7 @@ describe('EsBib', function () {
             gte: '1977',
             lt: '1978'
           },
-          raw: [
-            {
-              value: '790530m19771999pl uu m||     0    |pol|ncas   '
-            }
-          ],
+          raw: '790530m19771999pl uu m||     0    |pol|ncas   ',
           tag: 'm'
         },
         {
@@ -180,11 +172,7 @@ describe('EsBib', function () {
             gte: '1999',
             lt: '2000'
           },
-          raw: [
-            {
-              value: '790530m19771999pl uu m||     0    |pol|ncas   '
-            }
-          ],
+          raw: '790530m19771999pl uu m||     0    |pol|ncas   ',
           tag: 'm'
         }
       ])
@@ -207,11 +195,7 @@ describe('EsBib', function () {
             gte: '1977',
             lt: '1978'
           },
-          raw: [
-            {
-              value: '790530s1977uuuupl uu m||     0    |pol|ncas   '
-            }
-          ],
+          raw: '790530s1977uuuupl uu m||     0    |pol|ncas   ',
           tag: 's'
         }
       ])
@@ -234,11 +218,7 @@ describe('EsBib', function () {
             gte: '9999',
             lte: '9999'
           },
-          raw: [
-            {
-              value: '790530s9999uuuupl uu m||     0    |pol|ncas   '
-            }
-          ],
+          raw: '790530s9999uuuupl uu m||     0    |pol|ncas   ',
           tag: 's'
         }
       ])
@@ -261,11 +241,7 @@ describe('EsBib', function () {
             gte: '1977-06-05',
             lte: '1977-06-05T23:59:59'
           },
-          raw: [
-            {
-              value: '790530e19770605pl uu m||     0    |pol|ncas   '
-            }
-          ],
+          raw: '790530e19770605pl uu m||     0    |pol|ncas   ',
           tag: 'e'
         }
       ])
@@ -288,11 +264,7 @@ describe('EsBib', function () {
             gte: '1977',
             lt: '2000'
           },
-          raw: [
-            {
-              value: '790530u197719--5pl uu m||     0    |pol|ncas   '
-            }
-          ],
+          raw: '790530u197719--5pl uu m||     0    |pol|ncas   ',
           tag: 'u'
         }
       ])
@@ -315,11 +287,7 @@ describe('EsBib', function () {
             gte: '1900',
             lt: '2000'
           },
-          raw: [
-            {
-              value: '790530u19--19uupl uu m||     0    |pol|ncas   '
-            }
-          ],
+          raw: '790530u19--19uupl uu m||     0    |pol|ncas   ',
           tag: 'u'
         }
       ])
