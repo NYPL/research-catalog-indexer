@@ -70,8 +70,8 @@ describe('bib activity', () => {
     it('returns objects without parallels', async () => {
       const bib = toIndex.find(({ id }) => id === '11655934')
       expect(await getSubjectModels(new EsBib(new SierraBib(bib)))).to.deep.eq([
-        { preferredTerm: 'University of Utah -- Periodicals.', sourceId: 'b11655934' },
-        { preferredTerm: 'Education, Higher -- Utah -- Periodicals.', sourceId: 'b11655934' }
+        { preferredTerm: 'University of Utah -- Periodicals', sourceId: 'b11655934' },
+        { preferredTerm: 'Education, Higher -- Utah -- Periodicals', sourceId: 'b11655934' }
       ])
     })
     it('can handle orphan parallels', async () => {
@@ -161,14 +161,14 @@ describe('bib activity', () => {
       })
       expect(sortedCountEvents.map((event) => event.preferredTerm)).to.deep.eq([
         'an',
-        'Armenians -- Iran -- History.',
-        'Devon (England) -- Description and travel.',
-        'Education, Higher -- Utah -- Periodicals.',
-        'English drama.',
-        'Milestones -- England -- Devon.',
+        'Armenians -- Iran -- History',
+        'Devon (England) -- Description and travel',
+        'Education, Higher -- Utah -- Periodicals',
+        'English drama',
+        'Milestones -- England -- Devon',
         'old', 'stale', 'subject', 'subject',
-        'subject -- from -- suppressed bib.',
-        'University of Utah -- Periodicals.'
+        'subject -- from -- suppressed bib',
+        'University of Utah -- Periodicals'
       ])
     })
   })
