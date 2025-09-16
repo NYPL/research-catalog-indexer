@@ -9,6 +9,9 @@ const elastic = require('../../lib/elastic-search/requests')
 const SierraItem = require('../../lib/sierra-models/item')
 const SierraHolding = require('../../lib/sierra-models/holding')
 const NyplStreamsClient = require('@nypl/nypl-streams-client')
+const suppressedBib = require('../fixtures/bib-fake-suppressed.json')
+const suppress = require('../../lib/utils/suppressBibs')
+const browse = require('../../lib/browse-terms')
 
 describe('index handler function', () => {
   const eventDecoderStub = (type) => stub(eventDecoder, 'decodeRecordsFromEvent').callsFake(async () => {
@@ -49,16 +52,12 @@ describe('index handler function', () => {
     }
     modelPrefetchStub.resetHistory()
   })
-
-  xdescribe('prefilters', () => {
-    it('prefilters a bib', () => {
-
-    })
-    it('prefilters an item and fetches bibs', () => {
-
-    })
-    it('prefilters a holding and fetches bibs', () => {
-
+  describe('processRecords', () => {
+    it('calls deletions after subject processing has happened', async () => {
+      const suppressBibsStub = stub(suppress, 'suppressBibs')
+      const emitBibSubjectEventsStub = stub(browse, 'emitBibSubjectEvents')
+      await index.processRecords('Bib', [suppressedBib])
+      expect(emitBibSubjectEventsStub.calledBefore(suppressBibsStub)).to.equal(true)
     })
   })
 
