@@ -1,11 +1,11 @@
 const logger = require('./lib/logger')
 const eventDecoder = require('./lib/event-decoder')
 const elastic = require('./lib/elastic-search/requests')
-const { suppressBibs } = require('./lib/utils/suppressBibs')
+const suppress = require('./lib/utils/suppressBibs')
 const { buildEsDocument, transformIntoBibRecords } = require('./lib/build-es-document')
 const { truncate } = require('./lib/utils')
 const { notifyDocumentProcessed } = require('./lib/streams-client')
-const { emitBibSubjectEvents } = require('./lib/browse-terms')
+const browse = require('./lib/browse-terms')
 const { filteredSierraBibsForBibs } = require('./lib/prefilter')
 
 /**
@@ -61,18 +61,21 @@ const processRecords = async (type, records, options = {}) => {
     messages.push(`Wrote ${recordsToIndex.length} doc(s): ${summary}`)
   }
 
+  // Fetch subjects from all bibs, whether they are updates, creates, or deletes,
+  // and transmit to the browse pipeline.
+  const changedRecords = [...filteredBibs, ...removedBibs]
+  if ((changedRecords.length) && type === 'Bib') {
+    await browse.emitBibSubjectEvents(changedRecords)
+  }
+
   if (recordsToDelete.length) {
     if (options.dryrun) {
       console.log(`DRYRUN: Skipping removing ${recordsToDelete.length} records`)
     } else {
-      await suppressBibs(recordsToDelete)
+      await suppress.suppressBibs(recordsToDelete)
     }
 
     messages.push(`Deleted ${recordsToDelete.length} doc(s)`)
-  }
-
-  if ((recordsToIndex.length || recordsToDelete.length) && type === 'Bib') {
-    await emitBibSubjectEvents([...filteredBibs, ...removedBibs])
   }
 
   const message = messages.length ? messages.join('; ') : 'Nothing to do.'
