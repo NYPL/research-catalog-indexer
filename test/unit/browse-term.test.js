@@ -16,6 +16,7 @@ const {
 const esClient = require('../../lib/elastic-search/client')
 const sinon = require('sinon')
 const EsBib = require('../../lib/es-models/bib')
+const logger = require('../../lib/logger')
 
 const mockEsClient = {
   mget: async (request) => {
@@ -27,9 +28,10 @@ const mockEsClient = {
     })
   }
 }
-
+let loggerSpy
 describe('bib activity', () => {
   before(() => {
+    loggerSpy = sinon.spy(logger, 'debug')
     sinon.stub(esClient, 'client').resolves(mockEsClient)
   })
   after(() => {
@@ -153,6 +155,11 @@ describe('bib activity', () => {
     })
   })
   describe('buildBibSubjectEvents', () => {
+    it('returns early if there are no idsToFetch', async () => {
+      const nonResearchBib = { getIsResearchWithRationale: () => ({ isResearch: false }) }
+      expect(buildBibSubjectEvents([nonResearchBib])).to.eventually.equal(undefined)
+      expect(loggerSpy.calledWith('No records to fetch or build subjects for'))
+    })
     it('can handle a combination of deleted and updated sierra bibs, and filters non research', async () => {
       const records = [...toIndex, ...toDelete].map((record) => new SierraBib(record))
       const countEvents = await buildBibSubjectEvents(records)

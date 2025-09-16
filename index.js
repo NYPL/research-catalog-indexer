@@ -61,6 +61,12 @@ const processRecords = async (type, records, options = {}) => {
     messages.push(`Wrote ${recordsToIndex.length} doc(s): ${summary}`)
   }
 
+  // this must happen before recordsToDelete are deleted
+  const changedRecords = [...filteredBibs, ...removedBibs]
+  if ((changedRecords.length) && type === 'Bib') {
+    await emitBibSubjectEvents(changedRecords)
+  }
+
   if (recordsToDelete.length) {
     if (options.dryrun) {
       console.log(`DRYRUN: Skipping removing ${recordsToDelete.length} records`)
@@ -69,10 +75,6 @@ const processRecords = async (type, records, options = {}) => {
     }
 
     messages.push(`Deleted ${recordsToDelete.length} doc(s)`)
-  }
-
-  if ((recordsToIndex.length || recordsToDelete.length) && type === 'Bib') {
-    await emitBibSubjectEvents([...filteredBibs, ...removedBibs])
   }
 
   const message = messages.length ? messages.join('; ') : 'Nothing to do.'
