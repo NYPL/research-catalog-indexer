@@ -9,8 +9,6 @@ const elastic = require('../../lib/elastic-search/requests')
 const SierraItem = require('../../lib/sierra-models/item')
 const SierraHolding = require('../../lib/sierra-models/holding')
 const NyplStreamsClient = require('@nypl/nypl-streams-client')
-const { filteredSierraBibsForBibs } = require('../../lib/prefilter')
-const { transformIntoBibRecords } = require('../../lib/build-es-document')
 
 describe('index handler function', () => {
   const eventDecoderStub = (type) => stub(eventDecoder, 'decodeRecordsFromEvent').callsFake(async () => {
@@ -51,11 +49,6 @@ describe('index handler function', () => {
     }
     modelPrefetchStub.resetHistory()
   })
-  // describe('processRecords', () => {
-  //   it("calls emitBibSubjectEvents before records are deleted", async () => {
-  //     await 
-  //   })
-  // })
   xdescribe('prefilters', () => {
     it('prefilters a bib', () => {
 
