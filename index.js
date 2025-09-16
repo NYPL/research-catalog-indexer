@@ -71,7 +71,7 @@ const processRecords = async (type, records, options = {}) => {
     messages.push(`Deleted ${recordsToDelete.length} doc(s)`)
   }
 
-  if (type === 'Bib') {
+  if ((recordsToIndex.length || recordsToDelete.length) && type === 'Bib') {
     await emitBibSubjectEvents([...filteredBibs, ...removedBibs])
   }
 
