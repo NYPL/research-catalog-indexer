@@ -7,11 +7,13 @@ const { truncate } = require('./lib/utils')
 const { notifyDocumentProcessed } = require('./lib/streams-client')
 const browse = require('./lib/browse-terms')
 const { filteredSierraBibsForBibs } = require('./lib/prefilter')
+const { loadNyplCoreData } = require('./lib/load-core-data')
 
 /**
  * Main lambda handler receiving Bib, Item, and Holding events
  */
 const handler = async (event, context, callback) => {
+  await loadNyplCoreData()
   logger.setLevel(process.env.LOG_LEVEL || 'info')
 
   try {

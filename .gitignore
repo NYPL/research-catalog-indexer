@@ -4,4 +4,5 @@ terraform*
 node_modules
 build/
 uris.csv
+.vscode*
 *.log
