@@ -304,6 +304,29 @@ describe('EsBib', function () {
         }
       ])
     })
+    it('pads detailed dates correctly', () => {
+      const record = new SierraBib(require('../fixtures/bib-10554371.json'))
+      record.varFields = record.varFields.filter(field => field.marcTag !== '008')
+      record.varFields.push({
+        fieldTag: 'y',
+        marcTag: '008',
+        ind1: ' ',
+        ind2: ' ',
+        content: '170630e201704  it af    b    001 0dita dnam i ',
+        subfields: null
+      })
+      const esBib = new EsBib(record)
+      expect(esBib.dates()).to.deep.equal([
+        {
+          range: {
+            gte: '2017-04-01',
+            lt: '2017-05-01'
+          },
+          raw: '170630e201704  it af    b    001 0dita dnam i ',
+          tag: 'e'
+        }
+      ])
+    })
     it('rounds fuzzy dates up', () => {
       const record = new SierraBib(require('../fixtures/bib-10554371.json'))
       record.varFields = record.varFields.filter(field => field.marcTag !== '008')
