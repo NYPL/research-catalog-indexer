@@ -289,7 +289,7 @@ describe('EsBib', function () {
         marcTag: '008',
         ind1: ' ',
         ind2: ' ',
-        content: '008    160906e201610  it a     b    001 0 ita dnam',
+        content: '160906e201610  it a     b    001 0 ita dnam i ',
         subfields: null
       })
       const esBib = new EsBib(record)
@@ -299,7 +299,7 @@ describe('EsBib', function () {
             gte: '2016-10-01',
             lt: '2016-11-01'
           },
-          raw: '008    160906e201610  it a     b    001 0 ita dnam',
+          raw: '160906e201610  it a     b    001 0 ita dnam i ',
           tag: 'e'
         }
       ])
