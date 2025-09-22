@@ -124,6 +124,7 @@ const {
 } = require('./utils')
 const { setCredentials: kmsSetCredentials } = require('../lib/kms')
 const logger = require('../lib/logger')
+const { loadNyplCoreData } = require('../lib/load-core-data.js')
 logger.setLevel(process.env.LOG_LEVEL || 'info')
 
 if (process.env.NEW_RELIC_LICENSE_KEY && process.env.NEW_RELIC_APP_NAME) {
@@ -386,7 +387,7 @@ const buildSqlQuery = (options) => {
     ]
     options.limit = options.ids.length
 
-  // Support for a date range query
+    // Support for a date range query
   } else if (options.type && options.fromDate) {
     type = options.type
     const fromDate = options.fromDate
@@ -684,7 +685,7 @@ const run = async () => {
 }
 
 if (isCalledViaCommandLine) {
-  run()
+  loadNyplCoreData().then(() => run())
 }
 
 module.exports = {
