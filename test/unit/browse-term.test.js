@@ -76,7 +76,7 @@ describe('bib activity', () => {
         ]
       )
     })
-    it('does not return multiple subjects with the same preferred terms', async () => {
+    it('does not return subjects with the same preferred terms', async () => {
       const freshBibs = [
         devonBib, devonBib
       ].map((bib) => new EsBib(new SierraBib(bib)))
@@ -96,7 +96,7 @@ describe('bib activity', () => {
       )
     })
     it('only returns subjects that have been removed or added', async () => {
-      // ie Does not return subjects present on both the live es document and the freshly generated one
+      // ie Does not return subjects present on both the live es document and the freshly generated one... ie the DIFF!
       const freshBibs = [
         require('../fixtures/bib-11655934.json'),
         require('../fixtures/bib-10554618.json')].map((bib) => new EsBib(new SierraBib({ ...bib, id: `${bib.id}someDiff` })))
