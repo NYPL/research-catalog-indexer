@@ -13,14 +13,14 @@ module.exports = {
   {
     b11655934x: {
       _index: 'resources-2024-10-22',
-      _id: 'b11655934x',
+      _id: 'b11655934sameAsFresh',
       _source: {
         subjectLiteral: ['University of Utah -- Periodicals', 'Education, Higher -- Utah -- Periodicals']
       }
     },
     b10554618x: {
       _index: 'resources-2024-10-22',
-      _id: 'b10554618x',
+      _id: 'b10554618sameAsFresh',
       _source: {
         subjectLiteral: ['Milestones -- England -- Devon', 'Devon (England) -- Description and travel']
       }
