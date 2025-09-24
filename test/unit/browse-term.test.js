@@ -5,7 +5,8 @@ const {
   buildSubjectDiff,
   getPrimaryAndParallelLabels,
   getSubjectModels,
-  buildBatchedCommands
+  buildBatchedCommands,
+  determineUpdatedTerms
 } = require('../../lib/browse-terms')
 const SierraBib = require('../../lib/sierra-models/bib')
 const {
@@ -36,6 +37,16 @@ describe('bib activity', () => {
   })
   after(() => {
     esClient.client.restore()
+  })
+  describe('determineUpdatedTerms', () => {
+    it('returns no updated subjects when nothing has changed', async () => {
+      const freshBibs = [
+        require('../fixtures/bib-11655934.json'),
+        require('../fixtures/bib-10554618.json')].map((bib) => new EsBib(new SierraBib({ ...bib, id: `${bib.id}x` })))
+      const ids = await Promise.all(freshBibs.map(async (bib) => await bib.uri()))
+      const terms = await determineUpdatedTerms('subjectLiteral', ids, freshBibs)
+      expect(terms).to.deep.equal([])
+    })
   })
   describe('buildBatchedCommands', () => {
     const generateSubjects = (length) => (new Array(length)).fill(null).map((_, i) => ({ preferredTerm: `pref ${i}` }))

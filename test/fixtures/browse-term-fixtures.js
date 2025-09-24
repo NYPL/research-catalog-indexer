@@ -11,6 +11,20 @@ module.exports = {
   ],
   mgetResponses:
   {
+    b11655934x: {
+      _index: 'resources-2024-10-22',
+      _id: 'b11655934x',
+      _source: {
+        subjectLiteral: ['University of Utah -- Periodicals', 'Education, Higher -- Utah -- Periodicals']
+      }
+    },
+    b10554618x: {
+      _index: 'resources-2024-10-22',
+      _id: 'b10554618x',
+      _source: {
+        subjectLiteral: ['Milestones -- England -- Devon', 'Devon (England) -- Description and travel']
+      }
+    },
     parallelsChaos: {
       _index: 'resources-2024-10-22',
       _id: 'parallelsChaos',
