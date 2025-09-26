@@ -401,6 +401,20 @@ describe('EsBib', function () {
       const esBib = new EsBib(record)
       expect(esBib.dates()).to.deep.equal([])
     })
+    it('rejects impossible dates', () => {
+      const record = new SierraBib(require('../fixtures/bib-10554371.json'))
+      record.varFields = record.varFields.filter(field => field.marcTag !== '008')
+      record.varFields.push({
+        fieldTag: 'y',
+        marcTag: '008',
+        ind1: ' ',
+        ind2: ' ',
+        content: '790530e01021998pl uu m||     0    |pol|ncas   ',
+        subfields: null
+      })
+      const esBib = new EsBib(record)
+      expect(esBib.dates()).to.deep.equal([])
+    })
   })
 
   describe('dimensions', () => {
