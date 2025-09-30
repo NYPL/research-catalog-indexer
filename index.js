@@ -47,6 +47,14 @@ const processRecords = async (type, records, options = {}) => {
 
   const messages = []
 
+  // Fetch subjects from all bibs, whether they are updates, creates, or deletes,
+  // and transmit to the browse pipeline. This must happen before writes to the
+  // resources index to determine any diff between new and old subjects
+  const changedRecords = [...filteredBibs, ...removedBibs]
+  if ((changedRecords.length) && type === 'Bib') {
+    await browse.emitBibSubjectEvents(changedRecords)
+  }
+
   if (recordsToIndex.length) {
     if (options.dryrun) {
       logger.info(`DRYRUN: Skipping writing ${recordsToIndex.length} records`)
@@ -61,13 +69,6 @@ const processRecords = async (type, records, options = {}) => {
     // Log out a summary of records updated:
     const summary = truncate(recordsToIndex.map((record) => record.uri).join(','), 100)
     messages.push(`Wrote ${recordsToIndex.length} doc(s): ${summary}`)
-  }
-
-  // Fetch subjects from all bibs, whether they are updates, creates, or deletes,
-  // and transmit to the browse pipeline.
-  const changedRecords = [...filteredBibs, ...removedBibs]
-  if ((changedRecords.length) && type === 'Bib') {
-    await browse.emitBibSubjectEvents(changedRecords)
   }
 
   if (recordsToDelete.length) {
