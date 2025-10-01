@@ -51,8 +51,9 @@ const processRecords = async (type, records, options = {}) => {
   // and transmit to the browse pipeline. This must happen before writes to the
   // resources index to determine any diff between new and old subjects
   const changedRecords = [...filteredBibs, ...removedBibs]
+  let browseTermDiffs
   if ((changedRecords.length) && type === 'Bib') {
-    await browse.emitBibSubjectEvents(changedRecords)
+    browseTermDiffs = await browse.buildBibSubjectEvents(changedRecords)
   }
 
   if (recordsToIndex.length) {
@@ -80,7 +81,7 @@ const processRecords = async (type, records, options = {}) => {
 
     messages.push(`Deleted ${recordsToDelete.length} doc(s)`)
   }
-
+  await browse.emitBibSubjectEvents(browseTermDiffs)
   const message = messages.length ? messages.join('; ') : 'Nothing to do.'
 
   logger.info((options.dryrun ? 'DRYRUN: ' : '') + message)
