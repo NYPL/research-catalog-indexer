@@ -1693,4 +1693,36 @@ describe('EsBib', function () {
       expect(await (esBib.buildingLocationIds())).to.deep.equal(['rc'])
     })
   })
+
+  describe('series', () => {
+    it('extracts series statement', async () => {
+      const bib = new SierraBib({
+        varFields: [
+          {
+            marcTag: '490',
+            subfields: [
+              { tag: 'a', content: 'subfield a content' },
+              { tag: 'b', content: 'subfield b content' }
+            ]
+          },
+          {
+            marcTag: '810',
+            subfields: [
+              { tag: 'a', content: 'subfield a content' },
+              { tag: 'z', content: 'subfield z content' },
+              { tag: '6', content: 'subfield z content' }
+            ]
+          }
+        ]
+      })
+      const esBib = new EsBib(bib)
+
+      expect(await (esBib.series())).to.deep.equal([
+        // Only expect subfield a for 490:
+        'subfield a content',
+        // Expect all subfields (except 6) for 810:
+        'subfield a content subfield z content'
+      ])
+    })
+  })
 })

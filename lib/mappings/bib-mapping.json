@@ -161,9 +161,27 @@
         "marc": "791",
         "excludedSubfields": [
           "0",
+          "1",
+          "6"
+        ]
+      },
+      {
+        "marc": "790",
+        "excludedSubfields": [
+          "0",
+          "1",
+          "6"
+        ]
+      },
+      {
+        "marc": "796",
+        "excludedSubfields": [
+          "0",
+          "1",
           "6"
         ]
       }
+
     ]
   },
   "contributorLiteralByRole": {
@@ -918,6 +936,13 @@
         "subfields": [
           "a"
         ]
+      },
+      {
+        "marc": "752",
+        "subfields": [
+          "a",
+          "b"
+        ]
       }
     ]
   },
@@ -961,6 +986,34 @@
     "paths": [
       {
         "marc": "fixedFields.label = \"Material type\""
+      }
+    ]
+  },
+  "series": {
+    "paths": [
+      {
+        "marc": "440",
+        "subfields": [
+          "a"
+        ]
+      },
+      {
+        "marc": "490",
+        "subfields": [
+          "a"
+        ]
+      },
+      {
+        "marc": "800",
+        "excludedSubfields": [
+          "6"
+        ]
+      },
+      {
+        "marc": "810",
+        "excludedSubfields": [
+          "6"
+        ]
       }
     ]
   },
