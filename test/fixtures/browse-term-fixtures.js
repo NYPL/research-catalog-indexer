@@ -5,12 +5,42 @@ module.exports = {
   ],
   toIndex: [
     require('./bib-parallels-chaos.json'),
+    // not in mget response
     require('./bib-11655934.json'),
     require('./bib-14576049.json'),
+    // not in mget response
     require('./bib-10554618.json')
   ],
   mgetResponses:
   {
+    b11655934someDiff: {
+      _index: 'resources-2024-10-22',
+      _id: 'b11655934someDiff',
+      _source: {
+        subjectLiteral: ['University of Utah -- Perixxxdicals', 'Education, Higher -- Utah -- Periodicals']
+      }
+    },
+    b10554618someDiff: {
+      _index: 'resources-2024-10-22',
+      _id: 'b10554618someDiff',
+      _source: {
+        subjectLiteral: ['Milestones -- England -- Devon']
+      }
+    },
+    b11655934sameAsFresh: {
+      _index: 'resources-2024-10-22',
+      _id: 'b11655934sameAsFresh',
+      _source: {
+        subjectLiteral: ['University of Utah -- Periodicals', 'Education, Higher -- Utah -- Periodicals']
+      }
+    },
+    b10554618sameAsFresh: {
+      _index: 'resources-2024-10-22',
+      _id: 'b10554618sameAsFresh',
+      _source: {
+        subjectLiteral: ['Milestones -- England -- Devon', 'Devon (England) -- Description and travel']
+      }
+    },
     parallelsChaos: {
       _index: 'resources-2024-10-22',
       _id: 'parallelsChaos',

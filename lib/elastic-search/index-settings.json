@@ -1,0 +1,123 @@
+{
+  "number_of_shards": "2",
+  "max_inner_result_window": 3500,
+  "analysis": {
+    "filter": {
+      "icu_folding_filter": {
+        "type": "icu_folding"
+      },
+      "shingles_filter": {
+        "max_shingle_size": "3",
+        "min_shingle_size": "2",
+        "output_unigrams": "false",
+        "type": "shingle"
+      },
+      "en_stop_filter": {
+        "type": "stop",
+        "stopwords": "_english_"
+      },
+      "unique_stem": {
+        "type": "unique",
+        "only_on_same_position": "true"
+      },
+      "en_stem_filter": {
+        "name": "minimal_english",
+        "type": "stemmer"
+      }
+    },
+    "char_filter": {
+      "extended_punctuation_char_filter": {
+        "type": "mapping",
+        "mappings": [
+          "ʼ => '"
+        ]
+      },
+      "strip_punctuation": {
+        "pattern": "[\\p{Punct}]",
+        "type": "pattern_replace",
+        "replacement": ""
+      },
+      "clean_identifier_filter": {
+        "pattern": "[^0-9xX]",
+        "type": "pattern_replace",
+        "replacement": ""
+      },
+      "strip_shelfmark_punctuation": {
+        "pattern": "[!\"#$%&'(),-./:;<=>?\\[\\]^_`{|}~]",
+        "type": "pattern_replace",
+        "replacement": ""
+      }
+    },
+    "normalizer": {
+      "lowercase_normalizer": {
+        "filter": [
+          "asciifolding",
+          "lowercase"
+        ],
+        "type": "custom"
+      },
+      "punctuation_and_lowercase_normalizer": {
+        "filter": [
+          "asciifolding",
+          "lowercase"
+        ],
+        "type": "custom",
+        "char_filter": [
+          "strip_punctuation"
+        ]
+      },
+      "identifier_normalizer": {
+        "type": "custom",
+        "char_filter": [
+          "clean_identifier_filter"
+        ]
+      },
+      "shelfmark_normalizer": {
+        "filter": [
+          "asciifolding",
+          "lowercase"
+        ],
+        "type": "custom",
+        "char_filter": [
+          "strip_shelfmark_punctuation"
+        ]
+      }
+    },
+    "analyzer": {
+      "shingles_analyzer": {
+        "filter": [
+          "lowercase",
+          "asciifolding",
+          "shingles_filter"
+        ],
+        "type": "custom",
+        "tokenizer": "standard"
+      },
+      "folding_stemming_analyzer": {
+        "filter": [
+          "lowercase",
+          "icu_folding_filter",
+          "en_stop_filter",
+          "keyword_repeat",
+          "en_stem_filter",
+          "unique_stem"
+        ],
+        "char_filter": [
+          "extended_punctuation_char_filter",
+          "strip_punctuation"
+        ],
+        "tokenizer": "icu_tokenizer"
+      },
+      "folding_analyzer": {
+        "filter": [
+          "lowercase",
+          "icu_folding_filter"
+        ],
+        "char_filter": [
+          "extended_punctuation_char_filter"
+        ],
+        "tokenizer": "icu_tokenizer"
+      }
+    }
+  }
+}

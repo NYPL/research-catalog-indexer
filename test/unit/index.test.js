@@ -53,11 +53,12 @@ describe('index handler function', () => {
     modelPrefetchStub.resetHistory()
   })
   describe('processRecords', () => {
-    it('calls deletions after subject processing has happened', async () => {
+    it('calls deletions after subject diff is determined', async () => {
       const suppressBibsStub = stub(suppress, 'suppressBibs')
-      const emitBibSubjectEventsStub = stub(browse, 'emitBibSubjectEvents')
+      stub(browse, 'emitBibSubjectEvents')
+      const buildBibSubjectEventsStub = stub(browse, 'buildBibSubjectEvents')
       await index.processRecords('Bib', [suppressedBib])
-      expect(emitBibSubjectEventsStub.calledBefore(suppressBibsStub)).to.equal(true)
+      expect(buildBibSubjectEventsStub.calledBefore(suppressBibsStub)).to.equal(true)
     })
   })
 
