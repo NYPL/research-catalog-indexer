@@ -9,6 +9,7 @@ Resources:
       Handler: index.handler
       Runtime: nodejs20.x
       Timeout: 300
+      MemorySize: 512
       Environment:
         Variables:
           NYPL_API_BASE_URL: https://qa-platform.nypl.org/api/v0.1/

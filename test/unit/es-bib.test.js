@@ -549,6 +549,12 @@ describe('EsBib', function () {
       )
     })
 
+    it('should include Corporate names in contributorLiteral', () => {
+      const record = new SierraBib(require('../fixtures/bib-11606020.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.contributorLiteral()).to.deep.equal(['Schiff Collection'])
+    })
+
     it('should filter out contributors that are also creators', function () {
       const record = new SierraBib({
         varFields: [
@@ -943,11 +949,21 @@ describe('EsBib', function () {
       expect(esBib.note()).to.equal(null)
     })
   })
+
   describe('placeOfPublication', () => {
     it('should return array with placeOfPublication', function () {
       const record = new SierraBib(require('../fixtures/bib-10001936.json'))
       const esBib = new EsBib(record)
       expect(esBib.placeOfPublication()).to.deep.equal(['Ṛostov (Doni Vra)'])
+    })
+
+    it('should include data from 752', function () {
+      const record = new SierraBib(require('../fixtures/bib-11606020.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.placeOfPublication()).to.deep.equal([
+        'England London',
+        'London'
+      ])
     })
   })
 
@@ -1765,6 +1781,38 @@ describe('EsBib', function () {
       const bib = new SierraBib(require('../fixtures/bib-hl990000453050203941.json'))
       const esBib = new EsBib(bib)
       expect(await (esBib.buildingLocationIds())).to.deep.equal(['rc'])
+    })
+  })
+
+  describe('series', () => {
+    it('extracts series statement', async () => {
+      const bib = new SierraBib({
+        varFields: [
+          {
+            marcTag: '490',
+            subfields: [
+              { tag: 'a', content: 'subfield a content' },
+              { tag: 'b', content: 'subfield b content' }
+            ]
+          },
+          {
+            marcTag: '810',
+            subfields: [
+              { tag: 'a', content: 'subfield a content' },
+              { tag: 'z', content: 'subfield z content' },
+              { tag: '6', content: 'subfield z content' }
+            ]
+          }
+        ]
+      })
+      const esBib = new EsBib(bib)
+
+      expect(await (esBib.series())).to.deep.equal([
+        // Only expect subfield a for 490:
+        'subfield a content',
+        // Expect all subfields (except 6) for 810:
+        'subfield a content subfield z content'
+      ])
     })
   })
 })
