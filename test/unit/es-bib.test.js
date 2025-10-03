@@ -475,6 +475,12 @@ describe('EsBib', function () {
       )
     })
 
+    it('should include Corporate names in contributorLiteral', () => {
+      const record = new SierraBib(require('../fixtures/bib-11606020.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.contributorLiteral()).to.deep.equal(['Schiff Collection'])
+    })
+
     it('should filter out contributors that are also creators', function () {
       const record = new SierraBib({
         varFields: [
@@ -869,11 +875,21 @@ describe('EsBib', function () {
       expect(esBib.note()).to.equal(null)
     })
   })
+
   describe('placeOfPublication', () => {
     it('should return array with placeOfPublication', function () {
       const record = new SierraBib(require('../fixtures/bib-10001936.json'))
       const esBib = new EsBib(record)
       expect(esBib.placeOfPublication()).to.deep.equal(['Ṛostov (Doni Vra)'])
+    })
+
+    it('should include data from 752', function () {
+      const record = new SierraBib(require('../fixtures/bib-11606020.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.placeOfPublication()).to.deep.equal([
+        'England London',
+        'London'
+      ])
     })
   })
 
