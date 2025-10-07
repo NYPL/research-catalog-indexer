@@ -1,11 +1,12 @@
 const expect = require('chai').expect
 const {
-  fetchStaleSubjectLiterals,
+  fetchLiveSubjectLiterals,
   buildBibSubjectEvents,
   buildSubjectDiff,
   getPrimaryAndParallelLabels,
   getSubjectModels,
-  buildBatchedCommands
+  buildBatchedCommands,
+  determineUpdatedTerms
 } = require('../../lib/browse-terms')
 const SierraBib = require('../../lib/sierra-models/bib')
 const {
@@ -36,6 +37,83 @@ describe('bib activity', () => {
   })
   after(() => {
     esClient.client.restore()
+  })
+  describe('determineUpdatedTerms', () => {
+    const devonBib = require('../fixtures/bib-10554618.json')
+    const utahBib = require('../fixtures/bib-11655934.json')
+    it('returns no updated subjects when nothing has changed', async () => {
+      const freshBibs = [
+        devonBib,
+        utahBib].map((bib) => new EsBib(new SierraBib({ ...bib, id: `${bib.id}sameAsFresh` })))
+      const ids = await Promise.all(freshBibs.map(async (bib) => await bib.uri()))
+      const terms = await determineUpdatedTerms('subjectLiteral', ids, freshBibs)
+      expect(terms).to.deep.equal([])
+    })
+    it('returns fresh bib subjects only when there is no live bib data to return', async () => {
+      const freshBibs = [
+        utahBib,
+        devonBib].map((bib) => new EsBib(new SierraBib(bib)))
+      const ids = await Promise.all(freshBibs.map(async (bib) => await bib.uri()))
+      const terms = await determineUpdatedTerms('subjectLiteral', ids, freshBibs)
+      expect(terms).to.deep.equal(
+        [
+          {
+            preferredTerm: 'University of Utah -- Periodicals',
+            sourceId: 'b11655934'
+          },
+          {
+            preferredTerm: 'Education, Higher -- Utah -- Periodicals',
+            sourceId: 'b11655934'
+          },
+          {
+            preferredTerm: 'Milestones -- England -- Devon',
+            sourceId: 'b10554618'
+          },
+          {
+            preferredTerm: 'Devon (England) -- Description and travel',
+            sourceId: 'b10554618'
+          }
+        ]
+      )
+    })
+    it('does not return subjects with the same preferred terms', async () => {
+      const freshBibs = [
+        devonBib, devonBib
+      ].map((bib) => new EsBib(new SierraBib(bib)))
+      const ids = await Promise.all(freshBibs.map(async (bib) => await bib.uri()))
+      const terms = await determineUpdatedTerms('subjectLiteral', ids, freshBibs)
+      expect(terms).to.deep.equal(
+        [
+          {
+            preferredTerm: 'Milestones -- England -- Devon',
+            sourceId: 'b10554618'
+          },
+          {
+            preferredTerm: 'Devon (England) -- Description and travel',
+            sourceId: 'b10554618'
+          }
+        ]
+      )
+    })
+    it('only returns subjects that have been removed or added', async () => {
+      // ie Does not return subjects present on both the live es document and the freshly generated one... ie the DIFF!
+      const freshBibs = [
+        require('../fixtures/bib-11655934.json'),
+        require('../fixtures/bib-10554618.json')].map((bib) => new EsBib(new SierraBib({ ...bib, id: `${bib.id}someDiff` })))
+      const ids = await Promise.all(freshBibs.map(async (bib) => await bib.uri()))
+      const terms = await determineUpdatedTerms('subjectLiteral', ids, freshBibs)
+      expect(terms).to.deep.equal([
+        {
+          preferredTerm: 'University of Utah -- Periodicals',
+          sourceId: 'b11655934someDiff'
+        },
+        { preferredTerm: 'University of Utah -- Perixxxdicals' },
+        {
+          preferredTerm: 'Devon (England) -- Description and travel',
+          sourceId: 'b10554618someDiff'
+        }
+      ])
+    })
   })
   describe('buildBatchedCommands', () => {
     const generateSubjects = (length) => (new Array(length)).fill(null).map((_, i) => ({ preferredTerm: `pref ${i}` }))
@@ -160,30 +238,61 @@ describe('bib activity', () => {
       expect(buildBibSubjectEvents([nonResearchBib])).to.eventually.equal(undefined)
       expect(loggerSpy.calledWith('No records to fetch or build subjects for'))
     })
-    it('can handle a combination of deleted and updated sierra bibs, and filters non research', async () => {
-      const records = [...toIndex, ...toDelete].map((record) => new SierraBib(record))
-      const countEvents = await buildBibSubjectEvents(records)
-      const sortedCountEvents = countEvents.sort((a, b) => {
-        return a.preferredTerm.toLowerCase() > b.preferredTerm.toLowerCase() ? 1 : -1
+    describe('on ingest (all subjects present are passed along)', () => {
+      before(() => {
+        process.env.INGEST_BROWSE_TERMS = true
       })
-      expect(sortedCountEvents.map((event) => event.preferredTerm)).to.deep.eq([
-        'an',
-        'Armenians -- Iran -- History',
-        'Devon (England) -- Description and travel',
-        'Education, Higher -- Utah -- Periodicals',
-        'English drama',
-        'Milestones -- England -- Devon',
-        'old', 'stale', 'subject', 'subject',
-        'subject -- from -- suppressed bib',
-        'University of Utah -- Periodicals'
-      ])
+      after(() => {
+        process.env.INGEST_BROWSE_TERMS = false
+      })
+      it('can handle a combination of deleted and updated sierra bibs, and filters non research, and ignores indexed subject data', async () => {
+        const records = [...toIndex, ...toDelete].map((record) => new SierraBib(record))
+        const countEvents = await buildBibSubjectEvents(records)
+        const sortedCountEvents = countEvents.sort((a, b) => {
+          return a.preferredTerm.toLowerCase() > b.preferredTerm.toLowerCase() ? 1 : -1
+        })
+        expect(sortedCountEvents.map((event) => event.preferredTerm)).to.deep.eq([
+          'Armenians -- Iran -- History',
+          'Devon (England) -- Description and travel',
+          'Education, Higher -- Utah -- Periodicals',
+          'English drama',
+          'Milestones -- England -- Devon',
+          'subject -- from -- suppressed bib',
+          'University of Utah -- Periodicals'
+        ])
+      })
+    })
+    describe('Not on ingest (only diff is passed along)', () => {
+      before(() => {
+        process.env.INGEST_BROWSE_TERMS = false
+      })
+      it('calls determineUpdatedTerms', async () => {
+        const records = [...toIndex, ...toDelete].map((record) => new SierraBib(record))
+        const countEvents = await buildBibSubjectEvents(records)
+        const sortedCountEvents = countEvents.sort((a, b) => {
+          return a.preferredTerm.toLowerCase() > b.preferredTerm.toLowerCase() ? 1 : -1
+        })
+        // This list returns more subjects than the last test, since it includes
+        // subjects from live bibs as well as additional subjects from bib event
+        expect(sortedCountEvents.map((event) => event.preferredTerm)).to.deep.eq([
+          'an',
+          'Armenians -- Iran -- History',
+          'Devon (England) -- Description and travel',
+          'Education, Higher -- Utah -- Periodicals',
+          'English drama',
+          'Milestones -- England -- Devon',
+          'old', 'stale', 'subject',
+          'subject -- from -- suppressed bib',
+          'University of Utah -- Periodicals'
+        ])
+      })
     })
   })
-  describe('fetchStaleSubjects', () => {
+  describe('fetchLiveSubjects', () => {
     it('returns a flattened array of subjects for supplied records', async () => {
       const records = ['b2', 'b3']
-      const staleSubjects = await fetchStaleSubjectLiterals(records)
-      expect(staleSubjects).to.deep.equal([
+      const liveSubjects = await fetchLiveSubjectLiterals(records)
+      expect(liveSubjects).to.deep.equal([
         'spaghetti',
         'meatballs',
         'Literature -- Collections -- Periodicals.',
@@ -195,13 +304,13 @@ describe('bib activity', () => {
       ])
     })
     it('can handle no records', async () => {
-      const noSubjects = await fetchStaleSubjectLiterals(undefined)
+      const noSubjects = await fetchLiveSubjectLiterals(undefined)
       expect(noSubjects).to.deep.equal([])
     })
     it('can handle elastic search returning not found responses', async () => {
       const records = ['b1', 'b2', 'b3', 'b4']
-      const staleSubjects = await fetchStaleSubjectLiterals(records)
-      expect(staleSubjects).to.deep.eq([
+      const liveSubjects = await fetchLiveSubjectLiterals(records)
+      expect(liveSubjects).to.deep.eq([
         'spaghetti',
         'meatballs',
         'Literature -- Collections -- Periodicals.',

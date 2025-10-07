@@ -47,6 +47,15 @@ const processRecords = async (type, records, options = {}) => {
 
   const messages = []
 
+  // Fetch subjects from all bibs, whether they are updates, creates, or deletes,
+  // and transmit to the browse pipeline. This must happen before writes to the
+  // resources index to determine any diff between new and old subjects
+  const changedRecords = [...filteredBibs, ...removedBibs]
+  let browseTermDiffs
+  if ((changedRecords.length) && type === 'Bib') {
+    browseTermDiffs = await browse.buildBibSubjectEvents(changedRecords)
+  }
+
   if (recordsToIndex.length) {
     if (options.dryrun) {
       logger.info(`DRYRUN: Skipping writing ${recordsToIndex.length} records`)
@@ -63,13 +72,6 @@ const processRecords = async (type, records, options = {}) => {
     messages.push(`Wrote ${recordsToIndex.length} doc(s): ${summary}`)
   }
 
-  // Fetch subjects from all bibs, whether they are updates, creates, or deletes,
-  // and transmit to the browse pipeline.
-  const changedRecords = [...filteredBibs, ...removedBibs]
-  if ((changedRecords.length) && type === 'Bib') {
-    await browse.emitBibSubjectEvents(changedRecords)
-  }
-
   if (recordsToDelete.length) {
     if (options.dryrun) {
       console.log(`DRYRUN: Skipping removing ${recordsToDelete.length} records`)
@@ -79,7 +81,7 @@ const processRecords = async (type, records, options = {}) => {
 
     messages.push(`Deleted ${recordsToDelete.length} doc(s)`)
   }
-
+  await browse.emitBibSubjectEvents(browseTermDiffs)
   const message = messages.length ? messages.join('; ') : 'Nothing to do.'
 
   logger.info((options.dryrun ? 'DRYRUN: ' : '') + message)
