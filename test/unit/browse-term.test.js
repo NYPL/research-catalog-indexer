@@ -238,26 +238,24 @@ describe('bib activity', () => {
       expect(buildBibSubjectEvents([nonResearchBib])).to.eventually.equal(undefined)
       expect(loggerSpy.calledWith('No records to fetch or build subjects for'))
     })
-    describe('on ingest (all subjects present are passed along)', () => {
+    describe('on ingest (all subjects from non suppressed or deleted bibs present are passed along)', () => {
       before(() => {
         process.env.INGEST_BROWSE_TERMS = true
       })
       after(() => {
         process.env.INGEST_BROWSE_TERMS = false
       })
-      it('can handle a combination of deleted and updated sierra bibs, and filters non research, and ignores indexed subject data', async () => {
+      it('can handle a combination of deleted and updated sierra bibs, and filters non research and suppressed, and ignores indexed subject data', async () => {
         const records = [...toIndex, ...toDelete].map((record) => new SierraBib(record))
         const countEvents = await buildBibSubjectEvents(records)
         const sortedCountEvents = countEvents.sort((a, b) => {
           return a.preferredTerm.toLowerCase() > b.preferredTerm.toLowerCase() ? 1 : -1
         })
         expect(sortedCountEvents.map((event) => event.preferredTerm)).to.deep.eq([
-          'Armenians -- Iran -- History',
           'Devon (England) -- Description and travel',
           'Education, Higher -- Utah -- Periodicals',
           'English drama',
           'Milestones -- England -- Devon',
-          'subject -- from -- suppressed bib',
           'University of Utah -- Periodicals'
         ])
       })
