@@ -16,7 +16,7 @@ describe('EsItem', function () {
       const record = new SierraItem(require('../fixtures/item-17145801.json'))
       const esItem = new EsItem(record, { formatId: () => 'r' })
       expect(esItem.formatLiteral()).to.deep.equal([
-        '3-D Object'
+        '3-D object'
       ])
     })
   })
