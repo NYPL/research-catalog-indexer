@@ -8,6 +8,8 @@ const { notifyDocumentProcessed } = require('./lib/streams-client')
 const browse = require('./lib/browse-terms')
 const { filteredSierraBibsForBibs } = require('./lib/prefilter')
 const { loadNyplCoreData } = require('./lib/load-core-data')
+const SierraBib = require('./lib/sierra-models/bib')
+const EsBib = require('./lib/es-models/bib')
 
 /**
  * Main lambda handler receiving Bib, Item, and Holding events
@@ -43,7 +45,7 @@ const processRecords = async (type, records, options = {}) => {
   // If original event was a Bib event, delete the "removed" records:
   const recordsToDelete = type === 'Bib' ? removedBibs : []
 
-  const recordsToIndex = await buildEsDocument(filteredBibs)
+  const { recordsToIndex, esModels: esModelsForFreshData } = await buildEsDocument(filteredBibs)
 
   const messages = []
 
@@ -53,7 +55,8 @@ const processRecords = async (type, records, options = {}) => {
   const changedRecords = [...filteredBibs, ...removedBibs]
   let browseTermDiffs
   if ((changedRecords.length) && type === 'Bib') {
-    browseTermDiffs = await browse.buildBibSubjectEvents(changedRecords)
+    removedBibs.map(bib => new EsBib(new SierraBib(bib)))
+    browseTermDiffs = await browse.buildBibSubjectEvents([...esModelsForFreshData])
   }
 
   if (recordsToIndex.length) {
