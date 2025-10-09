@@ -27,7 +27,7 @@ describe('aeon-urls', () => {
     })
     const esItem = new EsItem(sierraItem)
 
-    const url = await aeonUrlForItem(esItem)
+    const url = aeonUrlForItem(esItem)
     expect(url).to.eq(null)
   })
 
@@ -35,7 +35,7 @@ describe('aeon-urls', () => {
     const record = new SierraItem(require('../fixtures/item-37528709.json'))
     const esItem = new EsItem(record)
 
-    const url = await aeonUrlForItem(esItem)
+    const url = aeonUrlForItem(esItem)
     // Note no esBib is associated, so fields are unnaturally light:
     expect(url).to.eq('https://specialcollections.nypl.org/aeon/Aeon.dll?Action=10&CallNumber=Sc+Visual+DVD-362&Form=30&Genre=moving+image&ItemInfo1=Use+in+library&ItemISxN=i375287097&ItemNumber=33433124443791&ItemVolume=Disc+2&Location=Schomburg+Moving+Image+and+Recorded+Sound&Site=SCHMIRS')
   })
@@ -46,7 +46,7 @@ describe('aeon-urls', () => {
     sierraItem._bibs = [sierraBib]
     const esItem = new EsItem(sierraItem, new EsBib(sierraBib))
 
-    const url = await aeonUrlForItem(esItem)
+    const url = aeonUrlForItem(esItem)
     const [baseUrl, queryString] = url.split('?')
 
     expect(baseUrl).to.equal('https://specialcollections.nypl.org/aeon/Aeon.dll')
