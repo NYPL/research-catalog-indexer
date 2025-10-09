@@ -45,7 +45,7 @@ describe('bib activity', () => {
       const freshBibs = [
         devonBib,
         utahBib].map((bib) => new EsBib(new SierraBib({ ...bib, id: `${bib.id}sameAsFresh` })))
-      const ids = await Promise.all(freshBibs.map(async (bib) => await bib.uri()))
+      const ids = freshBibs.map((bib) => bib.uri())
       const terms = await determineUpdatedTerms('subjectLiteral', ids, freshBibs)
       expect(terms).to.deep.equal([])
     })
@@ -53,7 +53,7 @@ describe('bib activity', () => {
       const freshBibs = [
         utahBib,
         devonBib].map((bib) => new EsBib(new SierraBib(bib)))
-      const ids = await Promise.all(freshBibs.map(async (bib) => await bib.uri()))
+      const ids = freshBibs.map((bib) => bib.uri())
       const terms = await determineUpdatedTerms('subjectLiteral', ids, freshBibs)
       expect(terms).to.deep.equal(
         [
@@ -80,7 +80,7 @@ describe('bib activity', () => {
       const freshBibs = [
         devonBib, devonBib
       ].map((bib) => new EsBib(new SierraBib(bib)))
-      const ids = await Promise.all(freshBibs.map(async (bib) => await bib.uri()))
+      const ids = freshBibs.map((bib) => bib.uri())
       const terms = await determineUpdatedTerms('subjectLiteral', ids, freshBibs)
       expect(terms).to.deep.equal(
         [
@@ -100,7 +100,7 @@ describe('bib activity', () => {
       const freshBibs = [
         require('../fixtures/bib-11655934.json'),
         require('../fixtures/bib-10554618.json')].map((bib) => new EsBib(new SierraBib({ ...bib, id: `${bib.id}someDiff` })))
-      const ids = await Promise.all(freshBibs.map(async (bib) => await bib.uri()))
+      const ids = freshBibs.map((bib) => bib.uri())
       const terms = await determineUpdatedTerms('subjectLiteral', ids, freshBibs)
       expect(terms).to.deep.equal([
         {
