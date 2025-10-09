@@ -10,6 +10,7 @@ const { filteredSierraBibsForBibs } = require('./lib/prefilter')
 const { loadNyplCoreData } = require('./lib/load-core-data')
 const SierraBib = require('./lib/sierra-models/bib')
 const EsBib = require('./lib/es-models/bib')
+const { Timer } = require('./timers')
 
 /**
  * Main lambda handler receiving Bib, Item, and Holding events
@@ -45,8 +46,11 @@ const processRecords = async (type, records, options = {}) => {
   // If original event was a Bib event, delete the "removed" records:
   const recordsToDelete = type === 'Bib' ? removedBibs : []
 
+  const esDocTimer = new Timer('esDocBuilder')
+  esDocTimer.startTimer()
   const { recordsToIndex, esModels: esModelsForFreshData } = await buildEsDocument(filteredBibs)
-
+  esDocTimer.endTimer()
+  esDocTimer.howMany('seconds')
   const messages = []
 
   // Fetch subjects from all bibs, whether they are updates, creates, or deletes,
@@ -55,8 +59,12 @@ const processRecords = async (type, records, options = {}) => {
   const changedRecords = [...filteredBibs, ...removedBibs]
   let browseTermDiffs
   if ((changedRecords.length) && type === 'Bib') {
+    const bibSubjectTimer = new Timer('buildBibSubjectEvents')
+    bibSubjectTimer.startTimer()
     removedBibs.map(bib => new EsBib(new SierraBib(bib)))
     browseTermDiffs = await browse.buildBibSubjectEvents([...esModelsForFreshData])
+    bibSubjectTimer.endTimer()
+    bibSubjectTimer.howMany('seconds')
   }
 
   if (recordsToIndex.length) {
@@ -84,7 +92,7 @@ const processRecords = async (type, records, options = {}) => {
 
     messages.push(`Deleted ${recordsToDelete.length} doc(s)`)
   }
-  await browse.emitBibSubjectEvents(browseTermDiffs)
+  if (!options.dryrun) await browse.emitBibSubjectEvents(browseTermDiffs)
   const message = messages.length ? messages.join('; ') : 'Nothing to do.'
 
   logger.info((options.dryrun ? 'DRYRUN: ' : '') + message)
