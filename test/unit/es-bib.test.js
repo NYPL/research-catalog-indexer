@@ -72,6 +72,41 @@ describe('EsBib', function () {
     })
   })
 
+  describe('collectionIds', function () {
+    it('returns collection id(s) that correspond to item holding locations', async () => {
+      const bib = new SierraBib(require('../fixtures/bib-11606020.json'))
+      bib._items = []
+      // An item from Maps
+      bib._items.push(new SierraItem(require('../fixtures/item-14441624.json')))
+      expect(await (new EsBib(bib)).collectionIds()).to.deep.equal(['map'])
+
+      // Another item from Maps
+      bib._items.push(new SierraItem(require('../fixtures/item-19885371.json')))
+      expect(await (new EsBib(bib)).collectionIds()).to.deep.equal(['map'])
+
+      // An item from Moving Image and Sound Division
+      bib._items.push(new SierraItem(require('../fixtures/item-37528709.json')))
+      expect(await (new EsBib(bib)).collectionIds()).to.deep.equal(['scb', 'map'])
+    })
+    it('checks fixed field 26 for location on bibs with no items', async () => {
+      const resBib = new SierraBib(require('../fixtures/bib-15109087.json'))
+      resBib._items = []
+      // fixed field 26 on this bib has value: "mal "
+      expect(await (new EsBib(resBib)).collectionIds()).to.deep.equal(['mal'])
+
+      const scbBib = new SierraBib(require('../fixtures/bib-22027953.json'))
+      scbBib._items = []
+      // fixed field 26 on this bib has value: "scb "
+      expect(await (new EsBib(scbBib)).collectionIds()).to.deep.equal(['scb'])
+    })
+    it('returns an empty array for partner records', async () => {
+      const bib = new SierraBib(require('../fixtures/bib-pul-99122517373506421.json'))
+      bib._items = []
+      bib._items.push(new SierraItem(require('../fixtures/item-pul-7834127.json')))
+      expect(await (new EsBib(bib)).collectionIds()).to.deep.equal([])
+    })
+  })
+
   describe('creatorLiteral', function () {
     it('should return the creator literal', function () {
       const record = new SierraBib(require('../fixtures/bib-10001936.json'))
