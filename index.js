@@ -46,7 +46,6 @@ const processRecords = async (type, records, options = {}) => {
   // If original event was a Bib event, delete the "removed" records:
   const recordsToDelete = type === 'Bib' ? removedBibs : []
 
-
   const esDocTimer = new Timer('esDocBuilder')
   esDocTimer.startTimer()
   const recordsToIndex = await buildEsDocument(filteredBibs)
