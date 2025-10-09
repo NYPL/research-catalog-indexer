@@ -83,7 +83,7 @@ const argv = require('minimist')(process.argv.slice(2), {
   integer: ['limit', 'offset', 'batchSize']
 })
 
-const isCalledViaCommandLine = /scripts\/spaghetti(.js)?/.test(fs.realpathSync(process.argv[1]))
+const isCalledViaCommandLine = /scripts\/benchmarking-bulk-index(.js)?/.test(fs.realpathSync(process.argv[1]))
 
 const dotenv = require('dotenv')
 
