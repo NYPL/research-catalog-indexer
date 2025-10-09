@@ -120,7 +120,7 @@ describe('EsCheckinCardItem', function () {
       // Because the holding record doesn't have a 843, we expect checkin card
       // items to derive formatLiteral from the esBib.materialType:
       expect(items[0].formatLiteral()).to.deep.equal([
-        'Book/Text'
+        'Book/text'
       ])
     })
   })
