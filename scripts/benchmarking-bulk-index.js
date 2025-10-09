@@ -487,7 +487,7 @@ const updateByBibOrItemServiceQuery = async (options) => {
   while (!done && (count < options.limit || !options.limit)) {
     await instrument('Bulk-index batch', async () => {
       // Pull next batch of records from the cursor:
-      const timer = new Timer(`Bib service fetch no. ${Math.ceil(count / options.batchSize)}`)
+      const timer = new Timer(`${Math.ceil(count / options.batchSize) + 1}th Bib service fetch`)
       timer.startTimer()
       const rows = await cursor.read(options.batchSize)
       timer.endTimer()

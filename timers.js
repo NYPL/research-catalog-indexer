@@ -53,6 +53,7 @@ class Timer {
   howMany (unit, time, name) {
     if (!time) time = this.howManyRaw()
     if (!name) name = this.name
+    if (!unit) unit = 'seconds'
     const unitDivisor = {
       ms: 1,
       seconds: 1000,
