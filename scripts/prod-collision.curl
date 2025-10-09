@@ -2,3 +2,234 @@ curl --location "XX/_update_by_query?wait_for_completion=false&refresh=true&conf
 --header "Authorization: apiKey XX" \
 --header "Content-Type: application/json" \
 --data "{\"script\":{\"inline\":\"def collectionLabels = new HashMap(); collectionLabels.put('bur51','bur'); collectionLabels.put('mab01','mab'); collectionLabels.put('mab0v','mab'); collectionLabels.put('mab82','mab'); collectionLabels.put('mab88','mab'); collectionLabels.put('mab89','mab'); collectionLabels.put('mab92','mab'); collectionLabels.put('mab98','mab'); collectionLabels.put('mab99','mab'); collectionLabels.put('mabb1','mab'); collectionLabels.put('mabb2','mab'); collectionLabels.put('mabb3','mab'); collectionLabels.put('mabm2','mab'); collectionLabels.put('rcmb2','mab'); collectionLabels.put('rcmb8','mab'); collectionLabels.put('rcmb9','mab'); collectionLabels.put('mac82','mac'); collectionLabels.put('macc2','mac'); collectionLabels.put('mae82','mae'); collectionLabels.put('mae92','mae'); collectionLabels.put('maee2','mae'); collectionLabels.put('maf32','maf'); collectionLabels.put('maf82','maf'); collectionLabels.put('maf88','maf'); collectionLabels.put('maf92','maf'); collectionLabels.put('maf98','maf'); collectionLabels.put('maf99','maf'); collectionLabels.put('maff1','maf'); collectionLabels.put('maff3','maf'); collectionLabels.put('rcmf2','maf'); collectionLabels.put('rcmf8','maf'); collectionLabels.put('rcmf9','maf'); collectionLabels.put('mag82','mag'); collectionLabels.put('mag92','mag'); collectionLabels.put('mag98','mag'); collectionLabels.put('magg1','mag'); collectionLabels.put('magg2','mag'); collectionLabels.put('rcmg2','mag'); collectionLabels.put('rcmg8','mag'); collectionLabels.put('rcmg9','mag'); collectionLabels.put('magg3','mag'); collectionLabels.put('mak32','mak'); collectionLabels.put('mak82','mak'); collectionLabels.put('makk3','mak'); collectionLabels.put('mai32','mal'); collectionLabels.put('mai82','mal'); collectionLabels.put('mai92','mal'); collectionLabels.put('mal17','mal'); collectionLabels.put('mal23','mal'); collectionLabels.put('mal42','mal'); collectionLabels.put('mal72','mal'); collectionLabels.put('mal82','mal'); collectionLabels.put('mal92','mal'); collectionLabels.put('mala','mal'); collectionLabels.put('mala1','mal'); collectionLabels.put('malc','mal'); collectionLabels.put('mall1','mal'); collectionLabels.put('malm2','mal'); collectionLabels.put('maln','mal'); collectionLabels.put('maln1','mal'); collectionLabels.put('malv2','mal'); collectionLabels.put('malw','mal'); collectionLabels.put('malw1','mal'); collectionLabels.put('rc2ma','mal'); collectionLabels.put('rc2mj','mal'); collectionLabels.put('rcma2','mal'); collectionLabels.put('rcmi2','mal'); collectionLabels.put('rcmj2','mal'); collectionLabels.put('rcml2','mal'); collectionLabels.put('rcml8','mal'); collectionLabels.put('mao82','mao'); collectionLabels.put('mao92','mao'); collectionLabels.put('maor2','mao'); collectionLabels.put('rcmo2','mao'); collectionLabels.put('map08','map'); collectionLabels.put('map32','map'); collectionLabels.put('map42','map'); collectionLabels.put('map82','map'); collectionLabels.put('map92','map'); collectionLabels.put('map98','map'); collectionLabels.put('map99','map'); collectionLabels.put('mapp1','map'); collectionLabels.put('mapp2','map'); collectionLabels.put('mapp3','map'); collectionLabels.put('mapp8','map'); collectionLabels.put('mapp9','map'); collectionLabels.put('rcmp2','map'); collectionLabels.put('rcmp8','map'); collectionLabels.put('rcmp9','map'); collectionLabels.put('maqq2','maq'); collectionLabels.put('rcmq2','maq'); collectionLabels.put('mar82','mar'); collectionLabels.put('mar92','mar'); collectionLabels.put('mard2','mar'); collectionLabels.put('marr2','mar'); collectionLabels.put('rcmr2','mar'); collectionLabels.put('mas82','mas'); collectionLabels.put('mas92','mas'); collectionLabels.put('masb2','mas'); collectionLabels.put('mass2','mas'); collectionLabels.put('masu2','mas'); collectionLabels.put('rcms2','mas'); collectionLabels.put('mauu1','mau'); collectionLabels.put('mauu2','mau'); collectionLabels.put('pad11','pad'); collectionLabels.put('pad22','pad'); collectionLabels.put('pad28','pad'); collectionLabels.put('pad32','pad'); collectionLabels.put('pad38','pad'); collectionLabels.put('pad42','pad'); collectionLabels.put('rcpd2','pad'); collectionLabels.put('rcpd8','pad'); collectionLabels.put('rcpd9','pad'); collectionLabels.put('paf28','paf'); collectionLabels.put('paf29','paf'); collectionLabels.put('rcpf2','paf'); collectionLabels.put('rcpf8','paf'); collectionLabels.put('rcpf9','paf'); collectionLabels.put('pah11','pah'); collectionLabels.put('pah22','pah'); collectionLabels.put('pah32','pah'); collectionLabels.put('pah38','pah'); collectionLabels.put('pah42','pah'); collectionLabels.put('rcph2','pah'); collectionLabels.put('rcph8','pah'); collectionLabels.put('rcph9','pah'); collectionLabels.put('pam11','pam'); collectionLabels.put('pam22','pam'); collectionLabels.put('pam32','pam'); collectionLabels.put('pam38','pam'); collectionLabels.put('pam42','pam'); collectionLabels.put('pam48','pam'); collectionLabels.put('rcpm2','pam'); collectionLabels.put('rcpm8','pam'); collectionLabels.put('rcpm9','pam'); collectionLabels.put('pat11','pat'); collectionLabels.put('pat22','pat'); collectionLabels.put('pat28','pat'); collectionLabels.put('pat32','pat'); collectionLabels.put('pat38','pat'); collectionLabels.put('pat42','pat'); collectionLabels.put('pat48','pat'); collectionLabels.put('rcpt2','pat'); collectionLabels.put('rcpt8','pat'); collectionLabels.put('rcpt9','pat'); collectionLabels.put('pav22','pav'); collectionLabels.put('pav28','pav'); collectionLabels.put('pav32','pav'); collectionLabels.put('pav38','pav'); collectionLabels.put('rcpr2','pav'); collectionLabels.put('rcpr8','pav'); collectionLabels.put('rcpr9','pav'); collectionLabels.put('scbb2','scb'); collectionLabels.put('rccb2','scb'); collectionLabels.put('rccb8','scb'); collectionLabels.put('rccb9','scb'); collectionLabels.put('sccc2','scc'); collectionLabels.put('sccc3','scc'); collectionLabels.put('rcca9','scc'); collectionLabels.put('scdd1','scd'); collectionLabels.put('scdd2','scd'); collectionLabels.put('rccd2','scd'); collectionLabels.put('rccd8','scd'); collectionLabels.put('rccd9','scd'); collectionLabels.put('scedd','sce'); collectionLabels.put('scee2','sce'); collectionLabels.put('rcce2','sce'); collectionLabels.put('rcce8','sce'); collectionLabels.put('rcce9','sce'); collectionLabels.put('scff1','scf'); collectionLabels.put('scff2','scf'); collectionLabels.put('scff3','scf'); collectionLabels.put('rc2cf','scf'); collectionLabels.put('rc2cm','scf'); collectionLabels.put('rccf2','scf'); collectionLabels.put('rccf8','scf'); collectionLabels.put('rccf9','scf'); def collectionIds = new HashSet(); for (int i = 0; i < ctx._source.items.size(); i++) { def item = ctx._source.items[i]; if ((item.type instanceof List) && item.type.size() == 1 && item.type[0] == 'bf:Item') { if (item.holdingLocation != null && item.holdingLocation.size() > 0) { def locId = item.holdingLocation[0].id; if (locId.startsWith(\\\"loc:\\\")) { locId = locId.substring(4); } def collectionId = collectionLabels.get(locId); if (collectionId != null) { collectionIds.add(collectionId); } } } } ctx._source.collectionIds = new ArrayList(collectionIds);\",\"lang\":\"painless\"},\"query\":{\"term\":{\"nyplSource\":\"sierra-nypl\"}}}"
+
+
+// The script ^^
+def collectionLabels = new HashMap();
+collectionLabels['bur51'] = 'bur';
+
+collectionLabels['mab01'] = 'mab';
+collectionLabels['mab0v'] = 'mab';
+collectionLabels['mab82'] = 'mab';
+collectionLabels['mab88'] = 'mab';
+collectionLabels['mab89'] = 'mab';
+collectionLabels['mab92'] = 'mab';
+collectionLabels['mab98'] = 'mab';
+collectionLabels['mab99'] = 'mab';
+collectionLabels['mabb1'] = 'mab';
+collectionLabels['mabb2'] = 'mab';
+collectionLabels['mabb3'] = 'mab';
+collectionLabels['mabm2'] = 'mab';
+collectionLabels['rcmb2'] = 'mab';
+collectionLabels['rcmb8'] = 'mab';
+collectionLabels['rcmb9'] = 'mab';
+
+collectionLabels['mac82'] = 'mac';
+collectionLabels['macc2'] = 'mac';
+
+collectionLabels['mae82'] = 'mae';
+collectionLabels['mae92'] = 'mae';
+collectionLabels['maee2'] = 'mae';
+
+collectionLabels['maf32'] = 'maf';
+collectionLabels['maf82'] = 'maf';
+collectionLabels['maf88'] = 'maf';
+collectionLabels['maf92'] = 'maf';
+collectionLabels['maf98'] = 'maf';
+collectionLabels['maf99'] = 'maf';
+collectionLabels['maff1'] = 'maf';
+collectionLabels['maff3'] = 'maf';
+collectionLabels['rcmf2'] = 'maf';
+collectionLabels['rcmf8'] = 'maf';
+collectionLabels['rcmf9'] = 'maf';
+
+collectionLabels['mag82'] = 'mag';
+collectionLabels['mag92'] = 'mag';
+collectionLabels['mag98'] = 'mag';
+collectionLabels['magg1'] = 'mag';
+collectionLabels['magg2'] = 'mag';
+collectionLabels['rcmg2'] = 'mag';
+collectionLabels['rcmg8'] = 'mag';
+collectionLabels['rcmg9'] = 'mag';
+collectionLabels['magg3'] = 'mag';
+
+collectionLabels['mak32'] = 'mak';
+collectionLabels['mak82'] = 'mak';
+collectionLabels['makk3'] = 'mak';
+
+collectionLabels['mai32'] = 'mal';
+collectionLabels['mai82'] = 'mal';
+collectionLabels['mai92'] = 'mal';
+collectionLabels['mal17'] = 'mal';
+collectionLabels['mal23'] = 'mal';
+collectionLabels['mal42'] = 'mal';
+collectionLabels['mal72'] = 'mal';
+collectionLabels['mal82'] = 'mal';
+collectionLabels['mal92'] = 'mal';
+collectionLabels['mala'] = 'mal';
+collectionLabels['mala1'] = 'mal';
+collectionLabels['malc'] = 'mal';
+collectionLabels['mall1'] = 'mal';
+collectionLabels['malm2'] = 'mal';
+collectionLabels['maln'] = 'mal';
+collectionLabels['maln1'] = 'mal';
+collectionLabels['malv2'] = 'mal';
+collectionLabels['malw'] = 'mal';
+collectionLabels['malw1'] = 'mal';
+collectionLabels['rc2ma'] = 'mal';
+collectionLabels['rc2mj'] = 'mal';
+collectionLabels['rcma2'] = 'mal';
+collectionLabels['rcmi2'] = 'mal';
+collectionLabels['rcmj2'] = 'mal';
+collectionLabels['rcml2'] = 'mal';
+collectionLabels['rcml8'] = 'mal';
+
+collectionLabels['mao82'] = 'mao';
+collectionLabels['mao92'] = 'mao';
+collectionLabels['maor2'] = 'mao';
+collectionLabels['rcmo2'] = 'mao';
+
+collectionLabels['map08'] = 'map';
+collectionLabels['map32'] = 'map';
+collectionLabels['map42'] = 'map';
+collectionLabels['map82'] = 'map';
+collectionLabels['map92'] = 'map';
+collectionLabels['map98'] = 'map';
+collectionLabels['map99'] = 'map';
+collectionLabels['mapp1'] = 'map';
+collectionLabels['mapp2'] = 'map';
+collectionLabels['mapp3'] = 'map';
+collectionLabels['mapp8'] = 'map';
+collectionLabels['mapp9'] = 'map';
+collectionLabels['rcmp2'] = 'map';
+collectionLabels['rcmp8'] = 'map';
+collectionLabels['rcmp9'] = 'map';
+
+collectionLabels['maqq2'] = 'maq';
+collectionLabels['rcmq2'] = 'maq';
+
+collectionLabels['mar82'] = 'mar';
+collectionLabels['mar92'] = 'mar';
+collectionLabels['mard2'] = 'mar';
+collectionLabels['marr2'] = 'mar';
+collectionLabels['rcmr2'] = 'mar';
+
+collectionLabels['mas82'] = 'mas';
+collectionLabels['mas92'] = 'mas';
+collectionLabels['masb2'] = 'mas';
+collectionLabels['mass2'] = 'mas';
+collectionLabels['masu2'] = 'mas';
+collectionLabels['rcms2'] = 'mas';
+
+collectionLabels['mauu1'] = 'mau';
+collectionLabels['mauu2'] = 'mau';
+
+collectionLabels['pad11'] = 'pad';
+collectionLabels['pad22'] = 'pad';
+collectionLabels['pad28'] = 'pad';
+collectionLabels['pad32'] = 'pad';
+collectionLabels['pad38'] = 'pad';
+collectionLabels['pad42'] = 'pad';
+collectionLabels['rcpd2'] = 'pad';
+collectionLabels['rcpd8'] = 'pad';
+collectionLabels['rcpd9'] = 'pad';
+
+collectionLabels['paf28'] = 'paf';
+collectionLabels['paf29'] = 'paf';
+collectionLabels['rcpf2'] = 'paf';
+collectionLabels['rcpf8'] = 'paf';
+collectionLabels['rcpf9'] = 'paf';
+
+collectionLabels['pah11'] = 'pah';
+collectionLabels['pah22'] = 'pah';
+collectionLabels['pah32'] = 'pah';
+collectionLabels['pah38'] = 'pah';
+collectionLabels['pah42'] = 'pah';
+collectionLabels['rcph2'] = 'pah';
+collectionLabels['rcph8'] = 'pah';
+collectionLabels['rcph9'] = 'pah';
+
+collectionLabels['pam11'] = 'pam';
+collectionLabels['pam22'] = 'pam';
+collectionLabels['pam32'] = 'pam';
+collectionLabels['pam38'] = 'pam';
+collectionLabels['pam42'] = 'pam';
+collectionLabels['pam48'] = 'pam';
+collectionLabels['rcpm2'] = 'pam';
+collectionLabels['rcpm8'] = 'pam';
+collectionLabels['rcpm9'] = 'pam';
+
+collectionLabels['pat11'] = 'pat';
+collectionLabels['pat22'] = 'pat';
+collectionLabels['pat28'] = 'pat';
+collectionLabels['pat32'] = 'pat';
+collectionLabels['pat38'] = 'pat';
+collectionLabels['pat42'] = 'pat';
+collectionLabels['pat48'] = 'pat';
+collectionLabels['rcpt2'] = 'pat';
+collectionLabels['rcpt8'] = 'pat';
+collectionLabels['rcpt9'] = 'pat';
+
+collectionLabels['pav22'] = 'pav';
+collectionLabels['pav28'] = 'pav';
+collectionLabels['pav32'] = 'pav';
+collectionLabels['pav38'] = 'pav';
+collectionLabels['rcpr2'] = 'pav';
+collectionLabels['rcpr8'] = 'pav';
+collectionLabels['rcpr9'] = 'pav';
+
+collectionLabels['scbb2'] = 'scb';
+collectionLabels['rccb2'] = 'scb';
+collectionLabels['rccb8'] = 'scb';
+collectionLabels['rccb9'] = 'scb';
+
+collectionLabels['sccc2'] = 'scc';
+collectionLabels['sccc3'] = 'scc';
+collectionLabels['rcca9'] = 'scc';
+
+collectionLabels['scdd1'] = 'scd';
+collectionLabels['scdd2'] = 'scd';
+collectionLabels['rccd2'] = 'scd';
+collectionLabels['rccd8'] = 'scd';
+collectionLabels['rccd9'] = 'scd';
+
+collectionLabels['scedd'] = 'sce';
+collectionLabels['scee2'] = 'sce';
+collectionLabels['rcce2'] = 'sce';
+collectionLabels['rcce8'] = 'sce';
+collectionLabels['rcce9'] = 'sce';
+
+collectionLabels['scff1'] = 'scf';
+collectionLabels['scff2'] = 'scf';
+collectionLabels['scff3'] = 'scf';
+collectionLabels['rc2cf'] = 'scf';
+collectionLabels['rc2cm'] = 'scf';
+collectionLabels['rccf2'] = 'scf';
+collectionLabels['rccf8'] = 'scf';
+collectionLabels['rccf9'] = 'scf';
+
+def collectionIds = new HashSet();
+
+for (int i = 0; i < ctx._source.items.size(); i++) {
+    def item = ctx._source.items[i];
+    
+    if ((item.type instanceof List) && item.type.size() == 1 && item.type[0] == 'bf:Item') {
+        if (item.holdingLocation != null && item.holdingLocation.size() > 0) {
+
+                def locId = item.holdingLocation[0].id;
+                
+                if (locId.startsWith("loc:")) {
+                    locId = locId.substring(4);
+                }
+                
+                def collectionId = collectionLabels[locId];
+                
+                if (collectionId != null) {
+                    collectionIds.add(collectionId);
+                }
+            
+        }
+    }
+}
+
+ctx._source.collectionIds = new ArrayList(collectionIds);
