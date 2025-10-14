@@ -446,7 +446,7 @@ const buildSqlQuery = (options) => {
   const dedupe = !!options.hasMarc
 
   const primaryColumns = dedupe ? 'DISTINCT id, nypl_source' : '*'
-  let query = `SELECT ${primaryColumns} FROM ${sqlFromAndWhere} LIMIT 500000`
+  let query = `SELECT ${primaryColumns} FROM ${sqlFromAndWhere} LIMIT 10000`
 
   // Some queries will return bibs multiple times because a matched var/subfield repeats.
   // To ensure we only handle such bibs once, we must de-deupe the results on id & nypl_source.
