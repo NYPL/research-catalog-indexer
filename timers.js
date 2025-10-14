@@ -54,6 +54,7 @@ class Timer {
     if (!time) time = this.howManyRaw()
     if (!name) name = this.name
     if (!unit) unit = 'seconds'
+    if (!Timer.allTimers[name].log) return
     const unitDivisor = {
       ms: 1,
       seconds: 1000,
@@ -62,8 +63,23 @@ class Timer {
     }
     if (!unitDivisor[unit]) throw new Error('Invalid unit passed to Timer')
     const massagedTime = time / unitDivisor[unit]
-    logger.info(`${name} took ${massagedTime} ${unit} to run`)
+    logger.info(`${name}: ${massagedTime} ${unit}`)
   }
 }
+
+Timer.allTimers = {}
+
+Timer.startNew = (name) => {
+  const timer = new Timer(name)
+  const shouldLog = () => {
+    const whiteList = process.env.WHITELIST_TIMERS
+    if (!whiteList) return true
+    else return whiteList.includes(name)
+  }
+  Timer.allTimers[name] = { timer, log: shouldLog() }
+  timer.startTimer()
+  return timer
+}
+
 
 module.exports = { Timer, BatchTimer }

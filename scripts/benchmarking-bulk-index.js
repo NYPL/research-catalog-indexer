@@ -230,6 +230,7 @@ const convertCommonModelProperties = (models) => {
  *  an array of items for that bib
  */
 const sierraItemsByBibIds = async (bibIds, nyplSource) => {
+  const itemsForBibsTimer = Timer.startNew('itemsForBibs')
   const itemClient = await db.connect('itemService')
 
   const query = `SELECT * FROM item
@@ -250,7 +251,8 @@ const sierraItemsByBibIds = async (bibIds, nyplSource) => {
   }, {})
 
   itemClient.release()
-
+  itemsForBibsTimer.endTimer()
+  itemsForBibsTimer.howMany('seconds')
   logger.debug(`ItemService DB: Retrieved ${items.length} item(s) for ${bibIds.length} bib id(s) using query ${query}`)
 
   return itemsByBibId
@@ -262,15 +264,16 @@ const sierraItemsByBibIds = async (bibIds, nyplSource) => {
  */
 const sierraHoldingsByBibIds = async (bibIds) => {
   if (bibIds.length === 0) return {}
-
+  const holdingsForBibsTimer = Timer.startNew('holdingsForBibs')
   const holdingsClient = await db.connect('holdingsService')
 
   const query = `SELECT * FROM records
     WHERE "bibIds" && array[${bibIds.join(',')}]`
+  const holdingsQueryTimer = Timer.startNew('holdings query')
   const result = await holdingsClient.query(query)
-
+  holdingsQueryTimer.endTimer()
+  holdingsQueryTimer.howMany('seconds')
   const holdings = convertCommonModelProperties(result.rows)
-
   const holdingsByBibId = holdings.reduce((byBibId, item) => {
     item.bibIds.forEach((bibId) => {
       if (!byBibId[bibId]) {
@@ -280,11 +283,12 @@ const sierraHoldingsByBibIds = async (bibIds) => {
     })
     return byBibId
   }, {})
-
   logger.debug(`HoldinsgService DB: Retrieved ${holdings.length} holdings(s) for ${bibIds.length} bib id(s) using query ${query}`)
 
   holdingsClient.release()
-
+  holdingsForBibsTimer.endTimer()
+  holdingsForBibsTimer.howMany('seconds')
+  if (!holdings.length) logger.info('0 holdings found for bibs')
   return holdingsByBibId
 }
 
@@ -482,13 +486,11 @@ const updateByBibOrItemServiceQuery = async (options) => {
   let count = 0
   const startTime = new Date()
   let done = false
-  const totalTimer = new Timer('all the things')
-  totalTimer.startTimer()
+  const totalTimer = Timer.startNew('all the things')
   while (!done && (count < options.limit || !options.limit)) {
     await instrument('Bulk-index batch', async () => {
       // Pull next batch of records from the cursor:
-      const timer = new Timer(`${Math.ceil(count / options.batchSize) + 1}th Bib service fetch`)
-      timer.startTimer()
+      const timer = Timer.startNew(`${Math.ceil(count / options.batchSize) + 1}th Bib service fetch`)
       const rows = await cursor.read(options.batchSize)
       timer.endTimer()
       timer.howMany('seconds')

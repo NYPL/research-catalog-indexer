@@ -46,8 +46,7 @@ const processRecords = async (type, records, options = {}) => {
   // If original event was a Bib event, delete the "removed" records:
   const recordsToDelete = type === 'Bib' ? removedBibs : []
 
-  const esDocTimer = new Timer('esDocBuilder')
-  esDocTimer.startTimer()
+  const esDocTimer = Timer.startNew('esDocBuilder')
   const recordsToIndex = await buildEsDocument(filteredBibs)
   esDocTimer.endTimer()
   esDocTimer.howMany('seconds')
@@ -59,8 +58,7 @@ const processRecords = async (type, records, options = {}) => {
   const changedRecords = [...filteredBibs, ...removedBibs]
   let browseTermDiffs
   if ((changedRecords.length) && type === 'Bib') {
-    const bibSubjectTimer = new Timer('buildBibSubjectEvents')
-    bibSubjectTimer.startTimer()
+    const bibSubjectTimer = Timer.startNew('buildBibSubjectEvents')
     removedBibs.map(bib => new EsBib(new SierraBib(bib)))
     browseTermDiffs = await browse.buildBibSubjectEvents(changedRecords)
     bibSubjectTimer.endTimer()
