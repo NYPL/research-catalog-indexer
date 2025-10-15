@@ -52,9 +52,9 @@ const processRecords = async (type, records, options = {}) => {
   // resources index to determine any diff between new and old subjects
   const changedRecords = [...filteredBibs, ...removedBibs]
   let browseTermDiffs
-  if ((changedRecords.length) && type === 'Bib') {
-    browseTermDiffs = await browse.buildBibSubjectEvents(changedRecords)
-  }
+  // if ((changedRecords.length) && type === 'Bib') {
+  //   browseTermDiffs = await browse.buildBibSubjectEvents(changedRecords)
+  // }
 
   if (recordsToIndex.length) {
     if (options.dryrun) {
@@ -81,7 +81,7 @@ const processRecords = async (type, records, options = {}) => {
 
     messages.push(`Deleted ${recordsToDelete.length} doc(s)`)
   }
-  await browse.emitBibSubjectEvents(browseTermDiffs)
+  // await browse.emitBibSubjectEvents(browseTermDiffs)
   const message = messages.length ? messages.join('; ') : 'Nothing to do.'
 
   logger.info((options.dryrun ? 'DRYRUN: ' : '') + message)
