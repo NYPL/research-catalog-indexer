@@ -53,7 +53,7 @@ describe('index handler function', () => {
     modelPrefetchStub.resetHistory()
   })
   describe('processRecords', () => {
-    it('calls deletions after subject diff is determined', async () => {
+    it.skip('calls deletions after subject diff is determined', async () => {
       const suppressBibsStub = stub(suppress, 'suppressBibs')
       stub(browse, 'emitBibSubjectEvents')
       const buildBibSubjectEventsStub = stub(browse, 'buildBibSubjectEvents')

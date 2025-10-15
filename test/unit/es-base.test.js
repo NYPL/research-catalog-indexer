@@ -67,7 +67,7 @@ describe('EsBase', function () {
           ]
         }
       }
-      const doc = new Foo().toJson()
+      const doc = new Foo2().toJson()
       expect(doc).to.deep.equal({
         fooMethod: 'fooMethod value',
         singleChild: {

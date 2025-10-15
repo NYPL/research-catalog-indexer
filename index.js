@@ -8,8 +8,8 @@ const { notifyDocumentProcessed } = require('./lib/streams-client')
 // const browse = require('./lib/browse-terms')
 const { filteredSierraBibsForBibs } = require('./lib/prefilter')
 const { loadNyplCoreData } = require('./lib/load-core-data')
-const SierraBib = require('./lib/sierra-models/bib')
-const EsBib = require('./lib/es-models/bib')
+// const SierraBib = require('./lib/sierra-models/bib')
+// const EsBib = require('./lib/es-models/bib')
 
 /**
  * Main lambda handler receiving Bib, Item, and Holding events
