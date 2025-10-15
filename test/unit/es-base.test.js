@@ -51,7 +51,7 @@ describe('EsBase', function () {
         }
       }
 
-      class Foo extends EsBase {
+      class Foo2 extends EsBase {
         fooMethod () {
           return 'fooMethod value'
         }
