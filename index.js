@@ -5,7 +5,7 @@ const suppress = require('./lib/utils/suppressBibs')
 const { buildEsDocument, transformIntoBibRecords } = require('./lib/build-es-document')
 const { truncate } = require('./lib/utils')
 const { notifyDocumentProcessed } = require('./lib/streams-client')
-const browse = require('./lib/browse-terms')
+// const browse = require('./lib/browse-terms')
 const { filteredSierraBibsForBibs } = require('./lib/prefilter')
 const { loadNyplCoreData } = require('./lib/load-core-data')
 
@@ -50,8 +50,8 @@ const processRecords = async (type, records, options = {}) => {
   // Fetch subjects from all bibs, whether they are updates, creates, or deletes,
   // and transmit to the browse pipeline. This must happen before writes to the
   // resources index to determine any diff between new and old subjects
-  const changedRecords = [...filteredBibs, ...removedBibs]
-  let browseTermDiffs
+  // const changedRecords = [...filteredBibs, ...removedBibs]
+  // let browseTermDiffs
   // if ((changedRecords.length) && type === 'Bib') {
   //   browseTermDiffs = await browse.buildBibSubjectEvents(changedRecords)
   // }
