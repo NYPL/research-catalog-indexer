@@ -39,7 +39,8 @@ describe('SierraBase', function () {
           a: 'Niwtʻer azgayin patmutʻian hamar',
           b: 'Ereveli hay kazunkʻ ; Parskastan /',
           c: 'Ashkhatasirutʻiamb Galust Shermazaniani.'
-        }
+        },
+        varFieldIndex: 14
       })
     })
 
@@ -94,7 +95,8 @@ describe('SierraBase', function () {
         value: 'ابن الكلبي.',
         subfieldMap: { a: 'ابن الكلبي.' },
         script: 'arabic',
-        direction: 'rtl'
+        direction: 'rtl',
+        varFieldIndex: 8
       })
       expect(!varFieldValue.value)
     })
@@ -112,7 +114,8 @@ describe('SierraBase', function () {
         direction: 'rtl',
         subfieldMap: {
           a: 'תולדות ישו.'
-        }
+        },
+        varFieldIndex: 22
       })
     })
     it('extracts correct text direction when record has multiple parallels with different text directions', function () {
@@ -135,12 +138,14 @@ describe('SierraBase', function () {
 
       expect(varField600).to.deep.equal([
         {
+          varFieldIndex: 0,
           value: '600 primary value a 600 primary value b',
           subfieldMap: {
             a: '600 primary value a',
             b: '600 primary value b'
           },
           parallel: {
+            varFieldIndex: 1,
             value: '600 parallel value a 600 parallel value b',
             script: 'arabic',
             direction: 'rtl',
@@ -160,6 +165,7 @@ describe('SierraBase', function () {
       expect(varField100).to.deep.equal([
         {
           parallel: {
+            varFieldIndex: 2,
             value: '100 parallel value a 100 parallel value b',
             script: 'arabic',
             direction: 'rtl',
@@ -258,6 +264,15 @@ describe('SierraBase', function () {
   })
 
   describe('varFieldsMulti', () => {
+    it('respects order of varfields', () => {
+      const bib = new SierraBib(require('../fixtures/bib-subject-order.json'))
+      const mappings = [
+        { marc: '600', subfields: ['a'] },
+        { marc: '650', subfields: ['a'] }
+      ]
+      const varfields = bib.varFieldsMulti(mappings)
+      expect(varfields[0].value).to.deep.equal('Motion picture actors and actresses.')
+    })
     it('more paths in bib-mappings.json than fields in fixture', () => {
       const bib = new SierraBib(require('../fixtures/bib-11606020.json'))
       // the fixture only has a 791 field for contributorLiteral, but there
@@ -273,6 +288,7 @@ describe('SierraBase', function () {
       const varFields = bib.varFieldsMulti(mappings)
       expect(varFields).to.deep.equal([
         {
+          varFieldIndex: 0,
           value: 'Schiff Collection.',
           subfieldMap: { a: 'Schiff Collection.' }
         }

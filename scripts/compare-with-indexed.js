@@ -23,9 +23,10 @@ const dotenv = require('dotenv')
 dotenv.config({ path: argv.envfile || './config/qa.env' })
 
 const NyplSourceMapper = require('../lib/utils/nypl-source-mapper')
-const { awsCredentialsFromIni, die, printDiff, buildSierraModelFromUri, capitalize } = require('./utils')
+const { awsCredentialsFromIni, die, printDiff, buildSierraModelFromUri } = require('./utils')
 const { bibsForHoldingsOrItems } = require('../lib/platform-api/requests')
-const { buildEsDocument } = require('../lib/build-es-document')
+const { buildEsDocument, transformIntoBibRecords } = require('../lib/build-es-document')
+const { filteredSierraBibsForBibs } = require('../lib/prefilter')
 const EsBib = require('../lib/es-models/bib')
 const SierraBib = require('../lib/sierra-models/bib')
 const SierraHolding = require('../lib/sierra-models/holding')
@@ -61,7 +62,10 @@ const buildLocalEsDocFromUri = async (uri) => {
 
   const mapper = await NyplSourceMapper.instance()
   const { type } = mapper.splitIdentifier(uri)
-  return buildEsDocument({ type: capitalize(type), records: [record] })
+  const records = await transformIntoBibRecords(type, [record])
+  const { filteredBibs, removedBibs } = await filteredSierraBibsForBibs(records)
+  const recordsToIndex = await buildEsDocument(filteredBibs)
+  return { recordsToIndex, recordsToDelete: removedBibs }
 }
 
 /**

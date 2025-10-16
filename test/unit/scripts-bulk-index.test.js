@@ -17,7 +17,7 @@ const removeDupeWhitespace = (sql) => {
 // Map anticipated SQL queries to mocked data to return:
 const pgFixtures = [
   {
-    match: /SELECT R\.\* FROM \(SELECT DISTINCT id, nypl_source FROM bib WHERE nypl_source = \$1 AND id IN \('1234','5678'\) LIMIT 2\) _R INNER JOIN bib R ON _R\.id=R\.id AND _R\.nypl_source=R\.nypl_source/,
+    match: /SELECT \* FROM bib WHERE nypl_source = \$1 AND id IN \('1234','5678'\) LIMIT 2/,
     rows: [
       {
         id: 1234,
@@ -199,11 +199,9 @@ describe('scripts/bulk-index', () => {
       expect(bulkIndexer.buildSqlQuery({ bibId: '1234', nyplSource: 'sierra-nypl' }))
         .to.deep.eq({
           query: [
-            'SELECT R.* FROM (',
-            'SELECT DISTINCT id, nypl_source FROM bib',
+            'SELECT * FROM bib',
             '      WHERE nypl_source = $1',
-            '      AND id = $2 LIMIT 1',
-            ') _R INNER JOIN bib R ON _R.id=R.id AND _R.nypl_source=R.nypl_source'
+            '      AND id = $2 LIMIT 1'
           ].join('\n'),
           params: ['sierra-nypl', '1234'],
           type: 'bib'
@@ -214,11 +212,9 @@ describe('scripts/bulk-index', () => {
       expect(bulkIndexer.buildSqlQuery({ ids: ['1234'], nyplSource: 'some-source', type: 'table_name' }))
         .to.deep.eq({
           query: [
-            'SELECT R.* FROM (',
-            'SELECT DISTINCT id, nypl_source FROM table_name',
+            'SELECT * FROM table_name',
             '      WHERE nypl_source = $1',
-            "      AND id IN ('1234') LIMIT 1",
-            ') _R INNER JOIN table_name R ON _R.id=R.id AND _R.nypl_source=R.nypl_source'
+            "      AND id IN ('1234') LIMIT 1"
           ].join('\n'),
           params: ['some-source'],
           type: 'table_name'
@@ -245,9 +241,7 @@ describe('scripts/bulk-index', () => {
       expect(bulkIndexer.buildSqlQuery({ type: 'table_name' }))
         .to.deep.eq({
           query: [
-            'SELECT R.* FROM (',
-            'SELECT DISTINCT id, nypl_source FROM table_name',
-            ') _R INNER JOIN table_name R ON _R.id=R.id AND _R.nypl_source=R.nypl_source'
+            'SELECT * FROM table_name'
           ].join('\n'),
           params: [],
           type: 'table_name'

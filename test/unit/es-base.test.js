@@ -51,7 +51,7 @@ describe('EsBase', function () {
         }
       }
 
-      class Foo extends EsBase {
+      class Foo2 extends EsBase {
         fooMethod () {
           return 'fooMethod value'
         }
@@ -67,7 +67,7 @@ describe('EsBase', function () {
           ]
         }
       }
-      const doc = await (new Foo()).toJson()
+      const doc = await (new Foo2()).toJson()
       expect(doc).to.deep.equal({
         fooMethod: 'fooMethod value',
         singleChild: {

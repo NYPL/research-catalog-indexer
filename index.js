@@ -1,11 +1,11 @@
 const logger = require('./lib/logger')
 const eventDecoder = require('./lib/event-decoder')
 const elastic = require('./lib/elastic-search/requests')
-const { suppressBibs } = require('./lib/utils/suppressBibs')
+const suppress = require('./lib/utils/suppressBibs')
 const { buildEsDocument, transformIntoBibRecords } = require('./lib/build-es-document')
 const { truncate } = require('./lib/utils')
 const { notifyDocumentProcessed } = require('./lib/streams-client')
-const { emitBibSubjectEvents } = require('./lib/browse-terms')
+// const browse = require('./lib/browse-terms')
 const { filteredSierraBibsForBibs } = require('./lib/prefilter')
 const { loadNyplCoreData } = require('./lib/load-core-data')
 
@@ -46,9 +46,15 @@ const processRecords = async (type, records, options = {}) => {
   const recordsToIndex = await buildEsDocument(filteredBibs)
 
   const messages = []
-  if (type === 'Bib') {
-    await emitBibSubjectEvents([...filteredBibs, ...removedBibs])
-  }
+
+  // Fetch subjects from all bibs, whether they are updates, creates, or deletes,
+  // and transmit to the browse pipeline. This must happen before writes to the
+  // resources index to determine any diff between new and old subjects
+  // const changedRecords = [...filteredBibs, ...removedBibs]
+  // let browseTermDiffs
+  // if ((changedRecords.length) && type === 'Bib') {
+  //   browseTermDiffs = await browse.buildBibSubjectEvents(changedRecords)
+  // }
 
   if (recordsToIndex.length) {
     if (options.dryrun) {
@@ -70,12 +76,12 @@ const processRecords = async (type, records, options = {}) => {
     if (options.dryrun) {
       console.log(`DRYRUN: Skipping removing ${recordsToDelete.length} records`)
     } else {
-      await suppressBibs(recordsToDelete)
+      await suppress.suppressBibs(recordsToDelete)
     }
 
     messages.push(`Deleted ${recordsToDelete.length} doc(s)`)
   }
-
+  // await browse.emitBibSubjectEvents(browseTermDiffs)
   const message = messages.length ? messages.join('; ') : 'Nothing to do.'
 
   logger.info((options.dryrun ? 'DRYRUN: ' : '') + message)
