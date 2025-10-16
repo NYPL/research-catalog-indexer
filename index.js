@@ -8,6 +8,8 @@ const { notifyDocumentProcessed } = require('./lib/streams-client')
 // const browse = require('./lib/browse-terms')
 const { filteredSierraBibsForBibs } = require('./lib/prefilter')
 const { loadNyplCoreData } = require('./lib/load-core-data')
+// const SierraBib = require('./lib/sierra-models/bib')
+// const EsBib = require('./lib/es-models/bib')
 
 /**
  * Main lambda handler receiving Bib, Item, and Holding events
@@ -43,33 +45,34 @@ const processRecords = async (type, records, options = {}) => {
   // If original event was a Bib event, delete the "removed" records:
   const recordsToDelete = type === 'Bib' ? removedBibs : []
 
-  const recordsToIndex = await buildEsDocument(filteredBibs)
-
+  const esModels = await buildEsDocument(filteredBibs)
+  const plainObjectEsDocuments = esModels.map((record) => record.toJson())
   const messages = []
 
   // Fetch subjects from all bibs, whether they are updates, creates, or deletes,
   // and transmit to the browse pipeline. This must happen before writes to the
   // resources index to determine any diff between new and old subjects
-  // const changedRecords = [...filteredBibs, ...removedBibs]
+  // const esModelsForDeletions = removedBibs.map(bib => new EsBib(new SierraBib(bib)))
+  // const changedRecords = [...esModels, ...esModelsForDeletions]
   // let browseTermDiffs
   // if ((changedRecords.length) && type === 'Bib') {
   //   browseTermDiffs = await browse.buildBibSubjectEvents(changedRecords)
   // }
 
-  if (recordsToIndex.length) {
+  if (plainObjectEsDocuments.length) {
     if (options.dryrun) {
-      logger.info(`DRYRUN: Skipping writing ${recordsToIndex.length} records`)
+      logger.info(`DRYRUN: Skipping writing ${plainObjectEsDocuments.length} records`)
     } else {
       // Write records to ES:
-      await elastic.writeRecords(recordsToIndex)
+      await elastic.writeRecords(plainObjectEsDocuments)
 
       // Write to IndexDocumentProcessed Kinesis stream:
-      await notifyDocumentProcessed(recordsToIndex)
+      await notifyDocumentProcessed(plainObjectEsDocuments)
     }
 
     // Log out a summary of records updated:
-    const summary = truncate(recordsToIndex.map((record) => record.uri).join(','), 100)
-    messages.push(`Wrote ${recordsToIndex.length} doc(s): ${summary}`)
+    const summary = truncate(plainObjectEsDocuments.map((record) => record.uri).join(','), 100)
+    messages.push(`Wrote ${plainObjectEsDocuments.length} doc(s): ${summary}`)
   }
 
   if (recordsToDelete.length) {

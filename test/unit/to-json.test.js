@@ -11,8 +11,6 @@ class Model {
 
   _privateMethod () { return 'meep morp' }
 
-  async asyncPublicMethod () { return Promise.resolve('I am also supposed to be here') }
-
   publicMethod () { return 'I am supposed to be here' }
 }
 
@@ -27,7 +25,6 @@ describe('toJson', () => {
     it('returns methods of class client', () => {
       expect(_getAllMethods(mod)).to.deep.equal([
         '_privateMethod',
-        'asyncPublicMethod',
         'publicMethod'
       ])
     })
@@ -36,34 +33,28 @@ describe('toJson', () => {
   describe('_publicMethods', () => {
     it('filters private methods', () => {
       expect(_publicMethods(mod)).to.deep.equal([
-        'asyncPublicMethod',
         'publicMethod'
       ])
     })
   })
 
   describe('toJson', () => {
-    it('returns the values of the public methods of object, whether async or not', async () => {
-      const JSONifiedMod = await toJson(mod)
+    it('returns the values of the public methods of object, whether async or not', () => {
+      const JSONifiedMod = toJson(mod)
       expect(JSONifiedMod).to.deep.equal({
-        asyncPublicMethod: 'I am also supposed to be here',
         publicMethod: 'I am supposed to be here'
       })
     })
 
-    it('builds an object whose keys are sorted alphabetically even if some of the values are built async', async () => {
+    it('builds an object whose keys are sorted alphabetically', () => {
       const mod = new (class {
         method3 () { return 'method 3' }
-
-        async method2 () { return Promise.resolve('method 2') }
-
         method1 () { return 'method 1' }
       })()
 
-      const obj = await toJson(mod)
+      const obj = toJson(mod)
       expect(obj).to.deep.equal({
         method1: 'method 1',
-        method2: 'method 2',
         method3: 'method 3'
       })
     })

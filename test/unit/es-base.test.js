@@ -27,19 +27,19 @@ describe('EsBase', function () {
   })
 
   describe('toJson', () => {
-    it('should return a plainobject representation of a descendent instance', async () => {
+    it('should return a plainobject representation of a descendent instance', () => {
       class Foo extends EsBase {
         bar () {
           return 'bar value'
         }
       }
-      const doc = await (new Foo()).toJson()
+      const doc = new Foo().toJson()
       expect(doc).to.deep.equal({
         bar: 'bar value'
       })
     })
 
-    it('should return a plainobject representation of descendent children', async () => {
+    it('should return a plainobject representation of descendent children', () => {
       class FooChild extends EsBase {
         constructor (id) {
           super()
@@ -67,7 +67,7 @@ describe('EsBase', function () {
           ]
         }
       }
-      const doc = await (new Foo2()).toJson()
+      const doc = new Foo2().toJson()
       expect(doc).to.deep.equal({
         fooMethod: 'fooMethod value',
         singleChild: {
