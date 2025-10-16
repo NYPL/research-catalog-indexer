@@ -70,7 +70,7 @@ const { Timer } = require('../timers.js')
 
 const argv = require('minimist')(process.argv.slice(2), {
   default: {
-    limit: 500000,
+    limit: 10000,
     offset: 0,
     batchSize: 100,
     nyplSource: 'sierra-nypl',
