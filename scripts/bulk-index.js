@@ -294,38 +294,46 @@ const sierraHoldingsByBibIds = async (bibIds) => {
 const overwriteModelPrefetch = () => {
   const originalFunction = modelPrefetcher.modelPrefetch
 
-  modelPrefetcher.modelPrefetch = async (bibs) => {
-    if (bibs.length === 0) return bibs
-    const distinctSources = Array.from(new Set(bibs.map((b) => b.nyplSource)))
-    if (distinctSources.length > 1) {
-      throw new Error(`Model prefetch encountered batch with multiple nyplSources: ${distinctSources.join(',')}`)
+  if (process.env.USER_SCHEMA) {
+    const userSchema = process.env.USER_SCHEMA.split(',')
+    if (!userSchema.includes('items') && !userSchema.includes('holdings')) {
+      modelPrefetcher.modelPrefetch = () => {}
     }
+  } else {
+    modelPrefetcher.modelPrefetch = async (bibs) => {
+      if (bibs.length === 0) return bibs
+      const distinctSources = Array.from(new Set(bibs.map((b) => b.nyplSource)))
+      if (distinctSources.length > 1) {
+        throw new Error(`Model prefetch encountered batch with multiple nyplSources: ${distinctSources.join(',')}`)
+      }
 
-    // Get distinct bib ids:
-    const bibIds = Array.from(new Set(bibs.map((b) => b.id)))
-    const nyplSource = bibs[0].nyplSource
+      // Get distinct bib ids:
+      const bibIds = Array.from(new Set(bibs.map((b) => b.id)))
+      const nyplSource = bibs[0].nyplSource
 
-    // Fetch all items and holdings for this set of bibs:
-    const [itemsByBibId, holdingsByBibId] = await Promise.all([
-      sierraItemsByBibIds(bibIds, nyplSource),
-      nyplSource === 'sierra-nypl' ? sierraHoldingsByBibIds(bibIds) : Promise.resolve({})
-    ])
+      // Fetch all items and holdings for this set of bibs:
+      const [itemsByBibId, holdingsByBibId] = await Promise.all([
+        sierraItemsByBibIds(bibIds, nyplSource),
+        nyplSource === 'sierra-nypl' ? sierraHoldingsByBibIds(bibIds) : Promise.resolve({})
+      ])
 
-    // Attach holdings and items to bibs:
-    bibs = bibs.map((bib) => {
-      // Wrap in SierraHolding class and apply suppression:
-      bib._holdings = filteredSierraHoldingsForHoldings(holdingsByBibId[bib.id] || [])
-      // Apply suppression/is-research filtering to items:
-      bib._items = filteredSierraItemsForItems(itemsByBibId[bib.id]) || []
-      // Ensure items have a reference to their bib:
-      bib._items.forEach((item) => {
-        item._bibs = [bib]
+      // Attach holdings and items to bibs:
+      bibs = bibs.map((bib) => {
+        // Wrap in SierraHolding class and apply suppression:
+        bib._holdings = filteredSierraHoldingsForHoldings(holdingsByBibId[bib.id] || [])
+        // Apply suppression/is-research filtering to items:
+        bib._items = filteredSierraItemsForItems(itemsByBibId[bib.id]) || []
+        // Ensure items have a reference to their bib:
+        bib._items.forEach((item) => {
+          item._bibs = [bib]
+        })
+        return bib
       })
-      return bib
-    })
 
-    return bibs
+      return bibs
+    }
   }
+
 
   modelPrefetcher.modelPrefetch.originalFunction = originalFunction
 }
@@ -634,6 +642,10 @@ const run = async () => {
 
   if (process.env.SCHEMA_FILE) {
     process.env.USER_SCHEMA = require(process.env.SCHEMA_FILE)
+  }
+
+  if (argv.user_schema) {
+    process.env.USER_SCHEMA = argv.user_schema
   }
 
   // Validate args:
