@@ -37,7 +37,6 @@ const processRecords = async (type, records, options = {}) => {
   options = Object.assign({
     dryrun: false
   }, options)
-
   // Ensure event has Bib records:
   records = await transformIntoBibRecords(type, records)
 
@@ -47,7 +46,10 @@ const processRecords = async (type, records, options = {}) => {
   const recordsToDelete = type === 'Bib' ? removedBibs : []
 
   const esModels = await buildEsDocument(filteredBibs)
-  const plainObjectEsDocuments = esModels.map((record) => record.toPlainObject(schema))
+  const plainObjectEsDocuments = esModels.map((record) => {
+    const x = record.toPlainObject(schema())
+    return x
+  })
   const messages = []
 
   // Fetch subjects from all bibs, whether they are updates, creates, or deletes,

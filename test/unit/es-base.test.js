@@ -69,7 +69,7 @@ describe('EsBase', function () {
           ]
         }
       }
-      const doc = new FakeBib().toPlainObject({ title: 'mapping', numItems: 'mapping', items: { properties: { holdingLocation: 'mapping' } } })
+      const doc = new FakeBib().toPlainObject({ title: 'mapping', numItems: 'mapping', items: { properties: { holdingLocation: 'mapping', uri: '123' } } })
       expect(doc).to.deep.equal({
         title: 'book',
         numItems: 2,
