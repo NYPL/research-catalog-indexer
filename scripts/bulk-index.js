@@ -632,6 +632,10 @@ const cancelRun = (message) => {
 const run = async () => {
   dotenv.config({ path: argv.envfile })
 
+  if (process.env.SCHEMA_FILE) {
+    process.env.USER_SCHEMA = require(process.env.SCHEMA_FILE)
+  }
+
   // Validate args:
   if (
     (
