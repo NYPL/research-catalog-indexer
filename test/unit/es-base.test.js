@@ -26,59 +26,59 @@ describe('EsBase', function () {
     })
   })
 
-  describe('toJson', () => {
+  describe('toPlainObject', () => {
     it('should return a plainobject representation of a descendent instance', () => {
       class Foo extends EsBase {
         bar () {
           return 'bar value'
         }
       }
-      const doc = new Foo().toJson()
+      const doc = new Foo().toPlainObject({
+        bar: 'index mapping'
+      })
       expect(doc).to.deep.equal({
         bar: 'bar value'
       })
     })
 
     it('should return a plainobject representation of descendent children', () => {
-      class FooChild extends EsBase {
+      class FakeItem extends EsBase {
         constructor (id) {
           super()
           this.id = id
         }
 
-        fooChildMethod () {
-          return `fooChildMethod ${this.id} value`
+        holdingLocation () {
+          return `loc:${this.id}`
         }
       }
 
-      class Foo2 extends EsBase {
-        fooMethod () {
-          return 'fooMethod value'
+      class FakeBib extends EsBase {
+        title () {
+          return 'book'
         }
 
-        singleChild () {
-          return new FooChild(0)
+        numItems () {
+          return this.items().length
         }
 
-        children () {
+        items () {
           return [
-            new FooChild(1),
-            new FooChild(2)
+            new FakeItem(1),
+            new FakeItem(2)
           ]
         }
       }
-      const doc = new Foo2().toJson()
+      const doc = new FakeBib().toPlainObject({ title: 'mapping', numItems: 'mapping', items: { properties: { holdingLocation: 'mapping', uri: '123' } } })
       expect(doc).to.deep.equal({
-        fooMethod: 'fooMethod value',
-        singleChild: {
-          fooChildMethod: 'fooChildMethod 0 value'
-        },
-        children: [
+        title: 'book',
+        numItems: 2,
+        items: [
           {
-            fooChildMethod: 'fooChildMethod 1 value'
+            holdingLocation: 'loc:1'
           },
           {
-            fooChildMethod: 'fooChildMethod 2 value'
+            holdingLocation: 'loc:2'
           }
         ]
       })
