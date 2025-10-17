@@ -109,8 +109,8 @@ const Cursor = require('pg-cursor')
 
 const kms = require('../lib/kms.js')
 const modelPrefetcher = require('../lib/model-prefetch')
-const rewire = require('rewire')
-const indexer = requires('../index')
+const generalPrefetcher = require('../lib/general-prefetch')
+const indexer = require('../index')
 const {
   filteredSierraItemsForItems,
   filteredSierraHoldingsForHoldings
@@ -296,13 +296,13 @@ const sierraHoldingsByBibIds = async (bibIds) => {
 
 const overwriteModelPrefetch = () => {
   const originalFunction = modelPrefetcher.modelPrefetch
+  const originalGeneralPrefetch = generalPrefetcher.generalPrefetch
 
   if (process.env.USER_SCHEMA) {
     const userSchema = process.env.USER_SCHEMA.split(',')
     if (!userSchema.includes('items') && !userSchema.includes('holdings')) {
       modelPrefetcher.modelPrefetch = (bibs) => (bibs)
-      generalPrefetch = rewire('../../lib/general-prefetch')
-      generalPrefetch.__set__('generalPrefetch', (records) => (records))
+      generalPrefetcher.generalPrefetch = (bibs) => (bibs)
     }
   } else {
     modelPrefetcher.modelPrefetch = async (bibs) => {
@@ -340,12 +340,17 @@ const overwriteModelPrefetch = () => {
   }
 
   modelPrefetcher.modelPrefetch.originalFunction = originalFunction
+  generalPrefetcher.generalPrefetch.originalGeneralPrefetch = originalGeneralPrefetch
 }
 
 const restoreModelPrefetch = () => {
   if (modelPrefetcher.modelPrefetch.originalFunction) {
     modelPrefetcher.modelPrefetch = modelPrefetcher.modelPrefetch.originalFunction
       .bind(modelPrefetcher)
+  }
+  if (generalPrefetcher.generalPrefetch.originalGeneralPrefetch) {
+    generalPrefetcher.generalPrefetch = generalPrefetcher.generalPrefetch.originalGeneralPrefetch
+      .bind(generalPrefetcher)
   }
 }
 
