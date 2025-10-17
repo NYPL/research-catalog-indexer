@@ -63,8 +63,6 @@ const processRecords = async (type, records, options = {}) => {
   }
 
   if (plainObjectEsDocuments.length) {
-    console.log(options)
-
     if (options.dryrun) {
       logger.info(`DRYRUN: Skipping writing ${plainObjectEsDocuments.length} records`)
     } else {
