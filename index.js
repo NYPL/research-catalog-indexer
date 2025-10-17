@@ -8,7 +8,7 @@ const { notifyDocumentProcessed } = require('./lib/streams-client')
 const browse = require('./lib/browse-terms')
 const { filteredSierraBibsForBibs } = require('./lib/prefilter')
 const { loadNyplCoreData } = require('./lib/load-core-data')
-const { schema } = require('./lib/elastic-search/index-schema')
+const schema = require('./lib/elastic-search/index-schema')
 const SierraBib = require('./lib/sierra-models/bib')
 const EsBib = require('./lib/es-models/bib')
 
@@ -46,10 +46,7 @@ const processRecords = async (type, records, options = {}) => {
   const recordsToDelete = type === 'Bib' ? removedBibs : []
 
   const esModels = await buildEsDocument(filteredBibs)
-  const plainObjectEsDocuments = esModels.map((record) => {
-    const x = record.toPlainObject(schema())
-    return x
-  })
+  const plainObjectEsDocuments = esModels.map((record) => record.toPlainObject(schema.schema()))
   const messages = []
 
   // Fetch subjects from all bibs, whether they are updates, creates, or deletes,

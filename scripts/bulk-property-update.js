@@ -284,7 +284,10 @@ const overwriteSchema = () => {
   const originalSchemaMethod = schema.schema
   const newSchema = {}
   argv.properties.split(',').forEach((prop) => { newSchema[prop] = true })
-  schema.schema = () => newSchema
+  schema.schema = () => {
+    logger.info('meep morp new schema')
+    return newSchema
+  }
   schema.schema.originalMethod = originalSchemaMethod
 }
 const restoreSchema = () => {
@@ -334,7 +337,7 @@ const fetchFromDbConnection = async (bibs) => {
 
 const overwriteGeneralPrefetch = () => {
   const originalFunction = prefetchers.generalPrefetch
-  if (argv.skipModelPrefetch) {
+  if (argv.skipPrefetch) {
     prefetchers.generalPrefetch = async (bibs) => Promise.resolve(bibs)
 
     prefetchers.modelPrefetch.originalFunction = originalFunction
@@ -350,7 +353,7 @@ const restoreGeneralPrefetch = () => {
 
 const overwriteModelPrefetch = () => {
   const originalFunction = prefetchers.modelPrefetch
-  if (argv.skipModelPrefetch) prefetchers.modelPrefetch = async (bibs) => Promise.resolve(bibs)
+  if (argv.skipPrefetch) prefetchers.modelPrefetch = async (bibs) => Promise.resolve(bibs)
   else prefetchers.modelPrefetch = fetchFromDbConnection
 
   prefetchers.modelPrefetch.originalFunction = originalFunction
