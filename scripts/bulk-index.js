@@ -62,6 +62,8 @@
  *      dryrun {boolean}: Set to true to perform all work, but skip writing to index.
  *      envfile {string}: Path to local .env file. Default ./config/qa-bulk-index.env
  *      table {string}: Override primary table name used (e.g. bib_v2)
+ *      schema_file {string}: Path to json file containing a list of properties to index. Optional
+ *      user_schema {string}: List of properties to index. Optional
  *
  */
 const fs = require('fs')
@@ -107,6 +109,7 @@ const Cursor = require('pg-cursor')
 
 const kms = require('../lib/kms.js')
 const modelPrefetcher = require('../lib/model-prefetch')
+const generalPrefetcher = require('../lib/general-prefetch')
 const indexer = require('../index')
 const {
   filteredSierraItemsForItems,
@@ -293,47 +296,61 @@ const sierraHoldingsByBibIds = async (bibIds) => {
 
 const overwriteModelPrefetch = () => {
   const originalFunction = modelPrefetcher.modelPrefetch
+  const originalGeneralPrefetch = generalPrefetcher.generalPrefetch
 
-  modelPrefetcher.modelPrefetch = async (bibs) => {
-    if (bibs.length === 0) return bibs
-    const distinctSources = Array.from(new Set(bibs.map((b) => b.nyplSource)))
-    if (distinctSources.length > 1) {
-      throw new Error(`Model prefetch encountered batch with multiple nyplSources: ${distinctSources.join(',')}`)
+  if (process.env.USER_SCHEMA) {
+    const userSchema = process.env.USER_SCHEMA.split(',')
+    if (!userSchema.includes('items') && !userSchema.includes('holdings')) {
+      modelPrefetcher.modelPrefetch = (bibs) => (bibs)
+      generalPrefetcher.generalPrefetch = (bibs) => (bibs)
     }
+  } else {
+    modelPrefetcher.modelPrefetch = async (bibs) => {
+      if (bibs.length === 0) return bibs
+      const distinctSources = Array.from(new Set(bibs.map((b) => b.nyplSource)))
+      if (distinctSources.length > 1) {
+        throw new Error(`Model prefetch encountered batch with multiple nyplSources: ${distinctSources.join(',')}`)
+      }
 
-    // Get distinct bib ids:
-    const bibIds = Array.from(new Set(bibs.map((b) => b.id)))
-    const nyplSource = bibs[0].nyplSource
+      // Get distinct bib ids:
+      const bibIds = Array.from(new Set(bibs.map((b) => b.id)))
+      const nyplSource = bibs[0].nyplSource
 
-    // Fetch all items and holdings for this set of bibs:
-    const [itemsByBibId, holdingsByBibId] = await Promise.all([
-      sierraItemsByBibIds(bibIds, nyplSource),
-      nyplSource === 'sierra-nypl' ? sierraHoldingsByBibIds(bibIds) : Promise.resolve({})
-    ])
+      // Fetch all items and holdings for this set of bibs:
+      const [itemsByBibId, holdingsByBibId] = await Promise.all([
+        sierraItemsByBibIds(bibIds, nyplSource),
+        nyplSource === 'sierra-nypl' ? sierraHoldingsByBibIds(bibIds) : Promise.resolve({})
+      ])
 
-    // Attach holdings and items to bibs:
-    bibs = bibs.map((bib) => {
-      // Wrap in SierraHolding class and apply suppression:
-      bib._holdings = filteredSierraHoldingsForHoldings(holdingsByBibId[bib.id] || [])
-      // Apply suppression/is-research filtering to items:
-      bib._items = filteredSierraItemsForItems(itemsByBibId[bib.id]) || []
-      // Ensure items have a reference to their bib:
-      bib._items.forEach((item) => {
-        item._bibs = [bib]
+      // Attach holdings and items to bibs:
+      bibs = bibs.map((bib) => {
+        // Wrap in SierraHolding class and apply suppression:
+        bib._holdings = filteredSierraHoldingsForHoldings(holdingsByBibId[bib.id] || [])
+        // Apply suppression/is-research filtering to items:
+        bib._items = filteredSierraItemsForItems(itemsByBibId[bib.id]) || []
+        // Ensure items have a reference to their bib:
+        bib._items.forEach((item) => {
+          item._bibs = [bib]
+        })
+        return bib
       })
-      return bib
-    })
 
-    return bibs
+      return bibs
+    }
   }
 
   modelPrefetcher.modelPrefetch.originalFunction = originalFunction
+  generalPrefetcher.generalPrefetch.originalGeneralPrefetch = originalGeneralPrefetch
 }
 
 const restoreModelPrefetch = () => {
   if (modelPrefetcher.modelPrefetch.originalFunction) {
     modelPrefetcher.modelPrefetch = modelPrefetcher.modelPrefetch.originalFunction
       .bind(modelPrefetcher)
+  }
+  if (generalPrefetcher.generalPrefetch.originalGeneralPrefetch) {
+    generalPrefetcher.generalPrefetch = generalPrefetcher.generalPrefetch.originalGeneralPrefetch
+      .bind(generalPrefetcher)
   }
 }
 
@@ -631,6 +648,14 @@ const cancelRun = (message) => {
 // Main dispatcher:
 const run = async () => {
   dotenv.config({ path: argv.envfile })
+
+  if (argv.schema_file) {
+    process.env.USER_SCHEMA = require(argv.schema_file)
+  }
+
+  if (argv.user_schema) {
+    process.env.USER_SCHEMA = argv.user_schema
+  }
 
   // Validate args:
   if (
