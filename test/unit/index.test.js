@@ -1,5 +1,4 @@
 const { stub, spy } = require('sinon')
-const rewire = require('rewire')
 const { expect } = require('chai')
 
 const eventDecoder = require('../../lib/event-decoder')
@@ -17,15 +16,15 @@ describe('index handler function', () => {
   const eventDecoderStub = (type) => stub(eventDecoder, 'decodeRecordsFromEvent').callsFake(async () => {
     return Promise.resolve({ type, records: [{ nyplSource: 'washington-heights', id: '12345678' }] })
   })
-  let stubsyB
-  let generalPrefetch
+  // let stubsyB
+  // let generalPrefetch
   let modelPrefetchStub
   before(() => {
-    stubsyB = stub().callsFake(async (bibs) => {
-      return Promise.resolve(bibs)
-    })
-    generalPrefetch = rewire('../../lib/general-prefetch')
-    generalPrefetch.__set__('attachRecapCustomerCodes', stubsyB)
+    // stubsyB = stub().callsFake(async (bibs) => {
+    //   return Promise.resolve(bibs)
+    // })
+    // generalPrefetch = require('../../lib/prefetch')
+    // generalPrefetch.generalPrefetch.attachRecapCustomerCodes = stubsyB
 
     modelPrefetchStub = stub(platformApi, 'modelPrefetch').callsFake(async (bibs) => {
       return await Promise.all(bibs.map((bib) => {
