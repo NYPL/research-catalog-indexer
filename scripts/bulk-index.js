@@ -109,7 +109,8 @@ const Cursor = require('pg-cursor')
 
 const kms = require('../lib/kms.js')
 const modelPrefetcher = require('../lib/model-prefetch')
-const indexer = require('../index')
+const rewire = require('rewire')
+const indexer = requires('../index')
 const {
   filteredSierraItemsForItems,
   filteredSierraHoldingsForHoldings
@@ -300,6 +301,8 @@ const overwriteModelPrefetch = () => {
     const userSchema = process.env.USER_SCHEMA.split(',')
     if (!userSchema.includes('items') && !userSchema.includes('holdings')) {
       modelPrefetcher.modelPrefetch = (bibs) => (bibs)
+      generalPrefetch = rewire('../../lib/general-prefetch')
+      generalPrefetch.__set__('generalPrefetch', (records) => (records))
     }
   } else {
     modelPrefetcher.modelPrefetch = async (bibs) => {
