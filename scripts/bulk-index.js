@@ -312,7 +312,6 @@ const overwriteSchema = () => {
     if (!validSchemaProp) throw new Error(`${property} not a valid ES document property.`)
     return validSchemaProp
   }).forEach((prop) => { newSchema[prop] = true })
-  console.log(newSchema)
   schema.schema = () => {
     return newSchema
   }
