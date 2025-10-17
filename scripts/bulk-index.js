@@ -62,6 +62,8 @@
  *      dryrun {boolean}: Set to true to perform all work, but skip writing to index.
  *      envfile {string}: Path to local .env file. Default ./config/qa-bulk-index.env
  *      table {string}: Override primary table name used (e.g. bib_v2)
+ *      schema_file {string}: Path to json file containing a list of properties to index. Optional
+ *      user_schema {string}: List of properties to index. Optional
  *
  */
 const fs = require('fs')
@@ -297,7 +299,7 @@ const overwriteModelPrefetch = () => {
   if (process.env.USER_SCHEMA) {
     const userSchema = process.env.USER_SCHEMA.split(',')
     if (!userSchema.includes('items') && !userSchema.includes('holdings')) {
-      modelPrefetcher.modelPrefetch = () => {}
+      modelPrefetcher.modelPrefetch = (bibs) => (bibs)
     }
   } else {
     modelPrefetcher.modelPrefetch = async (bibs) => {
@@ -640,8 +642,8 @@ const cancelRun = (message) => {
 const run = async () => {
   dotenv.config({ path: argv.envfile })
 
-  if (process.env.SCHEMA_FILE) {
-    process.env.USER_SCHEMA = require(process.env.SCHEMA_FILE)
+  if (argv.schema_file) {
+    process.env.USER_SCHEMA = require(argv.schema_file)
   }
 
   if (argv.user_schema) {
