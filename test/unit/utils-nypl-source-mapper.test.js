@@ -142,6 +142,22 @@ describe('utils/NyplSourceMapper', function () {
       expect(split.nyplSource).to.eq('recap-hl')
       expect(split.id).to.be.eq('123')
     })
+
+    it('should allow extra character prefixes on partner bib ids', function () {
+      const split = sourceMapperInstance.splitIdentifier('cbin1234')
+      expect(split).to.be.a('object')
+      expect(split.type).to.eq('bib')
+      expect(split.nyplSource).to.eq('recap-cul')
+      expect(split.id).to.be.eq('in1234')
+    })
+
+    it('should allow extra character prefixes on partner item ids', function () {
+      const split = sourceMapperInstance.splitIdentifier('cifoo1234')
+      expect(split).to.be.a('object')
+      expect(split.type).to.eq('item')
+      expect(split.nyplSource).to.eq('recap-cul')
+      expect(split.id).to.be.eq('foo1234')
+    })
   })
 
   describe('prefix', async function () {
