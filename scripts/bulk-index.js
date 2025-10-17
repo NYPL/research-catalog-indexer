@@ -63,6 +63,18 @@
  *      envfile {string}: Path to local .env file. Default ./config/qa-bulk-index.env
  *      table {string}: Override primary table name used (e.g. bib_v2)
  *
+ *  III. Perform property-specific bib-only update:
+ *
+ *      node scripts/bulk-index.js [...bulk index args]  --properties subjectLiteral,addedAuthorTitle --skipPrefetch true --updateOnly true
+ *
+ *      Perform bulk update to specified properties. To date, this script is intended for use on bib-level properties
+ *      with no dependencies on item or holding data.
+ *
+ *      Arguments:
+ *        any bulk-index argument for specifying the scope of the update
+ *        properties {string}: comma-delineated list of bib-level properties to run update for
+ *        skipPrefetch {boolean}: flag to skip item and holding fetches from the DB, as well as API calls to M2 customer code store and SCSB
+ *        updateOnly {boolean}: flag to run as update only script and not standard bulk index overwrite
  */
 const fs = require('fs')
 const { parse: csvParse } = require('csv-parse/sync')
@@ -146,8 +158,8 @@ const usage = () => {
     '  node reindex-record --envfile [path to .env] --type (bib|item) --nyplSource SOURCE [--hasSubfield S]',
     'Reindex by CSV (containing prefixed ids):',
     '  node reindex-record --envfile [path to .env] --csv FILE --csvIdColumn 0',
-    'Perform any reindex only for a specific bib-only properties',
-    'node scripts/bulk-index.js --csv spaghetti.csv --csvIdColumn 0 --properties subjectLiteral,addedAuthorTitle --nyplSource sierra-nypl --skipPrefetch true --type bib --updateOnly true'
+    'Perform any reindex only for specific bib-only properties by adding the following to any reindex args: ',
+    '  --properties subjectLiteral,addedAuthorTitle --skipPrefetch true  --updateOnly true'
   ].join('\n'))
   return true
 }
