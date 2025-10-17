@@ -119,6 +119,7 @@ const {
 const { setCredentials: kmsSetCredentials } = require('../lib/kms')
 const logger = require('../lib/logger')
 const { loadNyplCoreData } = require('../lib/load-core-data.js')
+const { SkipPrefetchError } = require('../lib/errors.js')
 logger.setLevel(process.env.LOG_LEVEL || 'info')
 
 if (process.env.NEW_RELIC_LICENSE_KEY && process.env.NEW_RELIC_APP_NAME) {
@@ -150,7 +151,6 @@ const db = {
    *  Initialize all db connection pools
    */
   initPools: async () => {
-    console.log('initpools')
     db.dbConnectionPools = {
       itemService: await db.initPool('ITEM'),
       bibService: await db.initPool('BIB'),
@@ -285,11 +285,11 @@ const overwriteSchema = () => {
   const newSchema = {}
   argv.properties.split(',').forEach((prop) => { newSchema[prop] = true })
   schema.schema = () => {
-    logger.info('meep morp new schema')
     return newSchema
   }
   schema.schema.originalMethod = originalSchemaMethod
 }
+
 const restoreSchema = () => {
   if (schema.schema.originalFunction) {
     schema.schema = schema.schema.originalFunction
@@ -478,7 +478,6 @@ const buildSqlQuery = (options) => {
  *  Reindex a bunch of bibs based on a BibService query
  */
 const updateByBibOrItemServiceQuery = async (options) => {
-  console.log('spaghetti')
   options = Object.assign({
     // Default progress logger:
     progressCallback: (count, total, startTime) => printProgress(count, total, argv.batchSize, startTime)
@@ -525,10 +524,12 @@ const updateByBibOrItemServiceQuery = async (options) => {
             processed = true
           })
           .catch(async (e) => {
-            logger.warn(`Retrying due to error: ${e}`)
-            console.trace(e)
-            await delay(3000)
-            retries -= 1
+            if (!(e instanceof SkipPrefetchError)) {
+              logger.warn(`Retrying due to error: ${e}`)
+              console.trace(e)
+              await delay(3000)
+              retries -= 1
+            } else throw e
           })
       }
       count += rows.length
@@ -649,7 +650,6 @@ const cancelRun = (message) => {
 
 // Main dispatcher:
 const run = async () => {
-  console.log('run')
   dotenv.config({ path: argv.envfile })
 
   // Validate args:
@@ -686,7 +686,6 @@ const run = async () => {
     ) || argv.nyplSource
   ) {
     await db.initPools()
-    console.log('spaghetti')
     await updateByBibOrItemServiceQuery(argv)
       .catch((e) => {
         logger.error('Error ', e)
@@ -694,7 +693,6 @@ const run = async () => {
       })
     db.endPools()
   }
-  console.log("xxx")
   // Disable direct-db access to Item, Bib, and Holdings services (formality)
   restoreModelPrefetch()
   restoreGeneralPrefetch()
