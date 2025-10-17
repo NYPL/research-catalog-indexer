@@ -58,19 +58,19 @@ describe('bib activity', () => {
       expect(terms).to.deep.equal(
         [
           {
-            preferredTerm: 'University of Utah -- Periodicals',
+            preferredTerm: 'University of Utah -- Periodicals.',
             sourceId: 'b11655934'
           },
           {
-            preferredTerm: 'Education, Higher -- Utah -- Periodicals',
+            preferredTerm: 'Education, Higher -- Utah -- Periodicals.',
             sourceId: 'b11655934'
           },
           {
-            preferredTerm: 'Milestones -- England -- Devon',
+            preferredTerm: 'Milestones -- England -- Devon.',
             sourceId: 'b10554618'
           },
           {
-            preferredTerm: 'Devon (England) -- Description and travel',
+            preferredTerm: 'Devon (England) -- Description and travel.',
             sourceId: 'b10554618'
           }
         ]
@@ -85,11 +85,11 @@ describe('bib activity', () => {
       expect(terms).to.deep.equal(
         [
           {
-            preferredTerm: 'Milestones -- England -- Devon',
+            preferredTerm: 'Milestones -- England -- Devon.',
             sourceId: 'b10554618'
           },
           {
-            preferredTerm: 'Devon (England) -- Description and travel',
+            preferredTerm: 'Devon (England) -- Description and travel.',
             sourceId: 'b10554618'
           }
         ]
@@ -104,12 +104,12 @@ describe('bib activity', () => {
       const terms = await determineUpdatedTerms('subjectLiteral', ids, freshBibs)
       expect(terms).to.deep.equal([
         {
-          preferredTerm: 'University of Utah -- Periodicals',
+          preferredTerm: 'University of Utah -- Periodicals.',
           sourceId: 'b11655934someDiff'
         },
         { preferredTerm: 'University of Utah -- Perixxxdicals' },
         {
-          preferredTerm: 'Devon (England) -- Description and travel',
+          preferredTerm: 'Devon (England) -- Description and travel.',
           sourceId: 'b10554618someDiff'
         }
       ])
@@ -150,8 +150,8 @@ describe('bib activity', () => {
     it('returns objects without parallels', async () => {
       const bib = toIndex.find(({ id }) => id === '11655934')
       expect(await getSubjectModels(new EsBib(new SierraBib(bib)))).to.deep.eq([
-        { preferredTerm: 'University of Utah -- Periodicals', sourceId: 'b11655934' },
-        { preferredTerm: 'Education, Higher -- Utah -- Periodicals', sourceId: 'b11655934' }
+        { preferredTerm: 'University of Utah -- Periodicals.', sourceId: 'b11655934' },
+        { preferredTerm: 'Education, Higher -- Utah -- Periodicals.', sourceId: 'b11655934' }
       ])
     })
     it('can handle orphan parallels', async () => {
@@ -252,11 +252,11 @@ describe('bib activity', () => {
           return a.preferredTerm.toLowerCase() > b.preferredTerm.toLowerCase() ? 1 : -1
         })
         expect(sortedCountEvents.map((event) => event.preferredTerm)).to.deep.eq([
-          'Devon (England) -- Description and travel',
-          'Education, Higher -- Utah -- Periodicals',
-          'English drama',
-          'Milestones -- England -- Devon',
-          'University of Utah -- Periodicals'
+          'Devon (England) -- Description and travel.',
+          'Education, Higher -- Utah -- Periodicals.',
+          'English drama.',
+          'Milestones -- England -- Devon.',
+          'University of Utah -- Periodicals.'
         ])
       })
     })
@@ -274,16 +274,16 @@ describe('bib activity', () => {
         // subjects from live bibs as well as additional subjects from bib event
         expect(sortedCountEvents.map((event) => event.preferredTerm)).to.deep.eq([
           'an',
-          'Armenians -- Iran -- History',
-          'Devon (England) -- Description and travel',
-          'Education, Higher -- Utah -- Periodicals',
-          'English drama',
-          'Milestones -- England -- Devon',
+          'Armenians -- Iran -- History.',
+          'Devon (England) -- Description and travel.',
+          'Education, Higher -- Utah -- Periodicals.',
+          'English drama.',
+          'Milestones -- England -- Devon.',
           'old',
           'stale',
           'subject',
-          'subject -- from -- suppressed bib',
-          'University of Utah -- Periodicals'
+          'subject -- from -- suppressed bib.',
+          'University of Utah -- Periodicals.'
         ])
       })
     })
