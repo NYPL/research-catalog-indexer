@@ -65,7 +65,7 @@ const argv = require('minimist')(process.argv.slice(2), {
     offset: 0,
     batchSize: 100,
     nyplSource: 'sierra-nypl',
-    dryrun: true,
+    dryrun: false,
     envfile: './config/qa-bulk-index.env'
   },
   string: ['hasMarc', 'hasSubfield', 'bibId', 'fromDate', 'toDate'],
@@ -282,12 +282,13 @@ const sierraHoldingsByBibIds = async (bibIds) => {
 
 const overwriteSchema = () => {
   const originalSchemaMethod = schema.schema
-  const newSchema = {}
+  const newSchema = { uri: true }
   argv.properties.split(',').filter((property) => {
     const validSchemaProp = !!originalSchemaMethod()[property]
     if (!validSchemaProp) throw new Error(`${property} not a valid ES document property.`)
     return validSchemaProp
   }).forEach((prop) => { newSchema[prop] = true })
+  console.log(newSchema)
   schema.schema = () => {
     return newSchema
   }
@@ -522,7 +523,7 @@ const updateByBibOrItemServiceQuery = async (options) => {
       let retries = 3
       let processed = false
       while (!processed && retries > 0) {
-        await indexer.processRecords(capitalize(type), records, { dryrun: options.dryrun })
+        await indexer.processRecords(capitalize(type), records, { updateOnly: true, dryrun: options.dryrun })
           .then(() => {
             if (retries < 3) logger.info(`Succeeded on retry ${3 - retries}`)
             processed = true

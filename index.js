@@ -35,6 +35,7 @@ const handler = async (event, context, callback) => {
 
 const processRecords = async (type, records, options = {}) => {
   options = Object.assign({
+    updateOnly: false,
     dryrun: false
   }, options)
   // Ensure event has Bib records:
@@ -62,11 +63,13 @@ const processRecords = async (type, records, options = {}) => {
   }
 
   if (plainObjectEsDocuments.length) {
+    console.log(options)
+
     if (options.dryrun) {
       logger.info(`DRYRUN: Skipping writing ${plainObjectEsDocuments.length} records`)
     } else {
       // Write records to ES:
-      await elastic.writeRecords(plainObjectEsDocuments)
+      await elastic.writeRecords(plainObjectEsDocuments, options.updateOnly)
 
       // Write to IndexDocumentProcessed Kinesis stream:
       await notifyDocumentProcessed(plainObjectEsDocuments)
