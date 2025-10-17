@@ -283,7 +283,11 @@ const sierraHoldingsByBibIds = async (bibIds) => {
 const overwriteSchema = () => {
   const originalSchemaMethod = schema.schema
   const newSchema = {}
-  argv.properties.split(',').forEach((prop) => { newSchema[prop] = true })
+  argv.properties.split(',').filter((property) => {
+    const validSchemaProp = !!originalSchemaMethod()[property]
+    if (!validSchemaProp) throw new Error(`${property} not a valid ES document property.`)
+    return validSchemaProp
+  }).forEach((prop) => { newSchema[prop] = true })
   schema.schema = () => {
     return newSchema
   }
