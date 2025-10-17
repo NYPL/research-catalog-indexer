@@ -336,7 +336,6 @@ const overwriteModelPrefetch = () => {
     }
   }
 
-
   modelPrefetcher.modelPrefetch.originalFunction = originalFunction
 }
 
