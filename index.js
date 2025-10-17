@@ -5,11 +5,12 @@ const suppress = require('./lib/utils/suppressBibs')
 const { buildEsDocument, transformIntoBibRecords } = require('./lib/build-es-document')
 const { truncate } = require('./lib/utils')
 const { notifyDocumentProcessed } = require('./lib/streams-client')
-// const browse = require('./lib/browse-terms')
+const browse = require('./lib/browse-terms')
 const { filteredSierraBibsForBibs } = require('./lib/prefilter')
 const { loadNyplCoreData } = require('./lib/load-core-data')
-// const SierraBib = require('./lib/sierra-models/bib')
-// const EsBib = require('./lib/es-models/bib')
+const { schema } = require('./lib/elastic-search/index-schema')
+const SierraBib = require('./lib/sierra-models/bib')
+const EsBib = require('./lib/es-models/bib')
 
 /**
  * Main lambda handler receiving Bib, Item, and Holding events
@@ -36,7 +37,6 @@ const processRecords = async (type, records, options = {}) => {
   options = Object.assign({
     dryrun: false
   }, options)
-
   // Ensure event has Bib records:
   records = await transformIntoBibRecords(type, records)
 
@@ -46,18 +46,23 @@ const processRecords = async (type, records, options = {}) => {
   const recordsToDelete = type === 'Bib' ? removedBibs : []
 
   const esModels = await buildEsDocument(filteredBibs)
-  const plainObjectEsDocuments = esModels.map((record) => record.toJson())
+  const plainObjectEsDocuments = esModels.map((record) => {
+    const x = record.toPlainObject(schema())
+    return x
+  })
   const messages = []
 
   // Fetch subjects from all bibs, whether they are updates, creates, or deletes,
   // and transmit to the browse pipeline. This must happen before writes to the
   // resources index to determine any diff between new and old subjects
-  // const esModelsForDeletions = removedBibs.map(bib => new EsBib(new SierraBib(bib)))
-  // const changedRecords = [...esModels, ...esModelsForDeletions]
-  // let browseTermDiffs
-  // if ((changedRecords.length) && type === 'Bib') {
-  //   browseTermDiffs = await browse.buildBibSubjectEvents(changedRecords)
-  // }
+  let browseTermDiffs
+  if (process.env.EMIT_BROWSE_TERMS) {
+    const esModelsForDeletions = removedBibs.map(bib => new EsBib(new SierraBib(bib)))
+    const changedRecords = [...esModels, ...esModelsForDeletions]
+    if ((changedRecords.length) && type === 'Bib') {
+      browseTermDiffs = await browse.buildBibSubjectEvents(changedRecords)
+    }
+  }
 
   if (plainObjectEsDocuments.length) {
     if (options.dryrun) {
@@ -84,7 +89,9 @@ const processRecords = async (type, records, options = {}) => {
 
     messages.push(`Deleted ${recordsToDelete.length} doc(s)`)
   }
-  // await browse.emitBibSubjectEvents(browseTermDiffs)
+  if (process.env.EMIT_BROWSE_TERMS) {
+    await browse.emitBibSubjectEvents(browseTermDiffs)
+  }
   const message = messages.length ? messages.join('; ') : 'Nothing to do.'
 
   logger.info((options.dryrun ? 'DRYRUN: ' : '') + message)
