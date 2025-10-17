@@ -11,8 +11,6 @@
  *
  *    Arguments:
  *      type {string}: Required. One of item or bib
- *      hasMarc {string}: Marc tag that must be present in the record
- *      hasSubfield {string}: When used with hasMarc, restricts to records matching both marc tag and subfield
  *      nyplSource {string}: NYPL Source value. Default 'sierra-nypl'
  *      orderBy {string}: Columns to order query by. Default '' (no sort).
  *        e.g. `--orderBy id`. Sortable columns include `id`, `updated_date`,
@@ -37,13 +35,7 @@
  *
  *    Examples
  *
- *    To reindex all NYPL bibs with marc 001 in QA:
- *      node scripts/bulk-index.js --type bib --hasMarc 001
- *
- *    To reindex all NYPL bibs with 700 $t in QA:
- *      node scripts/bulk-index.js --type bib --hasMarc 700 --hasSubfield t
- *
- *    To reindex all bibs in QA:
+ *    To reindex all nypl bibs in QA:
  *      node scripts/bulk-index.js --type bib
  *
  *  II. Updating by CSV:
@@ -73,14 +65,15 @@ const argv = require('minimist')(process.argv.slice(2), {
     offset: 0,
     batchSize: 100,
     nyplSource: 'sierra-nypl',
-    dryrun: false,
+    dryrun: true,
     envfile: './config/qa-bulk-index.env'
   },
   string: ['hasMarc', 'hasSubfield', 'bibId', 'fromDate', 'toDate'],
+  boolean: ['loadItems'],
   integer: ['limit', 'offset', 'batchSize']
 })
 
-const isCalledViaCommandLine = /scripts\/bulk-index(.js)?/.test(fs.realpathSync(process.argv[1]))
+const isCalledViaCommandLine = /scripts\/bulk-property-update(.js)?/.test(fs.realpathSync(process.argv[1]))
 
 const dotenv = require('dotenv')
 
@@ -106,7 +99,8 @@ const { Pool } = require('pg')
 const Cursor = require('pg-cursor')
 
 const kms = require('../lib/kms.js')
-const modelPrefetcher = require('../lib/prefetch.js')
+const schema = require('../lib/elastic-search/index-schema.js')
+const prefetchers = require('../lib/prefetch')
 const indexer = require('../index')
 const {
   filteredSierraItemsForItems,
@@ -156,6 +150,7 @@ const db = {
    *  Initialize all db connection pools
    */
   initPools: async () => {
+    console.log('initpools')
     db.dbConnectionPools = {
       itemService: await db.initPool('ITEM'),
       bibService: await db.initPool('BIB'),
@@ -285,55 +280,86 @@ const sierraHoldingsByBibIds = async (bibIds) => {
   return holdingsByBibId
 }
 
+const overwriteSchema = () => {
+  const originalSchemaMethod = schema.schema
+  const newSchema = {}
+  argv.properties.split(',').forEach((prop) => { newSchema[prop] = true })
+  schema.schema = () => newSchema
+  schema.schema.originalMethod = originalSchemaMethod
+}
+const restoreSchema = () => {
+  if (schema.schema.originalFunction) {
+    schema.schema = schema.schema.originalFunction
+      .bind(schema)
+  }
+}
+
 /**
  *  Here we're overwriting the application modelPrefetch routine to prefetch
  *  items and holdings by direct sql connection to the Item- and
  *  HoldingsService databases
  */
-
-const overwriteModelPrefetch = () => {
-  const originalFunction = modelPrefetcher.modelPrefetch
-
-  modelPrefetcher.modelPrefetch = async (bibs) => {
-    if (bibs.length === 0) return bibs
-    const distinctSources = Array.from(new Set(bibs.map((b) => b.nyplSource)))
-    if (distinctSources.length > 1) {
-      throw new Error(`Model prefetch encountered batch with multiple nyplSources: ${distinctSources.join(',')}`)
-    }
-
-    // Get distinct bib ids:
-    const bibIds = Array.from(new Set(bibs.map((b) => b.id)))
-    const nyplSource = bibs[0].nyplSource
-
-    // Fetch all items and holdings for this set of bibs:
-    const [itemsByBibId, holdingsByBibId] = await Promise.all([
-      sierraItemsByBibIds(bibIds, nyplSource),
-      nyplSource === 'sierra-nypl' ? sierraHoldingsByBibIds(bibIds) : Promise.resolve({})
-    ])
-
-    // Attach holdings and items to bibs:
-    bibs = bibs.map((bib) => {
-      // Wrap in SierraHolding class and apply suppression:
-      bib._holdings = filteredSierraHoldingsForHoldings(holdingsByBibId[bib.id] || [])
-      // Apply suppression/is-research filtering to items:
-      bib._items = filteredSierraItemsForItems(itemsByBibId[bib.id]) || []
-      // Ensure items have a reference to their bib:
-      bib._items.forEach((item) => {
-        item._bibs = [bib]
-      })
-      return bib
-    })
-
-    return bibs
+const fetchFromDbConnection = async (bibs) => {
+  if (bibs.length === 0) return bibs
+  const distinctSources = Array.from(new Set(bibs.map((b) => b.nyplSource)))
+  if (distinctSources.length > 1) {
+    throw new Error(`Model prefetch encountered batch with multiple nyplSources: ${distinctSources.join(',')}`)
   }
 
-  modelPrefetcher.modelPrefetch.originalFunction = originalFunction
+  // Get distinct bib ids:
+  const bibIds = Array.from(new Set(bibs.map((b) => b.id)))
+  const nyplSource = bibs[0].nyplSource
+
+  // Fetch all items and holdings for this set of bibs:
+  const [itemsByBibId, holdingsByBibId] = await Promise.all([
+    sierraItemsByBibIds(bibIds, nyplSource),
+    nyplSource === 'sierra-nypl' ? sierraHoldingsByBibIds(bibIds) : Promise.resolve({})
+  ])
+
+  // Attach holdings and items to bibs:
+  bibs = bibs.map((bib) => {
+    // Wrap in SierraHolding class and apply suppression:
+    bib._holdings = filteredSierraHoldingsForHoldings(holdingsByBibId[bib.id] || [])
+    // Apply suppression/is-research filtering to items:
+    bib._items = filteredSierraItemsForItems(itemsByBibId[bib.id]) || []
+    // Ensure items have a reference to their bib:
+    bib._items.forEach((item) => {
+      item._bibs = [bib]
+    })
+    return bib
+  })
+
+  return bibs
+}
+
+const overwriteGeneralPrefetch = () => {
+  const originalFunction = prefetchers.generalPrefetch
+  if (argv.skipModelPrefetch) {
+    prefetchers.generalPrefetch = async (bibs) => Promise.resolve(bibs)
+
+    prefetchers.modelPrefetch.originalFunction = originalFunction
+  }
+}
+
+const restoreGeneralPrefetch = () => {
+  if (prefetchers.generalPrefetch.originalFunction) {
+    prefetchers.generalPrefetch = prefetchers.generalPrefetch.originalFunction
+      .bind(prefetchers)
+  }
+}
+
+const overwriteModelPrefetch = () => {
+  const originalFunction = prefetchers.modelPrefetch
+  if (argv.skipModelPrefetch) prefetchers.modelPrefetch = async (bibs) => Promise.resolve(bibs)
+  else prefetchers.modelPrefetch = fetchFromDbConnection
+
+  prefetchers.modelPrefetch.originalFunction = originalFunction
 }
 
 const restoreModelPrefetch = () => {
-  if (modelPrefetcher.modelPrefetch.originalFunction) {
-    modelPrefetcher.modelPrefetch = modelPrefetcher.modelPrefetch.originalFunction
-      .bind(modelPrefetcher)
+  if (prefetchers.modelPrefetch.originalFunction) {
+    prefetchers.modelPrefetch = prefetchers.modelPrefetch.originalFunction
+      .bind(prefetchers)
   }
 }
 
@@ -341,19 +367,8 @@ const restoreModelPrefetch = () => {
 * Build a Bib/Item Service db query based on given options.
 *
 * Supported options:
-* - bibId {number} - Bib id
-* - itemId {number} - Bib id
-* - ids {int[]} - Array of ids
-* - type {string} - Either 'bib' or 'item'
 * - nyplSource {string}
-* - hasMarc {string} - Query by presence of a marc field (e.g. '001')
-* - hasSubfield {string} - When used with hasMarc, restricts to records with given marc tag and subfield (e.g. 't')
-* - limit {integer} - Limit query to count
-* - offset {integer} - Start query at offset
-* - orderBy {string} - SQL phrase to use in ORDER BY ...
-* - fromDate {string} - Date string at the bottom of range for updated_date field
-* - toDate {string} - Date string at the top of range for updated_date field
-* - table {string} - Defaults to using the type (bib, item) as table name, but this field lets you specify a different table e.g. bib_v2
+
 **/
 const buildSqlQuery = (options) => {
   let sqlFromAndWhere = null
@@ -460,6 +475,7 @@ const buildSqlQuery = (options) => {
  *  Reindex a bunch of bibs based on a BibService query
  */
 const updateByBibOrItemServiceQuery = async (options) => {
+  console.log('spaghetti')
   options = Object.assign({
     // Default progress logger:
     progressCallback: (count, total, startTime) => printProgress(count, total, argv.batchSize, startTime)
@@ -630,19 +646,12 @@ const cancelRun = (message) => {
 
 // Main dispatcher:
 const run = async () => {
+  console.log('run')
   dotenv.config({ path: argv.envfile })
 
   // Validate args:
   if (
-    (
-      !(argv.type) &&
-      !argv.bibId &&
-      !argv.itemId &&
-      !argv.csv
-    ) || (
-      argv.type &&
-      !['bib', 'item'].includes(argv.type)
-    )
+    !argv.properties
   ) {
     usage()
     cancelRun('Insufficient params')
@@ -650,7 +659,8 @@ const run = async () => {
 
   // Enable direct-db access to Item, Bib, and Holdings services:
   overwriteModelPrefetch()
-
+  overwriteGeneralPrefetch()
+  overwriteSchema()
   // Require one of:
   // - csv
   // - bib/item id
@@ -670,9 +680,10 @@ const run = async () => {
         argv.nyplSource ||
         argv.fromDate
       )
-    )
+    ) || argv.nyplSource
   ) {
     await db.initPools()
+    console.log('spaghetti')
     await updateByBibOrItemServiceQuery(argv)
       .catch((e) => {
         logger.error('Error ', e)
@@ -680,8 +691,11 @@ const run = async () => {
       })
     db.endPools()
   }
+  console.log("xxx")
   // Disable direct-db access to Item, Bib, and Holdings services (formality)
   restoreModelPrefetch()
+  restoreGeneralPrefetch()
+  restoreSchema()
 }
 
 if (isCalledViaCommandLine) {
