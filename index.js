@@ -69,12 +69,8 @@ const processRecords = async (type, records, options = {}) => {
     } else {
       // Write records to ES:
       await elastic.writeRecords(plainObjectEsDocuments, options.updateOnly)
-      if (!process.env.SKIP_NOTIFY) {
-        const notifyTimer = Timer.startNew('notifyDocumentProcessed')
         // Write to IndexDocumentProcessed Kinesis stream:
         await notifyDocumentProcessed(plainObjectEsDocuments)
-        notifyTimer.endTimer()
-        notifyTimer.howMany('seconds')
       }
     }
     // Log out a summary of records updated:
