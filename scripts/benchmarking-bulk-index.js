@@ -66,7 +66,6 @@
  */
 const fs = require('fs')
 const { parse: csvParse } = require('csv-parse/sync')
-const { Timer } = require('../timers.js')
 
 const argv = require('minimist')(process.argv.slice(2), {
   default: {
@@ -123,7 +122,8 @@ const {
   die,
   camelize,
   capitalize,
-  printProgress
+  printProgress,
+  Timer
 } = require('./utils.js')
 const { setCredentials: kmsSetCredentials } = require('../lib/kms.js')
 const logger = require('../lib/logger.js')
