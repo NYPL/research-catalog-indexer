@@ -45,7 +45,7 @@ describe('bib activity', () => {
       const freshBibs = [
         devonBib,
         utahBib].map((bib) => new EsBib(new SierraBib({ ...bib, id: `${bib.id}sameAsFresh` })))
-      const ids = await Promise.all(freshBibs.map(async (bib) => await bib.uri()))
+      const ids = freshBibs.map((bib) => bib.uri())
       const terms = await determineUpdatedTerms('subjectLiteral', ids, freshBibs)
       expect(terms).to.deep.equal([])
     })
@@ -53,7 +53,7 @@ describe('bib activity', () => {
       const freshBibs = [
         utahBib,
         devonBib].map((bib) => new EsBib(new SierraBib(bib)))
-      const ids = await Promise.all(freshBibs.map(async (bib) => await bib.uri()))
+      const ids = freshBibs.map((bib) => bib.uri())
       const terms = await determineUpdatedTerms('subjectLiteral', ids, freshBibs)
       expect(terms).to.deep.equal(
         [
@@ -80,7 +80,7 @@ describe('bib activity', () => {
       const freshBibs = [
         devonBib, devonBib
       ].map((bib) => new EsBib(new SierraBib(bib)))
-      const ids = await Promise.all(freshBibs.map(async (bib) => await bib.uri()))
+      const ids = freshBibs.map((bib) => bib.uri())
       const terms = await determineUpdatedTerms('subjectLiteral', ids, freshBibs)
       expect(terms).to.deep.equal(
         [
@@ -100,7 +100,7 @@ describe('bib activity', () => {
       const freshBibs = [
         require('../fixtures/bib-11655934.json'),
         require('../fixtures/bib-10554618.json')].map((bib) => new EsBib(new SierraBib({ ...bib, id: `${bib.id}someDiff` })))
-      const ids = await Promise.all(freshBibs.map(async (bib) => await bib.uri()))
+      const ids = freshBibs.map((bib) => bib.uri())
       const terms = await determineUpdatedTerms('subjectLiteral', ids, freshBibs)
       expect(terms).to.deep.equal([
         {
@@ -246,7 +246,7 @@ describe('bib activity', () => {
         process.env.INGEST_BROWSE_TERMS = false
       })
       it('can handle a combination of deleted and updated sierra bibs, and filters non research and suppressed, and ignores indexed subject data', async () => {
-        const records = [...toIndex, ...toDelete].map((record) => new SierraBib(record))
+        const records = [...toIndex, ...toDelete].map((record) => new EsBib(new SierraBib(record)))
         const countEvents = await buildBibSubjectEvents(records)
         const sortedCountEvents = countEvents.sort((a, b) => {
           return a.preferredTerm.toLowerCase() > b.preferredTerm.toLowerCase() ? 1 : -1
@@ -265,7 +265,7 @@ describe('bib activity', () => {
         process.env.INGEST_BROWSE_TERMS = false
       })
       it('calls determineUpdatedTerms', async () => {
-        const records = [...toIndex, ...toDelete].map((record) => new SierraBib(record))
+        const records = [...toIndex, ...toDelete].map((record) => new EsBib(new SierraBib(record)))
         const countEvents = await buildBibSubjectEvents(records)
         const sortedCountEvents = countEvents.sort((a, b) => {
           return a.preferredTerm.toLowerCase() > b.preferredTerm.toLowerCase() ? 1 : -1
@@ -279,7 +279,9 @@ describe('bib activity', () => {
           'Education, Higher -- Utah -- Periodicals',
           'English drama',
           'Milestones -- England -- Devon',
-          'old', 'stale', 'subject',
+          'old',
+          'stale',
+          'subject',
           'subject -- from -- suppressed bib',
           'University of Utah -- Periodicals'
         ])

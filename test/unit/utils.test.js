@@ -87,31 +87,31 @@ describe('utils', () => {
     })
   })
 
-  describe('sortByAsyncSortKey', () => {
-    it('sorts array of values by an async getter', async () => {
+  describe('sortByKey', () => {
+    it('sorts array of values by a getter', () => {
       const input = ['element 2', 'element 1', 'element 4', 'element 3']
-      const sorted = await utils.sortByAsyncSortKey(input, (element) => Promise.resolve(element))
+      const sorted = utils.sortByKey(input, (element) => element)
       expect(sorted).to.deep.equal([
         'element 1', 'element 2', 'element 3', 'element 4'
       ])
     })
 
-    it('sorts array of values by an async member function', async () => {
+    it('sorts array of values by a member function', () => {
       const input = [
-        { id: 'element 2', sortKey: () => Promise.resolve(2) },
-        { id: 'element 1', sortKey: () => Promise.resolve(1) },
-        { id: 'element 4', sortKey: () => Promise.resolve(4) },
-        { id: 'element 3', sortKey: () => Promise.resolve(3) }
+        { id: 'element 2', sortKey: () => 2 },
+        { id: 'element 1', sortKey: () => 1 },
+        { id: 'element 4', sortKey: () => 4 },
+        { id: 'element 3', sortKey: () => 3 }
       ]
-      const sorted = await utils.sortByAsyncSortKey(input, (element) => element.sortKey())
+      const sorted = utils.sortByKey(input, (element) => element.sortKey())
       expect(sorted.map((el) => el.id)).to.deep.equal([
         'element 1', 'element 2', 'element 3', 'element 4'
       ])
     })
 
-    it('supports reverse sorting', async () => {
+    it('supports reverse sorting', () => {
       const input = ['element 2', 'element 1', 'element 4', 'element 3']
-      const sorted = await utils.sortByAsyncSortKey(input, (element) => Promise.resolve(element), 'desc')
+      const sorted = utils.sortByKey(input, (element) => element, 'desc')
       expect(sorted).to.deep.equal([
         'element 4', 'element 3', 'element 2', 'element 1'
       ])

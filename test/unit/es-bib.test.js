@@ -27,14 +27,14 @@ describe('EsBib', function () {
     it('should return correctly prefixed uri for nypl bib', async function () {
       const record = new SierraBib(require('../fixtures/bib-10001936.json'))
       const esBib = new EsBib(record)
-      const uri = await esBib.uri()
+      const uri = esBib.uri()
       expect(uri).to.eq('b10001936')
     })
 
     it('should return correctly prefixed uri for partner bib', async function () {
       const record = new SierraBib(require('../fixtures/bib-hl990000453050203941.json'))
       const esBib = new EsBib(record)
-      const uri = await esBib.uri()
+      const uri = esBib.uri()
       expect(uri).to.eq('hb990000453050203941')
     })
   })
