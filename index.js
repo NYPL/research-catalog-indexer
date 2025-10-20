@@ -69,7 +69,8 @@ const processRecords = async (type, records, options = {}) => {
       // Write records to ES:
       await elastic.writeRecords(plainObjectEsDocuments, options.updateOnly)
       // Write to IndexDocumentProcessed Kinesis stream:
-      await notifyDocumentProcessed(plainObjectEsDocuments)
+      // Skipping is default when running a bulk index script
+      if (!process.env.SKIP_DOC_PROCESSED_STREAM) await notifyDocumentProcessed(plainObjectEsDocuments)
     }
     // Log out a summary of records updated:
     const summary = truncate(plainObjectEsDocuments.map((record) => record.uri).join(','), 100)

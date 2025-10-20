@@ -84,7 +84,7 @@ const argv = require('minimist')(process.argv.slice(2), {
     limit: null,
     offset: 0,
     batchSize: 100,
-    nyplSource: 'sierra-nypl',
+    // nyplSource: 'sierra-nypl',
     dryrun: false,
     updateOnly: false,
     envfile: './config/qa-bulk-index.env',
@@ -716,31 +716,31 @@ const run = async () => {
   // - csv
   // - bib/item id
   // - type, plus another qualifier (hasMarc or nyplSource)
-  if (argv.csv) {
-    await updateByCsv(argv)
-      .catch((e) => {
-        logger.error(`Error: ${e.message}`, e)
-      })
-  } else if (
-    argv.bibId ||
-    argv.itemId ||
-    (
-      argv.type &&
-      (
-        argv.hasMarc ||
-        argv.nyplSource ||
-        argv.fromDate
-      )
-    )
-  ) {
-    await db.initPools()
-    await updateByBibOrItemServiceQuery(argv)
-      .catch((e) => {
-        logger.error('Error ', e)
-        logger.error(e.stack)
-      })
-    db.endPools()
-  }
+  // if (argv.csv) {
+  //   await updateByCsv(argv)
+  //     .catch((e) => {
+  //       logger.error(`Error: ${e.message}`, e)
+  //     })
+  // } else if (
+  //   argv.bibId ||
+  //   argv.itemId ||
+  //   (
+  //     argv.type &&
+  //     (
+  //       argv.hasMarc ||
+  //       argv.nyplSource ||
+  //       argv.fromDate
+  //     )
+  //   )
+  // ) {
+  await db.initPools()
+  await updateByBibOrItemServiceQuery(argv)
+    .catch((e) => {
+      logger.error('Error ', e)
+      logger.error(e.stack)
+    })
+  db.endPools()
+  // }
   // Disable direct-db access to Item, Bib, and Holdings services (formality)
   restoreModelPrefetch()
   restoreGeneralPrefetch()
