@@ -11,7 +11,6 @@ const { loadNyplCoreData } = require('./lib/load-core-data')
 const schema = require('./lib/elastic-search/index-schema')
 const SierraBib = require('./lib/sierra-models/bib')
 const EsBib = require('./lib/es-models/bib')
-const { Timer } = require('./timers')
 
 /**
  * Main lambda handler receiving Bib, Item, and Holding events
@@ -69,9 +68,8 @@ const processRecords = async (type, records, options = {}) => {
     } else {
       // Write records to ES:
       await elastic.writeRecords(plainObjectEsDocuments, options.updateOnly)
-        // Write to IndexDocumentProcessed Kinesis stream:
-        await notifyDocumentProcessed(plainObjectEsDocuments)
-      }
+      // Write to IndexDocumentProcessed Kinesis stream:
+      await notifyDocumentProcessed(plainObjectEsDocuments)
     }
     // Log out a summary of records updated:
     const summary = truncate(plainObjectEsDocuments.map((record) => record.uri).join(','), 100)

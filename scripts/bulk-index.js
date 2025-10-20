@@ -754,7 +754,6 @@ if (isCalledViaCommandLine) {
       total.endTimer()
       total.howMany('hours')
     })
-
   })
 }
 
