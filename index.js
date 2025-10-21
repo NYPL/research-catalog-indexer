@@ -87,7 +87,7 @@ const processRecords = async (type, records, options = {}) => {
     messages.push(`Deleted ${recordsToDelete.length} doc(s)`)
   }
   if (process.env.EMIT_BROWSE_TERMS) {
-    await browse.emitBibSubjectEvents(browseTermDiffs)
+    browse.emitBibSubjectEvents(browseTermDiffs)
   }
   const message = messages.length ? messages.join('; ') : 'Nothing to do.'
 
