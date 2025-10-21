@@ -142,6 +142,7 @@ const { setCredentials: kmsSetCredentials } = require('../lib/kms')
 const logger = require('../lib/logger')
 const { loadNyplCoreData } = require('../lib/load-core-data.js')
 const { SkipPrefetchError } = require('../lib/errors.js')
+const { Timer } = require('../timers.js')
 logger.setLevel(process.env.LOG_LEVEL || 'info')
 
 if (process.env.NEW_RELIC_LICENSE_KEY && process.env.NEW_RELIC_APP_NAME) {
@@ -747,7 +748,13 @@ const run = async () => {
 }
 
 if (isCalledViaCommandLine) {
-  loadNyplCoreData().then(() => run())
+  loadNyplCoreData().then(() => {
+    const total = Timer.startNew('bulk update')
+    run().then(() => {
+      total.endTimer()
+      total.howMany('hours')
+    })
+  })
 }
 
 module.exports = {
