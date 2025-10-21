@@ -76,6 +76,7 @@ describe('EsBib', function () {
     it('returns collection id(s) that correspond to item holding locations', async () => {
       const bib = new SierraBib(require('../fixtures/bib-11606020.json'))
       bib._items = []
+      bib._holdings = []
       // An item from Maps
       bib._items.push(new SierraItem(require('../fixtures/item-14441624.json')))
       expect(await (new EsBib(bib)).collectionIds()).to.deep.equal(['map'])
@@ -91,11 +92,13 @@ describe('EsBib', function () {
     it('checks fixed field 26 for location on bibs with no items', async () => {
       const resBib = new SierraBib(require('../fixtures/bib-15109087.json'))
       resBib._items = []
+      resBib._holdings = []
       // fixed field 26 on this bib has value: "mal "
       expect(await (new EsBib(resBib)).collectionIds()).to.deep.equal(['mal'])
 
       const scbBib = new SierraBib(require('../fixtures/bib-22027953.json'))
       scbBib._items = []
+      scbBib._holdings = []
       // fixed field 26 on this bib has value: "scb "
       expect(await (new EsBib(scbBib)).collectionIds()).to.deep.equal(['scb'])
     })
@@ -1105,7 +1108,7 @@ describe('EsBib', function () {
     it('should respect the order that subjects were catalogged in', () => {
       const record = new SierraBib(require('../fixtures/bib-subject-order.json'))
       const esBib = new EsBib(record)
-      expect(esBib.subjectLiteral()[0]).to.deep.equal('Motion picture actors and actresses')
+      expect(esBib.subjectLiteral()[0]).to.deep.equal('Motion picture actors and actresses.')
     })
     it('should return an array of subject literals with " " joiner around certain subfields', () => {
       const record = new SierraBib(require('../fixtures/bib-parallels-chaos.json'))
@@ -1122,7 +1125,7 @@ describe('EsBib', function () {
     it('should return an array of subject literals with " -- " joiner around other subfields', () => {
       const record = new SierraBib(require('../fixtures/bib-10001936.json'))
       const esBib = new EsBib(record)
-      expect(esBib.subjectLiteral()).to.deep.equal(['Armenians -- Iran -- History'])
+      expect(esBib.subjectLiteral()).to.deep.equal(['Armenians -- Iran -- History.'])
     })
 
     it('subjectLiteral_exploded', () => {
@@ -1653,6 +1656,7 @@ describe('EsBib', function () {
         new SierraItem(require('../fixtures/item-10003973.json')),
         new SierraItem(require('../fixtures/item-17145801.json'))
       ]
+      sierraBib._holdings = []
       bib = new EsBib(sierraBib)
     })
 
@@ -1748,6 +1752,7 @@ describe('EsBib', function () {
         new SierraItem(require('../fixtures/item-10003973.json')),
         new SierraItem(require('../fixtures/item-17145801.json'))
       ]
+      sierraBib._holdings = []
       bib = new EsBib(sierraBib)
     })
 
@@ -1760,6 +1765,7 @@ describe('EsBib', function () {
     it('builds array of plain, distinct building ids from item locations', async () => {
       const bib = new SierraBib(require('../fixtures/bib-10001936.json'))
       bib._items = []
+      bib._holdings = []
       // Adopt a RC items:
       bib._items.push(new SierraItem(require('../fixtures/item-10003973.json')))
       expect(await (new EsBib(bib)).buildingLocationIds()).to.deep.equal(['rc'])
