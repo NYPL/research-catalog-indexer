@@ -78,7 +78,6 @@
  */
 const fs = require('fs')
 const { parse: csvParse } = require('csv-parse/sync')
-
 const argv = require('minimist')(process.argv.slice(2), {
   default: {
     limit: null,
@@ -143,6 +142,7 @@ const { setCredentials: kmsSetCredentials } = require('../lib/kms')
 const logger = require('../lib/logger')
 const { loadNyplCoreData } = require('../lib/load-core-data.js')
 const { SkipPrefetchError } = require('../lib/errors.js')
+const { setIndexToNoRefresh, setIndexRefresh } = require('../lib/elastic-search/requests.js')
 logger.setLevel(process.env.LOG_LEVEL || 'info')
 
 if (process.env.NEW_RELIC_LICENSE_KEY && process.env.NEW_RELIC_APP_NAME) {
@@ -691,7 +691,6 @@ const cancelRun = (message) => {
 // Main dispatcher:
 const run = async () => {
   dotenv.config({ path: argv.envfile })
-
   // Validate args:
   if (
     (
@@ -747,12 +746,22 @@ const run = async () => {
   restoreSchema()
 }
 
+const preflightSetup = async () => {
+  await setIndexToNoRefresh()
+  await loadNyplCoreData()
+  totalTimer.startTimer()
+}
+
+const cleanup = async () => {
+  await setIndexRefresh(process.env.ELASTIC_RESOURCES_INDEX, 30)
+}
+
+const totalTimer = new Timer('bulk update')
+
 if (isCalledViaCommandLine) {
-  loadNyplCoreData().then(() => {
-    const total = Timer.startNew('bulk update')
+  preflightSetup.then(() => {
     run().then(() => {
-      total.endTimer()
-      total.howMany('hours')
+      cleanup()
     })
   })
 }

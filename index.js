@@ -87,7 +87,8 @@ const processRecords = async (type, records, options = {}) => {
     messages.push(`Deleted ${recordsToDelete.length} doc(s)`)
   }
   if (process.env.EMIT_BROWSE_TERMS) {
-    await browse.emitBibSubjectEvents(browseTermDiffs)
+    const subjectHandler = process.env.BTI_INDEX_PATH ? browse.emitBibSubjectsToLocalBti : browse.emitBibSubjectsToLocalBti
+    await subjectHandler(browseTermDiffs)
   }
   const message = messages.length ? messages.join('; ') : 'Nothing to do.'
 
