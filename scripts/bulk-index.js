@@ -75,7 +75,7 @@
  *        properties {string}: comma-delineated list of bib-level properties to run update for
  *        skipPrefetch {boolean}: flag to skip item and holding fetches from the DB, as well as API calls to M2 customer code store and SCSB
  *        updateOnly {boolean}: flag to run as update only script and not standard bulk index overwrite
- *        
+ *
  *      SKIP_PREFETCH and UPDATE_ONLY can both be passed in as environment variables as well.
  */
 const fs = require('fs')
@@ -758,17 +758,17 @@ const run = async () => {
   restoreSchema()
 }
 
-const preflightSetup = async () => {
-  await setIndexToNoRefresh()
-  await loadNyplCoreData()
-  totalTimer.startTimer()
-}
+// const preflightSetup = async () => {
+//   await setIndexToNoRefresh()
+//   await loadNyplCoreData()
+//   totalTimer.startTimer()
+// }
 
-const cleanup = async () => {
-  await setIndexRefresh(process.env.ELASTIC_RESOURCES_INDEX, 30)
-}
+// const cleanup = async () => {
+//   await setIndexRefresh(process.env.ELASTIC_RESOURCES_INDEX, 30)
+// }
 
-const totalTimer = new Timer('bulk update')
+// const totalTimer = new Timer('bulk update')
 
 if (isCalledViaCommandLine) {
   // preflightSetup().then(() => {
