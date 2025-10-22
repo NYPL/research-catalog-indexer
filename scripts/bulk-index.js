@@ -83,7 +83,7 @@ const argv = require('minimist')(process.argv.slice(2), {
     limit: null,
     offset: 0,
     batchSize: 100,
-    // nyplSource: 'sierra-nypl',
+    nyplSource: 'sierra-nypl',
     dryrun: false,
     updateOnly: false,
     envfile: './config/qa-bulk-index.env',
