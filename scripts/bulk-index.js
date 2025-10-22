@@ -366,7 +366,7 @@ const fetchFromDbConnection = async (bibs) => {
 
 const overwriteGeneralPrefetch = () => {
   const originalFunction = prefetchers.generalPrefetch
-  if (argv.skipPrefetch) {
+  if (argv.skipPrefetch || process.env.SKIP_PREFETCH) {
     prefetchers.generalPrefetch = async (bibs) => Promise.resolve(bibs)
 
     prefetchers.modelPrefetch.originalFunction = originalFunction
@@ -382,7 +382,7 @@ const restoreGeneralPrefetch = () => {
 
 const overwriteModelPrefetch = () => {
   const originalFunction = prefetchers.modelPrefetch
-  if (argv.skipPrefetch) prefetchers.modelPrefetch = async (bibs) => Promise.resolve(bibs)
+  if (argv.skipPrefetch || process.env.SKIP_PREFETCH) prefetchers.modelPrefetch = async (bibs) => Promise.resolve(bibs)
   else prefetchers.modelPrefetch = fetchFromDbConnection
 
   prefetchers.modelPrefetch.originalFunction = originalFunction
@@ -558,7 +558,7 @@ const updateByBibOrItemServiceQuery = async (options) => {
       let retries = 3
       let processed = false
       while (!processed && retries > 0) {
-        await indexer.processRecords(capitalize(type), records, { updateOnly: argv.updateOnly, dryrun: argv.dryrun })
+        await indexer.processRecords(capitalize(type), records, { updateOnly: process.env.UPDATE_ONLY || argv.updateOnly, dryrun: argv.dryrun })
           .then(() => {
             if (retries < 3) logger.info(`Succeeded on retry ${3 - retries}`)
             processed = true
@@ -759,11 +759,12 @@ const cleanup = async () => {
 const totalTimer = new Timer('bulk update')
 
 if (isCalledViaCommandLine) {
-  preflightSetup.then(() => {
-    run().then(() => {
-      cleanup()
-    })
-  })
+  // preflightSetup().then(() => {
+  loadNyplCoreData().then(run)
+  // .then(() => {
+  //   cleanup()
+  // })
+  // })
 }
 
 module.exports = {
