@@ -75,6 +75,8 @@
  *        properties {string}: comma-delineated list of bib-level properties to run update for
  *        skipPrefetch {boolean}: flag to skip item and holding fetches from the DB, as well as API calls to M2 customer code store and SCSB
  *        updateOnly {boolean}: flag to run as update only script and not standard bulk index overwrite
+ *        
+ *      SKIP_PREFETCH and UPDATE_ONLY can both be passed in as environment variables as well.
  */
 const fs = require('fs')
 const { parse: csvParse } = require('csv-parse/sync')
