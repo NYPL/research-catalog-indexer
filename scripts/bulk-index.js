@@ -698,7 +698,7 @@ const cancelRun = (message) => {
 const run = async () => {
   dotenv.config({ path: argv.envfile })
   // Validate args:
-  if (argv.updateOnly && !argv.properties) {
+  if (!(process.env.UPDATE_ONLY || argv.updateOnly) && (argv.properties)) {
     logger.error('Must provide --properties on command line if --updateOnly is true.')
     cancelRun('Insufficient params')
   }
