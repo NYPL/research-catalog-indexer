@@ -570,7 +570,12 @@ const updateByBibOrItemServiceQuery = async (options) => {
               console.trace(e)
               await delay(3000)
               retries -= 1
-            } else throw e
+            } else {
+              cursor.close(() => {
+                client.release()
+              })
+              throw e
+            }
           })
       }
       count += rows.length
@@ -720,31 +725,31 @@ const run = async () => {
   // - csv
   // - bib/item id
   // - type, plus another qualifier (hasMarc or nyplSource)
-  // if (argv.csv) {
-  //   await updateByCsv(argv)
-  //     .catch((e) => {
-  //       logger.error(`Error: ${e.message}`, e)
-  //     })
-  // } else if (
-  //   argv.bibId ||
-  //   argv.itemId ||
-  //   (
-  //     argv.type &&
-  //     (
-  //       argv.hasMarc ||
-  //       argv.nyplSource ||
-  //       argv.fromDate
-  //     )
-  //   )
-  // ) {
-  await db.initPools()
-  await updateByBibOrItemServiceQuery(argv)
-    .catch((e) => {
-      logger.error('Error ', e)
-      logger.error(e.stack)
-    })
-  db.endPools()
-  // }
+  if (argv.csv) {
+    await updateByCsv(argv)
+      .catch((e) => {
+        logger.error(`Error: ${e.message}`, e)
+      })
+  } else if (
+    argv.bibId ||
+    argv.itemId ||
+    (
+      argv.type &&
+      (
+        argv.hasMarc ||
+        argv.nyplSource ||
+        argv.fromDate
+      )
+    )
+  ) {
+    await db.initPools()
+    await updateByBibOrItemServiceQuery(argv)
+      .catch((e) => {
+        logger.error('Error ', e)
+        logger.error(e.stack)
+      })
+    db.endPools()
+  }
   // Disable direct-db access to Item, Bib, and Holdings services (formality)
   restoreModelPrefetch()
   restoreGeneralPrefetch()
