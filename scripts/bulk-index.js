@@ -87,7 +87,8 @@ const argv = require('minimist')(process.argv.slice(2), {
     dryrun: false,
     updateOnly: false,
     envfile: './config/qa-bulk-index.env',
-    skipPrefetch: false
+    skipPrefetch: false,
+    properties: ''
   },
   boolean: ['updateOnly'],
   string: ['hasMarc', 'hasSubfield', 'bibId', 'fromDate', 'toDate'],
@@ -153,13 +154,13 @@ const usage = () => {
   console.log([
     'Usage:',
     'Reindex a single record:',
-    '  node reindex-record --envfile [path to .env] (--bibId id|--itemId id)',
+    '  node bulk-index --envfile [path to .env] (--bibId id|--itemId id)',
     'Reindex by has-marc:',
-    '  node reindex-record --envfile [path to .env] --type (bib|item) --hasMarc 001 [--hasSubfield S]',
+    '  node bulk-index --envfile [path to .env] --type (bib|item) --hasMarc 001 [--hasSubfield S]',
     'Reindex by nypl-source:',
-    '  node reindex-record --envfile [path to .env] --type (bib|item) --nyplSource SOURCE [--hasSubfield S]',
+    '  node bulk-index --envfile [path to .env] --type (bib|item) --nyplSource SOURCE [--hasSubfield S]',
     'Reindex by CSV (containing prefixed ids):',
-    '  node reindex-record --envfile [path to .env] --csv FILE --csvIdColumn 0',
+    '  node bulk-index --envfile [path to .env] --csv FILE --csvIdColumn 0',
     'Perform any reindex only for specific bib-only properties by adding the following to any reindex args: ',
     '  --properties subjectLiteral,addedAuthorTitle --skipPrefetch true  --updateOnly true'
   ].join('\n'))
@@ -692,6 +693,10 @@ const cancelRun = (message) => {
 const run = async () => {
   dotenv.config({ path: argv.envfile })
   // Validate args:
+  if (argv.updateOnly && !argv.properties) {
+    logger.error('Must provide --properties on command line if --updateOnly is true.')
+    cancelRun('Insufficient params')
+  }
   if (
     (
       !(argv.type) &&
