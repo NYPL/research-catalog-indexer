@@ -58,19 +58,19 @@ describe('bib activity', () => {
       expect(terms).to.deep.equal(
         [
           {
-            preferredTerm: 'University of Utah -- Periodicals',
+            preferredTerm: 'University of Utah -- Periodicals.',
             sourceId: 'b11655934'
           },
           {
-            preferredTerm: 'Education, Higher -- Utah -- Periodicals',
+            preferredTerm: 'Education, Higher -- Utah -- Periodicals.',
             sourceId: 'b11655934'
           },
           {
-            preferredTerm: 'Milestones -- England -- Devon',
+            preferredTerm: 'Milestones -- England -- Devon.',
             sourceId: 'b10554618'
           },
           {
-            preferredTerm: 'Devon (England) -- Description and travel',
+            preferredTerm: 'Devon (England) -- Description and travel.',
             sourceId: 'b10554618'
           }
         ]
@@ -85,11 +85,11 @@ describe('bib activity', () => {
       expect(terms).to.deep.equal(
         [
           {
-            preferredTerm: 'Milestones -- England -- Devon',
+            preferredTerm: 'Milestones -- England -- Devon.',
             sourceId: 'b10554618'
           },
           {
-            preferredTerm: 'Devon (England) -- Description and travel',
+            preferredTerm: 'Devon (England) -- Description and travel.',
             sourceId: 'b10554618'
           }
         ]
@@ -104,7 +104,7 @@ describe('bib activity', () => {
       const terms = await determineUpdatedTerms('subjectLiteral', ids, freshBibs)
       expect(terms).to.deep.equal([
         {
-          preferredTerm: 'University of Utah -- Periodicals',
+          preferredTerm: 'University of Utah -- Periodicals.',
           sourceId: 'b11655934someDiff'
         },
         { preferredTerm: 'University of Utah -- Perixxxdicals' },
@@ -142,16 +142,16 @@ describe('bib activity', () => {
       expect(await getSubjectModels(new EsBib(new SierraBib(bib)))).to.deep.eq([
         {
           sourceId: 'parallelsChaos',
-          preferredTerm: '600 primary value a 600 primary value b',
-          variant: '‏600 parallel value a 600 parallel value b'
+          preferredTerm: '600 primary value a 600 primary value b.',
+          variant: '‏600 parallel value a 600 parallel value b.'
         }
       ])
     })
     it('returns objects without parallels', async () => {
       const bib = toIndex.find(({ id }) => id === '11655934')
       expect(await getSubjectModels(new EsBib(new SierraBib(bib)))).to.deep.eq([
-        { preferredTerm: 'University of Utah -- Periodicals', sourceId: 'b11655934' },
-        { preferredTerm: 'Education, Higher -- Utah -- Periodicals', sourceId: 'b11655934' }
+        { preferredTerm: 'University of Utah -- Periodicals.', sourceId: 'b11655934' },
+        { preferredTerm: 'Education, Higher -- Utah -- Periodicals.', sourceId: 'b11655934' }
       ])
     })
     it('can handle orphan parallels', async () => {
@@ -182,7 +182,7 @@ describe('bib activity', () => {
       expect(await getSubjectModels(new EsBib(new SierraBib(bib)))).to.deep.eq([
         {
           sourceId: '123',
-          variant: '‏600 orphaned parallel value a 600 orphaned parallel value b'
+          variant: '‏600 orphaned parallel value a 600 orphaned parallel value b.'
         }
       ])
     })
@@ -198,7 +198,7 @@ describe('bib activity', () => {
           ]
         }
       })
-      expect(labels).to.deep.equal({ preferredTerm: 'preferredTerm a preferredTerm b' })
+      expect(labels).to.deep.equal({ preferredTerm: 'preferredTerm a preferredTerm b.' })
     })
     it('can handle preferredTerm and parallel', () => {
       const labels = getPrimaryAndParallelLabels({
@@ -206,7 +206,7 @@ describe('bib activity', () => {
           marcTag: '600',
           subfields: [
             { tag: 'a', content: 'preferredTerm a' },
-            { tag: 'b', content: 'preferredTerm b' }
+            { tag: 'b', content: 'preferredTerm b.' }
           ]
         },
         parallel: {
@@ -220,7 +220,7 @@ describe('bib activity', () => {
         }
       })
       expect(labels).to.deep.equal(
-        { preferredTerm: 'preferredTerm a preferredTerm b', variant: 'parallel a parallel b' })
+        { preferredTerm: 'preferredTerm a preferredTerm b.', variant: 'parallel a parallel b.' })
     })
   })
   describe('buildSubjectDiff', () => {
@@ -252,11 +252,11 @@ describe('bib activity', () => {
           return a.preferredTerm.toLowerCase() > b.preferredTerm.toLowerCase() ? 1 : -1
         })
         expect(sortedCountEvents.map((event) => event.preferredTerm)).to.deep.eq([
-          'Devon (England) -- Description and travel',
-          'Education, Higher -- Utah -- Periodicals',
-          'English drama',
-          'Milestones -- England -- Devon',
-          'University of Utah -- Periodicals'
+          'Devon (England) -- Description and travel.',
+          'Education, Higher -- Utah -- Periodicals.',
+          'English drama.',
+          'Milestones -- England -- Devon.',
+          'University of Utah -- Periodicals.'
         ])
       })
     })
@@ -274,16 +274,16 @@ describe('bib activity', () => {
         // subjects from live bibs as well as additional subjects from bib event
         expect(sortedCountEvents.map((event) => event.preferredTerm)).to.deep.eq([
           'an',
-          'Armenians -- Iran -- History',
-          'Devon (England) -- Description and travel',
-          'Education, Higher -- Utah -- Periodicals',
-          'English drama',
-          'Milestones -- England -- Devon',
+          'Armenians -- Iran -- History.',
+          'Devon (England) -- Description and travel.',
+          'Education, Higher -- Utah -- Periodicals.',
+          'English drama.',
+          'Milestones -- England -- Devon.',
           'old',
           'stale',
           'subject',
-          'subject -- from -- suppressed bib',
-          'University of Utah -- Periodicals'
+          'subject -- from -- suppressed bib.',
+          'University of Utah -- Periodicals.'
         ])
       })
     })
