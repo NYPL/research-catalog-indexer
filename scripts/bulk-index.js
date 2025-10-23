@@ -138,7 +138,7 @@ const {
   camelize,
   capitalize,
   printProgress,
-  Timer,
+  Timer
 } = require('./utils')
 const schema = require('../lib/elastic-search/index-schema.js')
 const { setCredentials: kmsSetCredentials } = require('../lib/kms')
