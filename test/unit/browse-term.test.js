@@ -199,7 +199,7 @@ describe('bib activity', () => {
           ]
         }
       })
-      expect(labels).to.deep.equal({ preferredTerm: 'preferredTerm a preferredTerm b', suppress: false })
+      expect(labels).to.deep.equal({ preferredTerm: 'preferredTerm a preferredTerm b.', suppress: false })
     })
     it('can handle preferredTerm and parallel', () => {
       const labels = getPrimaryAndParallelLabels({
@@ -223,7 +223,7 @@ describe('bib activity', () => {
         }
       })
       expect(labels).to.deep.equal(
-        { preferredTerm: 'preferredTerm a preferredTerm b', suppress: false, variant: 'parallel a parallel b' })
+        { preferredTerm: 'preferredTerm a preferredTerm b.', suppress: false, variant: 'parallel a parallel b.' })
     })
   })
   describe('buildSubjectDiff', () => {
