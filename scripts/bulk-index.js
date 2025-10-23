@@ -63,10 +63,24 @@
  *      envfile {string}: Path to local .env file. Default ./config/qa-bulk-index.env
  *      table {string}: Override primary table name used (e.g. bib_v2)
  *
+ *  III. Perform property-specific bib-only update:
+ *
+ *      node scripts/bulk-index.js [...bulk index args]  --batchSize 1000 (recommended) --properties subjectLiteral,addedAuthorTitle (--skipPrefetch true --updateOnly true) (not required if passed as env vars)
+ *
+ *      Perform bulk update to specified properties. To date, this script is intended for use on bib-level properties
+ *      with no dependencies on item or holding data. Recommended params include --batchSize 1000, as well as setting
+ *      process.env.STOP_REFRESH to true to avoid latency in the resources index while running.
+ *
+ *      Arguments:
+ *        any bulk-index argument for specifying the scope of the update
+ *        properties {string}: comma-delineated list of bib-level properties to run update for
+ *        skipPrefetch {boolean}: flag to skip item and holding fetches from the DB, as well as API calls to M2 customer code store and SCSB
+ *        updateOnly {boolean}: flag to run as update only script and not standard bulk index overwrite
+ *
+ *      SKIP_PREFETCH and UPDATE_ONLY can both be passed in as environment variables as well.
  */
 const fs = require('fs')
 const { parse: csvParse } = require('csv-parse/sync')
-
 const argv = require('minimist')(process.argv.slice(2), {
   default: {
     limit: null,
@@ -74,8 +88,12 @@ const argv = require('minimist')(process.argv.slice(2), {
     batchSize: 100,
     nyplSource: 'sierra-nypl',
     dryrun: false,
-    envfile: './config/qa-bulk-index.env'
+    updateOnly: false,
+    envfile: './config/qa-bulk-index.env',
+    skipPrefetch: false,
+    properties: ''
   },
+  boolean: ['updateOnly'],
   string: ['hasMarc', 'hasSubfield', 'bibId', 'fromDate', 'toDate'],
   integer: ['limit', 'offset', 'batchSize']
 })
@@ -106,7 +124,7 @@ const { Pool } = require('pg')
 const Cursor = require('pg-cursor')
 
 const kms = require('../lib/kms.js')
-const modelPrefetcher = require('../lib/model-prefetch')
+const prefetchers = require('../lib/prefetch.js')
 const indexer = require('../index')
 const {
   filteredSierraItemsForItems,
@@ -120,11 +138,15 @@ const {
   die,
   camelize,
   capitalize,
-  printProgress
+  printProgress,
+  Timer
 } = require('./utils')
+const schema = require('../lib/elastic-search/index-schema.js')
 const { setCredentials: kmsSetCredentials } = require('../lib/kms')
 const logger = require('../lib/logger')
 const { loadNyplCoreData } = require('../lib/load-core-data.js')
+const { SkipPrefetchError } = require('../lib/errors.js')
+const { setIndexToNoRefresh, setIndexRefresh } = require('../lib/elastic-search/requests.js')
 logger.setLevel(process.env.LOG_LEVEL || 'info')
 
 if (process.env.NEW_RELIC_LICENSE_KEY && process.env.NEW_RELIC_APP_NAME) {
@@ -135,13 +157,15 @@ const usage = () => {
   console.log([
     'Usage:',
     'Reindex a single record:',
-    '  node reindex-record --envfile [path to .env] (--bibId id|--itemId id)',
+    '  node bulk-index --envfile [path to .env] (--bibId id|--itemId id)',
     'Reindex by has-marc:',
-    '  node reindex-record --envfile [path to .env] --type (bib|item) --hasMarc 001 [--hasSubfield S]',
+    '  node bulk-index --envfile [path to .env] --type (bib|item) --hasMarc 001 [--hasSubfield S]',
     'Reindex by nypl-source:',
-    '  node reindex-record --envfile [path to .env] --type (bib|item) --nyplSource SOURCE [--hasSubfield S]',
+    '  node bulk-index --envfile [path to .env] --type (bib|item) --nyplSource SOURCE [--hasSubfield S]',
     'Reindex by CSV (containing prefixed ids):',
-    '  node reindex-record --envfile [path to .env] --csv FILE --csvIdColumn 0'
+    '  node bulk-index --envfile [path to .env] --csv FILE --csvIdColumn 0',
+    'Perform any reindex only for specific bib-only properties by adding the following to any reindex args: ',
+    '  --properties subjectLiteral,addedAuthorTitle --skipPrefetch true  --updateOnly true'
   ].join('\n'))
   return true
 }
@@ -285,55 +309,93 @@ const sierraHoldingsByBibIds = async (bibIds) => {
   return holdingsByBibId
 }
 
+const overwriteSchema = () => {
+  const originalSchemaMethod = schema.schema
+  const newSchema = { uri: true }
+  argv.properties.split(',').filter((property) => {
+    const validSchemaProp = !!originalSchemaMethod()[property]
+    if (!validSchemaProp) throw new Error(`${property} not a valid ES document property.`)
+    return validSchemaProp
+  }).forEach((prop) => { newSchema[prop] = true })
+  schema.schema = () => {
+    return newSchema
+  }
+  schema.schema.originalMethod = originalSchemaMethod
+}
+
+const restoreSchema = () => {
+  if (schema.schema.originalFunction) {
+    schema.schema = schema.schema.originalFunction
+      .bind(schema)
+  }
+}
+
 /**
  *  Here we're overwriting the application modelPrefetch routine to prefetch
  *  items and holdings by direct sql connection to the Item- and
  *  HoldingsService databases
  */
-
-const overwriteModelPrefetch = () => {
-  const originalFunction = modelPrefetcher.modelPrefetch
-
-  modelPrefetcher.modelPrefetch = async (bibs) => {
-    if (bibs.length === 0) return bibs
-    const distinctSources = Array.from(new Set(bibs.map((b) => b.nyplSource)))
-    if (distinctSources.length > 1) {
-      throw new Error(`Model prefetch encountered batch with multiple nyplSources: ${distinctSources.join(',')}`)
-    }
-
-    // Get distinct bib ids:
-    const bibIds = Array.from(new Set(bibs.map((b) => b.id)))
-    const nyplSource = bibs[0].nyplSource
-
-    // Fetch all items and holdings for this set of bibs:
-    const [itemsByBibId, holdingsByBibId] = await Promise.all([
-      sierraItemsByBibIds(bibIds, nyplSource),
-      nyplSource === 'sierra-nypl' ? sierraHoldingsByBibIds(bibIds) : Promise.resolve({})
-    ])
-
-    // Attach holdings and items to bibs:
-    bibs = bibs.map((bib) => {
-      // Wrap in SierraHolding class and apply suppression:
-      bib._holdings = filteredSierraHoldingsForHoldings(holdingsByBibId[bib.id] || [])
-      // Apply suppression/is-research filtering to items:
-      bib._items = filteredSierraItemsForItems(itemsByBibId[bib.id]) || []
-      // Ensure items have a reference to their bib:
-      bib._items.forEach((item) => {
-        item._bibs = [bib]
-      })
-      return bib
-    })
-
-    return bibs
+const fetchFromDbConnection = async (bibs) => {
+  if (bibs.length === 0) return bibs
+  const distinctSources = Array.from(new Set(bibs.map((b) => b.nyplSource)))
+  if (distinctSources.length > 1) {
+    throw new Error(`Model prefetch encountered batch with multiple nyplSources: ${distinctSources.join(',')}`)
   }
 
-  modelPrefetcher.modelPrefetch.originalFunction = originalFunction
+  // Get distinct bib ids:
+  const bibIds = Array.from(new Set(bibs.map((b) => b.id)))
+  const nyplSource = bibs[0].nyplSource
+
+  // Fetch all items and holdings for this set of bibs:
+  const [itemsByBibId, holdingsByBibId] = await Promise.all([
+    sierraItemsByBibIds(bibIds, nyplSource),
+    nyplSource === 'sierra-nypl' ? sierraHoldingsByBibIds(bibIds) : Promise.resolve({})
+  ])
+
+  // Attach holdings and items to bibs:
+  bibs = bibs.map((bib) => {
+    // Wrap in SierraHolding class and apply suppression:
+    bib._holdings = filteredSierraHoldingsForHoldings(holdingsByBibId[bib.id] || [])
+    // Apply suppression/is-research filtering to items:
+    bib._items = filteredSierraItemsForItems(itemsByBibId[bib.id]) || []
+    // Ensure items have a reference to their bib:
+    bib._items.forEach((item) => {
+      item._bibs = [bib]
+    })
+    return bib
+  })
+
+  return bibs
+}
+
+const overwriteGeneralPrefetch = () => {
+  const originalFunction = prefetchers.generalPrefetch
+  if (argv.skipPrefetch || process.env.SKIP_PREFETCH) {
+    prefetchers.generalPrefetch = async (bibs) => Promise.resolve(bibs)
+
+    prefetchers.modelPrefetch.originalFunction = originalFunction
+  }
+}
+
+const restoreGeneralPrefetch = () => {
+  if (prefetchers.generalPrefetch.originalFunction) {
+    prefetchers.generalPrefetch = prefetchers.generalPrefetch.originalFunction
+      .bind(prefetchers)
+  }
+}
+
+const overwriteModelPrefetch = () => {
+  const originalFunction = prefetchers.modelPrefetch
+  if (argv.skipPrefetch || process.env.SKIP_PREFETCH) prefetchers.modelPrefetch = async (bibs) => Promise.resolve(bibs)
+  else prefetchers.modelPrefetch = fetchFromDbConnection
+
+  prefetchers.modelPrefetch.originalFunction = originalFunction
 }
 
 const restoreModelPrefetch = () => {
-  if (modelPrefetcher.modelPrefetch.originalFunction) {
-    modelPrefetcher.modelPrefetch = modelPrefetcher.modelPrefetch.originalFunction
-      .bind(modelPrefetcher)
+  if (prefetchers.modelPrefetch.originalFunction) {
+    prefetchers.modelPrefetch = prefetchers.modelPrefetch.originalFunction
+      .bind(prefetchers)
   }
 }
 
@@ -500,16 +562,23 @@ const updateByBibOrItemServiceQuery = async (options) => {
       let retries = 3
       let processed = false
       while (!processed && retries > 0) {
-        await indexer.processRecords(capitalize(type), records, { dryrun: options.dryrun })
+        await indexer.processRecords(capitalize(type), records, { updateOnly: process.env.UPDATE_ONLY || argv.updateOnly, dryrun: argv.dryrun })
           .then(() => {
             if (retries < 3) logger.info(`Succeeded on retry ${3 - retries}`)
             processed = true
           })
           .catch(async (e) => {
-            logger.warn(`Retrying due to error: ${e}`)
-            console.trace(e)
-            await delay(3000)
-            retries -= 1
+            if (!(e instanceof SkipPrefetchError)) {
+              logger.warn(`Retrying due to error: ${e}`)
+              console.trace(e)
+              await delay(3000)
+              retries -= 1
+            } else {
+              cursor.close(() => {
+                client.release()
+              })
+              throw e
+            }
           })
       }
       count += rows.length
@@ -631,8 +700,11 @@ const cancelRun = (message) => {
 // Main dispatcher:
 const run = async () => {
   dotenv.config({ path: argv.envfile })
-
   // Validate args:
+  if (!(process.env.UPDATE_ONLY || argv.updateOnly) && (argv.properties)) {
+    logger.error('Must provide --properties on command line if --updateOnly is true.')
+    cancelRun('Insufficient params')
+  }
   if (
     (
       !(argv.type) &&
@@ -650,7 +722,8 @@ const run = async () => {
 
   // Enable direct-db access to Item, Bib, and Holdings services:
   overwriteModelPrefetch()
-
+  overwriteGeneralPrefetch()
+  overwriteSchema()
   // Require one of:
   // - csv
   // - bib/item id
@@ -682,10 +755,26 @@ const run = async () => {
   }
   // Disable direct-db access to Item, Bib, and Holdings services (formality)
   restoreModelPrefetch()
+  restoreGeneralPrefetch()
+  restoreSchema()
 }
 
+const preflightSetup = async () => {
+  if (process.env.STOP_REFRESH === 'true') await setIndexToNoRefresh()
+  await loadNyplCoreData()
+  totalTimer.startTimer()
+}
+
+const cleanup = async () => {
+  if (process.env.STOP_REFRESH === 'true') await setIndexRefresh(process.env.ELASTIC_RESOURCES_INDEX, 30)
+  totalTimer.endTimer()
+  totalTimer.howMany('hours')
+}
+
+const totalTimer = new Timer('bulk update')
+
 if (isCalledViaCommandLine) {
-  loadNyplCoreData().then(() => run())
+  preflightSetup().then(run).then(cleanup)
 }
 
 module.exports = {

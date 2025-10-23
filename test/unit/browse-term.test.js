@@ -109,7 +109,7 @@ describe('bib activity', () => {
         },
         { preferredTerm: 'University of Utah -- Perixxxdicals' },
         {
-          preferredTerm: 'Devon (England) -- Description and travel',
+          preferredTerm: 'Devon (England) -- Description and travel.',
           sourceId: 'b10554618someDiff'
         }
       ])
@@ -191,6 +191,7 @@ describe('bib activity', () => {
     it('can handle no parallels', () => {
       const labels = getPrimaryAndParallelLabels({
         marc: {
+          ind2: '0',
           marcTag: '600',
           subfields: [
             { tag: 'a', content: 'preferredTerm a' },
@@ -198,11 +199,12 @@ describe('bib activity', () => {
           ]
         }
       })
-      expect(labels).to.deep.equal({ preferredTerm: 'preferredTerm a preferredTerm b.' })
+      expect(labels).to.deep.equal({ preferredTerm: 'preferredTerm a preferredTerm b', suppress: false })
     })
     it('can handle preferredTerm and parallel', () => {
       const labels = getPrimaryAndParallelLabels({
         marc: {
+          ind2: '0',
           marcTag: '600',
           subfields: [
             { tag: 'a', content: 'preferredTerm a' },
@@ -211,6 +213,7 @@ describe('bib activity', () => {
         },
         parallel: {
           marc: {
+            ind2: '0',
             marcTag: '880',
             subfields: [
               { tag: 'a', content: 'parallel a' },
@@ -220,7 +223,7 @@ describe('bib activity', () => {
         }
       })
       expect(labels).to.deep.equal(
-        { preferredTerm: 'preferredTerm a preferredTerm b.', variant: 'parallel a parallel b.' })
+        { preferredTerm: 'preferredTerm a preferredTerm b', suppress: false, variant: 'parallel a parallel b' })
     })
   })
   describe('buildSubjectDiff', () => {
