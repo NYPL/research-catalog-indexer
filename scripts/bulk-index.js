@@ -138,7 +138,7 @@ const {
   camelize,
   capitalize,
   printProgress,
-  Timer
+  Timer,
 } = require('./utils')
 const schema = require('../lib/elastic-search/index-schema.js')
 const { setCredentials: kmsSetCredentials } = require('../lib/kms')
@@ -758,25 +758,22 @@ const run = async () => {
   restoreSchema()
 }
 
-// const preflightSetup = async () => {
-//   await setIndexToNoRefresh()
-//   await loadNyplCoreData()
-//   totalTimer.startTimer()
-// }
+const preflightSetup = async () => {
+  if (process.env.STOP_REFRESH === 'true') await setIndexToNoRefresh()
+  await loadNyplCoreData()
+  totalTimer.startTimer()
+}
 
-// const cleanup = async () => {
-//   await setIndexRefresh(process.env.ELASTIC_RESOURCES_INDEX, 30)
-// }
+const cleanup = async () => {
+  if (process.env.STOP_REFRESH === 'true') await setIndexRefresh(process.env.ELASTIC_RESOURCES_INDEX, 30)
+  totalTimer.endTimer()
+  totalTimer.howMany('hours')
+}
 
-// const totalTimer = new Timer('bulk update')
+const totalTimer = new Timer('bulk update')
 
 if (isCalledViaCommandLine) {
-  // preflightSetup().then(() => {
-  loadNyplCoreData().then(run)
-  // .then(() => {
-  //   cleanup()
-  // })
-  // })
+  preflightSetup().then(run).then(cleanup)
 }
 
 module.exports = {
