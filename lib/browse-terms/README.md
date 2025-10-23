@@ -21,6 +21,7 @@ node scripts/bulk-index.js --properties subjectLiteral,parallelSubjectLiteral --
 - BTI_CONFIG_PATH - path from where script is invoked to where the BTI config is stored.
 - INGEST_BROWSE_TERMS (true) - indicates to the RCI to skip live bib browse term data fetching. We fetch those to ensure that any deleted subjects or updated subjects get updated counts. When ingesting, we are not worried about such potential diffs, because there are no diffs in an empty index.
 - EMIT_BROWSE_TERMS (true) - indicates to RCI to reprocess browse terms via exposed methods in `./index.js` and send them to, in this case, a local version of the BTI for indexing.
+- BROWSE_BATCH_SIZE (1000 recommended) - size of bulk requests sent to browse term index
 - SKIP_DOC_PROCESSED_STREAM (true) - we don't need to write completed processed documents to this kinesis stream, and skippin the avro encoding is good for performance.
 - SKIP_PREFETCH (true) - skip any item or holding DB or API prefetching. These fields are not needed for browse term updates
 - UPDATE_ONLY (true) - perform updates only to specific properties passed on command line instead of rewriting entire document
