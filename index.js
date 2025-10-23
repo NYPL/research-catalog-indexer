@@ -88,6 +88,7 @@ const processRecords = async (type, records, options = {}) => {
   }
   if (process.env.EMIT_BROWSE_TERMS) {
     const subjectHandler = process.env.BTI_INDEX_PATH ? browse.emitBibSubjectsToLocalBti : browse.emitBibSubjectsToLocalBti
+    console.log(browseTermDiffs.length)
     await subjectHandler(browseTermDiffs)
   }
   const message = messages.length ? messages.join('; ') : 'Nothing to do.'

@@ -484,7 +484,6 @@ class Timer {
     if (!time) time = this.howManyRaw()
     if (!name) name = this.name
     if (!unit) unit = 'seconds'
-    if (!Timer.allTimers[name].log) return
     const unitDivisor = {
       ms: 1,
       seconds: 1000,
