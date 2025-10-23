@@ -68,7 +68,7 @@
  *      node scripts/bulk-index.js [...bulk index args]  --batchSize 1000 (recommended) --properties subjectLiteral,addedAuthorTitle (--skipPrefetch true --updateOnly true) (not required if passed as env vars)
  *
  *      Perform bulk update to specified properties. To date, this script is intended for use on bib-level properties
- *      with no dependencies on item or holding data. Recommended params include --batchSize 1000, as well as setting 
+ *      with no dependencies on item or holding data. Recommended params include --batchSize 1000, as well as setting
  *      process.env.STOP_REFRESH to true to avoid latency in the resources index while running.
  *
  *      Arguments:
