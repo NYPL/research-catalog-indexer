@@ -467,10 +467,9 @@ const buildSqlQuery = (options) => {
     const selects = [table]
     // Build array of WHERE clauses:
     const wheres = []
-
     // Filter on nyplSource:
     if (options.nyplSource) {
-      wheres.push('nypl_source = $1')
+      wheres.push('NOT (nypl_source = $1)')
       params.push(options.nyplSource)
     }
 
