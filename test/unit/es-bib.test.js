@@ -1113,13 +1113,13 @@ describe('EsBib', function () {
     it('should return an array of subject literals with " " joiner around certain subfields', () => {
       const record = new SierraBib(require('../fixtures/bib-parallels-chaos.json'))
       const esBib = new EsBib(record)
-      expect(esBib.subjectLiteral()).to.deep.equal(['600 primary value a 600 primary value b'])
+      expect(esBib.subjectLiteral()).to.deep.equal(['600 primary value a 600 primary value b.'])
     })
 
     it('should trim whitespace', () => {
       const record = new SierraBib(require('../fixtures/bib-subject-spaces.json'))
       const esBib = new EsBib(record)
-      expect(esBib.subjectLiteral()).to.deep.equal(['600 primary value a 600 primary value b'])
+      expect(esBib.subjectLiteral()).to.deep.equal(['600 primary value a 600 primary value b.'])
     })
 
     it('should return an array of subject literals with " -- " joiner around other subfields', () => {
@@ -1152,7 +1152,7 @@ describe('EsBib', function () {
     it('should return parallelSubjectLiteral values', () => {
       const record = new SierraBib(require('../fixtures/bib-parallels-chaos.json'))
       const esBib = new EsBib(record)
-      expect(esBib.parallelSubjectLiteral()).to.deep.equal(['‏600 parallel value a 600 parallel value b'])
+      expect(esBib.parallelSubjectLiteral()).to.deep.equal(['‏600 parallel value a 600 parallel value b.'])
     })
     it('parallelSubjectLiteral shouldn\t have a problem with no parallel', () => {
       const record = new SierraBib(require('../fixtures/bib-10554371.json'))
