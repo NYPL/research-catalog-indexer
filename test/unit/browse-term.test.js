@@ -208,7 +208,7 @@ describe('bib activity', () => {
           marcTag: '600',
           subfields: [
             { tag: 'a', content: 'preferredTerm a' },
-            { tag: 'b', content: 'preferredTerm b' }
+            { tag: 'b', content: 'preferredTerm b.' }
           ]
         },
         parallel: {
