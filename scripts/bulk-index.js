@@ -766,7 +766,7 @@ const preflightSetup = async () => {
 }
 
 const cleanup = async () => {
-  if (process.env.STOP_REFRESH === 'true') await setIndexRefresh(process.env.ELASTIC_RESOURCES_INDEX, 30)
+  if (process.env.STOP_REFRESH === 'true') await setIndexRefresh(process.env.ELASTIC_RESOURCES_INDEX_NAME, 30)
   totalTimer.endTimer()
   totalTimer.howMany('hours')
 }
