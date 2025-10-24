@@ -6,7 +6,7 @@ const sinon = require('sinon')
 
 const bulkIndexer = require('../../scripts/bulk-index')
 const index = require('../../index')
-const modelPrefetcher = require('../../lib/model-prefetch')
+const modelPrefetcher = require('../../lib/prefetch')
 
 // Util for stripping dupe whitespace from sql queries:
 const removeDupeWhitespace = (sql) => {
