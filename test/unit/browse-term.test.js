@@ -142,8 +142,8 @@ describe('bib activity', () => {
       expect(await getSubjectModels(new EsBib(new SierraBib(bib)))).to.deep.eq([
         {
           sourceId: 'parallelsChaos',
-          preferredTerm: '600 primary value a 600 primary value b',
-          variant: '‏600 parallel value a 600 parallel value b'
+          preferredTerm: '600 primary value a 600 primary value b.',
+          variant: '‏600 parallel value a 600 parallel value b.'
         }
       ])
     })
@@ -182,7 +182,7 @@ describe('bib activity', () => {
       expect(await getSubjectModels(new EsBib(new SierraBib(bib)))).to.deep.eq([
         {
           sourceId: '123',
-          variant: '‏600 orphaned parallel value a 600 orphaned parallel value b'
+          variant: '‏600 orphaned parallel value a 600 orphaned parallel value b.'
         }
       ])
     })
@@ -199,7 +199,7 @@ describe('bib activity', () => {
           ]
         }
       })
-      expect(labels).to.deep.equal({ preferredTerm: 'preferredTerm a preferredTerm b', suppress: false })
+      expect(labels).to.deep.equal({ preferredTerm: 'preferredTerm a preferredTerm b.', suppress: false })
     })
     it('can handle preferredTerm and parallel', () => {
       const labels = getPrimaryAndParallelLabels({
@@ -208,7 +208,7 @@ describe('bib activity', () => {
           marcTag: '600',
           subfields: [
             { tag: 'a', content: 'preferredTerm a' },
-            { tag: 'b', content: 'preferredTerm b' }
+            { tag: 'b', content: 'preferredTerm b.' }
           ]
         },
         parallel: {
@@ -223,7 +223,7 @@ describe('bib activity', () => {
         }
       })
       expect(labels).to.deep.equal(
-        { preferredTerm: 'preferredTerm a preferredTerm b', suppress: false, variant: 'parallel a parallel b' })
+        { preferredTerm: 'preferredTerm a preferredTerm b.', suppress: false, variant: 'parallel a parallel b.' })
     })
   })
   describe('buildSubjectDiff', () => {
