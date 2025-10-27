@@ -54,7 +54,7 @@ const processRecords = async (type, records, options = {}) => {
   // and transmit to the browse pipeline. This must happen before writes to the
   // resources index to determine any diff between new and old subjects
   let browseTermDiffs
-  if (process.env.EMIT_BROWSE_TERMS) {
+  if (process.env.EMIT_BROWSE_TERMS === 'true') {
     const esModelsForDeletions = removedBibs.map(bib => new EsBib(new SierraBib(bib)))
     const changedRecords = [...esModels, ...esModelsForDeletions]
     if ((changedRecords.length) && type === 'Bib') {
@@ -86,7 +86,7 @@ const processRecords = async (type, records, options = {}) => {
 
     messages.push(`Deleted ${recordsToDelete.length} doc(s)`)
   }
-  if (process.env.EMIT_BROWSE_TERMS) {
+  if (process.env.EMIT_BROWSE_TERMS === 'true') {
     const subjectHandler = process.env.BTI_INDEX_PATH ? browse.emitBibSubjectsToLocalBti : browse.emitBibSubjectsToLocalBti
     console.log(browseTermDiffs.length)
     await subjectHandler(browseTermDiffs)
