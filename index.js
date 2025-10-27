@@ -8,7 +8,7 @@ const { notifyDocumentProcessed } = require('./lib/streams-client')
 const browse = require('./lib/browse-terms')
 const { filteredSierraBibsForBibs } = require('./lib/prefilter')
 const { loadNyplCoreData } = require('./lib/load-core-data')
-const { schema } = require('./lib/elastic-search/index-schema')
+const schema = require('./lib/elastic-search/index-schema')
 const SierraBib = require('./lib/sierra-models/bib')
 const EsBib = require('./lib/es-models/bib')
 
@@ -35,6 +35,7 @@ const handler = async (event, context, callback) => {
 
 const processRecords = async (type, records, options = {}) => {
   options = Object.assign({
+    updateOnly: false,
     dryrun: false
   }, options)
   // Ensure event has Bib records:
@@ -46,10 +47,7 @@ const processRecords = async (type, records, options = {}) => {
   const recordsToDelete = type === 'Bib' ? removedBibs : []
 
   const esModels = await buildEsDocument(filteredBibs)
-  const plainObjectEsDocuments = esModels.map((record) => {
-    const x = record.toPlainObject(schema())
-    return x
-  })
+  const plainObjectEsDocuments = esModels.map((record) => record.toPlainObject(schema.schema()))
   const messages = []
 
   // Fetch subjects from all bibs, whether they are updates, creates, or deletes,
@@ -69,12 +67,11 @@ const processRecords = async (type, records, options = {}) => {
       logger.info(`DRYRUN: Skipping writing ${plainObjectEsDocuments.length} records`)
     } else {
       // Write records to ES:
-      await elastic.writeRecords(plainObjectEsDocuments)
-
+      await elastic.writeRecords(plainObjectEsDocuments, options.updateOnly)
       // Write to IndexDocumentProcessed Kinesis stream:
-      await notifyDocumentProcessed(plainObjectEsDocuments)
+      // Skipping is default when running a bulk index script
+      if (process.env.SKIP_DOC_PROCESSED_STREAM !== 'true') await notifyDocumentProcessed(plainObjectEsDocuments)
     }
-
     // Log out a summary of records updated:
     const summary = truncate(plainObjectEsDocuments.map((record) => record.uri).join(','), 100)
     messages.push(`Wrote ${plainObjectEsDocuments.length} doc(s): ${summary}`)
@@ -90,7 +87,9 @@ const processRecords = async (type, records, options = {}) => {
     messages.push(`Deleted ${recordsToDelete.length} doc(s)`)
   }
   if (process.env.EMIT_BROWSE_TERMS) {
-    await browse.emitBibSubjectEvents(browseTermDiffs)
+    const subjectHandler = process.env.BTI_INDEX_PATH ? browse.emitBibSubjectsToLocalBti : browse.emitBibSubjectsToLocalBti
+    console.log(browseTermDiffs.length)
+    await subjectHandler(browseTermDiffs)
   }
   const message = messages.length ? messages.join('; ') : 'Nothing to do.'
 
