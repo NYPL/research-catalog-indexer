@@ -470,7 +470,7 @@ const buildSqlQuery = (options) => {
     const wheres = []
 
     // Filter on nyplSource:
-    if (options.nyplSource !== 'all') {
+    if (options.nyplSource && options.nyplSource !== 'all') {
       wheres.push('nypl_source = $1')
       params.push(options.nyplSource)
     }
