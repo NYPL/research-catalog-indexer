@@ -67,16 +67,14 @@ const processRecords = async (type, records, options = {}) => {
       logger.info(`DRYRUN: Skipping writing ${plainObjectEsDocuments.length} records`)
     } else if (!options.updateOnly) {
       // Write records to ES:
-
       await elastic.writeRecords(plainObjectEsDocuments)
-      // Write to IndexDocumentProcessed Kinesis stream:
-      // Skipping is default when running a bulk index script
     } else if (options.updateOnly) {
       await elastic.updateRecords(plainObjectEsDocuments)
     }
     if (process.env.SKIP_DOC_PROCESSED_STREAM !== 'true') await notifyDocumentProcessed(plainObjectEsDocuments)
     // Log out a summary of records updated:
     const summary = truncate(plainObjectEsDocuments.map((record) => record.uri).join(','), 100)
+    // TO DO: this should reflect errors and successes, not just happily claim writing for all
     messages.push(`Wrote ${plainObjectEsDocuments.length} doc(s): ${summary}`)
   }
 
