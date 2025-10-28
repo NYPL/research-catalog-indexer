@@ -96,3 +96,7 @@ if (argv.uri) {
     }
   })
 } else usage()
+
+module.exports = {
+  reindexBib
+}
