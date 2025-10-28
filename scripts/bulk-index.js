@@ -99,7 +99,6 @@ const argv = require('minimist')(process.argv.slice(2), {
 })
 
 const isCalledViaCommandLine = /scripts\/bulk-index(.js)?/.test(fs.realpathSync(process.argv[1]))
-
 const dotenv = require('dotenv')
 
 // Conditionally set up NR instrumentation
@@ -696,7 +695,6 @@ const cancelRun = (message) => {
 
 // Main dispatcher:
 const run = async () => {
-  dotenv.config({ path: argv.envfile })
   // Validate args:
   if ((process.env.UPDATE_ONLY || argv.updateOnly) && !(argv.properties)) {
     logger.error('Must provide --properties on command line if --updateOnly is true.')
@@ -757,13 +755,16 @@ const run = async () => {
 }
 
 const preflightSetup = async () => {
-  if (process.env.STOP_REFRESH === 'true') await setIndexToNoRefresh()
+  dotenv.config({ path: argv.envfile })
+  if (process.env.STOP_REFRESH === 'true') {
+    await setIndexToNoRefresh()
+  }
   await loadNyplCoreData()
   totalTimer.startTimer()
 }
 
 const cleanup = async () => {
-  if (process.env.STOP_REFRESH === 'true') await setIndexRefresh(process.env.ELASTIC_RESOURCES_INDEX_NAME, 30)
+  if (process.env.STOP_REFRESH === 'true') await setIndexRefresh(process.env.ELASTIC_RESOURCES_INDEX_NAME, '30s')
   totalTimer.endTimer()
   totalTimer.howMany('hours')
 }
