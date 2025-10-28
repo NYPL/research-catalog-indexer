@@ -58,7 +58,7 @@ describe('elastic search requests', () => {
       expect(docStatements).to.have.lengthOf(records.length)
     })
   })
-  describe.only('writeRecords', () => {
+  describe('writeRecords', () => {
     it('logs errors', async () => {
       esRequests = rewire('../../lib/elastic-search/requests')
 
