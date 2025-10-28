@@ -370,11 +370,8 @@ const fetchFromDbConnection = async (bibs) => {
 
 const overwriteGeneralPrefetch = () => {
   const originalFunction = prefetchers.generalPrefetch
-  if (argv.skipPrefetch || process.env.SKIP_PREFETCH) {
-    prefetchers.generalPrefetch = async (bibs) => Promise.resolve(bibs)
-
-    prefetchers.modelPrefetch.originalFunction = originalFunction
-  }
+  prefetchers.generalPrefetch = async (bibs) => Promise.resolve(bibs)
+  prefetchers.modelPrefetch.originalFunction = originalFunction
 }
 
 const restoreGeneralPrefetch = () => {
@@ -701,7 +698,7 @@ const cancelRun = (message) => {
 const run = async () => {
   dotenv.config({ path: argv.envfile })
   // Validate args:
-  if (!(process.env.UPDATE_ONLY || argv.updateOnly) && (argv.properties)) {
+  if ((process.env.UPDATE_ONLY || argv.updateOnly) && !(argv.properties)) {
     logger.error('Must provide --properties on command line if --updateOnly is true.')
     cancelRun('Insufficient params')
   }
@@ -720,10 +717,10 @@ const run = async () => {
     cancelRun('Insufficient params')
   }
 
-  // Enable direct-db access to Item, Bib, and Holdings services:
+  // Enable direct-db access to Item, Bib, and Holdings services, or optionally skip item and holdings fetch:
   overwriteModelPrefetch()
-  overwriteGeneralPrefetch()
-  overwriteSchema()
+  if (argv.skipPrefetch || process.env.SKIP_PREFETCH) overwriteGeneralPrefetch()
+  if (argv.updateOnly || process.env.UPDATE_ONLY) overwriteSchema()
   // Require one of:
   // - csv
   // - bib/item id
