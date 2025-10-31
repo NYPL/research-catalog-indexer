@@ -83,7 +83,7 @@ describe('elastic search requests', () => {
         await esRequests.writeRecords(records)
       } catch (e) {}
 
-      expect(loggerSpy.calledWith('Indexing error: Error updating 12345: ya: messed up')).to.eq(true)
+      expect(loggerSpy.calledWith('Indexing error: Error indexing 12345: ya: messed up')).to.eq(true)
     })
   })
 })
