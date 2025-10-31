@@ -1821,4 +1821,95 @@ describe('EsBib', function () {
       ])
     })
   })
+
+  describe('physicalDescription', () => {
+    it('extracts physicalDescription content', async () => {
+      const bib = new SierraBib({
+        varFields: [
+          {
+            marcTag: '300',
+            subfields: [
+              { tag: 'a', content: 'subfield_a' },
+              { tag: 'b', content: 'subfield_b' },
+              { tag: 'c', content: 'subfield_c' },
+              { tag: 'd', content: 'subfield_d' },
+              { tag: 'e', content: 'subfield_e' }
+            ]
+          }
+        ]
+      })
+      const esBib = new EsBib(bib)
+
+      expect(await (esBib.physicalDescription())).to.deep.equal([
+        // Expect all subfields (except d) for 300:
+        'subfield_a : subfield_b ; subfield_c + subfield_e'
+      ])
+    })
+  })
+
+  describe('physicalDescriptionWithSuffixes', () => {
+    it('extracts physicalDescription content', async () => {
+      const bib = new SierraBib({
+        varFields: [
+          {
+            marcTag: '300',
+            subfields: [
+              { tag: 'a', content: '1 map :' },
+              { tag: 'b', content: 'both sides, color ;' },
+              { tag: 'c', content: '128 x 96 cm, on sheet 68 x 98 cm +' },
+              { tag: 'e', content: '1 index (31 p. ; 19 cm)' }
+            ]
+          }
+        ]
+      })
+      const esBib = new EsBib(bib)
+
+      expect(await (esBib.physicalDescription())).to.deep.equal([
+        '1 map : both sides, color ; 128 x 96 cm, on sheet 68 x 98 cm + 1 index (31 p. ; 19 cm)'
+      ])
+    })
+  })
+
+  describe('physicalDescriptionSubset1', () => {
+    it('extracts physicalDescription content', async () => {
+      const bib = new SierraBib({
+        varFields: [
+          {
+            marcTag: '300',
+            subfields: [
+              { tag: 'a', content: '1 score (16 p.) ;' },
+              { tag: 'c', content: '29 cm' }
+            ]
+          }
+        ]
+      })
+      const esBib = new EsBib(bib)
+
+      expect(await (esBib.physicalDescription())).to.deep.equal([
+        '1 score (16 p.) ; 29 cm'
+      ])
+    })
+  })
+
+  describe('physicalDescriptionSubset2', () => {
+    it('extracts physicalDescription content', async () => {
+      const bib = new SierraBib({
+        varFields: [
+          {
+            marcTag: '300',
+            subfields: [
+              { tag: 'a', content: '1 computer disk ;' },
+              { tag: 'c', content: '3 1/2 in. +' },
+              { tag: 'e', content: 'reference manual' }
+            ]
+          }
+        ]
+      })
+      const esBib = new EsBib(bib)
+
+      expect(await (esBib.physicalDescription())).to.deep.equal([
+        '1 computer disk ; 3 1/2 in. + reference manual'
+      ])
+    })
+  })
 })

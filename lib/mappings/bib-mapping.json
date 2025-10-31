@@ -1299,6 +1299,19 @@
       }
     ]
   },
+  "physicalDescription": {
+    "paths": [
+      {
+        "marc": "300",
+        "subfields": [
+          "a",
+          "b",
+          "c",
+          "e"
+        ]
+      }
+    ]
+  },
   "hasReproduction": {
     "paths": [
       {
