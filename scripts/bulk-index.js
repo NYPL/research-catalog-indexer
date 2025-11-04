@@ -99,7 +99,6 @@ const argv = require('minimist')(process.argv.slice(2), {
 })
 
 const isCalledViaCommandLine = /scripts\/bulk-index(.js)?/.test(fs.realpathSync(process.argv[1]))
-
 const dotenv = require('dotenv')
 
 // Conditionally set up NR instrumentation
@@ -370,11 +369,8 @@ const fetchFromDbConnection = async (bibs) => {
 
 const overwriteGeneralPrefetch = () => {
   const originalFunction = prefetchers.generalPrefetch
-  if (argv.skipPrefetch || process.env.SKIP_PREFETCH) {
-    prefetchers.generalPrefetch = async (bibs) => Promise.resolve(bibs)
-
-    prefetchers.modelPrefetch.originalFunction = originalFunction
-  }
+  prefetchers.generalPrefetch = async (bibs) => Promise.resolve(bibs)
+  prefetchers.modelPrefetch.originalFunction = originalFunction
 }
 
 const restoreGeneralPrefetch = () => {
@@ -470,7 +466,7 @@ const buildSqlQuery = (options) => {
     const wheres = []
 
     // Filter on nyplSource:
-    if (options.nyplSource) {
+    if (options.nyplSource && options.nyplSource !== 'all') {
       wheres.push('nypl_source = $1')
       params.push(options.nyplSource)
     }
@@ -699,9 +695,8 @@ const cancelRun = (message) => {
 
 // Main dispatcher:
 const run = async () => {
-  dotenv.config({ path: argv.envfile })
   // Validate args:
-  if (!(process.env.UPDATE_ONLY || argv.updateOnly) && (argv.properties)) {
+  if ((process.env.UPDATE_ONLY || argv.updateOnly) && !(argv.properties)) {
     logger.error('Must provide --properties on command line if --updateOnly is true.')
     cancelRun('Insufficient params')
   }
@@ -720,10 +715,10 @@ const run = async () => {
     cancelRun('Insufficient params')
   }
 
-  // Enable direct-db access to Item, Bib, and Holdings services:
+  // Enable direct-db access to Item, Bib, and Holdings services, or optionally skip item and holdings fetch:
   overwriteModelPrefetch()
-  overwriteGeneralPrefetch()
-  overwriteSchema()
+  if (argv.skipPrefetch || process.env.SKIP_PREFETCH) overwriteGeneralPrefetch()
+  if (argv.updateOnly || process.env.UPDATE_ONLY) overwriteSchema()
   // Require one of:
   // - csv
   // - bib/item id
@@ -760,13 +755,16 @@ const run = async () => {
 }
 
 const preflightSetup = async () => {
-  if (process.env.STOP_REFRESH === 'true') await setIndexToNoRefresh()
+  dotenv.config({ path: argv.envfile })
+  if (process.env.STOP_REFRESH === 'true') {
+    await setIndexToNoRefresh()
+  }
   await loadNyplCoreData()
   totalTimer.startTimer()
 }
 
 const cleanup = async () => {
-  if (process.env.STOP_REFRESH === 'true') await setIndexRefresh(process.env.ELASTIC_RESOURCES_INDEX_NAME, 30)
+  if (process.env.STOP_REFRESH === 'true') await setIndexRefresh(process.env.ELASTIC_RESOURCES_INDEX_NAME, '30s')
   totalTimer.endTimer()
   totalTimer.howMany('hours')
 }

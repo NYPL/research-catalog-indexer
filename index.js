@@ -65,15 +65,16 @@ const processRecords = async (type, records, options = {}) => {
   if (plainObjectEsDocuments.length) {
     if (options.dryrun) {
       logger.info(`DRYRUN: Skipping writing ${plainObjectEsDocuments.length} records`)
-    } else {
+    } else if (!options.updateOnly) {
       // Write records to ES:
-      await elastic.writeRecords(plainObjectEsDocuments, options.updateOnly)
-      // Write to IndexDocumentProcessed Kinesis stream:
-      // Skipping is default when running a bulk index script
-      if (process.env.SKIP_DOC_PROCESSED_STREAM !== 'true') await notifyDocumentProcessed(plainObjectEsDocuments)
+      await elastic.writeRecords(plainObjectEsDocuments)
+    } else if (options.updateOnly) {
+      await elastic.updateRecords(plainObjectEsDocuments)
     }
+    if (process.env.SKIP_DOC_PROCESSED_STREAM !== 'true') await notifyDocumentProcessed(plainObjectEsDocuments)
     // Log out a summary of records updated:
     const summary = truncate(plainObjectEsDocuments.map((record) => record.uri).join(','), 100)
+    // TO DO: this should reflect errors and successes, not just happily claim writing for all
     messages.push(`Wrote ${plainObjectEsDocuments.length} doc(s): ${summary}`)
   }
 
@@ -86,6 +87,7 @@ const processRecords = async (type, records, options = {}) => {
 
     messages.push(`Deleted ${recordsToDelete.length} doc(s)`)
   }
+
   if (process.env.EMIT_BROWSE_TERMS === 'true') {
     const subjectHandler = process.env.BTI_INDEX_PATH ? browse.emitBibSubjectsToLocalBti : browse.emitBibSubjectEventsToSqs
     await subjectHandler(browseTermDiffs)
