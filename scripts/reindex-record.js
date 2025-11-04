@@ -23,7 +23,7 @@
  */
 
 const NyplSourceMapper = require('../lib/utils/nypl-source-mapper')
-
+const fs = require('fs')
 const { bibById, modelPrefetch } = require('../lib/platform-api/requests')
 const { awsCredentialsFromIni, die } = require('./utils')
 const { setCredentials: kmsSetCredentials } = require('../lib/kms')
@@ -34,14 +34,14 @@ const {
 
 const argv = require('minimist')(process.argv.slice(2))
 
+const isCalledViaCommandLine = /scripts\/bulk-index(.js)?/.test(fs.realpathSync(process.argv[1]))
+
 const dotenv = require('dotenv')
 
 const usage = () => {
   console.log('Usage: node reindex-record --uri [bnum/inum/hnum] --envfile [path to .env]')
   return true
 }
-
-if (!argv.envfile) usage() && die('--envfile required')
 
 dotenv.config({ path: argv.envfile })
 
@@ -86,13 +86,20 @@ const reindexBib = async (nyplSource, id) => {
   console.log('Finished writing all records to streams')
 }
 
-if (argv.uri) {
-  NyplSourceMapper.instance().then((mapper) => {
-    const { id, type, nyplSource } = mapper.splitIdentifier(argv.uri)
-    switch (type) {
-      case 'bib':
-        reindexBib(nyplSource, id)
-        break
-    }
-  })
-} else usage()
+if (isCalledViaCommandLine) {
+  if (!argv.envfile) usage() && die('--envfile required')
+  if (argv.uri) {
+    NyplSourceMapper.instance().then((mapper) => {
+      const { id, type, nyplSource } = mapper.splitIdentifier(argv.uri)
+      switch (type) {
+        case 'bib':
+          reindexBib(nyplSource, id)
+          break
+      }
+    })
+  } else usage()
+}
+
+module.exports = {
+  reindexBib
+}
