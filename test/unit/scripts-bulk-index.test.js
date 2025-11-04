@@ -4,9 +4,11 @@ chai.use(require('chai-as-promised'))
 
 const sinon = require('sinon')
 
+const logger = require('../../lib/logger')
 const bulkIndexer = require('../../scripts/bulk-index')
 const index = require('../../index')
 const modelPrefetcher = require('../../lib/prefetch')
+const schema = require('../../lib/elastic-search/index-schema')
 
 // Util for stripping dupe whitespace from sql queries:
 const removeDupeWhitespace = (sql) => {
@@ -119,7 +121,14 @@ describe('scripts/bulk-index', () => {
     bulkIndexer.db.connect.restore()
     index.processRecords.restore()
   })
-
+  describe('validateParams', () => {
+    it('cancels run if properties not specified with updateOnly', () => {
+      process.env.UPDATE_ONLY = false
+      const errorLogSpy = sinon.spy(logger, 'error')
+      bulkIndexer._testing.validateParams({ properties: 'dates' })
+      expect(errorLogSpy.calledWith('Error: Must provide --properties when UPDATE_ONLY=true or --updateOnly true (and vice versa)')).to.eq(true)
+    })
+  })
   describe('updateByCsv', () => {
     it('throws error when insufficient config', async () => {
       await expect(bulkIndexer.updateByCsv()).to.be.rejected
@@ -164,6 +173,25 @@ describe('scripts/bulk-index', () => {
         id: 1234,
         nyplSource: 'sierra-nypl'
       })
+    })
+  })
+
+  describe('overWriteSchema', () => {
+    afterEach(bulkIndexer._testing.restoreSchema)
+    it('overwrites schema with single', () => {
+      bulkIndexer._testing.overwriteSchema('dates')
+      expect(schema.schema()).to.deep.equal({ uri: true, dates: true })
+    })
+    it('overwrites schema with multiple properties', () => {
+      bulkIndexer._testing.overwriteSchema('dates,subjectLiteral')
+      expect(schema.schema()).to.deep.equal({ uri: true, dates: true, subjectLiteral: true })
+    })
+    it('throws on a property not in original schema', () => {
+      try {
+        expect(bulkIndexer._testing.overwriteSchema('spaghetti'))
+      } catch (e) {
+        expect(e.message).to.eq('spaghetti not a valid ES document property')
+      }
     })
   })
 

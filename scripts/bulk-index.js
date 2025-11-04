@@ -308,24 +308,24 @@ const sierraHoldingsByBibIds = async (bibIds) => {
   return holdingsByBibId
 }
 
-const overwriteSchema = () => {
+const overwriteSchema = (properties) => {
   const originalSchemaMethod = schema.schema
+
   const newSchema = { uri: true }
-  argv.properties.split(',').filter((property) => {
+  properties.split(',').filter((property) => {
     const validSchemaProp = !!originalSchemaMethod()[property]
-    if (!validSchemaProp) throw new Error(`${property} not a valid ES document property.`)
+    if (!validSchemaProp) throw new Error(`${property} not a valid ES document property`)
     return validSchemaProp
   }).forEach((prop) => { newSchema[prop] = true })
   schema.schema = () => {
     return newSchema
   }
-  schema.schema.originalMethod = originalSchemaMethod
+  schema.originalMethod = originalSchemaMethod
 }
 
 const restoreSchema = () => {
-  if (schema.schema.originalFunction) {
-    schema.schema = schema.schema.originalFunction
-      .bind(schema)
+  if (schema.originalMethod) {
+    schema.schema = schema.originalMethod
   }
 }
 
@@ -693,14 +693,12 @@ const cancelRun = (message) => {
   else logger.error('Error: ' + message)
 }
 
-// Main dispatcher:
-const run = async () => {
-  // Validate args:
-  if ((process.env.UPDATE_ONLY || argv.updateOnly) && !(argv.properties)) {
-    logger.error('Must provide --properties on command line if --updateOnly is true.')
-    cancelRun('Insufficient params')
-  }
-  if (
+const validateParams = (argv) => {
+  let message
+  const updateOnly = process.env.UPDATE_ONLY === 'true' || argv.updateOnly
+  if ((updateOnly || argv.properties) && !(updateOnly && argv.properties)) {
+    message = 'Must provide --properties when UPDATE_ONLY=true or --updateOnly true (and vice versa)'
+  } else if (
     (
       !(argv.type) &&
       !argv.bibId &&
@@ -712,13 +710,19 @@ const run = async () => {
     )
   ) {
     usage()
-    cancelRun('Insufficient params')
+    message = 'Insufficient params'
   }
+  if (message) cancelRun(message)
+}
 
+// Main dispatcher:
+const run = async () => {
+  // Validate args:
+  validateParams(argv)
   // Enable direct-db access to Item, Bib, and Holdings services, or optionally skip item and holdings fetch:
   overwriteModelPrefetch()
   if (argv.skipPrefetch || process.env.SKIP_PREFETCH) overwriteGeneralPrefetch()
-  if (argv.updateOnly || process.env.UPDATE_ONLY) overwriteSchema()
+  if (argv.updateOnly || process.env.UPDATE_ONLY) overwriteSchema(argv.properties)
   // Require one of:
   // - csv
   // - bib/item id
@@ -780,5 +784,10 @@ module.exports = {
   db,
   buildSqlQuery,
   overwriteModelPrefetch,
-  restoreModelPrefetch
+  restoreModelPrefetch,
+  _testing: {
+    validateParams,
+    overwriteSchema,
+    restoreSchema
+  }
 }
