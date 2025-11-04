@@ -23,7 +23,7 @@
  */
 
 const NyplSourceMapper = require('../lib/utils/nypl-source-mapper')
-
+const { loadNyplCoreData } = require('../lib/load-core-data')
 const { bibById, modelPrefetch } = require('../lib/platform-api/requests')
 const { awsCredentialsFromIni, die } = require('./utils')
 const { setCredentials: kmsSetCredentials } = require('../lib/kms')
@@ -87,7 +87,8 @@ const reindexBib = async (nyplSource, id) => {
 }
 
 if (argv.uri) {
-  NyplSourceMapper.instance().then((mapper) => {
+  loadNyplCoreData().then(() => {
+    const mapper = NyplSourceMapper.instance()
     const { id, type, nyplSource } = mapper.splitIdentifier(argv.uri)
     switch (type) {
       case 'bib':
