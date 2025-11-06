@@ -61,7 +61,7 @@ const processRecords = async (type, records, options = {}) => {
       browseTermDiffs = await browse.buildBibSubjectEvents(changedRecords)
     }
   }
-  
+
   if (plainObjectEsDocuments.length) {
     let summary
     if (options.dryrun) {
