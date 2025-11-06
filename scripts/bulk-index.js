@@ -558,24 +558,23 @@ const updateByBibOrItemServiceQuery = async (options) => {
       let retries = 3
       let processed = false
       while (!processed && retries > 0) {
-        await indexer.processRecords(capitalize(type), records, { updateOnly: process.env.UPDATE_ONLY || argv.updateOnly, dryrun: argv.dryrun })
-          .then(() => {
-            if (retries < 3) logger.info(`Succeeded on retry ${3 - retries}`)
-            processed = true
-          })
-          .catch(async (e) => {
-            if (!(e instanceof SkipPrefetchError)) {
-              logger.warn(`Retrying due to error: ${e}`)
-              console.trace(e)
-              await delay(3000)
-              retries -= 1
-            } else {
-              cursor.close(() => {
-                client.release()
-              })
-              throw e
-            }
-          })
+        try {
+          await indexer.processRecords(capitalize(type), records, { updateOnly: process.env.UPDATE_ONLY || argv.updateOnly, dryrun: argv.dryrun })
+          if (retries < 3) logger.info(`Succeeded on retry ${3 - retries}`)
+          processed = true
+        } catch (e) {
+          if (!(e instanceof SkipPrefetchError)) {
+            logger.warn(`Retrying due to error: ${e}`)
+            console.trace(e)
+            await delay(3000)
+            retries -= 1
+          } else {
+            cursor.close(() => {
+              client.release()
+            })
+            throw e
+          }
+        }
       }
       count += rows.length
 
@@ -745,11 +744,12 @@ const run = async () => {
     )
   ) {
     await db.initPools()
-    await updateByBibOrItemServiceQuery(argv)
-      .catch((e) => {
-        logger.error('Error ', e)
-        logger.error(e.stack)
-      })
+    try {
+      await updateByBibOrItemServiceQuery(argv)
+    } catch (e) {
+      logger.error('Error ', e)
+      logger.error(e.stack)
+    }
     db.endPools()
   }
   // Disable direct-db access to Item, Bib, and Holdings services (formality)
@@ -779,7 +779,10 @@ const cleanup = async () => {
 const totalTimer = new Timer('bulk update')
 
 if (isCalledViaCommandLine) {
-  preflightSetup().then(run).finally(cleanup)
+  preflightSetup()
+    .then(run)
+    .catch(logger.error)
+    .finally(cleanup)
 }
 
 module.exports = {
