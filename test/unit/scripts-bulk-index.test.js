@@ -7,7 +7,7 @@ const sinon = require('sinon')
 const logger = require('../../lib/logger')
 const bulkIndexer = require('../../scripts/bulk-index')
 const index = require('../../index')
-const modelPrefetcher = require('../../lib/prefetch')
+const prefetchers = require('../../lib/prefetch')
 const schema = require('../../lib/elastic-search/index-schema')
 
 // Util for stripping dupe whitespace from sql queries:
@@ -175,7 +175,14 @@ describe('scripts/bulk-index', () => {
       })
     })
   })
-
+  describe.only('overwriteGeneralPrefetch', () => {
+    beforeEach(bulkIndexer._testing.overwriteGeneralPrefetch)
+    afterEach(bulkIndexer._testing.restoreGeneralPrefetch)
+    it('overwrites general prefetch', () => {
+      bulkIndexer._testing.overwriteGeneralPrefetch()
+      expect(prefetchers.generalPrefetch(['spaghetti'])).to.eventually.equal(['spaghetti'])
+    })
+  })
   describe('overWriteSchema', () => {
     afterEach(bulkIndexer._testing.restoreSchema)
     it('overwrites schema with single', () => {
@@ -205,7 +212,7 @@ describe('scripts/bulk-index', () => {
     })
 
     it('is overwritten by sql connector', async () => {
-      await modelPrefetcher.modelPrefetch([
+      await prefetchers.modelPrefetch([
         {
           id: 1234,
           nyplSource: 'sierra-nypl'

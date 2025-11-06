@@ -100,7 +100,7 @@ const argv = require('minimist')(process.argv.slice(2), {
 
 const isCalledViaCommandLine = /scripts\/bulk-index(.js)?/.test(fs.realpathSync(process.argv[1]))
 const dotenv = require('dotenv')
-
+const { exec } = require('child_process')
 // Conditionally set up NR instrumentation
 // Initialize `instrument` as a pass-through
 let instrument = (label, cb) => cb()
@@ -370,7 +370,7 @@ const fetchFromDbConnection = async (bibs) => {
 const overwriteGeneralPrefetch = () => {
   const originalFunction = prefetchers.generalPrefetch
   prefetchers.generalPrefetch = async (bibs) => Promise.resolve(bibs)
-  prefetchers.modelPrefetch.originalFunction = originalFunction
+  prefetchers.generalPrefetch.originalFunction = originalFunction
 }
 
 const restoreGeneralPrefetch = () => {
@@ -769,6 +769,9 @@ const preflightSetup = async () => {
 
 const cleanup = async () => {
   if (process.env.STOP_REFRESH === 'true') await setIndexRefresh(process.env.ELASTIC_RESOURCES_INDEX_NAME, '30s')
+  if (process.env.UPDATE_ONLY || argv.updateOnly) {
+    exec(`cat temp-unindexed-records* > unindexed-records-${argv.properties}-${Date.now()}.txt; rm temp-unindexed-records*`)
+  }
   totalTimer.endTimer()
   totalTimer.howMany('hours')
 }
@@ -776,7 +779,7 @@ const cleanup = async () => {
 const totalTimer = new Timer('bulk update')
 
 if (isCalledViaCommandLine) {
-  preflightSetup().then(run).then(cleanup)
+  preflightSetup().then(run).finally(cleanup)
 }
 
 module.exports = {
@@ -787,6 +790,8 @@ module.exports = {
   restoreModelPrefetch,
   _testing: {
     validateParams,
+    overwriteGeneralPrefetch,
+    restoreGeneralPrefetch,
     overwriteSchema,
     restoreSchema
   }
