@@ -514,6 +514,20 @@ const buildSqlQuery = (options) => {
   return { query, params, type }
 }
 
+const readCursorRecurser = async (batchSize, cursor, retry = 1) => {
+  if (retry > 3) {
+    throw new Error('Error connecting to db after 3 tries')
+  }
+  try {
+    await delay(retry * 1000)
+    return await cursor.read(batchSize)
+  } catch (e) {
+    logger.warn('readCursorRecursor error: ', e)
+    logger.info(`readCursorRecursor retry #${retry}`)
+    return await readCursorRecurser(batchSize, cursor, ++retry)
+  }
+}
+
 /**
  *  Reindex a bunch of bibs based on a BibService query
  */
@@ -542,7 +556,15 @@ const updateByBibOrItemServiceQuery = async (options) => {
   while (!done && (count < options.limit || !options.limit)) {
     await instrument('Bulk-index batch', async () => {
       // Pull next batch of records from the cursor:
-      const rows = await cursor.read(options.batchSize)
+      let rows
+      try {
+        rows = await readCursorRecurser(options.batchSize, cursor)
+      } catch (e) {
+        cursor.close(() => {
+          client.release()
+        })
+        throw e
+      }
 
       // Did we reach the end?
       if (rows.length === 0) {
