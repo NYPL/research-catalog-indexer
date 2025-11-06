@@ -175,7 +175,7 @@ describe('scripts/bulk-index', () => {
       })
     })
   })
-  describe.only('overwriteGeneralPrefetch', () => {
+  describe('overwriteGeneralPrefetch', () => {
     beforeEach(bulkIndexer._testing.overwriteGeneralPrefetch)
     afterEach(bulkIndexer._testing.restoreGeneralPrefetch)
     it('overwrites general prefetch', () => {
