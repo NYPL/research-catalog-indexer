@@ -1299,6 +1299,14 @@
       }
     ]
   },
+  "physicalDescription": {
+    "paths": [
+      {
+        "notes": "Combined subfields follow the delimiter rules laid out in https://www.loc.gov/marc/bibliographic/bd300.html. See bib.js for details",
+        "marc": "300"
+      }
+    ]
+  },
   "hasReproduction": {
     "paths": [
       {
