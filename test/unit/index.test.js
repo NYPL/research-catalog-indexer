@@ -108,7 +108,7 @@ describe('index handler function', () => {
       // stub, which always returns a fake item:
       await index.handler('some fake event data', null, callback)
       expect(callback.calledOnce).to.equal(true)
-      expect(callback).to.have.been.calledWith(null, 'Wrote 1 doc(s): b1')
+      expect(callback).to.have.been.calledWith(null, 'Wrote 1 records: b1')
       expect(streamStub.calledOnceWith(
         'IndexDocumentProcessed-test',
         [{ id: '1', nyplSource: 'sierra-nypl', nyplType: 'bib' }]
