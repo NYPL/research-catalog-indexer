@@ -816,10 +816,7 @@ const totalTimer = new Timer('bulk update')
 if (isCalledViaCommandLine) {
   preflightSetup()
     .then(run)
-    .catch((e) => {
-      logger.info('spaghetti')
-      logger.error(e)
-    })
+    .catch(logger.error)
     .finally(cleanup)
 }
 
