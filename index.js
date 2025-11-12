@@ -73,7 +73,7 @@ const processRecords = async (type, records, options = {}) => {
     } else if (options.updateOnly) {
       try {
         const unindexedRecords = await elastic.updateRecords(plainObjectEsDocuments)
-        summary = `Updated ${plainObjectEsDocuments.length - unindexedRecords.length} records, wrote ${unindexedRecords.length} unindexed records to file`
+        summary = `Updated ${plainObjectEsDocuments.length - (unindexedRecords.length || 0)} records ${unindexedRecords.length ? `, wrote ${unindexedRecords.length} unindexed records to file` : ''}. Sample of ids written: ${truncate(plainObjectEsDocuments.map((record) => record.uri).join(','), 100)}`
       } catch (e) {
         logger.error('Update records error: ', e)
       }
@@ -91,6 +91,7 @@ const processRecords = async (type, records, options = {}) => {
     }
 
     messages.push(`Deleted ${recordsToDelete.length} doc(s)`)
+    messages.push(`Deleted ids: ${recordsToDelete.map((record) => record.id)}`)
   }
 
   if (process.env.EMIT_BROWSE_TERMS === 'true') {

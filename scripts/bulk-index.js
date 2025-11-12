@@ -65,7 +65,7 @@
  *
  *  III. Perform property-specific bib-only update:
  *
- *      node scripts/bulk-index.js [...bulk index args]  --batchSize 1000 (recommended) --properties subjectLiteral,addedAuthorTitle (--skipPrefetch true --updateOnly true) (not required if passed as env vars)
+ *      node scripts/bulk-index.js [...bulk index args]  --batchSize 1000 (recommended) --properties subjectLiteral,addedAuthorTitle (--skipApiPrefetch true --skipDbPrefetch true --updateOnly true) (not required if passed as env vars)
  *
  *      Perform bulk update to specified properties. To date, this script is intended for use on bib-level properties
  *      with no dependencies on item or holding data. Recommended params include --batchSize 1000, as well as setting
@@ -74,10 +74,11 @@
  *      Arguments:
  *        any bulk-index argument for specifying the scope of the update
  *        properties {string}: comma-delineated list of bib-level properties to run update for
- *        skipPrefetch {boolean}: flag to skip item and holding fetches from the DB, as well as API calls to M2 customer code store and SCSB
+ *        skipDbPrefetch {boolean}: flag to skip item and holding fetches from the DB
+ *        skipApiPrefetch {boolean}: skip API calls to M2 customer code store and SCSB
  *        updateOnly {boolean}: flag to run as update only script and not standard bulk index overwrite
  *
- *      SKIP_PREFETCH and UPDATE_ONLY can both be passed in as environment variables as well.
+ *      SKIP_DB_PREFETCH, SKIP_API_PREFETCH and UPDATE_ONLY can both be passed in as environment variables as well.
  */
 const fs = require('fs')
 const { parse: csvParse } = require('csv-parse/sync')
@@ -146,7 +147,6 @@ const logger = require('../lib/logger')
 const { loadNyplCoreData } = require('../lib/load-core-data.js')
 const { SkipPrefetchError } = require('../lib/errors.js')
 const { setIndexToNoRefresh, setIndexRefresh } = require('../lib/elastic-search/requests.js')
-logger.setLevel(process.env.LOG_LEVEL || 'info')
 
 if (process.env.NEW_RELIC_LICENSE_KEY && process.env.NEW_RELIC_APP_NAME) {
   logger.info(`Enabling NewRelic reporting for ${process.env.NEW_RELIC_APP_NAME}`)
@@ -308,12 +308,23 @@ const sierraHoldingsByBibIds = async (bibIds) => {
   return holdingsByBibId
 }
 
+const presentInSchema = (property, schema) => {
+  const schemaProperties = Object.keys(schema)
+  return schemaProperties.find((schemaProperty) => {
+    if (property === schemaProperty) return true
+    else if (schema[schemaProperty].type === 'nested') {
+      return presentInSchema(property, schema[schemaProperty].properties)
+    }
+  })
+}
+
 const overwriteSchema = (properties) => {
   const originalSchemaMethod = schema.schema
 
   const newSchema = { uri: true }
+  logger.info(`Overwriting schema to only contain properties: ${properties}`)
   properties.split(',').filter((property) => {
-    const validSchemaProp = !!originalSchemaMethod()[property]
+    const validSchemaProp = !!presentInSchema(property, originalSchemaMethod())
     if (!validSchemaProp) throw new Error(`${property} not a valid ES document property`)
     return validSchemaProp
   }).forEach((prop) => { newSchema[prop] = true })
@@ -382,7 +393,7 @@ const restoreGeneralPrefetch = () => {
 
 const overwriteModelPrefetch = () => {
   const originalFunction = prefetchers.modelPrefetch
-  if (argv.skipPrefetch || process.env.SKIP_PREFETCH) prefetchers.modelPrefetch = async (bibs) => Promise.resolve(bibs)
+  if (argv.skipDbPrefetch || process.env.SKIP_DB_PREFETCH === 'true') prefetchers.modelPrefetch = async (bibs) => Promise.resolve(bibs)
   else prefetchers.modelPrefetch = fetchFromDbConnection
 
   prefetchers.modelPrefetch.originalFunction = originalFunction
@@ -717,7 +728,8 @@ const cancelRun = (message) => {
 const validateParams = (argv) => {
   let message
   const updateOnly = process.env.UPDATE_ONLY === 'true' || argv.updateOnly
-  if ((updateOnly || argv.properties) && !(updateOnly && argv.properties)) {
+  const properties = process.env.PROPERTIES || argv.properties
+  if ((updateOnly || properties) && !(updateOnly && properties)) {
     message = 'Must provide --properties when UPDATE_ONLY=true or --updateOnly true (and vice versa)'
   } else if (
     (
@@ -742,8 +754,8 @@ const run = async () => {
   validateParams(argv)
   // Enable direct-db access to Item, Bib, and Holdings services, or optionally skip item and holdings fetch:
   overwriteModelPrefetch()
-  if (argv.skipPrefetch || process.env.SKIP_PREFETCH) overwriteGeneralPrefetch()
-  if (argv.updateOnly || process.env.UPDATE_ONLY) overwriteSchema(argv.properties)
+  if (argv.skipApiPrefetch || process.env.SKIP_API_PREFETCH === 'true') overwriteGeneralPrefetch()
+  if (argv.updateOnly || process.env.UPDATE_ONLY) overwriteSchema(argv.properties || process.env.PROPERTIES)
   // Require one of:
   // - csv
   // - bib/item id
@@ -782,6 +794,7 @@ const run = async () => {
 
 const preflightSetup = async () => {
   dotenv.config({ path: argv.envfile })
+  logger.setLevel(process.env.LOG_LEVEL || 'info')
   if (process.env.STOP_REFRESH === 'true') {
     await setIndexToNoRefresh()
   }
@@ -792,7 +805,7 @@ const preflightSetup = async () => {
 const cleanup = async () => {
   if (process.env.STOP_REFRESH === 'true') await setIndexRefresh(process.env.ELASTIC_RESOURCES_INDEX_NAME, '30s')
   if (process.env.UPDATE_ONLY || argv.updateOnly) {
-    exec(`cat temp-unindexed-records* > unindexed-records-${argv.properties}-${Date.now()}.txt; rm temp-unindexed-records*`)
+    exec(`cat temp-unindexed-records* > unindexed-records-${(argv.properties || process.env.PROPERTIES)}-${Date.now()}.txt; rm temp-unindexed-records*`)
   }
   totalTimer.endTimer()
   totalTimer.howMany('hours')
@@ -803,7 +816,10 @@ const totalTimer = new Timer('bulk update')
 if (isCalledViaCommandLine) {
   preflightSetup()
     .then(run)
-    .catch(logger.error)
+    .catch((e) => {
+      logger.info('spaghetti')
+      logger.error(e)
+    })
     .finally(cleanup)
 }
 
