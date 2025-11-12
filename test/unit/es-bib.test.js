@@ -1446,7 +1446,23 @@ describe('EsBib', function () {
         { id: 'lang:san', label: 'Sanskrit' }
       ])
     })
+
+    it('should return preferred language code if deprecated code found', () => {
+      const record = new SierraBib({
+        varFields: [
+          {
+            marcTag: '008',
+            // max is a deprecated code:
+            content: '                                   max'
+          }
+        ]
+      })
+      expect((new EsBib(record)).language()).to.deep.equal([
+        { id: 'lang:glv', label: 'Manx' }
+      ])
+    })
   })
+
   describe('electronic resource properties', () => {
     let supplementaryContentRecord
     let electronicResourcesRecord
