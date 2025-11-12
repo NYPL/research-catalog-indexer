@@ -74,8 +74,8 @@
  *      Arguments:
  *        any bulk-index argument for specifying the scope of the update
  *        properties {string}: comma-delineated list of bib-level properties to run update for
- *        skipDbPrefetch {boolean}: flag to skip item and holding fetches from the DB
- *        skipApiPrefetch {boolean}: skip API calls to M2 customer code store and SCSB
+ *        skipDbPrefetch {boolean}: flag to skip item and holding fetches from the DB. Can be false for any bib-level updates, must be true for item or holding level updates
+ *        skipApiPrefetch {boolean}: skip API calls to M2 customer code store and SCSB. Can be true for any bib-level update. Can be true for item level updates that do not have to do with live SCSB or M2 customer code data.
  *        updateOnly {boolean}: flag to run as update only script and not standard bulk index overwrite
  *
  *      SKIP_DB_PREFETCH, SKIP_API_PREFETCH and UPDATE_ONLY can both be passed in as environment variables as well.
@@ -314,7 +314,7 @@ const presentInSchema = (property, schema) => {
     if (property === schemaProperty) return true
     else if (schema[schemaProperty].type === 'nested') {
       return presentInSchema(property, schema[schemaProperty].properties)
-    }
+    } else return false
   })
 }
 
