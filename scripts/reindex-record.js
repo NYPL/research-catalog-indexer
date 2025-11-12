@@ -31,10 +31,9 @@ const {
   setCredentials: kinesisSetCredentials,
   client: makeStreamsClient
 } = require('../lib/streams-client')
-
 const argv = require('minimist')(process.argv.slice(2))
 
-const isCalledViaCommandLine = /scripts\/bulk-index(.js)?/.test(fs.realpathSync(process.argv[1]))
+const isCalledViaCommandLine = /scripts\/reindex-record(.js)?/.test(fs.realpathSync(process.argv[1]))
 
 const dotenv = require('dotenv')
 
@@ -46,6 +45,7 @@ const usage = () => {
 dotenv.config({ path: argv.envfile })
 
 const logger = require('../lib/logger')
+const { loadNyplCoreData } = require('../lib/load-core-data')
 logger.setLevel(process.env.LOG_LEVEL || 'info')
 
 // Ensure we're looking at the right profile
@@ -89,7 +89,8 @@ const reindexBib = async (nyplSource, id) => {
 if (isCalledViaCommandLine) {
   if (!argv.envfile) usage() && die('--envfile required')
   if (argv.uri) {
-    NyplSourceMapper.instance().then((mapper) => {
+    loadNyplCoreData().then(() => {
+      const mapper = NyplSourceMapper.instance()
       const { id, type, nyplSource } = mapper.splitIdentifier(argv.uri)
       switch (type) {
         case 'bib':
@@ -97,8 +98,8 @@ if (isCalledViaCommandLine) {
           break
       }
     })
-  } else usage()
-}
+  }
+} else usage()
 
 module.exports = {
   reindexBib

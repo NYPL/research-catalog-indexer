@@ -63,22 +63,21 @@
  *      envfile {string}: Path to local .env file. Default ./config/qa-bulk-index.env
  *      table {string}: Override primary table name used (e.g. bib_v2)
  *
- *  III. Perform property-specific bib-only update:
+ *  III. Perform property-specific update:
  *
- *      node scripts/bulk-index.js [...bulk index args]  --batchSize 1000 (recommended) --properties subjectLiteral,addedAuthorTitle (--skipApiPrefetch true --skipDbPrefetch true --updateOnly true) (not required if passed as env vars)
+ *      node scripts/bulk-index.js [...bulk index args]  --updateOnly (required) --batchSize 1000 (recommended) --properties subjectLiteral,addedAuthorTitle (--skipApiPrefetch true --skipDbPrefetch true --updateOnly true) (not required if passed as env vars)
  *
- *      Perform bulk update to specified properties. To date, this script is intended for use on bib-level properties
- *      with no dependencies on item or holding data. Recommended params include --batchSize 1000, as well as setting
+ *      Perform bulk update to specified properties. Recommended params include --batchSize 1000, as well as setting
  *      process.env.STOP_REFRESH to true to avoid latency in the resources index while running.
  *
  *      Arguments:
  *        any bulk-index argument for specifying the scope of the update
- *        properties {string}: comma-delineated list of bib-level properties to run update for
+ *        properties {string}: comma-delineated list of properties to run update for
  *        skipDbPrefetch {boolean}: flag to skip item and holding fetches from the DB. Can be false for any bib-level updates, must be true for item or holding level updates
  *        skipApiPrefetch {boolean}: skip API calls to M2 customer code store and SCSB. Can be true for any bib-level update. Can be true for item level updates that do not have to do with live SCSB or M2 customer code data.
  *        updateOnly {boolean}: flag to run as update only script and not standard bulk index overwrite
  *
- *      SKIP_DB_PREFETCH, SKIP_API_PREFETCH and UPDATE_ONLY can both be passed in as environment variables as well.
+ *      PROPERTIES, SKIP_DB_PREFETCH, SKIP_API_PREFETCH and UPDATE_ONLY can both be passed in as environment variables as well.
  */
 const fs = require('fs')
 const { parse: csvParse } = require('csv-parse/sync')
@@ -805,7 +804,7 @@ const preflightSetup = async () => {
 const cleanup = async () => {
   if (process.env.STOP_REFRESH === 'true') await setIndexRefresh(process.env.ELASTIC_RESOURCES_INDEX_NAME, '30s')
   if (process.env.UPDATE_ONLY || argv.updateOnly) {
-    exec(`cat temp-unindexed-records* > unindexed-records-${(argv.properties || process.env.PROPERTIES)}-${Date.now()}.txt; rm temp-unindexed-records*`)
+    exec(`cat temp-unindexed-records* && > unindexed-records-${(argv.properties || process.env.PROPERTIES)}-${Date.now()}.txt; rm temp-unindexed-records*`)
   }
   totalTimer.endTimer()
   totalTimer.howMany('hours')
