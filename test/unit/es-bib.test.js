@@ -951,24 +951,19 @@ describe('EsBib', function () {
           noteType: 'Note',
           type: 'bf:Note'
         },
-        '',
-        '',
-        '',
-        '',
-        '',
+        // Empty placeholder notes:
+        { label: '', type: 'bf:Note' },
+        { label: '', type: 'bf:Note' },
+        { label: '', type: 'bf:Note' },
+        { label: '', type: 'bf:Note' },
+        { label: '', type: 'bf:Note' },
         // This is a parallel for primary note "Austin Hansen, ...", which
         // appears at index 6 in the note array:
         {
           label: 'parallel for 545 a ',
           noteType: 'Biography',
           type: 'bf:Note'
-        },
-        '',
-        '',
-        '',
-        '',
-        '',
-        ''
+        }
       ])
     })
 
@@ -986,10 +981,7 @@ describe('EsBib', function () {
           label: 'At head of title: Національна академія наук Укрӓіни. Національна бібліотека Укрӓіни імені В.І Вернадського. Інститут рукопису.',
           noteType: 'Note',
           type: 'bf:Note'
-        },
-        // Includes two other primary note values:
-        '',
-        ''
+        }
       ])
     })
 
