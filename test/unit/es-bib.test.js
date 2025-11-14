@@ -648,6 +648,14 @@ describe('EsBib', function () {
         ]
       )
     })
+
+    it('should extract parallelDescription', () => {
+      const record = new SierraBib(require('../fixtures/bib-23236773.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.parallelDescription()).to.deep.equal([
+        '本书内容讲述:如果重绘中国当代文学"后三十年"的地图,这几个枢纽点是不应该被忽视的:1976年,1979年,1985年和1993年.1993年作为1980年代文学的终结点和1990年代文学的开启,具有历史枢纽点的特殊意义.因为只有在1993年的文学变局里,1980年代作为20世纪中国文学又一个"黄金十年"的历史命题才是成立的;而正是在这个枢纽点上,1990年代文学才告诉人们,它告别了当代文学漫长的理想浪漫期,回到了文学本来的面貌当中.'
+      ])
+    })
   })
 
   describe('identifier', () => {
@@ -935,13 +943,53 @@ describe('EsBib', function () {
     it('parallel notes', () => {
       const record = new SierraBib(require('../fixtures/bib-notes.json'))
       const esBib = new EsBib(record)
-      expect(esBib._parallelNotesAsDisplayFields()).to.deep.equal([
+      expect(esBib.parallelNote()).to.deep.equal([
         // This is a parallel for primary note "Title devised by cataloger.",
         // which appears at index 0 in the note array:
-        { value: 'parallel 500 a', index: 0, fieldName: 'note' },
+        {
+          label: 'parallel 500 a',
+          noteType: 'Note',
+          type: 'bf:Note'
+        },
+        '',
+        '',
+        '',
+        '',
+        '',
         // This is a parallel for primary note "Austin Hansen, ...", which
         // appears at index 6 in the note array:
-        { value: 'parallel for 545 a ', index: 6, fieldName: 'note' }
+        {
+          label: 'parallel for 545 a ',
+          noteType: 'Biography',
+          type: 'bf:Note'
+        },
+        '',
+        '',
+        '',
+        '',
+        '',
+        ''
+      ])
+    })
+
+    it('parallel notes (2)', () => {
+      const record = new SierraBib(require('../fixtures/bib-21131507.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.parallelNote()).to.deep.equal([
+        {
+          label: '"Науково-довідкове видання"--Colophon.',
+
+          noteType: 'Note',
+          type: 'bf:Note'
+        },
+        {
+          label: 'At head of title: Національна академія наук Укрӓіни. Національна бібліотека Укрӓіни імені В.І Вернадського. Інститут рукопису.',
+          noteType: 'Note',
+          type: 'bf:Note'
+        },
+        // Includes two other primary note values:
+        '',
+        ''
       ])
     })
 
@@ -1018,6 +1066,20 @@ describe('EsBib', function () {
           '[v. ] 8. Objects of provenance not known. pt. 1. Royal Statues. private Statues (Predynastic to Dynasty XVII) -- pt. 2. Private Statues (Dynasty XVIII to the Roman Periiod). Statues of Deities -- [pt. 3] Indices to parts 1 and 2, Statues -- pt. 4. Stelae (Dynasty XVIII to the Roman Period) 803-044-050 to 803-099-990 / by Jaromir Malek, assisted by Diana Magee and Elizabeth Miles.'
         ]
       )
+    })
+
+    it('should return toc and parallel toc', () => {
+      const record = new SierraBib(require('../fixtures/bib-23722949.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.tableOfContents()).to.deep.equal([
+        'Zustrichnyĭ marsh = Vstrechnyĭ marsh / A. Lazarenko -- Pokhidnyĭ marsh = Pokhodnyĭ marsh / S. Shvart͡s -- Karnavalʹnyĭ valʹs = Karnavalʹnyĭ valʹs / A. Kolomii͡et͡sʹ = A. Kolomiet͡s -- Valʹs z baletu "Mukha-t͡sokotukha" = Valʹs iz baleta "Mukha-t͡sokotukha" / L. Usachov = L. Usachev -- Valʹs na ukraïnsʹki temy = Valʹs na ukrainskie temy / I͡E. I͡Ut͡sevych = E. I͡Ut͡sevich -- Polʹka-rondo / S. Z͡Hdanov = S. Zhdanov -- Molodiz͡hna polʹka = Molodezhnai͡a polʹka / I. Berkovich = I. Berkovych -- Polʹka z͡hart = Polʹka-shutka  / N. Shulʹman -- Mazurka / I. Vilensʹkyĭ = I. Vilenskiĭ -- Chardash / V. Koltun -- Rosiĭsʹkyĭ tanet͡sʹ = Russkiĭ tanet͡s / I. Vilensʹkyĭ = I. Vilenskiĭ -- Ukraïnsʹkyĭ tanet͡sʹ = Ukrainskiĭ tanet͡s / P. Hlushkov ; P. Glushkov -- Kozachok = Kazachek / K. Dominchen -- Kozachok = Kazachek / S. Z͡Hdanov = S. Zhdanov -- Kolomyĭky z baletu "Khustka Dovbusha" = Kolomyĭki iz baleta "Khustka dovbusha" / A. Kos-Anatolʹsʹkyĭ = A. Kos-Anatolʹskiĭ -- Tropoti͡anka / L. Hrinberh = L. Grinberg -- Azerbaĭdz͡hansʹkyĭ tanet͡sʹ = Azerbaĭdzhanskiĭ tanet͡s / H. Sesiashvili = G. Sesiashvili -- Variat͡siï na chesʹku temu = Variat͡sii na cheshskui͡u temu / S. Shvart͡s -- Kytaĭsʹkyĭ tanet͡sʹ = Kitaĭskiĭ tanet͡s / C. Chapkiĭ = S. Chapkiĭ.'
+      ])
+      // At writing, this bib in production doesn't link the primary and
+      // parallel TOC fields properly, leading to an orphaned parallel:
+      expect(esBib.parallelTableOfContents()).to.deep.equal([
+        '',
+        'Зустрічний марш = Встречный марш / А. Лазаренко -- Похідний марш = Походный марш / С. Шварц -- Карнавальний вальс = Карнавальный вальс / А. Коломієць = А. Коломиец -- Вальс з балету "Муха-цокотуха" = Вальс из балета "Муха-цокотуха" / Л. Усачов = Л. Усачев -- Вальс на українські теми = Вальс на украинские темы / Є Юцевич = Е. Юцевич -- Полька-рондо / С. Жданов -- Молодіжна полька = Молодежная полька / І Беркович -- Полька жарт = Полька-шутка / Н. Шульман -- Мазурка / І Віленський = И. Виленский -- Чардаш / В. Колтун -- Російський танець = Русский танец / І Віленський = И. Виленский -- Український танець = Украинский танец / П. Глушков -- Козачок = Казачек / К. Домінчен = К. Доминчен -- Козачок = Казачек  / С. Жданов -- Коломийки з балету "Хустка Довбуша" = Коломыйки из балета "Хустка Довбуша"/ А. Кос-Анатольський = А. Кос-Анатольский -- Тропотянка / Л. Грінберг = Л. Гринберг -- Азербайджанський танець = Азербайджанский танец / Г. Сесіашвілі   Г. Сесиашвили -- Варіації на чеську тему = Вариации на чешскую тему / С. Шварц -- Китайський танець = Китайский танец / С. Чапкій = С. Чапкий.'
+      ])
     })
   })
 
@@ -1161,18 +1223,31 @@ describe('EsBib', function () {
     })
   })
 
-  describe('parallelDisplayField', () => {
-    it('returns parallel display fields', () => {
-      const record = new SierraBib(require('../fixtures/bib-parallel-display-fields.json'))
+  describe('editionStatement', () => {
+    it('extracts editionStatement & parallel', () => {
+      const record = new SierraBib(require('../fixtures/bib-11086445.json'))
       const esBib = new EsBib(record)
-      expect(esBib.parallelDisplayField()).to.deep.equal([
-        {
-          fieldName: 'publicationStatement',
-          index: 0,
-          value: '长沙市 : 湖南人民出版社 : 湖南省新華書店发行, 1984.'
-        },
-        { fieldName: 'placeOfPublication', index: 0, value: '长沙市' },
-        { fieldName: 'editionStatement', index: 0, value: '第1版.' }
+      expect(esBib.editionStatement()).to.deep.equal([
+        'Di 1 ban.'
+      ])
+      expect(esBib.parallelEditionStatement()).to.deep.equal([
+        '第1版.'
+      ])
+    })
+  })
+
+  describe('parallelPublicationStatment', () => {
+    it('returns parallel publication statement', () => {
+      const record = new SierraBib(require('../fixtures/bib-parallels-late-added.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.parallelPublicationStatement()).to.deep.equal([
+        '长沙市 : 湖南人民出版社 : 湖南省新華書店发行, 1984.'
+      ])
+      expect(esBib.parallelPlaceOfPublication()).to.deep.equal([
+        '长沙市'
+      ])
+      expect(esBib.parallelEditionStatement()).to.deep.equal([
+        '第1版.'
       ])
     })
   })
@@ -1756,6 +1831,25 @@ describe('EsBib', function () {
       const esBib = new EsBib(record)
       expect(esBib.addedAuthorTitle()).to.deep.equal(['Peter Pan.'])
     })
+
+    it('extracts added author title', () => {
+      const record = new SierraBib(require('../fixtures/bib-21989304.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.addedAuthorTitle()).to.deep.equal([
+        'Dvenadt︠s︡atʹ.'
+      ])
+    })
+
+    it('extracts parallel added author title', () => {
+      const record = new SierraBib(require('../fixtures/bib-21989304.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.parallelAddedAuthorTitle()).to.deep.equal([
+        // Although this appears to be the right parallel for the primary
+        // (above), the $6 doesn't link them correctly, hence orphaned:
+        '',
+        'Двенадцать'
+      ])
+    })
   })
 
   describe('popularity', () => {
@@ -1807,7 +1901,7 @@ describe('EsBib', function () {
   })
 
   describe('series', () => {
-    it('extracts series statement', async () => {
+    it('extracts series', async () => {
       const bib = new SierraBib({
         varFields: [
           {
@@ -1834,6 +1928,14 @@ describe('EsBib', function () {
         'subfield a content',
         // Expect all subfields (except 6) for 810:
         'subfield a content subfield z content'
+      ])
+    })
+
+    it('extracts parallelSeries', () => {
+      const bib = new SierraBib(require('../fixtures/bib-23236773.json'))
+      const esBib = new EsBib(bib)
+      expect(esBib.parallelSeries()).to.deep.equal([
+        'Dang dai wen xue shi yan jiu cong shu'
       ])
     })
   })
