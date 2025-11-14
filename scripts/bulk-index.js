@@ -65,7 +65,7 @@
  *
  *  III. Perform property-specific bib-only update:
  *
- *      node scripts/bulk-index.js [...bulk index args]  --batchSize 1000 (recommended) --properties subjectLiteral,addedAuthorTitle (--skipPrefetch true --updateOnly true) (not required if passed as env vars)
+ *      node scripts/bulk-index.js [...bulk index args]  --batchSize 1000 (recommended) --properties subjectLiteral,addedAuthorTitle (--skipApiPrefetch true --skipDbPrefetch true --updateOnly true) (not required if passed as env vars)
  *
  *      Perform bulk update to specified properties. To date, this script is intended for use on bib-level properties
  *      with no dependencies on item or holding data. Recommended params include --batchSize 1000, as well as setting
@@ -74,10 +74,11 @@
  *      Arguments:
  *        any bulk-index argument for specifying the scope of the update
  *        properties {string}: comma-delineated list of bib-level properties to run update for
- *        skipPrefetch {boolean}: flag to skip item and holding fetches from the DB, as well as API calls to M2 customer code store and SCSB
+ *        skipDbPrefetch {boolean}: flag to skip item and holding fetches from the DB. Can be false for any bib-level updates, must be true for item or holding level updates
+ *        skipApiPrefetch {boolean}: skip API calls to M2 customer code store and SCSB. Can be true for any bib-level update. Can be true for item level updates that do not have to do with live SCSB or M2 customer code data.
  *        updateOnly {boolean}: flag to run as update only script and not standard bulk index overwrite
  *
- *      SKIP_PREFETCH and UPDATE_ONLY can both be passed in as environment variables as well.
+ *      SKIP_DB_PREFETCH, SKIP_API_PREFETCH and UPDATE_ONLY can both be passed in as environment variables as well.
  */
 const fs = require('fs')
 const { parse: csvParse } = require('csv-parse/sync')
@@ -100,7 +101,7 @@ const argv = require('minimist')(process.argv.slice(2), {
 
 const isCalledViaCommandLine = /scripts\/bulk-index(.js)?/.test(fs.realpathSync(process.argv[1]))
 const dotenv = require('dotenv')
-
+const { exec } = require('child_process')
 // Conditionally set up NR instrumentation
 // Initialize `instrument` as a pass-through
 let instrument = (label, cb) => cb()
@@ -146,7 +147,6 @@ const logger = require('../lib/logger')
 const { loadNyplCoreData } = require('../lib/load-core-data.js')
 const { SkipPrefetchError } = require('../lib/errors.js')
 const { setIndexToNoRefresh, setIndexRefresh } = require('../lib/elastic-search/requests.js')
-logger.setLevel(process.env.LOG_LEVEL || 'info')
 
 if (process.env.NEW_RELIC_LICENSE_KEY && process.env.NEW_RELIC_APP_NAME) {
   logger.info(`Enabling NewRelic reporting for ${process.env.NEW_RELIC_APP_NAME}`)
@@ -308,24 +308,35 @@ const sierraHoldingsByBibIds = async (bibIds) => {
   return holdingsByBibId
 }
 
-const overwriteSchema = () => {
+const presentInSchema = (property, schema) => {
+  const schemaProperties = Object.keys(schema)
+  return schemaProperties.find((schemaProperty) => {
+    if (property === schemaProperty) return true
+    else if (schema[schemaProperty].type === 'nested') {
+      return presentInSchema(property, schema[schemaProperty].properties)
+    } else return false
+  })
+}
+
+const overwriteSchema = (properties) => {
   const originalSchemaMethod = schema.schema
+
   const newSchema = { uri: true }
-  argv.properties.split(',').filter((property) => {
-    const validSchemaProp = !!originalSchemaMethod()[property]
-    if (!validSchemaProp) throw new Error(`${property} not a valid ES document property.`)
+  logger.info(`Overwriting schema to only contain properties: ${properties}`)
+  properties.split(',').filter((property) => {
+    const validSchemaProp = !!presentInSchema(property, originalSchemaMethod())
+    if (!validSchemaProp) throw new Error(`${property} not a valid ES document property`)
     return validSchemaProp
   }).forEach((prop) => { newSchema[prop] = true })
   schema.schema = () => {
     return newSchema
   }
-  schema.schema.originalMethod = originalSchemaMethod
+  schema.originalMethod = originalSchemaMethod
 }
 
 const restoreSchema = () => {
-  if (schema.schema.originalFunction) {
-    schema.schema = schema.schema.originalFunction
-      .bind(schema)
+  if (schema.originalMethod) {
+    schema.schema = schema.originalMethod
   }
 }
 
@@ -370,7 +381,7 @@ const fetchFromDbConnection = async (bibs) => {
 const overwriteGeneralPrefetch = () => {
   const originalFunction = prefetchers.generalPrefetch
   prefetchers.generalPrefetch = async (bibs) => Promise.resolve(bibs)
-  prefetchers.modelPrefetch.originalFunction = originalFunction
+  prefetchers.generalPrefetch.originalFunction = originalFunction
 }
 
 const restoreGeneralPrefetch = () => {
@@ -382,7 +393,7 @@ const restoreGeneralPrefetch = () => {
 
 const overwriteModelPrefetch = () => {
   const originalFunction = prefetchers.modelPrefetch
-  if (argv.skipPrefetch || process.env.SKIP_PREFETCH) prefetchers.modelPrefetch = async (bibs) => Promise.resolve(bibs)
+  if (argv.skipDbPrefetch || process.env.SKIP_DB_PREFETCH === 'true') prefetchers.modelPrefetch = async (bibs) => Promise.resolve(bibs)
   else prefetchers.modelPrefetch = fetchFromDbConnection
 
   prefetchers.modelPrefetch.originalFunction = originalFunction
@@ -514,6 +525,20 @@ const buildSqlQuery = (options) => {
   return { query, params, type }
 }
 
+const readCursorRecurser = async (batchSize, cursor, retry = 1) => {
+  if (retry > 3) {
+    throw new Error('Error connecting to db after 3 tries')
+  }
+  try {
+    await delay(retry * 1000)
+    return await cursor.read(batchSize)
+  } catch (e) {
+    logger.warn('readCursorRecursor error: ', e)
+    logger.info(`readCursorRecursor retry #${retry}`)
+    return await readCursorRecurser(batchSize, cursor, ++retry)
+  }
+}
+
 /**
  *  Reindex a bunch of bibs based on a BibService query
  */
@@ -542,7 +567,15 @@ const updateByBibOrItemServiceQuery = async (options) => {
   while (!done && (count < options.limit || !options.limit)) {
     await instrument('Bulk-index batch', async () => {
       // Pull next batch of records from the cursor:
-      const rows = await cursor.read(options.batchSize)
+      let rows
+      try {
+        rows = await readCursorRecurser(options.batchSize, cursor)
+      } catch (e) {
+        cursor.close(() => {
+          client.release()
+        })
+        throw e
+      }
 
       // Did we reach the end?
       if (rows.length === 0) {
@@ -558,24 +591,23 @@ const updateByBibOrItemServiceQuery = async (options) => {
       let retries = 3
       let processed = false
       while (!processed && retries > 0) {
-        await indexer.processRecords(capitalize(type), records, { updateOnly: process.env.UPDATE_ONLY || argv.updateOnly, dryrun: argv.dryrun })
-          .then(() => {
-            if (retries < 3) logger.info(`Succeeded on retry ${3 - retries}`)
-            processed = true
-          })
-          .catch(async (e) => {
-            if (!(e instanceof SkipPrefetchError)) {
-              logger.warn(`Retrying due to error: ${e}`)
-              console.trace(e)
-              await delay(3000)
-              retries -= 1
-            } else {
-              cursor.close(() => {
-                client.release()
-              })
-              throw e
-            }
-          })
+        try {
+          await indexer.processRecords(capitalize(type), records, { updateOnly: process.env.UPDATE_ONLY || argv.updateOnly, dryrun: argv.dryrun })
+          if (retries < 3) logger.info(`Succeeded on retry ${3 - retries}`)
+          processed = true
+        } catch (e) {
+          if (!(e instanceof SkipPrefetchError)) {
+            logger.warn(`Retrying due to error: ${e}`)
+            console.trace(e)
+            await delay(3000)
+            retries -= 1
+          } else {
+            cursor.close(() => {
+              client.release()
+            })
+            throw e
+          }
+        }
       }
       count += rows.length
 
@@ -693,14 +725,13 @@ const cancelRun = (message) => {
   else logger.error('Error: ' + message)
 }
 
-// Main dispatcher:
-const run = async () => {
-  // Validate args:
-  if ((process.env.UPDATE_ONLY || argv.updateOnly) && !(argv.properties)) {
-    logger.error('Must provide --properties on command line if --updateOnly is true.')
-    cancelRun('Insufficient params')
-  }
-  if (
+const validateParams = (argv) => {
+  let message
+  const updateOnly = process.env.UPDATE_ONLY === 'true' || argv.updateOnly
+  const properties = process.env.PROPERTIES || argv.properties
+  if ((updateOnly || properties) && !(updateOnly && properties)) {
+    message = 'Must provide --properties when UPDATE_ONLY=true or --updateOnly true (and vice versa)'
+  } else if (
     (
       !(argv.type) &&
       !argv.bibId &&
@@ -712,13 +743,19 @@ const run = async () => {
     )
   ) {
     usage()
-    cancelRun('Insufficient params')
+    message = 'Insufficient params'
   }
+  if (message) cancelRun(message)
+}
 
+// Main dispatcher:
+const run = async () => {
+  // Validate args:
+  validateParams(argv)
   // Enable direct-db access to Item, Bib, and Holdings services, or optionally skip item and holdings fetch:
   overwriteModelPrefetch()
-  if (argv.skipPrefetch || process.env.SKIP_PREFETCH) overwriteGeneralPrefetch()
-  if (argv.updateOnly || process.env.UPDATE_ONLY) overwriteSchema()
+  if (argv.skipApiPrefetch || process.env.SKIP_API_PREFETCH === 'true') overwriteGeneralPrefetch()
+  if (argv.updateOnly || process.env.UPDATE_ONLY) overwriteSchema(argv.properties || process.env.PROPERTIES)
   // Require one of:
   // - csv
   // - bib/item id
@@ -741,11 +778,12 @@ const run = async () => {
     )
   ) {
     await db.initPools()
-    await updateByBibOrItemServiceQuery(argv)
-      .catch((e) => {
-        logger.error('Error ', e)
-        logger.error(e.stack)
-      })
+    try {
+      await updateByBibOrItemServiceQuery(argv)
+    } catch (e) {
+      logger.error('Error ', e)
+      logger.error(e.stack)
+    }
     db.endPools()
   }
   // Disable direct-db access to Item, Bib, and Holdings services (formality)
@@ -756,6 +794,7 @@ const run = async () => {
 
 const preflightSetup = async () => {
   dotenv.config({ path: argv.envfile })
+  logger.setLevel(process.env.LOG_LEVEL || 'info')
   if (process.env.STOP_REFRESH === 'true') {
     await setIndexToNoRefresh()
   }
@@ -765,6 +804,9 @@ const preflightSetup = async () => {
 
 const cleanup = async () => {
   if (process.env.STOP_REFRESH === 'true') await setIndexRefresh(process.env.ELASTIC_RESOURCES_INDEX_NAME, '30s')
+  if (process.env.UPDATE_ONLY || argv.updateOnly) {
+    exec(`cat temp-unindexed-records* > unindexed-records-${(argv.properties || process.env.PROPERTIES)}-${Date.now()}.txt; rm temp-unindexed-records*`)
+  }
   totalTimer.endTimer()
   totalTimer.howMany('hours')
 }
@@ -772,7 +814,10 @@ const cleanup = async () => {
 const totalTimer = new Timer('bulk update')
 
 if (isCalledViaCommandLine) {
-  preflightSetup().then(run).then(cleanup)
+  preflightSetup()
+    .then(run)
+    .catch(logger.error)
+    .finally(cleanup)
 }
 
 module.exports = {
@@ -780,5 +825,12 @@ module.exports = {
   db,
   buildSqlQuery,
   overwriteModelPrefetch,
-  restoreModelPrefetch
+  restoreModelPrefetch,
+  _testing: {
+    validateParams,
+    overwriteGeneralPrefetch,
+    restoreGeneralPrefetch,
+    overwriteSchema,
+    restoreSchema
+  }
 }

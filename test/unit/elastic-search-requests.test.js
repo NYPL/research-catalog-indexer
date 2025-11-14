@@ -59,6 +59,8 @@ describe('elastic search requests', () => {
     })
   })
   describe('writeRecords', () => {
+    let loggerSpy
+    afterEach(() => loggerSpy.restore())
     it('logs errors', async () => {
       esRequests = rewire('../../lib/elastic-search/requests')
 
@@ -77,7 +79,7 @@ describe('elastic search requests', () => {
           }
         })
       )
-      const loggerSpy = sinon.spy(logger, 'error')
+      loggerSpy = sinon.spy(logger, 'error')
 
       try {
         await esRequests.writeRecords(records)
