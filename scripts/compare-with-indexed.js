@@ -31,6 +31,8 @@ const EsBib = require('../lib/es-models/bib')
 const SierraBib = require('../lib/sierra-models/bib')
 const SierraHolding = require('../lib/sierra-models/holding')
 const { currentDocument } = require('../lib/elastic-search/requests')
+const { loadNyplCoreData } = require('../lib/load-core-data')
+const { schema } = require('../lib/elastic-search/index-schema')
 
 const { setCredentials: kmsSetCredentials } = require('../lib/kms')
 
@@ -64,7 +66,8 @@ const buildLocalEsDocFromUri = async (uri) => {
   const { type } = mapper.splitIdentifier(uri)
   const records = await transformIntoBibRecords(type, [record])
   const { filteredBibs, removedBibs } = await filteredSierraBibsForBibs(records)
-  const recordsToIndex = await buildEsDocument(filteredBibs)
+  const recordsToIndex = (await buildEsDocument(filteredBibs))
+    .map((r) => r.toPlainObject(schema()))
   return { recordsToIndex, recordsToDelete: removedBibs }
 }
 
@@ -112,6 +115,7 @@ const suppressionReportForModel = async (record) => {
  *  Run the compare-with-indexed report over the document identified by --uri
  */
 const run = async () => {
+  await loadNyplCoreData()
   console.log(`Comparing local ES doc against the one in ${indexName}`)
   const mapper = await NyplSourceMapper.instance()
   const { type } = mapper.splitIdentifier(argv.uri)
