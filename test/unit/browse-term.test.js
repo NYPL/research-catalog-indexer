@@ -6,8 +6,7 @@ const {
   getPrimaryAndParallelLabels,
   getSubjectModels,
   buildBatchedCommands,
-  determineUpdatedTerms,
-  emitBibSubjectEventsToSqs
+  determineUpdatedTerms
 } = require('../../lib/browse-terms')
 const SierraBib = require('../../lib/sierra-models/bib')
 const {
