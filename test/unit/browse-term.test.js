@@ -236,9 +236,9 @@ describe('bib activity', () => {
     })
   })
   describe('buildBibSubjectEvents', () => {
-    it('returns early if there are no idsToFetch', async () => {
+    it('returns an empty array if there are no idsToFetch', async () => {
       const nonResearchBib = { getIsResearchWithRationale: () => ({ isResearch: false }) }
-      expect(buildBibSubjectEvents([nonResearchBib])).to.eventually.equal(undefined)
+      expect(buildBibSubjectEvents([nonResearchBib])).to.eventually.equal([])
       expect(loggerSpy.calledWith('No records to fetch or build subjects for'))
     })
     describe('on ingest (all subjects from non suppressed or deleted bibs present are passed along)', () => {
