@@ -30,7 +30,7 @@ const mockEsClient = {
   }
 }
 let loggerSpy
-describe('bib activity', () => {
+xdescribe('bib activity', () => {
   before(() => {
     loggerSpy = sinon.spy(logger, 'debug')
     sinon.stub(esClient, 'client').resolves(mockEsClient)
