@@ -27,14 +27,14 @@ describe('EsBib', function () {
     it('should return correctly prefixed uri for nypl bib', async function () {
       const record = new SierraBib(require('../fixtures/bib-10001936.json'))
       const esBib = new EsBib(record)
-      const uri = await esBib.uri()
+      const uri = esBib.uri()
       expect(uri).to.eq('b10001936')
     })
 
     it('should return correctly prefixed uri for partner bib', async function () {
       const record = new SierraBib(require('../fixtures/bib-hl990000453050203941.json'))
       const esBib = new EsBib(record)
-      const uri = await esBib.uri()
+      const uri = esBib.uri()
       expect(uri).to.eq('hb990000453050203941')
     })
   })
@@ -76,6 +76,7 @@ describe('EsBib', function () {
     it('returns collection id(s) that correspond to item holding locations', async () => {
       const bib = new SierraBib(require('../fixtures/bib-11606020.json'))
       bib._items = []
+      bib._holdings = []
       // An item from Maps
       bib._items.push(new SierraItem(require('../fixtures/item-14441624.json')))
       expect(await (new EsBib(bib)).collectionIds()).to.deep.equal(['map'])
@@ -91,11 +92,13 @@ describe('EsBib', function () {
     it('checks fixed field 26 for location on bibs with no items', async () => {
       const resBib = new SierraBib(require('../fixtures/bib-15109087.json'))
       resBib._items = []
+      resBib._holdings = []
       // fixed field 26 on this bib has value: "mal "
       expect(await (new EsBib(resBib)).collectionIds()).to.deep.equal(['mal'])
 
       const scbBib = new SierraBib(require('../fixtures/bib-22027953.json'))
       scbBib._items = []
+      scbBib._holdings = []
       // fixed field 26 on this bib has value: "scb "
       expect(await (new EsBib(scbBib)).collectionIds()).to.deep.equal(['scb'])
     })
@@ -645,6 +648,14 @@ describe('EsBib', function () {
         ]
       )
     })
+
+    it('should extract parallelDescription', () => {
+      const record = new SierraBib(require('../fixtures/bib-23236773.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.parallelDescription()).to.deep.equal([
+        '本书内容讲述:如果重绘中国当代文学"后三十年"的地图,这几个枢纽点是不应该被忽视的:1976年,1979年,1985年和1993年.1993年作为1980年代文学的终结点和1990年代文学的开启,具有历史枢纽点的特殊意义.因为只有在1993年的文学变局里,1980年代作为20世纪中国文学又一个"黄金十年"的历史命题才是成立的;而正是在这个枢纽点上,1990年代文学才告诉人们,它告别了当代文学漫长的理想浪漫期,回到了文学本来的面貌当中.'
+      ])
+    })
   })
 
   describe('identifier', () => {
@@ -932,13 +943,45 @@ describe('EsBib', function () {
     it('parallel notes', () => {
       const record = new SierraBib(require('../fixtures/bib-notes.json'))
       const esBib = new EsBib(record)
-      expect(esBib._parallelNotesAsDisplayFields()).to.deep.equal([
+      expect(esBib.parallelNote()).to.deep.equal([
         // This is a parallel for primary note "Title devised by cataloger.",
         // which appears at index 0 in the note array:
-        { value: 'parallel 500 a', index: 0, fieldName: 'note' },
+        {
+          label: 'parallel 500 a',
+          noteType: 'Note',
+          type: 'bf:Note'
+        },
+        // Empty placeholder notes:
+        { label: '', type: 'bf:Note' },
+        { label: '', type: 'bf:Note' },
+        { label: '', type: 'bf:Note' },
+        { label: '', type: 'bf:Note' },
+        { label: '', type: 'bf:Note' },
         // This is a parallel for primary note "Austin Hansen, ...", which
         // appears at index 6 in the note array:
-        { value: 'parallel for 545 a ', index: 6, fieldName: 'note' }
+        {
+          label: 'parallel for 545 a ',
+          noteType: 'Biography',
+          type: 'bf:Note'
+        }
+      ])
+    })
+
+    it('parallel notes (2)', () => {
+      const record = new SierraBib(require('../fixtures/bib-21131507.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.parallelNote()).to.deep.equal([
+        {
+          label: '"Науково-довідкове видання"--Colophon.',
+
+          noteType: 'Note',
+          type: 'bf:Note'
+        },
+        {
+          label: 'At head of title: Національна академія наук Укрӓіни. Національна бібліотека Укрӓіни імені В.І Вернадського. Інститут рукопису.',
+          noteType: 'Note',
+          type: 'bf:Note'
+        }
       ])
     })
 
@@ -1015,6 +1058,20 @@ describe('EsBib', function () {
           '[v. ] 8. Objects of provenance not known. pt. 1. Royal Statues. private Statues (Predynastic to Dynasty XVII) -- pt. 2. Private Statues (Dynasty XVIII to the Roman Periiod). Statues of Deities -- [pt. 3] Indices to parts 1 and 2, Statues -- pt. 4. Stelae (Dynasty XVIII to the Roman Period) 803-044-050 to 803-099-990 / by Jaromir Malek, assisted by Diana Magee and Elizabeth Miles.'
         ]
       )
+    })
+
+    it('should return toc and parallel toc', () => {
+      const record = new SierraBib(require('../fixtures/bib-23722949.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.tableOfContents()).to.deep.equal([
+        'Zustrichnyĭ marsh = Vstrechnyĭ marsh / A. Lazarenko -- Pokhidnyĭ marsh = Pokhodnyĭ marsh / S. Shvart͡s -- Karnavalʹnyĭ valʹs = Karnavalʹnyĭ valʹs / A. Kolomii͡et͡sʹ = A. Kolomiet͡s -- Valʹs z baletu "Mukha-t͡sokotukha" = Valʹs iz baleta "Mukha-t͡sokotukha" / L. Usachov = L. Usachev -- Valʹs na ukraïnsʹki temy = Valʹs na ukrainskie temy / I͡E. I͡Ut͡sevych = E. I͡Ut͡sevich -- Polʹka-rondo / S. Z͡Hdanov = S. Zhdanov -- Molodiz͡hna polʹka = Molodezhnai͡a polʹka / I. Berkovich = I. Berkovych -- Polʹka z͡hart = Polʹka-shutka  / N. Shulʹman -- Mazurka / I. Vilensʹkyĭ = I. Vilenskiĭ -- Chardash / V. Koltun -- Rosiĭsʹkyĭ tanet͡sʹ = Russkiĭ tanet͡s / I. Vilensʹkyĭ = I. Vilenskiĭ -- Ukraïnsʹkyĭ tanet͡sʹ = Ukrainskiĭ tanet͡s / P. Hlushkov ; P. Glushkov -- Kozachok = Kazachek / K. Dominchen -- Kozachok = Kazachek / S. Z͡Hdanov = S. Zhdanov -- Kolomyĭky z baletu "Khustka Dovbusha" = Kolomyĭki iz baleta "Khustka dovbusha" / A. Kos-Anatolʹsʹkyĭ = A. Kos-Anatolʹskiĭ -- Tropoti͡anka / L. Hrinberh = L. Grinberg -- Azerbaĭdz͡hansʹkyĭ tanet͡sʹ = Azerbaĭdzhanskiĭ tanet͡s / H. Sesiashvili = G. Sesiashvili -- Variat͡siï na chesʹku temu = Variat͡sii na cheshskui͡u temu / S. Shvart͡s -- Kytaĭsʹkyĭ tanet͡sʹ = Kitaĭskiĭ tanet͡s / C. Chapkiĭ = S. Chapkiĭ.'
+      ])
+      // At writing, this bib in production doesn't link the primary and
+      // parallel TOC fields properly, leading to an orphaned parallel:
+      expect(esBib.parallelTableOfContents()).to.deep.equal([
+        '',
+        'Зустрічний марш = Встречный марш / А. Лазаренко -- Похідний марш = Походный марш / С. Шварц -- Карнавальний вальс = Карнавальный вальс / А. Коломієць = А. Коломиец -- Вальс з балету "Муха-цокотуха" = Вальс из балета "Муха-цокотуха" / Л. Усачов = Л. Усачев -- Вальс на українські теми = Вальс на украинские темы / Є Юцевич = Е. Юцевич -- Полька-рондо / С. Жданов -- Молодіжна полька = Молодежная полька / І Беркович -- Полька жарт = Полька-шутка / Н. Шульман -- Мазурка / І Віленський = И. Виленский -- Чардаш / В. Колтун -- Російський танець = Русский танец / І Віленський = И. Виленский -- Український танець = Украинский танец / П. Глушков -- Козачок = Казачек / К. Домінчен = К. Доминчен -- Козачок = Казачек  / С. Жданов -- Коломийки з балету "Хустка Довбуша" = Коломыйки из балета "Хустка Довбуша"/ А. Кос-Анатольський = А. Кос-Анатольский -- Тропотянка / Л. Грінберг = Л. Гринберг -- Азербайджанський танець = Азербайджанский танец / Г. Сесіашвілі   Г. Сесиашвили -- Варіації на чеську тему = Вариации на чешскую тему / С. Шварц -- Китайський танець = Китайский танец / С. Чапкій = С. Чапкий.'
+      ])
     })
   })
 
@@ -1097,12 +1154,21 @@ describe('EsBib', function () {
   })
 
   describe('subjectLiteral', () => {
+    it('should not build subjectLiterals that are suppressed', () => {
+      const record = new SierraBib(require('../fixtures/partner-suppressable-subjects.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.subjectLiteral().length).to.equal(7)
+    })
+    it('should respect the order that subjects were catalogged in', () => {
+      const record = new SierraBib(require('../fixtures/bib-subject-order.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.subjectLiteral()[0]).to.deep.equal('Motion picture actors and actresses.')
+    })
     it('should return an array of subject literals with " " joiner around certain subfields', () => {
       const record = new SierraBib(require('../fixtures/bib-parallels-chaos.json'))
       const esBib = new EsBib(record)
-      expect(esBib.subjectLiteral()).to.deep.equal(['600 primary value a 600 primary value b'])
+      expect(esBib.subjectLiteral()).to.deep.equal(['600 primary value a 600 primary value b.'])
     })
-
     it('should return an array of subject literals with " -- " joiner around other subfields', () => {
       const record = new SierraBib(require('../fixtures/bib-10001936.json'))
       const esBib = new EsBib(record)
@@ -1130,26 +1196,48 @@ describe('EsBib', function () {
         'Social security -- Latin America'
       ])
     })
-
     it('should return parallelSubjectLiteral values', () => {
       const record = new SierraBib(require('../fixtures/bib-parallels-chaos.json'))
       const esBib = new EsBib(record)
-      expect(esBib.parallelSubjectLiteral()).to.deep.equal(['‏600 parallel value a 600 parallel value b'])
+      expect(esBib.parallelSubjectLiteral()).to.deep.equal(['‏600 parallel value a 600 parallel value b.'])
+    })
+    it('parallelSubjectLiteral shouldn\t have a problem with no parallel', () => {
+      const record = new SierraBib(require('../fixtures/bib-10554371.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.parallelSubjectLiteral())
+    })
+    it('parallelSubjectLiteral shouldn\t have a problem with no parallel', () => {
+      const record = new SierraBib(require('../fixtures/bib-10554371.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.parallelSubjectLiteral())
     })
   })
 
-  describe('parallelDisplayField', () => {
-    it('returns parallel display fields', () => {
-      const record = new SierraBib(require('../fixtures/bib-parallel-display-fields.json'))
+  describe('editionStatement', () => {
+    it('extracts editionStatement & parallel', () => {
+      const record = new SierraBib(require('../fixtures/bib-11086445.json'))
       const esBib = new EsBib(record)
-      expect(esBib.parallelDisplayField()).to.deep.equal([
-        {
-          fieldName: 'publicationStatement',
-          index: 0,
-          value: '长沙市 : 湖南人民出版社 : 湖南省新華書店发行, 1984.'
-        },
-        { fieldName: 'placeOfPublication', index: 0, value: '长沙市' },
-        { fieldName: 'editionStatement', index: 0, value: '第1版.' }
+      expect(esBib.editionStatement()).to.deep.equal([
+        'Di 1 ban.'
+      ])
+      expect(esBib.parallelEditionStatement()).to.deep.equal([
+        '第1版.'
+      ])
+    })
+  })
+
+  describe('parallelPublicationStatment', () => {
+    it('returns parallel publication statement', () => {
+      const record = new SierraBib(require('../fixtures/bib-parallels-late-added.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.parallelPublicationStatement()).to.deep.equal([
+        '长沙市 : 湖南人民出版社 : 湖南省新華書店发行, 1984.'
+      ])
+      expect(esBib.parallelPlaceOfPublication()).to.deep.equal([
+        '长沙市'
+      ])
+      expect(esBib.parallelEditionStatement()).to.deep.equal([
+        '第1版.'
       ])
     })
   })
@@ -1423,7 +1511,23 @@ describe('EsBib', function () {
         { id: 'lang:san', label: 'Sanskrit' }
       ])
     })
+
+    it('should return preferred language code if deprecated code found', () => {
+      const record = new SierraBib({
+        varFields: [
+          {
+            marcTag: '008',
+            // max is a deprecated code:
+            content: '                                   max'
+          }
+        ]
+      })
+      expect((new EsBib(record)).language()).to.deep.equal([
+        { id: 'lang:glv', label: 'Manx' }
+      ])
+    })
   })
+
   describe('electronic resource properties', () => {
     let supplementaryContentRecord
     let electronicResourcesRecord
@@ -1633,6 +1737,7 @@ describe('EsBib', function () {
         new SierraItem(require('../fixtures/item-10003973.json')),
         new SierraItem(require('../fixtures/item-17145801.json'))
       ]
+      sierraBib._holdings = []
       bib = new EsBib(sierraBib)
     })
 
@@ -1716,6 +1821,25 @@ describe('EsBib', function () {
       const esBib = new EsBib(record)
       expect(esBib.addedAuthorTitle()).to.deep.equal(['Peter Pan.'])
     })
+
+    it('extracts added author title', () => {
+      const record = new SierraBib(require('../fixtures/bib-21989304.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.addedAuthorTitle()).to.deep.equal([
+        'Dvenadt︠s︡atʹ.'
+      ])
+    })
+
+    it('extracts parallel added author title', () => {
+      const record = new SierraBib(require('../fixtures/bib-21989304.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.parallelAddedAuthorTitle()).to.deep.equal([
+        // Although this appears to be the right parallel for the primary
+        // (above), the $6 doesn't link them correctly, hence orphaned:
+        '',
+        'Двенадцать'
+      ])
+    })
   })
 
   describe('popularity', () => {
@@ -1728,6 +1852,7 @@ describe('EsBib', function () {
         new SierraItem(require('../fixtures/item-10003973.json')),
         new SierraItem(require('../fixtures/item-17145801.json'))
       ]
+      sierraBib._holdings = []
       bib = new EsBib(sierraBib)
     })
 
@@ -1740,6 +1865,7 @@ describe('EsBib', function () {
     it('builds array of plain, distinct building ids from item locations', async () => {
       const bib = new SierraBib(require('../fixtures/bib-10001936.json'))
       bib._items = []
+      bib._holdings = []
       // Adopt a RC items:
       bib._items.push(new SierraItem(require('../fixtures/item-10003973.json')))
       expect(await (new EsBib(bib)).buildingLocationIds()).to.deep.equal(['rc'])
@@ -1765,7 +1891,7 @@ describe('EsBib', function () {
   })
 
   describe('series', () => {
-    it('extracts series statement', async () => {
+    it('extracts series', async () => {
       const bib = new SierraBib({
         varFields: [
           {
@@ -1792,6 +1918,105 @@ describe('EsBib', function () {
         'subfield a content',
         // Expect all subfields (except 6) for 810:
         'subfield a content subfield z content'
+      ])
+    })
+
+    it('extracts parallelSeries', () => {
+      const bib = new SierraBib(require('../fixtures/bib-23236773.json'))
+      const esBib = new EsBib(bib)
+      expect(esBib.parallelSeries()).to.deep.equal([
+        'Dang dai wen xue shi yan jiu cong shu'
+      ])
+    })
+  })
+
+  describe('physicalDescription', () => {
+    it('extracts physicalDescription content', async () => {
+      const bib = new SierraBib({
+        varFields: [
+          {
+            marcTag: '300',
+            subfields: [
+              { tag: 'a', content: 'subfield_a' },
+              { tag: 'b', content: 'subfield_b' },
+              { tag: 'c', content: 'subfield_c' },
+              { tag: 'd', content: 'subfield_d' },
+              { tag: 'e', content: 'subfield_e' }
+            ]
+          }
+        ]
+      })
+      const esBib = new EsBib(bib)
+
+      expect(await (esBib.physicalDescription())).to.deep.equal([
+        // Expect all subfields (except d) for 300:
+        'subfield_a : subfield_b ; subfield_c + subfield_e'
+      ])
+    })
+  })
+
+  describe('physicalDescriptionWithSuffixes', () => {
+    it('extracts physicalDescription content', async () => {
+      const bib = new SierraBib({
+        varFields: [
+          {
+            marcTag: '300',
+            subfields: [
+              { tag: 'a', content: '1 map :' },
+              { tag: 'b', content: 'both sides, color ;' },
+              { tag: 'c', content: '128 x 96 cm, on sheet 68 x 98 cm +' },
+              { tag: 'e', content: '1 index (31 p. ; 19 cm)' }
+            ]
+          }
+        ]
+      })
+      const esBib = new EsBib(bib)
+
+      expect(await (esBib.physicalDescription())).to.deep.equal([
+        '1 map : both sides, color ; 128 x 96 cm, on sheet 68 x 98 cm + 1 index (31 p. ; 19 cm)'
+      ])
+    })
+  })
+
+  describe('physicalDescriptionSubset1', () => {
+    it('extracts physicalDescription content', async () => {
+      const bib = new SierraBib({
+        varFields: [
+          {
+            marcTag: '300',
+            subfields: [
+              { tag: 'a', content: '1 score (16 p.) ;' },
+              { tag: 'c', content: '29 cm' }
+            ]
+          }
+        ]
+      })
+      const esBib = new EsBib(bib)
+
+      expect(await (esBib.physicalDescription())).to.deep.equal([
+        '1 score (16 p.) ; 29 cm'
+      ])
+    })
+  })
+
+  describe('physicalDescriptionSubset2', () => {
+    it('extracts physicalDescription content', async () => {
+      const bib = new SierraBib({
+        varFields: [
+          {
+            marcTag: '300',
+            subfields: [
+              { tag: 'a', content: '1 computer disk ;' },
+              { tag: 'c', content: '3 1/2 in. +' },
+              { tag: 'e', content: 'reference manual' }
+            ]
+          }
+        ]
+      })
+      const esBib = new EsBib(bib)
+
+      expect(await (esBib.physicalDescription())).to.deep.equal([
+        '1 computer disk ; 3 1/2 in. + reference manual'
       ])
     })
   })

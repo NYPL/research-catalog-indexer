@@ -1,0 +1,968 @@
+{
+  "id": "21131507",
+  "nyplSource": "sierra-nypl",
+  "title": "Arkhivy, kolekt︠s︡iï ta zibranni︠a︡ derz︠h︡avnykh, hromadsʹkykh ta relihiĭnykh ustanov u fondakh Instytutu rukopysu Nat︠s︡ionalʹnoï biblioteky Ukraïny imeni V. I. Vernadsʹkoho : putivnyk",
+  "author": "",
+  "publishYear": 2015,
+  "nyplType": "bib",
+  "controlNumber": "963867285",
+  "standardNumbers": [
+    "9789660278059",
+    "9660278055"
+  ],
+  "updatedDate": "2021-11-12T23:02:45",
+  "createdDate": "2016-12-08T21:07:51",
+  "deletedDate": null,
+  "catalogDate": "2016-12-20T00:00:00",
+  "deleted": false,
+  "suppressed": false,
+  "locations": [
+    {
+      "code": "mal",
+      "name": "SASB - Service Desk Rm 315"
+    },
+    {
+      "code": "mal",
+      "name": "SASB - Service Desk Rm 315"
+    }
+  ],
+  "lang": {
+    "code": "ukr",
+    "name": "Ukrainian"
+  },
+  "materialType": {
+    "code": "a  ",
+    "value": "BOOK/TEXT"
+  },
+  "bibLevel": {
+    "code": "m",
+    "value": "MONOGRAPH"
+  },
+  "country": {
+    "code": "un ",
+    "name": "Ukraine"
+  },
+  "normTitle": "arkhivy kolekt︠s︡iï ta zibranni︠a︡ derz︠h︡avnykh hromadsʹkykh ta relihiĭnykh ustanov u fondakh instytutu rukopysu nat︠s︡ionalʹnoï biblioteky ukraïny imeni v i vernadsʹkoho putivnyk",
+  "normAuthor": "",
+  "fixedFields": {
+    "24": {
+      "label": "Language",
+      "value": "ukr",
+      "display": "Ukrainian"
+    },
+    "25": {
+      "label": "Skip",
+      "value": "0",
+      "display": null
+    },
+    "26": {
+      "label": "Location",
+      "value": "mal  ",
+      "display": "SASB - Service Desk Rm 315"
+    },
+    "27": {
+      "label": "COPIES",
+      "value": "1",
+      "display": null
+    },
+    "28": {
+      "label": "Cat. Date",
+      "value": "2016-12-20",
+      "display": null
+    },
+    "29": {
+      "label": "Bib Level",
+      "value": "m",
+      "display": "MONOGRAPH"
+    },
+    "30": {
+      "label": "Material Type",
+      "value": "a  ",
+      "display": "BOOK/TEXT"
+    },
+    "31": {
+      "label": "Bib Code 3",
+      "value": "-",
+      "display": null
+    },
+    "80": {
+      "label": "Record Type",
+      "value": "b",
+      "display": null
+    },
+    "81": {
+      "label": "Record Number",
+      "value": "21131507",
+      "display": null
+    },
+    "83": {
+      "label": "Created Date",
+      "value": "2016-12-08T21:07:51Z",
+      "display": null
+    },
+    "84": {
+      "label": "Updated Date",
+      "value": "2021-11-12T23:02:45Z",
+      "display": null
+    },
+    "85": {
+      "label": "No. of Revisions",
+      "value": "6",
+      "display": null
+    },
+    "86": {
+      "label": "Agency",
+      "value": "1",
+      "display": null
+    },
+    "89": {
+      "label": "Country",
+      "value": "un ",
+      "display": "Ukraine"
+    },
+    "98": {
+      "label": "PDATE",
+      "value": "2021-10-24T22:17:46Z",
+      "display": null
+    },
+    "107": {
+      "label": "MARC Type",
+      "value": " ",
+      "display": null
+    }
+  },
+  "varFields": [
+    {
+      "ind1": "1",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "700",
+      "fieldTag": "b",
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "880-06"
+        },
+        {
+          "tag": "a",
+          "content": "Bodak, Olʹha,"
+        },
+        {
+          "tag": "e",
+          "content": "author."
+        }
+      ]
+    },
+    {
+      "ind1": "1",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "700",
+      "fieldTag": "b",
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "880-07"
+        },
+        {
+          "tag": "a",
+          "content": "Dubrovina, L. A.,"
+        },
+        {
+          "tag": "e",
+          "content": "editor."
+        }
+      ]
+    },
+    {
+      "ind1": "2",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "710",
+      "fieldTag": "b",
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "880-08"
+        },
+        {
+          "tag": "a",
+          "content": "Nat︠s︡ionalʹna biblioteka Ukraïny im. V.I. Vernadsʹkoho."
+        },
+        {
+          "tag": "b",
+          "content": "Instytut rukopysu,"
+        },
+        {
+          "tag": "e",
+          "content": "issuing body."
+        }
+      ]
+    },
+    {
+      "ind1": "2",
+      "ind2": "0",
+      "content": null,
+      "marcTag": "610",
+      "fieldTag": "d",
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "880-05"
+        },
+        {
+          "tag": "a",
+          "content": "Nat︠s︡ionalʹna biblioteka Ukraïny im. V.I. Vernadsʹkoho."
+        },
+        {
+          "tag": "b",
+          "content": "Instytut rukopysu"
+        },
+        {
+          "tag": "x",
+          "content": "Archives"
+        },
+        {
+          "tag": "v",
+          "content": "Catalogs."
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "0",
+      "content": null,
+      "marcTag": "650",
+      "fieldTag": "d",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Learning and scholarship"
+        },
+        {
+          "tag": "z",
+          "content": "Ukraine"
+        },
+        {
+          "tag": "x",
+          "content": "History"
+        },
+        {
+          "tag": "x",
+          "content": "Sources"
+        },
+        {
+          "tag": "v",
+          "content": "Bibliography"
+        },
+        {
+          "tag": "v",
+          "content": "Catalogs."
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "0",
+      "content": null,
+      "marcTag": "650",
+      "fieldTag": "d",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Religious institutions"
+        },
+        {
+          "tag": "z",
+          "content": "Ukraine"
+        },
+        {
+          "tag": "x",
+          "content": "History"
+        },
+        {
+          "tag": "x",
+          "content": "Sources"
+        },
+        {
+          "tag": "v",
+          "content": "Bibliography"
+        },
+        {
+          "tag": "v",
+          "content": "Catalogs."
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "020",
+      "fieldTag": "i",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "9789660278059"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "020",
+      "fieldTag": "i",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "9660278055"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "035",
+      "fieldTag": "l",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "(OCoLC)963867285"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "504",
+      "fieldTag": "n",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Includes bibliographical references."
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "500",
+      "fieldTag": "n",
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "880-03"
+        },
+        {
+          "tag": "a",
+          "content": "\"Naukovo-dovidkove vydanni︠a︡\"--Colophon."
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "500",
+      "fieldTag": "n",
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "880-04"
+        },
+        {
+          "tag": "a",
+          "content": "At head of title: Nat︠s︡ionalʹna akademii︠a︡ nauk Ukraïny. Nat︠s︡ionalʹna biblioteka Ukraïny imeni V.I. Vernadsʹkoho. Instytut rukopysu."
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "504",
+      "fieldTag": "n",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Includes bibliographical references and index."
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": "963867285",
+      "marcTag": "001",
+      "fieldTag": "o",
+      "subfields": null
+    },
+    {
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "marcTag": "264",
+      "fieldTag": "p",
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "880-02"
+        },
+        {
+          "tag": "a",
+          "content": "Kyïv :"
+        },
+        {
+          "tag": "b",
+          "content": "Instytut rukopysu NBUV,"
+        },
+        {
+          "tag": "c",
+          "content": "2015."
+        }
+      ]
+    },
+    {
+      "ind1": "8",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "852",
+      "fieldTag": "q",
+      "subfields": [
+        {
+          "tag": "h",
+          "content": "ReCAP 16-34638"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "300",
+      "fieldTag": "r",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "325 pages ;"
+        },
+        {
+          "tag": "c",
+          "content": "25 cm"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "336",
+      "fieldTag": "r",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "text"
+        },
+        {
+          "tag": "b",
+          "content": "txt"
+        },
+        {
+          "tag": "2",
+          "content": "rdacontent"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "337",
+      "fieldTag": "r",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "unmediated"
+        },
+        {
+          "tag": "b",
+          "content": "n"
+        },
+        {
+          "tag": "2",
+          "content": "rdamedia"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "338",
+      "fieldTag": "r",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "volume"
+        },
+        {
+          "tag": "b",
+          "content": "nc"
+        },
+        {
+          "tag": "2",
+          "content": "rdacarrier"
+        }
+      ]
+    },
+    {
+      "ind1": "0",
+      "ind2": "0",
+      "content": null,
+      "marcTag": "245",
+      "fieldTag": "t",
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "880-01"
+        },
+        {
+          "tag": "a",
+          "content": "Arkhivy, kolekt︠s︡iï ta zibranni︠a︡ derz︠h︡avnykh, hromadsʹkykh ta relihiĭnykh ustanov u fondakh Instytutu rukopysu Nat︠s︡ionalʹnoï biblioteky Ukraïny imeni V. I. Vernadsʹkoho :"
+        },
+        {
+          "tag": "b",
+          "content": "putivnyk /"
+        },
+        {
+          "tag": "c",
+          "content": "avtorsʹkyĭ kolektyv, O.P. Bodak [and 30 others] ; redakt︠s︡iĭna kolehii︠a︡, L. A. Dubrovina (holova) [and 8 others]."
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": "OCoLC",
+      "marcTag": "003",
+      "fieldTag": "y",
+      "subfields": null
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": "20161220081711.0",
+      "marcTag": "005",
+      "fieldTag": "y",
+      "subfields": null
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": "161121s2015    un       d    100 0 ukr dnamIi ",
+      "marcTag": "008",
+      "fieldTag": "y",
+      "subfields": null
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "040",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "UAB"
+        },
+        {
+          "tag": "b",
+          "content": "eng"
+        },
+        {
+          "tag": "e",
+          "content": "rda"
+        },
+        {
+          "tag": "c",
+          "content": "LTSCA"
+        },
+        {
+          "tag": "d",
+          "content": "NYP"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "049",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "NYPP"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "4",
+      "content": null,
+      "marcTag": "050",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "AS264.K543"
+        },
+        {
+          "tag": "b",
+          "content": "A75 2015"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "066",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "c",
+          "content": "(N"
+        },
+        {
+          "tag": "c",
+          "content": "(Q"
+        }
+      ]
+    },
+    {
+      "ind1": "0",
+      "ind2": "0",
+      "content": null,
+      "marcTag": "880",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "245-01/(N"
+        },
+        {
+          "tag": "a",
+          "content": "Архіви, колекції та зібрання державних, громадських та релігійних установ у фондах Інституту рукопису Національної бібліотеки України імені В. І Вернадського :"
+        },
+        {
+          "tag": "b",
+          "content": "путівник /"
+        },
+        {
+          "tag": "c",
+          "content": "авторський колектив, О.П. Бодак [and 30 others] ; редакційна колегія, Л.А. Дубровіна (голова) [and 8 others]."
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "marcTag": "880",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "264-02/(N"
+        },
+        {
+          "tag": "a",
+          "content": "Кӥів :"
+        },
+        {
+          "tag": "b",
+          "content": "Інститут рукопису НБУВ,"
+        },
+        {
+          "tag": "c",
+          "content": "2015."
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "880",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "500-03/(N"
+        },
+        {
+          "tag": "a",
+          "content": "\"Науково-довідкове видання\"--Colophon."
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "880",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "500-04/(N"
+        },
+        {
+          "tag": "a",
+          "content": "At head of title: Національна академія наук Укрӓіни. Національна бібліотека Укрӓіни імені В.І Вернадського. Інститут рукопису."
+        }
+      ]
+    },
+    {
+      "ind1": "2",
+      "ind2": "4",
+      "content": null,
+      "marcTag": "880",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "610-05/(N"
+        },
+        {
+          "tag": "a",
+          "content": "Національна бібліотека Укрӓіни ім. В.І Вернадського."
+        },
+        {
+          "tag": "b",
+          "content": "Інститут рукопису"
+        },
+        {
+          "tag": "x",
+          "content": "Archives"
+        },
+        {
+          "tag": "v",
+          "content": "Catalogs."
+        }
+      ]
+    },
+    {
+      "ind1": "1",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "880",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "700-06/(N"
+        },
+        {
+          "tag": "a",
+          "content": "Бодак, Олга,"
+        },
+        {
+          "tag": "e",
+          "content": "author."
+        }
+      ]
+    },
+    {
+      "ind1": "1",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "880",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "700-07/(N"
+        },
+        {
+          "tag": "a",
+          "content": "Дубровіна, Л. А.,"
+        },
+        {
+          "tag": "e",
+          "content": "editor."
+        }
+      ]
+    },
+    {
+      "ind1": "2",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "880",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "710-08/(N"
+        },
+        {
+          "tag": "a",
+          "content": "Національна бібліотека Укрӓіни ім. В.І Вернадського."
+        },
+        {
+          "tag": "b",
+          "content": "Інститут рукопису,"
+        },
+        {
+          "tag": "e",
+          "content": "issuing body."
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "901",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "MARS"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "4",
+      "content": null,
+      "marcTag": "908",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "AS264.K543"
+        },
+        {
+          "tag": "b",
+          "content": "A75 2015"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "901",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "lsh"
+        },
+        {
+          "tag": "b",
+          "content": "CATRL"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "945",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": ".b211315072"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "946",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "m"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "marcTag": "949",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "ReCAP 16-34638"
+        },
+        {
+          "tag": "l",
+          "content": "rc2ma"
+        },
+        {
+          "tag": "s",
+          "content": "b"
+        },
+        {
+          "tag": "t",
+          "content": "055"
+        },
+        {
+          "tag": "h",
+          "content": "33"
+        },
+        {
+          "tag": "o",
+          "content": "2"
+        },
+        {
+          "tag": "v",
+          "content": "CATRL/lsh"
+        },
+        {
+          "tag": "i",
+          "content": "33433119560153"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "910",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "RL"
+        }
+      ]
+    },
+    {
+      "ind1": null,
+      "ind2": null,
+      "content": "00000nam  2200541Ii 4500",
+      "marcTag": null,
+      "fieldTag": "_",
+      "subfields": null
+    }
+  ]
+}
+

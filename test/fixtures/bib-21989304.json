@@ -1,0 +1,1246 @@
+{
+  "id": "21989304",
+  "nyplSource": "sierra-nypl",
+  "title": "Dvenadt͡satʹ : k stoletii͡u pervoĭ publikat͡sii : alʹbom-katalog",
+  "author": "",
+  "publishYear": 2017,
+  "nyplType": "bib",
+  "controlNumber": "1061286338",
+  "standardNumbers": [
+    "9785432700599",
+    "543270059X"
+  ],
+  "updatedDate": "2021-11-12T23:04:03",
+  "createdDate": "2019-10-10T20:11:08",
+  "deletedDate": null,
+  "catalogDate": "2019-10-10T00:00:00",
+  "deleted": false,
+  "suppressed": false,
+  "locations": [
+    {
+      "code": "mal",
+      "name": "SASB - Service Desk Rm 315"
+    },
+    {
+      "code": "mal",
+      "name": "SASB - Service Desk Rm 315"
+    }
+  ],
+  "lang": {
+    "code": "rus",
+    "name": "Russian"
+  },
+  "materialType": {
+    "code": "a  ",
+    "value": "BOOK/TEXT"
+  },
+  "bibLevel": {
+    "code": "m",
+    "value": "MONOGRAPH"
+  },
+  "country": {
+    "code": "ru ",
+    "name": "Russia (Federation)"
+  },
+  "normTitle": "dvenadt͡satʹ k stoletii͡u pervoĭ publikat͡sii alʹbom katalog",
+  "normAuthor": "",
+  "fixedFields": {
+    "24": {
+      "label": "Language",
+      "value": "rus",
+      "display": "Russian"
+    },
+    "25": {
+      "label": "Skip",
+      "value": "0",
+      "display": null
+    },
+    "26": {
+      "label": "Location",
+      "value": "mal  ",
+      "display": "SASB - Service Desk Rm 315"
+    },
+    "27": {
+      "label": "COPIES",
+      "value": "1",
+      "display": null
+    },
+    "28": {
+      "label": "Cat. Date",
+      "value": "2019-10-10",
+      "display": null
+    },
+    "29": {
+      "label": "Bib Level",
+      "value": "m",
+      "display": "MONOGRAPH"
+    },
+    "30": {
+      "label": "Material Type",
+      "value": "a  ",
+      "display": "BOOK/TEXT"
+    },
+    "31": {
+      "label": "Bib Code 3",
+      "value": "-",
+      "display": null
+    },
+    "80": {
+      "label": "Record Type",
+      "value": "b",
+      "display": null
+    },
+    "81": {
+      "label": "Record Number",
+      "value": "21989304",
+      "display": null
+    },
+    "83": {
+      "label": "Created Date",
+      "value": "2019-10-10T20:11:08Z",
+      "display": null
+    },
+    "84": {
+      "label": "Updated Date",
+      "value": "2021-11-12T23:04:03Z",
+      "display": null
+    },
+    "85": {
+      "label": "No. of Revisions",
+      "value": "5",
+      "display": null
+    },
+    "86": {
+      "label": "Agency",
+      "value": "1",
+      "display": null
+    },
+    "89": {
+      "label": "Country",
+      "value": "ru ",
+      "display": "Russia (Federation)"
+    },
+    "98": {
+      "label": "PDATE",
+      "value": "2021-10-25T21:24:06Z",
+      "display": null
+    },
+    "107": {
+      "label": "MARC Type",
+      "value": " ",
+      "display": null
+    }
+  },
+  "varFields": [
+    {
+      "ind1": "1",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "700",
+      "fieldTag": "b",
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "880-05"
+        },
+        {
+          "tag": "a",
+          "content": "Pushkareva, L. V.,"
+        },
+        {
+          "tag": "e",
+          "content": "compiler,"
+        },
+        {
+          "tag": "e",
+          "content": "editor."
+        }
+      ]
+    },
+    {
+      "ind1": "1",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "700",
+      "fieldTag": "b",
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "880-06"
+        },
+        {
+          "tag": "a",
+          "content": "Demidenko, I︠U︡. B."
+        },
+        {
+          "tag": "q",
+          "content": "(I︠U︡lii︠a︡ Borisovna),"
+        },
+        {
+          "tag": "e",
+          "content": "editor."
+        }
+      ]
+    },
+    {
+      "ind1": "1",
+      "ind2": "2",
+      "content": null,
+      "marcTag": "700",
+      "fieldTag": "b",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Blok, Aleksandr Aleksandrovich,"
+        },
+        {
+          "tag": "d",
+          "content": "1880-1921."
+        },
+        {
+          "tag": "t",
+          "content": "Dvenadt︠s︡atʹ."
+        }
+      ]
+    },
+    {
+      "ind1": "2",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "710",
+      "fieldTag": "b",
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "880-07"
+        },
+        {
+          "tag": "a",
+          "content": "Gosudarstvennyĭ muzeĭ istorii Sankt-Peterburga,"
+        },
+        {
+          "tag": "e",
+          "content": "issuing body."
+        }
+      ]
+    },
+    {
+      "ind1": "1",
+      "ind2": "0",
+      "content": null,
+      "marcTag": "600",
+      "fieldTag": "d",
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "880-04"
+        },
+        {
+          "tag": "a",
+          "content": "Blok, Aleksandr Aleksandrovich,"
+        },
+        {
+          "tag": "d",
+          "content": "1880-1921."
+        },
+        {
+          "tag": "t",
+          "content": "Dvenadt︠s︡atʹ."
+        }
+      ]
+    },
+    {
+      "ind1": "1",
+      "ind2": "0",
+      "content": null,
+      "marcTag": "600",
+      "fieldTag": "d",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Blok, Aleksandr Aleksandrovich,"
+        },
+        {
+          "tag": "d",
+          "content": "1880-1921"
+        },
+        {
+          "tag": "x",
+          "content": "First editions."
+        }
+      ]
+    },
+    {
+      "ind1": "1",
+      "ind2": "0",
+      "content": null,
+      "marcTag": "600",
+      "fieldTag": "d",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Blok, Aleksandr Aleksandrovich,"
+        },
+        {
+          "tag": "d",
+          "content": "1880-1921"
+        },
+        {
+          "tag": "x",
+          "content": "Criticism and interpretation."
+        }
+      ]
+    },
+    {
+      "ind1": "1",
+      "ind2": "0",
+      "content": null,
+      "marcTag": "600",
+      "fieldTag": "d",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Blok, Aleksandr Aleksandrovich,"
+        },
+        {
+          "tag": "d",
+          "content": "1880-1921"
+        },
+        {
+          "tag": "v",
+          "content": "Bibliography"
+        },
+        {
+          "tag": "v",
+          "content": "Catalogs."
+        }
+      ]
+    },
+    {
+      "ind1": "1",
+      "ind2": "0",
+      "content": null,
+      "marcTag": "600",
+      "fieldTag": "d",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Blok, Aleksandr Aleksandrovich,"
+        },
+        {
+          "tag": "d",
+          "content": "1880-1921"
+        },
+        {
+          "tag": "x",
+          "content": "Illustrations"
+        },
+        {
+          "tag": "v",
+          "content": "Catalogs."
+        }
+      ]
+    },
+    {
+      "ind1": "1",
+      "ind2": "0",
+      "content": null,
+      "marcTag": "600",
+      "fieldTag": "d",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Blok, Aleksandr Aleksandrovich,"
+        },
+        {
+          "tag": "d",
+          "content": "1880-1921."
+        },
+        {
+          "tag": "t",
+          "content": "Dvenadt︠s︡atʹ"
+        },
+        {
+          "tag": "v",
+          "content": "Illustrations."
+        }
+      ]
+    },
+    {
+      "ind1": "2",
+      "ind2": "0",
+      "content": null,
+      "marcTag": "610",
+      "fieldTag": "d",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Gosudarstvennyĭ muzeĭ istorii Sankt-Peterburga"
+        },
+        {
+          "tag": "v",
+          "content": "Catalogs."
+        }
+      ]
+    },
+    {
+      "ind1": "1",
+      "ind2": "7",
+      "content": null,
+      "marcTag": "600",
+      "fieldTag": "d",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Blok, Aleksandr Aleksandrovich,"
+        },
+        {
+          "tag": "d",
+          "content": "1880-1921."
+        },
+        {
+          "tag": "2",
+          "content": "fast"
+        },
+        {
+          "tag": "0",
+          "content": "(OCoLC)fst00057547"
+        }
+      ]
+    },
+    {
+      "ind1": "2",
+      "ind2": "7",
+      "content": null,
+      "marcTag": "610",
+      "fieldTag": "d",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Gosudarstvennyĭ muzeĭ istorii Sankt-Peterburga."
+        },
+        {
+          "tag": "2",
+          "content": "fast"
+        },
+        {
+          "tag": "0",
+          "content": "(OCoLC)fst00697201"
+        }
+      ]
+    },
+    {
+      "ind1": "0",
+      "ind2": "7",
+      "content": null,
+      "marcTag": "630",
+      "fieldTag": "d",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Dvenadt͡satʹ (Blok, Aleksandr Aleksandrovich)"
+        },
+        {
+          "tag": "2",
+          "content": "fast"
+        },
+        {
+          "tag": "0",
+          "content": "(OCoLC)fst01359167"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "7",
+      "content": null,
+      "marcTag": "650",
+      "fieldTag": "d",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Illustration of books."
+        },
+        {
+          "tag": "2",
+          "content": "fast"
+        },
+        {
+          "tag": "0",
+          "content": "(OCoLC)fst00967406"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "7",
+      "content": null,
+      "marcTag": "650",
+      "fieldTag": "d",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "First editions."
+        },
+        {
+          "tag": "2",
+          "content": "fast"
+        },
+        {
+          "tag": "0",
+          "content": "(OCoLC)fst00925770"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "7",
+      "content": null,
+      "marcTag": "655",
+      "fieldTag": "d",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Illustrated works."
+        },
+        {
+          "tag": "2",
+          "content": "fast"
+        },
+        {
+          "tag": "0",
+          "content": "(OCoLC)fst01423873"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "7",
+      "content": null,
+      "marcTag": "655",
+      "fieldTag": "d",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Criticism, interpretation, etc."
+        },
+        {
+          "tag": "2",
+          "content": "fast"
+        },
+        {
+          "tag": "0",
+          "content": "(OCoLC)fst01411635"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "7",
+      "content": null,
+      "marcTag": "655",
+      "fieldTag": "d",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Catalogs."
+        },
+        {
+          "tag": "2",
+          "content": "fast"
+        },
+        {
+          "tag": "0",
+          "content": "(OCoLC)fst01423692"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "020",
+      "fieldTag": "i",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "9785432700599"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "020",
+      "fieldTag": "i",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "543270059X"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "035",
+      "fieldTag": "l",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "(OCoLC)1061286338"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "500",
+      "fieldTag": "n",
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "880-03"
+        },
+        {
+          "tag": "a",
+          "content": "\"Pervoe illi͡ustrirovannoe izdanie poėmy. Otkliki sovremennikov. Izdanii͡a poėmy i illi͡ustrat͡sii iz sobranii͡a Gosudarstvennogo muzei͡a istorii Sankt-Peterburga.\""
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "504",
+      "fieldTag": "n",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Includes bibliographical references and indexes."
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": "1061286338",
+      "marcTag": "001",
+      "fieldTag": "o",
+      "subfields": null
+    },
+    {
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "marcTag": "264",
+      "fieldTag": "p",
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "880-02"
+        },
+        {
+          "tag": "a",
+          "content": "Sankt-Peterburg :"
+        },
+        {
+          "tag": "b",
+          "content": "Gosudarstvennyĭ muzeĭ istorii Sankt-Peterburga,"
+        },
+        {
+          "tag": "c",
+          "content": "2017."
+        }
+      ]
+    },
+    {
+      "ind1": "8",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "852",
+      "fieldTag": "q",
+      "subfields": [
+        {
+          "tag": "h",
+          "content": "ReCAP 19-27559"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "300",
+      "fieldTag": "r",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "301 pages :"
+        },
+        {
+          "tag": "b",
+          "content": "illustrations (some color) ;"
+        },
+        {
+          "tag": "c",
+          "content": "30 cm"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "336",
+      "fieldTag": "r",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "text"
+        },
+        {
+          "tag": "b",
+          "content": "txt"
+        },
+        {
+          "tag": "2",
+          "content": "rdacontent"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "337",
+      "fieldTag": "r",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "unmediated"
+        },
+        {
+          "tag": "b",
+          "content": "n"
+        },
+        {
+          "tag": "2",
+          "content": "rdamedia"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "338",
+      "fieldTag": "r",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "volume"
+        },
+        {
+          "tag": "b",
+          "content": "nc"
+        },
+        {
+          "tag": "2",
+          "content": "rdacarrier"
+        }
+      ]
+    },
+    {
+      "ind1": "0",
+      "ind2": "0",
+      "content": null,
+      "marcTag": "245",
+      "fieldTag": "t",
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "880-01"
+        },
+        {
+          "tag": "a",
+          "content": "Dvenadt͡satʹ :"
+        },
+        {
+          "tag": "b",
+          "content": "k stoletii͡u pervoĭ publikat͡sii : alʹbom-katalog /"
+        },
+        {
+          "tag": "c",
+          "content": "Aleksandr Blok ; avtor-sostavitelʹ L.V. Pushkareva ; nauchnyĭ redaktor I͡U.B. Demidenko."
+        }
+      ]
+    },
+    {
+      "ind1": "3",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "246",
+      "fieldTag": "u",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "12"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": "OCoLC",
+      "marcTag": "003",
+      "fieldTag": "y",
+      "subfields": null
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": "20191010041054.0",
+      "marcTag": "005",
+      "fieldTag": "y",
+      "subfields": null
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": "180607s2017    ru a     bc   001 0 rus ccam i ",
+      "marcTag": "008",
+      "fieldTag": "y",
+      "subfields": null
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "040",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "YUS"
+        },
+        {
+          "tag": "b",
+          "content": "eng"
+        },
+        {
+          "tag": "e",
+          "content": "rda"
+        },
+        {
+          "tag": "c",
+          "content": "YUS"
+        },
+        {
+          "tag": "d",
+          "content": "OCLCO"
+        },
+        {
+          "tag": "d",
+          "content": "OCLCF"
+        },
+        {
+          "tag": "d",
+          "content": "PUL"
+        },
+        {
+          "tag": "d",
+          "content": "STF"
+        },
+        {
+          "tag": "d",
+          "content": "PAU"
+        },
+        {
+          "tag": "d",
+          "content": "OCLCO"
+        },
+        {
+          "tag": "d",
+          "content": "CGU"
+        },
+        {
+          "tag": "d",
+          "content": "OCLCO"
+        },
+        {
+          "tag": "d",
+          "content": "OCL"
+        },
+        {
+          "tag": "d",
+          "content": "NYP"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "042",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "pcc"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "049",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "NYPP"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "4",
+      "content": null,
+      "marcTag": "050",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "PG3453.B6"
+        },
+        {
+          "tag": "b",
+          "content": "D83 2017"
+        }
+      ]
+    },
+    {
+      "ind1": "0",
+      "ind2": "0",
+      "content": null,
+      "marcTag": "880",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "245-01"
+        },
+        {
+          "tag": "a",
+          "content": "Двенадцать :"
+        },
+        {
+          "tag": "b",
+          "content": "к столетию первой публикации : альбом-каталог /"
+        },
+        {
+          "tag": "c",
+          "content": "Александр Блок ; автор-составитель Л.В. Пушкарева ; научный редактор Ю.Б. Демиденко."
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "marcTag": "880",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "264-02"
+        },
+        {
+          "tag": "a",
+          "content": "Санкт-Петербург :"
+        },
+        {
+          "tag": "b",
+          "content": "Государственный музей истории Санкт-Петербурга,"
+        },
+        {
+          "tag": "c",
+          "content": "2017."
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "880",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "500-03"
+        },
+        {
+          "tag": "a",
+          "content": "\"Первое иллюстрированное издание поэмы. Отклики современников. Издания поэмы и иллюстрации из собрания Государственного музея истории Санкт-Петербурга.\""
+        }
+      ]
+    },
+    {
+      "ind1": "1",
+      "ind2": "4",
+      "content": null,
+      "marcTag": "880",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "600-04"
+        },
+        {
+          "tag": "a",
+          "content": "Блок, Александр Александрович,"
+        },
+        {
+          "tag": "d",
+          "content": "1880-1921."
+        },
+        {
+          "tag": "t",
+          "content": "Двенадцать."
+        }
+      ]
+    },
+    {
+      "ind1": "1",
+      "ind2": "2",
+      "content": null,
+      "marcTag": "880",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "700-00"
+        },
+        {
+          "tag": "i",
+          "content": "Contains facsimile of (manifestation):"
+        },
+        {
+          "tag": "a",
+          "content": "Блок, Александр Александрович, 1880-1921."
+        },
+        {
+          "tag": "t",
+          "content": "Двенадцать"
+        },
+        {
+          "tag": "d",
+          "content": "Петербургъ : Алконостъ, 1918."
+        }
+      ]
+    },
+    {
+      "ind1": "1",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "880",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "700-05"
+        },
+        {
+          "tag": "a",
+          "content": "Пушкарева, Л. В.,"
+        },
+        {
+          "tag": "e",
+          "content": "compiler,"
+        },
+        {
+          "tag": "e",
+          "content": "editor."
+        }
+      ]
+    },
+    {
+      "ind1": "1",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "880",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "700-06"
+        },
+        {
+          "tag": "a",
+          "content": "Демиденко, Ю. Б."
+        },
+        {
+          "tag": "q",
+          "content": "(Юлия Борисовна),"
+        },
+        {
+          "tag": "e",
+          "content": "editor."
+        }
+      ]
+    },
+    {
+      "ind1": "2",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "880",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "710-07"
+        },
+        {
+          "tag": "a",
+          "content": "Государственный музей истории Санкт-Петербурга,"
+        },
+        {
+          "tag": "e",
+          "content": "issuing body."
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "901",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "MARS"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "4",
+      "content": null,
+      "marcTag": "908",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "PG3453.B6"
+        },
+        {
+          "tag": "b",
+          "content": "D83 2017"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "901",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "wjs"
+        },
+        {
+          "tag": "b",
+          "content": "CATRL"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "946",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "m"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "marcTag": "949",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "z",
+          "content": "8528"
+        },
+        {
+          "tag": "a",
+          "content": "ReCAP 19-27559"
+        },
+        {
+          "tag": "i",
+          "content": "33433129421511"
+        },
+        {
+          "tag": "l",
+          "content": "RC2MA"
+        },
+        {
+          "tag": "s",
+          "content": "b"
+        },
+        {
+          "tag": "t",
+          "content": "055"
+        },
+        {
+          "tag": "h",
+          "content": "43"
+        },
+        {
+          "tag": "o",
+          "content": "2"
+        },
+        {
+          "tag": "v",
+          "content": "CATRL/wjs"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "910",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "RL"
+        }
+      ]
+    },
+    {
+      "ind1": null,
+      "ind2": null,
+      "content": "00000cam a2200673 i 4500",
+      "marcTag": null,
+      "fieldTag": "_",
+      "subfields": null
+    }
+  ]
+}

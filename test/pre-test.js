@@ -14,7 +14,7 @@ async function runTest () {
     const esBib = new EsBib(sierraBib)
     console.log('title: ', esBib.title())
     console.log('parallelTitle', esBib.parallelTitle())
-    const uri = await esBib.uri()
+    const uri = esBib.uri()
     console.log('uri: ', uri)
     console.log('creatorLiteral: ', esBib.creatorLiteral())
     console.log('parallelCreatorLiteral: ', esBib.parallelCreatorLiteral())

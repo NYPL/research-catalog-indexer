@@ -22,22 +22,23 @@ describe('utils/NyplSourceMapper', function () {
     })
 
     it('should fetch data from nypl core', async function () {
-      const mapping = await NyplSourceMapper.instance()
+      await NyplSourceMapper.loadInstance()
+      const mapping = NyplSourceMapper.instance()
       expect(mapping.nyplSourceMap).to.nested.include({ 'sierra-nypl.organization': 'nyplOrg:0001' })
     })
 
     it('should return pre-fetched data if initialized', async function () {
       // We expect no fetches made yet:
       expect(interceptedNyplSourceMapperRequestsCount()).to.eq(0)
-
-      const mapping = await NyplSourceMapper.instance()
+      await NyplSourceMapper.loadInstance()
+      const mapping = NyplSourceMapper.instance()
       expect(mapping.nyplSourceMap).to.nested.include({ 'sierra-nypl.organization': 'nyplOrg:0001' })
       // We expect one initial fetch made on the source mapper file
       expect(interceptedNyplSourceMapperRequestsCount()).to.eq(1)
 
       // Trigger another instance creation, which will break if another `fetch`
       // call is made, since the nock only specifies .times(1)
-      await NyplSourceMapper.instance()
+      NyplSourceMapper.instance()
       expect(mapping.nyplSourceMap).to.nested.include({ 'sierra-nypl.organization': 'nyplOrg:0001' })
 
       // We expect no additional fetches made on the source mapper file:
@@ -45,12 +46,13 @@ describe('utils/NyplSourceMapper', function () {
     })
 
     it('should reuse existing fetch if one is already active', async function () {
+      await NyplSourceMapper.loadInstance()
       // Trigger multiple instance creations simultaneously to assert the mock
       // is only used once:
-      const [mapping1, mapping2] = await Promise.all([
+      const [mapping1, mapping2] = [
         NyplSourceMapper.instance(),
         NyplSourceMapper.instance()
-      ])
+      ]
       expect(mapping1.nyplSourceMap).to.nested.include({ 'sierra-nypl.organization': 'nyplOrg:0001' })
       expect(mapping2.nyplSourceMap).to.nested.include({ 'sierra-nypl.organization': 'nyplOrg:0001' })
     })
@@ -61,7 +63,8 @@ describe('utils/NyplSourceMapper', function () {
 
     beforeEach(async () => {
       stubNyplSourceMapper()
-      sourceMapperInstance = await NyplSourceMapper.instance()
+      await NyplSourceMapper.loadInstance()
+      sourceMapperInstance = NyplSourceMapper.instance()
     })
     afterEach(() => {
       unstubNyplSourceMapper()
@@ -139,6 +142,22 @@ describe('utils/NyplSourceMapper', function () {
       expect(split.nyplSource).to.eq('recap-hl')
       expect(split.id).to.be.eq('123')
     })
+
+    it('should allow extra character prefixes on partner bib ids', function () {
+      const split = sourceMapperInstance.splitIdentifier('cbin1234')
+      expect(split).to.be.a('object')
+      expect(split.type).to.eq('bib')
+      expect(split.nyplSource).to.eq('recap-cul')
+      expect(split.id).to.be.eq('in1234')
+    })
+
+    it('should allow extra character prefixes on partner item ids', function () {
+      const split = sourceMapperInstance.splitIdentifier('cifoo1234')
+      expect(split).to.be.a('object')
+      expect(split.type).to.eq('item')
+      expect(split.nyplSource).to.eq('recap-cul')
+      expect(split.id).to.be.eq('foo1234')
+    })
   })
 
   describe('prefix', async function () {
@@ -146,7 +165,8 @@ describe('utils/NyplSourceMapper', function () {
 
     before(async () => {
       stubNyplSourceMapper()
-      sourceMapperInstance = await NyplSourceMapper.instance()
+      await NyplSourceMapper.loadInstance()
+      sourceMapperInstance = NyplSourceMapper.instance()
     })
     after(() => {
       unstubNyplSourceMapper()
@@ -191,7 +211,7 @@ describe('utils/NyplSourceMapper', function () {
         .times(1)
         .reply(503, () => '{}')
 
-      const call = NyplSourceMapper.instance()
+      const call = NyplSourceMapper.loadInstance()
       return expect(call).to.be.rejectedWith(`Error retrieving ${SOURCE_MAPPING_URL} - got status 503`)
     })
 
@@ -205,7 +225,7 @@ describe('utils/NyplSourceMapper', function () {
         .times(1)
         .reply(200, () => '{ "oh": "no" }')
 
-      const call = NyplSourceMapper.instance()
+      const call = NyplSourceMapper.loadInstance()
       return expect(call).to.be.rejectedWith(`Error parsing data at ${SOURCE_MAPPING_URL}`)
     })
   })

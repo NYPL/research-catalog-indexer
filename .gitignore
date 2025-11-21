@@ -6,3 +6,4 @@ build/
 uris.csv
 .vscode*
 *.log
+unindexed-*

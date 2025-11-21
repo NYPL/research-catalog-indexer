@@ -1,0 +1,1200 @@
+{
+  "id": "23722949",
+  "nyplSource": "sierra-nypl",
+  "title": "Zbirnyk kont͡sertnykh p'ies v tant͡si͡uvalniĭ formi dli͡a bai͡ana = Sbornik kont͡sertnykh pʹes v tant͡sevalʹnoĭ forme dli͡a bai͡ana",
+  "author": "",
+  "publishYear": 1958,
+  "nyplType": "bib",
+  "controlNumber": "1538598487",
+  "standardNumbers": [],
+  "updatedDate": "2025-09-24T14:01:18",
+  "createdDate": "2025-09-23T19:31:04",
+  "deletedDate": null,
+  "catalogDate": "2025-09-23T00:00:00",
+  "deleted": false,
+  "suppressed": false,
+  "locations": [
+    {
+      "code": "pam",
+      "name": "Performing Arts Research Collections - Music"
+    }
+  ],
+  "lang": {
+    "code": "zxx",
+    "name": "No linguistic content"
+  },
+  "materialType": {
+    "code": "c  ",
+    "value": "SCORE"
+  },
+  "bibLevel": {
+    "code": "m",
+    "value": "MONOGRAPH"
+  },
+  "country": {
+    "code": "un ",
+    "name": "Ukraine"
+  },
+  "normTitle": "zbirnyk kont͡sertnykh pies v tant͡si͡uvalniĭ formi dli͡a bai͡ana sbornik kont͡sertnykh pʹes v tant͡sevalʹnoĭ forme dli͡a bai͡ana",
+  "normAuthor": "",
+  "fixedFields": {
+    "24": {
+      "label": "Language",
+      "value": "zxx",
+      "display": "No linguistic content"
+    },
+    "25": {
+      "label": "Skip",
+      "value": "0",
+      "display": null
+    },
+    "26": {
+      "label": "Location",
+      "value": "pam  ",
+      "display": "Performing Arts Research Collections - Music"
+    },
+    "27": {
+      "label": "",
+      "value": "1",
+      "display": null
+    },
+    "28": {
+      "label": "Cat. Date",
+      "value": "2025-09-23",
+      "display": null
+    },
+    "29": {
+      "label": "Bib Level",
+      "value": "m",
+      "display": "MONOGRAPH"
+    },
+    "30": {
+      "label": "Material Type",
+      "value": "c  ",
+      "display": "SCORE"
+    },
+    "31": {
+      "label": "Bib Code 3",
+      "value": "-",
+      "display": null
+    },
+    "80": {
+      "label": "Record Type",
+      "value": "b",
+      "display": null
+    },
+    "81": {
+      "label": "Record Number",
+      "value": "23722949",
+      "display": null
+    },
+    "83": {
+      "label": "Created Date",
+      "value": "2025-09-23T19:31:04Z",
+      "display": null
+    },
+    "84": {
+      "label": "Updated Date",
+      "value": "2025-09-24T14:01:18Z",
+      "display": null
+    },
+    "85": {
+      "label": "No. of Revisions",
+      "value": "4",
+      "display": null
+    },
+    "86": {
+      "label": "Agency",
+      "value": "1",
+      "display": "53rd Street"
+    },
+    "89": {
+      "label": "Country",
+      "value": "un ",
+      "display": "Ukraine"
+    },
+    "98": {
+      "label": "",
+      "value": "2025-09-24T03:41:31Z",
+      "display": null
+    },
+    "107": {
+      "label": "MARC Type",
+      "value": " ",
+      "display": null
+    }
+  },
+  "varFields": [
+    {
+      "ind1": "1",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "700",
+      "fieldTag": "b",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "I͡Ut͡sevych, I͡Evhen Omeli͡anovich,"
+        },
+        {
+          "tag": "d",
+          "content": "1901-1988,"
+        },
+        {
+          "tag": "e",
+          "content": "arranger of music,"
+        },
+        {
+          "tag": "e",
+          "content": "editor."
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "0",
+      "content": null,
+      "marcTag": "650",
+      "fieldTag": "d",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Bayan music."
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "0",
+      "content": null,
+      "marcTag": "650",
+      "fieldTag": "d",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Bayan music, Arranged."
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "0",
+      "content": null,
+      "marcTag": "650",
+      "fieldTag": "d",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Ballets"
+        },
+        {
+          "tag": "v",
+          "content": "Excerpts, Arranged."
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "0",
+      "content": null,
+      "marcTag": "650",
+      "fieldTag": "d",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Marches (Bayan)"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "0",
+      "content": null,
+      "marcTag": "650",
+      "fieldTag": "d",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Waltzes."
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "0",
+      "content": null,
+      "marcTag": "650",
+      "fieldTag": "d",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Mazurkas."
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "7",
+      "content": null,
+      "marcTag": "655",
+      "fieldTag": "d",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Waltzes (Music)"
+        },
+        {
+          "tag": "2",
+          "content": "lcgft"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "7",
+      "content": null,
+      "marcTag": "655",
+      "fieldTag": "d",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Ballets (Music)"
+        },
+        {
+          "tag": "2",
+          "content": "lcgft"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "7",
+      "content": null,
+      "marcTag": "655",
+      "fieldTag": "d",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Marches (Music)"
+        },
+        {
+          "tag": "2",
+          "content": "lcgft"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "7",
+      "content": null,
+      "marcTag": "655",
+      "fieldTag": "d",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Mazurkas (Music)"
+        },
+        {
+          "tag": "2",
+          "content": "lcgft"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "7",
+      "content": null,
+      "marcTag": "655",
+      "fieldTag": "d",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Excerpts."
+        },
+        {
+          "tag": "2",
+          "content": "lcgft"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "7",
+      "content": null,
+      "marcTag": "655",
+      "fieldTag": "d",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Arrangements (Music)"
+        },
+        {
+          "tag": "2",
+          "content": "lcgft"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "7",
+      "content": null,
+      "marcTag": "655",
+      "fieldTag": "d",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Art music."
+        },
+        {
+          "tag": "2",
+          "content": "lcgft"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "7",
+      "content": null,
+      "marcTag": "655",
+      "fieldTag": "d",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Scores."
+        },
+        {
+          "tag": "2",
+          "content": "lcgft"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "7",
+      "content": null,
+      "marcTag": "650",
+      "fieldTag": "d",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Bayan music."
+        },
+        {
+          "tag": "2",
+          "content": "fast"
+        },
+        {
+          "tag": "0",
+          "content": "(OCoLC)fst00829012"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "7",
+      "content": null,
+      "marcTag": "650",
+      "fieldTag": "d",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Bayan music, Arranged."
+        },
+        {
+          "tag": "2",
+          "content": "fast"
+        },
+        {
+          "tag": "0",
+          "content": "(OCoLC)fst01185396"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "7",
+      "content": null,
+      "marcTag": "650",
+      "fieldTag": "d",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Ballets"
+        },
+        {
+          "tag": "x",
+          "content": "Excerpts, Arranged."
+        },
+        {
+          "tag": "2",
+          "content": "fast"
+        },
+        {
+          "tag": "0",
+          "content": "(OCoLC)fst01424662"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "7",
+      "content": null,
+      "marcTag": "650",
+      "fieldTag": "d",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Ballets."
+        },
+        {
+          "tag": "2",
+          "content": "fast"
+        },
+        {
+          "tag": "0",
+          "content": "(OCoLC)fst00826066"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "7",
+      "content": null,
+      "marcTag": "650",
+      "fieldTag": "d",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Waltzes."
+        },
+        {
+          "tag": "2",
+          "content": "fast"
+        },
+        {
+          "tag": "0",
+          "content": "(OCoLC)fst01170245"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "7",
+      "content": null,
+      "marcTag": "650",
+      "fieldTag": "d",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Mazurkas."
+        },
+        {
+          "tag": "2",
+          "content": "fast"
+        },
+        {
+          "tag": "0",
+          "content": "(OCoLC)fst01012946"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "7",
+      "content": null,
+      "marcTag": "655",
+      "fieldTag": "d",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Waltzes (Music)"
+        },
+        {
+          "tag": "2",
+          "content": "fast"
+        },
+        {
+          "tag": "0",
+          "content": "(OCoLC)fst01920415"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "7",
+      "content": null,
+      "marcTag": "655",
+      "fieldTag": "d",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Ballets (Music)"
+        },
+        {
+          "tag": "2",
+          "content": "fast"
+        },
+        {
+          "tag": "0",
+          "content": "(OCoLC)fst01920016"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "7",
+      "content": null,
+      "marcTag": "655",
+      "fieldTag": "d",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Marches (Music)"
+        },
+        {
+          "tag": "2",
+          "content": "fast"
+        },
+        {
+          "tag": "0",
+          "content": "(OCoLC)fst01726665"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "7",
+      "content": null,
+      "marcTag": "655",
+      "fieldTag": "d",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Mazurkas (Music)"
+        },
+        {
+          "tag": "2",
+          "content": "fast"
+        },
+        {
+          "tag": "0",
+          "content": "(OCoLC)fst01726669"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "7",
+      "content": null,
+      "marcTag": "655",
+      "fieldTag": "d",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Excerpts."
+        },
+        {
+          "tag": "2",
+          "content": "fast"
+        },
+        {
+          "tag": "0",
+          "content": "(OCoLC)fst01692837"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "7",
+      "content": null,
+      "marcTag": "655",
+      "fieldTag": "d",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Arrangements (Music)"
+        },
+        {
+          "tag": "2",
+          "content": "fast"
+        },
+        {
+          "tag": "0",
+          "content": "(OCoLC)fst01920435"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "7",
+      "content": null,
+      "marcTag": "655",
+      "fieldTag": "d",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Art music."
+        },
+        {
+          "tag": "2",
+          "content": "fast"
+        },
+        {
+          "tag": "0",
+          "content": "(OCoLC)fst01920007"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "7",
+      "content": null,
+      "marcTag": "655",
+      "fieldTag": "d",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Scores."
+        },
+        {
+          "tag": "2",
+          "content": "fast"
+        },
+        {
+          "tag": "0",
+          "content": "(OCoLC)fst01692898"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "035",
+      "fieldTag": "l",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "(OCoLC)1538598487"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "500",
+      "fieldTag": "n",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Collection of concert pieces in dance form for bayan."
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "500",
+      "fieldTag": "n",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Technical information on music in Ukrainian and Russian."
+        }
+      ]
+    },
+    {
+      "ind1": "0",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "505",
+      "fieldTag": "n",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Zustrichnyĭ marsh = Vstrechnyĭ marsh / A. Lazarenko -- Pokhidnyĭ marsh = Pokhodnyĭ marsh / S. Shvart͡s -- Karnavalʹnyĭ valʹs = Karnavalʹnyĭ valʹs / A. Kolomii͡et͡sʹ = A. Kolomiet͡s -- Valʹs z baletu \"Mukha-t͡sokotukha\" = Valʹs iz baleta \"Mukha-t͡sokotukha\" / L. Usachov = L. Usachev -- Valʹs na ukraïnsʹki temy = Valʹs na ukrainskie temy / I͡E. I͡Ut͡sevych = E. I͡Ut͡sevich -- Polʹka-rondo / S. Z͡Hdanov = S. Zhdanov -- Molodiz͡hna polʹka = Molodezhnai͡a polʹka / I. Berkovich = I. Berkovych -- Polʹka z͡hart = Polʹka-shutka  / N. Shulʹman -- Mazurka / I. Vilensʹkyĭ = I. Vilenskiĭ -- Chardash / V. Koltun -- Rosiĭsʹkyĭ tanet͡sʹ = Russkiĭ tanet͡s / I. Vilensʹkyĭ = I. Vilenskiĭ -- Ukraïnsʹkyĭ tanet͡sʹ = Ukrainskiĭ tanet͡s / P. Hlushkov ; P. Glushkov -- Kozachok = Kazachek / K. Dominchen -- Kozachok = Kazachek / S. Z͡Hdanov = S. Zhdanov -- Kolomyĭky z baletu \"Khustka Dovbusha\" = Kolomyĭki iz baleta \"Khustka dovbusha\" / A. Kos-Anatolʹsʹkyĭ = A. Kos-Anatolʹskiĭ -- Tropoti͡anka / L. Hrinberh = L. Grinberg -- Azerbaĭdz͡hansʹkyĭ tanet͡sʹ = Azerbaĭdzhanskiĭ tanet͡s / H. Sesiashvili = G. Sesiashvili -- Variat͡siï na chesʹku temu = Variat͡sii na cheshskui͡u temu / S. Shvart͡s -- Kytaĭsʹkyĭ tanet͡sʹ = Kitaĭskiĭ tanet͡s / C. Chapkiĭ = S. Chapkiĭ."
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": "1538598487",
+      "marcTag": "001",
+      "fieldTag": "o",
+      "subfields": null
+    },
+    {
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "marcTag": "264",
+      "fieldTag": "p",
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "880-03"
+        },
+        {
+          "tag": "a",
+          "content": "Kyïv :"
+        },
+        {
+          "tag": "b",
+          "content": "Muzfond SRSR, Ukrainsʹka Respublikansʹka Filii͡a ="
+        },
+        {
+          "tag": "a",
+          "content": "Kiev :"
+        },
+        {
+          "tag": "b",
+          "content": "Muzfond SSR, Ukrainskoe Respublikanskoe Otdelenie,"
+        },
+        {
+          "tag": "c",
+          "content": "1958."
+        }
+      ]
+    },
+    {
+      "ind1": "8",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "852",
+      "fieldTag": "q",
+      "subfields": [
+        {
+          "tag": "h",
+          "content": "JMG 25-1433"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "300",
+      "fieldTag": "r",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "1 score (75 pages) ;"
+        },
+        {
+          "tag": "c",
+          "content": "30 cm"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "336",
+      "fieldTag": "r",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "notated music"
+        },
+        {
+          "tag": "b",
+          "content": "ntm"
+        },
+        {
+          "tag": "2",
+          "content": "rdacontent"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "337",
+      "fieldTag": "r",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "unmediated"
+        },
+        {
+          "tag": "b",
+          "content": "n"
+        },
+        {
+          "tag": "2",
+          "content": "rdamedia"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "338",
+      "fieldTag": "r",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "volume"
+        },
+        {
+          "tag": "b",
+          "content": "nc"
+        },
+        {
+          "tag": "2",
+          "content": "rdacarrier"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "348",
+      "fieldTag": "r",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "score"
+        },
+        {
+          "tag": "2",
+          "content": "rdafnm"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "348",
+      "fieldTag": "r",
+      "subfields": [
+        {
+          "tag": "c",
+          "content": "staff notation"
+        },
+        {
+          "tag": "2",
+          "content": "rdafmn"
+        }
+      ]
+    },
+    {
+      "ind1": "0",
+      "ind2": "1",
+      "content": null,
+      "marcTag": "382",
+      "fieldTag": "r",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "bayan"
+        },
+        {
+          "tag": "n",
+          "content": "1"
+        },
+        {
+          "tag": "s",
+          "content": "1"
+        },
+        {
+          "tag": "2",
+          "content": "lcmpt"
+        }
+      ]
+    },
+    {
+      "ind1": "0",
+      "ind2": "0",
+      "content": null,
+      "marcTag": "245",
+      "fieldTag": "t",
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "880-01"
+        },
+        {
+          "tag": "a",
+          "content": "Zbirnyk kont͡sertnykh p'ies v tant͡si͡uvalniĭ formi dli͡a bai͡ana ="
+        },
+        {
+          "tag": "b",
+          "content": "Sbornik kont͡sertnykh pʹes v tant͡sevalʹnoĭ forme dli͡a bai͡ana /"
+        },
+        {
+          "tag": "c",
+          "content": "upori͡adkuvav ta obrabyv E. I͡Ut͡sevych = sostavil i obrabotal E. I͡Ut͡sevich."
+        }
+      ]
+    },
+    {
+      "ind1": "3",
+      "ind2": "1",
+      "content": null,
+      "marcTag": "246",
+      "fieldTag": "u",
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "880-02"
+        },
+        {
+          "tag": "a",
+          "content": "Sbornik kont͡sertnykh pʹes v tant͡sevalʹnoĭ forme dli͡a bai͡ana"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": "OCoLC",
+      "marcTag": "003",
+      "fieldTag": "y",
+      "subfields": null
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": "20250923033103.0",
+      "marcTag": "005",
+      "fieldTag": "y",
+      "subfields": null
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": "250923s1958    un mul   h     n  b zxx dncm i ",
+      "marcTag": "008",
+      "fieldTag": "y",
+      "subfields": null
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "040",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "NYP"
+        },
+        {
+          "tag": "b",
+          "content": "eng"
+        },
+        {
+          "tag": "e",
+          "content": "rda"
+        },
+        {
+          "tag": "c",
+          "content": "NYP"
+        }
+      ]
+    },
+    {
+      "ind1": "0",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "041",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "g",
+          "content": "ukr"
+        },
+        {
+          "tag": "g",
+          "content": "rus"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "047",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "df"
+        },
+        {
+          "tag": "a",
+          "content": "mz"
+        },
+        {
+          "tag": "a",
+          "content": "wz"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "049",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "NYPP"
+        }
+      ]
+    },
+    {
+      "ind1": "0",
+      "ind2": "0",
+      "content": null,
+      "marcTag": "880",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "245-01"
+        },
+        {
+          "tag": "a",
+          "content": "Збiрник концертних п'єс в танцювальнiй формi для баяна ="
+        },
+        {
+          "tag": "b",
+          "content": "Сборник концертных пьес в танцевальной форме для баяна /"
+        },
+        {
+          "tag": "c",
+          "content": "упорядкував та обробив Е. Юцевич = составил и обработал Е. Юцевич."
+        }
+      ]
+    },
+    {
+      "ind1": "3",
+      "ind2": "1",
+      "content": null,
+      "marcTag": "880",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "246-02"
+        },
+        {
+          "tag": "a",
+          "content": "Сборник концертных пьес в танцевальной форме для баяна"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "marcTag": "880",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "264-03"
+        },
+        {
+          "tag": "a",
+          "content": "Київ :"
+        },
+        {
+          "tag": "b",
+          "content": "Музфонд СРСР, Украінська Республіканська Фiлiя ="
+        },
+        {
+          "tag": "a",
+          "content": "Киев :"
+        },
+        {
+          "tag": "b",
+          "content": "Музфонд ССР, Украинское Республиканское Отделение,"
+        },
+        {
+          "tag": "c",
+          "content": "1958."
+        }
+      ]
+    },
+    {
+      "ind1": "0",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "880",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "505-00"
+        },
+        {
+          "tag": "a",
+          "content": "Зустрічний марш = Встречный марш / А. Лазаренко -- Похідний марш = Походный марш / С. Шварц -- Карнавальний вальс = Карнавальный вальс / А. Коломієць = А. Коломиец -- Вальс з балету \"Муха-цокотуха\" = Вальс из балета \"Муха-цокотуха\" / Л. Усачов = Л. Усачев -- Вальс на українські теми = Вальс на украинские темы / Є Юцевич = Е. Юцевич -- Полька-рондо / С. Жданов -- Молодіжна полька = Молодежная полька / І Беркович -- Полька жарт = Полька-шутка / Н. Шульман -- Мазурка / І Віленський = И. Виленский -- Чардаш / В. Колтун -- Російський танець = Русский танец / І Віленський = И. Виленский -- Український танець = Украинский танец / П. Глушков -- Козачок = Казачек / К. Домінчен = К. Доминчен -- Козачок = Казачек  / С. Жданов -- Коломийки з балету \"Хустка Довбуша\" = Коломыйки из балета \"Хустка Довбуша\"/ А. Кос-Анатольський = А. Кос-Анатольский -- Тропотянка / Л. Грінберг = Л. Гринберг -- Азербайджанський танець = Азербайджанский танец / Г. Сесіашвілі   Г. Сесиашвили -- Варіації на чеську тему = Вариации на чешскую тему / С. Шварц -- Китайський танець = Китайский танец / С. Чапкій = С. Чапкий."
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "901",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "MARS"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "901",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "elc"
+        },
+        {
+          "tag": "b",
+          "content": "CATRL"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "910",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "RL"
+        }
+      ]
+    },
+    {
+      "ind1": null,
+      "ind2": null,
+      "content": "00000ncm a2200769 i 4500",
+      "marcTag": null,
+      "fieldTag": "_",
+      "subfields": null
+    }
+  ]
+}

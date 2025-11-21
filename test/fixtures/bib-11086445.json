@@ -1,0 +1,718 @@
+{
+  "id": "11086445",
+  "nyplSource": "sierra-nypl",
+  "title": "Li Zhuowu xian sheng pi ping Xi you ji.",
+  "author": "Wu, Cheng'en, approximately 1500-approximately 1582.",
+  "publishYear": 1983,
+  "nyplType": "bib",
+  "controlNumber": "NYPO87-B1445",
+  "standardNumbers": [],
+  "updatedDate": "2022-07-31T21:33:25",
+  "createdDate": "2008-12-14T17:15:40",
+  "deletedDate": null,
+  "catalogDate": "2002-12-06T00:00:00",
+  "deleted": false,
+  "suppressed": false,
+  "locations": [
+    {
+      "code": "mal",
+      "name": "SASB - Service Desk Rm 315"
+    }
+  ],
+  "lang": {
+    "code": "chi",
+    "name": "Chinese"
+  },
+  "materialType": {
+    "code": "a  ",
+    "value": "BOOK/TEXT"
+  },
+  "bibLevel": {
+    "code": "m",
+    "value": "MONOGRAPH"
+  },
+  "country": {
+    "code": "cc ",
+    "name": "China"
+  },
+  "normTitle": "li zhuowu xian sheng pi ping xi you ji",
+  "normAuthor": "wu chengen approximately 1500 approximately 1582",
+  "fixedFields": {
+    "24": {
+      "label": "Language",
+      "value": "chi",
+      "display": "Chinese"
+    },
+    "25": {
+      "label": "Skip",
+      "value": "0",
+      "display": null
+    },
+    "26": {
+      "label": "Location",
+      "value": "mal  ",
+      "display": "SASB - Service Desk Rm 315"
+    },
+    "27": {
+      "label": "COPIES",
+      "value": "2",
+      "display": null
+    },
+    "28": {
+      "label": "Cat. Date",
+      "value": "2002-12-06",
+      "display": null
+    },
+    "29": {
+      "label": "Bib Level",
+      "value": "m",
+      "display": "MONOGRAPH"
+    },
+    "30": {
+      "label": "Material Type",
+      "value": "a  ",
+      "display": "BOOK/TEXT"
+    },
+    "31": {
+      "label": "Bib Code 3",
+      "value": "-",
+      "display": null
+    },
+    "80": {
+      "label": "Record Type",
+      "value": "b",
+      "display": null
+    },
+    "81": {
+      "label": "Record Number",
+      "value": "11086445",
+      "display": null
+    },
+    "83": {
+      "label": "Created Date",
+      "value": "2008-12-14T17:15:40Z",
+      "display": null
+    },
+    "84": {
+      "label": "Updated Date",
+      "value": "2022-07-31T21:33:25Z",
+      "display": null
+    },
+    "85": {
+      "label": "No. of Revisions",
+      "value": "14",
+      "display": null
+    },
+    "86": {
+      "label": "Agency",
+      "value": "1",
+      "display": null
+    },
+    "89": {
+      "label": "Country",
+      "value": "cc ",
+      "display": "China"
+    },
+    "98": {
+      "label": "PDATE",
+      "value": "2022-07-30T22:23:21Z",
+      "display": null
+    },
+    "107": {
+      "label": "MARC Type",
+      "value": " ",
+      "display": null
+    }
+  },
+  "varFields": [
+    {
+      "ind1": "1",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "100",
+      "fieldTag": "a",
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "880-01"
+        },
+        {
+          "tag": "a",
+          "content": "Wu, Cheng'en,"
+        },
+        {
+          "tag": "d",
+          "content": "approximately 1500-approximately 1582."
+        }
+      ]
+    },
+    {
+      "ind1": "1",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "700",
+      "fieldTag": "b",
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "880-06"
+        },
+        {
+          "tag": "a",
+          "content": "Li, Zhi,"
+        },
+        {
+          "tag": "d",
+          "content": "1527-1602."
+        }
+      ]
+    },
+    {
+      "ind1": "8",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "852",
+      "fieldTag": "c",
+      "subfields": [
+        {
+          "tag": "h",
+          "content": "*OVK 87-1121"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "250",
+      "fieldTag": "e",
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "880-04"
+        },
+        {
+          "tag": "a",
+          "content": "Di 1 ban."
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "035",
+      "fieldTag": "l",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "(OCoLC)25548145"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "500",
+      "fieldTag": "n",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "On double leaves, oriental style; in 2 cases."
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "500",
+      "fieldTag": "n",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Colophon title."
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "546",
+      "fieldTag": "n",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "In Chinese."
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": "NYPO87-B1445",
+      "marcTag": "001",
+      "fieldTag": "o",
+      "subfields": null
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "260",
+      "fieldTag": "p",
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "880-05"
+        },
+        {
+          "tag": "a",
+          "content": "[Zhengzhou shi] :"
+        },
+        {
+          "tag": "b",
+          "content": "Zhong zhou shu hua she :"
+        },
+        {
+          "tag": "b",
+          "content": "Henan sheng xin hua shu dian fa xing,"
+        },
+        {
+          "tag": "c",
+          "content": "1983."
+        }
+      ]
+    },
+    {
+      "ind1": "8",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "852",
+      "fieldTag": "q",
+      "subfields": [
+        {
+          "tag": "h",
+          "content": "*OVK 87-1121"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "300",
+      "fieldTag": "r",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "16 v. :"
+        },
+        {
+          "tag": "b",
+          "content": "ill. ;"
+        },
+        {
+          "tag": "c",
+          "content": "26 cm."
+        }
+      ]
+    },
+    {
+      "ind1": "1",
+      "ind2": "0",
+      "content": null,
+      "marcTag": "245",
+      "fieldTag": "t",
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "880-03"
+        },
+        {
+          "tag": "a",
+          "content": "Li Zhuowu xian sheng pi ping Xi you ji."
+        }
+      ]
+    },
+    {
+      "ind1": "0",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "740",
+      "fieldTag": "u",
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "880-07"
+        },
+        {
+          "tag": "a",
+          "content": "Xi you ji."
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "959",
+      "fieldTag": "v",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": ".b21075050"
+        },
+        {
+          "tag": "b",
+          "content": "01-11-08"
+        },
+        {
+          "tag": "c",
+          "content": "08-26-91"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": "CStRLIN",
+      "marcTag": "003",
+      "fieldTag": "y",
+      "subfields": null
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": "20021115110330.0",
+      "marcTag": "005",
+      "fieldTag": "y",
+      "subfields": null
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": "870428r1983    cc ah         00011 chi dcamua ",
+      "marcTag": "008",
+      "fieldTag": "y",
+      "subfields": null
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "040",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "ICU-FE"
+        },
+        {
+          "tag": "c",
+          "content": "ICU-FE"
+        },
+        {
+          "tag": "d",
+          "content": "NN"
+        },
+        {
+          "tag": "d",
+          "content": "CStRLIN"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "066",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "c",
+          "content": "$1"
+        }
+      ]
+    },
+    {
+      "ind1": "1",
+      "ind2": "0",
+      "content": null,
+      "marcTag": "880",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "100-01/$1"
+        },
+        {
+          "tag": "a",
+          "content": "吴承恩,"
+        },
+        {
+          "tag": "d",
+          "content": "approximately 1500-approximately 1582."
+        }
+      ]
+    },
+    {
+      "ind1": "1",
+      "ind2": "0",
+      "content": null,
+      "marcTag": "880",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "240-02/$1"
+        },
+        {
+          "tag": "a",
+          "content": "西遊记"
+        }
+      ]
+    },
+    {
+      "ind1": "1",
+      "ind2": "0",
+      "content": null,
+      "marcTag": "880",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "245-03/$1"
+        },
+        {
+          "tag": "a",
+          "content": "李卓吾先生批评西游记."
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "880",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "250-04/$1"
+        },
+        {
+          "tag": "a",
+          "content": "第1版."
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "880",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "260-05/$1"
+        },
+        {
+          "tag": "a",
+          "content": "[郑州市] :"
+        },
+        {
+          "tag": "b",
+          "content": "中州书画社 :"
+        },
+        {
+          "tag": "b",
+          "content": "河南省新华书店发行,"
+        },
+        {
+          "tag": "c",
+          "content": "1983."
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "880",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "500-00/$1"
+        },
+        {
+          "tag": "a",
+          "content": "Reprint of: 明刊袁幔亭序本."
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "880",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "500-00/$1"
+        },
+        {
+          "tag": "a",
+          "content": "Running title: 西遊記."
+        }
+      ]
+    },
+    {
+      "ind1": "1",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "880",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "700-06/$1"
+        },
+        {
+          "tag": "a",
+          "content": "李贄,"
+        },
+        {
+          "tag": "d",
+          "content": "1527-1602."
+        }
+      ]
+    },
+    {
+      "ind1": "0",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "880",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "740-07/$1"
+        },
+        {
+          "tag": "a",
+          "content": "西遊記."
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "987",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "PINYIN"
+        },
+        {
+          "tag": "b",
+          "content": "CStRLIN"
+        },
+        {
+          "tag": "c",
+          "content": "20010123"
+        },
+        {
+          "tag": "d",
+          "content": "c"
+        },
+        {
+          "tag": "e",
+          "content": "1.1"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "997",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "ho"
+        },
+        {
+          "tag": "b",
+          "content": "12-06-02"
+        },
+        {
+          "tag": "c",
+          "content": "m"
+        },
+        {
+          "tag": "d",
+          "content": "a"
+        },
+        {
+          "tag": "e",
+          "content": "-"
+        },
+        {
+          "tag": "f",
+          "content": "chi"
+        },
+        {
+          "tag": "g",
+          "content": "cc "
+        },
+        {
+          "tag": "h",
+          "content": "0"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "991",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "y",
+          "content": "25548145"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "910",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "RL"
+        }
+      ]
+    },
+    {
+      "ind1": null,
+      "ind2": null,
+      "content": "00000cam  2200397ua 4500",
+      "marcTag": null,
+      "fieldTag": "_",
+      "subfields": null
+    }
+  ]
+}

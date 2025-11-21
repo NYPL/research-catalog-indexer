@@ -63,5 +63,17 @@ describe('SierraBib', function () {
         })
       })
     })
+
+    describe('Unrecognized nyplSource', function () {
+      it('should return true for record with unrecognized nypl source', function () {
+        const record = require('../fixtures/bib-10001936.json')
+        record.nyplSource = 'recap-nypl'
+        const bib = new SierraBib(record)
+        expect(bib.getSuppressionWithRationale()).to.deep.equal({
+          suppressed: true,
+          rationale: 'nyplSource is not recognized'
+        })
+      })
+    })
   })
 })
