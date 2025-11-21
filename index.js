@@ -93,7 +93,7 @@ const processRecords = async (type, records, options = {}) => {
     messages.push(`Deleted ${recordsToDelete.length} doc(s)`)
     messages.push(`Deleted ids: ${recordsToDelete.map((record) => record.id)}`)
   }
-
+  if (!browseTermDiffs?.length) logger.info('No subject updates to process')
   if (process.env.EMIT_BROWSE_TERMS === 'true' && browseTermDiffs?.length) {
     const subjectHandler = process.env.BTI_INDEX_PATH ? browse.emitBibSubjectsToLocalBti : browse.emitBibSubjectEventsToSqs
     await subjectHandler(browseTermDiffs)
