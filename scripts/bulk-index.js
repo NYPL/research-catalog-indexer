@@ -380,6 +380,7 @@ const fetchFromDbConnection = async (bibs) => {
 
 const overwriteGeneralPrefetch = () => {
   const originalFunction = prefetchers.generalPrefetch
+  logger.info('skipping API fetching')
   prefetchers.generalPrefetch = async (bibs) => Promise.resolve(bibs)
   prefetchers.generalPrefetch.originalFunction = originalFunction
 }
@@ -393,7 +394,9 @@ const restoreGeneralPrefetch = () => {
 
 const overwriteModelPrefetch = () => {
   const originalFunction = prefetchers.modelPrefetch
-  if (argv.skipDbPrefetch || process.env.SKIP_DB_PREFETCH === 'true') prefetchers.modelPrefetch = async (bibs) => Promise.resolve(bibs)
+  if (argv.skipDbPrefetch || process.env.SKIP_DB_PREFETCH === 'true') {
+    logger.info('Skipping db prefetch')
+    prefetchers.modelPrefetch = async (bibs) => Promise.resolve(bibs)}
   else prefetchers.modelPrefetch = fetchFromDbConnection
 
   prefetchers.modelPrefetch.originalFunction = originalFunction
@@ -796,7 +799,7 @@ const preflightSetup = async () => {
   dotenv.config({ path: argv.envfile })
   logger.setLevel(process.env.LOG_LEVEL || 'info')
   if (process.env.STOP_REFRESH === 'true') {
-    await setIndexToNoRefresh()
+    await setIndexRefresh(process.env.ELASTIC_RESOURCES_INDEX_NAME, '30s')
   }
   await loadNyplCoreData()
   totalTimer.startTimer()
