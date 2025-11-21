@@ -380,6 +380,7 @@ const fetchFromDbConnection = async (bibs) => {
 
 const overwriteGeneralPrefetch = () => {
   const originalFunction = prefetchers.generalPrefetch
+  logger.info('skipping API fetching')
   prefetchers.generalPrefetch = async (bibs) => Promise.resolve(bibs)
   prefetchers.generalPrefetch.originalFunction = originalFunction
 }
@@ -393,8 +394,10 @@ const restoreGeneralPrefetch = () => {
 
 const overwriteModelPrefetch = () => {
   const originalFunction = prefetchers.modelPrefetch
-  if (argv.skipDbPrefetch || process.env.SKIP_DB_PREFETCH === 'true') prefetchers.modelPrefetch = async (bibs) => Promise.resolve(bibs)
-  else prefetchers.modelPrefetch = fetchFromDbConnection
+  if (argv.skipDbPrefetch || process.env.SKIP_DB_PREFETCH === 'true') {
+    logger.info('Skipping db prefetch')
+    prefetchers.modelPrefetch = async (bibs) => Promise.resolve(bibs)
+  } else prefetchers.modelPrefetch = fetchFromDbConnection
 
   prefetchers.modelPrefetch.originalFunction = originalFunction
 }
