@@ -952,11 +952,11 @@ describe('EsBib', function () {
           type: 'bf:Note'
         },
         // Empty placeholder notes:
-        { label: '', type: 'bf:Note' },
-        { label: '', type: 'bf:Note' },
-        { label: '', type: 'bf:Note' },
-        { label: '', type: 'bf:Note' },
-        { label: '', type: 'bf:Note' },
+        null,
+        null,
+        null,
+        null,
+        null,
         // This is a parallel for primary note "Austin Hansen, ...", which
         // appears at index 6 in the note array:
         {
