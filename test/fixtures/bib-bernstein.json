@@ -1,0 +1,914 @@
+{
+        "id": "11070959",
+        "nyplSource": "sierra-nypl",
+        "title": "West side story [sound recording]",
+        "author": "Bernstein, Leonard, 1918-1990.",
+        "publishYear": 1985,
+        "nyplType": "bib",
+        "controlNumber": "NYPG86-R23",
+        "standardNumbers": [
+            "2894152532"
+        ],
+        "updatedDate": "2025-06-12T13:25:06",
+        "createdDate": "2008-12-14T16:58:33",
+        "deletedDate": null,
+        "catalogDate": "2001-01-04T00:00:00",
+        "deleted": false,
+        "suppressed": false,
+        "locations": [
+            {
+                "code": "pah",
+                "name": "Performing Arts Research Collections - Recorded Sound"
+            }
+        ],
+        "lang": {
+            "code": "eng",
+            "name": "English"
+        },
+        "materialType": {
+            "code": "y  ",
+            "value": "MUSIC CD"
+        },
+        "bibLevel": {
+            "code": "m",
+            "value": "MONOGRAPH"
+        },
+        "country": {
+            "code": "gw ",
+            "name": "Germany"
+        },
+        "normTitle": "west side story sound recording",
+        "normAuthor": "bernstein leonard 1918 1990",
+        "fixedFields": {
+            "24": {
+                "label": "Language",
+                "value": "eng",
+                "display": "English"
+            },
+            "25": {
+                "label": "Skip",
+                "value": "0",
+                "display": null
+            },
+            "26": {
+                "label": "Location",
+                "value": "pah  ",
+                "display": "Performing Arts Research Collections - Recorded Sound"
+            },
+            "27": {
+                "label": "",
+                "value": "1",
+                "display": null
+            },
+            "28": {
+                "label": "Cat. Date",
+                "value": "2001-01-04",
+                "display": null
+            },
+            "29": {
+                "label": "Bib Level",
+                "value": "m",
+                "display": "MONOGRAPH"
+            },
+            "30": {
+                "label": "Material Type",
+                "value": "y  ",
+                "display": "MUSIC CD"
+            },
+            "31": {
+                "label": "Bib Code 3",
+                "value": "-",
+                "display": null
+            },
+            "80": {
+                "label": "Record Type",
+                "value": "b",
+                "display": null
+            },
+            "81": {
+                "label": "Record Number",
+                "value": "11070959",
+                "display": null
+            },
+            "83": {
+                "label": "Created Date",
+                "value": "2008-12-14T16:58:33Z",
+                "display": null
+            },
+            "84": {
+                "label": "Updated Date",
+                "value": "2025-06-12T13:25:06Z",
+                "display": null
+            },
+            "85": {
+                "label": "No. of Revisions",
+                "value": "13",
+                "display": null
+            },
+            "86": {
+                "label": "Agency",
+                "value": "1",
+                "display": "53rd Street"
+            },
+            "89": {
+                "label": "Country",
+                "value": "gw ",
+                "display": "Germany"
+            },
+            "98": {
+                "label": "",
+                "value": "2025-06-12T13:24:15Z",
+                "display": null
+            },
+            "107": {
+                "label": "MARC Type",
+                "value": " ",
+                "display": null
+            }
+        },
+        "varFields": [
+            {
+                "ind1": "1",
+                "ind2": " ",
+                "content": null,
+                "marcTag": "100",
+                "fieldTag": "a",
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "Bernstein, Leonard,"
+                    },
+                    {
+                        "tag": "d",
+                        "content": "1918-1990."
+                    }
+                ]
+            },
+            {
+                "ind1": "1",
+                "ind2": " ",
+                "content": null,
+                "marcTag": "700",
+                "fieldTag": "b",
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "Te Kanawa, Kiri."
+                    },
+                    {
+                        "tag": "4",
+                        "content": "prf"
+                    }
+                ]
+            },
+            {
+                "ind1": "1",
+                "ind2": " ",
+                "content": null,
+                "marcTag": "700",
+                "fieldTag": "b",
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "Troyanos, Tatiana."
+                    },
+                    {
+                        "tag": "4",
+                        "content": "prf"
+                    }
+                ]
+            },
+            {
+                "ind1": "1",
+                "ind2": " ",
+                "content": null,
+                "marcTag": "700",
+                "fieldTag": "b",
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "Horne, Marilyn."
+                    },
+                    {
+                        "tag": "4",
+                        "content": "prf"
+                    }
+                ]
+            },
+            {
+                "ind1": "1",
+                "ind2": " ",
+                "content": null,
+                "marcTag": "700",
+                "fieldTag": "b",
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "Carreras, José."
+                    },
+                    {
+                        "tag": "4",
+                        "content": "prf"
+                    }
+                ]
+            },
+            {
+                "ind1": "1",
+                "ind2": " ",
+                "content": null,
+                "marcTag": "700",
+                "fieldTag": "b",
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "Ollmann, Kurt."
+                    },
+                    {
+                        "tag": "4",
+                        "content": "prf"
+                    }
+                ]
+            },
+            {
+                "ind1": "1",
+                "ind2": " ",
+                "content": null,
+                "marcTag": "700",
+                "fieldTag": "b",
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "Sondheim, Stephen."
+                    },
+                    {
+                        "tag": "4",
+                        "content": "lyr"
+                    }
+                ]
+            },
+            {
+                "ind1": "1",
+                "ind2": " ",
+                "content": null,
+                "marcTag": "700",
+                "fieldTag": "b",
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "Laurents, Arthur."
+                    }
+                ]
+            },
+            {
+                "ind1": "1",
+                "ind2": "2",
+                "content": null,
+                "marcTag": "700",
+                "fieldTag": "b",
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "Bernstein, Leonard,"
+                    },
+                    {
+                        "tag": "d",
+                        "content": "1918-1990."
+                    },
+                    {
+                        "tag": "t",
+                        "content": "On the waterfront."
+                    },
+                    {
+                        "tag": "p",
+                        "content": "Suite."
+                    }
+                ]
+            },
+            {
+                "ind1": "8",
+                "ind2": " ",
+                "content": null,
+                "marcTag": "852",
+                "fieldTag": "c",
+                "subfields": [
+                    {
+                        "tag": "h",
+                        "content": "*LDC 26 (F)"
+                    },
+                    {
+                        "tag": "z",
+                        "content": "Notes and libretto on file."
+                    }
+                ]
+            },
+            {
+                "ind1": " ",
+                "ind2": "0",
+                "content": null,
+                "marcTag": "650",
+                "fieldTag": "d",
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "Musicals."
+                    }
+                ]
+            },
+            {
+                "ind1": " ",
+                "ind2": "0",
+                "content": null,
+                "marcTag": "650",
+                "fieldTag": "d",
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "Suites (Orchestra)"
+                    }
+                ]
+            },
+            {
+                "ind1": " ",
+                "ind2": "0",
+                "content": null,
+                "marcTag": "650",
+                "fieldTag": "d",
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "Motion picture music"
+                    },
+                    {
+                        "tag": "v",
+                        "content": "Excerpts, Arranged."
+                    }
+                ]
+            },
+            {
+                "ind1": "1",
+                "ind2": " ",
+                "content": null,
+                "marcTag": "024",
+                "fieldTag": "l",
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "2894152532"
+                    }
+                ]
+            },
+            {
+                "ind1": "0",
+                "ind2": "2",
+                "content": null,
+                "marcTag": "028",
+                "fieldTag": "l",
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "415 253-2 (415 254-2--415 255-2)"
+                    },
+                    {
+                        "tag": "b",
+                        "content": "Deutsche Grammophon"
+                    }
+                ]
+            },
+            {
+                "ind1": "0",
+                "ind2": "0",
+                "content": null,
+                "marcTag": "028",
+                "fieldTag": "l",
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "415 254-2"
+                    },
+                    {
+                        "tag": "b",
+                        "content": "Deutsche Grammophon"
+                    }
+                ]
+            },
+            {
+                "ind1": "0",
+                "ind2": "0",
+                "content": null,
+                "marcTag": "028",
+                "fieldTag": "l",
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "415 255-2"
+                    },
+                    {
+                        "tag": "b",
+                        "content": "Deutsche Grammophon"
+                    }
+                ]
+            },
+            {
+                "ind1": "0",
+                "ind2": "0",
+                "content": null,
+                "marcTag": "028",
+                "fieldTag": "l",
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "415 253-1"
+                    },
+                    {
+                        "tag": "b",
+                        "content": "Deutsche Grammophon"
+                    }
+                ]
+            },
+            {
+                "ind1": "0",
+                "ind2": "0",
+                "content": null,
+                "marcTag": "028",
+                "fieldTag": "l",
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "415 253-4"
+                    },
+                    {
+                        "tag": "b",
+                        "content": "Deutsche Grammophon"
+                    }
+                ]
+            },
+            {
+                "ind1": "0",
+                "ind2": "0",
+                "content": null,
+                "marcTag": "028",
+                "fieldTag": "l",
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "2532 051"
+                    },
+                    {
+                        "tag": "b",
+                        "content": "Deutsche Grammophon"
+                    }
+                ]
+            },
+            {
+                "ind1": "0",
+                "ind2": "0",
+                "content": null,
+                "marcTag": "028",
+                "fieldTag": "l",
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "3302 051"
+                    },
+                    {
+                        "tag": "b",
+                        "content": "Deutsche Grammophon"
+                    }
+                ]
+            },
+            {
+                "ind1": " ",
+                "ind2": " ",
+                "content": null,
+                "marcTag": "035",
+                "fieldTag": "l",
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "(WaOLN)nyp0007861"
+                    }
+                ]
+            },
+            {
+                "ind1": " ",
+                "ind2": " ",
+                "content": null,
+                "marcTag": "500",
+                "fieldTag": "n",
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "Compact discs."
+                    }
+                ]
+            },
+            {
+                "ind1": " ",
+                "ind2": " ",
+                "content": null,
+                "marcTag": "500",
+                "fieldTag": "n",
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "Title on container: Leonard Bernstein conducts West Side story."
+                    }
+                ]
+            },
+            {
+                "ind1": " ",
+                "ind2": " ",
+                "content": null,
+                "marcTag": "500",
+                "fieldTag": "n",
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "Also contains Bernstein's Symphonic suite from the film \"On the waterfront\" (recorded live, Israel Philharmonic Orchestra, Leonard Bernstein, conductor)."
+                    }
+                ]
+            },
+            {
+                "ind1": " ",
+                "ind2": " ",
+                "content": null,
+                "marcTag": "500",
+                "fieldTag": "n",
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "Durations: 1:15:47 ; 21:38."
+                    }
+                ]
+            },
+            {
+                "ind1": " ",
+                "ind2": " ",
+                "content": null,
+                "marcTag": "500",
+                "fieldTag": "n",
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "The 1st work available also on analog disc (Deutsche Grammophon 415 253-1) and cassette tape (415 253-4); the 2nd work on analog disc (2532 051) and cassette tape (3302 051)."
+                    }
+                ]
+            },
+            {
+                "ind1": " ",
+                "ind2": " ",
+                "content": null,
+                "marcTag": "500",
+                "fieldTag": "n",
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "Program notes in English by Bernstein and David Patrick Stearns with translations in German, French and Italian (40 p. : ill.), and libretto in English, German and French (67 p. : ill.) in container."
+                    }
+                ]
+            },
+            {
+                "ind1": "0",
+                "ind2": " ",
+                "content": null,
+                "marcTag": "511",
+                "fieldTag": "n",
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "Kiri Te Kanawa, soprano ; Tatiana Troyanos, Marilyn Horne, mezzo-sopranos ; José Carreras, Kurt Ollmann, tenors ; Nina Bernstein, Alexander Bernstein, speakers ; chorus and orchestra ; Leonard Bernstein, conductor."
+                    }
+                ]
+            },
+            {
+                "ind1": " ",
+                "ind2": " ",
+                "content": "NYPG86-R23",
+                "marcTag": "001",
+                "fieldTag": "o",
+                "subfields": null
+            },
+            {
+                "ind1": " ",
+                "ind2": " ",
+                "content": null,
+                "marcTag": "260",
+                "fieldTag": "p",
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "Hamburg :"
+                    },
+                    {
+                        "tag": "b",
+                        "content": "Deutsche Grammophon,"
+                    },
+                    {
+                        "tag": "c",
+                        "content": "p1985."
+                    }
+                ]
+            },
+            {
+                "ind1": "8",
+                "ind2": " ",
+                "content": null,
+                "marcTag": "852",
+                "fieldTag": "q",
+                "subfields": [
+                    {
+                        "tag": "h",
+                        "content": "*LDC 26 (F)"
+                    },
+                    {
+                        "tag": "z",
+                        "content": "Notes and libretto on file."
+                    }
+                ]
+            },
+            {
+                "ind1": " ",
+                "ind2": " ",
+                "content": null,
+                "marcTag": "300",
+                "fieldTag": "r",
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "2 sound discs :"
+                    },
+                    {
+                        "tag": "b",
+                        "content": "digital, stereo. ;"
+                    },
+                    {
+                        "tag": "c",
+                        "content": "4 3/4 in."
+                    }
+                ]
+            },
+            {
+                "ind1": " ",
+                "ind2": " ",
+                "content": null,
+                "marcTag": "306",
+                "fieldTag": "r",
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "011547"
+                    },
+                    {
+                        "tag": "a",
+                        "content": "002138"
+                    }
+                ]
+            },
+            {
+                "ind1": "1",
+                "ind2": "0",
+                "content": null,
+                "marcTag": "245",
+                "fieldTag": "t",
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "West side story"
+                    },
+                    {
+                        "tag": "h",
+                        "content": "[sound recording] /"
+                    },
+                    {
+                        "tag": "c",
+                        "content": "Leonard Bernstein ; [based on a conception of Jerome Robbins ; book by Arthur Laurents ; music by Leonard Bernstein ; lyrics by Stephen Sondheim ; orchestration by Leonard Bernstein with Sid Ramin and Irwin Kostal.]"
+                    }
+                ]
+            },
+            {
+                "ind1": "0",
+                "ind2": " ",
+                "content": null,
+                "marcTag": "740",
+                "fieldTag": "u",
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "Leonard Bernstein conducts West Side Story."
+                    }
+                ]
+            },
+            {
+                "ind1": "0",
+                "ind2": " ",
+                "content": null,
+                "marcTag": "740",
+                "fieldTag": "u",
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "On the waterfront."
+                    }
+                ]
+            },
+            {
+                "ind1": " ",
+                "ind2": " ",
+                "content": null,
+                "marcTag": "959",
+                "fieldTag": "v",
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": ".b20911506"
+                    },
+                    {
+                        "tag": "b",
+                        "content": "05-21-07"
+                    },
+                    {
+                        "tag": "c",
+                        "content": "08-24-91"
+                    }
+                ]
+            },
+            {
+                "ind1": "4",
+                "ind2": "0",
+                "content": null,
+                "marcTag": "856",
+                "fieldTag": "y",
+                "subfields": [
+                    {
+                        "tag": "u",
+                        "content": "https://specialcollections.nypl.org/aeon/Aeon.dll?Action=10&Form=30&Title=West+side+story&Site=LPAMR&CallNumber=*LDC+26+(F)&Author=Bernstein,+Leonard,&ItemPlace=Hamburg+:&ItemPublisher=Deutsche+Grammophon,&Date=p1985.&ItemInfo3=https://catalog.nypl.org/record=b11070959&ReferenceNumber=b110709597&Genre=Music+CD&Location=Performing+Arts+Music+and+Recorded+Sound"
+                    },
+                    {
+                        "tag": "z",
+                        "content": "Request Access to Music & Recorded Sound Division Special Collections material"
+                    }
+                ]
+            },
+            {
+                "ind1": " ",
+                "ind2": " ",
+                "content": "sduzznznnmpne ",
+                "marcTag": "007",
+                "fieldTag": "y",
+                "subfields": null
+            },
+            {
+                "ind1": " ",
+                "ind2": " ",
+                "content": "860116s1985    gw mc    defhi      eng dcjm a ",
+                "marcTag": "008",
+                "fieldTag": "y",
+                "subfields": null
+            },
+            {
+                "ind1": " ",
+                "ind2": " ",
+                "content": "20000925123401.0",
+                "marcTag": "005",
+                "fieldTag": "y",
+                "subfields": null
+            },
+            {
+                "ind1": " ",
+                "ind2": " ",
+                "content": null,
+                "marcTag": "040",
+                "fieldTag": "y",
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "CU"
+                    },
+                    {
+                        "tag": "c",
+                        "content": "CU"
+                    },
+                    {
+                        "tag": "d",
+                        "content": "NjR"
+                    },
+                    {
+                        "tag": "d",
+                        "content": "NN"
+                    },
+                    {
+                        "tag": "d",
+                        "content": "WaOLN"
+                    }
+                ]
+            },
+            {
+                "ind1": "1",
+                "ind2": " ",
+                "content": null,
+                "marcTag": "041",
+                "fieldTag": "y",
+                "subfields": [
+                    {
+                        "tag": "d",
+                        "content": "eng"
+                    },
+                    {
+                        "tag": "e",
+                        "content": "gerengfre"
+                    },
+                    {
+                        "tag": "h",
+                        "content": "eng"
+                    },
+                    {
+                        "tag": "g",
+                        "content": "enggerfreita"
+                    },
+                    {
+                        "tag": "h",
+                        "content": "eng"
+                    }
+                ]
+            },
+            {
+                "ind1": "2",
+                "ind2": " ",
+                "content": null,
+                "marcTag": "045",
+                "fieldTag": "y",
+                "subfields": [
+                    {
+                        "tag": "b",
+                        "content": "d1956"
+                    },
+                    {
+                        "tag": "b",
+                        "content": "d1957"
+                    }
+                ]
+            },
+            {
+                "ind1": " ",
+                "ind2": " ",
+                "content": null,
+                "marcTag": "997",
+                "fieldTag": "y",
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "ph"
+                    },
+                    {
+                        "tag": "b",
+                        "content": "01-04-01"
+                    },
+                    {
+                        "tag": "c",
+                        "content": "m"
+                    },
+                    {
+                        "tag": "d",
+                        "content": "j"
+                    },
+                    {
+                        "tag": "e",
+                        "content": "-"
+                    },
+                    {
+                        "tag": "f",
+                        "content": "eng"
+                    },
+                    {
+                        "tag": "g",
+                        "content": "gw "
+                    },
+                    {
+                        "tag": "h",
+                        "content": "0"
+                    }
+                ]
+            },
+            {
+                "ind1": " ",
+                "ind2": " ",
+                "content": null,
+                "marcTag": "910",
+                "fieldTag": "y",
+                "subfields": [
+                    {
+                        "tag": "a",
+                        "content": "RL"
+                    }
+                ]
+            },
+            {
+                "ind1": null,
+                "ind2": null,
+                "content": "00000cjm  2200553 a 4500",
+                "marcTag": null,
+                "fieldTag": "_",
+                "subfields": null
+            }
+        ]
+    }
