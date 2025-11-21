@@ -1162,7 +1162,7 @@ describe('EsBib', function () {
     it('should respect the order that subjects were catalogged in', () => {
       const record = new SierraBib(require('../fixtures/bib-subject-order.json'))
       const esBib = new EsBib(record)
-      expect(esBib.subjectLiteral()[0]).to.deep.equal('Motion picture actors and actresses')
+      expect(esBib.subjectLiteral()[0]).to.deep.equal('Motion picture actors and actresses.')
     })
     it('should return an array of subject literals with " " joiner around certain subfields', () => {
       const record = new SierraBib(require('../fixtures/bib-parallels-chaos.json'))
@@ -1172,7 +1172,7 @@ describe('EsBib', function () {
     it('should return an array of subject literals with " -- " joiner around other subfields', () => {
       const record = new SierraBib(require('../fixtures/bib-10001936.json'))
       const esBib = new EsBib(record)
-      expect(esBib.subjectLiteral()).to.deep.equal(['Armenians -- Iran -- History'])
+      expect(esBib.subjectLiteral()).to.deep.equal(['Armenians -- Iran -- History.'])
     })
 
     it('subjectLiteral_exploded', () => {
@@ -1200,6 +1200,11 @@ describe('EsBib', function () {
       const record = new SierraBib(require('../fixtures/bib-parallels-chaos.json'))
       const esBib = new EsBib(record)
       expect(esBib.parallelSubjectLiteral()).to.deep.equal(['‏600 parallel value a 600 parallel value b.'])
+    })
+    it('parallelSubjectLiteral shouldn\t have a problem with no parallel', () => {
+      const record = new SierraBib(require('../fixtures/bib-10554371.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.parallelSubjectLiteral())
     })
     it('parallelSubjectLiteral shouldn\t have a problem with no parallel', () => {
       const record = new SierraBib(require('../fixtures/bib-10554371.json'))
