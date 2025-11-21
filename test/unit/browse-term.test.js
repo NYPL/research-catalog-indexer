@@ -1,10 +1,10 @@
 const expect = require('chai').expect
 const {
-  fetchLiveSubjectLiterals,
-  buildBibSubjectEvents,
-  buildSubjectDiff,
+  fetchLiveBibData,
+  buildBrowseDataEvents,
+  buildBrowseDataDiff,
   getPrimaryAndParallelLabels,
-  getSubjectModels,
+  getBrowseDataModels,
   buildBatchedCommands,
   determineUpdatedTerms
 } = require('../../lib/browse-terms')
@@ -136,10 +136,10 @@ describe('bib activity', () => {
       expect(commands[2].input.Entries.length).to.eq(7)
     })
   })
-  describe('getSubjectModels', () => {
+  describe('getBrowseDataModels', () => {
     it('returns labels for preferred term and variants', async () => {
       const bib = toIndex.find(({ id }) => id === 'parallelsChaos')
-      expect(await getSubjectModels(new EsBib(new SierraBib(bib)))).to.deep.eq([
+      expect(await getBrowseDataModels(new EsBib(new SierraBib(bib)))).to.deep.eq([
         {
           sourceId: 'parallelsChaos',
           preferredTerm: '600 primary value a 600 primary value b.',
@@ -149,7 +149,7 @@ describe('bib activity', () => {
     })
     it('returns objects without parallels', async () => {
       const bib = toIndex.find(({ id }) => id === '11655934')
-      expect(await getSubjectModels(new EsBib(new SierraBib(bib)))).to.deep.eq([
+      expect(await getBrowseDataModels(new EsBib(new SierraBib(bib)))).to.deep.eq([
         { preferredTerm: 'University of Utah -- Periodicals.', sourceId: 'b11655934' },
         { preferredTerm: 'Education, Higher -- Utah -- Periodicals.', sourceId: 'b11655934' }
       ])
@@ -179,7 +179,7 @@ describe('bib activity', () => {
           ]
         }]
       }
-      expect(await getSubjectModels(new EsBib(new SierraBib(bib)))).to.deep.eq([
+      expect(await getBrowseDataModels(new EsBib(new SierraBib(bib)))).to.deep.eq([
         {
           sourceId: '123',
           variant: '‏600 orphaned parallel value a 600 orphaned parallel value b.'
@@ -226,19 +226,19 @@ describe('bib activity', () => {
         { preferredTerm: 'preferredTerm a preferredTerm b.', suppress: false, variant: 'parallel a parallel b.' })
     })
   })
-  describe('buildSubjectDiff', () => {
+  describe('buildBrowseDataDiff', () => {
     const makePreferredTermObject = (x) => ({ preferredTerm: x })
     it('subjects added', () => {
-      expect(buildSubjectDiff(['a', 'b', 'c', 'd'].map(makePreferredTermObject), ['c', 'd'].map(makePreferredTermObject))).to.deep.equal(['a', 'b'].map(makePreferredTermObject))
+      expect(buildBrowseDataDiff(['a', 'b', 'c', 'd'].map(makePreferredTermObject), ['c', 'd'].map(makePreferredTermObject))).to.deep.equal(['a', 'b'].map(makePreferredTermObject))
     })
     it('subjects deleted', () => {
-      expect(buildSubjectDiff(['c', 'd'].map(makePreferredTermObject), ['a', 'b', 'c', 'd'].map(makePreferredTermObject))).to.deep.equal(['a', 'b'].map(makePreferredTermObject))
+      expect(buildBrowseDataDiff(['c', 'd'].map(makePreferredTermObject), ['a', 'b', 'c', 'd'].map(makePreferredTermObject))).to.deep.equal(['a', 'b'].map(makePreferredTermObject))
     })
   })
-  describe('buildBibSubjectEvents', () => {
+  describe('buildBrowseDataEvents', () => {
     it('returns an empty array if there are no idsToFetch', async () => {
       const nonResearchBib = { getIsResearchWithRationale: () => ({ isResearch: false }) }
-      expect(buildBibSubjectEvents([nonResearchBib])).to.eventually.equal([])
+      expect(buildBrowseDataEvents([nonResearchBib])).to.eventually.equal([])
       expect(loggerSpy.calledWith('No records to fetch or build subjects for'))
     })
     describe('on ingest (all subjects from non suppressed or deleted bibs present are passed along)', () => {
@@ -250,7 +250,7 @@ describe('bib activity', () => {
       })
       it('can handle a combination of deleted and updated sierra bibs, and filters non research and suppressed, and ignores indexed subject data', async () => {
         const records = [...toIndex, ...toDelete].map((record) => new EsBib(new SierraBib(record)))
-        const countEvents = await buildBibSubjectEvents(records)
+        const countEvents = await buildBrowseDataEvents(records)
         const sortedCountEvents = countEvents.sort((a, b) => {
           return a.preferredTerm.toLowerCase() > b.preferredTerm.toLowerCase() ? 1 : -1
         })
@@ -269,7 +269,7 @@ describe('bib activity', () => {
       })
       it('calls determineUpdatedTerms', async () => {
         const records = [...toIndex, ...toDelete].map((record) => new EsBib(new SierraBib(record)))
-        const countEvents = await buildBibSubjectEvents(records)
+        const countEvents = await buildBrowseDataEvents(records)
         const sortedCountEvents = countEvents.sort((a, b) => {
           return a.preferredTerm.toLowerCase() > b.preferredTerm.toLowerCase() ? 1 : -1
         })
@@ -294,7 +294,7 @@ describe('bib activity', () => {
   describe('fetchLiveSubjects', () => {
     it('returns a flattened array of subjects for supplied records', async () => {
       const records = ['b2', 'b3']
-      const liveSubjects = await fetchLiveSubjectLiterals(records)
+      const liveSubjects = await fetchLiveBibData(records)
       expect(liveSubjects).to.deep.equal([
         'spaghetti',
         'meatballs',
@@ -307,12 +307,12 @@ describe('bib activity', () => {
       ])
     })
     it('can handle no records', async () => {
-      const noSubjects = await fetchLiveSubjectLiterals(undefined)
+      const noSubjects = await fetchLiveBibData(undefined)
       expect(noSubjects).to.deep.equal([])
     })
     it('can handle elastic search returning not found responses', async () => {
       const records = ['b1', 'b2', 'b3', 'b4']
-      const liveSubjects = await fetchLiveSubjectLiterals(records)
+      const liveSubjects = await fetchLiveBibData(records)
       expect(liveSubjects).to.deep.eq([
         'spaghetti',
         'meatballs',

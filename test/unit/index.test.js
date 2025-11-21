@@ -55,9 +55,9 @@ describe('index handler function', () => {
     it.skip('calls deletions after subject diff is determined', async () => {
       const suppressBibsStub = stub(suppress, 'suppressBibs')
       stub(browse, 'emitBibSubjectEvents')
-      const buildBibSubjectEventsStub = stub(browse, 'buildBibSubjectEvents')
+      const buildBrowseDataEventsStub = stub(browse, 'buildBrowseDataEvents')
       await index.processRecords('Bib', [suppressedBib])
-      expect(buildBibSubjectEventsStub.calledBefore(suppressBibsStub)).to.equal(true)
+      expect(buildBrowseDataEventsStub.calledBefore(suppressBibsStub)).to.equal(true)
     })
   })
 

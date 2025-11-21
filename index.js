@@ -58,7 +58,7 @@ const processRecords = async (type, records, options = {}) => {
     const esModelsForDeletions = removedBibs.map(bib => new EsBib(new SierraBib(bib)))
     const changedRecords = [...esModels, ...esModelsForDeletions]
     if ((changedRecords.length) && type === 'Bib') {
-      browseTermDiffs = await browse.buildBibSubjectEvents(changedRecords)
+      browseTermDiffs = await browse.buildBrowseDataEvents(changedRecords)
     }
   }
 
@@ -95,7 +95,7 @@ const processRecords = async (type, records, options = {}) => {
   }
   if (!browseTermDiffs?.length) logger.info('No subject updates to process')
   if (process.env.EMIT_BROWSE_TERMS === 'true' && browseTermDiffs?.length) {
-    const subjectHandler = process.env.BTI_INDEX_PATH ? browse.emitBibSubjectsToLocalBti : browse.emitBibSubjectEventsToSqs
+    const subjectHandler = process.env.BTI_INDEX_PATH ? browse.emitBrowseDataToLocalBti : browse.emitBrowseDataToSqs
     await subjectHandler(browseTermDiffs)
   }
   const message = messages.length ? messages.join('; ') : 'Nothing to do.'
