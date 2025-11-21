@@ -271,7 +271,7 @@ describe('SierraBase', function () {
         { marc: '650', subfields: ['a'] }
       ]
       const varfields = bib.varFieldsMulti(mappings)
-      expect(varfields[0].value).to.deep.equal('Motion picture actors and actresses.')
+      expect(varfields[0].value).to.deep.equal('Motion picture actors and actresses')
     })
     it('more paths in bib-mappings.json than fields in fixture', () => {
       const bib = new SierraBib(require('../fixtures/bib-11606020.json'))
