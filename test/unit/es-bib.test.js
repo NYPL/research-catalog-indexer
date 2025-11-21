@@ -118,6 +118,14 @@ describe('EsBib', function () {
     })
   })
 
+  describe.only('nameTitleRole', () => {
+    it('spaghetti', () => {
+      const record = new SierraBib(require('../fixtures/bib-bernstein.json'))
+      const esBib = new EsBib(record)
+      console.log(esBib.nameTitleRole())
+    })
+  })
+
   describe('creatorLiteralNormalized', () => {
     it('should reverse creatorLiteral name parts', () => {
       const esBib = new EsBib(new SierraBib(require('../fixtures/bib-10001936.json')))

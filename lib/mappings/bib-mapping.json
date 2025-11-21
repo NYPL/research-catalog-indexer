@@ -184,7 +184,7 @@
 
     ]
   },
-  "contributorLiteralByRole": {
+  "nameTitleRole": {
     "paths": [
       {"marc": "100"},
       {"marc": "110"},
