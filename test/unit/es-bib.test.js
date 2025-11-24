@@ -1925,7 +1925,7 @@ describe('EsBib', function () {
       const bib = new SierraBib(require('../fixtures/bib-23236773.json'))
       const esBib = new EsBib(bib)
       expect(esBib.parallelSeries()).to.deep.equal([
-        'Dang dai wen xue shi yan jiu cong shu'
+        '当代文学史研究丛书'
       ])
     })
   })
