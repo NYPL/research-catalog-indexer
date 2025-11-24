@@ -1,0 +1,862 @@
+{
+  "id": "23236773",
+  "nyplSource": "sierra-nypl",
+  "title": "Zou xiang shu niu dian : 1990 nian dai wen xue yan jiu = Zouxiang shuniu dian : 1990niandai wenxue yanjiu",
+  "author": "",
+  "publishYear": 2023,
+  "nyplType": "bib",
+  "controlNumber": "1395839137",
+  "standardNumbers": [
+    "9787301340936",
+    "7301340931"
+  ],
+  "updatedDate": "2024-03-01T14:48:26",
+  "createdDate": "2024-02-12T16:04:05",
+  "deletedDate": null,
+  "catalogDate": "2024-02-29T00:00:00",
+  "deleted": false,
+  "suppressed": false,
+  "locations": [
+    {
+      "code": "mal",
+      "name": "SASB - Service Desk Rm 315"
+    }
+  ],
+  "lang": {
+    "code": "chi",
+    "name": "Chinese"
+  },
+  "materialType": {
+    "code": "a  ",
+    "value": "BOOK/TEXT"
+  },
+  "bibLevel": {
+    "code": "m",
+    "value": "MONOGRAPH"
+  },
+  "country": {
+    "code": "cc ",
+    "name": "China"
+  },
+  "normTitle": "zou xiang shu niu dian 1990 nian dai wen xue yan jiu zouxiang shuniu dian 1990niandai wenxue yanjiu",
+  "normAuthor": "",
+  "fixedFields": {
+    "24": {
+      "label": "Language",
+      "value": "chi",
+      "display": "Chinese"
+    },
+    "25": {
+      "label": "Skip",
+      "value": "0",
+      "display": null
+    },
+    "26": {
+      "label": "Location",
+      "value": "mal  ",
+      "display": "SASB - Service Desk Rm 315"
+    },
+    "27": {
+      "label": "",
+      "value": "1",
+      "display": null
+    },
+    "28": {
+      "label": "Cat. Date",
+      "value": "2024-02-29",
+      "display": null
+    },
+    "29": {
+      "label": "Bib Level",
+      "value": "m",
+      "display": "MONOGRAPH"
+    },
+    "30": {
+      "label": "Material Type",
+      "value": "a  ",
+      "display": "BOOK/TEXT"
+    },
+    "31": {
+      "label": "Bib Code 3",
+      "value": "-",
+      "display": null
+    },
+    "80": {
+      "label": "Record Type",
+      "value": "b",
+      "display": null
+    },
+    "81": {
+      "label": "Record Number",
+      "value": "23236773",
+      "display": null
+    },
+    "83": {
+      "label": "Created Date",
+      "value": "2024-02-12T16:04:05Z",
+      "display": null
+    },
+    "84": {
+      "label": "Updated Date",
+      "value": "2024-03-01T14:48:26Z",
+      "display": null
+    },
+    "85": {
+      "label": "No. of Revisions",
+      "value": "4",
+      "display": null
+    },
+    "86": {
+      "label": "Agency",
+      "value": "1",
+      "display": null
+    },
+    "89": {
+      "label": "Country",
+      "value": "cc ",
+      "display": "China"
+    },
+    "98": {
+      "label": "",
+      "value": "2024-03-01T02:49:54Z",
+      "display": null
+    },
+    "107": {
+      "label": "MARC Type",
+      "value": " ",
+      "display": null
+    }
+  },
+  "varFields": [
+    {
+      "ind1": "1",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "700",
+      "fieldTag": "b",
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "880-06"
+        },
+        {
+          "tag": "a",
+          "content": "Cheng, Guangwei,"
+        },
+        {
+          "tag": "e",
+          "content": "editor."
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "0",
+      "content": null,
+      "marcTag": "650",
+      "fieldTag": "d",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Chinese literature"
+        },
+        {
+          "tag": "y",
+          "content": "20th century"
+        },
+        {
+          "tag": "x",
+          "content": "History and criticism."
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "7",
+      "content": null,
+      "marcTag": "648",
+      "fieldTag": "d",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "1900-1999"
+        },
+        {
+          "tag": "2",
+          "content": "fast"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "7",
+      "content": null,
+      "marcTag": "650",
+      "fieldTag": "d",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Chinese literature."
+        },
+        {
+          "tag": "2",
+          "content": "fast"
+        },
+        {
+          "tag": "0",
+          "content": "(OCoLC)fst00857595"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "7",
+      "content": null,
+      "marcTag": "651",
+      "fieldTag": "d",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "China."
+        },
+        {
+          "tag": "2",
+          "content": "fast"
+        },
+        {
+          "tag": "0",
+          "content": "(OCoLC)fst01206073"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "7",
+      "content": null,
+      "marcTag": "655",
+      "fieldTag": "d",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Criticism, interpretation, etc."
+        },
+        {
+          "tag": "2",
+          "content": "fast"
+        },
+        {
+          "tag": "0",
+          "content": "(OCoLC)fst01411635"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "250",
+      "fieldTag": "e",
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "880-03"
+        },
+        {
+          "tag": "a",
+          "content": "Di 1 ban."
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "020",
+      "fieldTag": "i",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "9787301340936"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "020",
+      "fieldTag": "i",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "7301340931"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "035",
+      "fieldTag": "l",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "(OCoLC)1395839137"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "504",
+      "fieldTag": "n",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Includes bibliographical references."
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": "1395839137",
+      "marcTag": "001",
+      "fieldTag": "o",
+      "subfields": null
+    },
+    {
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "marcTag": "264",
+      "fieldTag": "p",
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "880-04"
+        },
+        {
+          "tag": "a",
+          "content": "Beijing :"
+        },
+        {
+          "tag": "b",
+          "content": "Beijing da xue chu ban she,"
+        },
+        {
+          "tag": "c",
+          "content": "2023."
+        }
+      ]
+    },
+    {
+      "ind1": "8",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "852",
+      "fieldTag": "q",
+      "subfields": [
+        {
+          "tag": "h",
+          "content": "JX 24-2843"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "300",
+      "fieldTag": "r",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "2, 2, 2, 248 pages ;"
+        },
+        {
+          "tag": "c",
+          "content": "23 cm."
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "336",
+      "fieldTag": "r",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "text"
+        },
+        {
+          "tag": "b",
+          "content": "txt"
+        },
+        {
+          "tag": "2",
+          "content": "rdacontent"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "337",
+      "fieldTag": "r",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "unmediated"
+        },
+        {
+          "tag": "b",
+          "content": "n"
+        },
+        {
+          "tag": "2",
+          "content": "rdamedia"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "338",
+      "fieldTag": "r",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "volume"
+        },
+        {
+          "tag": "b",
+          "content": "nc"
+        },
+        {
+          "tag": "2",
+          "content": "rdacarrier"
+        }
+      ]
+    },
+    {
+      "ind1": "1",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "490",
+      "fieldTag": "s",
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "880-05"
+        },
+        {
+          "tag": "a",
+          "content": "Dang dai wen xue shi yan jiu cong shu"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "0",
+      "content": null,
+      "marcTag": "830",
+      "fieldTag": "s",
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "880-07"
+        },
+        {
+          "tag": "a",
+          "content": "Dang dai wen xue shi yan jiu cong shu."
+        }
+      ]
+    },
+    {
+      "ind1": "0",
+      "ind2": "0",
+      "content": null,
+      "marcTag": "245",
+      "fieldTag": "t",
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "880-01"
+        },
+        {
+          "tag": "a",
+          "content": "Zou xiang shu niu dian :"
+        },
+        {
+          "tag": "b",
+          "content": "1990 nian dai wen xue yan jiu = Zouxiang shuniu dian : 1990niandai wenxue yanjiu /"
+        },
+        {
+          "tag": "c",
+          "content": "Cheng Guangwei bian."
+        }
+      ]
+    },
+    {
+      "ind1": "3",
+      "ind2": "0",
+      "content": null,
+      "marcTag": "246",
+      "fieldTag": "u",
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "880-02"
+        },
+        {
+          "tag": "a",
+          "content": "1990 nian dai wen xue yan jiu"
+        }
+      ]
+    },
+    {
+      "ind1": "3",
+      "ind2": "1",
+      "content": null,
+      "marcTag": "246",
+      "fieldTag": "u",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Zouxiang shuniu dian"
+        }
+      ]
+    },
+    {
+      "ind1": "3",
+      "ind2": "1",
+      "content": null,
+      "marcTag": "246",
+      "fieldTag": "u",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "1990niandai wenxue yanjiu"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": "230824s2023    cc       b    000 0 chi dcam i ",
+      "marcTag": "008",
+      "fieldTag": "y",
+      "subfields": null
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": "OCoLC",
+      "marcTag": "003",
+      "fieldTag": "y",
+      "subfields": null
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": "20240229024639.0",
+      "marcTag": "005",
+      "fieldTag": "y",
+      "subfields": null
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "040",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "CNPIT"
+        },
+        {
+          "tag": "b",
+          "content": "eng"
+        },
+        {
+          "tag": "e",
+          "content": "rda"
+        },
+        {
+          "tag": "c",
+          "content": "CNPIT"
+        },
+        {
+          "tag": "d",
+          "content": "CUY"
+        },
+        {
+          "tag": "d",
+          "content": "OCLCO"
+        },
+        {
+          "tag": "d",
+          "content": "NYP"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "049",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "NYPP"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "066",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "c",
+          "content": "$1"
+        }
+      ]
+    },
+    {
+      "ind1": "1",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "880",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "490-05/$1"
+        },
+        {
+          "tag": "a",
+          "content": "当代文学史研究丛书"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "090",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "PL2303"
+        },
+        {
+          "tag": "b",
+          "content": ".Z6895 2023"
+        }
+      ]
+    },
+    {
+      "ind1": "0",
+      "ind2": "0",
+      "content": null,
+      "marcTag": "880",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "245-01/$1"
+        },
+        {
+          "tag": "a",
+          "content": "走向枢纽点 :"
+        },
+        {
+          "tag": "b",
+          "content": "1990年代文学研究 = Zouxiang shuniu dian : 1990niandai wenxue yanjiu /"
+        },
+        {
+          "tag": "c",
+          "content": "程光炜编."
+        }
+      ]
+    },
+    {
+      "ind1": "3",
+      "ind2": "0",
+      "content": null,
+      "marcTag": "880",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "246-02/$1"
+        },
+        {
+          "tag": "a",
+          "content": "1990年代文学研究"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "880",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "250-03/$1"
+        },
+        {
+          "tag": "a",
+          "content": "第1版."
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "1",
+      "content": null,
+      "marcTag": "880",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "264-04/$1"
+        },
+        {
+          "tag": "a",
+          "content": "北京 :"
+        },
+        {
+          "tag": "b",
+          "content": "北京大学出版社,"
+        },
+        {
+          "tag": "c",
+          "content": "2023."
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "880",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "520-00/$1"
+        },
+        {
+          "tag": "a",
+          "content": "本书内容讲述:如果重绘中国当代文学\"后三十年\"的地图,这几个枢纽点是不应该被忽视的:1976年,1979年,1985年和1993年.1993年作为1980年代文学的终结点和1990年代文学的开启,具有历史枢纽点的特殊意义.因为只有在1993年的文学变局里,1980年代作为20世纪中国文学又一个\"黄金十年\"的历史命题才是成立的;而正是在这个枢纽点上,1990年代文学才告诉人们,它告别了当代文学漫长的理想浪漫期,回到了文学本来的面貌当中."
+        }
+      ]
+    },
+    {
+      "ind1": "1",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "880",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "700-06/$1"
+        },
+        {
+          "tag": "a",
+          "content": "程光炜,"
+        },
+        {
+          "tag": "e",
+          "content": "editor."
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "0",
+      "content": null,
+      "marcTag": "880",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "6",
+          "content": "830-07/$1"
+        },
+        {
+          "tag": "a",
+          "content": "当代文学史研究丛书."
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "901",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "MARS"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "901",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "wly"
+        },
+        {
+          "tag": "b",
+          "content": "CATRL"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "910",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "RL"
+        }
+      ]
+    },
+    {
+      "ind1": null,
+      "ind2": null,
+      "content": "00000cam a2200577 i 4500",
+      "marcTag": null,
+      "fieldTag": "_",
+      "subfields": null
+    }
+  ]
+}

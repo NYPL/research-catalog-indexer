@@ -5,9 +5,12 @@ const suppress = require('./lib/utils/suppressBibs')
 const { buildEsDocument, transformIntoBibRecords } = require('./lib/build-es-document')
 const { truncate } = require('./lib/utils')
 const { notifyDocumentProcessed } = require('./lib/streams-client')
-// const browse = require('./lib/browse-terms')
+const browse = require('./lib/browse-terms')
 const { filteredSierraBibsForBibs } = require('./lib/prefilter')
 const { loadNyplCoreData } = require('./lib/load-core-data')
+const schema = require('./lib/elastic-search/index-schema')
+const SierraBib = require('./lib/sierra-models/bib')
+const EsBib = require('./lib/es-models/bib')
 
 /**
  * Main lambda handler receiving Bib, Item, and Holding events
@@ -32,9 +35,9 @@ const handler = async (event, context, callback) => {
 
 const processRecords = async (type, records, options = {}) => {
   options = Object.assign({
+    updateOnly: false,
     dryrun: false
   }, options)
-
   // Ensure event has Bib records:
   records = await transformIntoBibRecords(type, records)
 
@@ -43,33 +46,41 @@ const processRecords = async (type, records, options = {}) => {
   // If original event was a Bib event, delete the "removed" records:
   const recordsToDelete = type === 'Bib' ? removedBibs : []
 
-  const recordsToIndex = await buildEsDocument(filteredBibs)
-
+  const esModels = await buildEsDocument(filteredBibs)
+  const plainObjectEsDocuments = esModels.map((record) => record.toPlainObject(schema.schema()))
   const messages = []
 
   // Fetch subjects from all bibs, whether they are updates, creates, or deletes,
   // and transmit to the browse pipeline. This must happen before writes to the
   // resources index to determine any diff between new and old subjects
-  // const changedRecords = [...filteredBibs, ...removedBibs]
-  // let browseTermDiffs
-  // if ((changedRecords.length) && type === 'Bib') {
-  //   browseTermDiffs = await browse.buildBibSubjectEvents(changedRecords)
-  // }
-
-  if (recordsToIndex.length) {
-    if (options.dryrun) {
-      logger.info(`DRYRUN: Skipping writing ${recordsToIndex.length} records`)
-    } else {
-      // Write records to ES:
-      await elastic.writeRecords(recordsToIndex)
-
-      // Write to IndexDocumentProcessed Kinesis stream:
-      await notifyDocumentProcessed(recordsToIndex)
+  let browseTermDiffs
+  if (process.env.EMIT_BROWSE_TERMS === 'true') {
+    const esModelsForDeletions = removedBibs.map(bib => new EsBib(new SierraBib(bib)))
+    const changedRecords = [...esModels, ...esModelsForDeletions]
+    if ((changedRecords.length) && type === 'Bib') {
+      browseTermDiffs = await browse.buildBibSubjectEvents(changedRecords)
     }
+  }
 
-    // Log out a summary of records updated:
-    const summary = truncate(recordsToIndex.map((record) => record.uri).join(','), 100)
-    messages.push(`Wrote ${recordsToIndex.length} doc(s): ${summary}`)
+  if (plainObjectEsDocuments.length) {
+    let summary
+    if (options.dryrun) {
+      logger.info(`DRYRUN: Skipping writing ${plainObjectEsDocuments.length} records`)
+    } else if (!options.updateOnly) {
+      // Write records to ES:
+      await elastic.writeRecords(plainObjectEsDocuments)
+      summary = `Wrote ${plainObjectEsDocuments.length} records: ${truncate(plainObjectEsDocuments.map((record) => record.uri).join(','), 100)}`
+    } else if (options.updateOnly) {
+      try {
+        const unindexedRecords = await elastic.updateRecords(plainObjectEsDocuments)
+        summary = `Updated ${plainObjectEsDocuments.length - (unindexedRecords.length || 0)} records ${unindexedRecords.length ? `, wrote ${unindexedRecords.length} unindexed records to file` : ''}. Sample of ids written: ${truncate(plainObjectEsDocuments.map((record) => record.uri).join(','), 100)}`
+      } catch (e) {
+        logger.error('Update records error: ', e)
+      }
+    }
+    if (process.env.SKIP_DOC_PROCESSED_STREAM !== 'true') await notifyDocumentProcessed(plainObjectEsDocuments)
+    // TO DO: this should reflect errors and successes, not just happily claim writing for all
+    messages.push(summary)
   }
 
   if (recordsToDelete.length) {
@@ -80,8 +91,13 @@ const processRecords = async (type, records, options = {}) => {
     }
 
     messages.push(`Deleted ${recordsToDelete.length} doc(s)`)
+    messages.push(`Deleted ids: ${recordsToDelete.map((record) => record.id)}`)
   }
-  // await browse.emitBibSubjectEvents(browseTermDiffs)
+  if (!browseTermDiffs?.length) logger.info('No subject updates to process')
+  if (process.env.EMIT_BROWSE_TERMS === 'true' && browseTermDiffs?.length) {
+    const subjectHandler = process.env.BTI_INDEX_PATH ? browse.emitBibSubjectsToLocalBti : browse.emitBibSubjectEventsToSqs
+    await subjectHandler(browseTermDiffs)
+  }
   const message = messages.length ? messages.join('; ') : 'Nothing to do.'
 
   logger.info((options.dryrun ? 'DRYRUN: ' : '') + message)

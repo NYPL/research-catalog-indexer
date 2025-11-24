@@ -459,7 +459,59 @@ const retry = (call, retries = 3, retryIndex = 0) => {
   }
 }
 
+class Timer {
+  constructor (name) {
+    this.name = name
+    this.start = null
+    this.end = null
+  }
+
+  startTimer () {
+    logger.debug(`Starting timer for ${this.name}`)
+    this.start = new Date()
+  }
+
+  endTimer () {
+    logger.debug(`Ending timer for ${this.name}`)
+    this.end = new Date()
+  }
+
+  howManyRaw () {
+    return (this.end - this.start)
+  }
+
+  howMany (unit, time, name) {
+    if (!time) time = this.howManyRaw()
+    if (!name) name = this.name
+    if (!unit) unit = 'seconds'
+    const unitDivisor = {
+      ms: 1,
+      seconds: 1000,
+      minutes: 60 * 1000,
+      hours: 60 * 60 * 1000
+    }
+    if (!unitDivisor[unit]) throw new Error('Invalid unit passed to Timer')
+    const massagedTime = time / unitDivisor[unit]
+    logger.info(`${name}: ${massagedTime} ${unit}`)
+  }
+}
+
+Timer.allTimers = {}
+
+Timer.startNew = (name) => {
+  const timer = new Timer(name)
+  const shouldLog = () => {
+    const whiteList = process.env.WHITELIST_TIMERS
+    if (!whiteList) return true
+    else return whiteList.includes(name)
+  }
+  Timer.allTimers[name] = { timer, log: shouldLog() }
+  timer.startTimer()
+  return timer
+}
+
 module.exports = {
+  Timer,
   awsCredentialsFromIni,
   batch,
   batchIdentifiersByTypeAndNyplSource,

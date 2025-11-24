@@ -23,16 +23,17 @@
  */
 
 const NyplSourceMapper = require('../lib/utils/nypl-source-mapper')
-
+const fs = require('fs')
 const { bibById, modelPrefetch } = require('../lib/platform-api/requests')
-const { awsCredentialsFromIni, die } = require('./utils')
-const { setCredentials: kmsSetCredentials } = require('../lib/kms')
+const { die } = require('./utils')
+const { loadNyplCoreData } = require('../lib/load-core-data')
 const {
-  setCredentials: kinesisSetCredentials,
   client: makeStreamsClient
 } = require('../lib/streams-client')
 
 const argv = require('minimist')(process.argv.slice(2))
+
+const isCalledViaCommandLine = /scripts\/reindex-record(.js)?/.test(fs.realpathSync(process.argv[1]))
 
 const dotenv = require('dotenv')
 
@@ -41,17 +42,10 @@ const usage = () => {
   return true
 }
 
-if (!argv.envfile) usage() && die('--envfile required')
-
 dotenv.config({ path: argv.envfile })
 
 const logger = require('../lib/logger')
 logger.setLevel(process.env.LOG_LEVEL || 'info')
-
-// Ensure we're looking at the right profile
-const awsCreds = awsCredentialsFromIni()
-kmsSetCredentials(awsCreds)
-kinesisSetCredentials(awsCreds)
 
 const streamsClient = makeStreamsClient()
 
@@ -86,13 +80,25 @@ const reindexBib = async (nyplSource, id) => {
   console.log('Finished writing all records to streams')
 }
 
-if (argv.uri) {
-  NyplSourceMapper.instance().then((mapper) => {
-    const { id, type, nyplSource } = mapper.splitIdentifier(argv.uri)
-    switch (type) {
-      case 'bib':
-        reindexBib(nyplSource, id)
-        break
-    }
-  })
-} else usage()
+const run = async () => {
+  await loadNyplCoreData()
+  const mapper = await NyplSourceMapper.instance()
+
+  const { id, type, nyplSource } = mapper.splitIdentifier(argv.uri)
+  switch (type) {
+    case 'bib':
+      reindexBib(nyplSource, id)
+      break
+  }
+}
+
+if (isCalledViaCommandLine) {
+  if (!argv.envfile) usage() && die('--envfile required')
+  if (argv.uri) {
+    run()
+  } else usage()
+}
+
+module.exports = {
+  reindexBib
+}

@@ -30,7 +30,7 @@ const mockEsClient = {
   }
 }
 let loggerSpy
-xdescribe('bib activity', () => {
+describe('bib activity', () => {
   before(() => {
     loggerSpy = sinon.spy(logger, 'debug')
     sinon.stub(esClient, 'client').resolves(mockEsClient)
@@ -45,7 +45,7 @@ xdescribe('bib activity', () => {
       const freshBibs = [
         devonBib,
         utahBib].map((bib) => new EsBib(new SierraBib({ ...bib, id: `${bib.id}sameAsFresh` })))
-      const ids = await Promise.all(freshBibs.map(async (bib) => await bib.uri()))
+      const ids = freshBibs.map((bib) => bib.uri())
       const terms = await determineUpdatedTerms('subjectLiteral', ids, freshBibs)
       expect(terms).to.deep.equal([])
     })
@@ -53,24 +53,24 @@ xdescribe('bib activity', () => {
       const freshBibs = [
         utahBib,
         devonBib].map((bib) => new EsBib(new SierraBib(bib)))
-      const ids = await Promise.all(freshBibs.map(async (bib) => await bib.uri()))
+      const ids = freshBibs.map((bib) => bib.uri())
       const terms = await determineUpdatedTerms('subjectLiteral', ids, freshBibs)
       expect(terms).to.deep.equal(
         [
           {
-            preferredTerm: 'University of Utah -- Periodicals',
+            preferredTerm: 'University of Utah -- Periodicals.',
             sourceId: 'b11655934'
           },
           {
-            preferredTerm: 'Education, Higher -- Utah -- Periodicals',
+            preferredTerm: 'Education, Higher -- Utah -- Periodicals.',
             sourceId: 'b11655934'
           },
           {
-            preferredTerm: 'Milestones -- England -- Devon',
+            preferredTerm: 'Milestones -- England -- Devon.',
             sourceId: 'b10554618'
           },
           {
-            preferredTerm: 'Devon (England) -- Description and travel',
+            preferredTerm: 'Devon (England) -- Description and travel.',
             sourceId: 'b10554618'
           }
         ]
@@ -80,16 +80,16 @@ xdescribe('bib activity', () => {
       const freshBibs = [
         devonBib, devonBib
       ].map((bib) => new EsBib(new SierraBib(bib)))
-      const ids = await Promise.all(freshBibs.map(async (bib) => await bib.uri()))
+      const ids = freshBibs.map((bib) => bib.uri())
       const terms = await determineUpdatedTerms('subjectLiteral', ids, freshBibs)
       expect(terms).to.deep.equal(
         [
           {
-            preferredTerm: 'Milestones -- England -- Devon',
+            preferredTerm: 'Milestones -- England -- Devon.',
             sourceId: 'b10554618'
           },
           {
-            preferredTerm: 'Devon (England) -- Description and travel',
+            preferredTerm: 'Devon (England) -- Description and travel.',
             sourceId: 'b10554618'
           }
         ]
@@ -100,22 +100,22 @@ xdescribe('bib activity', () => {
       const freshBibs = [
         require('../fixtures/bib-11655934.json'),
         require('../fixtures/bib-10554618.json')].map((bib) => new EsBib(new SierraBib({ ...bib, id: `${bib.id}someDiff` })))
-      const ids = await Promise.all(freshBibs.map(async (bib) => await bib.uri()))
+      const ids = freshBibs.map((bib) => bib.uri())
       const terms = await determineUpdatedTerms('subjectLiteral', ids, freshBibs)
       expect(terms).to.deep.equal([
         {
-          preferredTerm: 'University of Utah -- Periodicals',
+          preferredTerm: 'University of Utah -- Periodicals.',
           sourceId: 'b11655934someDiff'
         },
         { preferredTerm: 'University of Utah -- Perixxxdicals' },
         {
-          preferredTerm: 'Devon (England) -- Description and travel',
+          preferredTerm: 'Devon (England) -- Description and travel.',
           sourceId: 'b10554618someDiff'
         }
       ])
     })
   })
-  describe('buildBatchedCommands', () => {
+  xdescribe('buildBatchedCommands', () => {
     const generateSubjects = (length) => (new Array(length)).fill(null).map((_, i) => ({ preferredTerm: `pref ${i}` }))
     it('1 subject', () => {
       const subject = generateSubjects(1)
@@ -142,16 +142,16 @@ xdescribe('bib activity', () => {
       expect(await getSubjectModels(new EsBib(new SierraBib(bib)))).to.deep.eq([
         {
           sourceId: 'parallelsChaos',
-          preferredTerm: '600 primary value a 600 primary value b',
-          variant: '‏600 parallel value a 600 parallel value b'
+          preferredTerm: '600 primary value a 600 primary value b.',
+          variant: '‏600 parallel value a 600 parallel value b.'
         }
       ])
     })
     it('returns objects without parallels', async () => {
       const bib = toIndex.find(({ id }) => id === '11655934')
       expect(await getSubjectModels(new EsBib(new SierraBib(bib)))).to.deep.eq([
-        { preferredTerm: 'University of Utah -- Periodicals', sourceId: 'b11655934' },
-        { preferredTerm: 'Education, Higher -- Utah -- Periodicals', sourceId: 'b11655934' }
+        { preferredTerm: 'University of Utah -- Periodicals.', sourceId: 'b11655934' },
+        { preferredTerm: 'Education, Higher -- Utah -- Periodicals.', sourceId: 'b11655934' }
       ])
     })
     it('can handle orphan parallels', async () => {
@@ -174,7 +174,7 @@ xdescribe('bib activity', () => {
             },
             {
               tag: 'b',
-              content: '600 orphaned parallel value b'
+              content: '600 orphaned parallel value b.'
             }
           ]
         }]
@@ -182,7 +182,7 @@ xdescribe('bib activity', () => {
       expect(await getSubjectModels(new EsBib(new SierraBib(bib)))).to.deep.eq([
         {
           sourceId: '123',
-          variant: '‏600 orphaned parallel value a 600 orphaned parallel value b'
+          variant: '‏600 orphaned parallel value a 600 orphaned parallel value b.'
         }
       ])
     })
@@ -191,6 +191,7 @@ xdescribe('bib activity', () => {
     it('can handle no parallels', () => {
       const labels = getPrimaryAndParallelLabels({
         marc: {
+          ind2: '0',
           marcTag: '600',
           subfields: [
             { tag: 'a', content: 'preferredTerm a' },
@@ -198,19 +199,21 @@ xdescribe('bib activity', () => {
           ]
         }
       })
-      expect(labels).to.deep.equal({ preferredTerm: 'preferredTerm a preferredTerm b' })
+      expect(labels).to.deep.equal({ preferredTerm: 'preferredTerm a preferredTerm b.', suppress: false })
     })
     it('can handle preferredTerm and parallel', () => {
       const labels = getPrimaryAndParallelLabels({
         marc: {
+          ind2: '0',
           marcTag: '600',
           subfields: [
             { tag: 'a', content: 'preferredTerm a' },
-            { tag: 'b', content: 'preferredTerm b' }
+            { tag: 'b', content: 'preferredTerm b.' }
           ]
         },
         parallel: {
           marc: {
+            ind2: '0',
             marcTag: '880',
             subfields: [
               { tag: 'a', content: 'parallel a' },
@@ -220,7 +223,7 @@ xdescribe('bib activity', () => {
         }
       })
       expect(labels).to.deep.equal(
-        { preferredTerm: 'preferredTerm a preferredTerm b', variant: 'parallel a parallel b' })
+        { preferredTerm: 'preferredTerm a preferredTerm b.', suppress: false, variant: 'parallel a parallel b.' })
     })
   })
   describe('buildSubjectDiff', () => {
@@ -233,9 +236,9 @@ xdescribe('bib activity', () => {
     })
   })
   describe('buildBibSubjectEvents', () => {
-    it('returns early if there are no idsToFetch', async () => {
+    it('returns an empty array if there are no idsToFetch', async () => {
       const nonResearchBib = { getIsResearchWithRationale: () => ({ isResearch: false }) }
-      expect(buildBibSubjectEvents([nonResearchBib])).to.eventually.equal(undefined)
+      expect(buildBibSubjectEvents([nonResearchBib])).to.eventually.equal([])
       expect(loggerSpy.calledWith('No records to fetch or build subjects for'))
     })
     describe('on ingest (all subjects from non suppressed or deleted bibs present are passed along)', () => {
@@ -246,17 +249,17 @@ xdescribe('bib activity', () => {
         process.env.INGEST_BROWSE_TERMS = false
       })
       it('can handle a combination of deleted and updated sierra bibs, and filters non research and suppressed, and ignores indexed subject data', async () => {
-        const records = [...toIndex, ...toDelete].map((record) => new SierraBib(record))
+        const records = [...toIndex, ...toDelete].map((record) => new EsBib(new SierraBib(record)))
         const countEvents = await buildBibSubjectEvents(records)
         const sortedCountEvents = countEvents.sort((a, b) => {
           return a.preferredTerm.toLowerCase() > b.preferredTerm.toLowerCase() ? 1 : -1
         })
         expect(sortedCountEvents.map((event) => event.preferredTerm)).to.deep.eq([
-          'Devon (England) -- Description and travel',
-          'Education, Higher -- Utah -- Periodicals',
-          'English drama',
-          'Milestones -- England -- Devon',
-          'University of Utah -- Periodicals'
+          'Devon (England) -- Description and travel.',
+          'Education, Higher -- Utah -- Periodicals.',
+          'English drama.',
+          'Milestones -- England -- Devon.',
+          'University of Utah -- Periodicals.'
         ])
       })
     })
@@ -265,7 +268,7 @@ xdescribe('bib activity', () => {
         process.env.INGEST_BROWSE_TERMS = false
       })
       it('calls determineUpdatedTerms', async () => {
-        const records = [...toIndex, ...toDelete].map((record) => new SierraBib(record))
+        const records = [...toIndex, ...toDelete].map((record) => new EsBib(new SierraBib(record)))
         const countEvents = await buildBibSubjectEvents(records)
         const sortedCountEvents = countEvents.sort((a, b) => {
           return a.preferredTerm.toLowerCase() > b.preferredTerm.toLowerCase() ? 1 : -1
@@ -274,14 +277,16 @@ xdescribe('bib activity', () => {
         // subjects from live bibs as well as additional subjects from bib event
         expect(sortedCountEvents.map((event) => event.preferredTerm)).to.deep.eq([
           'an',
-          'Armenians -- Iran -- History',
-          'Devon (England) -- Description and travel',
-          'Education, Higher -- Utah -- Periodicals',
-          'English drama',
-          'Milestones -- England -- Devon',
-          'old', 'stale', 'subject',
-          'subject -- from -- suppressed bib',
-          'University of Utah -- Periodicals'
+          'Armenians -- Iran -- History.',
+          'Devon (England) -- Description and travel.',
+          'Education, Higher -- Utah -- Periodicals.',
+          'English drama.',
+          'Milestones -- England -- Devon.',
+          'old',
+          'stale',
+          'subject',
+          'subject -- from -- suppressed bib.',
+          'University of Utah -- Periodicals.'
         ])
       })
     })
