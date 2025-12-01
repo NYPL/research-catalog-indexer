@@ -33,15 +33,14 @@ const { client: makeEsClient } = require('../lib/elastic-search/client')
 const logger = require('../lib/logger')
 const NyplSourceMapper = require('../lib/utils/nypl-source-mapper')
 const {
-  awsCredentialsFromIni,
   castArgsToInts,
   delay,
   die,
   lineCount,
   printProgress,
-  retry
+  retry,
+  setAwsProfile
 } = require('./utils')
-const { setCredentials: kmsSetCredentials } = require('../lib/kms')
 
 /**
 * Parse script arguments from process.argv:
@@ -96,10 +95,6 @@ const usage = () => {
   console.log('Usage: node scripts/update-property-by-csv.js --csv CSV --propertyName NAME [--limit L] [--offset O]')
   return true
 }
-
-// Ensure we're looking at the right profile
-const awsCreds = awsCredentialsFromIni()
-kmsSetCredentials(awsCreds)
 
 let processedCount = 0
 
@@ -324,6 +319,7 @@ const processCsv = async (options) => {
 // Only parse arguments and execute if invoked via cmdline:
 const isCalledViaCommandLine = /scripts\/update-property-by-csv(.js)?/.test(fs.realpathSync(process.argv[1]))
 if (isCalledViaCommandLine) {
+  setAwsProfile()
   const args = parseArguments()
 
   if (!args.envfile) usage() && die('--envfile required')

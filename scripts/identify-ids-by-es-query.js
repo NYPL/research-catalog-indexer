@@ -46,11 +46,10 @@ const fs = require('fs')
 
 const { query: esQuery, scroll: esScroll } = require('../lib/elastic-search/requests')
 const {
-  awsCredentialsFromIni,
   castArgsToInts,
-  die
+  die,
+  setAwsProfile
 } = require('./utils')
-const { setCredentials: kmsSetCredentials } = require('../lib/kms')
 
 /**
 * Parse script arguments from process.argv:
@@ -65,6 +64,9 @@ const parseArguments = () => {
       from: {
         type: 'string',
         default: '0'
+      },
+      innerProperty: {
+        type: 'string'
       },
       outfile: {
         type: 'string',
@@ -93,10 +95,6 @@ const usage = () => {
   return true
 }
 
-// Ensure we're looking at the right profile
-const awsCreds = awsCredentialsFromIni()
-kmsSetCredentials(awsCreds)
-
 /**
  * Recursive step. Given a raw search result, calls `scroll` until all records
  * consumed.
@@ -109,6 +107,19 @@ const parseResultAndScroll = (result, options, records = []) => {
 
   let ids = result.hits.hits.map((h) => h._id)
   if (options.stripprefix) ids = ids.map((id) => id.replace(/^[a-z]+/, ''))
+
+  if (options.innerProperty) {
+    const extras = result.hits.hits
+      .map((h) => {
+        const nestedName = options.innerProperty.split('.')[0]
+        return h.inner_hits[nestedName].hits.hits
+          .map((_h) => _h.fields[options.innerProperty])
+          .flat()
+      })
+
+    ids = ids.map((id, ind) => `${id},${extras[ind].join(';')}`)
+  }
+
   records = records.concat(ids)
 
   if (options.limit && records.length >= options.limit) {
@@ -156,6 +167,7 @@ const fetch = (body, options, records = []) => {
 }
 
 const run = async () => {
+  setAwsProfile()
   const args = parseArguments()
 
   // Require a --query
