@@ -23,7 +23,12 @@ const dotenv = require('dotenv')
 dotenv.config({ path: argv.envfile || './config/qa.env' })
 
 const NyplSourceMapper = require('../lib/utils/nypl-source-mapper')
-const { awsCredentialsFromIni, die, printDiff, buildSierraModelFromUri } = require('./utils')
+const {
+  buildSierraModelFromUri,
+  die,
+  printDiff,
+  setAwsProfile
+} = require('./utils')
 const { bibsForHoldingsOrItems } = require('../lib/platform-api/requests')
 const { buildEsDocument, transformIntoBibRecords } = require('../lib/build-es-document')
 const { filteredSierraBibsForBibs } = require('../lib/prefilter')
@@ -34,8 +39,6 @@ const { currentDocument } = require('../lib/elastic-search/requests')
 const { loadNyplCoreData } = require('../lib/load-core-data')
 const { schema } = require('../lib/elastic-search/index-schema')
 
-const { setCredentials: kmsSetCredentials } = require('../lib/kms')
-
 const logger = require('../lib/logger')
 logger.setLevel(process.env.LOG_LEVEL || 'info')
 
@@ -43,10 +46,6 @@ const usage = () => {
   console.log('Usage: node scripts/compare-with-indexed --envfile [path to .env] [--uri bnum]')
   return true
 }
-
-// Ensure we're looking at the right profile
-const awsCreds = awsCredentialsFromIni()
-kmsSetCredentials(awsCreds)
 
 let indexName = process.env.ELASTIC_RESOURCES_INDEX_NAME
 if (!argv.uri) usage() && die('Must specify event file or uri')
@@ -115,6 +114,7 @@ const suppressionReportForModel = async (record) => {
  *  Run the compare-with-indexed report over the document identified by --uri
  */
 const run = async () => {
+  setAwsProfile()
   await loadNyplCoreData()
   console.log(`Comparing local ES doc against the one in ${indexName}`)
   const mapper = await NyplSourceMapper.instance()

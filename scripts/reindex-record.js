@@ -25,7 +25,7 @@
 const NyplSourceMapper = require('../lib/utils/nypl-source-mapper')
 const fs = require('fs')
 const { bibById, modelPrefetch } = require('../lib/platform-api/requests')
-const { die } = require('./utils')
+const { die, setAwsProfile } = require('./utils')
 const { loadNyplCoreData } = require('../lib/load-core-data')
 const {
   client: makeStreamsClient
@@ -81,6 +81,7 @@ const reindexBib = async (nyplSource, id) => {
 }
 
 const run = async () => {
+  setAwsProfile()
   await loadNyplCoreData()
   const mapper = await NyplSourceMapper.instance()
 
