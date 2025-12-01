@@ -131,7 +131,6 @@ const {
   filteredSierraHoldingsForHoldings
 } = require('../lib/prefilter')
 const {
-  awsCredentialsFromIni,
   batch,
   batchIdentifiersByTypeAndNyplSource,
   delay,
@@ -139,10 +138,10 @@ const {
   camelize,
   capitalize,
   printProgress,
+  setAwsProfile,
   Timer
 } = require('./utils')
 const schema = require('../lib/elastic-search/index-schema.js')
-const { setCredentials: kmsSetCredentials } = require('../lib/kms')
 const logger = require('../lib/logger')
 const { loadNyplCoreData } = require('../lib/load-core-data.js')
 const { SkipPrefetchError } = require('../lib/errors.js')
@@ -168,9 +167,6 @@ const usage = () => {
   ].join('\n'))
   return true
 }
-
-const awsCreds = awsCredentialsFromIni()
-kmsSetCredentials(awsCreds)
 
 const db = {
   dbConnectionPools: null,
@@ -796,6 +792,7 @@ const run = async () => {
 }
 
 const preflightSetup = async () => {
+  setAwsProfile()
   dotenv.config({ path: argv.envfile })
   logger.setLevel(process.env.LOG_LEVEL || 'info')
   if (process.env.STOP_REFRESH === 'true') {

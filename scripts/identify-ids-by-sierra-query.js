@@ -20,7 +20,7 @@
  */
 const dotenv = require('dotenv')
 const kms = require('../lib/kms')
-const { die } = require('./utils')
+const { die, setAwsProfile } = require('./utils')
 
 const wrapper = require('@nypl/sierra-wrapper')
 const fs = require('fs')
@@ -157,6 +157,7 @@ const decryptConfig = async () => {
 * Build a CSV based on command arguments.
 */
 const run = async () => {
+  setAwsProfile()
   if (!argv.envfile) throw new Error('Must use --envfile to specify a sierra wrapper config')
   dotenv.config({ path: argv.envfile || './config/qa-bulk-index.env' })
 

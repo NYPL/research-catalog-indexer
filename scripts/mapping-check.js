@@ -15,17 +15,12 @@ const argv = require('minimist')(process.argv.slice(2))
 const logger = require('../lib/logger')
 const esClient = require('../lib/elastic-search/client')
 const { schema } = require('../lib/elastic-search/index-schema')
-const { awsCredentialsFromIni, die } = require('./utils')
-const { setCredentials: kmsSetCredentials } = require('../lib/kms')
+const { die, setAwsProfile } = require('./utils')
 
 const usage = () => {
   console.log('Usage: node mapping-check --envfile [path to .env] [--index INDEX]')
   return true
 }
-
-// Ensure we're looking at the right profile
-const awsCreds = awsCredentialsFromIni()
-kmsSetCredentials(awsCreds)
 
 /**
 * Given an index name, returns the remote mapping object
@@ -209,6 +204,7 @@ exports.run = async (options = {}) => {
 
 const isCalledViaCommandLine = /scripts\/mapping-check(.js)?/.test(fs.realpathSync(process.argv[1]))
 if (isCalledViaCommandLine) {
+  setAwsProfile()
   if (!argv.envfile) usage() && die('--envfile required')
 
   dotenv.config({ path: argv.envfile })

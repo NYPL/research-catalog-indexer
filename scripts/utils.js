@@ -8,19 +8,12 @@ const SierraItem = require('../lib/sierra-models/item')
 const SierraHolding = require('../lib/sierra-models/holding')
 const logger = require('../lib/logger')
 
-const { createCredentialChain, fromIni, fromEnv } = require('@aws-sdk/credential-providers')
-
 /**
-* Given a named profile, returns a `credentials` value suitable for sending
-* into any AWS SDK client class
+* Establish AWS profile to use when AWS internally looks for credential
+* providers
 */
-const awsCredentialsFromIni = (profile = 'nypl-digital-dev') => {
-  return createCredentialChain(
-    // First try using named profile in ~/.aws/credentials
-    fromIni({ profile }),
-    // Next, fall back on ENV vars:
-    fromEnv()
-  )
+const setAwsProfile = (profile = 'nypl-digital-dev') => {
+  process.env.AWS_PROFILE = profile
 }
 
 const die = (message) => {
@@ -511,8 +504,6 @@ Timer.startNew = (name) => {
 }
 
 module.exports = {
-  Timer,
-  awsCredentialsFromIni,
   batch,
   batchIdentifiersByTypeAndNyplSource,
   buildSierraModelFromUri,
@@ -526,5 +517,7 @@ module.exports = {
   printDiff,
   printProgress,
   retry,
-  secondsAsFriendlyDuration
+  secondsAsFriendlyDuration,
+  setAwsProfile,
+  Timer
 }

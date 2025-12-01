@@ -11,18 +11,13 @@ const argv = require('minimist')(process.argv.slice(2))
 const logger = require('../lib/logger')
 const esClient = require('../lib/elastic-search/client')
 const { schema } = require('../lib/elastic-search/index-schema')
-const { awsCredentialsFromIni, die } = require('./utils')
-const { setCredentials: kmsSetCredentials } = require('../lib/kms')
+const { die, setAwsProfile } = require('./utils')
 const indexSettings = require('../lib/elastic-search/index-settings.json')
 
 const usage = () => {
   console.log('Usage: node mapping-check --envfile [path to .env] [--index INDEX]')
   return true
 }
-
-// Ensure we're looking at the right profile
-const awsCreds = awsCredentialsFromIni()
-kmsSetCredentials(awsCreds)
 
 /**
 * Main script function.
@@ -52,6 +47,7 @@ exports.run = async (options = {}) => {
 
 const isCalledViaCommandLine = /scripts\/initialize-index(.js)?/.test(fs.realpathSync(process.argv[1]))
 if (isCalledViaCommandLine) {
+  setAwsProfile()
   if (!argv.envfile) usage() && die('--envfile required')
   if (!argv.index) usage() && die('--index required')
 
