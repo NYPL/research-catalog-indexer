@@ -118,7 +118,7 @@ describe('EsBib', function () {
     })
   })
 
-  describe.only('nameTitleRole', () => {
+  describe('nameTitleRole', () => {
     it('spaghetti', () => {
       const record = new SierraBib(require('../fixtures/bib-bernstein.json'))
       const esBib = new EsBib(record)

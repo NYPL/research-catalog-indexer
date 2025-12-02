@@ -53,15 +53,16 @@ const processRecords = async (type, records, options = {}) => {
   // Fetch subjects from all bibs, whether they are updates, creates, or deletes,
   // and transmit to the browse pipeline. This must happen before writes to the
   // resources index to determine any diff between new and old subjects
-  let browseTermDiffs
+  let subjectDiffs = []
   if (process.env.EMIT_BROWSE_TERMS === 'true') {
     const esModelsForDeletions = removedBibs.map(bib => new EsBib(new SierraBib(bib)))
     const changedRecords = [...esModels, ...esModelsForDeletions]
     if ((changedRecords.length) && type === 'Bib') {
-      browseTermDiffs = await browse.buildBrowseDataEvents(changedRecords)
+      subjectDiffs = await browse.buildBrowseDataEvents(changedRecords, 'subjectLiteral')
     }
   }
-
+  console.log(subjectDiffs)
+  const browseTermDiffs = [...subjectDiffs]
   if (plainObjectEsDocuments.length) {
     let summary
     if (options.dryrun) {
