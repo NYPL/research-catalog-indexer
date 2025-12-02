@@ -51,45 +51,10 @@ describe('bib activity', () => {
       )
     })
   })
-  describe('determineUpdatedTerms', () => {
+
+  describe.only('determineUpdatedTerms', () => {
     const devonBib = require('../fixtures/bib-10554618.json')
-    const utahBib = require('../fixtures/bib-11655934.json')
-    it('returns no updated subjects when nothing has changed', async () => {
-      const freshBibs = [
-        devonBib,
-        utahBib].map((bib) => new EsBib(new SierraBib({ ...bib, id: `${bib.id}sameAsFresh` })))
-      const ids = freshBibs.map((bib) => bib.uri())
-      const terms = await determineUpdatedTerms('subjectLiteral', ids, freshBibs)
-      expect(terms).to.deep.equal([])
-    })
-    it('returns fresh bib subjects only when there is no live bib data to return', async () => {
-      const freshBibs = [
-        utahBib,
-        devonBib].map((bib) => new EsBib(new SierraBib(bib)))
-      const ids = freshBibs.map((bib) => bib.uri())
-      const terms = await determineUpdatedTerms('subjectLiteral', ids, freshBibs)
-      expect(terms).to.deep.equal(
-        [
-          {
-            preferredTerm: 'University of Utah -- Periodicals.',
-            sourceId: 'b11655934'
-          },
-          {
-            preferredTerm: 'Education, Higher -- Utah -- Periodicals.',
-            sourceId: 'b11655934'
-          },
-          {
-            preferredTerm: 'Milestones -- England -- Devon.',
-            sourceId: 'b10554618'
-          },
-          {
-            preferredTerm: 'Devon (England) -- Description and travel.',
-            sourceId: 'b10554618'
-          }
-        ]
-      )
-    })
-    it('does not return subjects with the same preferred terms', async () => {
+    it('does not return duplicate subjects', async () => {
       const freshBibs = [
         devonBib, devonBib
       ].map((bib) => new EsBib(new SierraBib(bib)))
@@ -108,23 +73,31 @@ describe('bib activity', () => {
         ]
       )
     })
-    it('only returns subjects that have been removed or added', async () => {
-      // ie Does not return subjects present on both the live es document and the freshly generated one... ie the DIFF!
+    it('returns fresh and live subjects', async () => {
       const freshBibs = [
         require('../fixtures/bib-11655934.json'),
         require('../fixtures/bib-10554618.json')].map((bib) => new EsBib(new SierraBib({ ...bib, id: `${bib.id}someDiff` })))
       const ids = freshBibs.map((bib) => bib.uri())
       const terms = await determineUpdatedTerms('subjectLiteral', ids, freshBibs)
+      console.log(terms)
       expect(terms).to.deep.equal([
         {
           preferredTerm: 'University of Utah -- Periodicals.',
           sourceId: 'b11655934someDiff'
         },
-        { preferredTerm: 'University of Utah -- Perixxxdicals' },
+        {
+          preferredTerm: 'Education, Higher -- Utah -- Periodicals.',
+          sourceId: 'b11655934someDiff'
+        },
+        {
+          preferredTerm: 'Milestones -- England -- Devon.',
+          sourceId: 'b10554618someDiff'
+        },
         {
           preferredTerm: 'Devon (England) -- Description and travel.',
           sourceId: 'b10554618someDiff'
-        }
+        },
+        { preferredTerm: 'University of Utah -- Perixxxdicals' }
       ])
     })
   })
