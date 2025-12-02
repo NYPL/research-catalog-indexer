@@ -14,6 +14,8 @@ const {
   toIndex,
   toDelete
 } = require('../fixtures/browse-term-fixtures')
+const bernsteinBib = require('../fixtures/bib-bernstein.json')
+
 const esClient = require('../../lib/elastic-search/client')
 const sinon = require('sinon')
 const EsBib = require('../../lib/es-models/bib')
@@ -37,6 +39,17 @@ describe('bib activity', () => {
   })
   after(() => {
     esClient.client.restore()
+  })
+  describe('determineUpdatedTerms nameTitleRole', () => {
+    it('returns fresh bib subjects only when there is no live bib data to return', async () => {
+      const freshBibs = [
+        bernsteinBib].map((bib) => new EsBib(new SierraBib(bib)))
+      const ids = freshBibs.map((bib) => bib.uri())
+      const terms = await determineUpdatedTerms('nameTitleRole', ids, freshBibs)
+      expect(terms).to.deep.equal(
+        []
+      )
+    })
   })
   describe('determineUpdatedTerms', () => {
     const devonBib = require('../fixtures/bib-10554618.json')

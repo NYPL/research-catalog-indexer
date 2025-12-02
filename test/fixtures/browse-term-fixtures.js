@@ -13,6 +13,11 @@ module.exports = {
   ],
   mgetResponses:
   {
+    b11070959: {
+      _index: 'resources-2024-10-22',
+      _id: 'b11070959',
+      found: false
+    },
     b11655934someDiff: {
       _index: 'resources-2024-10-22',
       _id: 'b11655934someDiff',
