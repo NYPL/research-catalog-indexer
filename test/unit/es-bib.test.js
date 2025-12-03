@@ -585,7 +585,7 @@ describe('EsBib', function () {
     })
   })
 
-  describe('contributorLiteral', function () {
+  describe.only('contributorLiteral', function () {
     it('should return array of the contributorLiteral', function () {
       const record = new SierraBib(require('../fixtures/bib-hl990000453050203941.json'))
       const esBib = new EsBib(record)
@@ -825,7 +825,7 @@ describe('EsBib', function () {
     })
   })
 
-  describe.only('parallelContributorLiteral', function () {
+  describe('parallelContributorLiteral', function () {
     it('should return parallel contributor fields', function () {
       const record = new SierraBib(require('../fixtures/bib-parallels-party.json'))
       const esBib = new EsBib(record)
