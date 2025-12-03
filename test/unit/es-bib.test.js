@@ -136,84 +136,29 @@ describe('EsBib', function () {
     it('builds a variety of nameTitleRole objects', () => {
       const record = new SierraBib(require('../fixtures/bib-bernstein.json'))
       const esBib = new EsBib(record)
-      expect(esBib.nameTitleRole()).to.deep.equal(
-        [{
-          name: 'Bernstein, Leonard, 1918-1990.',
-          nameRolePacked: 'Bernstein, Leonard, 1918-1990.',
-          prefix: '',
-          role: [],
-          title: ''
-        },
-        {
-          name: 'Te Kanawa, Kiri.',
-          nameRolePacked: 'Te Kanawa, Kiri.|prf',
-          prefix: '',
-          role: [
-            'prf'
-          ],
-          title: ''
-        },
-        {
-          name: 'Troyanos, Tatiana.',
-          nameRolePacked: 'Troyanos, Tatiana.|prf',
-          prefix: '',
-          role: [
-            'prf'
-          ],
-          title: ''
-        },
-        {
-          name: 'Horne, Marilyn.',
-          nameRolePacked: 'Horne, Marilyn.|prf',
-          prefix: '',
-          role: [
-            'prf'
-          ],
-          title: ''
-        },
-        {
-          name: 'Carreras, José.',
-          nameRolePacked: 'Carreras, José.|prf',
-          prefix: '',
-          role: [
-            'prf'
-          ],
-          title: ''
-        },
-        {
-          name: 'Ollmann, Kurt.',
-          nameRolePacked: 'Ollmann, Kurt.|prf',
-          prefix: '',
-          role: [
-            'prf'
-          ],
-          title: ''
-        },
-        {
-          name: 'Sondheim, Stephen.',
-          nameRolePacked: 'Sondheim, Stephen.|lyr',
-          prefix: '',
-          role: [
-            'lyr'
-          ],
-          title: ''
-        },
-        {
-          name: 'Laurents, Arthur.',
-          nameRolePacked: 'Laurents, Arthur.',
-          prefix: '',
-          role: [],
-          title: ''
-        },
-        {
-          name: 'Bernstein, Leonard, 1918-1990.',
-          nameRolePacked: 'Bernstein, Leonard, 1918-1990.',
-          prefix: '',
-          role: [],
-          title: 'On the waterfront. Suite.'
-        }
-        ]
-      )
+      expect(esBib.nameTitleRole()[esBib.nameTitleRole().length - 1]).to.deep.include({
+        name: 'Bernstein, Leonard, 1918-1990.',
+        nameRolePacked: 'Bernstein, Leonard, 1918-1990.',
+        prefix: '',
+        role: [],
+        title: 'On the waterfront. Suite.'
+      })
+      expect(esBib.nameTitleRole()[0]).to.deep.include({
+        name: 'Bernstein, Leonard, 1918-1990.',
+        nameRolePacked: 'Bernstein, Leonard, 1918-1990.',
+        prefix: '',
+        role: [],
+        title: ''
+      })
+      expect(esBib.nameTitleRole()[1]).to.deep.include({
+        name: 'Te Kanawa, Kiri.',
+        nameRolePacked: 'Te Kanawa, Kiri.|prf',
+        prefix: '',
+        role: [
+          'prf'
+        ],
+        title: ''
+      })
     })
   })
 

@@ -47,12 +47,49 @@ describe('bib activity', () => {
       const ids = freshBibs.map((bib) => bib.uri())
       const terms = await determineUpdatedTerms('nameTitleRole', ids, freshBibs)
       expect(terms).to.deep.equal(
-        []
+        [
+          {
+            preferredTerm: 'Bernstein, Leonard, 1918-1990.',
+            sourceId: 'b11070959'
+          },
+          {
+            preferredTerm: 'Te Kanawa, Kiri. prf.',
+            sourceId: 'b11070959'
+          },
+          {
+            preferredTerm: 'Troyanos, Tatiana. prf.',
+            sourceId: 'b11070959'
+          },
+          {
+            preferredTerm: 'Horne, Marilyn. prf.',
+            sourceId: 'b11070959'
+          },
+          {
+            preferredTerm: 'Carreras, José. prf.',
+            sourceId: 'b11070959'
+          },
+          {
+            preferredTerm: 'Ollmann, Kurt. prf.',
+            sourceId: 'b11070959'
+          },
+          {
+            preferredTerm: 'Sondheim, Stephen. lyr.',
+            sourceId: 'b11070959'
+          },
+          {
+            preferredTerm: 'Laurents, Arthur.',
+            sourceId: 'b11070959'
+          },
+          {
+            preferredTerm: 'Bernstein, Leonard, 1918-1990. On the waterfront. Suite.',
+            sourceId: 'b11070959'
+          }
+        ]
       )
     })
   })
 
-  describe.only('determineUpdatedTerms', () => {
+  describe('determineUpdatedTerms', () => {
     const devonBib = require('../fixtures/bib-10554618.json')
     it('does not return duplicate subjects', async () => {
       const freshBibs = [
