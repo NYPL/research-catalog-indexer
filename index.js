@@ -54,13 +54,12 @@ const processRecords = async (type, records, options = {}) => {
   // and transmit to the browse pipeline. This must happen before writes to the
   // resources index to determine any diff between new and old subjects
   let subjectDiffs = []
-  let nameDiffs = []
+  const nameDiffs = []
   if (process.env.EMIT_BROWSE_TERMS === 'true') {
     const esModelsForDeletions = removedBibs.map(bib => new EsBib(new SierraBib(bib)))
     const changedRecords = [...esModels, ...esModelsForDeletions]
     if ((changedRecords.length) && type === 'Bib') {
       subjectDiffs = await browse.buildBrowseDataEvents(changedRecords, 'subjectLiteral')
-      nameDiffs = await browse.buildBrowseDataEvents(changedRecords, 'nameDiffs')
     }
   }
   const browseTermDiffs = [...subjectDiffs, ...nameDiffs]
@@ -100,7 +99,7 @@ const processRecords = async (type, records, options = {}) => {
   if (process.env.EMIT_BROWSE_TERMS === 'true' && browseTermDiffs?.length && !options.dryrun) {
     const emitTerms = process.env.BTI_INDEX_PATH ? browse.emitBrowseDataToLocalBti : browse.emitBrowseDataToSqs
     await emitTerms(subjectDiffs, process.env.ENCRYPTED_SQS_SUBJECT_URL)
-    await emitTerms(nameDiffs, process.env.ENCRYPTED_SQS_NAME_URL)
+    // await emitTerms(nameDiffs, process.env.ENCRYPTED_SQS_NAME_URL)
   }
   if (process.env.EMIT_BROWSE_TERMS === 'true' && browseTermDiffs?.length && options.dryrun) {
     logger.info(`DRYRUN: Skipping writing ${subjectDiffs.length} subject terms and ${nameDiffs.length} author terms to SQS`)
