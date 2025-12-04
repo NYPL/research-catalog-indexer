@@ -114,7 +114,34 @@ describe('EsBib', function () {
     it('should return the creator literal', function () {
       const record = new SierraBib(require('../fixtures/bib-10001936.json'))
       const esBib = new EsBib(record)
-      expect(esBib.creatorLiteral()).to.deep.equal(['Shermazanian, Galust'])
+      expect(esBib.creatorLiteral()).to.deep.equal(['Shermazanian, Galust.'])
+    })
+  })
+
+  describe('nameTitleRole', () => {
+    it('builds a variety of nameTitleRole objects', () => {
+      const record = new SierraBib(require('../fixtures/bib-bernstein.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.nameTitleRole()[esBib.nameTitleRole().length - 1]).to.deep.include({
+        name: 'Bernstein, Leonard, 1918-1990.',
+        prefix: '',
+        role: [],
+        title: 'On the waterfront. Suite.'
+      })
+      expect(esBib.nameTitleRole()[0]).to.deep.include({
+        name: 'Bernstein, Leonard, 1918-1990.',
+        prefix: '',
+        role: [],
+        title: ''
+      })
+      expect(esBib.nameTitleRole()[1]).to.deep.include({
+        name: 'Te Kanawa, Kiri.',
+        prefix: '',
+        role: [
+          'prf'
+        ],
+        title: ''
+      })
     })
   })
 
@@ -136,7 +163,7 @@ describe('EsBib', function () {
     it('should return the creator transformed for sorting', () => {
       const record = new SierraBib(require('../fixtures/bib-10001936.json'))
       const esBib = new EsBib(record)
-      expect(esBib.creator_sort()).to.deep.equal(['shermazanian, galust'])
+      expect(esBib.creator_sort()).to.deep.equal(['shermazanian, galust.'])
     })
   })
 
@@ -537,7 +564,7 @@ describe('EsBib', function () {
     it('should return the first contributor literal, truncated to 80 characters and lower case', function () {
       const record = new SierraBib(require('../fixtures/bib-hl990000453050203941.json'))
       const esBib = new EsBib(record)
-      expect(esBib.contributor_sort()).to.deep.equal(['ginosar, sh. (shaleṿ), 1902-'])
+      expect(esBib.contributor_sort()).to.deep.equal(['ginosar, sh. (shaleṿ), 1902- ed.'])
     })
   })
 
@@ -547,15 +574,27 @@ describe('EsBib', function () {
       const esBib = new EsBib(record)
       expect(esBib.contributorLiteral()).to.deep.equal(
         [
-          'Ginosar, Sh. (Shaleṿ), 1902-'
+          'Ginosar, Sh. (Shaleṿ), 1902- ed.'
         ]
       )
     })
-
+    it('with roles', () => {
+      const record = new SierraBib(require('../fixtures/bib-bernstein.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.contributorLiteral()).to.deep.equal([
+        'Te Kanawa, Kiri. Performer.',
+        'Troyanos, Tatiana. Performer.',
+        'Horne, Marilyn. Performer.',
+        'Carreras, José. Performer.',
+        'Ollmann, Kurt. Performer.',
+        'Sondheim, Stephen. Lyricist.',
+        'Laurents, Arthur.',
+        'Bernstein, Leonard, 1918-1990. On the waterfront. Suite.'])
+    })
     it('should include Corporate names in contributorLiteral', () => {
       const record = new SierraBib(require('../fixtures/bib-11606020.json'))
       const esBib = new EsBib(record)
-      expect(esBib.contributorLiteral()).to.deep.equal(['Schiff Collection'])
+      expect(esBib.contributorLiteral()).to.deep.equal(['Schiff Collection.'])
     })
 
     it('should filter out contributors that are also creators', function () {
@@ -573,11 +612,11 @@ describe('EsBib', function () {
       })
       const esBib = new EsBib(record)
       expect(esBib.creatorLiteral()).to.deep.equal([
-        'Lastname1, firstname1',
-        'Lastname2, firstname2, 1918-2024'
+        'Lastname1, firstname1.',
+        'Lastname2, firstname2, 1918-2024.'
       ])
       expect(esBib.contributorLiteral()).to.deep.equal([
-        'Lastname3, firstname3'
+        'Lastname3, firstname3.'
       ])
     })
 
@@ -590,7 +629,7 @@ describe('EsBib', function () {
       })
       const esBib = new EsBib(record)
       expect(esBib.creatorLiteral()).to.deep.equal([
-        'Lastname1, firstname1'
+        'Lastname1, firstname1.'
       ])
       expect(esBib.contributorLiteral()).to.deep.equal(null)
     })
@@ -627,7 +666,7 @@ describe('EsBib', function () {
       // This bib has a 700 with "Dickens, Charles", but it duplicates a 100,
       // so we don't want to see it repeated in this field:
       expect(esBib.contributorLiteralWithoutDates()).to.deep.equal([
-        'Leyris, Pierre'
+        'Leyris, Pierre.'
       ])
     })
   })
@@ -786,7 +825,7 @@ describe('EsBib', function () {
       const record = new SierraBib(require('../fixtures/bib-parallels-party.json'))
       const esBib = new EsBib(record)
       expect(esBib.parallelContributorLiteral()).to.deep.equal(
-        ['parallel content for 710$a parallel content for 710$z']
+        ['parallel content for 710$a parallel content for 710$v.']
       )
     })
   })

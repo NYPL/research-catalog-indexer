@@ -53,15 +53,17 @@ const processRecords = async (type, records, options = {}) => {
   // Fetch subjects from all bibs, whether they are updates, creates, or deletes,
   // and transmit to the browse pipeline. This must happen before writes to the
   // resources index to determine any diff between new and old subjects
-  let browseTermDiffs
+  let subjectDiffs = []
+  const nameDiffs = []
   if (process.env.EMIT_BROWSE_TERMS === 'true') {
     const esModelsForDeletions = removedBibs.map(bib => new EsBib(new SierraBib(bib)))
     const changedRecords = [...esModels, ...esModelsForDeletions]
     if ((changedRecords.length) && type === 'Bib') {
-      browseTermDiffs = await browse.buildBibSubjectEvents(changedRecords)
+      subjectDiffs = await browse.buildBrowseDataEvents(changedRecords, 'subjectLiteral')
     }
   }
-
+  const browseTermDiffs = [...subjectDiffs, ...nameDiffs]
+  logger.debug('Browse term parsing generated terms to index: ', { subjectDiffs, nameDiffs })
   if (plainObjectEsDocuments.length) {
     let summary
     if (options.dryrun) {
@@ -93,10 +95,14 @@ const processRecords = async (type, records, options = {}) => {
     messages.push(`Deleted ${recordsToDelete.length} doc(s)`)
     messages.push(`Deleted ids: ${recordsToDelete.map((record) => record.id)}`)
   }
-  if (!browseTermDiffs?.length) logger.info('No subject updates to process')
-  if (process.env.EMIT_BROWSE_TERMS === 'true' && browseTermDiffs?.length) {
-    const subjectHandler = process.env.BTI_INDEX_PATH ? browse.emitBibSubjectsToLocalBti : browse.emitBibSubjectEventsToSqs
-    await subjectHandler(browseTermDiffs)
+  if (!browseTermDiffs?.length) logger.info('No browse term updates to process')
+  if (process.env.EMIT_BROWSE_TERMS === 'true' && browseTermDiffs?.length && !options.dryrun) {
+    const emitTerms = process.env.BTI_INDEX_PATH ? browse.emitBrowseDataToLocalBti : browse.emitBrowseDataToSqs
+    await emitTerms(subjectDiffs, process.env.ENCRYPTED_SQS_SUBJECT_URL)
+    // await emitTerms(nameDiffs, process.env.ENCRYPTED_SQS_NAME_URL)
+  }
+  if (process.env.EMIT_BROWSE_TERMS === 'true' && browseTermDiffs?.length && options.dryrun) {
+    logger.info(`DRYRUN: Skipping writing ${subjectDiffs.length} subject terms and ${nameDiffs.length} author terms to SQS`)
   }
   const message = messages.length ? messages.join('; ') : 'Nothing to do.'
 
