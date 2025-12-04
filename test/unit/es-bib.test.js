@@ -114,7 +114,7 @@ describe('EsBib', function () {
     it('should return the creator literal', function () {
       const record = new SierraBib(require('../fixtures/bib-10001936.json'))
       const esBib = new EsBib(record)
-      expect(esBib.creatorLiteral()).to.deep.equal(['Shermazanian, Galust'])
+      expect(esBib.creatorLiteral()).to.deep.equal(['Shermazanian, Galust.'])
     })
   })
 
