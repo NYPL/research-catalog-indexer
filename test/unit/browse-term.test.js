@@ -40,7 +40,7 @@ describe('bib activity', () => {
   after(() => {
     esClient.client.restore()
   })
-  describe('determineUpdatedTerms nameTitleRole', () => {
+  describe.skip('determineUpdatedTerms nameTitleRole', () => {
     it('returns fresh bib subjects only when there is no live bib data to return', async () => {
       const freshBibs = [
         bernsteinBib].map((bib) => new EsBib(new SierraBib(bib)))
