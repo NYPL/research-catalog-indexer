@@ -825,7 +825,7 @@ describe('EsBib', function () {
       const record = new SierraBib(require('../fixtures/bib-parallels-party.json'))
       const esBib = new EsBib(record)
       expect(esBib.parallelContributorLiteral()).to.deep.equal(
-        ['parallel content for 710$a parallel content for 710$v']
+        ['parallel content for 710$a parallel content for 710$v.']
       )
     })
   })

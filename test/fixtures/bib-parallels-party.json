@@ -296,7 +296,7 @@
           "content": "content for 710$a"
         },
         {
-          "tag": "z",
+          "tag": "v",
           "content": "content for 710$v"
         }
       ]
@@ -317,7 +317,7 @@
           "content": "parallel content for 710$a"
         },
         {
-          "tag": "z",
+          "tag": "v",
           "content": "parallel content for 710$v"
         }
       ]
