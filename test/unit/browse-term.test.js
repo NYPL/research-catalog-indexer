@@ -53,27 +53,27 @@ describe('bib activity', () => {
             sourceId: 'b11070959'
           },
           {
-            preferredTerm: 'Te Kanawa, Kiri. prf.',
+            preferredTerm: 'Te Kanawa, Kiri. Performer.',
             sourceId: 'b11070959'
           },
           {
-            preferredTerm: 'Troyanos, Tatiana. prf.',
+            preferredTerm: 'Troyanos, Tatiana. Performer.',
             sourceId: 'b11070959'
           },
           {
-            preferredTerm: 'Horne, Marilyn. prf.',
+            preferredTerm: 'Horne, Marilyn. Performer.',
             sourceId: 'b11070959'
           },
           {
-            preferredTerm: 'Carreras, José. prf.',
+            preferredTerm: 'Carreras, José. Performer.',
             sourceId: 'b11070959'
           },
           {
-            preferredTerm: 'Ollmann, Kurt. prf.',
+            preferredTerm: 'Ollmann, Kurt. Performer.',
             sourceId: 'b11070959'
           },
           {
-            preferredTerm: 'Sondheim, Stephen. lyr.',
+            preferredTerm: 'Sondheim, Stephen. Lyricist.',
             sourceId: 'b11070959'
           },
           {
