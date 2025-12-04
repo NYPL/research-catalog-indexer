@@ -163,7 +163,7 @@ describe('EsBib', function () {
     it('should return the creator transformed for sorting', () => {
       const record = new SierraBib(require('../fixtures/bib-10001936.json'))
       const esBib = new EsBib(record)
-      expect(esBib.creator_sort()).to.deep.equal(['shermazanian, galust'])
+      expect(esBib.creator_sort()).to.deep.equal(['shermazanian, galust.'])
     })
   })
 
@@ -612,11 +612,11 @@ describe('EsBib', function () {
       })
       const esBib = new EsBib(record)
       expect(esBib.creatorLiteral()).to.deep.equal([
-        'Lastname1, firstname1',
-        'Lastname2, firstname2, 1918-2024'
+        'Lastname1, firstname1.',
+        'Lastname2, firstname2, 1918-2024.'
       ])
       expect(esBib.contributorLiteral()).to.deep.equal([
-        'Lastname3, firstname3'
+        'Lastname3, firstname3.'
       ])
     })
 
@@ -629,7 +629,7 @@ describe('EsBib', function () {
       })
       const esBib = new EsBib(record)
       expect(esBib.creatorLiteral()).to.deep.equal([
-        'Lastname1, firstname1'
+        'Lastname1, firstname1.'
       ])
       expect(esBib.contributorLiteral()).to.deep.equal(null)
     })
