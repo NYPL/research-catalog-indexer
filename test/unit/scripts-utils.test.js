@@ -221,4 +221,45 @@ describe('scripts/utils', () => {
       expect(call).to.throw('Invalid int arg: str1=foo')
     })
   })
+
+  describe('groupIdentifierEntitiesByTypeAndNyplSource', () => {
+    it('groups identifier entities', () => {
+      const input = [
+        { id: 1, nyplSource: 'a', type: 'bib' },
+        { id: 2, nyplSource: 'a', type: 'bib' },
+        { id: 3, nyplSource: 'b', type: 'bib' },
+        { id: 4, nyplSource: 'c', type: 'bib' },
+        { id: 1, nyplSource: 'c', type: 'bib' },
+        { id: 1, nyplSource: 'c', type: 'item' }
+      ]
+
+      expect(utils.groupIdentifierEntitiesByTypeAndNyplSource(input)).to.deep.equal([
+        [
+          { id: 1, nyplSource: 'a', type: 'bib' },
+          { id: 2, nyplSource: 'a', type: 'bib' }
+        ],
+        [
+          { id: 3, nyplSource: 'b', type: 'bib' }
+        ],
+        [
+          { id: 4, nyplSource: 'c', type: 'bib' },
+          { id: 1, nyplSource: 'c', type: 'bib' }
+        ],
+        [
+          { id: 1, nyplSource: 'c', type: 'item' }
+        ]
+      ])
+    })
+
+    it('groups entities with null nyplSource', () => {
+      const input = [{ id: '1234', nyplSource: null }, { id: '5678', nyplSource: null }]
+
+      expect(utils.groupIdentifierEntitiesByTypeAndNyplSource(input)).to.deep.equal([
+        [
+          { id: '1234', nyplSource: null },
+          { id: '5678', nyplSource: null }
+        ]
+      ])
+    })
+  })
 })
