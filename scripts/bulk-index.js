@@ -717,8 +717,8 @@ const processCsvBatch = async (batches, index = 0, options) => {
   // Determine type of batch by examining first record (fall back on options)
   const type = batch[0].type || options.type
   // Determine nyplSource of batch by examining first record (fall back on options)
-
   const nyplSource = batch[0].nyplSource || options.nyplSource
+
   await updateByBibOrItemServiceQuery(
     Object.assign(options, {
       // argv.offset should not influence sql offset:

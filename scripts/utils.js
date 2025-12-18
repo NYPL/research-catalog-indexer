@@ -290,41 +290,6 @@ const secondsAsFriendlyDuration = (seconds, options = {}) => {
 }
 
 /**
-* Given an array of identifiers (e.g. ['b123', 'pb456']) and a batchSize
-*  1. converts the identifiers into objects that define `type`, `nyplSource`, and `id`
-*  2. groups the mapped identifiers by type and nyplSource
-*  3. returns a new 2d array where each array contains no more than `batchSize` elements
-*
-* For example:
-* batchByTypeAndNyplSource(['b123', 'b456', 'b789', 'pb987'], 2)
-* => [
-*      [
-*        { type: 'bib', nyplSource: 'sierra-nypl', id: '123' },
-*        { type: 'bib', nyplSource: 'sierra-nypl', id: '456' }
-*      ],
-*      [
-*        { type: 'bib', nyplSource: 'sierra-nypl', id: '789' }
-*      ],
-*      [
-*        { type: 'bib', nyplSource: 'recap-pul', id: '987' }
-*      ]
-*    ]
-*/
-const batchIdentifiersByTypeAndNyplSource = async (identifiers, batchSize = 100) => {
-  const grouped = await groupIdentifiersByTypeAndNyplSource(identifiers)
-  const batches = grouped
-    // Apply batching to each group:
-    .map((group) => batch(group, batchSize))
-    // Flatten into a 1D array of grouped batches:
-    .flat()
-
-  // Log out the groupings:
-  logger.info(`Grouped ${identifiers.length} identifiers into ${batches.length} batches of length ${batchSize} by type and nyplSource`)
-
-  return batches
-}
-
-/**
 * Given an array of identifier entities (e.g. [{ id: 123, nyplSource: '...'}, ...])
 *  1. groups the mapped identifiers by type and nyplSource
 *  2. returns a new 2d array where each array contains only identifers of the same type and nyplSource
@@ -490,14 +455,12 @@ Timer.startNew = (name) => {
 
 module.exports = {
   batch,
-  batchIdentifiersByTypeAndNyplSource,
   buildSierraModelFromUri,
   camelize,
   capitalize,
   castArgsToInts,
   delay,
   die,
-  groupIdentifiersByTypeAndNyplSource,
   groupIdentifierEntitiesByTypeAndNyplSource,
   lineCount,
   printDiff,
