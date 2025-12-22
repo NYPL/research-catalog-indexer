@@ -290,84 +290,30 @@ const secondsAsFriendlyDuration = (seconds, options = {}) => {
 }
 
 /**
-* Given an array of identifiers (e.g. ['b123', 'pb456']) and a batchSize
-*  1. converts the identifiers into objects that define `type`, `nyplSource`, and `id`
-*  2. groups the mapped identifiers by type and nyplSource
-*  3. returns a new 2d array where each array contains no more than `batchSize` elements
+* Given an array of identifier entities (e.g. [{ id: 123, nyplSource: '...'}, ...])
+*  1. groups the mapped identifiers by type and nyplSource
+*  2. returns a new 2d array where each array contains only identifers of the same type and nyplSource
 *
 * For example:
-* batchByTypeAndNyplSource(['b123', 'b456', 'b789', 'pb987'], 2)
+* groupByTypeAndNyplSource([
+*   { id: 123, nyplSource: 'sierra-nypl' },
+*   { id: 234, nyplSource: 'sierra-nypl' },
+*   { id: 234, nyplSource: 'recap-pul' }
+* ])
 * => [
 *      [
-*        { type: 'bib', nyplSource: 'sierra-nypl', id: '123' },
-*        { type: 'bib', nyplSource: 'sierra-nypl', id: '456' }
+*        { nyplSource: 'sierra-nypl', id: 123 },
+*        { nyplSource: 'sierra-nypl', id: 234},
 *      ],
 *      [
-*        { type: 'bib', nyplSource: 'sierra-nypl', id: '789' }
-*      ],
-*      [
-*        { type: 'bib', nyplSource: 'recap-pul', id: '987' }
+*        { nyplSource: 'recap-pul', id: 234},
 *      ]
 *    ]
-*/
-const batchIdentifiersByTypeAndNyplSource = async (identifiers, batchSize = 100) => {
-  const grouped = await groupIdentifiersByTypeAndNyplSource(identifiers)
-  const batches = grouped
-    // Apply batching to each group:
-    .map((group) => batch(group, batchSize))
-    // Flatten into a 1D array of grouped batches:
-    .flat()
-
-  // Log out the groupings:
-  logger.info(`Grouped ${identifiers.length} identifiers into ${batches.length} batches of length ${batchSize} by type and nyplSource`)
-
-  return batches
-}
-
-/**
-* Given an array of identifiers (e.g. ['b123', 'pb456']):
-*  1. converts the identifiers into objects that define `type`, `nyplSource`, and `id`
-*  2. groups the mapped identifiers by type and nyplSource
-*  3. returns a new 2d array where each array contains only identifers of the same type and nyplSource
 *
-* For example:
-* groupByTypeAndNyplSource(['b123', 'b456', 'b789', 'pb987'], 2)
-* => [
-*      [
-*        { type: 'bib', nyplSource: 'sierra-nypl', id: '123' },
-*        { type: 'bib', nyplSource: 'sierra-nypl', id: '456' },
-*        { type: 'bib', nyplSource: 'sierra-nypl', id: '789' }
-*      ],
-*      [
-*        { type: 'bib', nyplSource: 'recap-pul', id: '987' }
-*      ]
-*    ]
+* Identifier entities don't need to define type or nyplSource.
 */
-const groupIdentifiersByTypeAndNyplSource = async (identifiers) => {
-  const mapper = await NyplSourceMapper.instance()
-
-  if (!/^[a-z]+\d+$/.test(identifiers[0])) {
-    logger.error(`Invalid prefixed id: ${identifiers[0]}`)
-    return
-  }
-  // Attempt to split all identifiers, capturing invalids
-  const { splitIdentifiers, invalid } = identifiers
-    .reduce((h, ident) => {
-      const split = mapper.splitIdentifier(ident)
-      if (!split || !split.type || !split.nyplSource) {
-        h.invalid.push(ident)
-      } else {
-        h.splitIdentifiers.push(split)
-      }
-      return h
-    }, { invalid: [], splitIdentifiers: [] })
-
-  // Report if some were not parsable:
-  if (invalid.length) {
-    console.warn(`Found ${invalid.length} invalid identifiers: `, invalid.slice(0, 10))
-  }
-
-  const grouped = splitIdentifiers.reduce((h, ident) => {
+const groupIdentifierEntitiesByTypeAndNyplSource = (identifiers) => {
+  const grouped = identifiers.reduce((h, ident) => {
     if (!h[ident.type]) h[ident.type] = []
     if (!h[ident.type][ident.nyplSource]) h[ident.type][ident.nyplSource] = []
     h[ident.type][ident.nyplSource].push(ident)
@@ -380,6 +326,10 @@ const groupIdentifiersByTypeAndNyplSource = async (identifiers) => {
   }, [])
 }
 
+/**
+ *  Given an array of things, returns a 2D array where each child array has
+ *  batchSize or fewer elements.
+ * */
 const batch = (things, batchSize = 100) => {
   return things.reduce((batches, thing) => {
     let currentBucket = batches[batches.length - 1]
@@ -505,14 +455,13 @@ Timer.startNew = (name) => {
 
 module.exports = {
   batch,
-  batchIdentifiersByTypeAndNyplSource,
   buildSierraModelFromUri,
   camelize,
   capitalize,
   castArgsToInts,
   delay,
   die,
-  groupIdentifiersByTypeAndNyplSource,
+  groupIdentifierEntitiesByTypeAndNyplSource,
   lineCount,
   printDiff,
   printProgress,

@@ -25,89 +25,6 @@ describe('scripts/utils', () => {
     })
   })
 
-  describe('groupIdentifiersByTypeAndNyplSource', () => {
-    const input = [
-      'b123',
-      'b456',
-      'b789',
-      'pb987',
-      'i12345',
-      'i456',
-      'i789',
-      'pi1234'
-    ]
-
-    it('batches identifiers by type and source', async () => {
-      const output = await utils.groupIdentifiersByTypeAndNyplSource(input)
-
-      expect(output).to.deep.equal([
-        [
-          { type: 'bib', nyplSource: 'sierra-nypl', id: '123' },
-          { type: 'bib', nyplSource: 'sierra-nypl', id: '456' },
-          { type: 'bib', nyplSource: 'sierra-nypl', id: '789' }
-        ],
-        [{ type: 'bib', nyplSource: 'recap-pul', id: '987' }],
-        [
-          { type: 'item', nyplSource: 'sierra-nypl', id: '12345' },
-          { type: 'item', nyplSource: 'sierra-nypl', id: '456' },
-          { type: 'item', nyplSource: 'sierra-nypl', id: '789' }
-        ],
-        [{ type: 'item', nyplSource: 'recap-pul', id: '1234' }]
-      ])
-    })
-  })
-
-  describe('batchIdentifiersByTypeAndNyplSource', () => {
-    const input = [
-      'b123',
-      'b456',
-      'b789',
-      'pb987',
-      'i12345',
-      'i456',
-      'i789',
-      'pi1234'
-    ]
-
-    it('batches identifiers by type and source', async () => {
-      const output = await utils.batchIdentifiersByTypeAndNyplSource(input)
-
-      expect(output).to.deep.equal([
-        [
-          { type: 'bib', nyplSource: 'sierra-nypl', id: '123' },
-          { type: 'bib', nyplSource: 'sierra-nypl', id: '456' },
-          { type: 'bib', nyplSource: 'sierra-nypl', id: '789' }
-        ],
-        [{ type: 'bib', nyplSource: 'recap-pul', id: '987' }],
-        [
-          { type: 'item', nyplSource: 'sierra-nypl', id: '12345' },
-          { type: 'item', nyplSource: 'sierra-nypl', id: '456' },
-          { type: 'item', nyplSource: 'sierra-nypl', id: '789' }
-        ],
-        [{ type: 'item', nyplSource: 'recap-pul', id: '1234' }]
-      ])
-    })
-
-    it('respects batchSize', async () => {
-      const output = await utils.batchIdentifiersByTypeAndNyplSource(input, 2)
-
-      expect(output).to.deep.equal([
-        [
-          { type: 'bib', nyplSource: 'sierra-nypl', id: '123' },
-          { type: 'bib', nyplSource: 'sierra-nypl', id: '456' }
-        ],
-        [{ type: 'bib', nyplSource: 'sierra-nypl', id: '789' }],
-        [{ type: 'bib', nyplSource: 'recap-pul', id: '987' }],
-        [
-          { type: 'item', nyplSource: 'sierra-nypl', id: '12345' },
-          { type: 'item', nyplSource: 'sierra-nypl', id: '456' }
-        ],
-        [{ type: 'item', nyplSource: 'sierra-nypl', id: '789' }],
-        [{ type: 'item', nyplSource: 'recap-pul', id: '1234' }]
-      ])
-    })
-  })
-
   describe('secondsAsFriendlyDuration', () => {
     it('returns object with correct counts and `display` property', () => {
       expect(utils.secondsAsFriendlyDuration(71)).to.deep.equal({
@@ -219,6 +136,47 @@ describe('scripts/utils', () => {
 
       const call = () => utils.castArgsToInts(inp, ['str1'])
       expect(call).to.throw('Invalid int arg: str1=foo')
+    })
+  })
+
+  describe('groupIdentifierEntitiesByTypeAndNyplSource', () => {
+    it('groups identifier entities', () => {
+      const input = [
+        { id: 1, nyplSource: 'a', type: 'bib' },
+        { id: 2, nyplSource: 'a', type: 'bib' },
+        { id: 3, nyplSource: 'b', type: 'bib' },
+        { id: 4, nyplSource: 'c', type: 'bib' },
+        { id: 1, nyplSource: 'c', type: 'bib' },
+        { id: 1, nyplSource: 'c', type: 'item' }
+      ]
+
+      expect(utils.groupIdentifierEntitiesByTypeAndNyplSource(input)).to.deep.equal([
+        [
+          { id: 1, nyplSource: 'a', type: 'bib' },
+          { id: 2, nyplSource: 'a', type: 'bib' }
+        ],
+        [
+          { id: 3, nyplSource: 'b', type: 'bib' }
+        ],
+        [
+          { id: 4, nyplSource: 'c', type: 'bib' },
+          { id: 1, nyplSource: 'c', type: 'bib' }
+        ],
+        [
+          { id: 1, nyplSource: 'c', type: 'item' }
+        ]
+      ])
+    })
+
+    it('groups entities with null nyplSource', () => {
+      const input = [{ id: '1234', nyplSource: null }, { id: '5678', nyplSource: null }]
+
+      expect(utils.groupIdentifierEntitiesByTypeAndNyplSource(input)).to.deep.equal([
+        [
+          { id: '1234', nyplSource: null },
+          { id: '5678', nyplSource: null }
+        ]
+      ])
     })
   })
 })
