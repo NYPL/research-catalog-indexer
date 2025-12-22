@@ -671,7 +671,7 @@ const updateByCsv = async (options = { offset: 0 }) => {
   const rawContent = fs.readFileSync(options.csv, 'utf8')
   const rows = csvParse(rawContent)
 
-  const sourceMapper = await NyplSourceMapper.instance()
+  const sourceMapper = NyplSourceMapper.instance()
 
   // Slice rows-to-process using --offset and --limit:
   const end = options.limit ? options.limit + options.offset : rows.length
