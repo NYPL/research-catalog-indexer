@@ -283,4 +283,15 @@ describe('scripts/bulk-index', () => {
         })
     })
   })
+
+  describe('barcodeCustomerCodeMapFromCsv', () => {
+    it('builds map from CSV', () => {
+      const lookup = bulkIndexer._testing.barcodeCustomerCodeMapFromCsv('./test/fixtures/barcode-customer-code-map.csv')
+      expect(lookup).to.deep.equal({
+        1234: 'NA',
+        2345: 'NH',
+        3456: 'NA'
+      })
+    })
+  })
 })
