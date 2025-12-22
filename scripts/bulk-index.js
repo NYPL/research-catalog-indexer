@@ -756,6 +756,15 @@ const validateParams = (argv) => {
   if (message) cancelRun(message)
 }
 
+/**
+ *  Given a path to a CSV, returns a plainobject mapping col 0 to col 1
+ */
+const barcodeCustomerCodeMapFromCsv = (path) => {
+  logger.info(`Loading barcode-recap-customer-code map from ${path}`)
+  return csvParse(fs.readFileSync(path, 'utf8'))
+    .reduce((h, [barcode, cc]) => Object.assign(h, { [barcode]: cc }), {})
+}
+
 // Main dispatcher:
 const run = async () => {
   // Validate args:
@@ -765,14 +774,11 @@ const run = async () => {
   if (argv.skipApiPrefetch || process.env.SKIP_API_PREFETCH === 'true') overwriteGeneralPrefetch()
   if (argv.updateOnly || process.env.UPDATE_ONLY) overwriteSchema(argv.properties || process.env.PROPERTIES)
 
+  // Use barcode-customer-code mapping file for speed?
   if (argv.recapBarcodeCustomerCodeMap) {
-    logger.info(`Loading barcode-recap-customer-code map from ${argv.recapBarcodeCustomerCodeMap}`)
-    populateBarcodeRecapCustomerCodeCache(
-      fs.readFileSync(argv.recapBarcodeCustomerCodeMap, 'utf8')
-        .split('\n')
-        .map((r) => r.trim().split(','))
-        .reduce((h, [barcode, cc]) => Object.assign(h, { [barcode]: cc }), {})
-    )
+    const lookup = barcodeCustomerCodeMapFromCsv(argv.recapBarcodeCustomerCodeMap)
+      .catch(die)
+    populateBarcodeRecapCustomerCodeCache(lookup)
   }
 
   // Require one of:
@@ -851,6 +857,7 @@ module.exports = {
     overwriteGeneralPrefetch,
     restoreGeneralPrefetch,
     overwriteSchema,
-    restoreSchema
+    restoreSchema,
+    barcodeCustomerCodeMapFromCsv
   }
 }
