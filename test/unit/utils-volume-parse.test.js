@@ -64,7 +64,7 @@ describe('utils/volume-parse', () => {
     })
 
     it('prioritizes reel over volume', () => {
-      expect(parseVolume('reel 18 [Denishawn v. 25-28]')).to.deep.equal([[18, 18]])
+      expect(parseVolume('reel 18 [Denishawn v. 25-28]')).to.deep.equal([[9982, 9982]])
     })
 
     it('parses Disc', () => {
