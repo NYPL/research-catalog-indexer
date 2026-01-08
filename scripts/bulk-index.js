@@ -779,7 +779,7 @@ const run = async () => {
   if (argv.updateOnly || process.env.UPDATE_ONLY) overwriteSchema(argv.properties || process.env.PROPERTIES)
 
   // Use barcode-customer-code mapping file to skip SCSB API calls?
-  // This CSV is expected to contain two: columns barcode, customercode.
+  // This CSV is expected to contain two columns: barcode, customercode.
   if (argv.recapBarcodeCustomerCodeMap) {
     const lookup = barcodeCustomerCodeMapFromCsv(argv.recapBarcodeCustomerCodeMap)
       .catch(die)
