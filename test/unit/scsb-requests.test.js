@@ -19,12 +19,12 @@ describe('SCSB requests', () => {
     it('returns a hash mapping itemIds to recap codes - multiple items', async () => {
       sinon.stub(ScsbClient, 'client').callsFake(() => Promise.resolve({ search: () => nyplScsbMultiItemBib }))
       const hashMap = await recapFuncs.private._createRecapCodeMap(bib)
-      expect(hashMap).to.deep.equal({ 1: 'A', 2: 'B', 3: 'C' })
+      expect(hashMap).to.deep.equal({ 33433063664720: 'A', 33433063513372: 'B', 33433063513364: 'C' })
     })
     it('returns a hash mapping itemId to recap codes - single items', async () => {
       sinon.stub(ScsbClient, 'client').callsFake(() => Promise.resolve({ search: () => nyplScsbSingleItemBib }))
       const hashMap = await recapFuncs.private._createRecapCodeMap(bib)
-      expect(hashMap).to.deep.equal({ 12235900: 'NA' })
+      expect(hashMap).to.deep.equal({ 33433034215776: 'NA' })
     })
     it('sends bibId with correct check digit', async () => {
       const scsbClientStub = sinon.stub(ScsbClient, 'client')
@@ -44,6 +44,7 @@ describe('SCSB requests', () => {
       expect(attachedBib.items()[0]._recapCustomerCode).to.equal('A')
       expect(attachedBib.items()[1]._recapCustomerCode).to.equal('B')
       expect(attachedBib.items()[2]._recapCustomerCode).to.equal('C')
+      // Mocked SCSB response only returns first three barcodes, so last has no CC:
       expect(attachedBib.items()[3]._recapCustomerCode).to.equal(undefined)
       ScsbClient.client.restore()
     })
