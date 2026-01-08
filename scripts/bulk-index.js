@@ -18,6 +18,9 @@
  *     - table {string}: Override primary table name used (e.g. bib_v2)
  *     - type {string}: Required. One of item or bib
  *     - properties {string}: comma-delineated list of bib-level properties to run update for
+ *     - recapBarcodeCustomerCodeMap {string}: Path to local CSV containing barcode and customer-code pairs.
+ *         When provided, allows script to skip many expensive SCSB API calls.
+ *         This CSV may be provided by ReCAP staff or generated from our ES.
  *
  *  Performing property-specific bib-only update:
  *
@@ -92,15 +95,16 @@ const fs = require('fs')
 const { parse: csvParse } = require('csv-parse/sync')
 const argv = require('minimist')(process.argv.slice(2), {
   default: {
-    limit: null,
-    offset: 0,
     batchSize: 100,
-    nyplSource: 'sierra-nypl',
     dryrun: false,
-    updateOnly: false,
     envfile: './config/qa-bulk-index.env',
+    limit: null,
+    nyplSource: 'sierra-nypl',
+    offset: 0,
+    properties: '',
+    recapBarcodeCustomerCodeMap: null
     skipPrefetch: false,
-    properties: ''
+    updateOnly: false
   },
   boolean: ['updateOnly'],
   string: ['hasMarc', 'hasSubfield', 'bibId', 'fromDate', 'toDate'],
@@ -774,7 +778,8 @@ const run = async () => {
   if (argv.skipApiPrefetch || process.env.SKIP_API_PREFETCH === 'true') overwriteGeneralPrefetch()
   if (argv.updateOnly || process.env.UPDATE_ONLY) overwriteSchema(argv.properties || process.env.PROPERTIES)
 
-  // Use barcode-customer-code mapping file for speed?
+  // Use barcode-customer-code mapping file to skip SCSB API calls?
+  // This CSV is expected to contain two: columns barcode, customercode.
   if (argv.recapBarcodeCustomerCodeMap) {
     const lookup = barcodeCustomerCodeMapFromCsv(argv.recapBarcodeCustomerCodeMap)
       .catch(die)
