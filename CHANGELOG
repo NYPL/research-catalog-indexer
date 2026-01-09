@@ -1,0 +1,3 @@
+# v1.0.0
+- Update browse term emission rules: send all subjects from ES index and new bib document to Browse Term Indexer
+- Update @nypl/browse-term version for updated 690 rules
