@@ -23,6 +23,7 @@
 ## Scenarios
 
 ### Updating records from a specific holding location
+  - 
     
 ### Adding a new subfield to an indexing rule
   After updating the RCI, 
