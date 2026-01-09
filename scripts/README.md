@@ -26,15 +26,15 @@
   - 
     
 ### Adding a new subfield to an indexing rule
+This kind of update requires using the `bulk-index.js` script.
   - If the property in question is present on every bib (e.g. title, author, format), run a `bulk-index.js` job with no limit
-  - If the updated rule affects a large number of bibs, but not all, querying Elastic Search may be quicker than querying the bib service. If presence of a specific marc field is not relevant, and presence of a property is sufficient reason to reindex, this is the move. 
+  - If the updated rule affects a large number of bibs, but not all, you can query ES for bib ids with relevant fields to be updated. If presence of a specific marc field is not relevant, and presence of a property is sufficient reason to reindex, this is the move. After querying Elastic Search, use those id's to populate a CSV that will passed along to the script.
     - Example: The subfields that comprise `description` are going to be split into two new properties. Any bib with a `description` in the index should be updated. Specific knowledge of marc fields is unneccesary, so an ES query is appropriate.
   - If the updated rule affects a single marc field of a few marc fields in an indexing rule, query the bib/item/holding service for ids that contain the marc field in question. 
     - Example: `subjectLiteral` ES property contains many 6xx fields. If recent updates only apply to uncommon 690 fields, every bib does not need to be updated, just the ones with 690 fields. Querying the bib service is the way to go here since the marc field is relevant.
     - Example of SQL query for ids for bibs with a 690 marc field present, the output of which is written to a CSV:
     ```
     \COPY (SELECT DISTINCT id, nypl_source FROM bib, json_array_elements(bib.var_fields::json) j690 WHERE jsonb_typeof(bib.var_fields) = 'array' AND j690->>'marcTag' = '690') TO '~/690_bibs.csv' WITH CSV DELIMITER ',' HEADER;
-  ```
   - If the property in question is a bib-level property, see documentation `bulk-index.js` about bib-only update invocations
 ### 
 
