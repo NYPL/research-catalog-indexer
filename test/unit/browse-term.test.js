@@ -2,7 +2,6 @@ const expect = require('chai').expect
 const {
   fetchLiveSubjectLiterals,
   buildBibSubjectEvents,
-  buildSubjectDiff,
   getPrimaryAndParallelLabels,
   getSubjectModels,
   buildBatchedCommands,
@@ -41,13 +40,13 @@ describe('bib activity', () => {
   describe('determineUpdatedTerms', () => {
     const devonBib = require('../fixtures/bib-10554618.json')
     const utahBib = require('../fixtures/bib-11655934.json')
-    it('returns no updated subjects when nothing has changed', async () => {
+    it('returns subjects when live and fresh document data is the same', async () => {
       const freshBibs = [
         devonBib,
         utahBib].map((bib) => new EsBib(new SierraBib({ ...bib, id: `${bib.id}sameAsFresh` })))
       const ids = freshBibs.map((bib) => bib.uri())
       const terms = await determineUpdatedTerms('subjectLiteral', ids, freshBibs)
-      expect(terms).to.deep.equal([])
+      expect(terms.length).to.equal(4)
     })
     it('returns fresh bib subjects only when there is no live bib data to return', async () => {
       const freshBibs = [
@@ -95,7 +94,7 @@ describe('bib activity', () => {
         ]
       )
     })
-    it('only returns subjects that have been removed or added', async () => {
+    it('returns subjects from ES index and new ES bib model', async () => {
       // ie Does not return subjects present on both the live es document and the freshly generated one... ie the DIFF!
       const freshBibs = [
         require('../fixtures/bib-11655934.json'),
@@ -107,7 +106,15 @@ describe('bib activity', () => {
           preferredTerm: 'University of Utah -- Periodicals.',
           sourceId: 'b11655934someDiff'
         },
+        {
+          preferredTerm: 'Education, Higher -- Utah -- Periodicals.',
+          sourceId: 'b11655934someDiff'
+        },
         { preferredTerm: 'University of Utah -- Perixxxdicals' },
+        {
+          preferredTerm: 'Milestones -- England -- Devon.',
+          sourceId: 'b10554618someDiff'
+        },
         {
           preferredTerm: 'Devon (England) -- Description and travel.',
           sourceId: 'b10554618someDiff'
@@ -224,15 +231,6 @@ describe('bib activity', () => {
       })
       expect(labels).to.deep.equal(
         { preferredTerm: 'preferredTerm a preferredTerm b.', suppress: false, variant: 'parallel a parallel b.' })
-    })
-  })
-  describe('buildSubjectDiff', () => {
-    const makePreferredTermObject = (x) => ({ preferredTerm: x })
-    it('subjects added', () => {
-      expect(buildSubjectDiff(['a', 'b', 'c', 'd'].map(makePreferredTermObject), ['c', 'd'].map(makePreferredTermObject))).to.deep.equal(['a', 'b'].map(makePreferredTermObject))
-    })
-    it('subjects deleted', () => {
-      expect(buildSubjectDiff(['c', 'd'].map(makePreferredTermObject), ['a', 'b', 'c', 'd'].map(makePreferredTermObject))).to.deep.equal(['a', 'b'].map(makePreferredTermObject))
     })
   })
   describe('buildBibSubjectEvents', () => {
