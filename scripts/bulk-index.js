@@ -102,7 +102,7 @@ const argv = require('minimist')(process.argv.slice(2), {
     nyplSource: 'sierra-nypl',
     offset: 0,
     properties: '',
-    recapBarcodeCustomerCodeMap: null
+    recapBarcodeCustomerCodeMap: null,
     skipPrefetch: false,
     updateOnly: false
   },
