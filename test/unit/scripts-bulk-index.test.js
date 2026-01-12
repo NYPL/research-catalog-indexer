@@ -66,6 +66,27 @@ const pgFixtures = [
         var_fields: []
       }
     ]
+  },
+  {
+    match: /SELECT \* FROM bib WHERE nypl_source = \$1 AND id IN \('1234','2345','3456'\) LIMIT 3/,
+    rows: [
+      { id: 1234 },
+      { id: 2345 },
+      { id: 3456 }
+    ]
+  },
+  {
+    match: /SELECT \* FROM bib WHERE nypl_source = \$1 AND id IN \('4567'\) LIMIT 1/,
+    rows: [
+      { id: 4567 }
+    ]
+  },
+  {
+    match: /SELECT \* FROM bib WHERE nypl_source = \$1 AND id IN \('5678','5789'\) LIMIT 2/,
+    rows: [
+      { id: 5678 },
+      { id: 5789 }
+    ]
   }
 ]
 
@@ -147,7 +168,7 @@ describe('scripts/bulk-index', () => {
       await expect(bulkIndexer.updateByCsv({ csv, csvIdColumn: 0, nyplSource: 'sierra-nypl' })).to.be.rejected
     })
 
-    it('given a csv, processes identified records', async () => {
+    it('given a csv with numeric identifieres, processes identified records', async () => {
       const csv = './test/fixtures/bulk-index-by-csv-numeric-ids.csv'
       await expect(bulkIndexer.updateByCsv({ csv, csvIdColumn: 0, type: 'bib', nyplSource: 'sierra-nypl' })).to.be.fulfilled
 
@@ -158,6 +179,21 @@ describe('scripts/bulk-index', () => {
       expect(records[0]).to.deep.include({
         id: 1234,
         nyplSource: 'sierra-nypl'
+      })
+    })
+
+    it('given a csv w/numeric and nyplSource identifieres, processes identified records', async function () {
+      this.timeout(5000)
+
+      const csv = './test/fixtures/bulk-index-by-csv-ids-with-nypl-source.csv'
+      await expect(bulkIndexer.updateByCsv({ csv, csvIdColumn: 0, csvNyplSourceColumn: 1, type: 'bib', batchSize: 3 })).to.be.fulfilled
+
+      // What records were processed?
+      const [type, records] = index.processRecords.getCall(0).args
+      expect(type).to.eq('Bib')
+      expect(records).to.have.lengthOf(3)
+      expect(records[0]).to.deep.include({
+        id: 1234
       })
     })
 
