@@ -1826,7 +1826,7 @@ describe('EsBib', function () {
       const record = new SierraBib(require('../fixtures/bib-21989304.json'))
       const esBib = new EsBib(record)
       expect(esBib.addedAuthorTitle()).to.deep.equal([
-        'Dvenadt︠s︡atʹ.'
+        'Dvenadt͡satʹ.'
       ])
     })
 
