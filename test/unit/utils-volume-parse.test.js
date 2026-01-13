@@ -62,5 +62,13 @@ describe('utils/volume-parse', () => {
       // Should reject only the invalid int:
       expect(parseVolume('volume 1 - 7600010780000')).to.deep.equal([[1, 1]])
     })
+
+    it('prioritizes reel over volume', () => {
+      expect(parseVolume('reel 18 [Denishawn v. 25-28]')).to.deep.equal([[9982, 9982]])
+    })
+
+    it('parses Disc', () => {
+      expect(parseVolume('Disc 4')).to.deep.equal([[9996, 9996]])
+    })
   })
 })
