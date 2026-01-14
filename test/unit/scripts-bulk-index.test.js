@@ -174,7 +174,6 @@ describe('scripts/bulk-index', () => {
 
       // What records were processed?
       const [type, records] = index.processRecords.getCall(0).args
-      console.log('func1: ', index.processRecords.getCall(0))
       expect(type).to.eq('Bib')
       expect(records).to.have.lengthOf(2)
       expect(records[0]).to.deep.include({
@@ -318,6 +317,17 @@ describe('scripts/bulk-index', () => {
           params: [],
           type: 'table_name'
         })
+    })
+  })
+
+  describe('barcodeCustomerCodeMapFromCsv', () => {
+    it('builds map from CSV', () => {
+      const lookup = bulkIndexer._testing.barcodeCustomerCodeMapFromCsv('./test/fixtures/barcode-customer-code-map.csv')
+      expect(lookup).to.deep.equal({
+        1234: 'NA',
+        2345: 'NH',
+        3456: 'NA'
+      })
     })
   })
 })
