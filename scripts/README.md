@@ -20,7 +20,7 @@ This document is a work in progress and is nowhere near exhaustive. It is meant 
   * Single record update using code that has passed code review and has been safely deployed.
 
 ### `bulk-index.js`
-* Required: csv of ids or bib service query. Note that it may be more efficient to run the bib service query separately and output to a csv with id and nyplSource column
+* Required: csv of ids or bib service query. Note that it may be more efficient to run the bib service query separately and output to a csv with id and nyplSource column. If the property in question is a bib-level property, see documentation `bulk-index.js` about bib-only update invocations
 * RCI source: checked out branch of RCI
 * Uses:
   * Updating any number of records. Necessary when a new indexing rule has been added or updated for a property that every bib has.
@@ -36,17 +36,20 @@ This document is a work in progress and is nowhere near exhaustive. It is meant 
     
 ### Adding a new subfield to an indexing rule
 This kind of update requires using the `bulk-index.js` script.
-  - If the property in question is present on every bib (e.g. title, author, format), run a `bulk-index.js` job with no limit, probably using the `updateOnly`, `skipApiPrefetch`, and `skipDbPrefetch` options (see documentation for details on bib update workflow)
-  - If the updated rule affects a large number of bibs, but not all, you can query ES for bib ids with relevant fields to be updated. If presence of a specific marc field is not relevant, and presence of a property is sufficient reason to reindex, this is the move. After querying Elastic Search, use those id's to populate a CSV that will passed along to the script.
+#### Updated rule affects every bib (e.g. title, author, format)
+  - run a `bulk-index.js` job with no limit, probably using the `updateOnly`, `skipApiPrefetch`, and `skipDbPrefetch` options (see documentation for details on bib update workflow)
+#### Updated rule affects a large number of bibs 
+This case has two possible sources of bib ids:
+  1. Elastic search 
+    - If presence of a specific marc field is not relevant, and presence of a property is sufficient reason to reindex, this is the move. After querying Elastic Search, use those id's to populate a CSV that will passed along to the script.
     - Example: The subfields that comprise `description` are going to be split into two new properties. Any bib with a `description` in the index should be updated. Specific knowledge of marc fields is unneccesary, so an ES query is appropriate.
-    - See `./example-queries/bib-property-multi-match.json` documentation for an example script
-  - If the updated rule affects a single marc field of a few marc fields in an indexing rule, query the bib/item/holding service for ids that contain the marc field in question. 
+      - See `./example-queries/bib-property-multi-match.json` documentation for an example script
+  2. Bib service
+    - A single marc field rule has been changed for a property that is comprised of multiple marc fields, AND that single marc field is not on every bib
     - Example: `subjectLiteral` ES property contains many 6xx fields. If recent updates only apply to uncommon 690 fields, every bib does not need to be updated, just the ones with 690 fields. Querying the bib service is the way to go here since the marc field is relevant.
     - Example of SQL query for ids for bibs with a 690 marc field present, the output of which is written to a CSV:
     ```
     \COPY (SELECT DISTINCT id, nypl_source FROM bib, json_array_elements(bib.var_fields::json) j690 WHERE jsonb_typeof(bib.var_fields) = 'array' AND j690->>'marcTag' = '690') TO '~/690_bibs.csv' WITH CSV DELIMITER ',' HEADER;
-  - If the property in question is a bib-level property, see documentation `bulk-index.js` about bib-only update invocations
-### 
 
 ## EC2
 If you are reindexing or updating more than a million or so records, it is a good idea to run the script from our dedicated server in AWS for long-running scripts. See documentation [here](https://docs.google.com/document/d/1A2PQt32tMmLRyI7KcTsOtheFMVvROt3akGdXuSXxwYQ/edit?tab=t.0#heading=h.njlhfusam8s0) for instructions.
