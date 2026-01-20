@@ -1,5 +1,7 @@
 # Reindexing Guidelines
 
+This document is a work in progress and is nowhere near exhaustive. It is meant to illustrate common use cases.
+
 ## The scripts and their applications
 ### `identify-ids-by-es-query.js`
 * Required: elastic search query JSON. See `./example-queries` for inspiration
