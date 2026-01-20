@@ -29,7 +29,18 @@ This document is a work in progress and is nowhere near exhaustive. It is meant 
   * User must double check that the code they have checked out is in working order. Highly recommended to run on a single record, then a large batch, before running on entire set of records.
   * DB connections are often dropped, so if you are running an update on every record in the bib service, there is a high chance that the update will stop partway through. 
 
+### `in-index update`
+* Required: elastic search query with a painless script 
+* Uses:
+  * Moving/changing the name of a property. See [SCC-4664](https://newyorkpubliclibrary.atlassian.net/browse/SCC-4664)
+  * Updating the label on an id/label entity
+
+
 ## Scenarios
+
+### Updating the label on an id/label entity
+  - Can be run as an "in-index" update. Use the elastic search update-by-query endpoint and a painless script. See [SCC-4593](https://newyorkpubliclibrary.atlassian.net/browse/SCC-4593) for an example painless script. Should also accompany an update to the RCI logic.
+  - Example: Holding locations per item have not changed, but their labels have.
 
 ### Updating records from a specific holding location or customer code
   - Run `./identify-ids-by-es-query.js` using a query similar to `./example-queries/item-property-match.json`. Use the output ids to run a `bulk-index.js` job. Depending on what you are updating, you may wish to run it with a csv prepopulated with recap customer codes to avoid hitting the SCSB API. 
