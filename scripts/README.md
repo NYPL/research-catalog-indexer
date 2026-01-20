@@ -1,6 +1,13 @@
 # Reindexing Guidelines
 
 ## The scripts and their applications
+### `identify-ids-by-es-query.js`
+* Required: elastic search query JSON. See `./example-queries` for inspiration
+* RCI source: n/a
+* Uses:
+  * Return bib ids from elastic search. Handles pagination of returned records and outputs to a csv of ids.
+* Risks: n/a
+
 ### `reindex-record.js`
 * Required: single record uri
 * RCI source: deployed code
@@ -11,7 +18,7 @@
   * Single record update using code that has passed code review and has been safely deployed.
 
 ### `bulk-index.js`
-* Required: csv of ids or bib service query. Note that it may be more efficient to run the bib service query separately and output to a csv.
+* Required: csv of ids or bib service query. Note that it may be more efficient to run the bib service query separately and output to a csv with id and nyplSource column
 * RCI source: checked out branch of RCI
 * Uses:
   * Updating any number of records. Necessary when a new indexing rule has been added or updated for a property that every bib has.
@@ -22,14 +29,15 @@
 
 ## Scenarios
 
-### Updating records from a specific holding location
-  - 
+### Updating records from a specific holding location or customer code
+  - Run `./identify-ids-by-es-query.js` using a query similar to `./example-queries/item-property-match.json`. Use the output ids to run a `bulk-index.js` job. Depending on what you are updating, you may wish to run it with a csv prepopulated with recap customer codes to avoid hitting the SCSB API. 
     
 ### Adding a new subfield to an indexing rule
 This kind of update requires using the `bulk-index.js` script.
-  - If the property in question is present on every bib (e.g. title, author, format), run a `bulk-index.js` job with no limit
+  - If the property in question is present on every bib (e.g. title, author, format), run a `bulk-index.js` job with no limit, probably using the `updateOnly`, `skipApiPrefetch`, and `skipDbPrefetch` options (see documentation for details on bib update workflow)
   - If the updated rule affects a large number of bibs, but not all, you can query ES for bib ids with relevant fields to be updated. If presence of a specific marc field is not relevant, and presence of a property is sufficient reason to reindex, this is the move. After querying Elastic Search, use those id's to populate a CSV that will passed along to the script.
     - Example: The subfields that comprise `description` are going to be split into two new properties. Any bib with a `description` in the index should be updated. Specific knowledge of marc fields is unneccesary, so an ES query is appropriate.
+    - See `./example-queries/bib-property-multi-match.json` documentation for an example script
   - If the updated rule affects a single marc field of a few marc fields in an indexing rule, query the bib/item/holding service for ids that contain the marc field in question. 
     - Example: `subjectLiteral` ES property contains many 6xx fields. If recent updates only apply to uncommon 690 fields, every bib does not need to be updated, just the ones with 690 fields. Querying the bib service is the way to go here since the marc field is relevant.
     - Example of SQL query for ids for bibs with a 690 marc field present, the output of which is written to a CSV:
