@@ -4,14 +4,14 @@ This document is a work in progress and is nowhere near exhaustive. It is meant 
 
 ## The scripts and their applications
 ### `identify-ids-by-es-query.js`
-* Required: elastic search query JSON. See `./example-queries` for inspiration
+* Summary: Return bib ids from elastic search. Handles pagination of returned records and outputs to a csv of ids.
+* Input: elastic search query JSON. See `./example-queries` for inspiration
 * RCI source: n/a
-* Uses:
-  * Return bib ids from elastic search. Handles pagination of returned records and outputs to a csv of ids.
 * Risks: n/a
 
 ### `reindex-record.js`
-* Required: single record uri
+* Summary: reindex a single record using indexer code deployed to specified environment.
+* Input: single record uri
 * RCI source: deployed code
 * Uses:
   * Bib is not displaying according to indexing rules in the Research Catalog
@@ -20,8 +20,8 @@ This document is a work in progress and is nowhere near exhaustive. It is meant 
   * Single record update using code that has passed code review and has been safely deployed.
 
 ### `bulk-index.js`
-* Required: csv of ids or bib service query. Note that it may be more efficient to run the bib service query separately and output to a csv with id and nyplSource column. If the property in question is a bib-level property, see documentation `bulk-index.js` about bib-only update invocations
-* RCI source: checked out branch of RCI
+* Input: csv of ids or bib service query. Note that it may be more efficient to run the bib service query separately and output to a csv with id and nyplSource column. If the property in question is a bib-level property, see documentation `bulk-index.js` about bib-only update invocations.
+* Summary: reindex any number of bibs using indexer code **currently checked out** on your machine, using data from specified environment, to live ES index from that environment
 * Uses:
   * Updating any number of records. Necessary when a new indexing rule has been added or updated for a property that every bib has.
   * Testing out work in progress code. If you are working on a new indexing rule, you may reindex it with your WIP as long as you are working with QA config.
@@ -30,7 +30,8 @@ This document is a work in progress and is nowhere near exhaustive. It is meant 
   * DB connections are often dropped, so if you are running an update on every record in the bib service, there is a high chance that the update will stop partway through. 
 
 ### `in-index update`
-* Required: elastic search query with a painless script 
+* Summary: This is not a script, but a workflow that we use when it is possible to make an update without running the indexer. It involves making an _update_by_query request to the ES index.
+* Input: Elastic search query with a painless script 
 * Uses:
   * Moving/changing the name of a property. See [SCC-4664](https://newyorkpubliclibrary.atlassian.net/browse/SCC-4664)
   * Updating the label on an id/label entity
