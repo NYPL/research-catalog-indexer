@@ -20,8 +20,8 @@ This document is a work in progress and is nowhere near exhaustive. It is meant 
   * Single record update using code that has passed code review and has been safely deployed.
 
 ### `bulk-index.js`
-* Input: csv of ids or bib service query. Note that it may be more efficient to run the bib service query separately and output to a csv with id and nyplSource column. If the property in question is a bib-level property, see documentation `bulk-index.js` about bib-only update invocations.
 * Summary: reindex any number of bibs using indexer code **currently checked out** on your machine, using data from specified environment, to live ES index from that environment
+* Input: csv of ids or bib service query. Note that it may be more efficient to run the bib service query separately and output to a csv with id and nyplSource column. If the property in question is a bib-level property, see documentation `bulk-index.js` about bib-only update invocations.
 * Uses:
   * Updating any number of records. Necessary when a new indexing rule has been added or updated for a property that every bib has.
   * Testing out work in progress code. If you are working on a new indexing rule, you may reindex it with your WIP as long as you are working with QA config.
