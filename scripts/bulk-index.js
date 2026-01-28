@@ -5,23 +5,54 @@
  *   1. an arbitrary Bib- or ItemService SQL query.
  *   2. a CSV containing identifiers
  *
+ *  Common Arguments
+ *
+ *    These arguments are generally available however the script is invoked:
+ *
+ *     - batchSize {int}: How many records to index at one time. Default 100
+ *     - dryrun {boolean}: Set to true to perform all work, but skip writing to index.
+ *     - envfile {string}: Path to local .env file. Default ./config/qa-bulk-index.env
+ *     - limit {int}: How many records to process. Default null (no limit)
+ *     - nyplSource {string}: NYPL Source value. Default 'sierra-nypl'
+ *     - offset {int}: How many records to skip over in the CSV. Default 0
+ *     - table {string}: Override primary table name used (e.g. bib_v2)
+ *     - type {string}: Required. One of item or bib
+ *     - properties {string}: comma-delineated list of bib-level properties to run update for
+ *     - recapBarcodeCustomerCodeMap {string}: Path to local CSV containing barcode and customer-code pairs.
+ *         When provided, allows script to skip many expensive SCSB API calls.
+ *         This CSV may be provided by ReCAP staff or generated from our ES.
+ *
+ *  Performing property-specific bib-only update:
+ *
+ *    Perform bulk update to specified properties. To date, this script is intended for use on bib-level properties
+ *    with no dependencies on item or holding data. Recommended params include --batchSize 1000, as well as setting
+ *    process.env.STOP_REFRESH to true to avoid latency in the resources index while running.
+ *
+ *    Example:
+ *      node scripts/bulk-index.js [...bulk index args]  --batchSize 1000 (recommended) \
+ *        --properties subjectLiteral,addedAuthorTitle (--skipApiPrefetch true --skipDbPrefetch true \
+ *        --updateOnly true) (not required if passed as env vars)
+ *
+ *    Property-specific arguments:
+ *     - skipDbPrefetch {boolean}: Flag to skip item and holding fetches from the DB. Can be false for any bib-level
+ *       updates, must be true for item or holding level updates. Can also be controlled via SKIP_DB_PREFETCH env var.
+ *     - skipApiPrefetch {boolean}: Skip API calls to M2 customer code store and SCSB. Can be true for any bib-level
+ *       update. Can be true for item level updates that do not have to do with live SCSB or M2 customer code data.
+ *       Can also be controlled via SKIP_API_PREFETCH env var.
+ *     - updateOnly {boolean}: Flag to run as update only script and not standard bulk index overwrite. Can also be
+ *       controlled via UPDATE_ONLY env var.
+ *
+ *
  *  I. Updating by Bib/Item Service query:
  *
  *    node scripts/bulk-index.js --type (item|bib) [--hasMarc MARC] [--hasSubfield S] [--nyplSource NYPLSOURCE]
  *
  *    Arguments:
- *      type {string}: Required. One of item or bib
- *      hasMarc {string}: Marc tag that must be present in the record
- *      hasSubfield {string}: When used with hasMarc, restricts to records matching both marc tag and subfield
- *      nyplSource {string}: NYPL Source value. Default 'sierra-nypl'
- *      orderBy {string}: Columns to order query by. Default '' (no sort).
+ *      - hasMarc {string}: Marc tag that must be present in the record
+ *      - hasSubfield {string}: When used with hasMarc, restricts to records matching both marc tag and subfield
+ *      - orderBy {string}: Columns to order query by. Default '' (no sort).
  *        e.g. `--orderBy id`. Sortable columns include `id`, `updated_date`,
  *        `created_date`.
- *      limit {int}: How many records to process. Default null (no limit)
- *      offset {int}: How many records to skip over. Default 0
- *      batchSize {int}: How many records to index at one time. Default 100
- *      dryrun {boolean}: Set to true to perform all work, but skip writing to index.
- *      envfile {string}: Path to local .env file. Default ./config/qa-bulk-index.env
  *
  *    One of these mutually exclusive arguments must be used so that the script
  *    has something to query on:
@@ -53,32 +84,12 @@
  *    CSV is may contain any number of columns, but one of them must contain prefixed ids (e.g. b1234)
  *
  *    Arguments:
- *      csv {string}: Path to local CSV. Required.
- *      csvIdColumn {int}: Column index (0-indexed) in CSV from which to extract the id. Required.
- *      csvDropChecksum {boolean}: Whether or not to remove the Sierra check-digit from extracted ids. Default false.
- *      limit {int}: How many records to process. Default null (no limit)
- *      offset {int}: How many records to skip over in the CSV. Default 0
- *      batchSize {int}: How many records to index at one time. Default 100
- *      dryrun {boolean}: Set to true to perform all work, but skip writing to index.
- *      envfile {string}: Path to local .env file. Default ./config/qa-bulk-index.env
- *      table {string}: Override primary table name used (e.g. bib_v2)
- *
- *  III. Perform property-specific bib-only update:
- *
- *      node scripts/bulk-index.js [...bulk index args]  --batchSize 1000 (recommended) --properties subjectLiteral,addedAuthorTitle (--skipApiPrefetch true --skipDbPrefetch true --updateOnly true) (not required if passed as env vars)
- *
- *      Perform bulk update to specified properties. To date, this script is intended for use on bib-level properties
- *      with no dependencies on item or holding data. Recommended params include --batchSize 1000, as well as setting
- *      process.env.STOP_REFRESH to true to avoid latency in the resources index while running.
- *
- *      Arguments:
- *        any bulk-index argument for specifying the scope of the update
- *        properties {string}: comma-delineated list of bib-level properties to run update for
- *        skipDbPrefetch {boolean}: flag to skip item and holding fetches from the DB. Can be false for any bib-level updates, must be true for item or holding level updates
- *        skipApiPrefetch {boolean}: skip API calls to M2 customer code store and SCSB. Can be true for any bib-level update. Can be true for item level updates that do not have to do with live SCSB or M2 customer code data.
- *        updateOnly {boolean}: flag to run as update only script and not standard bulk index overwrite
- *
- *      SKIP_DB_PREFETCH, SKIP_API_PREFETCH and UPDATE_ONLY can both be passed in as environment variables as well.
+ *      - csv {string}: Path to local CSV. Required.
+ *      - csvIdColumn {int}: Column index (0-indexed) in CSV from which to extract the id. Required.
+ *      - csvNyplSourceColumn {int}: Column index (0-indexed) in CSV from which to extract the nyplSource.
+ *        Required unless CSV contains prefixed ids or --nyplSource is speified
+ *      - csvDropChecksum {boolean}: Whether or not to remove the Sierra check-digit from extracted ids.
+ *        Default false.
  */
 const fs = require('fs')
 const { parse: csvParse } = require('csv-parse/sync')
@@ -87,20 +98,22 @@ const argv = require('minimist')(process.argv.slice(2), {
   default: {
     csvIdColumn: 0,
     csvNyplSourceColumn: 1,
-    limit: null,
-    offset: 0,
     batchSize: 100,
-    nyplSource: 'sierra-nypl',
     dryrun: false,
-    updateOnly: false,
     envfile: './config/qa-bulk-index.env',
+    limit: null,
+    nyplSource: 'sierra-nypl',
+    offset: 0,
+    properties: '',
+    recapBarcodeCustomerCodeMap: null,
     skipPrefetch: false,
-    properties: ''
+    updateOnly: false
   },
   boolean: ['updateOnly'],
   string: ['hasMarc', 'hasSubfield', 'bibId', 'fromDate', 'toDate'],
   integer: ['limit', 'offset', 'batchSize']
 })
+const { populateBarcodeRecapCustomerCodeCache } = require('../lib/scsb/requests')
 
 const isCalledViaCommandLine = /scripts\/bulk-index(.js)?/.test(fs.realpathSync(process.argv[1]))
 const dotenv = require('dotenv')
@@ -777,6 +790,15 @@ const validateParams = (argv) => {
   if (message) cancelRun(message)
 }
 
+/**
+ *  Given a path to a CSV, returns a plainobject mapping col 0 to col 1
+ */
+const barcodeCustomerCodeMapFromCsv = (path) => {
+  logger.info(`Loading barcode-recap-customer-code map from ${path}`)
+  return csvParse(fs.readFileSync(path, 'utf8'))
+    .reduce((h, [barcode, cc]) => Object.assign(h, { [barcode]: cc }), {})
+}
+
 // Main dispatcher:
 const run = async () => {
   // Validate args:
@@ -785,6 +807,15 @@ const run = async () => {
   overwriteModelPrefetch()
   if (argv.skipApiPrefetch || process.env.SKIP_API_PREFETCH === 'true') overwriteGeneralPrefetch()
   if (argv.updateOnly || process.env.UPDATE_ONLY) overwriteSchema(argv.properties || process.env.PROPERTIES)
+
+  // Use barcode-customer-code mapping file to skip SCSB API calls?
+  // This CSV is expected to contain two columns: barcode, customercode.
+  if (argv.recapBarcodeCustomerCodeMap) {
+    const lookup = barcodeCustomerCodeMapFromCsv(argv.recapBarcodeCustomerCodeMap)
+      .catch(die)
+    populateBarcodeRecapCustomerCodeCache(lookup)
+  }
+
   // Require one of:
   // - csv
   // - bib/item id
@@ -861,6 +892,7 @@ module.exports = {
     overwriteGeneralPrefetch,
     restoreGeneralPrefetch,
     overwriteSchema,
-    restoreSchema
+    restoreSchema,
+    barcodeCustomerCodeMapFromCsv
   }
 }
