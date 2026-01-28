@@ -632,11 +632,11 @@ describe('EsBib', function () {
     })
   })
 
-  describe('description', () => {
+  describe('summary', () => {
     it('should return array of the description', function () {
       const record = new SierraBib(require('../fixtures/bib-notes.json'))
       const esBib = new EsBib(record)
-      expect(esBib.description()).to.deep.equal(
+      expect(esBib.summary()).to.deep.equal(
         [
           'The Austin Hansen Collection primarily documents the people, places, and events in Harlem during the period from approximately the 1930s to the late 1980s. The Navy photography, produced when Hansen served on Manus Island in the South Pacific during the Second World War (1944-45), includes individual and group portraits of sailors, officers, South Seas inhabitants, and self-portraits.  Also included are views of daily military life and various construction projects.',
           'The Personalities series includes many well-known political, civil rights, labor, entertainment, literary, and sports figures. Among the more notable are Mary McLeod Bethune, Coretta Scott King, Canada Lee, Joe Louis, Adam Clayton Powell, Jr., A. Philip Randolph, Jackie Robinson, and Eleanor Roosevelt.',
@@ -649,10 +649,10 @@ describe('EsBib', function () {
       )
     })
 
-    it('should extract parallelDescription', () => {
+    it('should extract parallelSummary', () => {
       const record = new SierraBib(require('../fixtures/bib-23236773.json'))
       const esBib = new EsBib(record)
-      expect(esBib.parallelDescription()).to.deep.equal([
+      expect(esBib.parallelSummary()).to.deep.equal([
         '本书内容讲述:如果重绘中国当代文学"后三十年"的地图,这几个枢纽点是不应该被忽视的:1976年,1979年,1985年和1993年.1993年作为1980年代文学的终结点和1990年代文学的开启,具有历史枢纽点的特殊意义.因为只有在1993年的文学变局里,1980年代作为20世纪中国文学又一个"黄金十年"的历史命题才是成立的;而正是在这个枢纽点上,1990年代文学才告诉人们,它告别了当代文学漫长的理想浪漫期,回到了文学本来的面貌当中.'
       ])
     })
