@@ -1,0 +1,12 @@
+{
+    "query": {
+        "nested": {
+            "path": "items",
+            "query": {
+                "term": {
+                    "items.recapCustomerCode": "NA"
+                }
+            }
+        }
+    }
+}
