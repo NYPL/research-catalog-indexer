@@ -1,0 +1,13 @@
+{
+    "track_total_hits": true,
+    "query": {
+        "nested": {
+            "path": "items",
+            "query": {
+                "exists": {
+                    "field": "items.m2CustomerCode"
+                }
+            }
+        }
+    }
+}
