@@ -110,6 +110,14 @@ describe('EsBib', function () {
     })
   })
 
+  describe('creatorPacked', function () {
+    it('should return the creators packed with label', function () {
+      const record = new SierraBib(require('../fixtures/bib-10001936.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.creatorsPacked()).to.deep.equal(['Shermazanian, Galust||Shermazanian, Galust.'])
+    })
+  })
+
   describe('creatorLiteral', function () {
     it('should return the creator literal', function () {
       const record = new SierraBib(require('../fixtures/bib-10001936.json'))
@@ -538,6 +546,32 @@ describe('EsBib', function () {
       const record = new SierraBib(require('../fixtures/bib-hl990000453050203941.json'))
       const esBib = new EsBib(record)
       expect(esBib.contributor_sort()).to.deep.equal(['ginosar, sh. (shaleṿ), 1902-'])
+    })
+  })
+
+  describe('contributions', function () {
+    it('should return array of all contributions', function () {
+      const record = new SierraBib(require('../fixtures/bib-hl990000453050203941.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.contributions()).to.deep.equal(
+        [
+          'Israel',
+          'Ginosar, Sh. (Shaleṿ), 1902-',
+          'Ginosar, Sh. (Shaleṿ), 1902-||ed.'
+        ]
+      )
+    })
+  })
+
+  describe('contributorsPacked', function () {
+    it('should return array of contributors packed with labels', function () {
+      const record = new SierraBib(require('../fixtures/bib-hl990000453050203941.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.contributorsPacked()).to.deep.equal(
+        [
+          'Ginosar, Sh. (Shaleṿ), 1902-||Ginosar, Sh. (Shaleṿ), 1902-, ed.'
+        ]
+      )
     })
   })
 
