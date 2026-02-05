@@ -3,7 +3,7 @@
  * Given a ES query, identfies matching records and writes them to a local csv
  *
  * Options:
- *  --query QUERY - Provide ES query as a quoted JSON blob
+ *  --query QUERY - Provide ES query as a quoted JSON blob. See `./example-queries`
  *  --queryfile FILE - Provide a file path to a json file with the query. Should be relative to the script and in quotes.
  *  e.g. `--queryfile '../query.json'` in case you are in the main `discovery-hybrid-indexer` directory
  *  --outfile FILE - Specify where to write the CSV (default ./out.csv)

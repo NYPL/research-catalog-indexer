@@ -257,7 +257,7 @@
       }
     ]
   },
-  "description": {
+  "summary": {
     "paths": [
       {
         "marc": "520",
