@@ -184,39 +184,23 @@
 
     ]
   },
-  "contributorLiteralByRole": {
+  "contributor": {
     "paths": [
-      {
-        "marc": "700",
-        "subfields": [
-          "a",
-          "b",
-          "c",
-          "q",
-          "d",
-          "j"
-        ]
-      },
-      {
-        "marc": "710"
-      },
-      {
-        "marc": "711"
-      }
+      {"marc": "100"},
+      {"marc": "110"},
+      {"marc": "100"},
+      {"marc": "700"},
+      {"marc": "710"},
+      {"marc": "711"},
+      {"marc": "800"},
+      {"marc": "810"},
+      {"marc": "811"}
     ]
   },
   "creatorLiteral": {
     "paths": [
       {
-        "marc": "100",
-        "subfields": [
-          "a",
-          "b",
-          "c",
-          "q",
-          "d",
-          "j"
-        ]
+        "marc": "100"
       },
       {
         "marc": "110",
