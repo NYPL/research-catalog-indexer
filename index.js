@@ -50,18 +50,6 @@ const processRecords = async (type, records, options = {}) => {
   const plainObjectEsDocuments = esModels.map((record) => record.toPlainObject(schema.schema()))
   const messages = []
 
-  // Fetch subjects from all bibs, whether they are updates, creates, or deletes,
-  // and transmit to the browse pipeline. This must happen before writes to the
-  // resources index to determine any diff between new and old subjects
-  let browseTermDiffs
-  if (process.env.EMIT_BROWSE_TERMS === 'true') {
-    const esModelsForDeletions = removedBibs.map(bib => new EsBib(new SierraBib(bib)))
-    const changedRecords = [...esModels, ...esModelsForDeletions]
-    if ((changedRecords.length) && type === 'Bib') {
-      browseTermDiffs = await browse.buildBibSubjectEvents(changedRecords)
-    }
-  }
-
   if (plainObjectEsDocuments.length) {
     let summary
     if (options.dryrun) {
@@ -93,10 +81,12 @@ const processRecords = async (type, records, options = {}) => {
     messages.push(`Deleted ${recordsToDelete.length} doc(s)`)
     messages.push(`Deleted ids: ${recordsToDelete.map((record) => record.id)}`)
   }
-  if (!browseTermDiffs?.length) logger.info('No subject updates to process')
-  if (process.env.EMIT_BROWSE_TERMS === 'true' && browseTermDiffs?.length) {
-    const subjectHandler = process.env.BTI_INDEX_PATH ? browse.emitBibSubjectsToLocalBti : browse.emitBibSubjectEventsToSqs
-    await subjectHandler(browseTermDiffs)
+
+  if (process.env.EMIT_BROWSE_TERMS === 'true') {
+    // emit for deleted records as well
+    const allEsDocuments = esModels.concat(removedBibs.map(bib => new EsBib(new SierraBib(bib))))
+    browse.emitBrowseTerms(allEsDocuments, 'subject', 'subjectLiteral')
+    browse.emitBrowseTerms(allEsDocuments, 'contributor', 'contributorRoleLiteral')
   }
   const message = messages.length ? messages.join('; ') : 'Nothing to do.'
 

@@ -549,11 +549,11 @@ describe('EsBib', function () {
     })
   })
 
-  describe('contributions', function () {
+  describe('contributorRoleLiteral', function () {
     it('should return array of all contributions', function () {
       const record = new SierraBib(require('../fixtures/bib-hl990000453050203941.json'))
       const esBib = new EsBib(record)
-      expect(esBib.contributions()).to.deep.equal(
+      expect(esBib.contributorRoleLiteral()).to.deep.equal(
         [
           'Israel',
           'Ginosar, Sh. (Shaleṿ), 1902-',
