@@ -1,0 +1,49 @@
+{
+  "query": {
+    "bool": {
+      "should": [
+        {
+          "term": {
+            "language": "rup"
+          }
+        },
+        {
+          "term": {
+            "language": "rus"
+          }
+        },
+        {
+          "term": {
+            "language": "bel"
+          }
+        },
+        {
+          "term": {
+            "language": "ukr"
+          }
+        },
+        {
+          "term": {
+            "language": "aze"
+          }
+        },
+        {
+          "term": {
+            "language": "che"
+          }
+        },
+        {
+          "term": {
+            "language": "chu"
+          }
+        },
+        {
+          "term": {
+            "language": "bul"
+          }
+        }
+      ],
+      "minimum_should_match": 1
+    }
+  }
+}
