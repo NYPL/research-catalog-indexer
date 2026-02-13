@@ -4,12 +4,12 @@
 # in time immediately preceding when we started to create the new index)
 
 # Usage:
-#  - First delete the old triggers manually
-#  - Set FROM_TIMESTAMP below to a timestamp that precedes the start of your `_reindex`
+#  - First delete the old Bib, Item, and Holding triggers manually
+#  - Set FROM_TIMESTAMP (below) to a value that precedes the start of your `_reindex`
 #  - Set ENV appropriately
 #  - Run ./scripts/rewind-indexer.sh
 
-FROM_TIMESTAMP=2026-02-12T12:00:00-05:00
+FROM_TIMESTAMP=2026-02-12T15:10:00-05:00
 ENV=production
 
 echo Setting triggers for ResearchCatalogIndexer-$ENV to $FROM_TIMESTAMP
