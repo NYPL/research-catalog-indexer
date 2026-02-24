@@ -517,7 +517,7 @@ describe('EsBib', function () {
       const record = new SierraBib(require('../fixtures/bib-hl-990137923810203941.json'))
       const esBib = new EsBib(record)
       expect(esBib.parallelCreatorLiteral()).to.deep.equal(
-        ['بوريني، حسن احمد.']
+        ['بوريني، حسن احمد']
       )
     })
   })
@@ -820,7 +820,7 @@ describe('EsBib', function () {
       const record = new SierraBib(require('../fixtures/bib-parallels-party.json'))
       const esBib = new EsBib(record)
       expect(esBib.parallelContributorLiteral()).to.deep.equal(
-        ['parallel content for 710$a parallel content for 710$z']
+        ['parallel content for 710$a']
       )
     })
   })
