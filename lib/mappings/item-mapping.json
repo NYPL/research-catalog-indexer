@@ -40,7 +40,8 @@
         "subfields": [
           "k",
           "h",
-          "i"
+          "i",
+          "z"
         ],
         "notes": "Join 852 $k $h $i fields and fieldTag 'v' value (if available) with a space"
       },
