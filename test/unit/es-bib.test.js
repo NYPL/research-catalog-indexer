@@ -557,7 +557,7 @@ describe('EsBib', function () {
         [
           'Israel',
           'Ginosar, Sh. (Shaleṿ), 1902-',
-          'Ginosar, Sh. (Shaleṿ), 1902-||ed.'
+          'Ginosar, Sh. (Shaleṿ), 1902-||ed'
         ]
       )
     })
