@@ -62,7 +62,7 @@ describe('emitBrowseTerms', () => {
           {
             body: JSON.stringify({
               termType: 'contributor',
-              terms: [{ preferredTerm: 'Israel' }, { preferredTerm: 'Ginosar, Sh. (Shaleṿ), 1902-' }, { preferredTerm: 'Ginosar, Sh. (Shaleṿ), 1902-||ed.' }]
+              terms: [{ preferredTerm: 'Israel' }, { preferredTerm: 'Ginosar, Sh. (Shaleṿ), 1902-' }]
             })
           }
         ]
