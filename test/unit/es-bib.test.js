@@ -110,11 +110,11 @@ describe('EsBib', function () {
     })
   })
 
-  describe('creators_packed', function () {
+  describe('creators_displayPacked', function () {
     it('should return the creators packed with label', function () {
       const record = new SierraBib(require('../fixtures/bib-10001936.json'))
       const esBib = new EsBib(record)
-      expect(esBib.creators_packed()).to.deep.equal(['Shermazanian, Galust||Shermazanian, Galust.'])
+      expect(esBib.creators_displayPacked()).to.deep.equal(['Shermazanian, Galust||Shermazanian, Galust.'])
     })
   })
 
@@ -563,11 +563,11 @@ describe('EsBib', function () {
     })
   })
 
-  describe('contributors_packed', function () {
+  describe('contributors_displayPacked', function () {
     it('should return array of contributors packed with labels', function () {
       const record = new SierraBib(require('../fixtures/bib-aeon.json'))
       const esBib = new EsBib(record)
-      expect(esBib.contributors_packed()).to.deep.equal(
+      expect(esBib.contributors_displayPacked()).to.deep.equal(
         [
           'Aldanov, Mark Aleksandrovich, 1886-1957||Aldanov, Mark Aleksandrovich, 1886-1957.',
           'Kazan, Elia||Kazan, Elia.',
