@@ -2046,6 +2046,7 @@ describe('EsBib', function () {
             marcTag: '300',
             subfields: [
               { tag: 'a', content: '1 score (16 p.) ;' },
+              { tag: 'b', content: null },
               { tag: 'c', content: '29 cm' }
             ]
           }
@@ -2077,6 +2078,28 @@ describe('EsBib', function () {
 
       expect(await (esBib.physicalDescription())).to.deep.equal([
         '1 computer disk ; 3 1/2 in. + reference manual'
+      ])
+    })
+  })
+
+  describe('physicalDescriptionArray', () => {
+    it('extracts physicalDescription content for array subfields', async () => {
+      const bib = new SierraBib({
+        varFields: [
+          {
+            marcTag: '300',
+            subfields: [
+              { tag: 'a', content: ['1 computer disk ;', 'test'] },
+              { tag: 'c', content: '3 1/2 in. +' },
+              { tag: 'e', content: 'reference manual' }
+            ]
+          }
+        ]
+      })
+      const esBib = new EsBib(bib)
+
+      expect(await (esBib.physicalDescription())).to.deep.equal([
+        '1 computer disk ; test ; 3 1/2 in. + reference manual'
       ])
     })
   })
