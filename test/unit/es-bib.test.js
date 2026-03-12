@@ -110,11 +110,11 @@ describe('EsBib', function () {
     })
   })
 
-  describe('creatorPacked', function () {
+  describe('creators_displayPacked', function () {
     it('should return the creators packed with label', function () {
       const record = new SierraBib(require('../fixtures/bib-10001936.json'))
       const esBib = new EsBib(record)
-      expect(esBib.creatorsPacked()).to.deep.equal(['Shermazanian, Galust||Shermazanian, Galust.'])
+      expect(esBib.creators_displayPacked()).to.deep.equal(['Shermazanian, Galust||Shermazanian, Galust.'])
     })
   })
 
@@ -549,11 +549,11 @@ describe('EsBib', function () {
     })
   })
 
-  describe('contributorRoleLiteral', function () {
+  describe('browseableContributorRole_packed', function () {
     it('should return array of all contributions', function () {
       const record = new SierraBib(require('../fixtures/bib-hl990000453050203941.json'))
       const esBib = new EsBib(record)
-      expect(esBib.contributorRoleLiteral()).to.deep.equal(
+      expect(esBib.browseableContributorRole_packed()).to.deep.equal(
         [
           'Israel',
           'Ginosar, Sh. (Shaleṿ), 1902-',
@@ -563,13 +563,39 @@ describe('EsBib', function () {
     })
   })
 
-  describe('contributorsPacked', function () {
+  describe('contributors_displayPacked', function () {
     it('should return array of contributors packed with labels', function () {
-      const record = new SierraBib(require('../fixtures/bib-hl990000453050203941.json'))
+      const record = new SierraBib(require('../fixtures/bib-aeon.json'))
       const esBib = new EsBib(record)
-      expect(esBib.contributorsPacked()).to.deep.equal(
+      expect(esBib.contributors_displayPacked()).to.deep.equal(
         [
-          'Ginosar, Sh. (Shaleṿ), 1902-||Ginosar, Sh. (Shaleṿ), 1902-, ed.'
+          'Aldanov, Mark Aleksandrovich, 1886-1957||Aldanov, Mark Aleksandrovich, 1886-1957.',
+          'Kazan, Elia||Kazan, Elia.',
+          'Makovskii, Sergei Konstantinovich, 1877-1962||Makovskii, Sergei Konstantinovich, 1877-1962.',
+          'Nabokov, Elena Ivanovna||Nabokov, Elena Ivanovna.',
+          'Nabokova, Vera||Nabokova, Vera.',
+          'Struve, Gleb||Struve, Gleb.',
+          'Wilson, Edmund, 1895-1972||Wilson, Edmund, 1895-1972.',
+          'Bruccoli, Matthew Joseph, 1931-||Bruccoli, Matthew Joseph, 1931-',
+          'Plimpton, George||Plimpton, George.',
+          'Nabokov, Vladimir Vladimirovich, 1899-1977||Nabokov, Vladimir Vladimirovich, 1899-1977, former owner.',
+          'Boyle, Kay, 1902-1992||Boyle, Kay, 1902-1992, former owner.',
+          'Field, Andrew, 1938-||Field, Andrew, 1938-, former owner.',
+          'Bollingen Foundation||Bollingen Foundation.',
+          'Izdatelstvo imeni Chekhova (New York, N.Y.)||Izdatelstvo imeni Chekhova (New York, N.Y.)',
+          'Bureau littřaire D. Clairouin||Bureau littřaire D. Clairouin.',
+          'Cornell University||Cornell University.',
+          'Doubleday and Company, inc||Doubleday and Company, inc.',
+          'Librarie Gallimard||Librarie Gallimard.',
+          'Harper & Brothers||Harper & Brothers.',
+          'Henry Holt and Company||Henry Holt and Company.',
+          'McGraw-Hill, inc||McGraw-Hill, inc.',
+          'New Directions Publishing||New Directions Publishing.',
+          'New Yorker Magazine, Inc||New Yorker Magazine, Inc.',
+          'G.P. Putnam\'s Sons||G.P. Putnam\'s Sons.',
+          'Viking Press||Viking Press.',
+          'Weidenfeld and Nicolson (Firm)||Weidenfeld and Nicolson (Firm)',
+          'Prins & Prins||Prins & Prins.'
         ]
       )
     })
