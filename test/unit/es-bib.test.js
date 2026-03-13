@@ -1211,6 +1211,15 @@ describe('EsBib', function () {
       const esBib = new EsBib(record)
       expect(esBib.shelfMark()).to.deep.equal(['*ZAN-10228 no. 1'])
     })
+
+    it('should allow multiple shelfmarks', () => {
+      const record = new SierraBib(require('../fixtures/bib-12147603.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.shelfMark()).to.deep.equal([
+        '*MGZIC 9-603',
+        '*MGZHB 12-127 (Additional copy)'
+      ])
+    })
   })
 
   describe('subjectLiteral', () => {
