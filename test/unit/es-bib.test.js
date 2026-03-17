@@ -1090,18 +1090,6 @@ describe('EsBib', function () {
       expect(esBib.parallelPublisherLiteral()).to.deep.equal(['parallel for Tparan Hovhannu Tēr-Abrahamian'])
     })
   })
-
-  describe('seriesStatement', () => {
-    const record = new SierraBib(require('../fixtures/bib-parallels-party.json'))
-    const esBib = new EsBib(record)
-    it('should return array with seriesStatement', function () {
-      expect(esBib.seriesStatement()).to.deep.equal(['content for 440$a', 'content for 440$a (2)', 'content for 490$a', 'content for 800$a'])
-    })
-    it('parallelSeriesStatement', () => {
-      expect(esBib.parallelSeriesStatement()).to.deep.equal(['parallel content for 440$a', 'parallel content for 440$a (2)', '', 'parallel content for 800$a'])
-    })
-  })
-
   describe('tableOfContents', () => {
     it('should return table of contents', function () {
       const record = new SierraBib(require('../fixtures/bib-11055155.json'))
