@@ -1948,6 +1948,14 @@ describe('EsBib', function () {
       const esBib = new EsBib(bib)
       expect(await (esBib.buildingLocationIds())).to.deep.equal(['rc'])
     })
+
+    it('supports SNFL bibs', async () => {
+      const bib = new SierraBib(require('../fixtures/bib-10021966.json'))
+      bib._items = [new SierraItem(require('../fixtures/item-14749685.json'))]
+      bib._holdings = []
+      const esBib = new EsBib(bib)
+      expect(await (esBib.buildingLocationIds())).to.deep.equal(['bu'])
+    })
   })
 
   describe('series', () => {
