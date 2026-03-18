@@ -980,17 +980,25 @@
   "series": {
     "paths": [
       {
-        "marc": "440",
-        "subfields": [
-          "a"
-        ]
-      },
-      {
         "marc": "490",
         "subfields": [
           "a"
         ]
-      },
+      }
+    ]
+  },
+  "seriesUniformTitle": {
+    "paths": [
+      {
+        "marc": "830",
+        "subfields": [
+          "a"
+        ]
+      }
+    ]
+  },
+  "seriesAddedEntry": {
+    "paths": [
       {
         "marc": "800",
         "excludedSubfields": [
@@ -999,6 +1007,12 @@
       },
       {
         "marc": "810",
+        "excludedSubfields": [
+          "6"
+        ]
+      },
+      {
+        "marc": "811",
         "excludedSubfields": [
           "6"
         ]
