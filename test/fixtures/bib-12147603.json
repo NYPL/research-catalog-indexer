@@ -1,0 +1,756 @@
+{
+  "id": "12147603",
+  "nyplSource": "sierra-nypl",
+  "title": "Night journey [videorecording]",
+  "author": "",
+  "publishYear": 1960,
+  "nyplType": "bib",
+  "controlNumber": "NYPY737039075-F",
+  "standardNumbers": [],
+  "updatedDate": "2023-07-21T00:23:33",
+  "createdDate": "2008-12-15T18:12:00",
+  "deletedDate": null,
+  "catalogDate": "2000-05-17T00:00:00",
+  "deleted": false,
+  "suppressed": false,
+  "locations": [
+    {
+      "code": "pad",
+      "name": "Performing Arts Research Collections - Dance"
+    }
+  ],
+  "lang": {
+    "code": "eng",
+    "name": "English"
+  },
+  "materialType": {
+    "code": "g  ",
+    "value": "FILM,SLIDE,ETC"
+  },
+  "bibLevel": {
+    "code": "m",
+    "value": "MONOGRAPH"
+  },
+  "country": {
+    "code": "xxu",
+    "name": "United States"
+  },
+  "normTitle": "night journey videorecording",
+  "normAuthor": "",
+  "fixedFields": {
+    "24": {
+      "label": "Language",
+      "value": "eng",
+      "display": "English"
+    },
+    "25": {
+      "label": "Skip",
+      "value": "0",
+      "display": null
+    },
+    "26": {
+      "label": "Location",
+      "value": "pad  ",
+      "display": "Performing Arts Research Collections - Dance"
+    },
+    "27": {
+      "label": "",
+      "value": "2",
+      "display": null
+    },
+    "28": {
+      "label": "Cat. Date",
+      "value": "2000-05-17",
+      "display": null
+    },
+    "29": {
+      "label": "Bib Level",
+      "value": "m",
+      "display": "MONOGRAPH"
+    },
+    "30": {
+      "label": "Material Type",
+      "value": "g  ",
+      "display": "FILM,SLIDE,ETC"
+    },
+    "31": {
+      "label": "Bib Code 3",
+      "value": "-",
+      "display": null
+    },
+    "80": {
+      "label": "Record Type",
+      "value": "b",
+      "display": null
+    },
+    "81": {
+      "label": "Record Number",
+      "value": "12147603",
+      "display": null
+    },
+    "83": {
+      "label": "Created Date",
+      "value": "2008-12-15T18:12:00Z",
+      "display": null
+    },
+    "84": {
+      "label": "Updated Date",
+      "value": "2023-07-21T00:23:33Z",
+      "display": null
+    },
+    "85": {
+      "label": "No. of Revisions",
+      "value": "19",
+      "display": null
+    },
+    "86": {
+      "label": "Agency",
+      "value": "1",
+      "display": null
+    },
+    "89": {
+      "label": "Country",
+      "value": "xxu",
+      "display": "United States"
+    },
+    "98": {
+      "label": "",
+      "value": "2023-07-18T19:49:35Z",
+      "display": null
+    },
+    "107": {
+      "label": "MARC Type",
+      "value": " ",
+      "display": null
+    }
+  },
+  "varFields": [
+    {
+      "ind1": "1",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "700",
+      "fieldTag": "b",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Graham, Martha,"
+        },
+        {
+          "tag": "e",
+          "content": "choreographer,"
+        },
+        {
+          "tag": "e",
+          "content": "dancer."
+        }
+      ]
+    },
+    {
+      "ind1": "1",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "700",
+      "fieldTag": "b",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Ross, Bertram,"
+        },
+        {
+          "tag": "d",
+          "content": "1920-2003,"
+        },
+        {
+          "tag": "e",
+          "content": "dancer."
+        }
+      ]
+    },
+    {
+      "ind1": "1",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "700",
+      "fieldTag": "b",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Taylor, Paul,"
+        },
+        {
+          "tag": "d",
+          "content": "1930-2018,"
+        },
+        {
+          "tag": "e",
+          "content": "dancer."
+        }
+      ]
+    },
+    {
+      "ind1": "1",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "700",
+      "fieldTag": "b",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "McGehee, Helen,"
+        },
+        {
+          "tag": "e",
+          "content": "dancer."
+        }
+      ]
+    },
+    {
+      "ind1": "1",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "700",
+      "fieldTag": "b",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Kroll, Nathan."
+        },
+        {
+          "tag": "4",
+          "content": "pro"
+        }
+      ]
+    },
+    {
+      "ind1": "1",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "700",
+      "fieldTag": "b",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Noguchi, Isamu,"
+        },
+        {
+          "tag": "d",
+          "content": "1904-1988."
+        },
+        {
+          "tag": "4",
+          "content": "dsr"
+        }
+      ]
+    },
+    {
+      "ind1": "1",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "700",
+      "fieldTag": "b",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Schuman, William,"
+        },
+        {
+          "tag": "d",
+          "content": "1910-1992."
+        },
+        {
+          "tag": "t",
+          "content": "Night journey."
+        }
+      ]
+    },
+    {
+      "ind1": "1",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "700",
+      "fieldTag": "b",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Hammid, Alexander."
+        },
+        {
+          "tag": "4",
+          "content": "drt"
+        }
+      ]
+    },
+    {
+      "ind1": "2",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "710",
+      "fieldTag": "b",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Martha Graham Dance Company."
+        }
+      ]
+    },
+    {
+      "ind1": "1",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "700",
+      "fieldTag": "b",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Graham, Martha."
+        },
+        {
+          "tag": "t",
+          "content": "Night journey"
+        }
+      ]
+    },
+    {
+      "ind1": "8",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "852",
+      "fieldTag": "c",
+      "subfields": [
+        {
+          "tag": "h",
+          "content": "*MGZIC 9-603"
+        }
+      ]
+    },
+    {
+      "ind1": "8",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "852",
+      "fieldTag": "c",
+      "subfields": [
+        {
+          "tag": "h",
+          "content": "*MGZHB 12-127 (Additional copy)"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "4",
+      "content": null,
+      "marcTag": "690",
+      "fieldTag": "d",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Motion pictures."
+        },
+        {
+          "tag": "b",
+          "content": "Night journey."
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "035",
+      "fieldTag": "l",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "(NN-PD)737039075"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "035",
+      "fieldTag": "l",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "(WaOLN)nyp2134261"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "500",
+      "fieldTag": "n",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Producer: Nathan Kroll.  Director: Alexander Hammid.  Photographer: Stanley Meredith."
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "500",
+      "fieldTag": "n",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Choreographer: Martha Graham.  Sets: Isamu Noguchi.  Score: William Schuman.  Cast: Martha Graham (Jocasta), Bertram Ross (Oedipus), Paul Taylor (Tiresias), Helen McGehee (leader of the chorus), Ethel Winter, Mary Hinkson, Linda Hodes, Akiko Kanda, Carol Payne, and Bette Shaler."
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "500",
+      "fieldTag": "n",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "For another videotape of Night journey, see *MGZIA 4-746  Martha Graham--an American original in performance."
+        }
+      ]
+    },
+    {
+      "ind1": "0",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "590",
+      "fieldTag": "n",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Arch. Orig.: 1 reel 16mm positive; purchased by the Dance Division in 5/1960; transferred 2/2011 from IMAR to ReCAP Cold Storage."
+        }
+      ]
+    },
+    {
+      "ind1": "0",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "590",
+      "fieldTag": "n",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Neg.: none."
+        }
+      ]
+    },
+    {
+      "ind1": "0",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "590",
+      "fieldTag": "n",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Edit Master: none."
+        }
+      ]
+    },
+    {
+      "ind1": "0",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "590",
+      "fieldTag": "n",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Add. copy: none."
+        }
+      ]
+    },
+    {
+      "ind1": "0",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "590",
+      "fieldTag": "n",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Vid. Pres. Master: none."
+        }
+      ]
+    },
+    {
+      "ind1": "0",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "590",
+      "fieldTag": "n",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Vid. View. Copy: 1 3/4\" cassette; purchased by the Dance Div. from Phoenix Film and Video, 10/83."
+        }
+      ]
+    },
+    {
+      "ind1": "0",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "590",
+      "fieldTag": "n",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Film View. Copy: 1 16mm print, source and date unknown; on shelf."
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": "NYPY737039075-F",
+      "marcTag": "001",
+      "fieldTag": "o",
+      "subfields": null
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "260",
+      "fieldTag": "p",
+      "subfields": [
+        {
+          "tag": "c",
+          "content": "1960."
+        }
+      ]
+    },
+    {
+      "ind1": "8",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "852",
+      "fieldTag": "q",
+      "subfields": [
+        {
+          "tag": "h",
+          "content": "*MGZIC 9-603"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "300",
+      "fieldTag": "r",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "1 videocassette (U-matic, NTSC) (29 min.) :"
+        },
+        {
+          "tag": "b",
+          "content": "sd., b&w. ;"
+        },
+        {
+          "tag": "c",
+          "content": "3/4 in."
+        }
+      ]
+    },
+    {
+      "ind1": "0",
+      "ind2": "0",
+      "content": null,
+      "marcTag": "245",
+      "fieldTag": "t",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Night journey"
+        },
+        {
+          "tag": "h",
+          "content": "[videorecording]"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "959",
+      "fieldTag": "v",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": ".b36242366"
+        },
+        {
+          "tag": "b",
+          "content": "12-18-08"
+        },
+        {
+          "tag": "c",
+          "content": "09-17-95"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": "CStRLIN",
+      "marcTag": "003",
+      "fieldTag": "y",
+      "subfields": null
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": "19990811162126.2",
+      "marcTag": "005",
+      "fieldTag": "y",
+      "subfields": null
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": "mr|b|ab||||||||||||||||",
+      "marcTag": "007",
+      "fieldTag": "y",
+      "subfields": null
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": "730215s1960    xxu|    ||||||    m|eng dcgmzi ",
+      "marcTag": "008",
+      "fieldTag": "y",
+      "subfields": null
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "040",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "NN-PD"
+        },
+        {
+          "tag": "c",
+          "content": "NN-PD"
+        },
+        {
+          "tag": "d",
+          "content": "CStRLIN"
+        },
+        {
+          "tag": "d",
+          "content": "WaOLN"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "901",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "pdk"
+        },
+        {
+          "tag": "b",
+          "content": "SFP"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "903",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Less than half of chorus appears; wrong costumes used; distorting camera angles."
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "997",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "pd"
+        },
+        {
+          "tag": "b",
+          "content": "05-17-00"
+        },
+        {
+          "tag": "c",
+          "content": "m"
+        },
+        {
+          "tag": "d",
+          "content": "g"
+        },
+        {
+          "tag": "e",
+          "content": "-"
+        },
+        {
+          "tag": "f",
+          "content": "eng"
+        },
+        {
+          "tag": "g",
+          "content": "xxu"
+        },
+        {
+          "tag": "h",
+          "content": "0"
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "910",
+      "fieldTag": "y",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "RL"
+        }
+      ]
+    },
+    {
+      "ind1": null,
+      "ind2": null,
+      "content": "00000cgm  2200373zi 4500",
+      "marcTag": null,
+      "fieldTag": "_",
+      "subfields": null
+    }
+  ]
+}
