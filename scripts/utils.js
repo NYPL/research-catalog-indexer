@@ -207,6 +207,12 @@ function printDiff (remote, local, verbose) {
       } else {
         console.log(`  Both documents have ${remote[holdingsOrItems].length} ${holdingsOrItems}`)
       }
+      if (local.items) {
+        console.log('  Item sort: ')
+        local.items.forEach((item) => {
+          console.log(`    ${item.shelfMark} > ${item.enumerationChronology}`)
+        })
+      }
 
       if (remote[holdingsOrItems] && local[holdingsOrItems]) {
         remote[holdingsOrItems].forEach((remoteItem) => {

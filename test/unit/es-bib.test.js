@@ -87,7 +87,7 @@ describe('EsBib', function () {
 
       // An item from Moving Image and Sound Division
       bib._items.push(new SierraItem(require('../fixtures/item-37528709.json')))
-      expect(await (new EsBib(bib)).collectionIds()).to.deep.equal(['scb', 'map'])
+      expect(await (new EsBib(bib)).collectionIds()).to.deep.equal(['map', 'scb'])
     })
     it('checks fixed field 26 for location on bibs with no items', async () => {
       const resBib = new SierraBib(require('../fixtures/bib-15109087.json'))
@@ -1735,7 +1735,8 @@ describe('EsBib', function () {
       // Adopt some random items:
       sierraBib._items = [
         new SierraItem(require('../fixtures/item-10003973.json')),
-        new SierraItem(require('../fixtures/item-17145801.json'))
+        new SierraItem(require('../fixtures/item-29450615.json')),
+        new SierraItem(require('../fixtures/item-29450607.json'))
       ]
       sierraBib._holdings = []
       bib = new EsBib(sierraBib)
@@ -1744,13 +1745,13 @@ describe('EsBib', function () {
     it('items() returns array of items', async () => {
       const items = await bib.items()
       expect(items).to.be.a('array')
-      expect(items).to.have.lengthOf(2)
+      expect(items).to.have.lengthOf(3)
       expect(items[0].idBarcode()).to.deep.equal(['33433107664710'])
     })
 
     it('numItemsTotal()', async () => {
       const itemsCount = await bib.numItemsTotal()
-      expect(itemsCount).to.deep.equal([2])
+      expect(itemsCount).to.deep.equal([3])
     })
 
     it('numCheckinCardItems()', async () => {
@@ -1760,25 +1761,17 @@ describe('EsBib', function () {
 
     it('numItemVolumesParsed()', async () => {
       const numParsed = await bib.numItemVolumesParsed()
-      expect(numParsed).to.deep.equal([1])
+      expect(numParsed).to.deep.equal([2])
     })
 
-    it('sorts by shelfMark_sort()', async () => {
-      let items = await bib.items()
-      let uris = await Promise.all(items.map((i) => i.uri()))
-      expect(uris[0]).to.equal('i10003973')
-      expect(uris[1]).to.equal('i17145801')
+    it('sorts items by shelfmark, volumes, etc', async () => {
+      const items = await bib.items()
 
-      // Reverse the items stored in the bib:
-      bib.bib._items.reverse()
-      items = await bib.items()
-      uris = await Promise.all(items.map((i) => i.uri()))
-      // Verify order has been reversed:
-      expect(bib.bib._items[0].id).to.equal('17145801')
-      expect(bib.bib._items[1].id).to.equal('10003973')
-      // Verify they're still returned ordered by shelfMark:
-      expect(uris[0]).to.equal('i10003973')
-      expect(uris[1]).to.equal('i17145801')
+      // First item is '*z-3527', 'District of Columbia-Illinois'
+      expect(items[0].uri()).to.equal('i10003973')
+      // Next two items are 'jfl 76-252', 'no. 182 (spring 2000)' & 'no. 183 (autumn 2000)'
+      expect(items[1].uri()).to.equal('i29450607')
+      expect(items[2].uri()).to.equal('i29450615')
     })
   })
 
@@ -1870,13 +1863,13 @@ describe('EsBib', function () {
       bib._items.push(new SierraItem(require('../fixtures/item-10003973.json')))
       expect(await (new EsBib(bib)).buildingLocationIds()).to.deep.equal(['rc'])
 
-      // Adopt another RC items:
+      // Adopt another RC items
       bib._items.push(new SierraItem(require('../fixtures/item-17145801.json')))
       expect(await (new EsBib(bib)).buildingLocationIds()).to.deep.equal(['rc'])
 
       // Adopt a Maps items:
       bib._items.push(new SierraItem(require('../fixtures/item-14441624.json')))
-      expect(await (new EsBib(bib)).buildingLocationIds()).to.deep.equal(['ma', 'rc'])
+      expect(await (new EsBib(bib)).buildingLocationIds()).to.deep.equal(['rc', 'ma'])
 
       // Replace with a single SC item:
       bib._items = [new SierraItem(require('../fixtures/item-37528709.json'))]
