@@ -2080,9 +2080,9 @@ describe('EsBib', function () {
     it('extracts seriesAddedEntry (800, 810, 811 fields, excluding $6)', async () => {
       const result = await esBib.seriesAddedEntry()
       expect(result).to.deep.equal([
-        '800 Series Added Entry: Meier, C. A. (Carl Alfred) 1905-1995 Lehrbuch der komplexen Psychologie C.G. Jungs English v. 1.',
-        '810 Series Added Entry: United States Congress House Report 112-664.',
-        '811 Series Added Entry: Inter-American Conference on Agriculture (3rd : 1945 : Caracas, Venezuela) Cuadernos verdes Serie nacional 14.'
+        '800 Series Added Entry: Meier, C. A. (Carl Alfred) 1905-1995 Lehrbuch der komplexen Psychologie C.G. Jungs English v. 1',
+        '810 Series Added Entry: United States Congress House Report 112-664',
+        '811 Series Added Entry: Inter-American Conference on Agriculture (3rd : 1945 : Caracas, Venezuela) Cuadernos verdes Serie nacional 14'
       ])
     })
     it('handles multiple seriesAddedEntry fields correctly', async () => {
@@ -2095,11 +2095,11 @@ describe('EsBib', function () {
     it('concatenates subfields properly for seriesAddedEntry', async () => {
       const result = await esBib.seriesAddedEntry()
       // 800 field concatenates a, q, d, t, l, v
-      expect(result[0]).to.equal('800 Series Added Entry: Meier, C. A. (Carl Alfred) 1905-1995 Lehrbuch der komplexen Psychologie C.G. Jungs English v. 1.')
+      expect(result[0]).to.equal('800 Series Added Entry: Meier, C. A. (Carl Alfred) 1905-1995 Lehrbuch der komplexen Psychologie C.G. Jungs English v. 1')
       // 810 field concatenates a, b, b, t, v
-      expect(result[1]).to.equal('810 Series Added Entry: United States Congress House Report 112-664.')
+      expect(result[1]).to.equal('810 Series Added Entry: United States Congress House Report 112-664')
       // 811 field concatenates a, n, t, p, v
-      expect(result[2]).to.equal('811 Series Added Entry: Inter-American Conference on Agriculture (3rd : 1945 : Caracas, Venezuela) Cuadernos verdes Serie nacional 14.')
+      expect(result[2]).to.equal('811 Series Added Entry: Inter-American Conference on Agriculture (3rd : 1945 : Caracas, Venezuela) Cuadernos verdes Serie nacional 14')
     })
     it('series_displayPacked returns a||full for 490 fields', () => {
       const result = esBib.series_displayPacked()
@@ -2116,9 +2116,9 @@ describe('EsBib', function () {
     it('seriesAddedEntry_displayPacked returns name||label for 800/810/811', () => {
       const result = esBib.seriesAddedEntry_displayPacked()
       expect(result).to.deep.equal([
-        '800 Series Added Entry: Meier, C. A. (Carl Alfred) 1905-1995||800 Series Added Entry: Meier, C. A. (Carl Alfred) 1905-1995 Lehrbuch der komplexen Psychologie C.G. Jungs English v. 1.',
-        '810 Series Added Entry: United States Congress House||810 Series Added Entry: United States Congress House Report 112-664.',
-        '811 Series Added Entry: Inter-American Conference on Agriculture (3rd : 1945 : Caracas, Venezuela)||811 Series Added Entry: Inter-American Conference on Agriculture (3rd : 1945 : Caracas, Venezuela) Cuadernos verdes Serie nacional 14.'
+        '800 Series Added Entry: Meier, C. A. (Carl Alfred) 1905-1995||800 Series Added Entry: Meier, C. A. (Carl Alfred) 1905-1995 Lehrbuch der komplexen Psychologie C.G. Jungs English v. 1',
+        '810 Series Added Entry: United States Congress House||810 Series Added Entry: United States Congress House Report 112-664',
+        '811 Series Added Entry: Inter-American Conference on Agriculture (3rd : 1945 : Caracas, Venezuela)||811 Series Added Entry: Inter-American Conference on Agriculture (3rd : 1945 : Caracas, Venezuela) Cuadernos verdes Serie nacional 14'
       ])
     })
   })
