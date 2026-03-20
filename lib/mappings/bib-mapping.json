@@ -1000,22 +1000,13 @@
   "seriesAddedEntry": {
     "paths": [
       {
-        "marc": "800",
-        "excludedSubfields": [
-          "6"
-        ]
+        "marc": "800"
       },
       {
-        "marc": "810",
-        "excludedSubfields": [
-          "6"
-        ]
+        "marc": "810"
       },
       {
-        "marc": "811",
-        "excludedSubfields": [
-          "6"
-        ]
+        "marc": "811"
       }
     ]
   },
