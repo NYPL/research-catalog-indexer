@@ -522,6 +522,16 @@ describe('EsBib', function () {
     })
   })
 
+  describe('parallelCreators_displayPacked', function () {
+    it('should return the parallel creator literals packed with display strings', function () {
+      const record = new SierraBib(require('../fixtures/bib-hl-990137923810203941.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.parallelCreators_displayPacked()).to.deep.equal(
+        ['بوريني، حسن احمد||بوريني، حسن احمد']
+      )
+    })
+  })
+
   describe('contentsTitle', function () {
     it('should return the contents title values in an array', function () {
       const record = new SierraBib(require('../fixtures/bib-11055155.json'))
@@ -847,6 +857,16 @@ describe('EsBib', function () {
       const esBib = new EsBib(record)
       expect(esBib.parallelContributorLiteral()).to.deep.equal(
         ['parallel content for 710$a']
+      )
+    })
+  })
+
+  describe('parallelContributors_displayPacked', function () {
+    it('should return browseable parallel contributor fields packed with display strings', function () {
+      const record = new SierraBib(require('../fixtures/bib-23033611.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.parallelContributors_displayPacked()).to.deep.equal(
+        ['Народна библиотека "Стефан Првовенчани"||Народна библиотека "Стефан Првовенчани", issuing body']
       )
     })
   })
