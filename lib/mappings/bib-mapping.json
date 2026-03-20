@@ -980,133 +980,33 @@
   "series": {
     "paths": [
       {
-        "marc": "440",
-        "subfields": [
-          "a"
-        ]
-      },
-      {
         "marc": "490",
         "subfields": [
           "a"
-        ]
-      },
-      {
-        "marc": "800",
-        "excludedSubfields": [
-          "6"
-        ]
-      },
-      {
-        "marc": "810",
-        "excludedSubfields": [
-          "6"
         ]
       }
     ]
   },
-  "seriesStatement": {
+  "seriesUniformTitle": {
     "paths": [
       {
-        "marc": "440",
+        "marc": "830",
         "subfields": [
-          "3",
-          "a",
-          "x",
-          "v",
-          "l"
+          "a"
         ]
+      }
+    ]
+  },
+  "seriesAddedEntry": {
+    "paths": [
+      {
+        "marc": "800"
       },
       {
-        "marc": "490",
-        "subfields": [
-          "3",
-          "a",
-          "x",
-          "v",
-          "l"
-        ]
+        "marc": "810"
       },
       {
-        "marc": "800",
-        "subfields": [
-          "a",
-          "b",
-          "c",
-          "d",
-          "e",
-          "f",
-          "g",
-          "h",
-          "i",
-          "j",
-          "k",
-          "l",
-          "m",
-          "n",
-          "o",
-          "p",
-          "q",
-          "r",
-          "s",
-          "t",
-          "u",
-          "v"
-        ]
-      },
-      {
-        "marc": "810",
-        "subfields": [
-          "a",
-          "b",
-          "c",
-          "d",
-          "e",
-          "f",
-          "g",
-          "h",
-          "i",
-          "j",
-          "k",
-          "l",
-          "m",
-          "n",
-          "o",
-          "p",
-          "q",
-          "r",
-          "s",
-          "t",
-          "u",
-          "v"
-        ]
-      },
-      {
-        "marc": "811",
-        "subfields": [
-          "a",
-          "b",
-          "c",
-          "d",
-          "e",
-          "f",
-          "g",
-          "h",
-          "i",
-          "j",
-          "k",
-          "l",
-          "m",
-          "n",
-          "o",
-          "p",
-          "q",
-          "r",
-          "s",
-          "t",
-          "u",
-          "v"
-        ]
+        "marc": "811"
       }
     ]
   },
@@ -1244,25 +1144,6 @@
           "r",
           "s",
           "t"
-        ]
-      },
-      {
-        "marc": "830",
-        "subfields": [
-          "a",
-          "d",
-          "f",
-          "g",
-          "k",
-          "l",
-          "m",
-          "n",
-          "o",
-          "p",
-          "r",
-          "s",
-          "t",
-          "v"
         ]
       }
     ]
