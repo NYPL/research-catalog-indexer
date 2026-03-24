@@ -1,4 +1,7 @@
 const expect = require('chai').expect
+
+const { loadNyplCoreData } = require('../../lib/load-core-data')
+const loadCoreData = require('../../lib/load-core-data')
 const filters = require('../../lib/utils/checkin-card-filters')
 
 describe('utils/checkin-card-filters', () => {
@@ -168,6 +171,48 @@ describe('utils/checkin-card-filters', () => {
 
       item = { holdingLocation: () => [{ id: 'loc:ma123' }] }
       expect(filters._private.isOffsiteCheckinCard(item)).to.equal(false)
+    })
+  })
+
+  describe('hasAllowedStatus', () => {
+    let restoreCachedData
+    before(() => {
+      restoreCachedData = loadCoreData._private.cache
+      console.log('captured nypl-core as ', restoreCachedData)
+
+      loadCoreData._private.setCached({
+        checkinCardStatusMapping: {
+          '🎸': { display: true },
+          '❌': { display: false },
+          '❓': { }
+        }
+      })
+    })
+
+    after(async () => {
+      console.log('restoring nypl-core data to ', restoreCachedData)
+      loadCoreData._private.setCached(restoreCachedData)
+
+      // Other tests depend on this:
+      await loadNyplCoreData()
+    })
+
+    it('identifies allowed statuses', () => {
+      let item = { checkinCard: { status: { code: '🎸' } } }
+      expect(filters._private.hasAllowedStatus(item)).to.equal(true)
+
+      // If checkin card status doesn't indicate `display`, defautl to show:
+      item = { checkinCard: { status: { code: '❓' } } }
+      expect(filters._private.hasAllowedStatus(item)).to.equal(true)
+
+      // If checkin code unrecognized, default to show:
+      item = { checkinCard: { status: { code: 'foo' } } }
+      expect(filters._private.hasAllowedStatus(item)).to.equal(true)
+    })
+
+    it('identifies disallowed statuses', () => {
+      const item = { checkinCard: { status: { code: '❌' } } }
+      expect(filters._private.hasAllowedStatus(item)).to.equal(false)
     })
   })
 })

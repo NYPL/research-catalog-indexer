@@ -61,7 +61,6 @@ const run = async () => {
   const bib = recordsToIndex[0]
   const items = await bib.items()
 
-  // console.log(`  Distinct shelfmark groups: ${shelfmarkGroups.map((g) => `${g.shelfmark} (${g.items.length})`).join(', ')}`)
   const data = [[
     'URI',
     'Shelfmark (normalized)',
@@ -79,11 +78,10 @@ const run = async () => {
   const columnWidths = data[0].map((_, ind) => {
     return data.reduce((max, row) => Math.max(max, (row[ind] || '').length), 0) + 2
   })
-  console.log({ columnWidths })
   const rows = data.map((row) => {
     return row.map((val, ind) => ('' + val).padEnd(columnWidths[ind], ' ')).join(' | ')
   })
-  console.log(rows.join('\n'))
+  console.info(rows.join('\n'))
 }
 
 run()
