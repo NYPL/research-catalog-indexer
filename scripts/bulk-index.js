@@ -579,56 +579,75 @@ const updateByBibOrItemServiceQuery = async (options) => {
   let count = 0
   const startTime = new Date()
   let done = false
+  let lastProcessedId = null
+  let reconnectRetries = options._reconnectRetries || 0
+
   while (!done && (count < options.limit || !options.limit)) {
-    await instrument('Bulk-index batch', async () => {
-      // Pull next batch of records from the cursor:
-      let rows
-      try {
-        rows = await readCursorRecurser(options.batchSize, cursor)
-      } catch (e) {
-        cursor.close(() => {
-          client.release()
-        })
-        throw e
-      }
-
-      // Did we reach the end?
-      if (rows.length === 0) {
-        logger.info(`Cursor reached the end. Stopping after ${count} processed.`)
-        done = true
-        return
-      }
-
-      // Transform bib/item properties to match what Bib/ItemService would have returned:
-      const records = convertCommonModelProperties(rows)
-
-      // Trigger reindex:
-      let retries = 3
-      let processed = false
-      while (!processed && retries > 0) {
-        try {
-          await indexer.processRecords(capitalize(type), records, { updateOnly: process.env.UPDATE_ONLY || argv.updateOnly, dryrun: argv.dryrun })
-          if (retries < 3) logger.info(`Succeeded on retry ${3 - retries}`)
-          processed = true
-        } catch (e) {
-          if (!(e instanceof SkipPrefetchError)) {
-            logger.warn(`Retrying due to error: ${e}`)
-            console.trace(e)
-            await delay(3000)
-            retries -= 1
-          } else {
-            cursor.close(() => {
-              client.release()
-            })
-            throw e
+    try {
+      await instrument('Bulk-index batch', async () => {
+        // Pull next batch of records from the cursor:
+        const rows = await readCursorRecurser(options.batchSize, cursor)
+  
+        // Did we reach the end?
+        if (rows.length === 0) {
+          logger.info(`Cursor reached the end. Stopping after ${count} processed.`)
+          done = true
+          return
+        }
+        // Transform bib/item properties to match what Bib/ItemService would have returned:
+        const records = convertCommonModelProperties(rows)
+        // Trigger reindex:
+        let retries = 3
+        let processed = false
+        while (!processed && retries > 0) {
+          try {
+            await indexer.processRecords(capitalize(type), records, { updateOnly: process.env.UPDATE_ONLY || argv.updateOnly, dryrun: argv.dryrun })
+            if (retries < 3) logger.info(`Succeeded on retry ${3 - retries}`)
+            processed = true
+          } catch (e) {
+            if (!(e instanceof SkipPrefetchError)) {
+              logger.warn(`Retrying due to error: ${e}`)
+              console.trace(e)
+              await delay(3000)
+              retries -= 1
+            } else {
+              throw e
+            }
           }
         }
+        count += rows.length
+  
+        if (records.length > 0) {
+          const ids = records.map((r) => parseInt(r.id, 10)).filter((id) => !isNaN(id))
+          if (ids.length > 0) {
+            lastProcessedId = Math.max(...ids)
+          }
+        }
+  
+        // Log out progress so far:
+        options.progressCallback(count, total, startTime)
+      })
+    } catch (e) {
+      cursor.close(() => {
+        client.release()
+      })
+      if (e instanceof SkipPrefetchError) throw e
+      if (options.dbRestartMode) {
+        logger.warn(`Database connection error caught. Attempting to reconnect... Error: ${e}`)
+        if (reconnectRetries >= 3) {
+          logger.error(`Database reconnection failed permanently. Last successfully processed ID: ${lastProcessedId}`)
+          db.endPools()
+          return
+        }
+        await delay(reconnectRetries * 1000)
+        await db.initPools()
+        options.restartFromId = lastProcessedId
+        options._reconnectRetries = reconnectRetries + 1
+        return updateByBibOrItemServiceQuery(options)
+      } else {
+        throw e
       }
-      count += rows.length
-
-      // Log out progress so far:
-      options.progressCallback(count, total, startTime)
-    })
+    }
   }
 
   cursor.close(() => {
