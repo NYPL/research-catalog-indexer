@@ -110,6 +110,14 @@ describe('EsBib', function () {
     })
   })
 
+  describe('creators_displayPacked', function () {
+    it('should return the creators packed with label', function () {
+      const record = new SierraBib(require('../fixtures/bib-10001936.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.creators_displayPacked()).to.deep.equal(['Shermazanian, Galust||Shermazanian, Galust'])
+    })
+  })
+
   describe('creatorLiteral', function () {
     it('should return the creator literal', function () {
       const record = new SierraBib(require('../fixtures/bib-10001936.json'))
@@ -509,7 +517,17 @@ describe('EsBib', function () {
       const record = new SierraBib(require('../fixtures/bib-hl-990137923810203941.json'))
       const esBib = new EsBib(record)
       expect(esBib.parallelCreatorLiteral()).to.deep.equal(
-        ['بوريني، حسن احمد.']
+        ['بوريني، حسن احمد']
+      )
+    })
+  })
+
+  describe('parallelCreators_displayPacked', function () {
+    it('should return the parallel creator literals packed with display strings', function () {
+      const record = new SierraBib(require('../fixtures/bib-hl-990137923810203941.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.parallelCreators_displayPacked()).to.deep.equal(
+        ['بوريني، حسن احمد||بوريني، حسن احمد']
       )
     })
   })
@@ -538,6 +556,58 @@ describe('EsBib', function () {
       const record = new SierraBib(require('../fixtures/bib-hl990000453050203941.json'))
       const esBib = new EsBib(record)
       expect(esBib.contributor_sort()).to.deep.equal(['ginosar, sh. (shaleṿ), 1902-'])
+    })
+  })
+
+  describe('browseableContributorRole_packed', function () {
+    it('should return array of all contributions', function () {
+      const record = new SierraBib(require('../fixtures/bib-hl990000453050203941.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.browseableContributorRole_packed()).to.deep.equal(
+        [
+          'Israel',
+          'Ginosar, Sh. (Shaleṿ), 1902-',
+          'Ginosar, Sh. (Shaleṿ), 1902-||ed'
+        ]
+      )
+    })
+  })
+
+  describe('contributors_displayPacked', function () {
+    it('should return array of contributors packed with labels', function () {
+      const record = new SierraBib(require('../fixtures/bib-aeon.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.contributors_displayPacked()).to.deep.equal(
+        [
+          'Aldanov, Mark Aleksandrovich, 1886-1957||Aldanov, Mark Aleksandrovich, 1886-1957',
+          'Kazan, Elia||Kazan, Elia',
+          'Makovskii, Sergei Konstantinovich, 1877-1962||Makovskii, Sergei Konstantinovich, 1877-1962',
+          'Nabokov, Elena Ivanovna||Nabokov, Elena Ivanovna',
+          'Nabokova, Vera||Nabokova, Vera',
+          'Struve, Gleb||Struve, Gleb',
+          'Wilson, Edmund, 1895-1972||Wilson, Edmund, 1895-1972',
+          'Bruccoli, Matthew Joseph, 1931-||Bruccoli, Matthew Joseph, 1931-',
+          'Plimpton, George||Plimpton, George',
+          'Nabokov, Vladimir Vladimirovich, 1899-1977||Nabokov, Vladimir Vladimirovich, 1899-1977, former owner',
+          'Boyle, Kay, 1902-1992||Boyle, Kay, 1902-1992, former owner',
+          'Field, Andrew, 1938-||Field, Andrew, 1938-, former owner',
+          'Bollingen Foundation||Bollingen Foundation',
+          'Izdatelstvo imeni Chekhova (New York, N.Y.)||Izdatelstvo imeni Chekhova (New York, N.Y.)',
+          'Bureau littřaire D. Clairouin||Bureau littřaire D. Clairouin',
+          'Cornell University||Cornell University',
+          'Doubleday and Company, inc||Doubleday and Company, inc',
+          'Librarie Gallimard||Librarie Gallimard',
+          'Harper & Brothers||Harper & Brothers',
+          'Henry Holt and Company||Henry Holt and Company',
+          'McGraw-Hill, inc||McGraw-Hill, inc',
+          'New Directions Publishing||New Directions Publishing',
+          'New Yorker Magazine, Inc||New Yorker Magazine, Inc',
+          'G.P. Putnam\'s Sons||G.P. Putnam\'s Sons',
+          'Viking Press||Viking Press',
+          'Weidenfeld and Nicolson (Firm)||Weidenfeld and Nicolson (Firm)',
+          'Prins & Prins||Prins & Prins'
+        ]
+      )
     })
   })
 
@@ -786,7 +856,17 @@ describe('EsBib', function () {
       const record = new SierraBib(require('../fixtures/bib-parallels-party.json'))
       const esBib = new EsBib(record)
       expect(esBib.parallelContributorLiteral()).to.deep.equal(
-        ['parallel content for 710$a parallel content for 710$z']
+        ['parallel content for 710$a']
+      )
+    })
+  })
+
+  describe('parallelContributors_displayPacked', function () {
+    it('should return browseable parallel contributor fields packed with display strings', function () {
+      const record = new SierraBib(require('../fixtures/bib-23033611.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.parallelContributors_displayPacked()).to.deep.equal(
+        ['Народна библиотека "Стефан Првовенчани"||Народна библиотека "Стефан Првовенчани", issuing body']
       )
     })
   })
@@ -1150,6 +1230,15 @@ describe('EsBib', function () {
       const record = new SierraBib(require('../fixtures/bib-11655934.json'))
       const esBib = new EsBib(record)
       expect(esBib.shelfMark()).to.deep.equal(['*ZAN-10228 no. 1'])
+    })
+
+    it('should allow multiple shelfmarks', () => {
+      const record = new SierraBib(require('../fixtures/bib-12147603.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.shelfMark()).to.deep.equal([
+        '*MGZIC 9-603',
+        '*MGZHB 12-127 (Additional copy)'
+      ])
     })
   })
 
@@ -1979,6 +2068,7 @@ describe('EsBib', function () {
             marcTag: '300',
             subfields: [
               { tag: 'a', content: '1 score (16 p.) ;' },
+              { tag: 'b', content: null },
               { tag: 'c', content: '29 cm' }
             ]
           }
@@ -2010,6 +2100,28 @@ describe('EsBib', function () {
 
       expect(await (esBib.physicalDescription())).to.deep.equal([
         '1 computer disk ; 3 1/2 in. + reference manual'
+      ])
+    })
+  })
+
+  describe('physicalDescriptionArray', () => {
+    it('extracts physicalDescription content for array subfields', async () => {
+      const bib = new SierraBib({
+        varFields: [
+          {
+            marcTag: '300',
+            subfields: [
+              { tag: 'a', content: ['1 computer disk ;', 'test'] },
+              { tag: 'c', content: '3 1/2 in. +' },
+              { tag: 'e', content: 'reference manual' }
+            ]
+          }
+        ]
+      })
+      const esBib = new EsBib(bib)
+
+      expect(await (esBib.physicalDescription())).to.deep.equal([
+        '1 computer disk ; test ; 3 1/2 in. + reference manual'
       ])
     })
   })
