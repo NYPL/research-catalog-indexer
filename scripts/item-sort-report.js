@@ -1,13 +1,30 @@
 /**
  *
+ * Print a report showing the applied sort for the given bnum. Useful for
+ * understanding an odd item sort as it shows the normalized shelfmark used
+ * for intitial grouping and the extracted tags.
+ *
  * Usage:
- *   node scripts/compare-with-indexed --envfile [path to .env] --uri [bnum] --activeIndex [boolean] --verbose [boolean]
- */
-
+ *   node scripts/item-sort-report.js --envfile [path to .env] --uri [bnum]
+ *
+ * Example
+ *
+ *   node scripts/item-sort-report.js --envfile config/production.env --uri b10011753
+ *
+ *   URI         | Shelfmark (normalized)   | Enumeration Chronology                           | Tags
+ *   i12540559   | jlm 81-299               | Mar. 1973-June 1975 inc.                         | year: 1973; year: 1975
+ *   i12540560   | jlm 81-299               | July 1975-Mar. 1976                              | year: 1975; year: 1976
+ *   i12540561   | jlm 81-299               | Apr.-Aug.(1976)                                  | year: 1976
+ *   i12540562   | jlm 81-299               | Nov. 1976-Feb. 1977                              | year: 1976; year: 1977
+ *   i12540563   | jlm 81-299               | Mar. 1977-Oct. 1977                              | year: 1977; year: 1977
+ *   i12540564   | jlm 81-299               | Parl. 30, Sess. 3, no. 1-19 (1977-1978)          | number: 1-19; parl: 30; sess: 3; year: 1977-1978
+ *   i12540565   | jlm 81-299               | Parl. 30, Sess 3, no. 20-36 (1977-1978)          | number: 20-36; parl: 30; sess: 3; year: 1977-1978
+ *   i12540566   | jlm 81-299               | Parl. 30, Sess. 4, no. 1-12 inc. (1978-1979)     | number: 1-12; parl: 30; sess: 4; year: 1978-1979
+ *   i12540567   | jlm 81-299               | parl. 32, sess. 1-12 (1980)                      | parl: 32; sess: 1-12; year: 1980
+ *   ...
+ **/
 const argv = require('minimist')(process.argv.slice(2), {
   default: {
-    verbose: true,
-    printDocument: false
   },
   boolean: ['activeIndex', 'printDocument']
 })

@@ -3,15 +3,16 @@ const itemSort = require('../../lib/utils/item-sort')
 const EsItem = require('../../lib/es-models/item')
 const EsCheckinCardItem = require('../../lib/es-models/checkin-card-item')
 
-const mockEsItem = (enumerationChronology, shelfMark = '', Klass = EsItem) => {
+const mockEsItem = (enumerationChronology, shelfMark = '', uri, Klass = EsItem) => {
   const item = new Klass()
   item.enumerationChronology = () => [enumerationChronology]
   item._shelfMarkNormalized = () => shelfMark
+  item.uri = () => uri
   return item
 }
 
-const mockEsCheckinCardItem = (enumerationChronology, shelfMark = '') => {
-  return mockEsItem(enumerationChronology, shelfMark, EsCheckinCardItem)
+const mockEsCheckinCardItem = (enumerationChronology, shelfMark = '', uri = '') => {
+  return mockEsItem(enumerationChronology, shelfMark, uri, EsCheckinCardItem)
 }
 
 describe('utils/item-sort', () => {
@@ -332,6 +333,21 @@ describe('utils/item-sort', () => {
       ]
       // Succeeds because has checkin-cards and recent item:
       expect(itemSort._private.isActivelyCollected(input)).to.equal(true)
+    })
+  })
+
+  describe('sortKeysForItems', () => {
+    it('returns lookup for sorted items', () => {
+      expect(itemSort.sortKeysForItems([
+        mockEsItem('v. 48, no. 7-12 (1992)', 'ABC', 'i123'),
+        mockEsItem('no. 1-2 (2007)', 'ABC', 'i456'),
+        mockEsItem('v. 50-51, no. 1-3 (1994-1995)', 'ABC', 'i789')
+      ]))
+        .to.deep.equal({
+          i123: '   0',
+          i789: '   1',
+          i456: '   2'
+        })
     })
   })
 
