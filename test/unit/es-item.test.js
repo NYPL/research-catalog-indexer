@@ -339,4 +339,29 @@ describe('EsItem', function () {
       expect(esItem.dueDate()).to.equal(null)
     })
   })
+
+  describe('_taggedEnumerations', () => {
+    it('parses tagged enumerations', () => {
+      const item = new EsItem()
+      item.enumerationChronology = () => ['v. 1 ano IV no. 2']
+      expect(item._taggedEnumerations()).to.deep.equal([
+        // Expect them to be identified in tag alpha order
+        { raw: 'ano IV', start: '    4', type: 'ano' },
+        { raw: 'no. 2', start: '    2', type: 'number' },
+        { raw: 'v. 1', start: '    1', type: 'volume' }
+      ])
+    })
+  })
+
+  describe('_taggedEnumerationTypes', () => {
+    it('returns distinct type', () => {
+      const item = new EsItem()
+      item.enumerationChronology = () => ['vol. 1 r. 5, ed 6']
+      expect(item._taggedEnumerationTypes()).to.deep.equal([
+        'edition',
+        'reel',
+        'volume'
+      ])
+    })
+  })
 })

@@ -131,4 +131,93 @@ describe('utils', () => {
       expect(utils.truncate('123456789', 40)).to.equal('123456789')
     })
   })
+
+  describe('compoundComparator', () => {
+    it('sorts on single comparator', () => {
+      expect(
+        [8, 4, 5, 3, 7, 2, 9, 1, 6].sort(
+          utils.compoundComparator([
+            (o1, o2) => o1 > o2 ? 1 : -1
+          ])
+        )
+      ).to.deep.equal([1, 2, 3, 4, 5, 6, 7, 8, 9])
+    })
+
+    it('sorts on two comparators', () => {
+      expect(
+        [8, 4, 5, 3, 7, 2, 9, 1, 6].sort(
+          utils.compoundComparator([
+            // Sort evens, then odds
+            (o1, o2) => {
+              if (o1 % 2 === o2 % 2) return 0
+              return o1 % 2 ? 1 : -1
+            },
+            // Sort by value:
+            (o1, o2) => o1 > o2 ? 1 : -1
+          ])
+        )
+      ).to.deep.equal([2, 4, 6, 8, 1, 3, 5, 7, 9])
+    })
+
+    it('sorts on three comparators', () => {
+      expect(
+        [8, 4, 5, 3, 7, 2, 9, 1, 6].sort(
+          utils.compoundComparator([
+            // Make 1 and 7 come first:
+            (o1, o2) => {
+              const o1Privileged = [1, 7].includes(o1)
+              const o2Privileged = [1, 7].includes(o2)
+              if (o1Privileged && !o2Privileged) return -1
+              if (o2Privileged && !o1Privileged) return 1
+              return 0
+            },
+            // Sort evens, then odds
+            (o1, o2) => {
+              if (o1 % 2 === o2 % 2) return 0
+              return o1 % 2 ? 1 : -1
+            },
+            // Sort by value:
+            (o1, o2) => o1 > o2 ? 1 : -1
+          ])
+        )
+      ).to.deep.equal([1, 7, 2, 4, 6, 8, 3, 5, 9])
+    })
+  })
+
+  describe('countDistinctValues', () => {
+    it('counts distinct values', () => {
+      expect(utils.countDistinctValues([
+        'a', 'b', 'b', 'c', 'c', 'c', 'd', 'c'
+      ])).to.deep.equal({
+        a: 1,
+        b: 2,
+        c: 4,
+        d: 1
+      })
+    })
+  })
+
+  describe('groupByCallback', () => {
+    it('groups elements of an array by callback value', () => {
+      expect(utils.groupByCallback([1, 2, 3, 4], (v) => v % 2 === 0 ? 'even' : 'odd'))
+        .to.deep.equal({
+          even: [2, 4],
+          odd: [1, 3]
+        })
+    })
+  })
+
+  describe('orderByFixedArrayComparator', () => {
+    it('governs order by matching element in a fixed array', () => {
+      const compare = utils.orderByFixedArrayComparator([4, 2, 'x'])
+
+      expect(compare(1, 4)).to.equal(1)
+      expect(compare(2, 4)).to.equal(1)
+      expect(compare(4, 'x')).to.equal(-1)
+      expect(compare('x', 4)).to.equal(1)
+      expect(compare('x', 4)).to.equal(1)
+      expect(compare('x', 9)).to.equal(-1)
+      expect(compare(9, 9)).to.equal(0)
+    })
+  })
 })
