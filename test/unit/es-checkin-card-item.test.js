@@ -1,12 +1,16 @@
 const expect = require('chai').expect
+const sinon = require('sinon')
 
 const SierraHolding = require('../../lib/sierra-models/holding')
 const EsCheckinCardItem = require('../../lib/es-models/checkin-card-item')
 const EsBib = require('../../lib/es-models/bib')
+const SierraBib = require('../../lib/sierra-models/bib')
 
 describe('EsCheckinCardItem', function () {
   const holding = new SierraHolding(require('../fixtures/holding-1032862.json'))
-  const checkinCardItems = EsCheckinCardItem.fromSierraHolding(holding)
+  const record = new SierraBib(require('../fixtures/bib-10001936.json'))
+  const esBib = new EsBib(record)
+  const checkinCardItems = EsCheckinCardItem.fromSierraHolding(holding, esBib)
 
   describe('accessMessage', () => {
     it('returns static access message', () => {
@@ -78,29 +82,20 @@ describe('EsCheckinCardItem', function () {
   })
 
   describe('enumerationChronology_sort', () => {
-    it('returns padded sortable date string if no volume present', () => {
-      expect(checkinCardItems[0].enumerationChronology_sort()).to.deep.equal([
-        '          -2012-03-01'
-      ])
-      expect(checkinCardItems[1].enumerationChronology_sort()).to.deep.equal([
-        '          -2012-01-01'
-      ])
+    const holding = new SierraHolding(require('../fixtures/holding-1044923.json'))
+    const items = EsCheckinCardItem.fromSierraHolding(holding, esBib)
+
+    before(() => {
+      const sortKeys = { 'i-h1044923-0': '      1' }
+      sinon.stub(esBib, '_sortKeyForItem').callsFake((i) => sortKeys[i.uri()])
     })
 
-    it('returns padded sortable volume-date string when both vol and date present', () => {
-      const holding = new SierraHolding(require('../fixtures/holding-1044923.json'))
-      const items = EsCheckinCardItem.fromSierraHolding(holding)
-      // First item has null enumeration.enumeration
-      // and start_date "Jul. 10, 1999" (and null end_date), so:
-      expect(items[0].enumerationChronology_sort()).to.deep.equal([
-        '          -1999-07-10'
-      ])
+    after(() => {
+      esBib._sortKeyForItem.restore()
+    })
 
-      // Last item has enumeration.enumeration == "Vol. 30 No. 8"
-      // and start_date "Feb. 24, 2001" and null end_date, so:
-      expect(items[items.length - 1].enumerationChronology_sort()).to.deep.equal([
-        '        30-2001-02-24'
-      ])
+    it('relies on bib to return a sortable string that positions the item among other items', () => {
+      expect(items[0].enumerationChronology_sort()).to.equal('      1')
     })
   })
 
