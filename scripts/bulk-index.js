@@ -557,7 +557,7 @@ const readCursorRecurser = async (batchSize, cursor, retry = 1) => {
 /**
  *  Reindex a bunch of bibs based on a BibService query
  */
-const updateByBibOrItemServiceQuery = async (options) => {
+const updateByBibOrItemServiceQuery = async (options, reconnectRetries = 0) => {
   options = Object.assign({
     // Default progress logger:
     progressCallback: (count, total, startTime) => printProgress(count, total, argv.batchSize, startTime)
@@ -580,14 +580,13 @@ const updateByBibOrItemServiceQuery = async (options) => {
   const startTime = new Date()
   let done = false
   let lastProcessedId = null
-  let reconnectRetries = options._reconnectRetries || 0
 
   while (!done && (count < options.limit || !options.limit)) {
     try {
       await instrument('Bulk-index batch', async () => {
         // Pull next batch of records from the cursor:
         const rows = await readCursorRecurser(options.batchSize, cursor)
-  
+
         // Did we reach the end?
         if (rows.length === 0) {
           logger.info(`Cursor reached the end. Stopping after ${count} processed.`)
@@ -616,14 +615,14 @@ const updateByBibOrItemServiceQuery = async (options) => {
           }
         }
         count += rows.length
-  
+
         if (records.length > 0) {
           const ids = records.map((r) => parseInt(r.id, 10)).filter((id) => !isNaN(id))
           if (ids.length > 0) {
             lastProcessedId = Math.max(...ids)
           }
         }
-  
+
         // Log out progress so far:
         options.progressCallback(count, total, startTime)
       })
@@ -642,8 +641,7 @@ const updateByBibOrItemServiceQuery = async (options) => {
         await delay(reconnectRetries * 1000)
         await db.initPools()
         options.restartFromId = lastProcessedId
-        options._reconnectRetries = reconnectRetries + 1
-        return updateByBibOrItemServiceQuery(options)
+        return updateByBibOrItemServiceQuery(options, reconnectRetries + 1)
       } else {
         throw e
       }
@@ -904,6 +902,7 @@ module.exports = {
   updateByCsv,
   db,
   buildSqlQuery,
+  updateByBibOrItemServiceQuery,
   overwriteModelPrefetch,
   restoreModelPrefetch,
   _testing: {
