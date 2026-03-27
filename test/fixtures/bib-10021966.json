@@ -1,0 +1,506 @@
+{
+  "data": {
+    "id": "10021966",
+    "nyplSource": "sierra-nypl",
+    "title": "Early unnumbered U.S. patents, 1790-1836 : index and guide to the microfilm edition.",
+    "author": "Research Publications, inc.",
+    "publishYear": 1980,
+    "nyplType": "bib",
+    "controlNumber": "NYPG25138880-B",
+    "standardNumbers": [
+      "0892350202"
+    ],
+    "updatedDate": "2023-03-03T02:00:20",
+    "createdDate": "2008-12-13T16:14:00",
+    "deletedDate": null,
+    "catalogDate": "2000-12-16T00:00:00",
+    "deleted": false,
+    "suppressed": false,
+    "locations": [
+      {
+        "code": "bu",
+        "name": "Stavros Niarchos Foundation Library - Yoseloff Business Center - Research"
+      }
+    ],
+    "lang": {
+      "code": "eng",
+      "name": "English"
+    },
+    "materialType": {
+      "code": "a  ",
+      "value": "BOOK/TEXT"
+    },
+    "bibLevel": {
+      "code": "m",
+      "value": "MONOGRAPH"
+    },
+    "country": {
+      "code": "ctu",
+      "name": "Connecticut"
+    },
+    "normTitle": "early unnumbered u s patents 1790 1836 index and guide to the microfilm edition",
+    "normAuthor": "research publications inc",
+    "fixedFields": {
+      "24": {
+        "label": "Language",
+        "value": "eng",
+        "display": "English"
+      },
+      "25": {
+        "label": "Skip",
+        "value": "0",
+        "display": null
+      },
+      "26": {
+        "label": "Location",
+        "value": "bu   ",
+        "display": "Stavros Niarchos Foundation Library - Yoseloff Business Center - Research"
+      },
+      "27": {
+        "label": "",
+        "value": "1",
+        "display": null
+      },
+      "28": {
+        "label": "Cat. Date",
+        "value": "2000-12-16",
+        "display": null
+      },
+      "29": {
+        "label": "Bib Level",
+        "value": "m",
+        "display": "MONOGRAPH"
+      },
+      "30": {
+        "label": "Material Type",
+        "value": "a  ",
+        "display": "BOOK/TEXT"
+      },
+      "31": {
+        "label": "Bib Code 3",
+        "value": "-",
+        "display": null
+      },
+      "80": {
+        "label": "Record Type",
+        "value": "b",
+        "display": null
+      },
+      "81": {
+        "label": "Record Number",
+        "value": "10021966",
+        "display": null
+      },
+      "83": {
+        "label": "Created Date",
+        "value": "2008-12-13T16:14:00Z",
+        "display": null
+      },
+      "84": {
+        "label": "Updated Date",
+        "value": "2023-03-03T02:00:20Z",
+        "display": null
+      },
+      "85": {
+        "label": "No. of Revisions",
+        "value": "10",
+        "display": null
+      },
+      "86": {
+        "label": "Agency",
+        "value": "1",
+        "display": null
+      },
+      "89": {
+        "label": "Country",
+        "value": "ctu",
+        "display": "Connecticut"
+      },
+      "98": {
+        "label": "",
+        "value": "2021-11-05T02:14:37Z",
+        "display": null
+      },
+      "107": {
+        "label": "MARC Type",
+        "value": " ",
+        "display": null
+      }
+    },
+    "varFields": [
+      {
+        "ind1": "2",
+        "ind2": " ",
+        "content": null,
+        "marcTag": "110",
+        "fieldTag": "a",
+        "subfields": [
+          {
+            "tag": "a",
+            "content": "Research Publications, inc."
+          }
+        ]
+      },
+      {
+        "ind1": "1",
+        "ind2": " ",
+        "content": null,
+        "marcTag": "710",
+        "fieldTag": "b",
+        "subfields": [
+          {
+            "tag": "a",
+            "content": "United States."
+          },
+          {
+            "tag": "b",
+            "content": "Patent Office."
+          }
+        ]
+      },
+      {
+        "ind1": " ",
+        "ind2": "0",
+        "content": null,
+        "marcTag": "650",
+        "fieldTag": "d",
+        "subfields": [
+          {
+            "tag": "a",
+            "content": "Patents"
+          },
+          {
+            "tag": "z",
+            "content": "United States"
+          },
+          {
+            "tag": "v",
+            "content": "Indexes."
+          }
+        ]
+      },
+      {
+        "ind1": " ",
+        "ind2": " ",
+        "content": null,
+        "marcTag": "020",
+        "fieldTag": "i",
+        "subfields": [
+          {
+            "tag": "a",
+            "content": "0892350202 :"
+          },
+          {
+            "tag": "c",
+            "content": "$65.00"
+          }
+        ]
+      },
+      {
+        "ind1": " ",
+        "ind2": " ",
+        "content": null,
+        "marcTag": "010",
+        "fieldTag": "l",
+        "subfields": [
+          {
+            "tag": "a",
+            "content": "80014307"
+          }
+        ]
+      },
+      {
+        "ind1": " ",
+        "ind2": " ",
+        "content": null,
+        "marcTag": "035",
+        "fieldTag": "l",
+        "subfields": [
+          {
+            "tag": "a",
+            "content": "(WaOLN)nyp0221473"
+          }
+        ]
+      },
+      {
+        "ind1": " ",
+        "ind2": " ",
+        "content": null,
+        "marcTag": "947",
+        "fieldTag": "l",
+        "subfields": [
+          {
+            "tag": "a",
+            "content": "*VBD 81-1208 (Former classmark)"
+          }
+        ]
+      },
+      {
+        "ind1": " ",
+        "ind2": " ",
+        "content": "NYPG25138880-B",
+        "marcTag": "001",
+        "fieldTag": "o",
+        "subfields": null
+      },
+      {
+        "ind1": " ",
+        "ind2": " ",
+        "content": null,
+        "marcTag": "260",
+        "fieldTag": "p",
+        "subfields": [
+          {
+            "tag": "a",
+            "content": "Woodbridge, CT :"
+          },
+          {
+            "tag": "b",
+            "content": "Research Publications,"
+          },
+          {
+            "tag": "c",
+            "content": "1980."
+          }
+        ]
+      },
+      {
+        "ind1": "0",
+        "ind2": "1",
+        "content": null,
+        "marcTag": "852",
+        "fieldTag": "q",
+        "subfields": [
+          {
+            "tag": "k",
+            "content": "*R-SIBL"
+          },
+          {
+            "tag": "h",
+            "content": "T223.D7"
+          },
+          {
+            "tag": "i",
+            "content": ".R47 1980"
+          },
+          {
+            "tag": "m",
+            "content": "B. Altman Reference Desk"
+          }
+        ]
+      },
+      {
+        "ind1": " ",
+        "ind2": " ",
+        "content": null,
+        "marcTag": "300",
+        "fieldTag": "r",
+        "subfields": [
+          {
+            "tag": "a",
+            "content": "viii, 693 p. ;"
+          },
+          {
+            "tag": "c",
+            "content": "29 cm."
+          }
+        ]
+      },
+      {
+        "ind1": "1",
+        "ind2": "0",
+        "content": null,
+        "marcTag": "245",
+        "fieldTag": "t",
+        "subfields": [
+          {
+            "tag": "a",
+            "content": "Early unnumbered U.S. patents, 1790-1836 :"
+          },
+          {
+            "tag": "b",
+            "content": "index and guide to the microfilm edition."
+          }
+        ]
+      },
+      {
+        "ind1": " ",
+        "ind2": " ",
+        "content": null,
+        "marcTag": "959",
+        "fieldTag": "v",
+        "subfields": [
+          {
+            "tag": "a",
+            "content": ".b10223010"
+          },
+          {
+            "tag": "b",
+            "content": "07-18-08"
+          },
+          {
+            "tag": "c",
+            "content": "07-29-91"
+          }
+        ]
+      },
+      {
+        "ind1": " ",
+        "ind2": " ",
+        "content": "20001116192706.5",
+        "marcTag": "005",
+        "fieldTag": "y",
+        "subfields": null
+      },
+      {
+        "ind1": " ",
+        "ind2": " ",
+        "content": "810701s1980    ctu      i    000 0 eng  cam8i ",
+        "marcTag": "008",
+        "fieldTag": "y",
+        "subfields": null
+      },
+      {
+        "ind1": " ",
+        "ind2": " ",
+        "content": null,
+        "marcTag": "040",
+        "fieldTag": "y",
+        "subfields": [
+          {
+            "tag": "d",
+            "content": "NN"
+          },
+          {
+            "tag": "d",
+            "content": "WaOLN"
+          }
+        ]
+      },
+      {
+        "ind1": " ",
+        "ind2": " ",
+        "content": null,
+        "marcTag": "043",
+        "fieldTag": "y",
+        "subfields": [
+          {
+            "tag": "a",
+            "content": "n-us---"
+          }
+        ]
+      },
+      {
+        "ind1": "0",
+        "ind2": "0",
+        "content": null,
+        "marcTag": "050",
+        "fieldTag": "y",
+        "subfields": [
+          {
+            "tag": "a",
+            "content": "T223.D7"
+          },
+          {
+            "tag": "b",
+            "content": "R47 1980"
+          }
+        ]
+      },
+      {
+        "ind1": "0",
+        "ind2": "0",
+        "content": null,
+        "marcTag": "082",
+        "fieldTag": "y",
+        "subfields": [
+          {
+            "tag": "a",
+            "content": "608.773"
+          }
+        ]
+      },
+      {
+        "ind1": "0",
+        "ind2": "0",
+        "content": null,
+        "marcTag": "908",
+        "fieldTag": "y",
+        "subfields": [
+          {
+            "tag": "a",
+            "content": "T223.D7"
+          },
+          {
+            "tag": "b",
+            "content": "R47 1980"
+          }
+        ]
+      },
+      {
+        "ind1": " ",
+        "ind2": " ",
+        "content": null,
+        "marcTag": "997",
+        "fieldTag": "y",
+        "subfields": [
+          {
+            "tag": "a",
+            "content": "b"
+          },
+          {
+            "tag": "b",
+            "content": "12-16-00"
+          },
+          {
+            "tag": "c",
+            "content": "m"
+          },
+          {
+            "tag": "d",
+            "content": "a"
+          },
+          {
+            "tag": "e",
+            "content": "-"
+          },
+          {
+            "tag": "f",
+            "content": "eng"
+          },
+          {
+            "tag": "g",
+            "content": "ctu"
+          },
+          {
+            "tag": "h",
+            "content": "0"
+          }
+        ]
+      },
+      {
+        "ind1": " ",
+        "ind2": " ",
+        "content": null,
+        "marcTag": "910",
+        "fieldTag": "y",
+        "subfields": [
+          {
+            "tag": "a",
+            "content": "RL"
+          }
+        ]
+      },
+      {
+        "ind1": null,
+        "ind2": null,
+        "content": "00000cam  22002658i 4500",
+        "marcTag": null,
+        "fieldTag": "_",
+        "subfields": null
+      }
+    ]
+  },
+  "count": 1,
+  "statusCode": 200
+}
