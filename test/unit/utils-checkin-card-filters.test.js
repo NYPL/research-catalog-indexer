@@ -22,6 +22,8 @@ describe('utils/checkin-card-filters', () => {
         .to.equal(true)
       expect(filters._private.rangeIncludes({ start: 1, end: 3 }, { start: 2, end: 2 }))
         .to.equal(true)
+      expect(filters._private.rangeIncludes({ start: 1, end: 3 }, { start: 1 }))
+        .to.equal(true)
     })
 
     it('rejects if first range doesn\'t perfectly include second range', () => {
@@ -119,13 +121,13 @@ describe('utils/checkin-card-filters', () => {
     it('identifies redundant checkin card via loose match', () => {
       const checkinCardItem = {
         _taggedEnumerations: () => [{ start: 1, type: 'number' }],
-        _taggedYear: () => '2002',
+        _taggedYear: () => ({ start: '2002' }),
         enumerationChronology: () => 'ch'
       }
       const items = [
         {
           _taggedEnumerations: () => [{ start: 1, end: 3, type: 'volume' }],
-          _taggedYear: () => '2002'
+          _taggedYear: () => ({ start: '2002' })
         }
       ]
 

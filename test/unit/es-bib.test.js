@@ -565,9 +565,7 @@ describe('EsBib', function () {
       const esBib = new EsBib(record)
       expect(esBib.browseableContributorRole_packed()).to.deep.equal(
         [
-          'Israel',
-          'Ginosar, Sh. (Shaleṿ), 1902-',
-          'Ginosar, Sh. (Shaleṿ), 1902-||ed'
+          'Ginosar, Sh. (Shaleṿ), 1902-||editor'
         ]
       )
     })
