@@ -24,7 +24,7 @@
 
 const NyplSourceMapper = require('../lib/utils/nypl-source-mapper')
 const fs = require('fs')
-const { bibById, modelPrefetch } = require('../lib/platform-api/requests')
+const { bibById, modelPrefetch, itemById } = require('../lib/platform-api/requests')
 const { die, setAwsProfile } = require('./utils')
 const { loadNyplCoreData } = require('../lib/load-core-data')
 const {
@@ -80,16 +80,26 @@ const reindexBib = async (nyplSource, id) => {
   console.log('Finished writing all records to streams')
 }
 
+const reindexItem = async (nyplSource, id) => {
+  const item = await itemById(nyplSource, id)
+  await writeToStream('Item', [item])
+
+  console.log('Finished writing item to stream')
+}
+
 const run = async () => {
   setAwsProfile()
   await loadNyplCoreData()
   const mapper = await NyplSourceMapper.instance()
 
   const { id, type, nyplSource } = mapper.splitIdentifier(argv.uri)
+  console.log({ id, type, nyplSource })
   switch (type) {
     case 'bib':
       reindexBib(nyplSource, id)
       break
+    case 'item':
+      reindexItem(nyplSource, id)
   }
 }
 
