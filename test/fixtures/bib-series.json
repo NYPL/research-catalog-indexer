@@ -10,6 +10,7 @@
         "ind1": "1",
         "ind2": " ",
         "subfields": [
+          {"tag": "6", "content": "880-01"},
           {"tag": "a", "content": "490 Series: The Psychology of C.G. Jung"},
           {"tag": "v", "content": "v. 1"},
           {"tag": "l", "content": "(Z965.N38)"}
@@ -46,6 +47,7 @@
         "ind1": "2",
         "ind2": " ",
         "subfields": [
+          {"tag": "6", "content": "880-01"},
           {"tag": "a", "content": "811 Series Added Entry: Inter-American Conference on Agriculture"},
           {"tag": "n", "content": "(3rd : 1945 : Caracas, Venezuela)"},
           {"tag": "t", "content": "Cuadernos verdes"},
@@ -58,6 +60,7 @@
         "ind1": " ",
         "ind2": "0",
         "subfields": [
+          {"tag": "6", "content": "880-01"},
           {"tag": "a", "content": "830 Series Uniform Title: International Psychology Classics Series"},
           {"tag": "v", "content": "vol. 1"}
         ]
@@ -70,6 +73,26 @@
           {"tag": "6", "content": "830-01"},
           {"tag": "a", "content": "830 Series Uniform Title parallel: 心理学系列"},
           {"tag": "v", "content": "第1卷"}
+        ]
+      },
+      {
+        "marcTag": "880",
+        "ind1": "1",
+        "ind2": " ",
+        "subfields": [
+          {"tag": "6", "content": "811-01"},
+          {"tag": "a", "content": "811 Series Added Entry parallel: Chakra llamkaymanta Conferencia Interamericana"},
+          {"tag": "p", "content": "Serie nacional nisqa"}
+        ]
+      },
+      {
+        "marcTag": "880",
+        "ind1": "1",
+        "ind2": " ",
+        "subfields": [
+          {"tag": "6", "content": "490-01"},
+          {"tag": "a", "content": "490 Series parallel: Chay Psicología nisqa C.G. Jung"},
+          {"tag": "v", "content": "v. 1"}
         ]
       }
     ]

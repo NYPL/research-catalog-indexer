@@ -2091,7 +2091,7 @@ describe('EsBib', function () {
     })
     it('extracts parallelSeries and parallelSeriesUniformTitle', async () => {
       const seriesParallelResult = await esBib.parallelSeries()
-      expect(seriesParallelResult).to.deep.equal(null)
+      expect(seriesParallelResult).to.deep.equal(['490 Series parallel: Chay Psicología nisqa C.G. Jung'])
       const seriesTitleParallelResult = await esBib.parallelSeriesUniformTitle()
       expect(seriesTitleParallelResult).to.deep.equal([
         '830 Series Uniform Title parallel: 心理学系列'
@@ -2121,13 +2121,13 @@ describe('EsBib', function () {
       // 811 field concatenates a, n, t, p, v
       expect(result[2]).to.equal('811 Series Added Entry: Inter-American Conference on Agriculture (3rd : 1945 : Caracas, Venezuela) Cuadernos verdes Serie nacional 14')
     })
-    it('series_displayPacked returns a||full for 490 fields', () => {
+    it('series_displayPacked returns subfield a||full for 490 fields', () => {
       const result = esBib.series_displayPacked()
       expect(result).to.deep.equal([
         '490 Series: The Psychology of C.G. Jung||490 Series: The Psychology of C.G. Jung v. 1 (Z965.N38)'
       ])
     })
-    it('seriesUniformTitle_displayPacked returns a||full for 830 fields', () => {
+    it('seriesUniformTitle_displayPacked returns subfield a||full for 830 fields', () => {
       const result = esBib.seriesUniformTitle_displayPacked()
       expect(result).to.deep.equal([
         '830 Series Uniform Title: International Psychology Classics Series||830 Series Uniform Title: International Psychology Classics Series vol. 1'
@@ -2139,6 +2139,24 @@ describe('EsBib', function () {
         '800 Series Added Entry: Meier, C. A. (Carl Alfred) 1905-1995||800 Series Added Entry: Meier, C. A. (Carl Alfred) 1905-1995 Lehrbuch der komplexen Psychologie C.G. Jungs English v. 1',
         '810 Series Added Entry: United States Congress House||810 Series Added Entry: United States Congress House Report 112-664',
         '811 Series Added Entry: Inter-American Conference on Agriculture (3rd : 1945 : Caracas, Venezuela)||811 Series Added Entry: Inter-American Conference on Agriculture (3rd : 1945 : Caracas, Venezuela) Cuadernos verdes Serie nacional 14'
+      ])
+    })
+    it('parallelSeries_displayPacked returns subfield a||full for parallels to 490 field', function () {
+      const result = esBib.parallelSeries_displayPacked()
+      expect(result).to.deep.equal([
+        '490 Series parallel: Chay Psicología nisqa C.G. Jung||490 Series parallel: Chay Psicología nisqa C.G. Jung v. 1'
+      ])
+    })
+    it('parallelSeriesUniformTitle_displayPacked returns subfield a||full for parallels to 830 field', function () {
+      const result = esBib.parallelSeriesUniformTitle_displayPacked()
+      expect(result).to.deep.equal([
+        '830 Series Uniform Title parallel: 心理学系列||830 Series Uniform Title parallel: 心理学系列 第1卷'
+      ])
+    })
+    it('parallelSeriesAddedEntry_displayPacked returns subfield a||full for parallels to 800/810/811 (811 in this case) field', function () {
+      const result = esBib.parallelSeriesAddedEntry_displayPacked()
+      expect(result).to.deep.equal([
+        '811 Series Added Entry parallel: Chakra llamkaymanta Conferencia Interamericana||811 Series Added Entry parallel: Chakra llamkaymanta Conferencia Interamericana Serie nacional nisqa'
       ])
     })
   })
