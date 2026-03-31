@@ -1,0 +1,880 @@
+{
+    "id": "23033611",
+    "nyplSource": "sierra-nypl",
+    "title": "Preporučeno.",
+    "author": "",
+    "publishYear": 2006,
+    "nyplType": "bib",
+    "controlNumber": "1302207045",
+    "standardNumbers": [],
+    "updatedDate": "2024-02-13T03:12:23",
+    "createdDate": "2023-04-25T14:38:37",
+    "deletedDate": null,
+    "catalogDate": "2023-07-19T00:00:00",
+    "deleted": false,
+    "suppressed": false,
+    "locations": [
+      {
+        "code": "mak",
+        "name": "SASB - Dewitt Wallace Room 108"
+      },
+      {
+        "code": "mal",
+        "name": "SASB - Service Desk Rm 315"
+      }
+    ],
+    "lang": {
+      "code": "srp",
+      "name": "Serbian"
+    },
+    "materialType": {
+      "code": "a  ",
+      "value": "BOOK/TEXT"
+    },
+    "bibLevel": {
+      "code": "s",
+      "value": "SERIAL"
+    },
+    "country": {
+      "code": "rb ",
+      "name": "Serbia"
+    },
+    "normTitle": "preporučeno",
+    "normAuthor": "",
+    "fixedFields": {
+      "24": {
+        "label": "Language",
+        "value": "srp",
+        "display": "Serbian"
+      },
+      "25": {
+        "label": "Skip",
+        "value": "0",
+        "display": null
+      },
+      "26": {
+        "label": "Location",
+        "value": "multi",
+        "display": null
+      },
+      "27": {
+        "label": "",
+        "value": "17",
+        "display": null
+      },
+      "28": {
+        "label": "Cat. Date",
+        "value": "2023-07-19",
+        "display": null
+      },
+      "29": {
+        "label": "Bib Level",
+        "value": "s",
+        "display": "SERIAL"
+      },
+      "30": {
+        "label": "Material Type",
+        "value": "a  ",
+        "display": "BOOK/TEXT"
+      },
+      "31": {
+        "label": "Bib Code 3",
+        "value": "-",
+        "display": null
+      },
+      "80": {
+        "label": "Record Type",
+        "value": "b",
+        "display": null
+      },
+      "81": {
+        "label": "Record Number",
+        "value": "23033611",
+        "display": null
+      },
+      "83": {
+        "label": "Created Date",
+        "value": "2023-04-25T14:38:37Z",
+        "display": null
+      },
+      "84": {
+        "label": "Updated Date",
+        "value": "2024-02-13T03:12:23Z",
+        "display": null
+      },
+      "85": {
+        "label": "No. of Revisions",
+        "value": "10",
+        "display": null
+      },
+      "86": {
+        "label": "Agency",
+        "value": "1",
+        "display": null
+      },
+      "89": {
+        "label": "Country",
+        "value": "rb ",
+        "display": "Serbia"
+      },
+      "98": {
+        "label": "",
+        "value": "2024-02-12T18:56:15Z",
+        "display": null
+      },
+      "107": {
+        "label": "MARC Type",
+        "value": " ",
+        "display": null
+      }
+    },
+    "varFields": [
+      {
+        "ind1": "2",
+        "ind2": " ",
+        "content": null,
+        "marcTag": "710",
+        "fieldTag": "b",
+        "subfields": [
+          {
+            "tag": "6",
+            "content": "880-04"
+          },
+          {
+            "tag": "a",
+            "content": "Narodna biblioteka \"Stefan Prvovenčani\","
+          },
+          {
+            "tag": "e",
+            "content": "issuing body."
+          }
+        ]
+      },
+      {
+        "ind1": " ",
+        "ind2": "0",
+        "content": null,
+        "marcTag": "650",
+        "fieldTag": "d",
+        "subfields": [
+          {
+            "tag": "a",
+            "content": "Serbian literature"
+          },
+          {
+            "tag": "y",
+            "content": "20th century"
+          },
+          {
+            "tag": "v",
+            "content": "Periodicals."
+          }
+        ]
+      },
+      {
+        "ind1": " ",
+        "ind2": "0",
+        "content": null,
+        "marcTag": "650",
+        "fieldTag": "d",
+        "subfields": [
+          {
+            "tag": "a",
+            "content": "Serbian literature"
+          },
+          {
+            "tag": "y",
+            "content": "21st century"
+          },
+          {
+            "tag": "v",
+            "content": "Periodicals."
+          }
+        ]
+      },
+      {
+        "ind1": " ",
+        "ind2": "7",
+        "content": null,
+        "marcTag": "650",
+        "fieldTag": "d",
+        "subfields": [
+          {
+            "tag": "a",
+            "content": "Serbian literature."
+          },
+          {
+            "tag": "2",
+            "content": "fast"
+          },
+          {
+            "tag": "0",
+            "content": "(OCoLC)fst01112938"
+          }
+        ]
+      },
+      {
+        "ind1": " ",
+        "ind2": "7",
+        "content": null,
+        "marcTag": "648",
+        "fieldTag": "d",
+        "subfields": [
+          {
+            "tag": "a",
+            "content": "1900-2099"
+          },
+          {
+            "tag": "2",
+            "content": "fast"
+          }
+        ]
+      },
+      {
+        "ind1": " ",
+        "ind2": "7",
+        "content": null,
+        "marcTag": "655",
+        "fieldTag": "d",
+        "subfields": [
+          {
+            "tag": "a",
+            "content": "Periodicals."
+          },
+          {
+            "tag": "2",
+            "content": "fast"
+          },
+          {
+            "tag": "0",
+            "content": "(OCoLC)fst01411641"
+          }
+        ]
+      },
+      {
+        "ind1": " ",
+        "ind2": " ",
+        "content": null,
+        "marcTag": "022",
+        "fieldTag": "i",
+        "subfields": [
+          {
+            "tag": "a",
+            "content": "1452-3531"
+          },
+          {
+            "tag": "l",
+            "content": "1452-3531"
+          },
+          {
+            "tag": "2",
+            "content": "b1"
+          }
+        ]
+      },
+      {
+        "ind1": " ",
+        "ind2": " ",
+        "content": null,
+        "marcTag": "010",
+        "fieldTag": "l",
+        "subfields": [
+          {
+            "tag": "a",
+            "content": "  2022226360"
+          }
+        ]
+      },
+      {
+        "ind1": " ",
+        "ind2": " ",
+        "content": null,
+        "marcTag": "035",
+        "fieldTag": "l",
+        "subfields": [
+          {
+            "tag": "a",
+            "content": "(OCoLC)1302207045"
+          }
+        ]
+      },
+      {
+        "ind1": " ",
+        "ind2": " ",
+        "content": null,
+        "marcTag": "500",
+        "fieldTag": "n",
+        "subfields": [
+          {
+            "tag": "6",
+            "content": "880-03"
+          },
+          {
+            "tag": "a",
+            "content": "\"Časopis Povelja.\""
+          }
+        ]
+      },
+      {
+        "ind1": " ",
+        "ind2": " ",
+        "content": null,
+        "marcTag": "546",
+        "fieldTag": "n",
+        "subfields": [
+          {
+            "tag": "a",
+            "content": "Serbian."
+          },
+          {
+            "tag": "b",
+            "content": "Cyrillic alphabet."
+          }
+        ]
+      },
+      {
+        "ind1": "0",
+        "ind2": " ",
+        "content": null,
+        "marcTag": "588",
+        "fieldTag": "n",
+        "subfields": [
+          {
+            "tag": "a",
+            "content": "2018/1; title from title page."
+          }
+        ]
+      },
+      {
+        "ind1": "1",
+        "ind2": " ",
+        "content": null,
+        "marcTag": "588",
+        "fieldTag": "n",
+        "subfields": [
+          {
+            "tag": "a",
+            "content": "2021/3."
+          }
+        ]
+      },
+      {
+        "ind1": " ",
+        "ind2": " ",
+        "content": "1302207045",
+        "marcTag": "001",
+        "fieldTag": "o",
+        "subfields": null
+      },
+      {
+        "ind1": " ",
+        "ind2": "1",
+        "content": null,
+        "marcTag": "264",
+        "fieldTag": "p",
+        "subfields": [
+          {
+            "tag": "6",
+            "content": "880-02"
+          },
+          {
+            "tag": "a",
+            "content": "Kraljevo :"
+          },
+          {
+            "tag": "b",
+            "content": "Narodna biblioteka \"Stefan Prvovenčani\""
+          }
+        ]
+      },
+      {
+        "ind1": "8",
+        "ind2": " ",
+        "content": null,
+        "marcTag": "852",
+        "fieldTag": "q",
+        "subfields": [
+          {
+            "tag": "h",
+            "content": "ReCAP 23-8009"
+          }
+        ]
+      },
+      {
+        "ind1": " ",
+        "ind2": " ",
+        "content": null,
+        "marcTag": "300",
+        "fieldTag": "r",
+        "subfields": [
+          {
+            "tag": "a",
+            "content": "volumes ;"
+          },
+          {
+            "tag": "c",
+            "content": "16 x 23 cm"
+          }
+        ]
+      },
+      {
+        "ind1": " ",
+        "ind2": " ",
+        "content": null,
+        "marcTag": "310",
+        "fieldTag": "r",
+        "subfields": [
+          {
+            "tag": "a",
+            "content": "Three no. a year"
+          }
+        ]
+      },
+      {
+        "ind1": " ",
+        "ind2": " ",
+        "content": null,
+        "marcTag": "336",
+        "fieldTag": "r",
+        "subfields": [
+          {
+            "tag": "a",
+            "content": "text"
+          },
+          {
+            "tag": "b",
+            "content": "txt"
+          },
+          {
+            "tag": "2",
+            "content": "rdacontent"
+          }
+        ]
+      },
+      {
+        "ind1": " ",
+        "ind2": " ",
+        "content": null,
+        "marcTag": "337",
+        "fieldTag": "r",
+        "subfields": [
+          {
+            "tag": "a",
+            "content": "unmediated"
+          },
+          {
+            "tag": "b",
+            "content": "n"
+          },
+          {
+            "tag": "2",
+            "content": "rdamedia"
+          }
+        ]
+      },
+      {
+        "ind1": " ",
+        "ind2": " ",
+        "content": null,
+        "marcTag": "338",
+        "fieldTag": "r",
+        "subfields": [
+          {
+            "tag": "a",
+            "content": "volume"
+          },
+          {
+            "tag": "b",
+            "content": "nc"
+          },
+          {
+            "tag": "2",
+            "content": "rdacarrier"
+          }
+        ]
+      },
+      {
+        "ind1": "1",
+        "ind2": " ",
+        "content": null,
+        "marcTag": "362",
+        "fieldTag": "r",
+        "subfields": [
+          {
+            "tag": "a",
+            "content": "Began in 2006."
+          }
+        ]
+      },
+      {
+        "ind1": "0",
+        "ind2": "0",
+        "content": null,
+        "marcTag": "245",
+        "fieldTag": "t",
+        "subfields": [
+          {
+            "tag": "6",
+            "content": "880-01"
+          },
+          {
+            "tag": "a",
+            "content": "Preporučeno."
+          }
+        ]
+      },
+      {
+        "ind1": "0",
+        "ind2": " ",
+        "content": null,
+        "marcTag": "210",
+        "fieldTag": "u",
+        "subfields": [
+          {
+            "tag": "a",
+            "content": "Preporučeno"
+          }
+        ]
+      },
+      {
+        "ind1": "0",
+        "ind2": "0",
+        "content": null,
+        "marcTag": "299",
+        "fieldTag": "u",
+        "subfields": [
+          {
+            "tag": "6",
+            "content": "880-06"
+          },
+          {
+            "tag": "a",
+            "content": "Preporučeno."
+          }
+        ]
+      },
+      {
+        "ind1": "0",
+        "ind2": " ",
+        "content": null,
+        "marcTag": "799",
+        "fieldTag": "u",
+        "subfields": [
+          {
+            "tag": "a",
+            "content": "Gift of the DeWitt Wallace Endowment Fund, named in honor of the founder of Reader's Digest"
+          }
+        ]
+      },
+      {
+        "ind1": "0",
+        "ind2": "8",
+        "content": null,
+        "marcTag": "772",
+        "fieldTag": "w",
+        "subfields": [
+          {
+            "tag": "6",
+            "content": "880-05"
+          },
+          {
+            "tag": "t",
+            "content": "Povelja"
+          },
+          {
+            "tag": "x",
+            "content": "0352-7751"
+          },
+          {
+            "tag": "w",
+            "content": "(DLC)sn 95033418"
+          },
+          {
+            "tag": "w",
+            "content": "(OCoLC)32768016"
+          }
+        ]
+      },
+      {
+        "ind1": " ",
+        "ind2": " ",
+        "content": "OCoLC",
+        "marcTag": "003",
+        "fieldTag": "y",
+        "subfields": null
+      },
+      {
+        "ind1": " ",
+        "ind2": " ",
+        "content": "20230719030131.0",
+        "marcTag": "005",
+        "fieldTag": "y",
+        "subfields": null
+      },
+      {
+        "ind1": " ",
+        "ind2": " ",
+        "content": "220307c20069999rb tr m       0    0srp ccas i ",
+        "marcTag": "008",
+        "fieldTag": "y",
+        "subfields": null
+      },
+      {
+        "ind1": " ",
+        "ind2": " ",
+        "content": null,
+        "marcTag": "040",
+        "fieldTag": "y",
+        "subfields": [
+          {
+            "tag": "a",
+            "content": "IUL"
+          },
+          {
+            "tag": "b",
+            "content": "eng"
+          },
+          {
+            "tag": "e",
+            "content": "rda"
+          },
+          {
+            "tag": "c",
+            "content": "IUL"
+          },
+          {
+            "tag": "d",
+            "content": "IUL"
+          },
+          {
+            "tag": "d",
+            "content": "OCLCO"
+          },
+          {
+            "tag": "d",
+            "content": "OCLCF"
+          },
+          {
+            "tag": "d",
+            "content": "NYP"
+          }
+        ]
+      },
+      {
+        "ind1": " ",
+        "ind2": " ",
+        "content": null,
+        "marcTag": "042",
+        "fieldTag": "y",
+        "subfields": [
+          {
+            "tag": "a",
+            "content": "pcc"
+          }
+        ]
+      },
+      {
+        "ind1": " ",
+        "ind2": " ",
+        "content": null,
+        "marcTag": "049",
+        "fieldTag": "y",
+        "subfields": [
+          {
+            "tag": "a",
+            "content": "NYPP"
+          }
+        ]
+      },
+      {
+        "ind1": " ",
+        "ind2": "4",
+        "content": null,
+        "marcTag": "050",
+        "fieldTag": "y",
+        "subfields": [
+          {
+            "tag": "a",
+            "content": "PG1408"
+          },
+          {
+            "tag": "b",
+            "content": ".P74"
+          }
+        ]
+      },
+      {
+        "ind1": " ",
+        "ind2": "0",
+        "content": null,
+        "marcTag": "222",
+        "fieldTag": "y",
+        "subfields": [
+          {
+            "tag": "a",
+            "content": "Preporučeno"
+          }
+        ]
+      },
+      {
+        "ind1": "0",
+        "ind2": "0",
+        "content": null,
+        "marcTag": "880",
+        "fieldTag": "y",
+        "subfields": [
+          {
+            "tag": "6",
+            "content": "245-01"
+          },
+          {
+            "tag": "a",
+            "content": "Препоручено."
+          }
+        ]
+      },
+      {
+        "ind1": " ",
+        "ind2": "1",
+        "content": null,
+        "marcTag": "880",
+        "fieldTag": "y",
+        "subfields": [
+          {
+            "tag": "6",
+            "content": "264-02"
+          },
+          {
+            "tag": "a",
+            "content": "Краљево :"
+          },
+          {
+            "tag": "b",
+            "content": "Народна библиотека \"Стефан Првовенчани\""
+          }
+        ]
+      },
+      {
+        "ind1": " ",
+        "ind2": " ",
+        "content": null,
+        "marcTag": "880",
+        "fieldTag": "y",
+        "subfields": [
+          {
+            "tag": "6",
+            "content": "500-03"
+          },
+          {
+            "tag": "a",
+            "content": "\"Часопис Повеља.\""
+          }
+        ]
+      },
+      {
+        "ind1": "2",
+        "ind2": " ",
+        "content": null,
+        "marcTag": "880",
+        "fieldTag": "y",
+        "subfields": [
+          {
+            "tag": "6",
+            "content": "710-04"
+          },
+          {
+            "tag": "a",
+            "content": "Народна библиотека \"Стефан Првовенчани,\""
+          },
+          {
+            "tag": "e",
+            "content": "issuing body."
+          }
+        ]
+      },
+      {
+        "ind1": "0",
+        "ind2": "8",
+        "content": null,
+        "marcTag": "880",
+        "fieldTag": "y",
+        "subfields": [
+          {
+            "tag": "6",
+            "content": "772-05"
+          },
+          {
+            "tag": "t",
+            "content": "Повеља"
+          },
+          {
+            "tag": "x",
+            "content": "0352-7751"
+          },
+          {
+            "tag": "w",
+            "content": "(DLC)sn 95033418"
+          },
+          {
+            "tag": "w",
+            "content": "(OCoLC)32768016"
+          }
+        ]
+      },
+      {
+        "ind1": " ",
+        "ind2": " ",
+        "content": null,
+        "marcTag": "901",
+        "fieldTag": "y",
+        "subfields": [
+          {
+            "tag": "a",
+            "content": "MARS"
+          }
+        ]
+      },
+      {
+        "ind1": " ",
+        "ind2": "4",
+        "content": null,
+        "marcTag": "908",
+        "fieldTag": "y",
+        "subfields": [
+          {
+            "tag": "a",
+            "content": "PG1408"
+          },
+          {
+            "tag": "b",
+            "content": ".P74"
+          }
+        ]
+      },
+      {
+        "ind1": " ",
+        "ind2": " ",
+        "content": null,
+        "marcTag": "901",
+        "fieldTag": "y",
+        "subfields": [
+          {
+            "tag": "a",
+            "content": "ssk"
+          },
+          {
+            "tag": "b",
+            "content": "CATRL"
+          }
+        ]
+      },
+      {
+        "ind1": null,
+        "ind2": null,
+        "content": "00000cas a2200565 i 4500",
+        "marcTag": null,
+        "fieldTag": "_",
+        "subfields": null
+      }
+    ]
+  }
