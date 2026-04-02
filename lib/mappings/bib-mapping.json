@@ -987,12 +987,32 @@
       }
     ]
   },
+  "series_displayPacked": {
+    "paths": [
+      {
+        "marc": "490",
+        "excludedSubfields": [
+          "6"
+        ]
+      }
+    ]
+  },
   "seriesUniformTitle": {
     "paths": [
       {
         "marc": "830",
         "subfields": [
           "a"
+        ]
+      }
+    ]
+  },
+  "seriesUniformTitle_displayPacked": {
+    "paths": [
+      {
+        "marc": "830",
+        "excludedSubfields": [
+          "6"
         ]
       }
     ]
