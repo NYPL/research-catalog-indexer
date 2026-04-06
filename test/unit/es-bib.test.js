@@ -1108,18 +1108,6 @@ describe('EsBib', function () {
       expect(esBib.parallelPublisherLiteral()).to.deep.equal(['parallel for Tparan Hovhannu Tēr-Abrahamian'])
     })
   })
-
-  describe('seriesStatement', () => {
-    const record = new SierraBib(require('../fixtures/bib-parallels-party.json'))
-    const esBib = new EsBib(record)
-    it('should return array with seriesStatement', function () {
-      expect(esBib.seriesStatement()).to.deep.equal(['content for 440$a', 'content for 440$a (2)', 'content for 490$a', 'content for 800$a'])
-    })
-    it('parallelSeriesStatement', () => {
-      expect(esBib.parallelSeriesStatement()).to.deep.equal(['parallel content for 440$a', 'parallel content for 440$a (2)', '', 'parallel content for 800$a'])
-    })
-  })
-
   describe('tableOfContents', () => {
     it('should return table of contents', function () {
       const record = new SierraBib(require('../fixtures/bib-11055155.json'))
@@ -1970,46 +1958,6 @@ describe('EsBib', function () {
     })
   })
 
-  describe('series', () => {
-    it('extracts series', async () => {
-      const bib = new SierraBib({
-        varFields: [
-          {
-            marcTag: '490',
-            subfields: [
-              { tag: 'a', content: 'subfield a content' },
-              { tag: 'b', content: 'subfield b content' }
-            ]
-          },
-          {
-            marcTag: '810',
-            subfields: [
-              { tag: 'a', content: 'subfield a content' },
-              { tag: 'z', content: 'subfield z content' },
-              { tag: '6', content: 'subfield z content' }
-            ]
-          }
-        ]
-      })
-      const esBib = new EsBib(bib)
-
-      expect(await (esBib.series())).to.deep.equal([
-        // Only expect subfield a for 490:
-        'subfield a content',
-        // Expect all subfields (except 6) for 810:
-        'subfield a content subfield z content'
-      ])
-    })
-
-    it('extracts parallelSeries', () => {
-      const bib = new SierraBib(require('../fixtures/bib-23236773.json'))
-      const esBib = new EsBib(bib)
-      expect(esBib.parallelSeries()).to.deep.equal([
-        '当代文学史研究丛书'
-      ])
-    })
-  })
-
   describe('physicalDescription', () => {
     it('extracts physicalDescription content', async () => {
       const bib = new SierraBib({
@@ -2120,6 +2068,95 @@ describe('EsBib', function () {
 
       expect(await (esBib.physicalDescription())).to.deep.equal([
         '1 computer disk ; test ; 3 1/2 in. + reference manual'
+      ])
+    })
+  })
+  describe('series fields', () => {
+    let esBib
+    before(() => {
+      const bib = new SierraBib(require(('../fixtures/bib-series.json')))
+      esBib = new EsBib(bib)
+    })
+    it('extracts series (490 fields only $a)', async () => {
+      const result = await esBib.series()
+      expect(result).to.deep.equal([
+        '490 Series: The Psychology of C.G. Jung'
+      ])
+    })
+    it('extracts seriesUniformTitle (830 fields only $a)', async () => {
+      const result = await esBib.seriesUniformTitle()
+      expect(result).to.deep.equal([
+        '830 Series Uniform Title: International Psychology Classics Series'
+      ])
+    })
+    it('extracts parallelSeries and parallelSeriesUniformTitle', async () => {
+      const seriesParallelResult = await esBib.parallelSeries()
+      expect(seriesParallelResult).to.deep.equal(['490 Series parallel: Chay Psicología nisqa C.G. Jung'])
+      const seriesTitleParallelResult = await esBib.parallelSeriesUniformTitle()
+      expect(seriesTitleParallelResult).to.deep.equal([
+        '830 Series Uniform Title parallel: 心理学系列'
+      ])
+    })
+    it('extracts seriesAddedEntry (800, 810, 811 fields, excluding $6)', async () => {
+      const result = await esBib.seriesAddedEntry()
+      expect(result).to.deep.equal([
+        '800 Series Added Entry: Meier, C. A. (Carl Alfred) 1905-1995 Lehrbuch der komplexen Psychologie C.G. Jungs English v. 1',
+        '810 Series Added Entry: United States Congress House Report 112-664',
+        '811 Series Added Entry: Inter-American Conference on Agriculture (3rd : 1945 : Caracas, Venezuela) Cuadernos verdes Serie nacional 14'
+      ])
+    })
+    it('handles multiple seriesAddedEntry fields correctly', async () => {
+      const result = await esBib.seriesAddedEntry()
+      expect(result).to.have.lengthOf(3)
+      expect(result[0]).to.include('800 Series Added Entry')
+      expect(result[1]).to.include('810 Series Added Entry')
+      expect(result[2]).to.include('811 Series Added Entry')
+    })
+    it('concatenates subfields properly for seriesAddedEntry', async () => {
+      const result = await esBib.seriesAddedEntry()
+      // 800 field concatenates a, q, d, t, l, v
+      expect(result[0]).to.equal('800 Series Added Entry: Meier, C. A. (Carl Alfred) 1905-1995 Lehrbuch der komplexen Psychologie C.G. Jungs English v. 1')
+      // 810 field concatenates a, b, b, t, v
+      expect(result[1]).to.equal('810 Series Added Entry: United States Congress House Report 112-664')
+      // 811 field concatenates a, n, t, p, v
+      expect(result[2]).to.equal('811 Series Added Entry: Inter-American Conference on Agriculture (3rd : 1945 : Caracas, Venezuela) Cuadernos verdes Serie nacional 14')
+    })
+    it('series_displayPacked returns subfield a||full for 490 fields', () => {
+      const result = esBib.series_displayPacked()
+      expect(result).to.deep.equal([
+        '490 Series: The Psychology of C.G. Jung||490 Series: The Psychology of C.G. Jung v. 1 (Z965.N38)'
+      ])
+    })
+    it('seriesUniformTitle_displayPacked returns subfield a||full for 830 fields', () => {
+      const result = esBib.seriesUniformTitle_displayPacked()
+      expect(result).to.deep.equal([
+        '830 Series Uniform Title: International Psychology Classics Series||830 Series Uniform Title: International Psychology Classics Series vol. 1'
+      ])
+    })
+    it('seriesAddedEntry_displayPacked returns name||label for 800/810/811', () => {
+      const result = esBib.seriesAddedEntry_displayPacked()
+      expect(result).to.deep.equal([
+        '800 Series Added Entry: Meier, C. A. (Carl Alfred) 1905-1995||800 Series Added Entry: Meier, C. A. (Carl Alfred) 1905-1995 Lehrbuch der komplexen Psychologie C.G. Jungs English v. 1',
+        '810 Series Added Entry: United States Congress House||810 Series Added Entry: United States Congress House Report 112-664',
+        '811 Series Added Entry: Inter-American Conference on Agriculture (3rd : 1945 : Caracas, Venezuela)||811 Series Added Entry: Inter-American Conference on Agriculture (3rd : 1945 : Caracas, Venezuela) Cuadernos verdes Serie nacional 14'
+      ])
+    })
+    it('parallelSeries_displayPacked returns subfield a||full for parallels to 490 field', function () {
+      const result = esBib.parallelSeries_displayPacked()
+      expect(result).to.deep.equal([
+        '490 Series parallel: Chay Psicología nisqa C.G. Jung||490 Series parallel: Chay Psicología nisqa C.G. Jung v. 1'
+      ])
+    })
+    it('parallelSeriesUniformTitle_displayPacked returns subfield a||full for parallels to 830 field', function () {
+      const result = esBib.parallelSeriesUniformTitle_displayPacked()
+      expect(result).to.deep.equal([
+        '830 Series Uniform Title parallel: 心理学系列||830 Series Uniform Title parallel: 心理学系列 第1卷'
+      ])
+    })
+    it('parallelSeriesAddedEntry_displayPacked returns subfield a||full for parallels to 800/810/811 (811 in this case) field', function () {
+      const result = esBib.parallelSeriesAddedEntry_displayPacked()
+      expect(result).to.deep.equal([
+        '811 Series Added Entry parallel: Chakra llamkaymanta Conferencia Interamericana||811 Series Added Entry parallel: Chakra llamkaymanta Conferencia Interamericana Serie nacional nisqa'
       ])
     })
   })
