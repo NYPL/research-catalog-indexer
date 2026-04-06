@@ -21,6 +21,25 @@ const die = (message) => {
   process.exit()
 }
 
+/**
+ *  Perform transformations on a db result so that it resembles the object
+ *  returned from the Bib/Item services
+ */
+const convertCommonModelProperties = (models) => {
+  return models.map((model) => {
+    // camelize all root level property names:
+    Object.keys(model)
+      .forEach((k) => {
+        if (/_/.test(k)) {
+          const newProperty = camelize(k)
+          model[newProperty] = model[k]
+          delete model[k]
+        }
+      })
+    return model
+  })
+}
+
 function removeEmpty (obj) {
   return Object.fromEntries(
     Object.entries(obj)
@@ -468,5 +487,6 @@ module.exports = {
   retry,
   secondsAsFriendlyDuration,
   setAwsProfile,
-  Timer
+  Timer,
+  convertCommonModelProperties
 }

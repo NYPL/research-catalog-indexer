@@ -151,7 +151,7 @@ const {
   groupIdentifierEntitiesByTypeAndNyplSource,
   delay,
   die,
-  camelize,
+  convertCommonModelProperties,
   capitalize,
   printProgress,
   setAwsProfile,
@@ -185,6 +185,7 @@ const usage = () => {
 }
 
 const db = {
+  restartId: null,
   dbConnectionPools: null,
 
   /**
@@ -236,25 +237,6 @@ const db = {
         pool.end()
       })
   }
-}
-
-/**
- *  Perform transformations on a db result so that it resembles the object
- *  returned from the Bib/Item services
- */
-const convertCommonModelProperties = (models) => {
-  return models.map((model) => {
-    // camelize all root level property names:
-    Object.keys(model)
-      .forEach((k) => {
-        if (/_/.test(k)) {
-          const newProperty = camelize(k)
-          model[newProperty] = model[k]
-          delete model[k]
-        }
-      })
-    return model
-  })
 }
 
 /**
@@ -445,8 +427,14 @@ const buildSqlQuery = (options) => {
   let type = null
   let table = null
 
-  // Just querying a single bib/item id?
-  if (options.nyplSource && (options.bibId || options.itemId)) {
+  const SINGLE_ID_WITH_SOURCE = options.nyplSource && (options.bibId || options.itemId)
+  const MULTI_ID_WITH_SOURCE = options.nyplSource && options.type && options.ids
+  const ALL_OF_TYPE_FROM_PROVIDED_DATE = options.type && options.fromDate
+  const ALL_OF_TYPE_FROM_ID = options.type === 'bib' && options.restartId && options.orderBy === 'id'
+  const ALL_BIBS_WITH_RESTART = options.type === 'bib' && options.orderBy === 'id' && options.table !== 'bib'
+  const REINDEX_ALL = options.type
+
+  if (SINGLE_ID_WITH_SOURCE) {
     type = options.bibId ? 'bib' : 'item'
     table = options.table ? options.table : type
     sqlFromAndWhere = `${table}
@@ -460,7 +448,7 @@ const buildSqlQuery = (options) => {
     options.limit = 1
 
     // Querying a collection of ids?
-  } else if (options.nyplSource && options.type && options.ids) {
+  } else if (MULTI_ID_WITH_SOURCE) {
     type = options.type
     table = options.table ? options.table : type
     sqlFromAndWhere = `${table}
@@ -472,17 +460,21 @@ const buildSqlQuery = (options) => {
     options.limit = options.ids.length
 
     // Support for a date range query
-  } else if (options.type && options.fromDate) {
+  } else if (ALL_OF_TYPE_FROM_ID) {
+    type = options.type
+    table = options.table ? options.table : type
+    if (table !== 'bibv2') logger.error('Restart by id only compatible with bib v2 table and bib type updates.')
+    sqlFromAndWhere = `${table}
+      WHERE id >= ${options.restartId}'`
+  } else if (ALL_OF_TYPE_FROM_PROVIDED_DATE) {
     type = options.type
     const fromDate = options.fromDate
     const toDate = options.toDate != null ? options.toDate : new Date().toISOString().split('T')[0]
-
     table = options.table ? options.table : type
     sqlFromAndWhere = `${table}
       WHERE updated_date BETWEEN '${fromDate}' AND '${toDate}'`
-
     // Querying by type (and possibly hasMarc / nyplSource):
-  } else if (options.type) {
+  } else if (REINDEX_ALL || ALL_BIBS_WITH_RESTART) {
     type = options.type
     table = options.table ? options.table : type
 
@@ -540,20 +532,6 @@ const buildSqlQuery = (options) => {
   return { query, params, type }
 }
 
-const readCursorRecurser = async (batchSize, cursor, retry = 1) => {
-  if (retry > 3) {
-    throw new Error('Error connecting to db after 3 tries')
-  }
-  try {
-    await delay(retry * 1000)
-    return await cursor.read(batchSize)
-  } catch (e) {
-    logger.warn('readCursorRecursor error: ', e)
-    logger.info(`readCursorRecursor retry #${retry}`)
-    return await readCursorRecurser(batchSize, cursor, ++retry)
-  }
-}
-
 /**
  *  Reindex a bunch of bibs based on a BibService query
  */
@@ -584,7 +562,7 @@ const updateByBibOrItemServiceQuery = async (options) => {
       // Pull next batch of records from the cursor:
       let rows
       try {
-        rows = await readCursorRecurser(options.batchSize, cursor)
+        rows = await cursor.read(options.batchSize)
       } catch (e) {
         cursor.close(() => {
           client.release()
@@ -601,7 +579,6 @@ const updateByBibOrItemServiceQuery = async (options) => {
 
       // Transform bib/item properties to match what Bib/ItemService would have returned:
       const records = convertCommonModelProperties(rows)
-
       // Trigger reindex:
       let retries = 3
       let processed = false
@@ -807,7 +784,6 @@ const run = async () => {
   overwriteModelPrefetch()
   if (argv.skipApiPrefetch || process.env.SKIP_API_PREFETCH === 'true') overwriteGeneralPrefetch()
   if (argv.updateOnly || process.env.UPDATE_ONLY) overwriteSchema(argv.properties || process.env.PROPERTIES)
-
   // Use barcode-customer-code mapping file to skip SCSB API calls?
   // This CSV is expected to contain two columns: barcode, customercode.
   if (argv.recapBarcodeCustomerCodeMap) {
@@ -816,17 +792,8 @@ const run = async () => {
     populateBarcodeRecapCustomerCodeCache(lookup)
   }
 
-  // Require one of:
-  // - csv
-  // - bib/item id
-  // - type, plus another qualifier (hasMarc or nyplSource)
-  if (argv.csv) {
-    await updateByCsv(argv)
-      .catch((e) => {
-        logger.error(`Error: ${e.message}`, e)
-      })
-  } else if (
-    argv.bibId ||
+  const UPDATE_BY_CSV = argv.csv
+  const UPDATE_BY_BIB_OR_ITEM_SERVICE_QUERY = argv.bibId ||
     argv.itemId ||
     (
       argv.type &&
@@ -836,10 +803,20 @@ const run = async () => {
         argv.fromDate
       )
     )
-  ) {
+  // Require one of:
+  // - csv
+  // - bib/item id
+  // - type, plus another qualifier (hasMarc or nyplSource)
+  if (UPDATE_BY_CSV) {
+    await updateByCsv(argv)
+      .catch((e) => {
+        logger.error(`Error: ${e.message}`, e)
+      })
+  } else if (UPDATE_BY_BIB_OR_ITEM_SERVICE_QUERY) {
     await db.initPools()
     try {
-      await updateByBibOrItemServiceQuery(argv)
+      if (db.restartId) argv.restartId = db.restartId
+      await updateByBibOrItemServiceQuery({ ...argv })
     } catch (e) {
       logger.error('Error ', e)
       logger.error(e.stack)
