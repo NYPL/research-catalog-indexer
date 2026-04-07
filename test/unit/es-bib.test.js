@@ -2124,13 +2124,13 @@ describe('EsBib', function () {
     it('series_displayPacked returns subfield a||full for 490 fields', () => {
       const result = esBib.series_displayPacked()
       expect(result).to.deep.equal([
-        '490 Series: The Psychology of C.G. Jung||490 Series: The Psychology of C.G. Jung v. 1 (Z965.N38)'
+        '490 Series: The Psychology of C.G. Jung||490 Series: The Psychology of C.G. Jung, v. 1, (Z965.N38)'
       ])
     })
     it('seriesUniformTitle_displayPacked returns subfield a||full for 830 fields', () => {
       const result = esBib.seriesUniformTitle_displayPacked()
       expect(result).to.deep.equal([
-        '830 Series Uniform Title: International Psychology Classics Series||830 Series Uniform Title: International Psychology Classics Series vol. 1'
+        '830 Series Uniform Title: International Psychology Classics Series||830 Series Uniform Title: International Psychology Classics Series, vol. 1'
       ])
     })
     it('seriesAddedEntry_displayPacked returns name||label for 800/810/811', () => {
@@ -2144,13 +2144,13 @@ describe('EsBib', function () {
     it('parallelSeries_displayPacked returns subfield a||full for parallels to 490 field', function () {
       const result = esBib.parallelSeries_displayPacked()
       expect(result).to.deep.equal([
-        '490 Series parallel: Chay Psicología nisqa C.G. Jung||490 Series parallel: Chay Psicología nisqa C.G. Jung v. 1'
+        '490 Series parallel: Chay Psicología nisqa C.G. Jung||490 Series parallel: Chay Psicología nisqa C.G. Jung, v. 1'
       ])
     })
     it('parallelSeriesUniformTitle_displayPacked returns subfield a||full for parallels to 830 field', function () {
       const result = esBib.parallelSeriesUniformTitle_displayPacked()
       expect(result).to.deep.equal([
-        '830 Series Uniform Title parallel: 心理学系列||830 Series Uniform Title parallel: 心理学系列 第1卷'
+        '830 Series Uniform Title parallel: 心理学系列||830 Series Uniform Title parallel: 心理学系列, 第1卷'
       ])
     })
     it('parallelSeriesAddedEntry_displayPacked returns subfield a||full for parallels to 800/810/811 (811 in this case) field', function () {
