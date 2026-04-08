@@ -607,7 +607,7 @@ const updateByBibOrItemServiceQuery = async (options) => {
       let processed = false
       while (!processed && retries > 0) {
         try {
-          await indexer.processRecords(capitalize(type), records, { updateOnly: process.env.UPDATE_ONLY || argv.updateOnly, dryrun: argv.dryrun, skipDeletes: argv.skipDeletes == 'true' })
+          await indexer.processRecords(capitalize(type), records, { updateOnly: process.env.UPDATE_ONLY || argv.updateOnly, dryrun: argv.dryrun, skipDeletes: argv.skipDeletes === 'true' })
           if (retries < 3) logger.info(`Succeeded on retry ${3 - retries}`)
           processed = true
         } catch (e) {
