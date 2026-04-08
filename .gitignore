@@ -7,3 +7,4 @@ uris.csv
 .vscode*
 *.log
 unindexed-*
+scripts/bulk_logs/
