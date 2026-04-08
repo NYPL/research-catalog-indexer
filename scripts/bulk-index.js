@@ -540,24 +540,10 @@ const buildSqlQuery = (options) => {
   return { query, params, type }
 }
 
-const readCursorRecurser = async (batchSize, cursor, retry = 1) => {
-  if (retry > 3) {
-    throw new Error('Error connecting to db after 3 tries')
-  }
-  try {
-    await delay(retry * 1000)
-    return await cursor.read(batchSize)
-  } catch (e) {
-    logger.warn('readCursorRecursor error: ', e)
-    logger.info(`readCursorRecursor retry #${retry}`)
-    return await readCursorRecurser(batchSize, cursor, ++retry)
-  }
-}
-
 /**
  *  Reindex a bunch of bibs based on a BibService query
  */
-const updateByBibOrItemServiceQuery = async (options) => {
+const updateByBibOrItemServiceQuery = async (options, reconnectRetries = 0) => {
   options = Object.assign({
     // Default progress logger:
     progressCallback: (count, total, startTime) => printProgress(count, total, argv.batchSize, startTime)
@@ -579,56 +565,73 @@ const updateByBibOrItemServiceQuery = async (options) => {
   let count = 0
   const startTime = new Date()
   let done = false
+  let lastProcessedId = null
+
   while (!done && (count < options.limit || !options.limit)) {
-    await instrument('Bulk-index batch', async () => {
-      // Pull next batch of records from the cursor:
-      let rows
-      try {
-        rows = await readCursorRecurser(options.batchSize, cursor)
-      } catch (e) {
-        cursor.close(() => {
-          client.release()
-        })
-        throw e
-      }
+    try {
+      await instrument('Bulk-index batch', async () => {
+        // Pull next batch of records from the cursor:
+        const rows = await cursor.read(options.batchSize)
 
-      // Did we reach the end?
-      if (rows.length === 0) {
-        logger.info(`Cursor reached the end. Stopping after ${count} processed.`)
-        done = true
-        return
-      }
-
-      // Transform bib/item properties to match what Bib/ItemService would have returned:
-      const records = convertCommonModelProperties(rows)
-
-      // Trigger reindex:
-      let retries = 3
-      let processed = false
-      while (!processed && retries > 0) {
-        try {
-          await indexer.processRecords(capitalize(type), records, { updateOnly: process.env.UPDATE_ONLY || argv.updateOnly, dryrun: argv.dryrun })
-          if (retries < 3) logger.info(`Succeeded on retry ${3 - retries}`)
-          processed = true
-        } catch (e) {
-          if (!(e instanceof SkipPrefetchError)) {
-            logger.warn(`Retrying due to error: ${e}`)
-            console.trace(e)
-            await delay(3000)
-            retries -= 1
-          } else {
-            cursor.close(() => {
-              client.release()
-            })
-            throw e
+        // Did we reach the end?
+        if (rows.length === 0) {
+          logger.info(`Cursor reached the end. Stopping after ${count} processed.`)
+          done = true
+          return
+        }
+        // Transform bib/item properties to match what Bib/ItemService would have returned:
+        const records = convertCommonModelProperties(rows)
+        // Trigger reindex:
+        let retries = 3
+        let processed = false
+        while (!processed && retries > 0) {
+          try {
+            await indexer.processRecords(capitalize(type), records, { updateOnly: process.env.UPDATE_ONLY || argv.updateOnly, dryrun: argv.dryrun })
+            if (retries < 3) logger.info(`Succeeded on retry ${3 - retries}`)
+            processed = true
+          } catch (e) {
+            if (!(e instanceof SkipPrefetchError)) {
+              logger.warn(`Retrying due to error: ${e}`)
+              console.trace(e)
+              await delay(3000)
+              retries -= 1
+            } else {
+              throw e
+            }
           }
         }
-      }
-      count += rows.length
+        count += rows.length
 
-      // Log out progress so far:
-      options.progressCallback(count, total, startTime)
-    })
+        if (records.length > 0) {
+          const ids = records.map((r) => parseInt(r.id, 10)).filter((id) => !isNaN(id))
+          if (ids.length > 0) {
+            lastProcessedId = Math.max(...ids)
+          }
+        }
+
+        // Log out progress so far:
+        options.progressCallback(count, total, startTime)
+      })
+    } catch (e) {
+      cursor.close(() => {
+        client.release()
+      })
+      if (e instanceof SkipPrefetchError) throw e
+      if (options.dbRestartMode) {
+        logger.warn(`Database connection error caught. Attempting to reconnect... Error: ${e}`)
+        if (reconnectRetries >= 3) {
+          logger.error(`Database reconnection failed permanently. Last successfully processed ID: ${lastProcessedId}`)
+          db.endPools()
+          return
+        }
+        await delay(reconnectRetries * 1000)
+        await db.initPools()
+        options.restartFromId = lastProcessedId
+        return updateByBibOrItemServiceQuery(options, reconnectRetries + 1)
+      } else {
+        throw e
+      }
+    }
   }
 
   cursor.close(() => {
@@ -885,6 +888,7 @@ module.exports = {
   updateByCsv,
   db,
   buildSqlQuery,
+  updateByBibOrItemServiceQuery,
   overwriteModelPrefetch,
   restoreModelPrefetch,
   _testing: {
