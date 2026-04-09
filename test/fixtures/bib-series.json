@@ -62,6 +62,8 @@
         "subfields": [
           {"tag": "6", "content": "880-01"},
           {"tag": "a", "content": "830 Series Uniform Title: International Psychology Classics Series"},
+          {"tag": "t", "content": "830 Series Uniform Title other field t"},
+          {"tag": "d", "content": "830 Series Uniform Title other field d"},
           {"tag": "v", "content": "vol. 1"}
         ]
       },
