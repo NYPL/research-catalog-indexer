@@ -12,11 +12,11 @@
 #   $@ - All other args are passed into bulk-index.js to suite your use case.
 #
 # Example usage (starting from 10 years ago):
-# ./bulk_update_with_time_windows.sh 120 --envfile config/qa-bulk-index.env --type bib --nyplSource all --skipDeletes true
+# ./scripts/bulk_update_with_time_windows.sh 120 --envfile config/qa-bulk-index.env --type bib --nyplSource all --skipDeletes
 #
 # <assuming you're interrupted at month lookback 84>
 #
-# ./bulk_update_with_time_windows.sh 84 --envfile config/qa-bulk-index.env --type bib --nyplSource all --skipDeletes true
+# ./scripts/bulk_update_with_time_windows.sh 84 --envfile config/qa-bulk-index.env --type bib --nyplSource all --skipDeletes
 #
 # Not sure where you left off? This writes logs to bulk_logs/ including the month lookback so you should be able to find it there.
 #
