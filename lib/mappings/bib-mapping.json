@@ -1002,9 +1002,10 @@
     "paths": [
       {
         "marc": "830",
-        "subfields": [
-          "a"
-        ]
+        "excludedSubfields": [
+          "v", "6"
+        ],
+        "subfieldJoiner": ", "
       }
     ]
   },

@@ -2083,10 +2083,10 @@ describe('EsBib', function () {
         '490 Series: The Psychology of C.G. Jung'
       ])
     })
-    it('extracts seriesUniformTitle (830 fields only $a)', async () => {
+    it('extracts seriesUniformTitle (830 fields except $v)', async () => {
       const result = await esBib.seriesUniformTitle()
       expect(result).to.deep.equal([
-        '830 Series Uniform Title: International Psychology Classics Series'
+        '830 Series Uniform Title: International Psychology Classics Series, 830 Series Uniform Title other field t, 830 Series Uniform Title other field d'
       ])
     })
     it('extracts parallelSeries and parallelSeriesUniformTitle', async () => {
@@ -2127,10 +2127,10 @@ describe('EsBib', function () {
         '490 Series: The Psychology of C.G. Jung||490 Series: The Psychology of C.G. Jung, v. 1, (Z965.N38)'
       ])
     })
-    it('seriesUniformTitle_displayPacked returns subfield a||full for 830 fields', () => {
+    it('seriesUniformTitle_displayPacked returns all subfields except v||full for 830 fields', () => {
       const result = esBib.seriesUniformTitle_displayPacked()
       expect(result).to.deep.equal([
-        '830 Series Uniform Title: International Psychology Classics Series||830 Series Uniform Title: International Psychology Classics Series, vol. 1'
+        '830 Series Uniform Title: International Psychology Classics Series, 830 Series Uniform Title other field t, 830 Series Uniform Title other field d||830 Series Uniform Title: International Psychology Classics Series, 830 Series Uniform Title other field t, 830 Series Uniform Title other field d, vol. 1'
       ])
     })
     it('seriesAddedEntry_displayPacked returns name||label for 800/810/811', () => {

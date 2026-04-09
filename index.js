@@ -36,7 +36,8 @@ const handler = async (event, context, callback) => {
 const processRecords = async (type, records, options = {}) => {
   options = Object.assign({
     updateOnly: false,
-    dryrun: false
+    dryrun: false,
+    skipDeletes: false
   }, options)
   // Ensure event has Bib records:
   records = await transformIntoBibRecords(type, records)
@@ -74,6 +75,10 @@ const processRecords = async (type, records, options = {}) => {
   if (recordsToDelete.length) {
     if (options.dryrun) {
       console.log(`DRYRUN: Skipping removing ${recordsToDelete.length} records`)
+    } else if (options.skipDeletes) {
+      console.log(`Skipping deletes for ${recordsToDelete.length} records.`)
+      recordsToDelete.length = 0
+      removedBibs.length = 0
     } else {
       await suppress.suppressBibs(recordsToDelete)
     }
