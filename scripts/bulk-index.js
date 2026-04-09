@@ -109,8 +109,8 @@ const argv = require('minimist')(process.argv.slice(2), {
     skipPrefetch: false,
     updateOnly: false
   },
-  boolean: ['updateOnly'],
-  string: ['hasMarc', 'hasSubfield', 'bibId', 'fromDate', 'toDate', 'skipDeletes'],
+  boolean: ['updateOnly', 'skipDeletes'],
+  string: ['hasMarc', 'hasSubfield', 'bibId', 'fromDate', 'toDate'],
   integer: ['limit', 'offset', 'batchSize']
 })
 const { populateBarcodeRecapCustomerCodeCache } = require('../lib/scsb/requests')
@@ -607,7 +607,7 @@ const updateByBibOrItemServiceQuery = async (options) => {
       let processed = false
       while (!processed && retries > 0) {
         try {
-          await indexer.processRecords(capitalize(type), records, { updateOnly: process.env.UPDATE_ONLY || argv.updateOnly, dryrun: argv.dryrun, skipDeletes: argv.skipDeletes === 'true' })
+          await indexer.processRecords(capitalize(type), records, { updateOnly: process.env.UPDATE_ONLY || argv.updateOnly, dryrun: argv.dryrun, skipDeletes: argv.skipDeletes })
           if (retries < 3) logger.info(`Succeeded on retry ${3 - retries}`)
           processed = true
         } catch (e) {
@@ -674,7 +674,7 @@ const castRowToIdentifier = (row, options) => {
 *  - offset {int} - 0-indexed line number to start at. Default 0
 *  - limit {int}  - Number of rows to process. Default no-limit.
 *  - batchSize {int} - Number of records to process in each batch
-*  - skipDeletes {string} - Whether to skip deleting suppressed records, useful if doing a large bulk where we are trying to update a fields on existing records
+*  - skipDeletes {boolean} - Whether to skip deleting suppressed records, useful if doing a large bulk where we are trying to update fields on existing records
 */
 const updateByCsv = async (options = { offset: 0 }) => {
   if (!options.csv) throw new Error('--csv is required')

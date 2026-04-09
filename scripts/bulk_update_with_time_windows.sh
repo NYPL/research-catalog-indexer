@@ -22,7 +22,15 @@
 #
 ####################################################################################################################################
 
-current_ts=$(date -j -f "%Y-%m-%d" "$(date +%Y-%m-01)" +%s)
+current_ts=''
+# NOTE: i asked a robot to help with these date commands which have to be different on macos vs linux (EC2)
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    # macOS (BSD)
+    current_ts=$(date -j -f "%Y-%m-%d" "$(date +%Y-%m-01)" +%s)
+else
+    # AL2023 / Linux (GNU)
+    current_ts=$(date +%Y-%m-01)
+fi
 
 SCRIPT_DIR=$(dirname "$0")
 
@@ -35,10 +43,20 @@ fi
 
 mkdir -p $SCRIPT_DIR/bulk_logs/
 
-for i in $(seq $MONTHS_AGO_FROM 0); do
-    from_date=$(date -j -r "$current_ts" -v-"${i}"m +%Y-%m-01)
-    next_month=$(( i - 1 ))
-    to_date=$(date -j -r "$current_ts" -v-"${next_month}"m +%Y-%m-01)
+for i in $(seq $MONTHS_AGO_FROM -1 0); do
+    from_date=''
+    to_date=''
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+      # macOS (BSD Date)
+      from_date=$(date -j -r "$current_ts" -v-"${i}"m +%Y-%m-01)
+      next_month=$(( i - 1 ))
+      to_date=$(date -j -r "$current_ts" -v-"${next_month}"m +%Y-%m-01)
+    else
+      # AL2023 / Linux (GNU Date)
+      from_date=$(date -d "$current_ts - $i months" +%Y-%m-01)
+      next_month=$(( i - 1 ))
+      to_date=$(date -d "$current_ts - $next_month months" +%Y-%m-01)
+    fi
 
     LOG_FILE=$SCRIPT_DIR/bulk_logs/ordered_bulk_index_"$current_ts"."$i".log
 
