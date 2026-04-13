@@ -994,7 +994,7 @@
         "excludedSubfields": [
           "6"
         ],
-        "subfieldJoiner": ", "
+        "subfieldJoiner": " "
       }
     ]
   },
@@ -1005,7 +1005,7 @@
         "excludedSubfields": [
           "v", "6"
         ],
-        "subfieldJoiner": ", "
+        "subfieldJoiner": " "
       }
     ]
   },
@@ -1016,7 +1016,7 @@
         "excludedSubfields": [
           "6"
         ],
-        "subfieldJoiner": ", "
+        "subfieldJoiner": " "
       }
     ]
   },
