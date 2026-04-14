@@ -46,6 +46,11 @@
         "pattern": "[!\"#$%&'(),-./:;<=>?\\[\\]^_`{|}~]",
         "type": "pattern_replace",
         "replacement": ""
+      },
+      "strip_leading_articles": {
+          "type": "pattern_replace",
+          "pattern": "^(?i)(?:a|an|the)\\s+",
+          "replacement": ""
       }
     },
     "normalizer": {
@@ -80,6 +85,16 @@
         "type": "custom",
         "char_filter": [
           "strip_shelfmark_punctuation"
+        ]
+      },
+      "sort_normalizer": {
+        "filter": [
+          "asciifolding",
+          "lowercase"
+        ],
+        "type": "custom",
+        "char_filter": [
+          "strip_leading_articles"
         ]
       }
     },
