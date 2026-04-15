@@ -993,7 +993,8 @@
         "marc": "490",
         "excludedSubfields": [
           "6"
-        ]
+        ],
+        "subfieldJoiner": " "
       }
     ]
   },
@@ -1004,7 +1005,7 @@
         "excludedSubfields": [
           "v", "6"
         ],
-        "subfieldJoiner": ", "
+        "subfieldJoiner": " "
       }
     ]
   },
@@ -1015,7 +1016,7 @@
         "excludedSubfields": [
           "6"
         ],
-        "subfieldJoiner": ", "
+        "subfieldJoiner": " "
       }
     ]
   },

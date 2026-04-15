@@ -2086,7 +2086,15 @@ describe('EsBib', function () {
     it('extracts seriesUniformTitle (830 fields except $v)', async () => {
       const result = await esBib.seriesUniformTitle()
       expect(result).to.deep.equal([
-        '830 Series Uniform Title: International Psychology Classics Series, 830 Series Uniform Title other field t, 830 Series Uniform Title other field d'
+        '830 Series Uniform Title: International Psychology Classics Series 830 Series Uniform Title other field t 830 Series Uniform Title other field d'
+      ])
+    })
+    it('extracts seriesUniformTitle (830 fields except $v) problem case', async () => {
+      const bib = new SierraBib(require(('../fixtures/bib-16470373.json')))
+      const testBib = new EsBib(bib)
+      const result = await testBib.seriesUniformTitle()
+      expect(result).to.deep.equal([
+        'Rossini, Gioacchino 1792-1868. Works. Selections (Boccaccini & Spada editore) ;'
       ])
     })
     it('extracts parallelSeries and parallelSeriesUniformTitle', async () => {
@@ -2130,7 +2138,7 @@ describe('EsBib', function () {
     it('seriesUniformTitle_displayPacked returns all subfields except v||full for 830 fields', () => {
       const result = esBib.seriesUniformTitle_displayPacked()
       expect(result).to.deep.equal([
-        '830 Series Uniform Title: International Psychology Classics Series, 830 Series Uniform Title other field t, 830 Series Uniform Title other field d||830 Series Uniform Title: International Psychology Classics Series, 830 Series Uniform Title other field t, 830 Series Uniform Title other field d, vol. 1'
+        '830 Series Uniform Title: International Psychology Classics Series 830 Series Uniform Title other field t 830 Series Uniform Title other field d||830 Series Uniform Title: International Psychology Classics Series 830 Series Uniform Title other field t 830 Series Uniform Title other field d vol. 1'
       ])
     })
     it('seriesAddedEntry_displayPacked returns name||label for 800/810/811', () => {
@@ -2150,7 +2158,7 @@ describe('EsBib', function () {
     it('parallelSeriesUniformTitle_displayPacked returns subfield a||full for parallels to 830 field', function () {
       const result = esBib.parallelSeriesUniformTitle_displayPacked()
       expect(result).to.deep.equal([
-        '830 Series Uniform Title parallel: 心理学系列||830 Series Uniform Title parallel: 心理学系列, 第1卷'
+        '830 Series Uniform Title parallel: 心理学系列||830 Series Uniform Title parallel: 心理学系列 第1卷'
       ])
     })
     it('parallelSeriesAddedEntry_displayPacked returns subfield a||full for parallels to 800/810/811 (811 in this case) field', function () {

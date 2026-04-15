@@ -1,0 +1,429 @@
+{
+  "id": "16470373",
+  "nyplSource": "sierra-nypl",
+  "title": "Christe : per 2 tenori, basso ed orchestra",
+  "author": "Rossini, Gioacchino, 1792-1868.",
+  "publishYear": 2006,
+  "nyplType": "bib",
+  "controlNumber": "75399987",
+  "standardNumbers": [],
+  "updatedDate": "2023-07-18T13:41:06",
+  "createdDate": "2008-12-21T11:36:08",
+  "deletedDate": null,
+  "catalogDate": "2006-12-07T00:00:00",
+  "deleted": false,
+  "suppressed": false,
+  "locations": [
+    {
+      "code": "pam",
+      "name": "Performing Arts Research Collections - Music"
+    }
+  ],
+  "lang": { "code": "lat", "name": "Latin" },
+  "materialType": { "code": "c  ", "value": "SCORE" },
+  "bibLevel": { "code": "m", "value": "MONOGRAPH" },
+  "country": { "code": "it ", "name": "Italy" },
+  "normTitle": "christe per 2 tenori basso ed orchestra",
+  "normAuthor": "rossini gioacchino 1792 1868",
+  "fixedFields": {
+    "24": { "label": "Language", "value": "lat", "display": "Latin" },
+    "25": { "label": "Skip", "value": "0", "display": null },
+    "26": {
+      "label": "Location",
+      "value": "pam  ",
+      "display": "Performing Arts Research Collections - Music"
+    },
+    "27": { "label": "", "value": "1", "display": null },
+    "28": { "label": "Cat. Date", "value": "2006-12-07", "display": null },
+    "29": { "label": "Bib Level", "value": "m", "display": "MONOGRAPH" },
+    "30": { "label": "Material Type", "value": "c  ", "display": "SCORE" },
+    "31": { "label": "Bib Code 3", "value": "-", "display": null },
+    "80": { "label": "Record Type", "value": "b", "display": null },
+    "81": { "label": "Record Number", "value": "16470373", "display": null },
+    "83": {
+      "label": "Created Date",
+      "value": "2008-12-21T11:36:08Z",
+      "display": null
+    },
+    "84": {
+      "label": "Updated Date",
+      "value": "2023-07-18T13:41:06Z",
+      "display": null
+    },
+    "85": { "label": "No. of Revisions", "value": "10", "display": null },
+    "86": { "label": "Agency", "value": "1", "display": null },
+    "89": { "label": "Country", "value": "it ", "display": "Italy" },
+    "98": { "label": "", "value": "2022-06-06T17:30:25Z", "display": null },
+    "107": { "label": "MARC Type", "value": " ", "display": null }
+  },
+  "varFields": [
+    {
+      "ind1": "1",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "100",
+      "fieldTag": "a",
+      "subfields": [
+        { "tag": "a", "content": "Rossini, Gioacchino," },
+        { "tag": "d", "content": "1792-1868." }
+      ]
+    },
+    {
+      "ind1": "1",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "700",
+      "fieldTag": "b",
+      "subfields": [
+        { "tag": "a", "content": "Spada, Pietro," },
+        { "tag": "d", "content": "1935-" },
+        { "tag": "4", "content": "edt" }
+      ]
+    },
+    {
+      "ind1": "8",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "852",
+      "fieldTag": "c",
+      "subfields": [{ "tag": "h", "content": "JMG 06-1852" }]
+    },
+    {
+      "ind1": " ",
+      "ind2": "0",
+      "content": null,
+      "marcTag": "650",
+      "fieldTag": "d",
+      "subfields": [
+        { "tag": "a", "content": "Sacred vocal trios with orchestra" },
+        { "tag": "v", "content": "Scores." }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "254",
+      "fieldTag": "e",
+      "subfields": [{ "tag": "a", "content": "Partitura." }]
+    },
+    {
+      "ind1": "2",
+      "ind2": "2",
+      "content": null,
+      "marcTag": "028",
+      "fieldTag": "l",
+      "subfields": [
+        { "tag": "a", "content": "BS. 1607" },
+        { "tag": "b", "content": "Boccaccini & Spada" }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "035",
+      "fieldTag": "l",
+      "subfields": [
+        { "tag": "a", "content": "(OCoLC)75399987" },
+        { "tag": "z", "content": "(OCoLC)72521271" }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "035",
+      "fieldTag": "l",
+      "subfields": [{ "tag": "a", "content": "(WaOLN)M060000006" }]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "500",
+      "fieldTag": "n",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "For vocal soloists (TTB) with orchestra."
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "500",
+      "fieldTag": "n",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "Preface in Italian with English, French, and German translations."
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "546",
+      "fieldTag": "n",
+      "subfields": [{ "tag": "a", "content": "Latin words." }]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": "75399987",
+      "marcTag": "001",
+      "fieldTag": "o",
+      "subfields": null
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "260",
+      "fieldTag": "p",
+      "subfields": [
+        { "tag": "a", "content": "Pavona di Albano Laziale, Roma :" },
+        { "tag": "b", "content": "Boccaccini & Spada," },
+        { "tag": "c", "content": "c2006." }
+      ]
+    },
+    {
+      "ind1": "8",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "852",
+      "fieldTag": "q",
+      "subfields": [{ "tag": "h", "content": "JMG 06-1852" }]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "300",
+      "fieldTag": "r",
+      "subfields": [
+        { "tag": "a", "content": "1 score ([ii], 18 p.) ;" },
+        { "tag": "c", "content": "31 cm." }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "306",
+      "fieldTag": "r",
+      "subfields": [{ "tag": "a", "content": "000700" }]
+    },
+    {
+      "ind1": "1",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "490",
+      "fieldTag": "s",
+      "subfields": [
+        { "tag": "a", "content": "Inediti e rarità rossiniane ;" },
+        { "tag": "v", "content": "12" }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "0",
+      "content": null,
+      "marcTag": "830",
+      "fieldTag": "s",
+      "subfields": [
+        { "tag": "a", "content": "Rossini, Gioacchino" },
+        { "tag": "d", "content": "1792-1868." },
+        { "tag": "t", "content": "Works." },
+        {
+          "tag": "k",
+          "content": "Selections (Boccaccini & Spada editore) ;"
+        },
+        { "tag": "v", "content": "12." }
+      ]
+    },
+    {
+      "ind1": "1",
+      "ind2": "0",
+      "content": null,
+      "marcTag": "245",
+      "fieldTag": "t",
+      "subfields": [
+        { "tag": "a", "content": "Christe :" },
+        { "tag": "b", "content": "per 2 tenori, basso ed orchestra /" },
+        {
+          "tag": "c",
+          "content": "Gioacchino Rossini ; a cura di Pietro Spada."
+        }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "959",
+      "fieldTag": "v",
+      "subfields": [
+        { "tag": "a", "content": ".b8285564x" },
+        { "tag": "b", "content": "05-21-07" },
+        { "tag": "c", "content": "11-28-06" }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": "OCoLC",
+      "marcTag": "003",
+      "fieldTag": "y",
+      "subfields": null
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": "20061207063204.7",
+      "marcTag": "005",
+      "fieldTag": "y",
+      "subfields": null
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": "061108s2006    it uua   i     n    lat cccm4a ",
+      "marcTag": "008",
+      "fieldTag": "y",
+      "subfields": null
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "019",
+      "fieldTag": "y",
+      "subfields": [{ "tag": "a", "content": "72521271" }]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "040",
+      "fieldTag": "y",
+      "subfields": [
+        { "tag": "a", "content": "CGU" },
+        { "tag": "c", "content": "CGU" },
+        { "tag": "d", "content": "CGU" },
+        { "tag": "d", "content": "C3L" },
+        { "tag": "d", "content": "NYP" },
+        { "tag": "d", "content": "UtOrBLW" }
+      ]
+    },
+    {
+      "ind1": "1",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "041",
+      "fieldTag": "y",
+      "subfields": [
+        { "tag": "a", "content": "lat" },
+        { "tag": "g", "content": "ita" },
+        { "tag": "g", "content": "eng" },
+        { "tag": "g", "content": "fre" },
+        { "tag": "g", "content": "ger" },
+        { "tag": "h", "content": "ita" }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "042",
+      "fieldTag": "y",
+      "subfields": [{ "tag": "a", "content": "pcc" }]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "049",
+      "fieldTag": "y",
+      "subfields": [{ "tag": "a", "content": "NYPP" }]
+    },
+    {
+      "ind1": " ",
+      "ind2": "4",
+      "content": null,
+      "marcTag": "050",
+      "fieldTag": "y",
+      "subfields": [
+        { "tag": "a", "content": "M2018.R83" },
+        { "tag": "b", "content": "C57" }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": "4",
+      "content": null,
+      "marcTag": "908",
+      "fieldTag": "y",
+      "subfields": [
+        { "tag": "a", "content": "M2018.R83" },
+        { "tag": "b", "content": "C57" }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "901",
+      "fieldTag": "y",
+      "subfields": [
+        { "tag": "b", "content": "pm" },
+        { "tag": "c", "content": "CMC/GLU" }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "946",
+      "fieldTag": "y",
+      "subfields": [{ "tag": "a", "content": "m" }]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "997",
+      "fieldTag": "y",
+      "subfields": [
+        { "tag": "a", "content": "pm" },
+        { "tag": "b", "content": "12-07-06" },
+        { "tag": "c", "content": "m" },
+        { "tag": "d", "content": "c" },
+        { "tag": "e", "content": "-" },
+        { "tag": "f", "content": "lat" },
+        { "tag": "g", "content": "it " },
+        { "tag": "h", "content": "0" }
+      ]
+    },
+    {
+      "ind1": " ",
+      "ind2": " ",
+      "content": null,
+      "marcTag": "910",
+      "fieldTag": "y",
+      "subfields": [{ "tag": "a", "content": "RL" }]
+    },
+    {
+      "ind1": null,
+      "ind2": null,
+      "content": "00000ccm  22003974a 4500",
+      "marcTag": null,
+      "fieldTag": "_",
+      "subfields": null
+    }
+  ]
+}
