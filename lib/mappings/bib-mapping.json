@@ -184,7 +184,7 @@
 
     ]
   },
-  "contributor": {
+  "allContributors": {
     "paths": [
       {"marc": "100"},
       {"marc": "110"},
