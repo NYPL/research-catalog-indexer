@@ -1003,7 +1003,7 @@
       {
         "marc": "830",
         "excludedSubfields": [
-          "v", "6"
+          "v", "6", "0"
         ],
         "subfieldJoiner": " "
       }
@@ -1014,7 +1014,7 @@
       {
         "marc": "830",
         "excludedSubfields": [
-          "6"
+          "6", "0"
         ],
         "subfieldJoiner": " "
       }
@@ -1023,13 +1023,50 @@
   "seriesAddedEntry": {
     "paths": [
       {
-        "marc": "800"
+        "marc": "800",
+        "excludedSubfields": [
+          "v", "6", "0"
+        ],
+        "subfieldJoiner": " "
       },
       {
-        "marc": "810"
+        "marc": "810",
+        "excludedSubfields": [
+          "v", "6", "0"
+        ],
+        "subfieldJoiner": " "
       },
       {
-        "marc": "811"
+        "marc": "811",
+        "excludedSubfields": [
+          "v", "6", "0"
+        ],
+        "subfieldJoiner": " "
+      }
+    ]
+  },
+  "seriesAddedEntry_displayPacked": {
+    "paths": [
+      {
+        "marc": "800",
+        "excludedSubfields": [
+          "6", "0"
+        ],
+        "subfieldJoiner": " "
+      },
+      {
+        "marc": "810",
+        "excludedSubfields": [
+          "6", "0"
+        ],
+        "subfieldJoiner": " "
+      },
+      {
+        "marc": "811",
+        "excludedSubfields": [
+          "6", "0"
+        ],
+        "subfieldJoiner": " "
       }
     ]
   },
