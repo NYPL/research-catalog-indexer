@@ -36,7 +36,8 @@ const handler = async (event, context, callback) => {
 const processRecords = async (type, records, options = {}) => {
   options = Object.assign({
     updateOnly: false,
-    dryrun: false
+    dryrun: false,
+    skipDeletes: false
   }, options)
   // Ensure event has Bib records:
   records = await transformIntoBibRecords(type, records)
@@ -49,18 +50,6 @@ const processRecords = async (type, records, options = {}) => {
   const esModels = await buildEsDocument(filteredBibs)
   const plainObjectEsDocuments = esModels.map((record) => record.toPlainObject(schema.schema()))
   const messages = []
-
-  // Fetch subjects from all bibs, whether they are updates, creates, or deletes,
-  // and transmit to the browse pipeline. This must happen before writes to the
-  // resources index to determine any diff between new and old subjects
-  let browseTermDiffs
-  if (process.env.EMIT_BROWSE_TERMS === 'true') {
-    const esModelsForDeletions = removedBibs.map(bib => new EsBib(new SierraBib(bib)))
-    const changedRecords = [...esModels, ...esModelsForDeletions]
-    if ((changedRecords.length) && type === 'Bib') {
-      browseTermDiffs = await browse.buildBibSubjectEvents(changedRecords)
-    }
-  }
 
   if (plainObjectEsDocuments.length) {
     let summary
@@ -86,6 +75,10 @@ const processRecords = async (type, records, options = {}) => {
   if (recordsToDelete.length) {
     if (options.dryrun) {
       console.log(`DRYRUN: Skipping removing ${recordsToDelete.length} records`)
+    } else if (options.skipDeletes) {
+      console.log(`Skipping deletes for ${recordsToDelete.length} records.`)
+      recordsToDelete.length = 0
+      removedBibs.length = 0
     } else {
       await suppress.suppressBibs(recordsToDelete)
     }
@@ -93,10 +86,12 @@ const processRecords = async (type, records, options = {}) => {
     messages.push(`Deleted ${recordsToDelete.length} doc(s)`)
     messages.push(`Deleted ids: ${recordsToDelete.map((record) => record.id)}`)
   }
-  if (!browseTermDiffs?.length) logger.info('No subject updates to process')
-  if (process.env.EMIT_BROWSE_TERMS === 'true' && browseTermDiffs?.length) {
-    const subjectHandler = process.env.BTI_INDEX_PATH ? browse.emitBibSubjectsToLocalBti : browse.emitBibSubjectEventsToSqs
-    await subjectHandler(browseTermDiffs)
+
+  if (process.env.EMIT_BROWSE_TERMS === 'true') {
+    // emit for deleted records as well
+    const allEsDocuments = esModels.concat(removedBibs.map(bib => new EsBib(new SierraBib(bib))))
+    browse.emitBrowseTerms(allEsDocuments, 'subject')
+    browse.emitBrowseTerms(allEsDocuments, 'contributor')
   }
   const message = messages.length ? messages.join('; ') : 'Nothing to do.'
 

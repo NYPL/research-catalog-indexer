@@ -1,0 +1,101 @@
+{
+    "id": "99999123",
+    "nyplSource": "sierra-nypl",
+    "title": "Test for series",
+    "author": "Test, Author",
+    "publishYear": 2026,
+    "varFields": [
+      {
+        "marcTag": "490",
+        "ind1": "1",
+        "ind2": " ",
+        "subfields": [
+          {"tag": "6", "content": "880-01"},
+          {"tag": "a", "content": "490 Series: The Psychology of C.G. Jung"},
+          {"tag": "v", "content": "v. 1"},
+          {"tag": "l", "content": "(Z965.N38)"}
+
+        ]
+      },
+      {
+        "marcTag": "800",
+        "ind1": "1",
+        "ind2": " ",
+        "subfields": [
+          {"tag": "a", "content": "800 Series Added Entry: Meier, C. A."},
+          {"tag": "q", "content": "(Carl Alfred)"},
+          {"tag": "d", "content": "1905-1995"},
+          {"tag": "t", "content": "Lehrbuch der komplexen Psychologie C.G. Jungs"},
+          {"tag": "l", "content": "English"},
+          {"tag": "v", "content": "v. 1"}
+        ]
+      },
+      {
+        "marcTag": "810",
+        "ind1": "1",
+        "ind2": " ",
+        "subfields": [
+          {"tag": "a", "content": "810 Series Added Entry: United States"},
+          {"tag": "b", "content": "Congress"},
+          {"tag": "b", "content": "House"},
+          {"tag": "t", "content": "Report"},
+          {"tag": "v", "content": "112-664"}
+        ]
+      },
+      {
+        "marcTag": "811",
+        "ind1": "2",
+        "ind2": " ",
+        "subfields": [
+          {"tag": "6", "content": "880-01"},
+          {"tag": "a", "content": "811 Series Added Entry: Inter-American Conference on Agriculture"},
+          {"tag": "n", "content": "(3rd : 1945 : Caracas, Venezuela)"},
+          {"tag": "t", "content": "Cuadernos verdes"},
+          {"tag": "p", "content": "Serie nacional"},
+          {"tag": "v", "content": "14"}
+        ]
+      },
+      {
+        "marcTag": "830",
+        "ind1": " ",
+        "ind2": "0",
+        "subfields": [
+          {"tag": "6", "content": "880-01"},
+          {"tag": "a", "content": "830 Series Uniform Title: International Psychology Classics Series"},
+          {"tag": "t", "content": "830 Series Uniform Title other field t"},
+          {"tag": "d", "content": "830 Series Uniform Title other field d"},
+          {"tag": "v", "content": "vol. 1"}
+        ]
+      },
+      {
+        "marcTag": "880",
+        "ind1": "1",
+        "ind2": " ",
+        "subfields": [
+          {"tag": "6", "content": "830-01"},
+          {"tag": "a", "content": "830 Series Uniform Title parallel: 心理学系列"},
+          {"tag": "v", "content": "第1卷"}
+        ]
+      },
+      {
+        "marcTag": "880",
+        "ind1": "1",
+        "ind2": " ",
+        "subfields": [
+          {"tag": "6", "content": "811-01"},
+          {"tag": "a", "content": "811 Series Added Entry parallel: Chakra llamkaymanta Conferencia Interamericana"},
+          {"tag": "p", "content": "Serie nacional nisqa"}
+        ]
+      },
+      {
+        "marcTag": "880",
+        "ind1": "1",
+        "ind2": " ",
+        "subfields": [
+          {"tag": "6", "content": "490-01"},
+          {"tag": "a", "content": "490 Series parallel: Chay Psicología nisqa C.G. Jung"},
+          {"tag": "v", "content": "v. 1"}
+        ]
+      }
+    ]
+  }

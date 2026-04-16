@@ -184,39 +184,26 @@
 
     ]
   },
-  "contributorLiteralByRole": {
+  "contributor": {
     "paths": [
-      {
-        "marc": "700",
-        "subfields": [
-          "a",
-          "b",
-          "c",
-          "q",
-          "d",
-          "j"
-        ]
-      },
-      {
-        "marc": "710"
-      },
-      {
-        "marc": "711"
-      }
+      {"marc": "100"},
+      {"marc": "110"},
+      {"marc": "700"},
+      {"marc": "710"},
+      {"marc": "711"},
+      {"marc": "720"},
+      {"marc": "790"},
+      {"marc": "791"},
+      {"marc": "796"},
+      {"marc": "800"},
+      {"marc": "810"},
+      {"marc": "811"}
     ]
   },
   "creatorLiteral": {
     "paths": [
       {
-        "marc": "100",
-        "subfields": [
-          "a",
-          "b",
-          "c",
-          "q",
-          "d",
-          "j"
-        ]
+        "marc": "100"
       },
       {
         "marc": "110",
@@ -993,133 +980,56 @@
   "series": {
     "paths": [
       {
-        "marc": "440",
-        "subfields": [
-          "a"
-        ]
-      },
-      {
         "marc": "490",
         "subfields": [
           "a"
-        ]
-      },
-      {
-        "marc": "800",
-        "excludedSubfields": [
-          "6"
-        ]
-      },
-      {
-        "marc": "810",
-        "excludedSubfields": [
-          "6"
         ]
       }
     ]
   },
-  "seriesStatement": {
+  "series_displayPacked": {
     "paths": [
       {
-        "marc": "440",
-        "subfields": [
-          "3",
-          "a",
-          "x",
-          "v",
-          "l"
-        ]
-      },
-      {
         "marc": "490",
-        "subfields": [
-          "3",
-          "a",
-          "x",
-          "v",
-          "l"
-        ]
+        "excludedSubfields": [
+          "6"
+        ],
+        "subfieldJoiner": " "
+      }
+    ]
+  },
+  "seriesUniformTitle": {
+    "paths": [
+      {
+        "marc": "830",
+        "excludedSubfields": [
+          "v", "6"
+        ],
+        "subfieldJoiner": " "
+      }
+    ]
+  },
+  "seriesUniformTitle_displayPacked": {
+    "paths": [
+      {
+        "marc": "830",
+        "excludedSubfields": [
+          "6"
+        ],
+        "subfieldJoiner": " "
+      }
+    ]
+  },
+  "seriesAddedEntry": {
+    "paths": [
+      {
+        "marc": "800"
       },
       {
-        "marc": "800",
-        "subfields": [
-          "a",
-          "b",
-          "c",
-          "d",
-          "e",
-          "f",
-          "g",
-          "h",
-          "i",
-          "j",
-          "k",
-          "l",
-          "m",
-          "n",
-          "o",
-          "p",
-          "q",
-          "r",
-          "s",
-          "t",
-          "u",
-          "v"
-        ]
+        "marc": "810"
       },
       {
-        "marc": "810",
-        "subfields": [
-          "a",
-          "b",
-          "c",
-          "d",
-          "e",
-          "f",
-          "g",
-          "h",
-          "i",
-          "j",
-          "k",
-          "l",
-          "m",
-          "n",
-          "o",
-          "p",
-          "q",
-          "r",
-          "s",
-          "t",
-          "u",
-          "v"
-        ]
-      },
-      {
-        "marc": "811",
-        "subfields": [
-          "a",
-          "b",
-          "c",
-          "d",
-          "e",
-          "f",
-          "g",
-          "h",
-          "i",
-          "j",
-          "k",
-          "l",
-          "m",
-          "n",
-          "o",
-          "p",
-          "q",
-          "r",
-          "s",
-          "t",
-          "u",
-          "v"
-        ]
+        "marc": "811"
       }
     ]
   },
@@ -1257,25 +1167,6 @@
           "r",
           "s",
           "t"
-        ]
-      },
-      {
-        "marc": "830",
-        "subfields": [
-          "a",
-          "d",
-          "f",
-          "g",
-          "k",
-          "l",
-          "m",
-          "n",
-          "o",
-          "p",
-          "r",
-          "s",
-          "t",
-          "v"
         ]
       }
     ]

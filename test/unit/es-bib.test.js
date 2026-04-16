@@ -87,7 +87,7 @@ describe('EsBib', function () {
 
       // An item from Moving Image and Sound Division
       bib._items.push(new SierraItem(require('../fixtures/item-37528709.json')))
-      expect(await (new EsBib(bib)).collectionIds()).to.deep.equal(['scb', 'map'])
+      expect(await (new EsBib(bib)).collectionIds()).to.deep.equal(['map', 'scb'])
     })
     it('checks fixed field 26 for location on bibs with no items', async () => {
       const resBib = new SierraBib(require('../fixtures/bib-15109087.json'))
@@ -107,6 +107,14 @@ describe('EsBib', function () {
       bib._items = []
       bib._items.push(new SierraItem(require('../fixtures/item-pul-7834127.json')))
       expect(await (new EsBib(bib)).collectionIds()).to.deep.equal([])
+    })
+  })
+
+  describe('creators_displayPacked', function () {
+    it('should return the creators packed with label', function () {
+      const record = new SierraBib(require('../fixtures/bib-10001936.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.creators_displayPacked()).to.deep.equal(['Shermazanian, Galust||Shermazanian, Galust'])
     })
   })
 
@@ -509,7 +517,17 @@ describe('EsBib', function () {
       const record = new SierraBib(require('../fixtures/bib-hl-990137923810203941.json'))
       const esBib = new EsBib(record)
       expect(esBib.parallelCreatorLiteral()).to.deep.equal(
-        ['بوريني، حسن احمد.']
+        ['بوريني، حسن احمد']
+      )
+    })
+  })
+
+  describe('parallelCreators_displayPacked', function () {
+    it('should return the parallel creator literals packed with display strings', function () {
+      const record = new SierraBib(require('../fixtures/bib-hl-990137923810203941.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.parallelCreators_displayPacked()).to.deep.equal(
+        ['بوريني، حسن احمد||بوريني، حسن احمد']
       )
     })
   })
@@ -538,6 +556,56 @@ describe('EsBib', function () {
       const record = new SierraBib(require('../fixtures/bib-hl990000453050203941.json'))
       const esBib = new EsBib(record)
       expect(esBib.contributor_sort()).to.deep.equal(['ginosar, sh. (shaleṿ), 1902-'])
+    })
+  })
+
+  describe('browseableContributorRole_packed', function () {
+    it('should return array of all contributions', function () {
+      const record = new SierraBib(require('../fixtures/bib-hl990000453050203941.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.browseableContributorRole_packed()).to.deep.equal(
+        [
+          'Ginosar, Sh. (Shaleṿ), 1902-||editor'
+        ]
+      )
+    })
+  })
+
+  describe('contributors_displayPacked', function () {
+    it('should return array of contributors packed with labels', function () {
+      const record = new SierraBib(require('../fixtures/bib-aeon.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.contributors_displayPacked()).to.deep.equal(
+        [
+          'Aldanov, Mark Aleksandrovich, 1886-1957||Aldanov, Mark Aleksandrovich, 1886-1957',
+          'Kazan, Elia||Kazan, Elia',
+          'Makovskii, Sergei Konstantinovich, 1877-1962||Makovskii, Sergei Konstantinovich, 1877-1962',
+          'Nabokov, Elena Ivanovna||Nabokov, Elena Ivanovna',
+          'Nabokova, Vera||Nabokova, Vera',
+          'Struve, Gleb||Struve, Gleb',
+          'Wilson, Edmund, 1895-1972||Wilson, Edmund, 1895-1972',
+          'Bruccoli, Matthew Joseph, 1931-||Bruccoli, Matthew Joseph, 1931-',
+          'Plimpton, George||Plimpton, George',
+          'Nabokov, Vladimir Vladimirovich, 1899-1977||Nabokov, Vladimir Vladimirovich, 1899-1977, former owner',
+          'Boyle, Kay, 1902-1992||Boyle, Kay, 1902-1992, former owner',
+          'Field, Andrew, 1938-||Field, Andrew, 1938-, former owner',
+          'Bollingen Foundation||Bollingen Foundation',
+          'Izdatelstvo imeni Chekhova (New York, N.Y.)||Izdatelstvo imeni Chekhova (New York, N.Y.)',
+          'Bureau littřaire D. Clairouin||Bureau littřaire D. Clairouin',
+          'Cornell University||Cornell University',
+          'Doubleday and Company, inc||Doubleday and Company, inc',
+          'Librarie Gallimard||Librarie Gallimard',
+          'Harper & Brothers||Harper & Brothers',
+          'Henry Holt and Company||Henry Holt and Company',
+          'McGraw-Hill, inc||McGraw-Hill, inc',
+          'New Directions Publishing||New Directions Publishing',
+          'New Yorker Magazine, Inc||New Yorker Magazine, Inc',
+          'G.P. Putnam\'s Sons||G.P. Putnam\'s Sons',
+          'Viking Press||Viking Press',
+          'Weidenfeld and Nicolson (Firm)||Weidenfeld and Nicolson (Firm)',
+          'Prins & Prins||Prins & Prins'
+        ]
+      )
     })
   })
 
@@ -786,7 +854,17 @@ describe('EsBib', function () {
       const record = new SierraBib(require('../fixtures/bib-parallels-party.json'))
       const esBib = new EsBib(record)
       expect(esBib.parallelContributorLiteral()).to.deep.equal(
-        ['parallel content for 710$a parallel content for 710$z']
+        ['parallel content for 710$a']
+      )
+    })
+  })
+
+  describe('parallelContributors_displayPacked', function () {
+    it('should return browseable parallel contributor fields packed with display strings', function () {
+      const record = new SierraBib(require('../fixtures/bib-23033611.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.parallelContributors_displayPacked()).to.deep.equal(
+        ['Народна библиотека "Стефан Првовенчани"||Народна библиотека "Стефан Првовенчани", issuing body']
       )
     })
   })
@@ -1030,18 +1108,6 @@ describe('EsBib', function () {
       expect(esBib.parallelPublisherLiteral()).to.deep.equal(['parallel for Tparan Hovhannu Tēr-Abrahamian'])
     })
   })
-
-  describe('seriesStatement', () => {
-    const record = new SierraBib(require('../fixtures/bib-parallels-party.json'))
-    const esBib = new EsBib(record)
-    it('should return array with seriesStatement', function () {
-      expect(esBib.seriesStatement()).to.deep.equal(['content for 440$a', 'content for 440$a (2)', 'content for 490$a', 'content for 800$a'])
-    })
-    it('parallelSeriesStatement', () => {
-      expect(esBib.parallelSeriesStatement()).to.deep.equal(['parallel content for 440$a', 'parallel content for 440$a (2)', '', 'parallel content for 800$a'])
-    })
-  })
-
   describe('tableOfContents', () => {
     it('should return table of contents', function () {
       const record = new SierraBib(require('../fixtures/bib-11055155.json'))
@@ -1150,6 +1216,15 @@ describe('EsBib', function () {
       const record = new SierraBib(require('../fixtures/bib-11655934.json'))
       const esBib = new EsBib(record)
       expect(esBib.shelfMark()).to.deep.equal(['*ZAN-10228 no. 1'])
+    })
+
+    it('should allow multiple shelfmarks', () => {
+      const record = new SierraBib(require('../fixtures/bib-12147603.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.shelfMark()).to.deep.equal([
+        '*MGZIC 9-603',
+        '*MGZHB 12-127 (Additional copy)'
+      ])
     })
   })
 
@@ -1735,7 +1810,8 @@ describe('EsBib', function () {
       // Adopt some random items:
       sierraBib._items = [
         new SierraItem(require('../fixtures/item-10003973.json')),
-        new SierraItem(require('../fixtures/item-17145801.json'))
+        new SierraItem(require('../fixtures/item-29450615.json')),
+        new SierraItem(require('../fixtures/item-29450607.json'))
       ]
       sierraBib._holdings = []
       bib = new EsBib(sierraBib)
@@ -1744,13 +1820,13 @@ describe('EsBib', function () {
     it('items() returns array of items', async () => {
       const items = await bib.items()
       expect(items).to.be.a('array')
-      expect(items).to.have.lengthOf(2)
+      expect(items).to.have.lengthOf(3)
       expect(items[0].idBarcode()).to.deep.equal(['33433107664710'])
     })
 
     it('numItemsTotal()', async () => {
       const itemsCount = await bib.numItemsTotal()
-      expect(itemsCount).to.deep.equal([2])
+      expect(itemsCount).to.deep.equal([3])
     })
 
     it('numCheckinCardItems()', async () => {
@@ -1760,25 +1836,17 @@ describe('EsBib', function () {
 
     it('numItemVolumesParsed()', async () => {
       const numParsed = await bib.numItemVolumesParsed()
-      expect(numParsed).to.deep.equal([1])
+      expect(numParsed).to.deep.equal([2])
     })
 
-    it('sorts by shelfMark_sort()', async () => {
-      let items = await bib.items()
-      let uris = await Promise.all(items.map((i) => i.uri()))
-      expect(uris[0]).to.equal('i10003973')
-      expect(uris[1]).to.equal('i17145801')
+    it('sorts items by shelfmark, volumes, etc', async () => {
+      const items = await bib.items()
 
-      // Reverse the items stored in the bib:
-      bib.bib._items.reverse()
-      items = await bib.items()
-      uris = await Promise.all(items.map((i) => i.uri()))
-      // Verify order has been reversed:
-      expect(bib.bib._items[0].id).to.equal('17145801')
-      expect(bib.bib._items[1].id).to.equal('10003973')
-      // Verify they're still returned ordered by shelfMark:
-      expect(uris[0]).to.equal('i10003973')
-      expect(uris[1]).to.equal('i17145801')
+      // First item is '*z-3527', 'District of Columbia-Illinois'
+      expect(items[0].uri()).to.equal('i10003973')
+      // Next two items are 'jfl 76-252', 'no. 182 (spring 2000)' & 'no. 183 (autumn 2000)'
+      expect(items[1].uri()).to.equal('i29450607')
+      expect(items[2].uri()).to.equal('i29450615')
     })
   })
 
@@ -1870,13 +1938,13 @@ describe('EsBib', function () {
       bib._items.push(new SierraItem(require('../fixtures/item-10003973.json')))
       expect(await (new EsBib(bib)).buildingLocationIds()).to.deep.equal(['rc'])
 
-      // Adopt another RC items:
+      // Adopt another RC items
       bib._items.push(new SierraItem(require('../fixtures/item-17145801.json')))
       expect(await (new EsBib(bib)).buildingLocationIds()).to.deep.equal(['rc'])
 
       // Adopt a Maps items:
       bib._items.push(new SierraItem(require('../fixtures/item-14441624.json')))
-      expect(await (new EsBib(bib)).buildingLocationIds()).to.deep.equal(['ma', 'rc'])
+      expect(await (new EsBib(bib)).buildingLocationIds()).to.deep.equal(['rc', 'ma'])
 
       // Replace with a single SC item:
       bib._items = [new SierraItem(require('../fixtures/item-37528709.json'))]
@@ -1887,46 +1955,6 @@ describe('EsBib', function () {
       const bib = new SierraBib(require('../fixtures/bib-hl990000453050203941.json'))
       const esBib = new EsBib(bib)
       expect(await (esBib.buildingLocationIds())).to.deep.equal(['rc'])
-    })
-  })
-
-  describe('series', () => {
-    it('extracts series', async () => {
-      const bib = new SierraBib({
-        varFields: [
-          {
-            marcTag: '490',
-            subfields: [
-              { tag: 'a', content: 'subfield a content' },
-              { tag: 'b', content: 'subfield b content' }
-            ]
-          },
-          {
-            marcTag: '810',
-            subfields: [
-              { tag: 'a', content: 'subfield a content' },
-              { tag: 'z', content: 'subfield z content' },
-              { tag: '6', content: 'subfield z content' }
-            ]
-          }
-        ]
-      })
-      const esBib = new EsBib(bib)
-
-      expect(await (esBib.series())).to.deep.equal([
-        // Only expect subfield a for 490:
-        'subfield a content',
-        // Expect all subfields (except 6) for 810:
-        'subfield a content subfield z content'
-      ])
-    })
-
-    it('extracts parallelSeries', () => {
-      const bib = new SierraBib(require('../fixtures/bib-23236773.json'))
-      const esBib = new EsBib(bib)
-      expect(esBib.parallelSeries()).to.deep.equal([
-        '当代文学史研究丛书'
-      ])
     })
   })
 
@@ -1986,6 +2014,7 @@ describe('EsBib', function () {
             marcTag: '300',
             subfields: [
               { tag: 'a', content: '1 score (16 p.) ;' },
+              { tag: 'b', content: null },
               { tag: 'c', content: '29 cm' }
             ]
           }
@@ -2017,6 +2046,125 @@ describe('EsBib', function () {
 
       expect(await (esBib.physicalDescription())).to.deep.equal([
         '1 computer disk ; 3 1/2 in. + reference manual'
+      ])
+    })
+  })
+
+  describe('physicalDescriptionArray', () => {
+    it('extracts physicalDescription content for array subfields', async () => {
+      const bib = new SierraBib({
+        varFields: [
+          {
+            marcTag: '300',
+            subfields: [
+              { tag: 'a', content: ['1 computer disk ;', 'test'] },
+              { tag: 'c', content: '3 1/2 in. +' },
+              { tag: 'e', content: 'reference manual' }
+            ]
+          }
+        ]
+      })
+      const esBib = new EsBib(bib)
+
+      expect(await (esBib.physicalDescription())).to.deep.equal([
+        '1 computer disk ; test ; 3 1/2 in. + reference manual'
+      ])
+    })
+  })
+  describe('series fields', () => {
+    let esBib
+    before(() => {
+      const bib = new SierraBib(require(('../fixtures/bib-series.json')))
+      esBib = new EsBib(bib)
+    })
+    it('extracts series (490 fields only $a)', async () => {
+      const result = await esBib.series()
+      expect(result).to.deep.equal([
+        '490 Series: The Psychology of C.G. Jung'
+      ])
+    })
+    it('extracts seriesUniformTitle (830 fields except $v)', async () => {
+      const result = await esBib.seriesUniformTitle()
+      expect(result).to.deep.equal([
+        '830 Series Uniform Title: International Psychology Classics Series 830 Series Uniform Title other field t 830 Series Uniform Title other field d'
+      ])
+    })
+    it('extracts seriesUniformTitle (830 fields except $v) problem case', async () => {
+      const bib = new SierraBib(require(('../fixtures/bib-16470373.json')))
+      const testBib = new EsBib(bib)
+      const result = await testBib.seriesUniformTitle()
+      expect(result).to.deep.equal([
+        'Rossini, Gioacchino 1792-1868. Works. Selections (Boccaccini & Spada editore) ;'
+      ])
+    })
+    it('extracts parallelSeries and parallelSeriesUniformTitle', async () => {
+      const seriesParallelResult = await esBib.parallelSeries()
+      expect(seriesParallelResult).to.deep.equal(['490 Series parallel: Chay Psicología nisqa C.G. Jung'])
+      const seriesTitleParallelResult = await esBib.parallelSeriesUniformTitle()
+      expect(seriesTitleParallelResult).to.deep.equal([
+        '830 Series Uniform Title parallel: 心理学系列'
+      ])
+    })
+    it('extracts seriesAddedEntry (800, 810, 811 fields, excluding $6)', async () => {
+      const result = await esBib.seriesAddedEntry()
+      expect(result).to.deep.equal([
+        '800 Series Added Entry: Meier, C. A. (Carl Alfred) 1905-1995 Lehrbuch der komplexen Psychologie C.G. Jungs English v. 1',
+        '810 Series Added Entry: United States Congress House Report 112-664',
+        '811 Series Added Entry: Inter-American Conference on Agriculture (3rd : 1945 : Caracas, Venezuela) Cuadernos verdes Serie nacional 14'
+      ])
+    })
+    it('handles multiple seriesAddedEntry fields correctly', async () => {
+      const result = await esBib.seriesAddedEntry()
+      expect(result).to.have.lengthOf(3)
+      expect(result[0]).to.include('800 Series Added Entry')
+      expect(result[1]).to.include('810 Series Added Entry')
+      expect(result[2]).to.include('811 Series Added Entry')
+    })
+    it('concatenates subfields properly for seriesAddedEntry', async () => {
+      const result = await esBib.seriesAddedEntry()
+      // 800 field concatenates a, q, d, t, l, v
+      expect(result[0]).to.equal('800 Series Added Entry: Meier, C. A. (Carl Alfred) 1905-1995 Lehrbuch der komplexen Psychologie C.G. Jungs English v. 1')
+      // 810 field concatenates a, b, b, t, v
+      expect(result[1]).to.equal('810 Series Added Entry: United States Congress House Report 112-664')
+      // 811 field concatenates a, n, t, p, v
+      expect(result[2]).to.equal('811 Series Added Entry: Inter-American Conference on Agriculture (3rd : 1945 : Caracas, Venezuela) Cuadernos verdes Serie nacional 14')
+    })
+    it('series_displayPacked returns subfield a||full for 490 fields', () => {
+      const result = esBib.series_displayPacked()
+      expect(result).to.deep.equal([
+        '490 Series: The Psychology of C.G. Jung||490 Series: The Psychology of C.G. Jung v. 1 (Z965.N38)'
+      ])
+    })
+    it('seriesUniformTitle_displayPacked returns all subfields except v||full for 830 fields', () => {
+      const result = esBib.seriesUniformTitle_displayPacked()
+      expect(result).to.deep.equal([
+        '830 Series Uniform Title: International Psychology Classics Series 830 Series Uniform Title other field t 830 Series Uniform Title other field d||830 Series Uniform Title: International Psychology Classics Series 830 Series Uniform Title other field t 830 Series Uniform Title other field d vol. 1'
+      ])
+    })
+    it('seriesAddedEntry_displayPacked returns name||label for 800/810/811', () => {
+      const result = esBib.seriesAddedEntry_displayPacked()
+      expect(result).to.deep.equal([
+        '800 Series Added Entry: Meier, C. A. (Carl Alfred) 1905-1995||800 Series Added Entry: Meier, C. A. (Carl Alfred) 1905-1995 Lehrbuch der komplexen Psychologie C.G. Jungs English v. 1',
+        '810 Series Added Entry: United States Congress House||810 Series Added Entry: United States Congress House Report 112-664',
+        '811 Series Added Entry: Inter-American Conference on Agriculture (3rd : 1945 : Caracas, Venezuela)||811 Series Added Entry: Inter-American Conference on Agriculture (3rd : 1945 : Caracas, Venezuela) Cuadernos verdes Serie nacional 14'
+      ])
+    })
+    it('parallelSeries_displayPacked returns subfield a||full for parallels to 490 field', function () {
+      const result = esBib.parallelSeries_displayPacked()
+      expect(result).to.deep.equal([
+        '490 Series parallel: Chay Psicología nisqa C.G. Jung||490 Series parallel: Chay Psicología nisqa C.G. Jung v. 1'
+      ])
+    })
+    it('parallelSeriesUniformTitle_displayPacked returns subfield a||full for parallels to 830 field', function () {
+      const result = esBib.parallelSeriesUniformTitle_displayPacked()
+      expect(result).to.deep.equal([
+        '830 Series Uniform Title parallel: 心理学系列||830 Series Uniform Title parallel: 心理学系列 第1卷'
+      ])
+    })
+    it('parallelSeriesAddedEntry_displayPacked returns subfield a||full for parallels to 800/810/811 (811 in this case) field', function () {
+      const result = esBib.parallelSeriesAddedEntry_displayPacked()
+      expect(result).to.deep.equal([
+        '811 Series Added Entry parallel: Chakra llamkaymanta Conferencia Interamericana||811 Series Added Entry parallel: Chakra llamkaymanta Conferencia Interamericana Serie nacional nisqa'
       ])
     })
   })
