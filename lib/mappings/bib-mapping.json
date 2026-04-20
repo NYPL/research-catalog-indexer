@@ -181,23 +181,46 @@
           "6"
         ]
       }
-
     ]
   },
   "contributor": {
     "paths": [
-      {"marc": "100"},
-      {"marc": "110"},
-      {"marc": "700"},
-      {"marc": "710"},
-      {"marc": "711"},
-      {"marc": "720"},
-      {"marc": "790"},
-      {"marc": "791"},
-      {"marc": "796"},
-      {"marc": "800"},
-      {"marc": "810"},
-      {"marc": "811"}
+      {
+        "marc": "100"
+      },
+      {
+        "marc": "110"
+      },
+      {
+        "marc": "700"
+      },
+      {
+        "marc": "710"
+      },
+      {
+        "marc": "711"
+      },
+      {
+        "marc": "720"
+      },
+      {
+        "marc": "790"
+      },
+      {
+        "marc": "791"
+      },
+      {
+        "marc": "796"
+      },
+      {
+        "marc": "800"
+      },
+      {
+        "marc": "810"
+      },
+      {
+        "marc": "811"
+      }
     ]
   },
   "creatorLiteral": {
@@ -728,8 +751,10 @@
       },
       {
         "marc": "541",
-        "subfields": [
-          "a"
+        "excludedSubfields": [
+          "2",
+          "6",
+          "7"
         ],
         "description": "Source"
       },
@@ -758,7 +783,8 @@
       {
         "marc": "546",
         "subfields": [
-          "a"
+          "a",
+          "b"
         ],
         "description": "Language"
       },
@@ -1003,7 +1029,9 @@
       {
         "marc": "830",
         "excludedSubfields": [
-          "v", "6", "0"
+          "v",
+          "6",
+          "0"
         ],
         "subfieldJoiner": " "
       }
@@ -1014,7 +1042,8 @@
       {
         "marc": "830",
         "excludedSubfields": [
-          "6", "0"
+          "6",
+          "0"
         ],
         "subfieldJoiner": " "
       }
@@ -1025,21 +1054,27 @@
       {
         "marc": "800",
         "excludedSubfields": [
-          "v", "6", "0"
+          "v",
+          "6",
+          "0"
         ],
         "subfieldJoiner": " "
       },
       {
         "marc": "810",
         "excludedSubfields": [
-          "v", "6", "0"
+          "v",
+          "6",
+          "0"
         ],
         "subfieldJoiner": " "
       },
       {
         "marc": "811",
         "excludedSubfields": [
-          "v", "6", "0"
+          "v",
+          "6",
+          "0"
         ],
         "subfieldJoiner": " "
       }
@@ -1050,21 +1085,24 @@
       {
         "marc": "800",
         "excludedSubfields": [
-          "6", "0"
+          "6",
+          "0"
         ],
         "subfieldJoiner": " "
       },
       {
         "marc": "810",
         "excludedSubfields": [
-          "6", "0"
+          "6",
+          "0"
         ],
         "subfieldJoiner": " "
       },
       {
         "marc": "811",
         "excludedSubfields": [
-          "6", "0"
+          "6",
+          "0"
         ],
         "subfieldJoiner": " "
       }
