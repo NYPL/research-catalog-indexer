@@ -63,3 +63,27 @@ resource "aws_lambda_function" "lambda_instance" {
   }
   
 }
+
+data "aws_sns_topic" "rc_alarms" {
+  name = "research-catalog-team-alarms-${var.environment}"
+}
+
+resource "aws_cloudwatch_metric_alarm" "lambda_errors" {
+  alarm_name          = "lambda-errors-${aws_lambda_function.lambda_instance.function_name}"
+  comparison_operator = "GreaterThanThreshold"
+  evaluation_periods  = 1
+  metric_name         = "Errors"
+  namespace           = "AWS/Lambda"
+  period              = 300
+  statistic           = "Sum"
+  threshold           = 1
+  alarm_description   = "Lambda function ${aws_lambda_function.lambda_instance.function_name} has more than 1 error in 5 minutes"
+  alarm_actions       = [data.aws_sns_topic.rc_alarms.arn]
+  #ok_actions          = [data.aws_sns_topic.rc_alarms.arn]
+  treat_missing_data  = "notBreaching"
+
+  dimensions = {
+    FunctionName = aws_lambda_function.lambda_instance.function_name
+  }
+}
+
