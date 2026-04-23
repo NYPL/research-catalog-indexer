@@ -2128,13 +2128,13 @@ describe('EsBib', function () {
       expect(result[1]).to.include('810 Series Added Entry')
       expect(result[2]).to.include('811 Series Added Entry')
     })
-    it('concatenates subfields properly for seriesAddedEntry', async () => {
+    it('browse-term builds names correctly for seriesAddedEntry', async () => {
       const result = await esBib.seriesAddedEntry()
       // 800 field concatenates a, q, d
       expect(result[0]).to.equal('800 Series Added Entry: Meier, C. A. (Carl Alfred) 1905-1995')
       // 810 field concatenates a, b, b
       expect(result[1]).to.equal('810 Series Added Entry: United States Congress House')
-      // 811 field concatenates a
+      // 811 field concatenates a, c plus floaters n, d
       expect(result[2]).to.equal('811 Series Added Entry: Inter-American Conference on Agriculture (3rd : 1945 : Caracas, Venezuela)')
     })
     it('series_displayPacked returns subfield a||full for 490 fields', () => {
