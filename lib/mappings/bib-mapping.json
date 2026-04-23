@@ -1053,34 +1053,6 @@
       }
     ]
   },
-  "seriesAddedEntry_displayPacked": {
-    "paths": [
-      {
-        "marc": "800",
-        "excludedSubfields": [
-          "6",
-          "0"
-        ],
-        "subfieldJoiner": " "
-      },
-      {
-        "marc": "810",
-        "excludedSubfields": [
-          "6",
-          "0"
-        ],
-        "subfieldJoiner": " "
-      },
-      {
-        "marc": "811",
-        "excludedSubfields": [
-          "6",
-          "0"
-        ],
-        "subfieldJoiner": " "
-      }
-    ]
-  },
   "subjectLiteral": {
     "paths": [
       {
