@@ -211,15 +211,6 @@
       },
       {
         "marc": "796"
-      },
-      {
-        "marc": "800"
-      },
-      {
-        "marc": "810"
-      },
-      {
-        "marc": "811"
       }
     ]
   },
@@ -1028,10 +1019,8 @@
     "paths": [
       {
         "marc": "830",
-        "excludedSubfields": [
-          "v",
-          "6",
-          "0"
+        "subfields": [
+          "a", "d", "f", "g", "h", "k", "l", "m", "n", "o", "p", "r", "s", "t"
         ],
         "subfieldJoiner": " "
       }
@@ -1052,31 +1041,15 @@
   "seriesAddedEntry": {
     "paths": [
       {
-        "marc": "800",
-        "excludedSubfields": [
-          "v",
-          "6",
-          "0"
-        ],
-        "subfieldJoiner": " "
+        "marc": "800"
+
       },
       {
-        "marc": "810",
-        "excludedSubfields": [
-          "v",
-          "6",
-          "0"
-        ],
-        "subfieldJoiner": " "
+        "marc": "810"
+
       },
       {
-        "marc": "811",
-        "excludedSubfields": [
-          "v",
-          "6",
-          "0"
-        ],
-        "subfieldJoiner": " "
+        "marc": "811"
       }
     ]
   },
