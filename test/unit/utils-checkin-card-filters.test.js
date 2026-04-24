@@ -180,7 +180,6 @@ describe('utils/checkin-card-filters', () => {
     let restoreCachedData
     before(() => {
       restoreCachedData = loadCoreData._private.cache
-      console.log('captured nypl-core as ', restoreCachedData)
 
       loadCoreData._private.setCached({
         checkinCardStatusMapping: {
@@ -192,7 +191,6 @@ describe('utils/checkin-card-filters', () => {
     })
 
     after(async () => {
-      console.log('restoring nypl-core data to ', restoreCachedData)
       loadCoreData._private.setCached(restoreCachedData)
 
       // Other tests depend on this:
