@@ -2116,9 +2116,9 @@ describe('EsBib', function () {
     it('extracts seriesAddedEntry (800, 810, 811 fields)', async () => {
       const result = await esBib.seriesAddedEntry()
       expect(result).to.deep.equal([
-        '800 Series Added Entry: Meier, C. A. (Carl Alfred) 1905-1995',
-        '810 Series Added Entry: United States Congress House',
-        '811 Series Added Entry: Inter-American Conference on Agriculture (3rd : 1945 : Caracas, Venezuela)'
+        '800 Series Added Entry: Meier, C. A. (Carl Alfred) 1905-1995 Lehrbuch der komplexen Psychologie C.G. Jungs English',
+        '810 Series Added Entry: United States Congress Middle x House Report',
+        '811 Series Added Entry: Inter-American Conference on Agriculture (3rd : 1945 : Caracas, Venezuela) Cuadernos verdes Serie nacional'
       ])
     })
     it('handles multiple seriesAddedEntry fields correctly', async () => {
@@ -2128,14 +2128,11 @@ describe('EsBib', function () {
       expect(result[1]).to.include('810 Series Added Entry')
       expect(result[2]).to.include('811 Series Added Entry')
     })
-    it('browse-term builds names correctly for seriesAddedEntry', async () => {
+    it('builds name + title - $v and $x correctly for seriesAddedEntry', async () => {
       const result = await esBib.seriesAddedEntry()
-      // 800 field concatenates a, q, d
-      expect(result[0]).to.equal('800 Series Added Entry: Meier, C. A. (Carl Alfred) 1905-1995')
-      // 810 field concatenates a, b, b
-      expect(result[1]).to.equal('810 Series Added Entry: United States Congress House')
-      // 811 field concatenates a, c plus floaters n, d
-      expect(result[2]).to.equal('811 Series Added Entry: Inter-American Conference on Agriculture (3rd : 1945 : Caracas, Venezuela)')
+      expect(result[0]).to.equal('800 Series Added Entry: Meier, C. A. (Carl Alfred) 1905-1995 Lehrbuch der komplexen Psychologie C.G. Jungs English')
+      expect(result[1]).to.equal('810 Series Added Entry: United States Congress Middle x House Report')
+      expect(result[2]).to.equal('811 Series Added Entry: Inter-American Conference on Agriculture (3rd : 1945 : Caracas, Venezuela) Cuadernos verdes Serie nacional')
     })
     it('series_displayPacked returns subfield a||full for 490 fields', () => {
       const result = esBib.series_displayPacked()
@@ -2152,10 +2149,9 @@ describe('EsBib', function () {
     it('seriesAddedEntry_displayPacked returns expected display packed string for 800/810/811', () => {
       const result = esBib.seriesAddedEntry_displayPacked()
       expect(result).to.deep.equal([
-        '800 Series Added Entry: Meier, C. A. (Carl Alfred) 1905-1995||800 Series Added Entry: Meier, C. A. (Carl Alfred) 1905-1995 Lehrbuch der komplexen Psychologie C.G. Jungs English v. 1',
-        '810 Series Added Entry: United States Congress House||810 Series Added Entry: United States Congress House Report 112-664',
-        '811 Series Added Entry: Inter-American Conference on Agriculture (3rd : 1945 : Caracas, Venezuela)||811 Series Added Entry: Inter-American Conference on Agriculture (3rd : 1945 : Caracas, Venezuela) Cuadernos verdes Serie nacional 14'
-      ])
+        '800 Series Added Entry: Meier, C. A. (Carl Alfred) 1905-1995 Lehrbuch der komplexen Psychologie C.G. Jungs English||800 Series Added Entry: Meier, C. A. (Carl Alfred) 1905-1995 Lehrbuch der komplexen Psychologie C.G. Jungs English v. 1',
+        '810 Series Added Entry: United States Congress Middle x House Report||810 Series Added Entry: United States Congress Middle x House Report 112-664',
+        '811 Series Added Entry: Inter-American Conference on Agriculture (3rd : 1945 : Caracas, Venezuela) Cuadernos verdes Serie nacional||811 Series Added Entry: Inter-American Conference on Agriculture (3rd : 1945 : Caracas, Venezuela) Cuadernos verdes Serie nacional 14 Trailing x'])
     })
     it('parallelSeries_displayPacked returns expected display packed string for parallels to 490 field', function () {
       const result = esBib.parallelSeries_displayPacked()
@@ -2172,7 +2168,7 @@ describe('EsBib', function () {
     it('parallelSeriesAddedEntry_displayPacked returns expected display packed string for parallels to 800/810/811 (811 in this case) field', function () {
       const result = esBib.parallelSeriesAddedEntry_displayPacked()
       expect(result).to.deep.equal([
-        '811 Series Added Entry parallel: Chakra llamkaymanta Conferencia Interamericana||811 Series Added Entry parallel: Chakra llamkaymanta Conferencia Interamericana Serie nacional nisqa'
+        '811 Series Added Entry parallel: Chakra llamkaymanta Conferencia Interamericana Serie nacional nisqa||811 Series Added Entry parallel: Chakra llamkaymanta Conferencia Interamericana Serie nacional nisqa Vol 14'
       ])
     })
   })
