@@ -48,9 +48,10 @@
           {"tag": "0", "content": "810 $0 this shouldn't display"},
           {"tag": "a", "content": "810 Series Added Entry: United States"},
           {"tag": "b", "content": "Congress"},
+          {"tag": "x", "content": "Middle x"},
           {"tag": "b", "content": "House"},
           {"tag": "t", "content": "Report"},
-          {"tag": "v", "content": "112-664"}
+          {"tag": "x", "content": "112-664"}
         ]
       },
       {
@@ -63,7 +64,8 @@
           {"tag": "n", "content": "(3rd : 1945 : Caracas, Venezuela)"},
           {"tag": "t", "content": "Cuadernos verdes"},
           {"tag": "p", "content": "Serie nacional"},
-          {"tag": "v", "content": "14"}
+          {"tag": "v", "content": "14"},
+          {"tag": "x", "content": "Trailing x"}
         ]
       },
       {
@@ -95,7 +97,8 @@
         "subfields": [
           {"tag": "6", "content": "811-01"},
           {"tag": "a", "content": "811 Series Added Entry parallel: Chakra llamkaymanta Conferencia Interamericana"},
-          {"tag": "p", "content": "Serie nacional nisqa"}
+          {"tag": "p", "content": "Serie nacional nisqa"},
+          {"tag": "v", "content": "Vol 14"}
         ]
       },
       {
