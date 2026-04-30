@@ -592,7 +592,7 @@
       },
       {
         "marc": "506",
-        "excludeSubfields": ["6", "7", "2"],
+        "excludedSubfields": ["6", "7", "2"],
         "ind1": [
           " ",
           "1"
@@ -770,7 +770,7 @@
       },
       {
         "marc": "541",
-        "excludeSubfields": ["6", "7", "2"],
+        "excludedSubfields": ["6", "7", "2"],
         "ind1": [
           "1"
         ],
@@ -885,7 +885,7 @@
       },
       {
         "marc": "583",
-        "excludeSubfields": ["6", "7", "2"],
+        "excludedSubfields": ["6", "7", "2"],
         "ind1": ["1"],
         "description": "Processing Action"
       },
@@ -907,25 +907,25 @@
       },
       {
         "marc": "588",
-        "excludeSubfields": ["6", "7", "2"],
+        "excludedSubfields": ["6", "7", "2"],
         "ind1": [" "],
         "description": "Note"
       },
       {
         "marc": "588",
-        "excludeSubfields": ["6", "7", "2"],
+        "excludedSubfields": ["6", "7", "2"],
         "ind1Not": ["0"],
         "description": "Source of Description"
       },
       {
         "marc": "588",
-        "excludeSubfields": ["6", "7", "2"],
+        "excludedSubfields": ["6", "7", "2"],
         "ind1": ["1"],
         "description": "Latest issue consulted"
       },
       {
         "marc": "590",
-        "excludeSubfields": ["6", "7", "2"],
+        "excludedSubfields": ["6", "7", "2"],
         "ind1Not": ["0"],
         "description": "Local note"
       }

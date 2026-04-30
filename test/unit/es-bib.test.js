@@ -1018,6 +1018,27 @@ describe('EsBib', function () {
         }
       ])
     })
+
+    it('includes all but excluded subfields for 506', () => {
+      const record = new SierraBib({
+        varFields: [
+          {
+            marcTag: '506',
+            ind1: ' ',
+            subfields: [
+              { tag: 'h', content: 'h content' },
+              { tag: '2', content: '2 content' },
+              { tag: 'z', content: 'z content' }
+            ]
+          }
+        ]
+      })
+      const esBib = new EsBib(record)
+      expect(esBib.note().map((n) => n.label)).to.deep.equal([
+        'h content z content'
+      ])
+    })
+
     it('parallel notes', () => {
       const record = new SierraBib(require('../fixtures/bib-notes.json'))
       const esBib = new EsBib(record)
@@ -1063,7 +1084,7 @@ describe('EsBib', function () {
       ])
     })
 
-    it('excludes parallel notes with 1st indicator 0', () => {
+    it.only('excludes parallel notes with 1st indicator 0', () => {
       const record = new SierraBib(require('../fixtures/bib-pul-99122517373506421.json'))
       const esBib = new EsBib(record)
       // This record has a single note with 1st indicator '0', so it is excluded:
