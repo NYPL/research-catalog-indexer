@@ -1063,7 +1063,7 @@ describe('EsBib', function () {
       ])
     })
 
-    it('excludes notes with 1st indicator 0', () => {
+    it('excludes parallel notes with 1st indicator 0', () => {
       const record = new SierraBib(require('../fixtures/bib-pul-99122517373506421.json'))
       const esBib = new EsBib(record)
       // This record has a single note with 1st indicator '0', so it is excluded:
@@ -1263,7 +1263,7 @@ describe('EsBib', function () {
         'Social security -- Law and legislation -- Uruguay',
         'Social security -- Latin America'
       ])
-      // Expect the root subject to only occur once:
+      // Expect the root subject to oonlynly occur onte:
       expect(record.subjectLiteral_exploded()).to.deep.equal([
         'Social security',
         'Social security -- Law and legislation',
@@ -1750,6 +1750,7 @@ describe('EsBib', function () {
         ]
       })
       const esRecord = new EsBib(record)
+      expect(esRecord.supplementaryContent()).to.be.a('array')
       expect(esRecord.supplementaryContent().length).to.equal(1)
       expect(esRecord.numElectronicResources()).to.deep.equal([2])
       expect(esRecord._aeonUrls().length).to.equal(1)

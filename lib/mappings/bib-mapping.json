@@ -563,6 +563,7 @@
         "subfields": [
           "a"
         ],
+        "ind1Not": ["0"],
         "description": "Note"
       },
       {
@@ -570,6 +571,7 @@
         "subfields": [
           "a"
         ],
+        "ind1Not": ["0"],
         "description": "With"
       },
       {
@@ -577,6 +579,7 @@
         "subfields": [
           "a"
         ],
+        "ind1Not": ["0"],
         "description": "Thesis"
       },
       {
@@ -584,13 +587,17 @@
         "subfields": [
           "a"
         ],
+        "ind1Not": ["0"],
         "description": "Bibliography"
       },
       {
         "marc": "506",
-        "subfields": [
-          "a"
+        "excludeSubfields": ["6", "7", "2"],
+        "ind1": [
+          " ",
+          "1"
         ],
+        "ind1Not": ["0"],
         "description": "Access"
       },
       {
@@ -598,6 +605,7 @@
         "subfields": [
           "a"
         ],
+        "ind1Not": ["0"],
         "description": "Scale"
       },
       {
@@ -605,6 +613,7 @@
         "subfields": [
           "a"
         ],
+        "ind1Not": ["0"],
         "description": "Credits"
       },
       {
@@ -612,6 +621,7 @@
         "subfields": [
           "a"
         ],
+        "ind1Not": ["0"],
         "description": "Indexed In"
       },
       {
@@ -619,6 +629,7 @@
         "subfields": [
           "a"
         ],
+        "ind1Not": ["0"],
         "description": "Performer"
       },
       {
@@ -626,6 +637,7 @@
         "subfields": [
           "a"
         ],
+        "ind1Not": ["0"],
         "description": "Type of Report"
       },
       {
@@ -633,6 +645,7 @@
         "subfields": [
           "a"
         ],
+        "ind1Not": ["0"],
         "description": "Data Quality"
       },
       {
@@ -640,6 +653,7 @@
         "subfields": [
           "a"
         ],
+        "ind1Not": ["0"],
         "description": "Numbering"
       },
       {
@@ -647,6 +661,7 @@
         "subfields": [
           "a"
         ],
+        "ind1Not": ["0"],
         "description": "File Type"
       },
       {
@@ -654,6 +669,7 @@
         "subfields": [
           "a"
         ],
+        "ind1Not": ["0"],
         "description": "Event"
       },
       {
@@ -661,6 +677,7 @@
         "subfields": [
           "a"
         ],
+        "ind1Not": ["0"],
         "description": "Audience"
       },
       {
@@ -668,6 +685,7 @@
         "subfields": [
           "a"
         ],
+        "ind1Not": ["0"],
         "description": "Coverage"
       },
       {
@@ -675,6 +693,7 @@
         "subfields": [
           "a"
         ],
+        "ind1Not": ["0"],
         "description": "Cite As"
       },
       {
@@ -682,6 +701,7 @@
         "subfields": [
           "a"
         ],
+        "ind1Not": ["0"],
         "description": "Supplement"
       },
       {
@@ -689,6 +709,7 @@
         "subfields": [
           "a"
         ],
+        "ind1Not": ["0"],
         "description": "Study Program"
       },
       {
@@ -696,6 +717,7 @@
         "subfields": [
           "a"
         ],
+        "ind1Not": ["0"],
         "description": "Additional Formats"
       },
       {
@@ -703,6 +725,7 @@
         "subfields": [
           "a"
         ],
+        "ind1Not": ["0"],
         "description": "Reproduction"
       },
       {
@@ -710,6 +733,7 @@
         "subfields": [
           "a"
         ],
+        "ind1Not": ["0"],
         "description": "Original Version"
       },
       {
@@ -717,6 +741,7 @@
         "subfields": [
           "a"
         ],
+        "ind1Not": ["0"],
         "description": "Original Location"
       },
       {
@@ -724,6 +749,7 @@
         "subfields": [
           "a"
         ],
+        "ind1Not": ["0"],
         "description": "Funding"
       },
       {
@@ -731,6 +757,7 @@
         "subfields": [
           "a"
         ],
+        "ind1Not": ["0"],
         "description": "System Details"
       },
       {
@@ -738,15 +765,16 @@
         "subfields": [
           "a"
         ],
+        "ind1Not": ["0"],
         "description": "Terms of Use"
       },
       {
         "marc": "541",
-        "excludedSubfields": [
-          "2",
-          "6",
-          "7"
+        "excludeSubfields": ["6", "7", "2"],
+        "ind1": [
+          "1"
         ],
+        "ind1Not": ["0"],
         "description": "Source"
       },
       {
@@ -754,6 +782,7 @@
         "subfields": [
           "a"
         ],
+        "ind1Not": ["0"],
         "description": "Information Relating to Copyright Status"
       },
       {
@@ -761,6 +790,7 @@
         "subfields": [
           "a"
         ],
+        "ind1Not": ["0"],
         "description": "Location of Other Archival Materials"
       },
       {
@@ -769,6 +799,7 @@
           "a",
           "b"
         ],
+        "ind1Not": ["0"],
         "description": "Biography"
       },
       {
@@ -777,6 +808,7 @@
           "a",
           "b"
         ],
+        "ind1Not": ["0"],
         "description": "Language"
       },
       {
@@ -784,6 +816,7 @@
         "subfields": [
           "a"
         ],
+        "ind1Not": ["0"],
         "description": "Former Title"
       },
       {
@@ -791,6 +824,7 @@
         "subfields": [
           "a"
         ],
+        "ind1Not": ["0"],
         "description": "Issued By"
       },
       {
@@ -798,6 +832,7 @@
         "subfields": [
           "a"
         ],
+        "ind1Not": ["0"],
         "description": "Indexes/Finding Aids"
       },
       {
@@ -805,6 +840,7 @@
         "subfields": [
           "a"
         ],
+        "ind1Not": ["0"],
         "description": "Documentation"
       },
       {
@@ -812,6 +848,7 @@
         "subfields": [
           "a"
         ],
+        "ind1Not": ["0"],
         "description": "Provenance"
       },
       {
@@ -819,6 +856,7 @@
         "subfields": [
           "a"
         ],
+        "ind1Not": ["0"],
         "description": "Copy/Version"
       },
       {
@@ -826,6 +864,7 @@
         "subfields": [
           "a"
         ],
+        "ind1Not": ["0"],
         "description": "Binding"
       },
       {
@@ -833,6 +872,7 @@
         "subfields": [
           "a"
         ],
+        "ind1Not": ["0"],
         "description": "Linking Entry"
       },
       {
@@ -840,13 +880,13 @@
         "subfields": [
           "a"
         ],
+        "ind1Not": ["0"],
         "description": "Publications"
       },
       {
         "marc": "583",
-        "subfields": [
-          "a"
-        ],
+        "excludeSubfields": ["6", "7", "2"],
+        "ind1": ["1"],
         "description": "Processing Action"
       },
       {
@@ -854,6 +894,7 @@
         "subfields": [
           "a"
         ],
+        "ind1Not": ["0"],
         "description": "Exhibitions"
       },
       {
@@ -861,20 +902,31 @@
         "subfields": [
           "a"
         ],
+        "ind1Not": ["0"],
         "description": "Awards"
       },
       {
         "marc": "588",
-        "subfields": [
-          "a"
-        ],
+        "excludeSubfields": ["6", "7", "2"],
+        "ind1": [" "],
+        "description": "Note"
+      },
+      {
+        "marc": "588",
+        "excludeSubfields": ["6", "7", "2"],
+        "ind1Not": ["0"],
         "description": "Source of Description"
       },
       {
+        "marc": "588",
+        "excludeSubfields": ["6", "7", "2"],
+        "ind1": ["1"],
+        "description": "Latest issue consulted"
+      },
+      {
         "marc": "590",
-        "subfields": [
-          "a"
-        ],
+        "excludeSubfields": ["6", "7", "2"],
+        "ind1Not": ["0"],
         "description": "Local note"
       }
     ]
