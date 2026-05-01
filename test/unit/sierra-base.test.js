@@ -261,6 +261,75 @@ describe('SierraBase', function () {
       expect(varField100[0].value).to.equal('$a content')
       expect(varField100[0].parallel.value).to.equal('$a parallel content')
     })
+
+    describe('indicator querying', () => {
+      // Contrive a record with 3 varfield 100 entries, two of them effectively dupes
+      const record = new SierraBase({
+        varFields: [
+          {
+            marcTag: '100',
+            subfields: [{ tag: 'a', content: '$a content 1' }],
+            ind1: '0'
+          },
+          {
+            marcTag: '100',
+            subfields: [{ tag: 'a', content: '$a content 2' }],
+            ind1: '1'
+          },
+          {
+            marcTag: '880',
+            subfields: [
+              { tag: 'a', content: '$a parallel content 1' },
+              { tag: '6', content: '100-00' }
+            ],
+            ind1: '2'
+          }
+        ]
+      })
+
+      it('matches fields with requested indicators', () => {
+        let v = record.varField(100, ['a'], { ind1: ['0'] })
+        expect(v).to.be.a('array').to.have.lengthOf(1)
+        expect(v[0]).to.deep.include({ value: '$a content 1' })
+
+        v = record.varField(100, ['a'], { ind1: ['1'] })
+        expect(v).to.be.a('array').to.have.lengthOf(1)
+        expect(v[0]).to.deep.include({ value: '$a content 2' })
+
+        v = record.varField(100, ['a'], { ind1: ['0', '1'] })
+        expect(v).to.be.a('array').to.have.lengthOf(2)
+        expect(v[0]).to.deep.include({ value: '$a content 1' })
+        expect(v[1]).to.deep.include({ value: '$a content 2' })
+      })
+
+      it('excludes fields with negated indicators', () => {
+        let v = record.varField(100, ['a'], { ind1Not: ['0', '2'] })
+        expect(v).to.be.a('array').to.have.lengthOf(1)
+        expect(v[0]).to.deep.include({ value: '$a content 2' })
+
+        v = record.varField(100, ['a'], { ind1Not: ['1'] })
+        console.log(JSON.stringify(v, null, 2))
+        expect(v).to.be.a('array').to.have.lengthOf(2)
+        expect(v[0]).to.deep.include({ value: '$a content 1' })
+
+        v = record.varField(100, ['a'], { ind1Not: ['0', '1'] })
+        expect(v).to.be.a('array').to.have.lengthOf(1)
+      })
+
+      it('includes parallel fields by indicators', () => {
+        const v = record.varField(100, ['a'], { ind1: ['2'] })
+        expect(v).to.be.a('array').to.have.lengthOf(1)
+        expect(v[0].parallel).to.be.a('object')
+        expect(v[0].parallel).to.deep.include({ value: '$a parallel content 1' })
+      })
+
+      it('excludes parallel fields with negated indicators', () => {
+        const v = record.varField(100, ['a'], { ind1Not: ['2'] })
+        expect(v).to.be.a('array').to.have.lengthOf(2)
+        expect(v[0]).to.deep.include({ value: '$a content 1' })
+        expect(v[1]).to.deep.include({ value: '$a content 2' })
+      })
+    })
   })
 
   describe('varFieldsMulti', () => {

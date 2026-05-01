@@ -1084,11 +1084,13 @@ describe('EsBib', function () {
       ])
     })
 
-    it.only('excludes parallel notes with 1st indicator 0', () => {
+    it('excludes parallel notes with 1st indicator 0', () => {
       const record = new SierraBib(require('../fixtures/bib-pul-99122517373506421.json'))
       const esBib = new EsBib(record)
       // This record has a single note with 1st indicator '0', so it is excluded:
-      expect(esBib.note()).to.equal(null)
+      const note = esBib.note()
+      console.log({ note })
+      expect(note).to.equal(null)
     })
   })
 
@@ -1118,17 +1120,18 @@ describe('EsBib', function () {
   })
 
   describe('publisherLiteral', () => {
-    const record = new SierraBib(require('../fixtures/bib-10001936.json'))
-    const esBib = new EsBib(record)
     it('should return array with publisherLiteral', function () {
       const record = new SierraBib(require('../fixtures/bib-10001936.json'))
       const esBib = new EsBib(record)
       expect(esBib.publisherLiteral()).to.deep.equal(['Tparan Hovhannu Tēr-Abrahamian'])
     })
     it('parallelPublisherLiteral', () => {
+      const record = new SierraBib(require('../fixtures/bib-10001936.json'))
+      const esBib = new EsBib(record)
       expect(esBib.parallelPublisherLiteral()).to.deep.equal(['parallel for Tparan Hovhannu Tēr-Abrahamian'])
     })
   })
+
   describe('tableOfContents', () => {
     it('should return table of contents', function () {
       const record = new SierraBib(require('../fixtures/bib-11055155.json'))
@@ -1183,8 +1186,13 @@ describe('EsBib', function () {
   })
 
   describe('uniformTitle', () => {
-    const record = new SierraBib(require('../fixtures/bib-11606020.json'))
-    const esBib = new EsBib(record)
+    let esBib
+
+    before(() => {
+      const record = new SierraBib(require('../fixtures/bib-11606020.json'))
+      esBib = new EsBib(record)
+    })
+
     it('should return display titles', function () {
       expect(esBib.uniformTitle()).to.deep.equal(
         ['Toledot Yeshu.']
