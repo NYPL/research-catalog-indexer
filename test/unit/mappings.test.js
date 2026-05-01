@@ -155,7 +155,7 @@ describe('mappings', function () {
     it('returns a function that returns subfields specified in mappings.json', () => {
       const bib = new SierraBib(require('../fixtures/bib-11055155.json'))
       const mappings = BibMappings.get('contentsTitle', bib)
-      const subfields = mappings.map(marcField => marcField.subfields).flat()
+      const subfields = mappings.map((marcField) => marcField.subfields).flat()
       // This marcfield for this bib also has subfields g and r, which are not
       // included in bib-mappings.json
       expect(subfields).to.deep.equal(['t'])

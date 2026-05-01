@@ -1002,7 +1002,7 @@ describe('EsBib', function () {
           type: 'bf:Note'
         },
         {
-          label: 'Finding aid',
+          label: 'Finding aid: folder level control.',
           type: 'bf:Note',
           noteType: 'Indexes/Finding Aids'
         },
@@ -1037,6 +1037,20 @@ describe('EsBib', function () {
       expect(esBib.note().map((n) => n.label)).to.deep.equal([
         'h content z content'
       ])
+    })
+
+    it('requires ind1=1 for 583', () => {
+      const record = new SierraBib({
+        varFields: [
+          {
+            marcTag: '583',
+            ind1: ' ',
+            subfields: [{ tag: 'a', content: 'a content' }]
+          }
+        ]
+      })
+      const esBib = new EsBib(record)
+      expect(esBib.note()).to.equal(null)
     })
 
     it('parallel notes', () => {
@@ -1091,6 +1105,30 @@ describe('EsBib', function () {
       const note = esBib.note()
       console.log({ note })
       expect(note).to.equal(null)
+    })
+
+    it('includes all subfields', () => {
+      const record = new SierraBib({
+        varFields: [
+          {
+            marcTag: '500',
+            subfields: [
+              { tag: 'a', content: '$a' },
+              { tag: 'b', content: '$b' },
+              { tag: 'z', content: '$c' },
+              { tag: '2', content: '$2' },
+              { tag: '6', content: '$1' }
+            ]
+          }
+        ]
+      })
+      expect((new EsBib(record)).note()).to.deep.equal([
+        {
+          label: '$a $b $c',
+          noteType: 'Note',
+          type: 'bf:Note'
+        }
+      ])
     })
   })
 

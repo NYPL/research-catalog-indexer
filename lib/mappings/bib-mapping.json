@@ -560,33 +560,25 @@
     "paths": [
       {
         "marc": "500",
-        "subfields": [
-          "a"
-        ],
+        "excludedSubfields": ["6", "7", "2"],
         "ind1Not": ["0"],
         "description": "Note"
       },
       {
         "marc": "501",
-        "subfields": [
-          "a"
-        ],
+        "excludedSubfields": ["6", "7", "2"],
         "ind1Not": ["0"],
         "description": "With"
       },
       {
         "marc": "502",
-        "subfields": [
-          "a"
-        ],
+        "excludedSubfields": ["6", "7", "2"],
         "ind1Not": ["0"],
         "description": "Thesis"
       },
       {
         "marc": "504",
-        "subfields": [
-          "a"
-        ],
+        "excludedSubfields": ["6", "7", "2"],
         "ind1Not": ["0"],
         "description": "Bibliography"
       },
@@ -602,169 +594,127 @@
       },
       {
         "marc": "507",
-        "subfields": [
-          "a"
-        ],
+        "excludedSubfields": ["6", "7", "2"],
         "ind1Not": ["0"],
         "description": "Scale"
       },
       {
         "marc": "508",
-        "subfields": [
-          "a"
-        ],
+        "excludedSubfields": ["6", "7", "2"],
         "ind1Not": ["0"],
         "description": "Credits"
       },
       {
         "marc": "510",
-        "subfields": [
-          "a"
-        ],
+        "excludedSubfields": ["6", "7", "2"],
         "ind1Not": ["0"],
         "description": "Indexed In"
       },
       {
         "marc": "511",
-        "subfields": [
-          "a"
-        ],
+        "excludedSubfields": ["6", "7", "2"],
         "ind1Not": ["0"],
         "description": "Performer"
       },
       {
         "marc": "513",
-        "subfields": [
-          "a"
-        ],
+        "excludedSubfields": ["6", "7", "2"],
         "ind1Not": ["0"],
         "description": "Type of Report"
       },
       {
         "marc": "514",
-        "subfields": [
-          "a"
-        ],
+        "excludedSubfields": ["6", "7", "2"],
         "ind1Not": ["0"],
         "description": "Data Quality"
       },
       {
         "marc": "515",
-        "subfields": [
-          "a"
-        ],
+        "excludedSubfields": ["6", "7", "2"],
         "ind1Not": ["0"],
         "description": "Numbering"
       },
       {
         "marc": "516",
-        "subfields": [
-          "a"
-        ],
+        "excludedSubfields": ["6", "7", "2"],
         "ind1Not": ["0"],
         "description": "File Type"
       },
       {
         "marc": "518",
-        "subfields": [
-          "a"
-        ],
+        "excludedSubfields": ["6", "7", "2"],
         "ind1Not": ["0"],
         "description": "Event"
       },
       {
         "marc": "521",
-        "subfields": [
-          "a"
-        ],
+        "excludedSubfields": ["6", "7", "2"],
         "ind1Not": ["0"],
         "description": "Audience"
       },
       {
         "marc": "522",
-        "subfields": [
-          "a"
-        ],
+        "excludedSubfields": ["6", "7", "2"],
         "ind1Not": ["0"],
         "description": "Coverage"
       },
       {
         "marc": "524",
-        "subfields": [
-          "a"
-        ],
+        "excludedSubfields": ["6", "7", "2"],
         "ind1Not": ["0"],
         "description": "Cite As"
       },
       {
         "marc": "525",
-        "subfields": [
-          "a"
-        ],
+        "excludedSubfields": ["6", "7", "2"],
         "ind1Not": ["0"],
         "description": "Supplement"
       },
       {
         "marc": "526",
-        "subfields": [
-          "a"
-        ],
+        "excludedSubfields": ["6", "7", "2"],
         "ind1Not": ["0"],
         "description": "Study Program"
       },
       {
         "marc": "530",
-        "subfields": [
-          "a"
-        ],
+        "excludedSubfields": ["6", "7", "2"],
         "ind1Not": ["0"],
         "description": "Additional Formats"
       },
       {
         "marc": "533",
-        "subfields": [
-          "a"
-        ],
+        "excludedSubfields": ["6", "7", "2"],
         "ind1Not": ["0"],
         "description": "Reproduction"
       },
       {
         "marc": "534",
-        "subfields": [
-          "a"
-        ],
+        "excludedSubfields": ["6", "7", "2"],
         "ind1Not": ["0"],
         "description": "Original Version"
       },
       {
         "marc": "535",
-        "subfields": [
-          "a"
-        ],
+        "excludedSubfields": ["6", "7", "2"],
         "ind1Not": ["0"],
         "description": "Original Location"
       },
       {
         "marc": "536",
-        "subfields": [
-          "a"
-        ],
+        "excludedSubfields": ["6", "7", "2"],
         "ind1Not": ["0"],
         "description": "Funding"
       },
       {
         "marc": "538",
-        "subfields": [
-          "a"
-        ],
+        "excludedSubfields": ["6", "7", "2"],
         "ind1Not": ["0"],
         "description": "System Details"
       },
       {
         "marc": "540",
-        "subfields": [
-          "a"
-        ],
+        "excludedSubfields": ["6", "7", "2"],
         "ind1Not": ["0"],
         "description": "Terms of Use"
       },
@@ -779,107 +729,79 @@
       },
       {
         "marc": "542",
-        "subfields": [
-          "a"
-        ],
+        "excludedSubfields": ["6", "7", "2"],
         "ind1Not": ["0"],
         "description": "Information Relating to Copyright Status"
       },
       {
         "marc": "544",
-        "subfields": [
-          "a"
-        ],
+        "excludedSubfields": ["6", "7", "2"],
         "ind1Not": ["0"],
         "description": "Location of Other Archival Materials"
       },
       {
         "marc": "545",
-        "subfields": [
-          "a",
-          "b"
-        ],
+        "excludedSubfields": ["6", "7", "2"],
         "ind1Not": ["0"],
         "description": "Biography"
       },
       {
         "marc": "546",
-        "subfields": [
-          "a",
-          "b"
-        ],
+        "excludedSubfields": ["6", "7", "2"],
         "ind1Not": ["0"],
         "description": "Language"
       },
       {
         "marc": "547",
-        "subfields": [
-          "a"
-        ],
+        "excludedSubfields": ["6", "7", "2"],
         "ind1Not": ["0"],
         "description": "Former Title"
       },
       {
         "marc": "550",
-        "subfields": [
-          "a"
-        ],
+        "excludedSubfields": ["6", "7", "2"],
         "ind1Not": ["0"],
         "description": "Issued By"
       },
       {
         "marc": "555",
-        "subfields": [
-          "a"
-        ],
+        "excludedSubfields": ["6", "7", "2"],
         "ind1Not": ["0"],
         "description": "Indexes/Finding Aids"
       },
       {
         "marc": "556",
-        "subfields": [
-          "a"
-        ],
+        "excludedSubfields": ["6", "7", "2"],
         "ind1Not": ["0"],
         "description": "Documentation"
       },
       {
         "marc": "561",
-        "subfields": [
-          "a"
-        ],
+        "excludedSubfields": ["6", "7", "2"],
         "ind1Not": ["0"],
         "description": "Provenance"
       },
       {
         "marc": "562",
-        "subfields": [
-          "a"
-        ],
+        "excludedSubfields": ["6", "7", "2"],
         "ind1Not": ["0"],
         "description": "Copy/Version"
       },
       {
         "marc": "563",
-        "subfields": [
-          "a"
-        ],
+        "excludedSubfields": ["6", "7", "2"],
         "ind1Not": ["0"],
         "description": "Binding"
       },
       {
         "marc": "580",
-        "subfields": [
-          "a"
-        ],
+        "excludedSubfields": ["6", "7", "2"],
         "ind1Not": ["0"],
         "description": "Linking Entry"
       },
       {
         "marc": "581",
-        "subfields": [
-          "a"
-        ],
+        "excludedSubfields": ["6", "7", "2"],
         "ind1Not": ["0"],
         "description": "Publications"
       },
@@ -891,17 +813,13 @@
       },
       {
         "marc": "585",
-        "subfields": [
-          "a"
-        ],
+        "excludedSubfields": ["6", "7", "2"],
         "ind1Not": ["0"],
         "description": "Exhibitions"
       },
       {
         "marc": "586",
-        "subfields": [
-          "a"
-        ],
+        "excludedSubfields": ["6", "7", "2"],
         "ind1Not": ["0"],
         "description": "Awards"
       },
