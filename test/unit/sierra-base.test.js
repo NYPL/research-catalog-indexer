@@ -308,7 +308,6 @@ describe('SierraBase', function () {
         expect(v[0]).to.deep.include({ value: '$a content 2' })
 
         v = record.varField(100, ['a'], { ind1Not: ['1'] })
-        console.log(JSON.stringify(v, null, 2))
         expect(v).to.be.a('array').to.have.lengthOf(2)
         expect(v[0]).to.deep.include({ value: '$a content 1' })
 

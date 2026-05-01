@@ -1103,7 +1103,6 @@ describe('EsBib', function () {
       const esBib = new EsBib(record)
       // This record has a single note with 1st indicator '0', so it is excluded:
       const note = esBib.note()
-      console.log({ note })
       expect(note).to.equal(null)
     })
 
@@ -1330,7 +1329,7 @@ describe('EsBib', function () {
         'Social security -- Law and legislation -- Uruguay',
         'Social security -- Latin America'
       ])
-      // Expect the root subject to oonlynly occur onte:
+      // Expect the root subject to only occur once:
       expect(record.subjectLiteral_exploded()).to.deep.equal([
         'Social security',
         'Social security -- Law and legislation',
