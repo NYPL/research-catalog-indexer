@@ -162,6 +162,7 @@ const logger = require('../lib/logger')
 const { loadNyplCoreData } = require('../lib/load-core-data.js')
 const { SkipPrefetchError } = require('../lib/errors.js')
 const { setIndexToNoRefresh, setIndexRefresh } = require('../lib/elastic-search/requests.js')
+const { uriForRecordIdentifier } = require('../lib/utils/uriForRecordIdentifier.js')
 
 if (process.env.NEW_RELIC_LICENSE_KEY && process.env.NEW_RELIC_APP_NAME) {
   logger.info(`Enabling NewRelic reporting for ${process.env.NEW_RELIC_APP_NAME}`)
@@ -602,20 +603,19 @@ const updateByBibOrItemServiceQuery = async (options) => {
       // Transform bib/item properties to match what Bib/ItemService would have returned:
       const records = convertCommonModelProperties(rows)
 
-      // Trigger reindex:
-      let retries = 3
       let processed = false
-      while (!processed && retries > 0) {
+      while (!processed) {
         try {
-          await indexer.processRecords(capitalize(type), records, { updateOnly: process.env.UPDATE_ONLY || argv.updateOnly, dryrun: argv.dryrun, skipDeletes: argv.skipDeletes })
-          if (retries < 3) logger.info(`Succeeded on retry ${3 - retries}`)
+          const processRecordsCall = async () => { await indexer.processRecords(capitalize(type), records, { updateOnly: process.env.UPDATE_ONLY || argv.updateOnly, dryrun: argv.dryrun, skipDeletes: argv.skipDeletes }) }
+          const processRecordsErrorCallBack = (e) => {
+            logger.info(`Process records errored out. If query is ordered by id, restart reindex from id ${uriForRecordIdentifier(records[0].nyplSource, records[0].id, 'bib')}`)
+            throw e
+          }
+          await callWithRetry(processRecordsCall, processRecordsErrorCallBack)
           processed = true
         } catch (e) {
           if (!(e instanceof SkipPrefetchError)) {
-            logger.warn(`Retrying due to error: ${e}`)
             console.trace(e)
-            await delay(3000)
-            retries -= 1
           } else {
             cursor.close(() => {
               client.release()
@@ -634,6 +634,19 @@ const updateByBibOrItemServiceQuery = async (options) => {
   cursor.close(() => {
     client.release()
   })
+}
+
+const callWithRetry = async (functionCall, errorCb, retriesAllowed = 3, retryCount = 1) => {
+  try {
+    return await functionCall()
+  } catch (e) {
+    if (retriesAllowed - retryCount <= 0) {
+      errorCb(e)
+      throw e
+    }
+    logger.warn(`Retry #${retryCount} due to error: ${e}`)
+    callWithRetry(functionCall, errorCb, retriesAllowed, ++retryCount)
+  }
 }
 
 /**
