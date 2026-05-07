@@ -611,7 +611,7 @@ const updateByBibOrItemServiceQuery = async (options) => {
             logger.info(`Process records errored out. If query is ordered by id, restart reindex from id ${uriForRecordIdentifier(records[0].nyplSource, records[0].id, 'bib')}`)
             throw e
           }
-          await callWithRetry(processRecordsCall, processRecordsErrorCallBack)
+          await callWithRetry({ functionCall: processRecordsCall, errorCb: processRecordsErrorCallBack, functionName: 'processRecords' })
           processed = true
         } catch (e) {
           if (!(e instanceof SkipPrefetchError)) {
@@ -636,16 +636,19 @@ const updateByBibOrItemServiceQuery = async (options) => {
   })
 }
 
-const callWithRetry = async (functionCall, errorCb, retriesAllowed = 3, retryCount = 1) => {
+const callWithRetry = async ({ functionCall, errorCb, functionName, retriesAllowed = 3, retryCount = 1 }) => {
   try {
     return await functionCall()
   } catch (e) {
-    if (retriesAllowed - retryCount <= 0) {
+    if (retriesAllowed - retryCount < 0) {
       errorCb(e)
       throw e
     }
-    logger.warn(`Retry #${retryCount} due to error: ${e}`)
-    callWithRetry(functionCall, errorCb, retriesAllowed, ++retryCount)
+    logger.warn(`Retry ${functionName} call #${retryCount} due to error: ${e}`)
+    await delay(1000 * retryCount)
+    callWithRetry({
+      functionCall, errorCb, retriesAllowed, retryCount: ++retryCount, functionName
+    })
   }
 }
 
