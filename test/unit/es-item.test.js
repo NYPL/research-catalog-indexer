@@ -241,7 +241,7 @@ describe('EsItem', function () {
   })
 
   describe('physicalLocation', function () {
-    describe('nypl item with location', function () {
+    it('nypl item with location', function () {
       const record = new SierraItem(require('../fixtures/item-17145801.json'))
       const esItem = new EsItem(record)
       expect(esItem.physicalLocation()).to.deep.equal(
