@@ -7,10 +7,15 @@ const EsBib = require('../../lib/es-models/bib')
 const SierraBib = require('../../lib/sierra-models/bib')
 
 describe('EsCheckinCardItem', function () {
-  const holding = new SierraHolding(require('../fixtures/holding-1032862.json'))
-  const record = new SierraBib(require('../fixtures/bib-10001936.json'))
-  const esBib = new EsBib(record)
-  const checkinCardItems = EsCheckinCardItem.fromSierraHolding(holding, esBib)
+  let esBib
+  let checkinCardItems
+
+  before(() => {
+    const holding = new SierraHolding(require('../fixtures/holding-1032862.json'))
+    const record = new SierraBib(require('../fixtures/bib-10001936.json'))
+    esBib = new EsBib(record)
+    checkinCardItems = EsCheckinCardItem.fromSierraHolding(holding, esBib)
+  })
 
   describe('accessMessage', () => {
     it('returns static access message', () => {
@@ -82,8 +87,12 @@ describe('EsCheckinCardItem', function () {
   })
 
   describe('enumerationChronology_sort', () => {
-    const holding = new SierraHolding(require('../fixtures/holding-1044923.json'))
-    const items = EsCheckinCardItem.fromSierraHolding(holding, esBib)
+    let items
+
+    before(() => {
+      const holding = new SierraHolding(require('../fixtures/holding-1044923.json'))
+      items = EsCheckinCardItem.fromSierraHolding(holding, esBib)
+    })
 
     before(() => {
       const sortKeys = { 'i-h1044923-0': '      1' }
