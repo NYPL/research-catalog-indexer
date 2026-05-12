@@ -6,12 +6,20 @@ const readline = require('node:readline')
 const updateProperties = ['series', 'seriesAddedEntry', 'seriesUniformTitle', 'placeOfPublication', 'subjectLiteral']
 const index = process.env.ELASTIC_RESOURCES_INDEX_NAME
 
-const updateMappings = (mappings) => {
+const updateMappings = (mappings, dryrun) => {
   updateProperties.forEach((prop) => {
     let newMapping
+    let parallelProp = 'parallel' + prop[0].toUpperCase() + prop.substring(1)
     if (prop === 'subjectLiteral') newMapping = propertyTemplates.fulltextWithRawFoldedAndKLS
     else newMapping = propertyTemplates.textWithFilterableKeyword
+    if (dryrun) {
+      delete mappings[prop]
+      delete mappings[parallelProp]
+      prop = 'UPDATED_' + prop
+      parallelProp = 'UPDATED_' + parallelProp
+    }
     mappings[prop] = newMapping
+    mappings[parallelProp] = newMapping
   })
   return mappings
 }
@@ -37,7 +45,7 @@ const theThing = async (doIt = false) => {
   const settings = await es.indices.getSettings({ index })
   const mappingsResp = await es.indices.getMapping({ index })
   const mappings = mappingsResp.body[index].mappings.properties
-  updateMappings(mappings)
+  updateMappings(mappings, !doIt)
   const newIndexName = `resources-qa-${new Date(Date.now()).toISOString().split('T')[0]}`
   const body = buildIndexPostBody(newIndexName, settings.body[index].settings.index, mappings)
   console.log(body)
