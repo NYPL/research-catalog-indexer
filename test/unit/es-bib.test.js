@@ -1002,7 +1002,7 @@ describe('EsBib', function () {
           type: 'bf:Note'
         },
         {
-          label: 'Finding aid',
+          label: 'Finding aid: folder level control.',
           type: 'bf:Note',
           noteType: 'Indexes/Finding Aids'
         },
@@ -1018,6 +1018,41 @@ describe('EsBib', function () {
         }
       ])
     })
+
+    it('includes all but excluded subfields for 506', () => {
+      const record = new SierraBib({
+        varFields: [
+          {
+            marcTag: '506',
+            ind1: ' ',
+            subfields: [
+              { tag: 'h', content: 'h content' },
+              { tag: '2', content: '2 content' },
+              { tag: 'z', content: 'z content' }
+            ]
+          }
+        ]
+      })
+      const esBib = new EsBib(record)
+      expect(esBib.note().map((n) => n.label)).to.deep.equal([
+        'h content z content'
+      ])
+    })
+
+    it('requires ind1=1 for 583', () => {
+      const record = new SierraBib({
+        varFields: [
+          {
+            marcTag: '583',
+            ind1: ' ',
+            subfields: [{ tag: 'a', content: 'a content' }]
+          }
+        ]
+      })
+      const esBib = new EsBib(record)
+      expect(esBib.note()).to.equal(null)
+    })
+
     it('parallel notes', () => {
       const record = new SierraBib(require('../fixtures/bib-notes.json'))
       const esBib = new EsBib(record)
@@ -1063,11 +1098,36 @@ describe('EsBib', function () {
       ])
     })
 
-    it('excludes notes with 1st indicator 0', () => {
+    it('excludes parallel notes with 1st indicator 0', () => {
       const record = new SierraBib(require('../fixtures/bib-pul-99122517373506421.json'))
       const esBib = new EsBib(record)
       // This record has a single note with 1st indicator '0', so it is excluded:
-      expect(esBib.note()).to.equal(null)
+      const note = esBib.note()
+      expect(note).to.equal(null)
+    })
+
+    it('includes all subfields', () => {
+      const record = new SierraBib({
+        varFields: [
+          {
+            marcTag: '500',
+            subfields: [
+              { tag: 'a', content: '$a' },
+              { tag: 'b', content: '$b' },
+              { tag: 'z', content: '$c' },
+              { tag: '2', content: '$2' },
+              { tag: '6', content: '$1' }
+            ]
+          }
+        ]
+      })
+      expect((new EsBib(record)).note()).to.deep.equal([
+        {
+          label: '$a $b $c',
+          noteType: 'Note',
+          type: 'bf:Note'
+        }
+      ])
     })
   })
 
@@ -1097,17 +1157,18 @@ describe('EsBib', function () {
   })
 
   describe('publisherLiteral', () => {
-    const record = new SierraBib(require('../fixtures/bib-10001936.json'))
-    const esBib = new EsBib(record)
     it('should return array with publisherLiteral', function () {
       const record = new SierraBib(require('../fixtures/bib-10001936.json'))
       const esBib = new EsBib(record)
       expect(esBib.publisherLiteral()).to.deep.equal(['Tparan Hovhannu Tēr-Abrahamian'])
     })
     it('parallelPublisherLiteral', () => {
+      const record = new SierraBib(require('../fixtures/bib-10001936.json'))
+      const esBib = new EsBib(record)
       expect(esBib.parallelPublisherLiteral()).to.deep.equal(['parallel for Tparan Hovhannu Tēr-Abrahamian'])
     })
   })
+
   describe('tableOfContents', () => {
     it('should return table of contents', function () {
       const record = new SierraBib(require('../fixtures/bib-11055155.json'))
@@ -1162,8 +1223,13 @@ describe('EsBib', function () {
   })
 
   describe('uniformTitle', () => {
-    const record = new SierraBib(require('../fixtures/bib-11606020.json'))
-    const esBib = new EsBib(record)
+    let esBib
+
+    before(() => {
+      const record = new SierraBib(require('../fixtures/bib-11606020.json'))
+      esBib = new EsBib(record)
+    })
+
     it('should return display titles', function () {
       expect(esBib.uniformTitle()).to.deep.equal(
         ['Toledot Yeshu.']
@@ -1750,6 +1816,7 @@ describe('EsBib', function () {
         ]
       })
       const esRecord = new EsBib(record)
+      expect(esRecord.supplementaryContent()).to.be.a('array')
       expect(esRecord.supplementaryContent().length).to.equal(1)
       expect(esRecord.numElectronicResources()).to.deep.equal([2])
       expect(esRecord._aeonUrls().length).to.equal(1)

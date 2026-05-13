@@ -546,7 +546,6 @@ const readCursorRecurser = async (batchSize, cursor, retry = 1) => {
     throw new Error('Error connecting to db after 3 tries')
   }
   try {
-    await delay(retry * 1000)
     return await cursor.read(batchSize)
   } catch (e) {
     logger.warn('readCursorRecursor error: ', e)
