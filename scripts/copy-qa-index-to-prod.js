@@ -67,4 +67,4 @@ const theThing = async (doIt = false) => {
   }
 }
 
-theThing()
+theThing(true)
