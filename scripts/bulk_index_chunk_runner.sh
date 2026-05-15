@@ -27,7 +27,7 @@ echo commencing bulk reingest for all ids
 
 for file in `ls $BIB_IDS_DIR`; do
     echo "Processing $file"
-    if ! node ./scripts/bulk-index.js "$@" --type bib --envfile ./config/$1-bulk-index.env --skipDeletes --csv $BIB_IDS_DIR/$file --csvIdColumn 0 --csvNyplSourceColumn 1; then
+    if ! node ./scripts/bulk-index.js "$@" --batchSize 1000 --type bib --envfile ./config/$1-bulk-index.env --skipDeletes --csv $BIB_IDS_DIR/$file --csvIdColumn 0 --csvNyplSourceColumn 1; then
       echo "csv file failed run: $file"
       mv $BIB_IDS_DIR/$file $ERRORS_DIR
     fi
