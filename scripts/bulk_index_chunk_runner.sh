@@ -15,7 +15,7 @@ DECRYPTED_HOST=$(kms-util decrypt $BIB_SERVICE_DB_HOST)
 DECRYPTED_USER=$(kms-util decrypt $BIB_SERVICE_DB_USER)
 
 echo Fetching all bib ids from $1 bib database
-psql postgresql://$DECRYPTED_USER:$DECRYPTED_PW@$DECRYPTED_HOST/bib_service_production -c "\\COPY (SELECT id, nypl_source FROM bib WHERE id = '10833141') TO $SCRIPT_DIR/tmp/all_bib_ids.csv WITH CSV DELIMITER ',' HEADER;" 
+psql postgresql://$DECRYPTED_USER:$DECRYPTED_PW@$DECRYPTED_HOST/bib_service_production -c "\\COPY (SELECT id, nypl_source FROM bib) TO $SCRIPT_DIR/tmp/all_bib_ids.csv WITH CSV DELIMITER ',' HEADER;" 
 
 echo Splitting `wc -l $SCRIPT_DIR/tmp/all_bib_ids.csv` into files of 1000 ids
 split -l 1000 -a 5 -d $SCRIPT_DIR/tmp/all_bib_ids.csv $BIB_IDS_DIR/bib_ids_
