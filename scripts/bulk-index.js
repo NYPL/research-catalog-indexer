@@ -324,9 +324,10 @@ const presentInSchema = (property, schema) => {
   const schemaProperties = Object.keys(schema)
   return schemaProperties.find((schemaProperty) => {
     if (property === schemaProperty) return true
-    else if (schema[schemaProperty].type === 'nested') {
+    if (schema[schemaProperty]?.type === 'nested') {
       return presentInSchema(property, schema[schemaProperty].properties)
-    } else return false
+    }
+    return false
   })
 }
 
