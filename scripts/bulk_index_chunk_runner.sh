@@ -6,8 +6,10 @@ SCRIPT_DIR=.
 mkdir -p $SCRIPT_DIR/tmp/
 BIB_IDS_DIR=$SCRIPT_DIR/tmp/bib_ids/
 ERRORS_DIR=$SCRIPT_DIR/tmp/chunk_run_errors/
+PROCESSED_IDS_DIR = $SCRIPT_DIR/tmp/processed/
 mkdir -p $BIB_IDS_DIR
 mkdir -p $ERRORS_DIR
+mkdir -p $PROCESSED_IDS_DIR
 
 set -a; source config/"$1"-bulk-index.env; set +a
 DECRYPTED_PW=$(kms-util decrypt $BIB_SERVICE_DB_PW)
@@ -31,4 +33,5 @@ for file in `ls $BIB_IDS_DIR`; do
       echo "csv file failed run: $file"
       mv $BIB_IDS_DIR/$file $ERRORS_DIR
     fi
+    mv $BIB_IDS_DIR/$file $PROCESSED_IDS_DIR
 done
