@@ -8,3 +8,4 @@ uris.csv
 *.log
 unindexed-*
 scripts/bulk_logs/
+tmp/*
