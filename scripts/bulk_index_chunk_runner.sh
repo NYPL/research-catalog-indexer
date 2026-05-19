@@ -33,6 +33,7 @@ split -l 1000 -a 5 -d $SCRIPT_DIR/tmp/all_bib_ids.csv $BIB_IDS_DIR/bib_ids_
 echo Deleting original $SCRIPT_DIR/tmp/all_bib_ids.csv file
 rm $SCRIPT_DIR/tmp/all_bib_ids.csv 
 
+echo $@
 echo commencing bulk reingest for all ids
 
 for file in `ls $BIB_IDS_DIR`; do
