@@ -15,9 +15,14 @@ mkdir -p $ERRORS_DIR
 mkdir -p $PROCESSED_IDS_DIR
 
 set -a; source config/"$ENV"-bulk-index.env; set +a
-DECRYPTED_PW=$(kms-util decrypt $BIB_SERVICE_DB_PW) || { echo "Error: Failed to decrypt BIB_SERVICE_DB_PW"; exit 1; }
-DECRYPTED_HOST=$(kms-util decrypt $BIB_SERVICE_DB_HOST) || { echo "Error: Failed to decrypt BIB_SERVICE_DB_HOST"; exit 1; }
-DECRYPTED_USER=$(kms-util decrypt $BIB_SERVICE_DB_USER) || { echo "Error: Failed to decrypt BIB_SERVICE_DB_USER"; exit 1; }
+
+decrypt_env_var() {
+  node -e "require('./scripts/utils').setAwsProfile(); require('./lib/kms').decrypt(process.env.$1).then(console.log).catch(e => { console.error(e); process.exit(1); })"
+}
+
+DECRYPTED_PW=$(decrypt_env_var BIB_SERVICE_DB_PW) || { echo "Error: Failed to decrypt BIB_SERVICE_DB_PW"; exit 1; }
+DECRYPTED_HOST=$(decrypt_env_var BIB_SERVICE_DB_HOST) || { echo "Error: Failed to decrypt BIB_SERVICE_DB_HOST"; exit 1; }
+DECRYPTED_USER=$(decrypt_env_var BIB_SERVICE_DB_USER) || { echo "Error: Failed to decrypt BIB_SERVICE_DB_USER"; exit 1; }
 
 echo Fetching all bib ids from $ENV bib database
 psql postgresql://$DECRYPTED_USER:$DECRYPTED_PW@$DECRYPTED_HOST/bib_service_production -c "\\COPY (SELECT id, nypl_source FROM bib ORDER BY nypl_source) TO $SCRIPT_DIR/tmp/all_bib_ids.csv WITH CSV DELIMITER ',' HEADER;" 
