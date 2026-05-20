@@ -216,8 +216,7 @@ const db = {
       user,
       host,
       database: process.env[`${prefix}_SERVICE_DB_NAME`],
-      password,
-      query_timeout: 1000 * 60 * 5
+      password
     }
     return new Pool(config)
   },
