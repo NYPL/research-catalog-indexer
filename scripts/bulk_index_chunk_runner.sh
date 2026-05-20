@@ -6,7 +6,7 @@ SCRIPT_DIR=.
 mkdir -p $SCRIPT_DIR/tmp/
 BIB_IDS_DIR=$SCRIPT_DIR/tmp/bib_ids/
 ERRORS_DIR=$SCRIPT_DIR/tmp/chunk_run_errors/
-PROCESSED_IDS_DIR = $SCRIPT_DIR/tmp/processed/
+PROCESSED_IDS_DIR=$SCRIPT_DIR/tmp/processed/
 mkdir -p $BIB_IDS_DIR
 mkdir -p $ERRORS_DIR
 mkdir -p $PROCESSED_IDS_DIR
