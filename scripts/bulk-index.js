@@ -871,6 +871,7 @@ const cleanup = async () => {
   }
   totalTimer.endTimer()
   totalTimer.howMany('hours')
+  process.exit(0)
 }
 
 const totalTimer = new Timer('bulk update')
