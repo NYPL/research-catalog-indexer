@@ -231,11 +231,11 @@ const db = {
    *  Sever connections will all db connection pools
    */
   endPools: () => {
-    Object.entries(db.dbConnectionPools)
-      .forEach(([name, pool]) => {
+    return Promise.all(Object.entries(db.dbConnectionPools)
+      .map(([name, pool]) => {
         logger.debug(`Stopping ${name} pool`)
-        pool.end()
-      })
+        return pool.end()
+      }))
   }
 }
 
@@ -716,7 +716,7 @@ const updateByCsv = async (options = { offset: 0 }) => {
       startTime: new Date()
     })
     await processCsvBatch(batches, 0, optionsWithStats)
-    db.endPools()
+    await db.endPools()
   }
 }
 
@@ -845,7 +845,7 @@ const run = async () => {
       logger.error('Error ', e)
       logger.error(e.stack)
     }
-    db.endPools()
+    await db.endPools()
   }
   // Disable direct-db access to Item, Bib, and Holdings services (formality)
   restoreModelPrefetch()
