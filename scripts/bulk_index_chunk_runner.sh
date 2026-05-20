@@ -25,7 +25,7 @@ DECRYPTED_HOST=$(decrypt_env_var BIB_SERVICE_DB_HOST) || { echo "Error: Failed t
 DECRYPTED_USER=$(decrypt_env_var BIB_SERVICE_DB_USER) || { echo "Error: Failed to decrypt BIB_SERVICE_DB_USER"; exit 1; }
 
 echo Fetching all bib ids from $ENV bib database
-psql postgresql://$DECRYPTED_USER:$DECRYPTED_PW@$DECRYPTED_HOST/bib_service_production -c "\\COPY (SELECT id, nypl_source FROM bib ORDER BY nypl_source) TO $SCRIPT_DIR/tmp/all_bib_ids.csv WITH CSV DELIMITER ',' HEADER;" 
+psql postgresql://$DECRYPTED_USER:$DECRYPTED_PW@$DECRYPTED_HOST/bib_service_production -c "\\COPY (SELECT id, nypl_source FROM bib) TO $SCRIPT_DIR/tmp/all_bib_ids.csv WITH CSV DELIMITER ',' HEADER;" 
 
 echo Splitting `wc -l $SCRIPT_DIR/tmp/all_bib_ids.csv` into files of 1000 ids
 split -l 1000 -a 5 -d $SCRIPT_DIR/tmp/all_bib_ids.csv $BIB_IDS_DIR/bib_ids_
