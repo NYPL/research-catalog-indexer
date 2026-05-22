@@ -1161,6 +1161,9 @@
       }
     ]
   },
+  "uri": {
+    "notes": "Bnumber w/out check digit"
+  },
   "titleDisplay": {
     "paths": [
       {
