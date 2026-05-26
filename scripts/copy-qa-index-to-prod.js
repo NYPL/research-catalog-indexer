@@ -30,16 +30,18 @@ const buildIndexPostBody = (indexName, settings, mappings) => {
 const theThing = async (doIt = false) => {
   // Establish qa client
   const qaIndex = process.env.ELASTIC_RESOURCES_INDEX_NAME
+  console.log('The qa index:', qaIndex)
   const esQa = await client()
   const settings = await esQa.indices.getSettings({ index: qaIndex })
   const mappingsResp = await esQa.indices.getMapping({ index: qaIndex })
   const mappings = mappingsResp.body[qaIndex].mappings.properties
+  console.log('The qa mappings:', mappings)
 
   // Reset client and load prod config
   _resetClient()
   dotenv.config({ path: './config/production.env', override: true })
   const prodIndex = process.env.ELASTIC_RESOURCES_INDEX_NAME
-
+  console.log('The prod index:', prodIndex)
   // Build prod index
   const esProd = await client()
   const newIndexName = `resources-prod-${new Date(Date.now()).toISOString().split('T')[0]}`
@@ -67,4 +69,4 @@ const theThing = async (doIt = false) => {
   }
 }
 
-theThing(true)
+theThing(false)
