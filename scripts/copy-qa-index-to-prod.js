@@ -69,4 +69,4 @@ const theThing = async (doIt = false) => {
   }
 }
 
-theThing(false)
+theThing(true)
