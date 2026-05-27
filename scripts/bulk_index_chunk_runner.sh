@@ -14,8 +14,8 @@ mkdir -p $BIB_IDS_DIR
 mkdir -p $ERRORS_DIR
 mkdir -p $PROCESSED_IDS_DIR
 
-if [ "$2" == "true" ]; then
-  source config/"$1"-bulk-index.env; set +a
+if [ "$FETCH_IDS" == "true" ]; then
+  source config/"$1"-bulk-index.env
   DECRYPTED_PW=$(kms-util decrypt $BIB_SERVICE_DB_PW)
   DECRYPTED_HOST=$(kms-util decrypt $BIB_SERVICE_DB_HOST)
   DECRYPTED_USER=$(kms-util decrypt $BIB_SERVICE_DB_USER)
@@ -31,10 +31,10 @@ fi
 echo commencing bulk reingest for all ids
 
 for file in `ls $BIB_IDS_DIR`; do
-    echo "Processing $file"
-    if ! node ./scripts/bulk-index.js "$@" --batchSize 500 --type bib --envfile ./config/$1-bulk-index.env --skipDeletes --csv $BIB_IDS_DIR/$file --csvIdColumn 0 --csvNyplSourceColumn 1; then
-      echo "csv file failed run: $file"
-      mv $BIB_IDS_DIR/$file $ERRORS_DIR
-    fi
-    mv $BIB_IDS_DIR/$file $PROCESSED_IDS_DIR
+  echo "Processing $file"
+  if ! node ./scripts/bulk-index.js "$@" --batchSize 500 --type bib --envfile ./config/$1-bulk-index.env --skipDeletes --csv $BIB_IDS_DIR/$file --csvIdColumn 0 --csvNyplSourceColumn 1; then
+    echo "csv file failed run: $file"
+    mv $BIB_IDS_DIR/$file $ERRORS_DIR
+  fi
+  mv $BIB_IDS_DIR/$file $PROCESSED_IDS_DIR
 done
