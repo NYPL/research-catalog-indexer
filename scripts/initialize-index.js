@@ -43,21 +43,21 @@ exports.run = async (options = {}) => {
       }
     }
   })
+  console.log(`Index ${options.index} initialized.`)
   const reindexRl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
   })
-  const oldIndex = process.env.RESOURCES_INDEX
-  reindexRl.question(`copy contents of ${oldIndex} to ${options.index}? Only "yes" will trigger copy... `, async answer => {
+  const oldIndex = process.env.ELASTIC_RESOURCES_INDEX_NAME
+  await reindexRl.question(`copy contents of ${oldIndex} to ${options.index}? Only "yes" will trigger copy... `, async answer => {
     if (answer === 'yes') {
       console.log(`Copying contents of ${oldIndex} to ${options.index}`)
-      const resp = await client.reindex({ waitForCompletion: false, body: { source: { oldIndex }, dest: { index: options.index } } })
+      const resp = await client.reindex({ waitForCompletion: false, body: { source: { index: oldIndex }, dest: { index: options.index } } })
       console.log(`Started reindex task #${resp.body.task}`)
     } else console.log('only yes will trigger reindex. Goodbye!')
     reindexRl.close()
+    console.log(`Don't forget to: \n\tUpdate this repo with new index\n\tUpdate Discovery API with new index\n\tUpdate browse index with ${options.index} \n\tUpdate index alias with ${options.index}\n\tDelete ${oldIndex}`)
   })
-  console.log(`Don't forget to: \n\tUpdate this repo with new index\n\tUpdate Discovery API with new index\n\tUpdate browse index with ${options.index} \n\tDelete ${oldIndex}`)
-  console.log('Done')
 }
 
 const isCalledViaCommandLine = /scripts\/initialize-index(.js)?/.test(fs.realpathSync(process.argv[1]))
