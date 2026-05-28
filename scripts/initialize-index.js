@@ -7,6 +7,8 @@
 */
 const dotenv = require('dotenv')
 const fs = require('fs')
+const readline = require('node:readline')
+
 const argv = require('minimist')(process.argv.slice(2))
 const logger = require('../lib/logger')
 const esClient = require('../lib/elastic-search/client')
@@ -41,7 +43,20 @@ exports.run = async (options = {}) => {
       }
     }
   })
-
+  const reindexRl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+  })
+  const oldIndex = process.env.RESOURCES_INDEX
+  reindexRl.question(`copy contents of ${oldIndex} to ${options.index}? Only "yes" will trigger copy... `, async answer => {
+    if (answer === 'yes') {
+      console.log(`Copying contents of ${oldIndex} to ${options.index}`)
+      const resp = await client.reindex({ waitForCompletion: false, body: { source: { oldIndex }, dest: { index: options.index } } })
+      console.log(`Started reindex task #${resp.body.task}`)
+    } else console.log('only yes will trigger reindex. Goodbye!')
+    reindexRl.close()
+  })
+  console.log(`Don't forget to: \n\tUpdate this repo with new index\n\tUpdate Discovery API with new index\n\tUpdate browse index with ${options.index} \n\tDelete ${oldIndex}`)
   console.log('Done')
 }
 

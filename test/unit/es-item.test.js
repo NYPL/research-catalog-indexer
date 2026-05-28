@@ -190,6 +190,18 @@ describe('EsItem', function () {
         )
       })
     })
+
+    describe('for an item with callNumber and copy number', function () {
+      it('should return the call number with copy number', function () {
+        const record = new SierraItem(require('../fixtures/item-42330197.json'))
+        const esItem = new EsItem(record)
+        expect(esItem.shelfMark()).to.deep.equal(
+          [
+            '*MGZPA JRDD 1972 1 copy 2'
+          ]
+        )
+      })
+    })
   })
 
   describe('shelfMark_sort', function () {
@@ -241,7 +253,7 @@ describe('EsItem', function () {
   })
 
   describe('physicalLocation', function () {
-    describe('nypl item with location', function () {
+    it('nypl item with location', function () {
       const record = new SierraItem(require('../fixtures/item-17145801.json'))
       const esItem = new EsItem(record)
       expect(esItem.physicalLocation()).to.deep.equal(

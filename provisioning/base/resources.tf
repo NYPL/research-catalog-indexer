@@ -2,6 +2,13 @@ provider "aws" {
   region     = "us-east-1"
 }
 
+locals {
+  tags = {
+    Project = "Research Catalog"
+    BusinessUnit = "LSP"
+  }
+}
+
 variable "environment" {
   type = string
   default = "qa"
@@ -33,7 +40,9 @@ resource "aws_s3_object" "uploaded_zip" {
   acl    = "private"
   source = data.archive_file.lambda_zip.output_path
   etag   = filemd5(data.archive_file.lambda_zip.output_path)
+  tags = local.tags
 }
+
 # Create the lambda:
 resource "aws_lambda_function" "lambda_instance" {
   description   = "Indexes bib data for the DiscoveryAPI, which powers the Research Catalog"
@@ -62,4 +71,32 @@ resource "aws_lambda_function" "lambda_instance" {
     security_group_ids = var.vpc_config.security_group_ids
   }
   
+  tags = local.tags
 }
+
+data "aws_sns_topic" "rc_alarms" {
+  name = "research-catalog-team-alarms-${var.environment}"
+
+  tags = local.tags
+}
+
+resource "aws_cloudwatch_metric_alarm" "lambda_errors" {
+  alarm_name          = "lambda-errors-${aws_lambda_function.lambda_instance.function_name}"
+  comparison_operator = "GreaterThanThreshold"
+  evaluation_periods  = 1
+  metric_name         = "Errors"
+  namespace           = "AWS/Lambda"
+  period              = 300
+  statistic           = "Sum"
+  threshold           = 1
+  alarm_description   = "Lambda function ${aws_lambda_function.lambda_instance.function_name} has more than 1 error in 5 minutes"
+  alarm_actions       = [data.aws_sns_topic.rc_alarms.arn]
+  treat_missing_data  = "notBreaching"
+
+  dimensions = {
+    FunctionName = aws_lambda_function.lambda_instance.function_name
+  }
+
+  tags = local.tags
+}
+
