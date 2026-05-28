@@ -273,6 +273,30 @@ describe('EsItem', function () {
         expect(esItem.recapCustomerCode()).to.deep.equal(['NA'])
       })
     })
+
+    describe('hl record in recap', function () {
+      it('should return the recapCustomerCode without prefix', function () {
+        const record = new SierraItem(require('../fixtures/item-hl-231730577470003941.json'))
+        const esItem = new EsItem(record)
+        expect(esItem.recapCustomerCode()).to.deep.equal(['HV'])
+      })
+    })
+
+    describe('hl record in hd', function () {
+      it('should return the recapCustomerCode with hd prefix', function () {
+        const record = new SierraItem(require('../fixtures/item-hl-231911262430003941.json'))
+        const esItem = new EsItem(record)
+        expect(esItem.recapCustomerCode()).to.deep.equal(['hd:HL'])
+      })
+    })
+
+    describe('PUL record in recap', function () {
+      it('should return the recapCustomerCode without prefix', function () {
+        const record = new SierraItem(require('../fixtures/item-pul-189241.json'))
+        const esItem = new EsItem(record)
+        expect(esItem.recapCustomerCode()).to.deep.equal(['PA'])
+      })
+    })
   })
 
   describe('requestable', function () {
