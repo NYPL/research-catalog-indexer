@@ -57,7 +57,7 @@ exports.run = async (options = {}) => {
       console.log(`Started reindex task #${resp.body.task}`)
     } else console.log('only yes will trigger reindex. Goodbye!')
     reindexRl.close()
-    console.log(`Don't forget to: \n\tUpdate this repo with new index\n\tUpdate Discovery API with new index\n\tUpdate browse index with ${options.index} \n\tUpdate index alias with ${options.index}\n\tDelete ${oldIndex}`)
+    console.log(`Don't forget to: \n\tUpdate this repo with ${options.index}\n\tUpdate Discovery API with ${options.index} after verifying with the mapping-check.js script in that repo\n\tUpdate index alias with ${options.index} (referenced by browse-term-indexer\n\tDelete ${oldIndex}`)
   })
 }
 
