@@ -39,6 +39,7 @@ exports.run = async (options = {}) => {
     body: {
       settings: indexSettings,
       mappings: {
+        dynamic: 'strict',
         properties: schema()
       }
     }
