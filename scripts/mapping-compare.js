@@ -32,12 +32,12 @@
 */
 const dotenv = require('dotenv')
 const fs = require('fs')
+const deepDiff = require('deep-diff-pizza')
+const chalk = require('chalk')
 const argv = require('minimist')(process.argv.slice(2))
 const logger = require('../lib/logger')
 const esClient = require('../lib/elastic-search/client')
 const { die, setAwsProfile } = require('./utils')
-const deepDiff = require('deep-diff-pizza')
-const chalk = require('chalk')
 
 const usage = () => {
   console.log('Usage: node scripts/mapping-compare --envfile CONFIG INDEX1 INDEX2')
@@ -73,6 +73,8 @@ const envfileForIndex = (index, options) => {
     return ['./config/qa.env', 'Index name contains "qa"']
   } else if (/prod/.test(index)) {
     return ['./config/production.env', 'Index name contains "prod"']
+  } else {
+    throw Error(`Could not determine appropriate envfile for ${index}`)
   }
 }
 
@@ -86,7 +88,7 @@ exports.getDiff = (mappings1, mappings2) => {
     .filter((diff) => diff.operation !== 'UNCHANGED')
     .map(({ operation, path, was, is }) => {
       const scrub = currentProp.length ? (' '.repeat(currentProp.length - 1) + '.') : ''
-      formattedPath = path.replace(currentProp, scrub)
+      const formattedPath = path.replace(currentProp, scrub)
       currentProp = path.split('.').slice(0, -1).join('.') + '.'
 
       switch (operation) {
@@ -94,7 +96,9 @@ exports.getDiff = (mappings1, mappings2) => {
         case 'REMOVED': return chalk.red(`- ${formattedPath} (${was})`)
         case 'UPDATED': return chalk.yellow(`~ ${formattedPath} (${was} > ${is})`)
       }
+      return null
     })
+    .filter(Boolean)
 
   return diffs.join('\n')
 }
@@ -107,7 +111,7 @@ exports.run = async (index1, index2, options = {}) => {
 
   const mappings = []
   try {
-    for ([ind, name] of Object.entries([index1, index2])) {
+    for (const [ind, name] of Object.entries([index1, index2])) {
       try {
         // if --envfile1 or --envfile2 given, pass in relevant config:
         const envfileKey = `envfile${parseInt(ind) + 1}`
