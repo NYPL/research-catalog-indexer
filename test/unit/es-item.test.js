@@ -84,6 +84,24 @@ describe('EsItem', function () {
     })
   })
 
+  describe('collection', function () {
+    it('returns collection code based on item holding location', function () {
+      const record = new SierraItem(require('../fixtures/item-14441624.json'))
+      const esItem = new EsItem(record)
+      expect(esItem.collection()).to.deep.equal(['map'])
+    })
+
+    it('returns null if item holding location does not map to a collection', function () {
+      const fakeRecord = new SierraItem({
+        id: '1234',
+        nyplSource: 'sierra-nypl',
+        location: { code: 'zzzzz' }
+      })
+      const esItem = new EsItem(fakeRecord)
+      expect(esItem.collection()).to.equal(null)
+    })
+  })
+
   describe('enumerationChronology', function () {
     it('should return enumeration chronology', function () {
       const record = new SierraItem(require('../fixtures/item-17145801.json'))
