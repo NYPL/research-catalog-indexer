@@ -58,7 +58,16 @@ const optionallyCopyContentsToNewIndex = async (newIndexName) => {
   await reindexRl.question(`copy contents of ${oldIndex} to ${newIndexName}? Only "yes" will trigger copy... `, async answer => {
     if (answer === 'yes') {
       console.log(`Copying contents of ${oldIndex} to ${newIndexName}`)
-      const resp = await client.reindex({ waitForCompletion: false, body: { source: { index: oldIndex }, dest: { index: newIndexName } } })
+      const resp = await client.reindex({
+        waitForCompletion: false,
+        body: {
+          source: { index: oldIndex },
+          dest: { index: newIndexName },
+          script: {
+            source: "ctx._source.remove('subjectLiteral_exploded');"
+          }
+        }
+      })
       console.log(`Started reindex task ${resp.body.task}`)
       console.log(`Don't forget to: \n\tUpdate this repo with ${newIndexName}\n\tUpdate Discovery API with ${newIndexName} after verifying with the mapping-check.js script in that repo\n\tUpdate index alias with ${newIndexName} (referenced by browse-term-indexer\n\tDelete ${oldIndex}`)
     } else console.log('only yes will trigger reindex. Goodbye!')
