@@ -59,13 +59,9 @@ const optionallyCopyContentsToNewIndex = async (newIndexName) => {
     if (answer === 'yes') {
       console.log(`Copying contents of ${oldIndex} to ${newIndexName}`)
       const resp = await client.reindex({
-        waitForCompletion: false,
         body: {
           source: { index: oldIndex },
-          dest: { index: newIndexName },
-          script: {
-            source: "ctx._source.remove('subjectLiteral_exploded');"
-          }
+          dest: { index: newIndexName }
         }
       })
       console.log(`Started reindex task ${resp.body.task}`)
