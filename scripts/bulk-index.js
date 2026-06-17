@@ -647,7 +647,7 @@ const castRowToIdentifier = (row, options) => {
 
   const isPrefixedId = /^[a-z]+\d+$/.test(id)
 
-  if (isPrefixedId) {
+  if (isPrefixedId || options.nyplSourceColumn) {
     const split = options.sourceMapper.splitIdentifier(id)
     if (!split || !split.type || !split.nyplSource) {
       throw new Error(`Invalid prefixed id: ${id}`)
