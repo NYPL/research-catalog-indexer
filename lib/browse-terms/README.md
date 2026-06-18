@@ -1,3 +1,5 @@
+DEPRECATED - this workflow refers to an outdated procedure.
+
 # Using RCI for browse term ingest
 This document outlines the procedure for updating a browse term property on all resources documents in elastic search, populating the browse index with those terms, and updating the counts for those terms.
 
