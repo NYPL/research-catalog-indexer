@@ -219,6 +219,21 @@ describe('EsItem', function () {
           ]
         )
       })
+
+      it('should ignore copy numbers < 2', function () {
+        // Overwrite fixture 'Copy No.' value with "0" and "1":
+        const itemMarc = JSON.parse(JSON.stringify(require('../fixtures/item-42330197.json')))
+        ; ['0', '1'].forEach((value) => {
+          itemMarc.fixedFields['58'].value = value
+          const record = new SierraItem(itemMarc)
+          const esItem = new EsItem(record)
+          expect(esItem.shelfMark()).to.deep.equal(
+            [
+              '*MGZPA JRDD 1972 1'
+            ]
+          )
+        })
+      })
     })
   })
 
