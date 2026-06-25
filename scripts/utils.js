@@ -364,44 +364,6 @@ const lineCount = (file) => {
   })
 }
 
-/**
-* Retry an async call on error. Returns an async function that retries the
-* given call the given amount of times. Resolves when any call succeeds. Errors
-* when retries exhausted.
-*
-* Usage:
-*   doSomethingAsync()
-*     .catch(retry(doSomethingAsync, 3))
-**/
-const retry = (call, retries = 3, retryIndex = 0) => {
-  return async (error) => {
-    // Have we exhausted retries?
-    if (retryIndex === retries) {
-      console.error('Encountered error. Exhausted retries.', error)
-      // Failed after 3 retries? Fail hard:
-      throw new Error(`Exhausted ${retries} retries`)
-    }
-
-    console.error('Encountered error. Will retry:', error)
-    const retryLabel = `Retry ${retryIndex + 1} of ${retries}`
-    // Back off 3s, 9s, 27s:
-    const howLong = Math.pow(3, retryIndex + 1)
-    console.log(`${retryLabel}: Waiting ${howLong}s`)
-    await module.exports.delay(howLong * 1000)
-
-    // Execute call:
-    console.log(`${retryLabel}: Executing`)
-    return call()
-      // If retry succeeded, brag about it and return:
-      .then((res) => {
-        console.log(`${retryLabel}: Succeeded!`)
-        return res
-      })
-      // If call failed again, retry:
-      .catch(retry(call, retries, retryIndex + 1))
-  }
-}
-
 class Timer {
   constructor (name) {
     this.name = name
@@ -465,7 +427,6 @@ module.exports = {
   lineCount,
   printDiff,
   printProgress,
-  retry,
   secondsAsFriendlyDuration,
   setAwsProfile,
   Timer
