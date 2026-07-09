@@ -216,7 +216,8 @@ const db = {
       user,
       host,
       database: process.env[`${prefix}_SERVICE_DB_NAME`],
-      password
+      password,
+      query_timeout: 1000 * 60 * 5
     }
     return new Pool(config)
   },
@@ -870,6 +871,7 @@ const cleanup = async () => {
   }
   totalTimer.endTimer()
   totalTimer.howMany('hours')
+  process.exit(0)
 }
 
 const totalTimer = new Timer('bulk update')

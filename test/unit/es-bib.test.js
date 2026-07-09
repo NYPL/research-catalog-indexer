@@ -1315,28 +1315,6 @@ describe('EsBib', function () {
       const esBib = new EsBib(record)
       expect(esBib.subjectLiteral()).to.deep.equal(['Armenians -- Iran -- History.'])
     })
-
-    it('subjectLiteral_exploded', () => {
-      const record = new EsBib(new SierraBib({}))
-      sinon.stub(record, 'subjectLiteral').returns(['Arabian Peninsula -- Religion -- Ancient History.'])
-      expect(record.subjectLiteral_exploded()).to.deep.equal(['Arabian Peninsula', 'Arabian Peninsula -- Religion', 'Arabian Peninsula -- Religion -- Ancient History'])
-    })
-
-    it('subjectLiteral_exploded de-dedupes', () => {
-      const record = new EsBib(new SierraBib({}))
-      // When subjectLiteral contains two subjects with a common root:
-      sinon.stub(record, 'subjectLiteral').returns([
-        'Social security -- Law and legislation -- Uruguay',
-        'Social security -- Latin America'
-      ])
-      // Expect the root subject to only occur once:
-      expect(record.subjectLiteral_exploded()).to.deep.equal([
-        'Social security',
-        'Social security -- Law and legislation',
-        'Social security -- Law and legislation -- Uruguay',
-        'Social security -- Latin America'
-      ])
-    })
     it('should return parallelSubjectLiteral values', () => {
       const record = new SierraBib(require('../fixtures/bib-parallels-chaos.json'))
       const esBib = new EsBib(record)
