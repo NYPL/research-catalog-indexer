@@ -3,6 +3,8 @@ const sinon = require('sinon')
 
 const logger = require('../../lib/logger')
 const utils = require('../../scripts/utils')
+const retryUtils = require('../../lib/utils/retry.js')
+const { retry } = retryUtils
 
 describe('scripts/utils', () => {
   describe('batch', () => {
@@ -66,15 +68,17 @@ describe('scripts/utils', () => {
   describe('retry', () => {
     before(() => {
       sinon.stub(utils, 'delay').callsFake(() => Promise.resolve())
+      sinon.stub(retryUtils, 'delay').callsFake(() => Promise.resolve())
     })
 
     after(() => utils.delay.restore())
+    after(() => retryUtils.delay.restore())
 
     it('retries a failing function N times', async () => {
       const call = () => Promise.reject(new Error('Error!'))
 
-      await expect(call().catch(utils.retry(call, 1))).to.be.rejectedWith('Exhausted 1 retries')
-      await expect(call().catch(utils.retry(call, 3))).to.be.rejectedWith('Exhausted 3 retries')
+      await expect(call().catch(retry(call, 1))).to.be.rejectedWith('Exhausted 1 retries')
+      await expect(call().catch(retry(call, 3))).to.be.rejectedWith('Exhausted 3 retries')
     })
 
     it('resolves a temporarily failing function', async () => {
@@ -89,11 +93,11 @@ describe('scripts/utils', () => {
       }
 
       // First, confirm fails if only allowed to retry twice:
-      await expect(call().catch(utils.retry(call, 2))).to.be.rejectedWith('Exhausted 2 retries')
+      await expect(call().catch(retry(call, 2))).to.be.rejectedWith('Exhausted 2 retries')
 
       // Next, confirm it succeeds if allowed to retry thrice:
       errorCount = 0
-      await expect(call().catch(utils.retry(call, 3))).to.eventually.equal('toast')
+      await expect(call().catch(retry(call, 3))).to.eventually.equal('toast')
     })
   })
 
