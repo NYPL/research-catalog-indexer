@@ -903,6 +903,12 @@
         "subfields": [
           "a"
         ]
+      },
+      {
+        "marc": "440",
+        "subfields": [
+          "a"
+        ]
       }
     ]
   },
@@ -910,6 +916,13 @@
     "paths": [
       {
         "marc": "490",
+        "excludedSubfields": [
+          "6"
+        ],
+        "subfieldJoiner": " "
+      },
+      {
+        "marc": "440",
         "excludedSubfields": [
           "6"
         ],
