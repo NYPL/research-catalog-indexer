@@ -33,26 +33,6 @@
       }
     ]
   },
-  "callNumber": {
-    "paths": [
-      {
-        "marc": "852",
-        "subfields": [
-          "k",
-          "h",
-          "i",
-          "z"
-        ],
-        "notes": "Join 852 $k $h $i fields and fieldTag 'v' value (if available) with a space"
-      },
-      {
-        "marc": "945",
-        "subfields": [
-          "g"
-        ]
-      }
-    ]
-  },
   "carrierType": {
     "paths": [
       {
@@ -113,6 +93,9 @@
       }
     ]
   },
+  "idBarcode": {
+    "notes": "876 p"
+  },
   "identifier": {},
   "label": {},
   "mediaType": {
@@ -147,6 +130,26 @@
         "marc": "900",
         "subfields": [
           "b"
+        ]
+      }
+    ]
+  },
+  "shelfMark": {
+    "paths": [
+      {
+        "marc": "852",
+        "subfields": [
+          "k",
+          "h",
+          "i",
+          "z"
+        ],
+        "notes": "Join 852 $k $h $i fields and fieldTag 'v' value (if available) with a space"
+      },
+      {
+        "marc": "945",
+        "subfields": [
+          "g"
         ]
       }
     ]
