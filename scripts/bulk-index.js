@@ -616,7 +616,7 @@ const updateByBibOrItemServiceQuery = async (options) => {
       while (!processed && retries > 0) {
         try {
           if (options.toCsv) {
-            fs.appendFileSync(options.toCsv, rows.map(row => `${row.id},${row.nyplSource}\n`).join(''));
+            fs.appendFileSync(options.toCsv, rows.map(row => `${row.id},${row.nyplSource}\n`).join(''))
           } else {
             await indexer.processRecords(capitalize(type), records, { updateOnly: process.env.UPDATE_ONLY || argv.updateOnly, dryrun: argv.dryrun, skipDeletes: argv.skipDeletes })
           }
