@@ -113,6 +113,7 @@ const argv = require('minimist')(process.argv.slice(2), {
   string: ['hasMarc', 'hasSubfield', 'bibId', 'fromDate', 'toDate'],
   integer: ['limit', 'offset', 'batchSize']
 })
+
 const { populateBarcodeRecapCustomerCodeCache } = require('../lib/scsb/requests')
 
 const isCalledViaCommandLine = /scripts\/bulk-index(.js)?/.test(fs.realpathSync(process.argv[1]))
@@ -522,8 +523,15 @@ const buildSqlQuery = (options) => {
 
   // Determine whether or not to use an inner-select to de-dupe the records:
   const dedupe = !!options.hasMarc
+  const toCsv = options.toCsv
 
-  const primaryColumns = dedupe ? 'DISTINCT id, nypl_source' : '*'
+  let primaryColumns = '*'
+  if (dedupe) {
+    primaryColumns = 'DISTINCT id, nypl_source'
+  }
+  if (toCsv) {
+    primaryColumns = 'id, nypl_source'
+  }
   let query = `SELECT ${primaryColumns} FROM ${sqlFromAndWhere}` +
     (options.orderBy ? ` ORDER BY ${options.orderBy}` : '') +
     (options.limit ? ` LIMIT ${options.limit}` : '') +
@@ -607,7 +615,11 @@ const updateByBibOrItemServiceQuery = async (options) => {
       let processed = false
       while (!processed && retries > 0) {
         try {
-          await indexer.processRecords(capitalize(type), records, { updateOnly: process.env.UPDATE_ONLY || argv.updateOnly, dryrun: argv.dryrun, skipDeletes: argv.skipDeletes })
+          if (options.toCsv) {
+            fs.appendFileSync(options.toCsv, rows.map(row => `${row.id},${row.nyplSource}\n`).join(''));
+          } else {
+            await indexer.processRecords(capitalize(type), records, { updateOnly: process.env.UPDATE_ONLY || argv.updateOnly, dryrun: argv.dryrun, skipDeletes: argv.skipDeletes })
+          }
           if (retries < 3) logger.info(`Succeeded on retry ${3 - retries}`)
           processed = true
         } catch (e) {
