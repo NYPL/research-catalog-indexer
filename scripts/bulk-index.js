@@ -677,7 +677,8 @@ const castRowToIdentifier = (row, options) => {
 *  - batchSize {int} - Number of records to process in each batch
 *  - skipDeletes {boolean} - Whether to skip deleting suppressed records, useful if doing a large bulk where we are trying to update fields on existing records
 */
-const updateByCsv = async (options = { offset: 0 }) => {
+const updateByCsv = async (options = {}) => {
+  options.offset = options.offset || 0
   if (!options.csv) throw new Error('--csv is required')
   if (isNaN(options.csvIdColumn)) {
     throw new Error('--csvIdColumn is required')

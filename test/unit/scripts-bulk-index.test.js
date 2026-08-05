@@ -10,6 +10,7 @@ const bulkIndexer = require('../../scripts/bulk-index')
 const index = require('../../index')
 const prefetchers = require('../../lib/prefetch')
 const schema = require('../../lib/elastic-search/index-schema')
+const utils = require('../../scripts/utils')
 
 // Util for stripping dupe whitespace from sql queries:
 const removeDupeWhitespace = (sql) => {
@@ -75,6 +76,38 @@ const pgFixtures = [
       { id: 2345 },
       { id: 3456 }
     ]
+  },
+  {
+    match: /SELECT \* FROM bib WHERE nypl_source = \$1 AND id IN \('2345','3456','4567'\) LIMIT 3/,
+    rows: [
+      { id: 2345 },
+      { id: 3456 },
+      { id: 4567 }
+    ]
+  },
+  {
+    match: /SELECT \* FROM bib WHERE nypl_source = \$1 AND id IN \('1234'\) LIMIT 1/,
+    rows: [{ id: 1234 }]
+  },
+  {
+    match: /SELECT \* FROM bib WHERE nypl_source = \$1 AND id IN \('2345'\) LIMIT 1/,
+    rows: [{ id: 2345 }]
+  },
+  {
+    match: /SELECT \* FROM bib WHERE nypl_source = \$1 AND id IN \('3456'\) LIMIT 1/,
+    rows: [{ id: 3456 }]
+  },
+  {
+    match: /SELECT \* FROM bib WHERE nypl_source = \$1 AND id IN \('5789'\) LIMIT 1/,
+    rows: [{ id: 5789 }]
+  },
+  {
+    match: /SELECT \* FROM bib WHERE nypl_source = \$1 AND id IN \('5678'\) LIMIT 1/,
+    rows: [{ id: 5678 }]
+  },
+  {
+    match: /SELECT \* FROM bib WHERE nypl_source = \$1 AND id IN \('2345','3456'\) LIMIT 2/,
+    rows: [{ id: 2345 }, { id: 3456 }]
   },
   {
     match: /SELECT \* FROM bib WHERE nypl_source = \$1 AND id IN \('4567'\) LIMIT 1/,
@@ -228,6 +261,66 @@ describe('scripts/bulk-index', () => {
       expect(records[0]).to.deep.include({
         id: 1234,
         nyplSource: 'sierra-nypl'
+      })
+    })
+
+    describe('CsvProgress integration', () => {
+      it('writes a "failed" status on initialization error', async () => {
+        const csv = './test/fixtures/bulk-index-by-csv-numeric-ids.csv'
+        await expect(bulkIndexer.updateByCsv({ csv, csvIdColumn: 0 })).to.be.rejected
+
+        const status = JSON.parse(fs.readFileSync(`${csv}-status.json`, 'utf8'))
+        expect(status.status).to.equal('failed')
+        expect(status.messages[0]).to.include('Must specify --nyplSource')
+      })
+
+      it('updates the offset after each batch and marks completed', async () => {
+        const csv = './test/fixtures/bulk-index-by-csv-ids-with-nypl-source.csv'
+        const updateOffsetSpy = sinon.spy(utils.CsvProgress.prototype, 'updateOffset')
+
+        // Process 3 records with a batchSize of 1 so it updates offset 3 times, plus 1 initial setup update
+        await bulkIndexer.updateByCsv({ csv, csvIdColumn: 0, csvNyplSourceColumn: 1, type: 'bib', batchSize: 1, limit: 3 })
+
+        expect(updateOffsetSpy.callCount).to.equal(4)
+        expect(updateOffsetSpy.getCall(0).args[0]).to.equal(0)
+        expect(updateOffsetSpy.getCall(1).args[0]).to.equal(1)
+        expect(updateOffsetSpy.getCall(2).args[0]).to.equal(2)
+        expect(updateOffsetSpy.getCall(3).args[0]).to.equal(3)
+
+        const status = JSON.parse(fs.readFileSync(`${csv}-status.json`, 'utf8'))
+        expect(status.status).to.equal('completed')
+        expect(status.offset).to.equal(3)
+
+        updateOffsetSpy.restore()
+      })
+
+      it('resumes from the correct offset if a running status file exists', async () => {
+        const csv = './test/fixtures/bulk-index-by-csv-ids-with-nypl-source.csv'
+        fs.writeFileSync(`${csv}-status.json`, JSON.stringify({
+          status: 'running',
+          offset: 2,
+          count: 6
+        }))
+
+        await bulkIndexer.updateByCsv({ csv, csvIdColumn: 0, csvNyplSourceColumn: 1, type: 'bib', batchSize: 3, limit: 2 })
+
+        const [, records] = index.processRecords.getCall(0).args
+        // Fast forwards past first 2 rows, parsing the next 2
+        expect(records).to.have.lengthOf(2)
+        expect(records[0]).to.deep.include({ id: 5678 })
+      })
+
+      it('starts with the correct offset if passed explicitly', async () => {
+        const csv = './test/fixtures/bulk-index-by-csv-ids-with-nypl-source.csv'
+        await bulkIndexer.updateByCsv({ csv, csvIdColumn: 0, csvNyplSourceColumn: 1, type: 'bib', batchSize: 3, offset: 1 })
+
+        const [, records] = index.processRecords.getCall(0).args
+        expect(records).to.have.lengthOf(3)
+        expect(records[0]).to.deep.include({ id: 2345 })
+
+        const status = JSON.parse(fs.readFileSync(`${csv}-status.json`, 'utf8'))
+        expect(status.status).to.equal('completed')
+        expect(status.offset).to.equal(6)
       })
     })
   })
