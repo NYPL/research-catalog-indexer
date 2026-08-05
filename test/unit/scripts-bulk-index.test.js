@@ -3,6 +3,7 @@ const expect = chai.expect
 chai.use(require('chai-as-promised'))
 
 const sinon = require('sinon')
+const fs = require('fs')
 
 const logger = require('../../lib/logger')
 const bulkIndexer = require('../../scripts/bulk-index')
@@ -151,6 +152,23 @@ describe('scripts/bulk-index', () => {
     })
   })
   describe('updateByCsv', () => {
+    const cleanUpStatusFiles = () => {
+      const testFiles = [
+        './test/fixtures/bulk-index-by-csv-numeric-ids.csv-status.json',
+        './test/fixtures/bulk-index-by-csv-ids-with-nypl-source.csv-status.json',
+        './test/fixtures/bulk-index-by-csv-prefixed-ids.csv-status.json',
+        './nonexistantfile-status.json'
+      ]
+      testFiles.forEach(file => {
+        if (fs.existsSync(file)) {
+          fs.unlinkSync(file)
+        }
+      })
+    }
+
+    beforeEach(cleanUpStatusFiles)
+    afterEach(cleanUpStatusFiles)
+
     it('throws error when insufficient config', async () => {
       await expect(bulkIndexer.updateByCsv()).to.be.rejected
       await expect(bulkIndexer.updateByCsv({})).to.be.rejected
@@ -164,7 +182,9 @@ describe('scripts/bulk-index', () => {
     it('given a csv with numeric ids, throws error if type or nyplSource not given', async () => {
       const csv = './test/fixtures/bulk-index-by-csv-numeric-ids.csv'
       await expect(bulkIndexer.updateByCsv({ csv, csvIdColumn: 0 })).to.be.rejected
+      cleanUpStatusFiles()
       await expect(bulkIndexer.updateByCsv({ csv, csvIdColumn: 0, type: 'bib' })).to.be.rejected
+      cleanUpStatusFiles()
       await expect(bulkIndexer.updateByCsv({ csv, csvIdColumn: 0, nyplSource: 'sierra-nypl' })).to.be.rejected
     })
 
