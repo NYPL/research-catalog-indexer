@@ -879,7 +879,7 @@ const totalTimer = new Timer('bulk update')
 if (isCalledViaCommandLine) {
   preflightSetup()
     .then(run)
-    .catch(logger.error)
+    .catch((e) => logger.error(e.message))
     .finally(cleanup)
 }
 
