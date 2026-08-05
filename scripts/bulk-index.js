@@ -117,7 +117,6 @@ const { populateBarcodeRecapCustomerCodeCache } = require('../lib/scsb/requests'
 
 const isCalledViaCommandLine = /scripts\/bulk-index(.js)?/.test(fs.realpathSync(process.argv[1]))
 const dotenv = require('dotenv')
-const { exec } = require('child_process')
 // Conditionally set up NR instrumentation
 // Initialize `instrument` as a pass-through
 let instrument = (label, cb) => cb()
