@@ -866,9 +866,10 @@ const preflightSetup = async () => {
 
 const cleanup = async () => {
   if (process.env.STOP_REFRESH === 'true') await setIndexRefresh(process.env.ELASTIC_RESOURCES_INDEX_NAME, '30s')
-  if (process.env.UPDATE_ONLY || argv.updateOnly) {
-    exec(`cat temp-unindexed-records* > unindexed-records-${(argv.properties || process.env.PROPERTIES)}-${Date.now()}.txt; rm temp-unindexed-records*`)
-  }
+  // TODO: move unindexed id batches into a single file
+  // if (process.env.UPDATE_ONLY || argv.updateOnly) {
+  //   exec(`cat temp-unindexed-records* > unindexed-records-${(argv.properties || process.env.PROPERTIES)}-${Date.now()}.txt; rm temp-unindexed-records*`)
+  // }
   totalTimer.endTimer()
   totalTimer.howMany('hours')
   process.exit(0)
