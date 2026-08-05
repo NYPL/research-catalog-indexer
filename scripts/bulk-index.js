@@ -148,6 +148,7 @@ const {
 } = require('../lib/prefilter')
 const {
   batch,
+  CsvProgress,
   groupIdentifierEntitiesByTypeAndNyplSource,
   delay,
   die,
@@ -682,6 +683,19 @@ const updateByCsv = async (options = { offset: 0 }) => {
     throw new Error('--csvIdColumn is required')
   }
 
+  const progress = await CsvProgress.forCsv(options.csv)
+
+  if (['completed', 'failed'].includes(progress.status())) {
+    logger.info(`Skipping CSV ${options.csv} because status is ${progress.status()}`)
+    return
+  }
+
+  if (progress.status() === 'running') {
+    options.offset = progress.offset
+  } else if (progress.status() === 'preparing') {
+    progress.updateOffset(options.offset)
+  }
+
   const rawContent = fs.readFileSync(options.csv, 'utf8')
   const rows = csvParse(rawContent)
 
@@ -689,21 +703,42 @@ const updateByCsv = async (options = { offset: 0 }) => {
 
   // Slice rows-to-process using --offset and --limit:
   const end = options.limit ? options.limit + options.offset : rows.length
-  const rowsToProcess = rows.slice(options.offset, end)
-    .map((row) => castRowToIdentifier(row, { idColumn: options.csvIdColumn, nyplSourceColumn: options.csvNyplSourceColumn, sourceMapper }))
+  let rowsToProcess
+  try {
+    rowsToProcess = rows.slice(options.offset, end)
+      .map((row) => castRowToIdentifier(row, { idColumn: options.csvIdColumn, nyplSourceColumn: options.csvNyplSourceColumn, sourceMapper }))
+  } catch (e) {
+    progress.addMessage(e.message)
+    progress.updateStatus('failed')
+    throw e
+  }
 
   logger.info(`Processing ${options.csv} rows ${options.offset} to ${end} (${rowsToProcess.length} rows)`)
 
   // Test first row to determine whether we need to interpret as prefixed
   // identifiers or just plain numeric ids:
-  const identifiersHaveNyplSource = rowsToProcess[0].nyplSource
-  const identifiersHaveType = rowsToProcess[0].type
+  if (rowsToProcess.length > 0) {
+    const identifiersHaveNyplSource = rowsToProcess[0].nyplSource
+    const identifiersHaveType = rowsToProcess[0].type
 
-  if (!options.nyplSource && !identifiersHaveNyplSource) {
-    throw new Error('Must specify --nyplSource if not apparent from CSV (use --csvNyplSourceColumn N if CSV includes nyplSource)')
-  } else if (!options.type && !identifiersHaveType) {
-    throw new Error('Must specify --type if not apparent from CSV')
-  } else {
+    if (!options.nyplSource && !identifiersHaveNyplSource) {
+      const errorMsg = 'Must specify --nyplSource if not apparent from CSV (use --csvNyplSourceColumn N if CSV includes nyplSource)'
+      progress.addMessage(errorMsg)
+      progress.updateStatus('failed')
+      throw new Error(errorMsg)
+    } else if (!options.type && !identifiersHaveType) {
+      const errorMsg = 'Must specify --type if not apparent from CSV'
+      progress.addMessage(errorMsg)
+      progress.updateStatus('failed')
+      throw new Error(errorMsg)
+    }
+  }
+
+  if (progress.status() === 'preparing') {
+    progress.updateStatus('running')
+  }
+
+  if (rowsToProcess.length > 0) {
     const batches = groupIdentifierEntitiesByTypeAndNyplSource(rowsToProcess)
       .map((grouped) => batch(grouped, options.batchSize))
       .flat()
@@ -711,13 +746,17 @@ const updateByCsv = async (options = { offset: 0 }) => {
     await db.initPools()
     // Add stats to options object (for progress reporting):
     const optionsWithStats = Object.assign(options, {
+      startingOffset: options.offset,
       count: 0,
       total: rowsToProcess.length,
-      startTime: new Date()
+      startTime: new Date(),
+      progress
     })
     await processCsvBatch(batches, 0, optionsWithStats)
     db.endPools()
   }
+
+  progress.updateStatus('completed')
 }
 
 /**
@@ -747,6 +786,10 @@ const processCsvBatch = async (batches, index = 0, options) => {
 
   // Log out progress so far:
   printProgress(options.count + batch.length, options.total, options.batchSize, options.startTime)
+
+  if (options.progress) {
+    options.progress.updateOffset(options.startingOffset + options.count + batch.length)
+  }
 
   if (batches.length > index + 1) {
     // Update `count` (for progress stats):
