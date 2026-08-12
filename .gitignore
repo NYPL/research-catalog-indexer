@@ -9,4 +9,4 @@ uris.csv
 unindexed-*
 scripts/bulk_logs/
 browse-term*.csv
-browse-term-output*
+browse-term-output*/
