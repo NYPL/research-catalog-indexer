@@ -529,7 +529,7 @@ describe('EsBib', function () {
       const record = new SierraBib(require('../fixtures/bib-hl-990137923810203941.json'))
       const esBib = new EsBib(record)
       expect(esBib.parallelCreators_displayComponents()).to.deep.equal(
-        [{ name: 'بوريني، حسن احمد', title: '', role: 'Būrīnī, Ḥasan Aḥmad||author', label: 'بوريني، حسن احمد' }]
+        [{ name: 'بوريني، حسن احمد', title: '', role: 'author', label: 'بوريني، حسن احمد' }]
       )
     })
   })
@@ -588,8 +588,8 @@ describe('EsBib', function () {
           { name: 'Wilson, Edmund, 1895-1972', title: '', role: '', label: 'Wilson, Edmund, 1895-1972' },
           { name: 'Bruccoli, Matthew Joseph, 1931-', title: '', role: '', label: 'Bruccoli, Matthew Joseph, 1931-' },
           { name: 'Plimpton, George', title: '', role: '', label: 'Plimpton, George' },
-          { name: 'Boyle, Kay, 1902-1992', title: '', role: 'Boyle, Kay, 1902-1992||former owner', label: 'Boyle, Kay, 1902-1992, former owner' },
-          { name: 'Field, Andrew, 1938-', title: '', role: 'Field, Andrew, 1938-||former owner', label: 'Field, Andrew, 1938-, former owner' },
+          { name: 'Boyle, Kay, 1902-1992', title: '', role: 'former owner', label: 'Boyle, Kay, 1902-1992, former owner' },
+          { name: 'Field, Andrew, 1938-', title: '', role: 'former owner', label: 'Field, Andrew, 1938-, former owner' },
           { name: 'Bollingen Foundation', title: '', role: '', label: 'Bollingen Foundation' },
           { name: 'Izdatelstvo imeni Chekhova (New York, N.Y.)', title: '', role: '', label: 'Izdatelstvo imeni Chekhova (New York, N.Y.)' },
           { name: 'Bureau littřaire D. Clairouin', title: '', role: '', label: 'Bureau littřaire D. Clairouin' },
@@ -865,7 +865,7 @@ describe('EsBib', function () {
       const record = new SierraBib(require('../fixtures/bib-23033611.json'))
       const esBib = new EsBib(record)
       expect(esBib.parallelContributors_displayComponents()).to.deep.equal(
-        [{ name: 'Народна библиотека "Стефан Првовенчани"', title: '', role: 'Narodna biblioteka "Stefan Prvovenčani"||issuing body', label: 'Народна библиотека "Стефан Првовенчани", issuing body' }]
+        [{ name: 'Народна библиотека "Стефан Првовенчани"', title: '', role: 'issuing body', label: 'Народна библиотека "Стефан Првовенчани", issuing body' }]
       )
     })
   })
@@ -2189,7 +2189,7 @@ describe('EsBib', function () {
     it('seriesUniformTitle_displayComponents returns expected display component objects', () => {
       const result = esBib.seriesUniformTitle_displayComponents()
       expect(result).to.deep.equal([
-        { name: '830 Series Uniform Title: International Psychology Classics Series', title: '830 Series Uniform Title other field t 830 Series Uniform Title other field d vol. 1', role: '', label: '830 Series Uniform Title: International Psychology Classics Series 830 Series Uniform Title other field t 830 Series Uniform Title other field d vol. 1' }
+        { name: '830 Series Uniform Title: International Psychology Classics Series', title: '830 Series Uniform Title other field t 830 Series Uniform Title other field d', role: '', label: '830 Series Uniform Title: International Psychology Classics Series 830 Series Uniform Title other field t 830 Series Uniform Title other field d vol. 1' }
       ])
     })
     it('seriesAddedEntry_displayComponents returns expected display component objects for 800/810/811', () => {
@@ -2209,7 +2209,7 @@ describe('EsBib', function () {
     it('parallelSeriesUniformTitle_displayComponents returns expected display component objects for parallels to 830 field', function () {
       const result = esBib.parallelSeriesUniformTitle_displayComponents()
       expect(result).to.deep.equal([
-        { name: '830 Series Uniform Title parallel: 心理学系列', title: '第1卷', role: '', label: '830 Series Uniform Title parallel: 心理学系列 第1卷' }
+        { name: '830 Series Uniform Title parallel: 心理学系列', title: '', role: '', label: '830 Series Uniform Title parallel: 心理学系列 第1卷' }
       ])
     })
     it('parallelSeriesAddedEntry_displayComponents returns expected display component objects for parallels to 800/810/811 (811 in this case) field', function () {
