@@ -65,12 +65,12 @@ resource "aws_lambda_function" "lambda_instance" {
   environment {
     variables = { for tuple in regexall("(.*?)=(.*)", file("../../config/${var.environment}.env")) : tuple[0] => tuple[1] }
   }
-  
+
   vpc_config {
     subnet_ids         = var.vpc_config.subnet_ids
     security_group_ids = var.vpc_config.security_group_ids
   }
-  
+
   tags = local.tags
 }
 
@@ -100,3 +100,21 @@ resource "aws_cloudwatch_metric_alarm" "lambda_errors" {
   tags = local.tags
 }
 
+resource "aws_cloudwatch_metric_alarm" "kinesis_iterator_age" {
+  alarm_name          = "lambda-kinesis-iterator-age-high"
+  comparison_operator = "GreaterThanThreshold"
+  evaluation_periods  = 2
+  metric_name         = "IteratorAge"
+  namespace           = "AWS/Lambda"
+  period              = 60
+  statistic           = "Maximum"
+  threshold           = 60000 # Value in milliseconds (e.g., 60000ms = 60 seconds / 1 minute)
+  alarm_description   = "Triggered when Lambda Kinesis iterator age exceeds 1 minute"
+
+  dimensions = {
+    FunctionName = aws_lambda_function.example.function_name
+  }
+
+  # Optional: Add your SNS topic ARN for notifications
+  # alarm_actions = [aws_sns_topic.example.arn]
+}
