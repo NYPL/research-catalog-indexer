@@ -7,14 +7,7 @@
     ]
   },
   "addedAuthorTitle": {
-    "paths": [
-      {
-        "marc": "700",
-        "subfields": [
-          "t"
-        ]
-      }
-    ]
+    "notes": "Name + title portions for creators/contributors"
   },
   "buildingLocationIds": {
     "notes": "Distinct research center locations"
