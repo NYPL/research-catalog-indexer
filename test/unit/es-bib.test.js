@@ -588,6 +588,7 @@ describe('EsBib', function () {
           { name: 'Wilson, Edmund, 1895-1972', title: '', role: '', label: 'Wilson, Edmund, 1895-1972' },
           { name: 'Bruccoli, Matthew Joseph, 1931-', title: '', role: '', label: 'Bruccoli, Matthew Joseph, 1931-' },
           { name: 'Plimpton, George', title: '', role: '', label: 'Plimpton, George' },
+          { name: 'Nabokov, Vladimir Vladimirovich, 1899-1977', title: '', role: 'former owner', label: 'Nabokov, Vladimir Vladimirovich, 1899-1977, former owner' },
           { name: 'Boyle, Kay, 1902-1992', title: '', role: 'former owner', label: 'Boyle, Kay, 1902-1992, former owner' },
           { name: 'Field, Andrew, 1938-', title: '', role: 'former owner', label: 'Field, Andrew, 1938-, former owner' },
           { name: 'Bollingen Foundation', title: '', role: '', label: 'Bollingen Foundation' },
