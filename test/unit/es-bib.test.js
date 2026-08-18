@@ -110,11 +110,11 @@ describe('EsBib', function () {
     })
   })
 
-  describe('creator__displayComponents', function () {
+  describe('creator_displayComponents', function () {
     it('should return the creators as display component objects', function () {
       const record = new SierraBib(require('../fixtures/bib-10001936.json'))
       const esBib = new EsBib(record)
-      expect(esBib.creator__displayComponents()).to.deep.equal([
+      expect(esBib.creator_displayComponents()).to.deep.equal([
         { name: 'Shermazanian, Galust', title: '', role: '', label: 'Shermazanian, Galust' }
       ])
     })
@@ -588,6 +588,7 @@ describe('EsBib', function () {
           { name: 'Wilson, Edmund, 1895-1972', title: '', role: '', label: 'Wilson, Edmund, 1895-1972' },
           { name: 'Bruccoli, Matthew Joseph, 1931-', title: '', role: '', label: 'Bruccoli, Matthew Joseph, 1931-' },
           { name: 'Plimpton, George', title: '', role: '', label: 'Plimpton, George' },
+          { name: 'Nabokov, Vladimir Vladimirovich, 1899-1977', title: '', role: 'former owner', label: 'Nabokov, Vladimir Vladimirovich, 1899-1977, former owner' },
           { name: 'Boyle, Kay, 1902-1992', title: '', role: 'former owner', label: 'Boyle, Kay, 1902-1992, former owner' },
           { name: 'Field, Andrew, 1938-', title: '', role: 'former owner', label: 'Field, Andrew, 1938-, former owner' },
           { name: 'Bollingen Foundation', title: '', role: '', label: 'Bollingen Foundation' },
@@ -2217,6 +2218,24 @@ describe('EsBib', function () {
       expect(result).to.deep.equal([
         { name: '811 Series Added Entry parallel: Chakra llamkaymanta Conferencia Interamericana', title: 'Serie nacional nisqa', role: '', label: '811 Series Added Entry parallel: Chakra llamkaymanta Conferencia Interamericana Serie nacional nisqa Vol 14' }
       ])
+    })
+    // Confirming the indexed values match what will be linked
+    it('series() values match the name of series_displayComponents()', () => {
+      const indexed = esBib.series()
+      const names = esBib.series_displayComponents().map(c => c.name)
+      expect(indexed).to.deep.equal(names)
+    })
+    it('seriesUniformTitle() values match name + title of seriesUniformTitle_displayComponents()', () => {
+      const indexed = esBib.seriesUniformTitle()
+      const fromComponents = esBib.seriesUniformTitle_displayComponents()
+        .map(c => [c.name, c.title].filter(Boolean).join(' '))
+      expect(indexed).to.deep.equal(fromComponents)
+    })
+    it('seriesAddedEntry() values match name + title of seriesAddedEntry_displayComponents()', () => {
+      const indexed = esBib.seriesAddedEntry()
+      const fromComponents = esBib.seriesAddedEntry_displayComponents()
+        .map(c => [c.name, c.title].filter(Boolean).join(' '))
+      expect(indexed).to.deep.equal(fromComponents)
     })
   })
 })
