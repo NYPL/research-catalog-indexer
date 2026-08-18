@@ -2219,5 +2219,23 @@ describe('EsBib', function () {
         { name: '811 Series Added Entry parallel: Chakra llamkaymanta Conferencia Interamericana', title: 'Serie nacional nisqa', role: '', label: '811 Series Added Entry parallel: Chakra llamkaymanta Conferencia Interamericana Serie nacional nisqa Vol 14' }
       ])
     })
+    // Confirming the indexed values match what will be linked
+    it('series() values match the name of series_displayComponents()', () => {
+      const indexed = esBib.series()
+      const names = esBib.series_displayComponents().map(c => c.name)
+      expect(indexed).to.deep.equal(names)
+    })
+    it('seriesUniformTitle() values match name + title of seriesUniformTitle_displayComponents()', () => {
+      const indexed = esBib.seriesUniformTitle()
+      const fromComponents = esBib.seriesUniformTitle_displayComponents()
+        .map(c => [c.name, c.title].filter(Boolean).join(' '))
+      expect(indexed).to.deep.equal(fromComponents)
+    })
+    it('seriesAddedEntry() values match name + title of seriesAddedEntry_displayComponents()', () => {
+      const indexed = esBib.seriesAddedEntry()
+      const fromComponents = esBib.seriesAddedEntry_displayComponents()
+        .map(c => [c.name, c.title].filter(Boolean).join(' '))
+      expect(indexed).to.deep.equal(fromComponents)
+    })
   })
 })
