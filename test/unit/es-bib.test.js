@@ -110,11 +110,11 @@ describe('EsBib', function () {
     })
   })
 
-  describe('creator__displayComponents', function () {
+  describe('creator_displayComponents', function () {
     it('should return the creators as display component objects', function () {
       const record = new SierraBib(require('../fixtures/bib-10001936.json'))
       const esBib = new EsBib(record)
-      expect(esBib.creator__displayComponents()).to.deep.equal([
+      expect(esBib.creator_displayComponents()).to.deep.equal([
         { name: 'Shermazanian, Galust', title: '', role: '', label: 'Shermazanian, Galust' }
       ])
     })
