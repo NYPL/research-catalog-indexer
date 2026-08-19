@@ -1957,6 +1957,114 @@ describe('EsBib', function () {
     })
   })
 
+  describe('authorNameTitle', function () {
+    it('returns name + title from a 700 entry as a single string', function () {
+      const record = new SierraBib(require('../fixtures/bib-14576049.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.authorNameTitle()).to.deep.equal(['Barrie, J. M. (James Matthew), 1860-1937 Peter Pan'])
+    })
+
+    it('includes all 7xx entries, combines name and title where present', function () {
+      // bib-12147603 has multiple 700s, two of which have $t
+      const record = new SierraBib(require('../fixtures/bib-12147603.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.authorNameTitle()).to.deep.equal([
+        'Graham, Martha',
+        'Ross, Bertram, 1920-2003',
+        'Taylor, Paul, 1930-2018',
+        'McGehee, Helen',
+        'Kroll, Nathan',
+        'Noguchi, Isamu, 1904-1988',
+        'Schuman, William, 1910-1992 Night journey',
+        'Hammid, Alexander',
+        'Martha Graham Dance Company',
+        'Graham, Martha Night journey'
+      ])
+    })
+
+    it('includes 1xx entries', function () {
+      const record = new SierraBib({
+        varFields: [
+          {
+            marcTag: '100',
+            subfields: [
+              { tag: 'a', content: 'Bach, Johann Sebastian,' },
+              { tag: 'd', content: '1685-1750.' },
+              { tag: 't', content: 'Goldberg variations.' }
+            ]
+          },
+          { marcTag: '700', subfields: [{ tag: 'a', content: 'Smith, John.' }] }
+        ]
+      })
+      const esBib = new EsBib(record)
+      expect(esBib.authorNameTitle()).to.deep.equal([
+        'Bach, Johann Sebastian, 1685-1750 Goldberg variations',
+        'Smith, John'
+      ])
+    })
+
+    it('includes both 1xx and 7xx entries', function () {
+      const record = new SierraBib({
+        varFields: [
+          {
+            marcTag: '100',
+            subfields: [
+              { tag: 'a', content: 'Creator, Name,' },
+              { tag: 't', content: 'Main Work.' }
+            ]
+          },
+          {
+            marcTag: '700',
+            subfields: [
+              { tag: 'a', content: 'Contributor, Name,' },
+              { tag: 't', content: 'Related Work.' }
+            ]
+          }
+        ]
+      })
+      const esBib = new EsBib(record)
+      expect(esBib.authorNameTitle()).to.deep.equal([
+        'Creator, Name Main Work',
+        'Contributor, Name Related Work'
+      ])
+    })
+
+    it('returns null when there are no 1xx or 7xx fields at all', function () {
+      const record = new SierraBib({ varFields: [] })
+      const esBib = new EsBib(record)
+      expect(esBib.authorNameTitle()).to.equal(null)
+    })
+  })
+
+  describe('parallelAuthorNameTitle', function () {
+    it('returns parallel name + title for linked 880 entries', function () {
+      // bib-21989304 has 880-linked 700s with Cyrillic variants
+      const record = new SierraBib(require('../fixtures/bib-21989304.json'))
+      const esBib = new EsBib(record)
+      const result = esBib.parallelAuthorNameTitle()
+      expect(result).to.be.an('array')
+      // The linked 880 parallel for the 700 with $t should appear
+      expect(result.some(v => v && v.includes('Блок'))).to.equal(true)
+    })
+
+    it('returns null when no 1xx or 7xx entries have a linked parallel', function () {
+      const record = new SierraBib({
+        varFields: [
+          { marcTag: '100', subfields: [{ tag: 'a', content: 'Smith, John.' }] },
+          { marcTag: '700', subfields: [{ tag: 'a', content: 'Jones, Mary.' }] }
+        ]
+      })
+      const esBib = new EsBib(record)
+      expect(esBib.parallelAuthorNameTitle()).to.equal(null)
+    })
+
+    it('returns null when there are no 1xx or 7xx fields at all', function () {
+      const record = new SierraBib({ varFields: [] })
+      const esBib = new EsBib(record)
+      expect(esBib.parallelAuthorNameTitle()).to.equal(null)
+    })
+  })
+
   describe('popularity', () => {
     let bib
 
