@@ -2257,7 +2257,7 @@ describe('EsBib', function () {
       const testBib = new EsBib(bib)
       const result = await testBib.seriesUniformTitle()
       expect(result).to.deep.equal([
-        'Rossini, Gioacchino 1792-1868. Works. Selections (Boccaccini & Spada editore) ;'
+        'Rossini, Gioacchino 1792-1868 Works. Selections (Boccaccini & Spada editore) ;'
       ])
     })
     it('extracts parallelSeries and parallelSeriesUniformTitle', async () => {
@@ -2266,6 +2266,58 @@ describe('EsBib', function () {
       const seriesTitleParallelResult = await esBib.parallelSeriesUniformTitle()
       expect(seriesTitleParallelResult).to.deep.equal([
         '830 Series Uniform Title parallel: 心理学系列'
+      ])
+    })
+    it('parallelSeries returns null for a primary with no parallel', async () => {
+      const bib = new SierraBib({
+        varFields: [
+          { marcTag: '490', subfields: [{ tag: 'a', content: 'Series without parallel' }] },
+          {
+            marcTag: '490',
+            subfields: [
+              { tag: '6', content: '880-01' },
+              { tag: 'a', content: 'Series with parallel' }
+            ]
+          },
+          {
+            marcTag: '880',
+            subfields: [
+              { tag: '6', content: '490-01' },
+              { tag: 'a', content: 'Parallel series value' }
+            ]
+          }
+        ]
+      })
+      expect(await (new EsBib(bib)).parallelSeries()).to.deep.equal([null, 'Parallel series value'])
+    })
+    it('parallelSeriesUniformTitle returns null for a primary with no parallel', async () => {
+      const bib = new SierraBib({
+        varFields: [
+          { marcTag: '830', subfields: [{ tag: 'a', content: 'Series Uniform Title without parallel' }] },
+          {
+            marcTag: '830',
+            subfields: [
+              { tag: '6', content: '880-01' },
+              { tag: 'a', content: 'Series Uniform Title with parallel' }
+            ]
+          },
+          {
+            marcTag: '880',
+            subfields: [
+              { tag: '6', content: '830-01' },
+              { tag: 'a', content: 'Parallel series uniform title' }
+            ]
+          }
+        ]
+      })
+      expect(await (new EsBib(bib)).parallelSeriesUniformTitle()).to.deep.equal([null, 'Parallel series uniform title'])
+    })
+    it('parallelSeriesAddedEntry returns null for primaries without parallels', async () => {
+      // 800 and 810 have no parallels; 811 has one
+      expect(await esBib.parallelSeriesAddedEntry()).to.deep.equal([
+        null,
+        null,
+        '811 Series Added Entry parallel: Chakra llamkaymanta Conferencia Interamericana Serie nacional nisqa'
       ])
     })
     it('extracts seriesAddedEntry (800, 810, 811 fields)', async () => {
