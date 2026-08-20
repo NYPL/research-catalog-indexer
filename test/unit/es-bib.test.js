@@ -2037,14 +2037,16 @@ describe('EsBib', function () {
   })
 
   describe('parallelAuthorNameTitle', function () {
-    it('returns parallel name + title for linked 880 entries', function () {
-      // bib-21989304 has 880-linked 700s with Cyrillic variants
+    it('returns parallel name + title for linked 880 entries, null where primary has no parallel', function () {
       const record = new SierraBib(require('../fixtures/bib-21989304.json'))
       const esBib = new EsBib(record)
-      const result = esBib.parallelAuthorNameTitle()
-      expect(result).to.be.an('array')
-      // The linked 880 parallel for the 700 with $t should appear
-      expect(result.some(v => v && v.includes('Блок'))).to.equal(true)
+      expect(esBib.parallelAuthorNameTitle()).to.deep.equal([
+        'Пушкарева, Л. В',
+        'Демиденко, Ю. Б. (Юлия Борисовна)',
+        // Blok 700 has no $6 link, so no parallel is linked — null placeholder:
+        null,
+        'Государственный музей истории Санкт-Петербурга'
+      ])
     })
 
     it('returns null when no 1xx or 7xx entries have a linked parallel', function () {

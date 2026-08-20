@@ -8,10 +8,13 @@
   },
   "addedAuthorTitle": {
     "paths": [
-      { "marc": "700",  
-        "subfields": ["t"]
+      {
+        "marc": "700",
+        "subfields": [
+          "t"
+        ]
       }
-    ] 
+    ]
   },
   "authorNameTitle": {
     "notes": "Name and title for contributors/creators",
