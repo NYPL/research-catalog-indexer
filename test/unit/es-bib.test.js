@@ -859,6 +859,40 @@ describe('EsBib', function () {
         ['parallel content for 710$a']
       )
     })
+
+    it('should filter out parallel contributors that duplicate parallel creators', () => {
+      const record = new SierraBib({
+        varFields: [
+          { marcTag: '100', subfields: [{ tag: '6', content: '880-01' }, { tag: 'a', content: 'Creator, Name' }] },
+          // Redundant contributor (same primary name as creator)
+          { marcTag: '700', subfields: [{ tag: '6', content: '880-01' }, { tag: 'a', content: 'Creator, Name' }] },
+          // Novel contributor
+          { marcTag: '700', subfields: [{ tag: '6', content: '880-02' }, { tag: 'a', content: 'Contributor, Novel' }] },
+          // Parallel for creator
+          { marcTag: '880', subfields: [{ tag: '6', content: '100-01' }, { tag: 'a', content: 'Параллельный создатель' }] },
+          // Parallel for redundant contributor (same parallel as creator)
+          { marcTag: '880', subfields: [{ tag: '6', content: '700-01' }, { tag: 'a', content: 'Параллельный создатель' }] },
+          // Parallel for novel contributor
+          { marcTag: '880', subfields: [{ tag: '6', content: '700-02' }, { tag: 'a', content: 'Параллельный участник' }] }
+        ]
+      })
+      const esBib = new EsBib(record)
+      expect(esBib.parallelCreatorLiteral()).to.deep.equal(['Параллельный создатель'])
+      expect(esBib.parallelContributorLiteral()).to.deep.equal(['Параллельный участник'])
+    })
+
+    it('should null parallelContributorLiteral if all the parallel contributors are redundant', () => {
+      const record = new SierraBib({
+        varFields: [
+          { marcTag: '100', subfields: [{ tag: '6', content: '880-01' }, { tag: 'a', content: 'Creator, Name' }] },
+          { marcTag: '700', subfields: [{ tag: '6', content: '880-01' }, { tag: 'a', content: 'Creator, Name' }] },
+          { marcTag: '880', subfields: [{ tag: '6', content: '100-01' }, { tag: 'a', content: 'Параллельный создатель' }] },
+          { marcTag: '880', subfields: [{ tag: '6', content: '700-01' }, { tag: 'a', content: 'Параллельный создатель' }] }
+        ]
+      })
+      const esBib = new EsBib(record)
+      expect(esBib.parallelContributorLiteral()).to.equal(null)
+    })
   })
 
   describe('parallelContributors_displayComponents', function () {
@@ -868,6 +902,26 @@ describe('EsBib', function () {
       expect(esBib.parallelContributors_displayComponents()).to.deep.equal(
         [{ name: 'Народна библиотека "Стефан Првовенчани"', title: '', role: 'issuing body', label: 'Народна библиотека "Стефан Првовенчани", issuing body' }]
       )
+    })
+
+    it('should filter out parallel contributor display components that duplicate parallel creators', () => {
+      const record = new SierraBib({
+        varFields: [
+          { marcTag: '100', subfields: [{ tag: '6', content: '880-01' }, { tag: 'a', content: 'Creator, Name' }] },
+          { marcTag: '700', subfields: [{ tag: '6', content: '880-01' }, { tag: 'a', content: 'Creator, Name' }] },
+          { marcTag: '700', subfields: [{ tag: '6', content: '880-02' }, { tag: 'a', content: 'Contributor, Novel' }] },
+          { marcTag: '880', subfields: [{ tag: '6', content: '100-01' }, { tag: 'a', content: 'Параллельный создатель' }] },
+          { marcTag: '880', subfields: [{ tag: '6', content: '700-01' }, { tag: 'a', content: 'Параллельный создатель' }] },
+          { marcTag: '880', subfields: [{ tag: '6', content: '700-02' }, { tag: 'a', content: 'Параллельный участник' }] }
+        ]
+      })
+      const esBib = new EsBib(record)
+      expect(esBib.parallelCreators_displayComponents()).to.deep.equal([
+        { name: 'Параллельный создатель', title: '', role: '', label: 'Параллельный создатель' }
+      ])
+      expect(esBib.parallelContributors_displayComponents()).to.deep.equal([
+        { name: 'Параллельный участник', title: '', role: '', label: 'Параллельный участник' }
+      ])
     })
   })
 
