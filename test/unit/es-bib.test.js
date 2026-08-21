@@ -923,6 +923,37 @@ describe('EsBib', function () {
         { name: 'Параллельный участник', title: '', role: '', label: 'Параллельный участник' }
       ])
     })
+
+    it('parallelContributors_displayComponents and parallelContributorLiteral are index-aligned: null at positions where primary has no parallel', () => {
+      const record = new SierraBib({
+        varFields: [
+          { marcTag: '700', subfields: [{ tag: 'a', content: 'Contributor one' }] },
+          {
+            marcTag: '700',
+            subfields: [
+              { tag: '6', content: '880-01' },
+              { tag: 'a', content: 'Contributor two' }
+            ]
+          },
+          {
+            marcTag: '880',
+            subfields: [
+              { tag: '6', content: '700-01' },
+              { tag: 'a', content: 'Параллельный участник' }
+            ]
+          }
+        ]
+      })
+      const esBib = new EsBib(record)
+      expect(esBib.parallelContributorLiteral()).to.deep.equal([
+        null,
+        'Параллельный участник'
+      ])
+      expect(esBib.parallelContributors_displayComponents()).to.deep.equal([
+        null,
+        { name: 'Параллельный участник', title: '', role: '', label: 'Параллельный участник' }
+      ])
+    })
   })
 
   describe('lccClassification', function () {
