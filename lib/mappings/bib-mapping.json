@@ -16,7 +16,7 @@
       }
     ]
   },
-  "authorNameTitle": {
+  "contributorNameTitle": {
     "notes": "Name and title for contributors/creators",
     "paths": [
       { "marc": "100" },

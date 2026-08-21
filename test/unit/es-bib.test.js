@@ -1957,18 +1957,18 @@ describe('EsBib', function () {
     })
   })
 
-  describe('authorNameTitle', function () {
+  describe('contributorNameTitle', function () {
     it('returns name + title from a 700 entry as a single string', function () {
       const record = new SierraBib(require('../fixtures/bib-14576049.json'))
       const esBib = new EsBib(record)
-      expect(esBib.authorNameTitle()).to.deep.equal(['Barrie, J. M. (James Matthew), 1860-1937 Peter Pan'])
+      expect(esBib.contributorNameTitle()).to.deep.equal(['Barrie, J. M. (James Matthew), 1860-1937 Peter Pan'])
     })
 
     it('includes all 7xx entries, combines name and title where present', function () {
       // bib-12147603 has multiple 700s, two of which have $t
       const record = new SierraBib(require('../fixtures/bib-12147603.json'))
       const esBib = new EsBib(record)
-      expect(esBib.authorNameTitle()).to.deep.equal([
+      expect(esBib.contributorNameTitle()).to.deep.equal([
         'Graham, Martha',
         'Ross, Bertram, 1920-2003',
         'Taylor, Paul, 1930-2018',
@@ -2023,7 +2023,7 @@ describe('EsBib', function () {
         ]
       })
       const esBib = new EsBib(record)
-      expect(esBib.authorNameTitle()).to.deep.equal([
+      expect(esBib.contributorNameTitle()).to.deep.equal([
         'Creator, Name Main Work',
         'Contributor, Name Related Work'
       ])
@@ -2032,15 +2032,15 @@ describe('EsBib', function () {
     it('returns null when there are no 1xx or 7xx fields at all', function () {
       const record = new SierraBib({ varFields: [] })
       const esBib = new EsBib(record)
-      expect(esBib.authorNameTitle()).to.equal(null)
+      expect(esBib.contributorNameTitle()).to.equal(null)
     })
   })
 
-  describe('parallelAuthorNameTitle', function () {
+  describe('parallelContributorNameTitle', function () {
     it('returns parallel name + title for linked 880 entries, null where primary has no parallel', function () {
       const record = new SierraBib(require('../fixtures/bib-21989304.json'))
       const esBib = new EsBib(record)
-      expect(esBib.parallelAuthorNameTitle()).to.deep.equal([
+      expect(esBib.parallelContributorNameTitle()).to.deep.equal([
         'Пушкарева, Л. В',
         'Демиденко, Ю. Б. (Юлия Борисовна)',
         // Blok 700 has no $6 link, so no parallel is linked — null placeholder:
@@ -2057,13 +2057,13 @@ describe('EsBib', function () {
         ]
       })
       const esBib = new EsBib(record)
-      expect(esBib.parallelAuthorNameTitle()).to.equal(null)
+      expect(esBib.parallelContributorNameTitle()).to.equal(null)
     })
 
     it('returns null when there are no 1xx or 7xx fields at all', function () {
       const record = new SierraBib({ varFields: [] })
       const esBib = new EsBib(record)
-      expect(esBib.parallelAuthorNameTitle()).to.equal(null)
+      expect(esBib.parallelContributorNameTitle()).to.equal(null)
     })
   })
 
