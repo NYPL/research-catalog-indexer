@@ -869,6 +869,37 @@ describe('EsBib', function () {
         [{ name: 'Народна библиотека "Стефан Првовенчани"', title: '', role: 'issuing body', label: 'Народна библиотека "Стефан Првовенчани", issuing body' }]
       )
     })
+
+    it('is index aligned with parallelContributorLiteral: null at positions where primary has no parallel', () => {
+      const record = new SierraBib({
+        varFields: [
+          { marcTag: '700', subfields: [{ tag: 'a', content: 'Contributor one' }] },
+          {
+            marcTag: '700',
+            subfields: [
+              { tag: '6', content: '880-01' },
+              { tag: 'a', content: 'Contributor two' }
+            ]
+          },
+          {
+            marcTag: '880',
+            subfields: [
+              { tag: '6', content: '700-01' },
+              { tag: 'a', content: 'Параллельный участник' }
+            ]
+          }
+        ]
+      })
+      const esBib = new EsBib(record)
+      expect(esBib.parallelContributorLiteral()).to.deep.equal([
+        null,
+        'Параллельный участник'
+      ])
+      expect(esBib.parallelContributors_displayComponents()).to.deep.equal([
+        null,
+        { name: 'Параллельный участник', title: '', role: '', label: 'Параллельный участник' }
+      ])
+    })
   })
 
   describe('lccClassification', function () {
@@ -2043,7 +2074,7 @@ describe('EsBib', function () {
       expect(esBib.parallelContributorNameTitle()).to.deep.equal([
         'Пушкарева, Л. В',
         'Демиденко, Ю. Б. (Юлия Борисовна)',
-        // Blok 700 has no $6 link, so no parallel is linked — null placeholder:
+        // Blok 700 has no $6 link, so no parallel is linked, null placeholder
         null,
         'Государственный музей истории Санкт-Петербурга'
       ])
