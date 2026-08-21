@@ -1997,7 +1997,7 @@ describe('EsBib', function () {
         ]
       })
       const esBib = new EsBib(record)
-      expect(esBib.authorNameTitle()).to.deep.equal([
+      expect(esBib.contributorNameTitle()).to.deep.equal([
         'Bach, Johann Sebastian, 1685-1750 Goldberg variations',
         'Smith, John'
       ])
