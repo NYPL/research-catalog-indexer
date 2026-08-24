@@ -663,46 +663,9 @@ const castRowToIdentifier = (row, options) => {
 }
 
 /**
-* Update index by CSV.
-*
-* Options param may include:
-*  - csv {string} - Path to local CSV file. Required.
-*  - csvIdColumn {int} - Column index (0-indexed) in CSV from which to extract the id. Required.
-*  - csvNyplSourceColumn {int} - Column index (0-indexed) in CSV from which to extract the nyplSource. Required if --nyplSource omitted.
-*  - type {string} - Type of record (item, bib, holding). Required if CSV contains numeric ids.
-*  - nyplSource {string} - NyplSource value (e.g. sierra-nypl). Required if CSV contains numeric ids.
-*  - csvDropChecksum {boolean} - Whether or not to remove the Sierra check-digit from extracted ids. Default false.
-*  - offset {int} - 0-indexed line number to start at. Default 0
-*  - limit {int}  - Number of rows to process. Default no-limit.
-*  - batchSize {int} - Number of records to process in each batch
-*  - skipDeletes {boolean} - Whether to skip deleting suppressed records, useful if doing a large bulk where we are trying to update fields on existing records
-*/
-const updateByCsv = async (options = {}) => {
-  options.offset = options.offset || 0
-  if (!options.csv) throw new Error('--csv is required')
-  if (isNaN(options.csvIdColumn)) {
-    throw new Error('--csvIdColumn is required')
-  }
-
-  const progress = await CsvProgress.forCsv(options.csv)
-
-  if (['completed', 'failed'].includes(progress.status())) {
-    logger.info(`Skipping CSV ${options.csv} because status is ${progress.status()}`)
-    return
-  }
-
-  if (progress.status() === 'running') {
-    options.offset = progress.offset
-  } else if (progress.status() === 'preparing') {
-    progress.updateOffset(options.offset)
-  }
-
-  const rawContent = fs.readFileSync(options.csv, 'utf8')
-  const rows = csvParse(rawContent)
-
-  const sourceMapper = NyplSourceMapper.instance()
-
-  // Slice rows-to-process using --offset and --limit:
+ * Extract and validate identifiers from CSV rows
+ */
+const extractAndValidateIdentifiers = (rows, options, progress, sourceMapper) => {
   const end = options.limit ? options.limit + options.offset : rows.length
   let rowsToProcess
   try {
@@ -735,6 +698,54 @@ const updateByCsv = async (options = {}) => {
     }
   }
 
+  return rowsToProcess
+}
+
+/**
+* Update index by CSV.
+*
+* Options param may include:
+*  - csv {string} - Path to local CSV file. Required.
+*  - csvIdColumn {int} - Column index (0-indexed) in CSV from which to extract the id. Required.
+*  - csvNyplSourceColumn {int} - Column index (0-indexed) in CSV from which to extract the nyplSource. Required if --nyplSource omitted.
+*  - type {string} - Type of record (item, bib, holding). Required if CSV contains numeric ids.
+*  - nyplSource {string} - NyplSource value (e.g. sierra-nypl). Required if CSV contains numeric ids.
+*  - csvDropChecksum {boolean} - Whether or not to remove the Sierra check-digit from extracted ids. Default false.
+*  - offset {int} - 0-indexed line number to start at. Default 0
+*  - limit {int}  - Number of rows to process. Default no-limit.
+*  - batchSize {int} - Number of records to process in each batch
+*  - skipDeletes {boolean} - Whether to skip deleting suppressed records, useful if doing a large bulk where we are trying to update fields on existing records
+*/
+const updateByCsv = async (options = {}) => {
+  options.offset = options.offset || 0
+  if (!options.csv) throw new Error('--csv is required')
+  if (isNaN(options.csvIdColumn)) {
+    throw new Error('--csvIdColumn is required')
+  }
+
+  const completed = 'completed'
+  const failed = 'failed'
+
+  const progress = await CsvProgress.forCsv(options.csv)
+
+  if ([completed, failed].includes(progress.status())) {
+    logger.info(`Skipping CSV ${options.csv} because status is ${progress.status()}`)
+    return
+  }
+
+  if (progress.status() === 'running') {
+    options.offset = progress.offset
+  } else if (progress.status() === 'preparing') {
+    progress.updateOffset(options.offset)
+  }
+
+  const rawContent = fs.readFileSync(options.csv, 'utf8')
+  const rows = csvParse(rawContent)
+
+  const sourceMapper = NyplSourceMapper.instance()
+
+  const rowsToProcess = extractAndValidateIdentifiers(rows, options, progress, sourceMapper)
+
   if (progress.status() === 'preparing') {
     progress.updateStatus('running')
   }
@@ -757,7 +768,7 @@ const updateByCsv = async (options = {}) => {
     db.endPools()
   }
 
-  progress.updateStatus('completed')
+  progress.updateStatus(completed)
 }
 
 /**
@@ -939,6 +950,7 @@ module.exports = {
     restoreGeneralPrefetch,
     overwriteSchema,
     restoreSchema,
-    barcodeCustomerCodeMapFromCsv
+    barcodeCustomerCodeMapFromCsv,
+    extractAndValidateIdentifiers
   }
 }

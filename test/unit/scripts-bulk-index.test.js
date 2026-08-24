@@ -433,6 +433,69 @@ describe('scripts/bulk-index', () => {
     })
   })
 
+  describe('extractAndValidateIdentifiers', () => {
+    let sourceMapper
+    const mockProgress = {
+      addMessage: sinon.stub(),
+      updateStatus: sinon.stub()
+    }
+
+    before(() => {
+      sourceMapper = {
+        splitIdentifier: (id) => {
+          if (id.startsWith('cb')) return { id: id.slice(2), type: 'bib', nyplSource: 'recap-cul' }
+          if (id.startsWith('pb')) return { id: id.slice(2), type: 'bib', nyplSource: 'recap-pul' }
+          if (id.startsWith('b')) return { id: id.slice(1), type: 'bib', nyplSource: 'sierra-nypl' }
+          return null
+        }
+      }
+    })
+
+    afterEach(() => {
+      mockProgress.addMessage.resetHistory()
+      mockProgress.updateStatus.resetHistory()
+    })
+
+    it('processes a single column CSV with prefixed ids', () => {
+      const rows = [['b1234'], ['cb5678'], ['pb9012']]
+      const options = { csvIdColumn: 0, offset: 0, csv: 'test.csv' }
+      const res = bulkIndexer._testing.extractAndValidateIdentifiers(rows, options, mockProgress, sourceMapper)
+      
+      expect(res).to.deep.equal([
+        { id: '1234', nyplSource: 'sierra-nypl', type: 'bib' },
+        { id: '5678', nyplSource: 'recap-cul', type: 'bib' },
+        { id: '9012', nyplSource: 'recap-pul', type: 'bib' }
+      ])
+    })
+
+    it('processes a two column CSV with non-prefixed ids and nyplSource', () => {
+      const rows = [['1234', 'sierra-nypl'], ['5678', 'sierra-nypl']]
+      const options = { csvIdColumn: 0, csvNyplSourceColumn: 1, type: 'bib', offset: 0, csv: 'test.csv' }
+      const res = bulkIndexer._testing.extractAndValidateIdentifiers(rows, options, mockProgress, sourceMapper)
+      
+      expect(res).to.deep.equal([
+        { id: '1234', nyplSource: 'sierra-nypl' },
+        { id: '5678', nyplSource: 'sierra-nypl' }
+      ])
+    })
+
+    it('throws error when type is not apparent or specified', () => {
+      const rows = [['1234', 'sierra-nypl']]
+      const options = { csvIdColumn: 0, csvNyplSourceColumn: 1, offset: 0, csv: 'test.csv' }
+      expect(() => bulkIndexer._testing.extractAndValidateIdentifiers(rows, options, mockProgress, sourceMapper))
+        .to.throw('Must specify --type if not apparent from CSV')
+      expect(mockProgress.updateStatus.calledWith('failed')).to.be.true
+    })
+
+    it('throws error when nyplSource is not apparent or specified', () => {
+      const rows = [['1234']]
+      const options = { csvIdColumn: 0, type: 'bib', offset: 0, csv: 'test.csv' }
+      expect(() => bulkIndexer._testing.extractAndValidateIdentifiers(rows, options, mockProgress, sourceMapper))
+        .to.throw('Must specify --nyplSource if not apparent from CSV (use --csvNyplSourceColumn N if CSV includes nyplSource)')
+      expect(mockProgress.updateStatus.calledWith('failed')).to.be.true
+    })
+  })
+
   describe('barcodeCustomerCodeMapFromCsv', () => {
     it('builds map from CSV', () => {
       const lookup = bulkIndexer._testing.barcodeCustomerCodeMapFromCsv('./test/fixtures/barcode-customer-code-map.csv')
