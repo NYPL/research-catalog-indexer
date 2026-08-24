@@ -460,7 +460,7 @@ describe('scripts/bulk-index', () => {
       const rows = [['b1234'], ['cb5678'], ['pb9012']]
       const options = { csvIdColumn: 0, offset: 0, csv: 'test.csv' }
       const res = bulkIndexer._testing.extractAndValidateIdentifiers(rows, options, mockProgress, sourceMapper)
-      
+
       expect(res).to.deep.equal([
         { id: '1234', nyplSource: 'sierra-nypl', type: 'bib' },
         { id: '5678', nyplSource: 'recap-cul', type: 'bib' },
@@ -472,7 +472,7 @@ describe('scripts/bulk-index', () => {
       const rows = [['1234', 'sierra-nypl'], ['5678', 'sierra-nypl']]
       const options = { csvIdColumn: 0, csvNyplSourceColumn: 1, type: 'bib', offset: 0, csv: 'test.csv' }
       const res = bulkIndexer._testing.extractAndValidateIdentifiers(rows, options, mockProgress, sourceMapper)
-      
+
       expect(res).to.deep.equal([
         { id: '1234', nyplSource: 'sierra-nypl' },
         { id: '5678', nyplSource: 'sierra-nypl' }
@@ -484,7 +484,7 @@ describe('scripts/bulk-index', () => {
       const options = { csvIdColumn: 0, csvNyplSourceColumn: 1, offset: 0, csv: 'test.csv' }
       expect(() => bulkIndexer._testing.extractAndValidateIdentifiers(rows, options, mockProgress, sourceMapper))
         .to.throw('Must specify --type if not apparent from CSV')
-      expect(mockProgress.updateStatus.calledWith('failed')).to.be.true
+      expect(mockProgress.updateStatus.calledWith('failed')).to.eq(true)
     })
 
     it('throws error when nyplSource is not apparent or specified', () => {
@@ -492,7 +492,7 @@ describe('scripts/bulk-index', () => {
       const options = { csvIdColumn: 0, type: 'bib', offset: 0, csv: 'test.csv' }
       expect(() => bulkIndexer._testing.extractAndValidateIdentifiers(rows, options, mockProgress, sourceMapper))
         .to.throw('Must specify --nyplSource if not apparent from CSV (use --csvNyplSourceColumn N if CSV includes nyplSource)')
-      expect(mockProgress.updateStatus.calledWith('failed')).to.be.true
+      expect(mockProgress.updateStatus.calledWith('failed')).to.eq(true)
     })
   })
 
