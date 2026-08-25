@@ -32,11 +32,11 @@
           "ʼ => '"
         ]
       },
-      "strip_punctuation": {
-        "pattern": "[\\p{Punct}]",
-        "type": "pattern_replace",
-        "replacement": ""
-      },
+      "rm_multiple_spaces": {
+          "type": "pattern_replace",
+          "pattern": "\\s+",
+          "replacement": " "
+        }, 
       "clean_identifier_filter": {
         "pattern": "[^0-9xX]",
         "type": "pattern_replace",
@@ -45,7 +45,7 @@
       "strip_shelfmark_punctuation": {
         "pattern": "[!\"#$%&'(),-./:;<=>?\\[\\]^_`{|}~]",
         "type": "pattern_replace",
-        "replacement": ""
+        "replacement": " "
       },
       "strip_leading_articles": {
           "type": "pattern_replace",
@@ -84,7 +84,8 @@
         ],
         "type": "custom",
         "char_filter": [
-          "strip_shelfmark_punctuation"
+          "strip_shelfmark_punctuation",
+          "rm_multiple_spaces"
         ]
       },
       "sort_normalizer": {
