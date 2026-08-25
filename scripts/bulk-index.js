@@ -725,6 +725,8 @@ const updateByCsv = async (options = {}) => {
 
   const completed = 'completed'
   const failed = 'failed'
+  const preparing = 'preparing'
+  const running = 'running'
 
   const progress = await CsvProgress.forCsv(options.csv)
 
@@ -735,7 +737,7 @@ const updateByCsv = async (options = {}) => {
 
   if (progress.status() === 'running') {
     options.offset = progress.offset
-  } else if (progress.status() === 'preparing') {
+  } else if (progress.status() === preparing) {
     progress.updateOffset(options.offset)
   }
 
@@ -746,7 +748,7 @@ const updateByCsv = async (options = {}) => {
 
   const rowsToProcess = extractAndValidateIdentifiers(rows, options, progress, sourceMapper)
 
-  if (progress.status() === 'preparing') {
+  if (progress.status() === preparing) {
     progress.updateStatus('running')
   }
 
