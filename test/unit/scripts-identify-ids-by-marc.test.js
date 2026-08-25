@@ -1,8 +1,8 @@
 const { expect } = require('chai')
 
-const { buildSqlQuery } = require('../../scripts/export-ids-by-marc')
+const { buildSqlQuery } = require('../../scripts/identify-ids-by-marc')
 
-describe('scripts/export-ids-by-marc', () => {
+describe('scripts/identify-ids-by-marc', () => {
   describe('buildSqlQuery', () => {
     it('builds sql for has-marc query', () => {
       expect(buildSqlQuery({ hasMarc: '001', nyplSource: 'sierra-nypl', type: 'bib' }))
