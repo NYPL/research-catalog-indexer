@@ -16,6 +16,21 @@
       }
     ]
   },
+  "contributorNameTitle": {
+    "notes": "Name and title for contributors/creators",
+    "paths": [
+      { "marc": "100" },
+      { "marc": "110" },
+      { "marc": "111" },
+      { "marc": "700" },
+      { "marc": "710" },
+      { "marc": "711" },
+      { "marc": "720" },
+      { "marc": "790" },
+      { "marc": "791" },
+      { "marc": "796" }
+    ]
+  },
   "buildingLocationIds": {
     "notes": "Distinct research center locations"
   },
@@ -912,42 +927,12 @@
       }
     ]
   },
-  "series_displayPacked": {
-    "paths": [
-      {
-        "marc": "490",
-        "excludedSubfields": [
-          "6"
-        ],
-        "subfieldJoiner": " "
-      },
-      {
-        "marc": "440",
-        "excludedSubfields": [
-          "6"
-        ],
-        "subfieldJoiner": " "
-      }
-    ]
-  },
   "seriesUniformTitle": {
     "paths": [
       {
         "marc": "830",
         "subfields": [
           "a", "d", "f", "g", "h", "k", "l", "m", "n", "o", "p", "r", "s", "t"
-        ],
-        "subfieldJoiner": " "
-      }
-    ]
-  },
-  "seriesUniformTitle_displayPacked": {
-    "paths": [
-      {
-        "marc": "830",
-        "excludedSubfields": [
-          "6",
-          "0"
         ],
         "subfieldJoiner": " "
       }

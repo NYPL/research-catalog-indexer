@@ -117,7 +117,6 @@ const { populateBarcodeRecapCustomerCodeCache } = require('../lib/scsb/requests'
 
 const isCalledViaCommandLine = /scripts\/bulk-index(.js)?/.test(fs.realpathSync(process.argv[1]))
 const dotenv = require('dotenv')
-const { exec } = require('child_process')
 // Conditionally set up NR instrumentation
 // Initialize `instrument` as a pass-through
 let instrument = (label, cb) => cb()
@@ -923,9 +922,10 @@ const preflightSetup = async () => {
 
 const cleanup = async () => {
   if (process.env.STOP_REFRESH === 'true') await setIndexRefresh(process.env.ELASTIC_RESOURCES_INDEX_NAME, '30s')
-  if (process.env.UPDATE_ONLY || argv.updateOnly) {
-    exec(`cat temp-unindexed-records* > unindexed-records-${(argv.properties || process.env.PROPERTIES)}-${Date.now()}.txt; rm temp-unindexed-records*`)
-  }
+  // TODO: move unindexed id batches into a single file
+  // if (process.env.UPDATE_ONLY || argv.updateOnly) {
+  //   exec(`cat temp-unindexed-records* > unindexed-records-${(argv.properties || process.env.PROPERTIES)}-${Date.now()}.txt; rm temp-unindexed-records*`)
+  // }
   totalTimer.endTimer()
   totalTimer.howMany('hours')
   process.exit(0)
@@ -936,7 +936,7 @@ const totalTimer = new Timer('bulk update')
 if (isCalledViaCommandLine) {
   preflightSetup()
     .then(run)
-    .catch(logger.error)
+    .catch((e) => logger.error(e.message))
     .finally(cleanup)
 }
 

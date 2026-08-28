@@ -110,11 +110,13 @@ describe('EsBib', function () {
     })
   })
 
-  describe('creators_displayPacked', function () {
-    it('should return the creators packed with label', function () {
+  describe('creator_displayComponents', function () {
+    it('should return the creators as display component objects', function () {
       const record = new SierraBib(require('../fixtures/bib-10001936.json'))
       const esBib = new EsBib(record)
-      expect(esBib.creators_displayPacked()).to.deep.equal(['Shermazanian, Galust||Shermazanian, Galust'])
+      expect(esBib.creator_displayComponents()).to.deep.equal([
+        { name: 'Shermazanian, Galust', title: '', role: '', label: 'Shermazanian, Galust' }
+      ])
     })
   })
 
@@ -522,12 +524,12 @@ describe('EsBib', function () {
     })
   })
 
-  describe('parallelCreators_displayPacked', function () {
-    it('should return the parallel creator literals packed with display strings', function () {
+  describe('parallelCreators_displayComponents', function () {
+    it('should return the parallel creator literals as display component objects', function () {
       const record = new SierraBib(require('../fixtures/bib-hl-990137923810203941.json'))
       const esBib = new EsBib(record)
-      expect(esBib.parallelCreators_displayPacked()).to.deep.equal(
-        ['بوريني، حسن احمد||بوريني، حسن احمد']
+      expect(esBib.parallelCreators_displayComponents()).to.deep.equal(
+        [{ name: 'بوريني، حسن احمد', title: '', role: 'author', label: 'بوريني، حسن احمد' }]
       )
     })
   })
@@ -571,39 +573,39 @@ describe('EsBib', function () {
     })
   })
 
-  describe('contributors_displayPacked', function () {
-    it('should return array of contributors packed with labels', function () {
+  describe('contributor_displayComponents', function () {
+    it('should return array of contributors as display component objects', function () {
       const record = new SierraBib(require('../fixtures/bib-aeon.json'))
       const esBib = new EsBib(record)
-      expect(esBib.contributors_displayPacked()).to.deep.equal(
+      expect(esBib.contributor_displayComponents()).to.deep.equal(
         [
-          'Aldanov, Mark Aleksandrovich, 1886-1957||Aldanov, Mark Aleksandrovich, 1886-1957',
-          'Kazan, Elia||Kazan, Elia',
-          'Makovskii, Sergei Konstantinovich, 1877-1962||Makovskii, Sergei Konstantinovich, 1877-1962',
-          'Nabokov, Elena Ivanovna||Nabokov, Elena Ivanovna',
-          'Nabokova, Vera||Nabokova, Vera',
-          'Struve, Gleb||Struve, Gleb',
-          'Wilson, Edmund, 1895-1972||Wilson, Edmund, 1895-1972',
-          'Bruccoli, Matthew Joseph, 1931-||Bruccoli, Matthew Joseph, 1931-',
-          'Plimpton, George||Plimpton, George',
-          'Nabokov, Vladimir Vladimirovich, 1899-1977||Nabokov, Vladimir Vladimirovich, 1899-1977, former owner',
-          'Boyle, Kay, 1902-1992||Boyle, Kay, 1902-1992, former owner',
-          'Field, Andrew, 1938-||Field, Andrew, 1938-, former owner',
-          'Bollingen Foundation||Bollingen Foundation',
-          'Izdatelstvo imeni Chekhova (New York, N.Y.)||Izdatelstvo imeni Chekhova (New York, N.Y.)',
-          'Bureau littřaire D. Clairouin||Bureau littřaire D. Clairouin',
-          'Cornell University||Cornell University',
-          'Doubleday and Company, inc||Doubleday and Company, inc',
-          'Librarie Gallimard||Librarie Gallimard',
-          'Harper & Brothers||Harper & Brothers',
-          'Henry Holt and Company||Henry Holt and Company',
-          'McGraw-Hill, inc||McGraw-Hill, inc',
-          'New Directions Publishing||New Directions Publishing',
-          'New Yorker Magazine, Inc||New Yorker Magazine, Inc',
-          'G.P. Putnam\'s Sons||G.P. Putnam\'s Sons',
-          'Viking Press||Viking Press',
-          'Weidenfeld and Nicolson (Firm)||Weidenfeld and Nicolson (Firm)',
-          'Prins & Prins||Prins & Prins'
+          { name: 'Aldanov, Mark Aleksandrovich, 1886-1957', title: '', role: '', label: 'Aldanov, Mark Aleksandrovich, 1886-1957' },
+          { name: 'Kazan, Elia', title: '', role: '', label: 'Kazan, Elia' },
+          { name: 'Makovskii, Sergei Konstantinovich, 1877-1962', title: '', role: '', label: 'Makovskii, Sergei Konstantinovich, 1877-1962' },
+          { name: 'Nabokov, Elena Ivanovna', title: '', role: '', label: 'Nabokov, Elena Ivanovna' },
+          { name: 'Nabokova, Vera', title: '', role: '', label: 'Nabokova, Vera' },
+          { name: 'Struve, Gleb', title: '', role: '', label: 'Struve, Gleb' },
+          { name: 'Wilson, Edmund, 1895-1972', title: '', role: '', label: 'Wilson, Edmund, 1895-1972' },
+          { name: 'Bruccoli, Matthew Joseph, 1931-', title: '', role: '', label: 'Bruccoli, Matthew Joseph, 1931-' },
+          { name: 'Plimpton, George', title: '', role: '', label: 'Plimpton, George' },
+          { name: 'Nabokov, Vladimir Vladimirovich, 1899-1977', title: '', role: 'former owner', label: 'Nabokov, Vladimir Vladimirovich, 1899-1977, former owner' },
+          { name: 'Boyle, Kay, 1902-1992', title: '', role: 'former owner', label: 'Boyle, Kay, 1902-1992, former owner' },
+          { name: 'Field, Andrew, 1938-', title: '', role: 'former owner', label: 'Field, Andrew, 1938-, former owner' },
+          { name: 'Bollingen Foundation', title: '', role: '', label: 'Bollingen Foundation' },
+          { name: 'Izdatelstvo imeni Chekhova (New York, N.Y.)', title: '', role: '', label: 'Izdatelstvo imeni Chekhova (New York, N.Y.)' },
+          { name: 'Bureau littřaire D. Clairouin', title: '', role: '', label: 'Bureau littřaire D. Clairouin' },
+          { name: 'Cornell University', title: '', role: '', label: 'Cornell University' },
+          { name: 'Doubleday and Company, inc', title: '', role: '', label: 'Doubleday and Company, inc' },
+          { name: 'Librarie Gallimard', title: '', role: '', label: 'Librarie Gallimard' },
+          { name: 'Harper & Brothers', title: '', role: '', label: 'Harper & Brothers' },
+          { name: 'Henry Holt and Company', title: '', role: '', label: 'Henry Holt and Company' },
+          { name: 'McGraw-Hill, inc', title: '', role: '', label: 'McGraw-Hill, inc' },
+          { name: 'New Directions Publishing', title: '', role: '', label: 'New Directions Publishing' },
+          { name: 'New Yorker Magazine, Inc', title: '', role: '', label: 'New Yorker Magazine, Inc' },
+          { name: "G.P. Putnam's Sons", title: '', role: '', label: "G.P. Putnam's Sons" },
+          { name: 'Viking Press', title: '', role: '', label: 'Viking Press' },
+          { name: 'Weidenfeld and Nicolson (Firm)', title: '', role: '', label: 'Weidenfeld and Nicolson (Firm)' },
+          { name: 'Prins & Prins', title: '', role: '', label: 'Prins & Prins' }
         ]
       )
     })
@@ -857,15 +859,100 @@ describe('EsBib', function () {
         ['parallel content for 710$a']
       )
     })
+
+    it('should filter out parallel contributors that duplicate parallel creators', () => {
+      const record = new SierraBib({
+        varFields: [
+          { marcTag: '100', subfields: [{ tag: '6', content: '880-01' }, { tag: 'a', content: 'Creator, Name' }] },
+          // Redundant contributor (same primary name as creator)
+          { marcTag: '700', subfields: [{ tag: '6', content: '880-01' }, { tag: 'a', content: 'Creator, Name' }] },
+          // Novel contributor
+          { marcTag: '700', subfields: [{ tag: '6', content: '880-02' }, { tag: 'a', content: 'Contributor, Novel' }] },
+          // Parallel for creator
+          { marcTag: '880', subfields: [{ tag: '6', content: '100-01' }, { tag: 'a', content: 'Параллельный создатель' }] },
+          // Parallel for redundant contributor (same parallel as creator)
+          { marcTag: '880', subfields: [{ tag: '6', content: '700-01' }, { tag: 'a', content: 'Параллельный создатель' }] },
+          // Parallel for novel contributor
+          { marcTag: '880', subfields: [{ tag: '6', content: '700-02' }, { tag: 'a', content: 'Параллельный участник' }] }
+        ]
+      })
+      const esBib = new EsBib(record)
+      expect(esBib.parallelCreatorLiteral()).to.deep.equal(['Параллельный создатель'])
+      expect(esBib.parallelContributorLiteral()).to.deep.equal(['Параллельный участник'])
+    })
+
+    it('should null parallelContributorLiteral if all the parallel contributors are redundant', () => {
+      const record = new SierraBib({
+        varFields: [
+          { marcTag: '100', subfields: [{ tag: '6', content: '880-01' }, { tag: 'a', content: 'Creator, Name' }] },
+          { marcTag: '700', subfields: [{ tag: '6', content: '880-01' }, { tag: 'a', content: 'Creator, Name' }] },
+          { marcTag: '880', subfields: [{ tag: '6', content: '100-01' }, { tag: 'a', content: 'Параллельный создатель' }] },
+          { marcTag: '880', subfields: [{ tag: '6', content: '700-01' }, { tag: 'a', content: 'Параллельный создатель' }] }
+        ]
+      })
+      const esBib = new EsBib(record)
+      expect(esBib.parallelContributorLiteral()).to.equal(null)
+    })
   })
 
-  describe('parallelContributors_displayPacked', function () {
-    it('should return browseable parallel contributor fields packed with display strings', function () {
+  describe('parallelContributors_displayComponents', function () {
+    it('should return browseable parallel contributor fields as display component objects', function () {
       const record = new SierraBib(require('../fixtures/bib-23033611.json'))
       const esBib = new EsBib(record)
-      expect(esBib.parallelContributors_displayPacked()).to.deep.equal(
-        ['Народна библиотека "Стефан Првовенчани"||Народна библиотека "Стефан Првовенчани", issuing body']
+      expect(esBib.parallelContributors_displayComponents()).to.deep.equal(
+        [{ name: 'Народна библиотека "Стефан Првовенчани"', title: '', role: 'issuing body', label: 'Народна библиотека "Стефан Првовенчани", issuing body' }]
       )
+    })
+
+    it('should filter out parallel contributor display components that duplicate parallel creators', () => {
+      const record = new SierraBib({
+        varFields: [
+          { marcTag: '100', subfields: [{ tag: '6', content: '880-01' }, { tag: 'a', content: 'Creator, Name' }] },
+          { marcTag: '700', subfields: [{ tag: '6', content: '880-01' }, { tag: 'a', content: 'Creator, Name' }] },
+          { marcTag: '700', subfields: [{ tag: '6', content: '880-02' }, { tag: 'a', content: 'Contributor, Novel' }] },
+          { marcTag: '880', subfields: [{ tag: '6', content: '100-01' }, { tag: 'a', content: 'Параллельный создатель' }] },
+          { marcTag: '880', subfields: [{ tag: '6', content: '700-01' }, { tag: 'a', content: 'Параллельный создатель' }] },
+          { marcTag: '880', subfields: [{ tag: '6', content: '700-02' }, { tag: 'a', content: 'Параллельный участник' }] }
+        ]
+      })
+      const esBib = new EsBib(record)
+      expect(esBib.parallelCreators_displayComponents()).to.deep.equal([
+        { name: 'Параллельный создатель', title: '', role: '', label: 'Параллельный создатель' }
+      ])
+      expect(esBib.parallelContributors_displayComponents()).to.deep.equal([
+        { name: 'Параллельный участник', title: '', role: '', label: 'Параллельный участник' }
+      ])
+    })
+
+    it('parallelContributors_displayComponents and parallelContributorLiteral are index-aligned: null at positions where primary has no parallel', () => {
+      const record = new SierraBib({
+        varFields: [
+          { marcTag: '700', subfields: [{ tag: 'a', content: 'Contributor one' }] },
+          {
+            marcTag: '700',
+            subfields: [
+              { tag: '6', content: '880-01' },
+              { tag: 'a', content: 'Contributor two' }
+            ]
+          },
+          {
+            marcTag: '880',
+            subfields: [
+              { tag: '6', content: '700-01' },
+              { tag: 'a', content: 'Параллельный участник' }
+            ]
+          }
+        ]
+      })
+      const esBib = new EsBib(record)
+      expect(esBib.parallelContributorLiteral()).to.deep.equal([
+        null,
+        'Параллельный участник'
+      ])
+      expect(esBib.parallelContributors_displayComponents()).to.deep.equal([
+        null,
+        { name: 'Параллельный участник', title: '', role: '', label: 'Параллельный участник' }
+      ])
     })
   })
 
@@ -1955,6 +2042,116 @@ describe('EsBib', function () {
     })
   })
 
+  describe('contributorNameTitle', function () {
+    it('returns name + title from a 700 entry as a single string', function () {
+      const record = new SierraBib(require('../fixtures/bib-14576049.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.contributorNameTitle()).to.deep.equal(['Barrie, J. M. (James Matthew), 1860-1937 Peter Pan'])
+    })
+
+    it('includes all 7xx entries, combines name and title where present', function () {
+      // bib-12147603 has multiple 700s, two of which have $t
+      const record = new SierraBib(require('../fixtures/bib-12147603.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.contributorNameTitle()).to.deep.equal([
+        'Graham, Martha',
+        'Ross, Bertram, 1920-2003',
+        'Taylor, Paul, 1930-2018',
+        'McGehee, Helen',
+        'Kroll, Nathan',
+        'Noguchi, Isamu, 1904-1988',
+        'Schuman, William, 1910-1992 Night journey',
+        'Hammid, Alexander',
+        'Martha Graham Dance Company',
+        'Graham, Martha Night journey'
+      ])
+    })
+
+    it('includes 1xx entries', function () {
+      const record = new SierraBib({
+        varFields: [
+          {
+            marcTag: '100',
+            subfields: [
+              { tag: 'a', content: 'Bach, Johann Sebastian,' },
+              { tag: 'd', content: '1685-1750.' },
+              { tag: 't', content: 'Goldberg variations.' }
+            ]
+          },
+          { marcTag: '700', subfields: [{ tag: 'a', content: 'Smith, John.' }] }
+        ]
+      })
+      const esBib = new EsBib(record)
+      expect(esBib.contributorNameTitle()).to.deep.equal([
+        'Bach, Johann Sebastian, 1685-1750 Goldberg variations',
+        'Smith, John'
+      ])
+    })
+
+    it('includes both 1xx and 7xx entries', function () {
+      const record = new SierraBib({
+        varFields: [
+          {
+            marcTag: '100',
+            subfields: [
+              { tag: 'a', content: 'Creator, Name,' },
+              { tag: 't', content: 'Main Work.' }
+            ]
+          },
+          {
+            marcTag: '700',
+            subfields: [
+              { tag: 'a', content: 'Contributor, Name,' },
+              { tag: 't', content: 'Related Work.' }
+            ]
+          }
+        ]
+      })
+      const esBib = new EsBib(record)
+      expect(esBib.contributorNameTitle()).to.deep.equal([
+        'Creator, Name Main Work',
+        'Contributor, Name Related Work'
+      ])
+    })
+
+    it('returns null when there are no 1xx or 7xx fields at all', function () {
+      const record = new SierraBib({ varFields: [] })
+      const esBib = new EsBib(record)
+      expect(esBib.contributorNameTitle()).to.equal(null)
+    })
+  })
+
+  describe('parallelContributorNameTitle', function () {
+    it('returns parallel name + title for linked 880 entries, null where primary has no parallel', function () {
+      const record = new SierraBib(require('../fixtures/bib-21989304.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.parallelContributorNameTitle()).to.deep.equal([
+        'Пушкарева, Л. В',
+        'Демиденко, Ю. Б. (Юлия Борисовна)',
+        // Blok 700 has no $6 link, so no parallel is linked, null placeholder
+        null,
+        'Государственный музей истории Санкт-Петербурга'
+      ])
+    })
+
+    it('returns null when no 1xx or 7xx entries have a linked parallel', function () {
+      const record = new SierraBib({
+        varFields: [
+          { marcTag: '100', subfields: [{ tag: 'a', content: 'Smith, John.' }] },
+          { marcTag: '700', subfields: [{ tag: 'a', content: 'Jones, Mary.' }] }
+        ]
+      })
+      const esBib = new EsBib(record)
+      expect(esBib.parallelContributorNameTitle()).to.equal(null)
+    })
+
+    it('returns null when there are no 1xx or 7xx fields at all', function () {
+      const record = new SierraBib({ varFields: [] })
+      const esBib = new EsBib(record)
+      expect(esBib.parallelContributorNameTitle()).to.equal(null)
+    })
+  })
+
   describe('popularity', () => {
     let bib
 
@@ -2147,7 +2344,7 @@ describe('EsBib', function () {
       const testBib = new EsBib(bib)
       const result = await testBib.seriesUniformTitle()
       expect(result).to.deep.equal([
-        'Rossini, Gioacchino 1792-1868. Works. Selections (Boccaccini & Spada editore) ;'
+        'Rossini, Gioacchino 1792-1868 Works. Selections (Boccaccini & Spada editore) ;'
       ])
     })
     it('extracts parallelSeries and parallelSeriesUniformTitle', async () => {
@@ -2156,6 +2353,58 @@ describe('EsBib', function () {
       const seriesTitleParallelResult = await esBib.parallelSeriesUniformTitle()
       expect(seriesTitleParallelResult).to.deep.equal([
         '830 Series Uniform Title parallel: 心理学系列'
+      ])
+    })
+    it('parallelSeries returns null for a primary with no parallel', async () => {
+      const bib = new SierraBib({
+        varFields: [
+          { marcTag: '490', subfields: [{ tag: 'a', content: 'Series without parallel' }] },
+          {
+            marcTag: '490',
+            subfields: [
+              { tag: '6', content: '880-01' },
+              { tag: 'a', content: 'Series with parallel' }
+            ]
+          },
+          {
+            marcTag: '880',
+            subfields: [
+              { tag: '6', content: '490-01' },
+              { tag: 'a', content: 'Parallel series value' }
+            ]
+          }
+        ]
+      })
+      expect(await (new EsBib(bib)).parallelSeries()).to.deep.equal([null, 'Parallel series value'])
+    })
+    it('parallelSeriesUniformTitle returns null for a primary with no parallel', async () => {
+      const bib = new SierraBib({
+        varFields: [
+          { marcTag: '830', subfields: [{ tag: 'a', content: 'Series Uniform Title without parallel' }] },
+          {
+            marcTag: '830',
+            subfields: [
+              { tag: '6', content: '880-01' },
+              { tag: 'a', content: 'Series Uniform Title with parallel' }
+            ]
+          },
+          {
+            marcTag: '880',
+            subfields: [
+              { tag: '6', content: '830-01' },
+              { tag: 'a', content: 'Parallel series uniform title' }
+            ]
+          }
+        ]
+      })
+      expect(await (new EsBib(bib)).parallelSeriesUniformTitle()).to.deep.equal([null, 'Parallel series uniform title'])
+    })
+    it('parallelSeriesAddedEntry returns null for primaries without parallels', async () => {
+      // 800 and 810 have no parallels; 811 has one
+      expect(await esBib.parallelSeriesAddedEntry()).to.deep.equal([
+        null,
+        null,
+        '811 Series Added Entry parallel: Chakra llamkaymanta Conferencia Interamericana Serie nacional nisqa'
       ])
     })
     it('extracts seriesAddedEntry (800, 810, 811 fields)', async () => {
@@ -2179,42 +2428,61 @@ describe('EsBib', function () {
       expect(result[1]).to.equal('810 Series Added Entry: United States Congress Middle x House Report')
       expect(result[2]).to.equal('811 Series Added Entry: Inter-American Conference on Agriculture (3rd : 1945 : Caracas, Venezuela) Cuadernos verdes Serie nacional')
     })
-    it('series_displayPacked returns subfield a||full for 490 fields', () => {
-      const result = esBib.series_displayPacked()
+    it('series_displayComponents returns display component objects for 490 fields', () => {
+      const result = esBib.series_displayComponents()
       expect(result).to.deep.equal([
-        '490 Series: The Psychology of C.G. Jung||490 Series: The Psychology of C.G. Jung v. 1 (Z965.N38)', '490 Series: The Psychology of C.G. Jung||490 Series: The Psychology of C.G. Jung v. 2'
+        { name: '490 Series: The Psychology of C.G. Jung', title: 'v. 1 (Z965.N38)', role: '', label: '490 Series: The Psychology of C.G. Jung v. 1 (Z965.N38)' }
       ])
     })
-    it('seriesUniformTitle_displayPacked returns expected display packed string', () => {
-      const result = esBib.seriesUniformTitle_displayPacked()
+    it('seriesUniformTitle_displayComponents returns expected display component objects', () => {
+      const result = esBib.seriesUniformTitle_displayComponents()
       expect(result).to.deep.equal([
-        '830 Series Uniform Title: International Psychology Classics Series 830 Series Uniform Title other field t 830 Series Uniform Title other field d||830 Series Uniform Title: International Psychology Classics Series 830 Series Uniform Title other field t 830 Series Uniform Title other field d vol. 1'
+        { name: '830 Series Uniform Title: International Psychology Classics Series', title: '830 Series Uniform Title other field t 830 Series Uniform Title other field d', role: '', label: '830 Series Uniform Title: International Psychology Classics Series 830 Series Uniform Title other field t 830 Series Uniform Title other field d vol. 1' }
       ])
     })
-    it('seriesAddedEntry_displayPacked returns expected display packed string for 800/810/811', () => {
-      const result = esBib.seriesAddedEntry_displayPacked()
+    it('seriesAddedEntry_displayComponents returns expected display component objects for 800/810/811', () => {
+      const result = esBib.seriesAddedEntry_displayComponents()
       expect(result).to.deep.equal([
-        '800 Series Added Entry: Meier, C. A. (Carl Alfred) 1905-1995 Lehrbuch der komplexen Psychologie C.G. Jungs English||800 Series Added Entry: Meier, C. A. (Carl Alfred) 1905-1995 Lehrbuch der komplexen Psychologie C.G. Jungs English v. 1',
-        '810 Series Added Entry: United States Congress Middle x House Report||810 Series Added Entry: United States Congress Middle x House Report 112-664',
-        '811 Series Added Entry: Inter-American Conference on Agriculture (3rd : 1945 : Caracas, Venezuela) Cuadernos verdes Serie nacional||811 Series Added Entry: Inter-American Conference on Agriculture (3rd : 1945 : Caracas, Venezuela) Cuadernos verdes Serie nacional 14 Trailing x'])
-    })
-    it('parallelSeries_displayPacked returns expected display packed string for parallels to 490 field', function () {
-      const result = esBib.parallelSeries_displayPacked()
-      expect(result).to.deep.equal([
-        '490 Series parallel: Chay Psicología nisqa C.G. Jung||490 Series parallel: Chay Psicología nisqa C.G. Jung v. 1'
+        { name: '800 Series Added Entry: Meier, C. A. (Carl Alfred) 1905-1995', title: 'Lehrbuch der komplexen Psychologie C.G. Jungs English', role: '', label: '800 Series Added Entry: Meier, C. A. (Carl Alfred) 1905-1995 Lehrbuch der komplexen Psychologie C.G. Jungs English v. 1' },
+        { name: '810 Series Added Entry: United States Congress', title: 'Middle x House Report', role: '', label: '810 Series Added Entry: United States Congress Middle x House Report 112-664' },
+        { name: '811 Series Added Entry: Inter-American Conference on Agriculture (3rd : 1945 : Caracas, Venezuela)', title: 'Cuadernos verdes Serie nacional', role: '', label: '811 Series Added Entry: Inter-American Conference on Agriculture (3rd : 1945 : Caracas, Venezuela) Cuadernos verdes Serie nacional 14 Trailing x' }
       ])
     })
-    it('parallelSeriesUniformTitle_displayPacked returns expected display packed string for parallels to 830 field', function () {
-      const result = esBib.parallelSeriesUniformTitle_displayPacked()
+    it('parallelSeries_displayComponents returns expected display component objects for parallels to 490 field', function () {
+      const result = esBib.parallelSeries_displayComponents()
       expect(result).to.deep.equal([
-        '830 Series Uniform Title parallel: 心理学系列||830 Series Uniform Title parallel: 心理学系列 第1卷'
+        { name: '490 Series parallel: Chay Psicología nisqa C.G. Jung', title: 'v. 1', role: '', label: '490 Series parallel: Chay Psicología nisqa C.G. Jung v. 1' }
       ])
     })
-    it('parallelSeriesAddedEntry_displayPacked returns expected display packed string for parallels to 800/810/811 (811 in this case) field', function () {
-      const result = esBib.parallelSeriesAddedEntry_displayPacked()
+    it('parallelSeriesUniformTitle_displayComponents returns expected display component objects for parallels to 830 field', function () {
+      const result = esBib.parallelSeriesUniformTitle_displayComponents()
       expect(result).to.deep.equal([
-        '811 Series Added Entry parallel: Chakra llamkaymanta Conferencia Interamericana Serie nacional nisqa||811 Series Added Entry parallel: Chakra llamkaymanta Conferencia Interamericana Serie nacional nisqa Vol 14'
+        { name: '830 Series Uniform Title parallel: 心理学系列', title: '', role: '', label: '830 Series Uniform Title parallel: 心理学系列 第1卷' }
       ])
+    })
+    it('parallelSeriesAddedEntry_displayComponents returns expected display component objects for parallels to 800/810/811 (811 in this case) field', function () {
+      const result = esBib.parallelSeriesAddedEntry_displayComponents()
+      expect(result).to.deep.equal([
+        { name: '811 Series Added Entry parallel: Chakra llamkaymanta Conferencia Interamericana', title: 'Serie nacional nisqa', role: '', label: '811 Series Added Entry parallel: Chakra llamkaymanta Conferencia Interamericana Serie nacional nisqa Vol 14' }
+      ])
+    })
+    // Confirming the indexed values match what will be linked
+    it('series() values match the name of series_displayComponents()', () => {
+      const indexed = esBib.series()
+      const names = esBib.series_displayComponents().map(c => c.name)
+      expect(indexed).to.deep.equal(names)
+    })
+    it('seriesUniformTitle() values match name + title of seriesUniformTitle_displayComponents()', () => {
+      const indexed = esBib.seriesUniformTitle()
+      const fromComponents = esBib.seriesUniformTitle_displayComponents()
+        .map(c => [c.name, c.title].filter(Boolean).join(' '))
+      expect(indexed).to.deep.equal(fromComponents)
+    })
+    it('seriesAddedEntry() values match name + title of seriesAddedEntry_displayComponents()', () => {
+      const indexed = esBib.seriesAddedEntry()
+      const fromComponents = esBib.seriesAddedEntry_displayComponents()
+        .map(c => [c.name, c.title].filter(Boolean).join(' '))
+      expect(indexed).to.deep.equal(fromComponents)
     })
   })
 })
