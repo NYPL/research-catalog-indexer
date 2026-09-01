@@ -2431,7 +2431,8 @@ describe('EsBib', function () {
     it('series_displayComponents returns display component objects for 490 fields', () => {
       const result = esBib.series_displayComponents()
       expect(result).to.deep.equal([
-        { name: '490 Series: The Psychology of C.G. Jung', title: 'v. 1 (Z965.N38)', role: '', label: '490 Series: The Psychology of C.G. Jung v. 1 (Z965.N38)' }
+        { name: '490 Series: The Psychology of C.G. Jung', title: 'v. 1 (Z965.N38)', role: '', label: '490 Series: The Psychology of C.G. Jung v. 1 (Z965.N38)' },
+        { name: '490 Series: The Psychology of C.G. Jung', title: 'v. 2', role: '', label: '490 Series: The Psychology of C.G. Jung v. 2' }
       ])
     })
     it('seriesUniformTitle_displayComponents returns expected display component objects', () => {
@@ -2466,11 +2467,11 @@ describe('EsBib', function () {
         { name: '811 Series Added Entry parallel: Chakra llamkaymanta Conferencia Interamericana', title: 'Serie nacional nisqa', role: '', label: '811 Series Added Entry parallel: Chakra llamkaymanta Conferencia Interamericana Serie nacional nisqa Vol 14' }
       ])
     })
-    // Confirming the indexed values match what will be linked
-    it('series() values match the name of series_displayComponents()', () => {
+    // confirm the indexed values are the unique names from series_displayComponents
+    it('series() values are the unique names from series_displayComponents()', () => {
       const indexed = esBib.series()
-      const names = esBib.series_displayComponents().map(c => c.name)
-      expect(indexed).to.deep.equal(names)
+      const uniqueNames = [...new Set(esBib.series_displayComponents().map(c => c.name))]
+      expect(indexed).to.deep.equal(uniqueNames)
     })
     it('seriesUniformTitle() values match name + title of seriesUniformTitle_displayComponents()', () => {
       const indexed = esBib.seriesUniformTitle()
