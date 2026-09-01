@@ -953,6 +953,32 @@
       }
     ]
   },
+  "seriesFull":{
+    "paths": [
+      {
+        "marc": "490",
+        "excludedSubfields": [
+          "6"
+        ]
+      },
+      {
+        "marc": "440",
+        "excludedSubfields": [
+          "6"
+        ]
+      }
+    ]
+  },
+  "seriesUniformTitleFull":{
+    "paths": [
+      {
+        "marc": "830",
+        "excludedSubfields": [
+          "6"
+        ]
+      }
+    ]
+  },
   "subjectLiteral": {
     "paths": [
       {
