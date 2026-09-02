@@ -1,9 +1,4 @@
-// Map of EXPECTED_INPUT -> EXPECTED_OUTPUT for each identifier normalizer,
-// derived from examples in SCC-5582, SCC-5432, SCC-5425, SCC-5426,
-// SCC-5424, and SCC-5443.
-
 const bnumberCases = {
-  // SCC-5443 (target bib: b11947770)
   b11947770: '11947770',
   cb11947770: '11947770',
   PB11947770: '11947770',
