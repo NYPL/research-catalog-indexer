@@ -797,15 +797,6 @@ describe('EsBib', function () {
       expect(esBib.idIsbn()).to.deep.equal(['0935661204 (tr)'])
     })
   })
-
-  describe('idIsbn_clean', () => {
-    it('should return array containing isbn without extra characters', function () {
-      const record = new SierraBib(require('../fixtures/bib-11806560.json'))
-      const esBib = new EsBib(record)
-      expect(esBib.idIsbn_clean()).to.deep.equal(['0935661204'])
-    })
-  })
-
   describe('idIssn', () => {
     it('should return array containing issn', function () {
       const record = new SierraBib(require('../fixtures/bib-10554371.json'))

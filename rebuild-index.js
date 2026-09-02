@@ -1,6 +1,6 @@
 const { client } = require('./lib/elastic-search/client')
 const logger = require('./lib/logger')
-const { schema } = require('./lib/elastic-search/index-schema.js')
+const { schema } = require('./lib/elastic-search/index-config/index-schema.js')
 const aws = require('aws-sdk')
 const dotenv = require('dotenv')
 
