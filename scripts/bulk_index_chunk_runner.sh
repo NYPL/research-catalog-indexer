@@ -1,5 +1,5 @@
 # Args: 
-# $1  - environment (qa or production)
+# $1  - path to config file
 # $2  - boolean flag to fetch ids 
 # $@  -  rest of flags passed to script
 
@@ -9,6 +9,7 @@ BIB_IDS_DIR=$SCRIPT_DIR/tmp/bib_ids/
 ERRORS_DIR=$SCRIPT_DIR/tmp/chunk_run_errors/
 PROCESSED_IDS_DIR=$SCRIPT_DIR/tmp/processed/
 FETCH_IDS=$2
+CONFIG_PATH=$1
 
 mkdir -p $BIB_IDS_DIR
 mkdir -p $ERRORS_DIR
@@ -32,7 +33,7 @@ echo commencing bulk reingest for all ids
 
 for file in `ls $BIB_IDS_DIR`; do
   echo "Processing $file"
-  if ! node ./scripts/bulk-index.js "$@" --batchSize 500 --type bib --envfile ./config/$1-bulk-index.env --skipDeletes --csv $BIB_IDS_DIR/$file --csvIdColumn 0 --csvNyplSourceColumn 1; then
+  if ! node ./scripts/bulk-index.js "$@" --batchSize 500 --type bib --envfile $CONFIG_PATH --skipDeletes --csv $BIB_IDS_DIR/$file --csvIdColumn 0 --csvNyplSourceColumn 1; then
     echo "csv file failed run: $file"
     mv $BIB_IDS_DIR/$file $ERRORS_DIR
   fi
