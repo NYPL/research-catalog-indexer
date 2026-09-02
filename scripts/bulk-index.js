@@ -156,7 +156,7 @@ const {
   setAwsProfile,
   Timer
 } = require('./utils')
-const schema = require('../lib/elastic-search/index-schema.js')
+const schema = require('../lib/elastic-search/index-config/index-schema.js')
 const logger = require('../lib/logger')
 const { loadNyplCoreData } = require('../lib/load-core-data.js')
 const { SkipPrefetchError } = require('../lib/errors.js')
