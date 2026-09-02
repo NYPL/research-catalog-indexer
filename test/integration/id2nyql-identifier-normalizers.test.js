@@ -31,7 +31,7 @@ describe('ID2NYQL identifier normalizers (_analyze integration)', () => {
   let esClient
 
   before(async () => {
-    dotenv.config({path: './config/qa.env'})
+    dotenv.config({ path: './config/qa.env' })
     process.env.INDEX_NAME = INDEX_NAME
     esClient = await client()
 
@@ -39,7 +39,7 @@ describe('ID2NYQL identifier normalizers (_analyze integration)', () => {
       console.log(`identifiers integration test setup: \n\tdeleting stale index at ${INDEX_NAME}`)
       await esClient.indices.delete({ index: INDEX_NAME })
     }
-      console.log(`identifiers integration test setup: \n\tcreating new index at ${INDEX_NAME}`)
+    console.log(`identifiers integration test setup: \n\tcreating new index at ${INDEX_NAME}`)
 
     await esClient.indices.create({ index: INDEX_NAME, body: indexSettings })
   })
