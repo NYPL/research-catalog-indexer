@@ -12,9 +12,9 @@ const readline = require('node:readline')
 const argv = require('minimist')(process.argv.slice(2))
 const logger = require('../lib/logger')
 const esClient = require('../lib/elastic-search/client')
-const { schema } = require('../lib/elastic-search/index-schema')
+const { schema } = require('../lib/elastic-search/index-config/index-schema')
 const { die, setAwsProfile } = require('./utils')
-const indexSettings = require('../lib/elastic-search/index-settings.json')
+const { mergedSettings } = require('../lib/elastic-search/index-config/index-settings')
 
 const usage = () => {
   console.log('Usage: node scripts/initialize-index.js --envfile [path to .env] [--index INDEX]')
@@ -27,7 +27,6 @@ const usage = () => {
 exports.run = async (options = {}) => {
   const client = await esClient.client()
   const exists = (await client.indices.exists({ index: options.index })).body
-
   if (exists) {
     console.log(`Index ${options.index} exists.`)
   } else {
@@ -36,7 +35,7 @@ exports.run = async (options = {}) => {
     await client.indices.create({
       index: options.index,
       body: {
-        settings: indexSettings,
+        settings: mergedSettings(),
         mappings: {
           dynamic: 'strict',
           properties: schema()

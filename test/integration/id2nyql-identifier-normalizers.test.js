@@ -2,7 +2,7 @@ const { expect } = require('chai')
 const { client } = require('../../lib/elastic-search/client.js')
 const dotenv = require('dotenv')
 
-const indexSettings = require('../../lib/elastic-search/index-config/identifiers.json')
+const indexSettings = require('../../lib/elastic-search/index-config/identifiers.js')
 const {
   bnumberCases,
   lccnCases,
