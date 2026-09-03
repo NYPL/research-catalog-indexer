@@ -16,64 +16,23 @@
       }
     ]
   },
-  "titleAlt": {
+  "contributorNameTitle": {
+    "notes": "Name and title for contributors/creators",
     "paths": [
-      {
-        "marc": "210",
-        "subfields": [
-          "a",
-          "b",
-          "f",
-          "n",
-          "p"
-        ]
-      },
-      {
-        "marc": "222",
-        "subfields": [
-          "a",
-          "b",
-          "f",
-          "n",
-          "p"
-        ]
-      },
-      {
-        "marc": "240",
-        "subfields": [
-          "a",
-          "b",
-          "f",
-          "n",
-          "p"
-        ]
-      },
-      {
-        "marc": "246",
-        "subfields": [
-          "a",
-          "b",
-          "f",
-          "n",
-          "p"
-        ]
-      },
-      {
-        "marc": "740",
-        "subfields": [
-          "a",
-          "n",
-          "p"
-        ]
-      },
-      {
-        "marc": "793",
-        "excludedSubfields": [
-          "0",
-          "6"
-        ]
-      }
+      { "marc": "100" },
+      { "marc": "110" },
+      { "marc": "111" },
+      { "marc": "700" },
+      { "marc": "710" },
+      { "marc": "711" },
+      { "marc": "720" },
+      { "marc": "790" },
+      { "marc": "791" },
+      { "marc": "796" }
     ]
+  },
+  "buildingLocationIds": {
+    "notes": "Distinct research center locations"
   },
   "callNumber": {
     "paths": [
@@ -92,18 +51,8 @@
       }
     ]
   },
-  "tableOfContents": {
-    "paths": [
-      {
-        "marc": "505",
-        "subfields": [
-          "a",
-          "g",
-          "r",
-          "t"
-        ]
-      }
-    ]
+  "collectionIds": {
+    "notes": "Collection determined by bib & item locations"
   },
   "contentsTitle": {
     "paths": [
@@ -242,6 +191,9 @@
       }
     ]
   },
+  "dates": {
+    "notes": "008/6-14"
+  },
   "dateCreated": {
     "paths": [
       {
@@ -262,6 +214,9 @@
         "marc": "008/7-10"
       }
     ]
+  },
+  "formatId": {
+    "notes": "Fixed field: Material type"
   },
   "serialPublicationDates": {
     "paths": [
@@ -296,7 +251,7 @@
       }
     ]
   },
-  "donorSponsor": {
+  "donor": {
     "paths": [
       {
         "marc": "799",
@@ -319,11 +274,7 @@
     ]
   },
   "electronicLocation": {
-    "paths": [
-      {
-        "notes": "856 (see notes)"
-      }
-    ]
+    "notes": "856 (see notes)"
   },
   "extent": {
     "paths": [
@@ -444,7 +395,7 @@
       }
     ]
   },
-  "isbn": {
+  "idIsbn": {
     "paths": [
       {
         "marc": "020",
@@ -464,7 +415,7 @@
       }
     ]
   },
-  "issn": {
+  "idIssn": {
     "paths": [
       {
         "marc": "022",
@@ -505,15 +456,11 @@
   "language": {
     "paths": [
       {
-        "marc": "lang",
+        "marc": "008/35-37",
         "description": "Language  "
       },
       {
-        "marc": "OR 008/35-37",
-        "description": "Language  "
-      },
-      {
-        "marc": "OR 041",
+        "marc": "041",
         "subfields": [
           "a"
         ],
@@ -533,7 +480,7 @@
       }
     ]
   },
-  "lccn": {
+  "idLccn": {
     "paths": [
       {
         "marc": "010",
@@ -971,17 +918,12 @@
         "subfields": [
           "a"
         ]
-      }
-    ]
-  },
-  "series_displayPacked": {
-    "paths": [
+      },
       {
-        "marc": "490",
-        "excludedSubfields": [
-          "6"
-        ],
-        "subfieldJoiner": " "
+        "marc": "440",
+        "subfields": [
+          "a"
+        ]
       }
     ]
   },
@@ -996,18 +938,6 @@
       }
     ]
   },
-  "seriesUniformTitle_displayPacked": {
-    "paths": [
-      {
-        "marc": "830",
-        "excludedSubfields": [
-          "6",
-          "0"
-        ],
-        "subfieldJoiner": " "
-      }
-    ]
-  },
   "seriesAddedEntry": {
     "paths": [
       {
@@ -1016,10 +946,35 @@
       },
       {
         "marc": "810"
-
       },
       {
         "marc": "811"
+      }
+    ]
+  },
+  "seriesFull":{
+    "paths": [
+      {
+        "marc": "490",
+        "excludedSubfields": [
+          "6"
+        ]
+      },
+      {
+        "marc": "440",
+        "excludedSubfields": [
+          "6"
+        ]
+      }
+    ]
+  },
+  "seriesUniformTitleFull":{
+    "paths": [
+      {
+        "marc": "830",
+        "excludedSubfields": [
+          "6"
+        ]
       }
     ]
   },
@@ -1064,16 +1019,25 @@
     ]
   },
   "supplementaryContent": {
-    "paths": [
-      {
-        "marc": "856 (see notes)"
-      }
-    ]
+    "notes": "856"
   },
   "suppressed": {
     "paths": [
       {
         "marc": "suppressed"
+      }
+    ]
+  },
+  "tableOfContents": {
+    "paths": [
+      {
+        "marc": "505",
+        "subfields": [
+          "a",
+          "g",
+          "r",
+          "t"
+        ]
       }
     ]
   },
@@ -1100,6 +1064,68 @@
         ],
         "nyplSources": [
           "recap-hl"
+        ]
+      }
+    ]
+  },
+  "titleAlt": {
+    "paths": [
+      {
+        "marc": "210",
+        "subfields": [
+          "a",
+          "b",
+          "f",
+          "n",
+          "p"
+        ]
+      },
+      {
+        "marc": "222",
+        "subfields": [
+          "a",
+          "b",
+          "f",
+          "n",
+          "p"
+        ]
+      },
+      {
+        "marc": "240",
+        "subfields": [
+          "a",
+          "b",
+          "f",
+          "n",
+          "p"
+        ]
+      },
+      {
+        "marc": "246",
+        "subfields": [
+          "a",
+          "b",
+          "f",
+          "g",
+          "h",
+          "i",
+          "n",
+          "p"
+        ]
+      },
+      {
+        "marc": "740",
+        "subfields": [
+          "a",
+          "n",
+          "p"
+        ]
+      },
+      {
+        "marc": "793",
+        "excludedSubfields": [
+          "0",
+          "6"
         ]
       }
     ]
@@ -1160,6 +1186,9 @@
         ]
       }
     ]
+  },
+  "uri": {
+    "notes": "Bnumber w/out check digit"
   },
   "titleDisplay": {
     "paths": [

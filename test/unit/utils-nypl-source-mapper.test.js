@@ -1,5 +1,6 @@
 const expect = require('chai').expect
 const nock = require('nock')
+const sinon = require('sinon')
 
 const {
   stubNyplSourceMapper,
@@ -8,6 +9,7 @@ const {
 } = require('./utils')
 
 const NyplSourceMapper = require('../../lib/utils/nypl-source-mapper')
+const retryUtils = require('../../lib/utils/retry.js')
 
 const SOURCE_MAPPING_URL = 'https://raw.githubusercontent.com/NYPL/nypl-core/master/mappings/recap-discovery/nypl-source-mapping.json'
 
@@ -195,6 +197,9 @@ describe('utils/NyplSourceMapper', function () {
   })
 
   describe('nyplSourceMapping error conditions', async function () {
+    before(() => sinon.stub(retryUtils, 'delay').resolves())
+    after(() => retryUtils.delay.restore())
+
     beforeEach(() => NyplSourceMapper.__resetInstance())
     afterEach(() => {
       unstubNyplSourceMapper()
@@ -208,11 +213,11 @@ describe('utils/NyplSourceMapper', function () {
           'access-control-allow-credentials': 'true'
         })
         .get(/.*/)
-        .times(1)
+        .times(3)
         .reply(503, () => '{}')
 
       const call = NyplSourceMapper.loadInstance()
-      return expect(call).to.be.rejectedWith(`Error retrieving ${SOURCE_MAPPING_URL} - got status 503`)
+      return expect(call).to.be.rejectedWith('Exhausted 3 retries: got status 503')
     })
 
     it('should fail if mapping json returns a 200 but is malformed', async () => {
