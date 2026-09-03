@@ -12,7 +12,7 @@ const readline = require('node:readline')
 const argv = require('minimist')(process.argv.slice(2))
 const logger = require('../lib/logger')
 const esClient = require('../lib/elastic-search/client')
-const { schema } = require('../lib/elastic-search/index-schema')
+const { schema } = require('../lib/elastic-search/index-config/index-schema')
 const { die, setAwsProfile } = require('./utils')
 const indexSettings = require('../lib/elastic-search/index-settings.json')
 

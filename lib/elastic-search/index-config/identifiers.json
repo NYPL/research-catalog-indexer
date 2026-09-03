@@ -1,0 +1,110 @@
+{"settings": {
+    "analysis": {
+      "char_filter": {
+        "strip_suffix": {
+          "type": "pattern_replace",
+          "pattern": "/.*$",
+          "replacement": ""
+        },
+        "strip_whitespace": {
+          "type": "pattern_replace",
+          "pattern": "\\s+",
+          "replacement": ""
+        },
+        "lccn_pad5": {
+          "type": "pattern_replace",
+          "pattern": "-(\\d{5})(?!\\d)",
+          "replacement": "0$1"
+        },
+        "lccn_pad4": {
+          "type": "pattern_replace",
+          "pattern": "-(\\d{4})(?!\\d)",
+          "replacement": "00$1"
+        },
+        "lccn_pad3": {
+          "type": "pattern_replace",
+          "pattern": "-(\\d{3})(?!\\d)",
+          "replacement": "000$1"
+        },
+        "lccn_pad2": {
+          "type": "pattern_replace",
+          "pattern": "-(\\d{2})(?!\\d)",
+          "replacement": "0000$1"
+        },
+        "lccn_pad1": {
+          "type": "pattern_replace",
+          "pattern": "-(\\d{1})(?!\\d)",
+          "replacement": "00000$1"
+        },
+        "strip_hyphen": {
+          "type": "pattern_replace",
+          "pattern": "-",
+          "replacement": ""
+        },
+        "clean_identifier_filter": {
+          "type": "pattern_replace",
+          "pattern": "[^0-9xX]",
+          "replacement": ""
+        },
+        "bnumber_strip_prefix": {
+          "type": "pattern_replace",
+          "pattern": "^[bBcChHpPyY]+",
+          "replacement": ""
+        },
+        "bnumber_strip_check_digit": {
+          "type": "pattern_replace",
+          "pattern": "^(\\d{8})\\d$",
+          "replacement": "$1"
+        }
+      },
+      "normalizer": {
+        "lccn_normalizer": {
+          "type": "custom",
+          "char_filter": [
+            "strip_suffix",
+            "strip_whitespace",
+            "lccn_pad5",
+            "lccn_pad4",
+            "lccn_pad3",
+            "lccn_pad2",
+            "lccn_pad1",
+            "strip_hyphen"
+          ],
+          "filter": ["lowercase"]
+        },
+        "isbn_normalizer": {
+          "type": "custom",
+          "char_filter": ["clean_identifier_filter"],
+          "filter": ["lowercase"]
+        },
+        "issn_normalizer": {
+          "type": "custom",
+          "char_filter": ["clean_identifier_filter"],
+          "filter": ["lowercase"]
+        },
+        "oclc_normalizer": {
+          "type": "custom",
+          "char_filter": [],
+          "filter": ["lowercase"]
+        },
+        "bnumber_normalizer": {
+          "type": "custom",
+          "char_filter": [
+            "bnumber_strip_prefix",
+            "bnumber_strip_check_digit"
+          ],
+          "filter": []
+        }
+      }
+    }
+  },
+  "mappings": {
+    "properties": {
+      "lccn": { "type": "keyword", "normalizer": "lccn_normalizer" },
+      "isbn": { "type": "keyword", "normalizer": "isbn_normalizer" },
+      "issn": { "type": "keyword", "normalizer": "issn_normalizer" },
+      "oclc": { "type": "keyword", "normalizer": "oclc_normalizer" },
+      "bnumber": { "type": "keyword", "normalizer": "bnumber_normalizer" }
+    }
+  }
+}
