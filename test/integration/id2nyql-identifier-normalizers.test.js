@@ -2,7 +2,11 @@ const { expect } = require('chai')
 const { client } = require('../../lib/elastic-search/client.js')
 const dotenv = require('dotenv')
 
-const indexSettings = require('../../lib/elastic-search/index-config/identifiers.json')
+const identiferSettings = require('../../lib/elastic-search/index-config/identifiers.json')
+const {
+  indexSettings
+} = require('../../lib/elastic-search/index-config/index-settings.js')
+
 const {
   bnumberCases,
   lccnCases,
@@ -25,7 +29,13 @@ const FIELD_BY_CASE_MAP = {
   oclcCases: 'oclc'
 }
 
-const caseMapsByName = { bnumberCases, lccnCases, isbnCases, issnCases, oclcCases }
+const caseMapsByName = {
+  bnumberCases,
+  lccnCases,
+  isbnCases,
+  issnCases,
+  oclcCases
+}
 
 describe('ID2NYQL identifier normalizers (_analyze integration)', () => {
   let esClient
@@ -35,18 +45,34 @@ describe('ID2NYQL identifier normalizers (_analyze integration)', () => {
     process.env.INDEX_NAME = INDEX_NAME
     esClient = await client()
 
-    if (await esClient.indices.exists({ index: INDEX_NAME }).then((resp) => resp.body)) {
-      console.log(`identifiers integration test setup: \n\tdeleting stale index at ${INDEX_NAME}`)
+    if (
+      await esClient.indices
+        .exists({ index: INDEX_NAME })
+        .then((resp) => resp.body)
+    ) {
+      console.log(
+        `identifiers integration test setup: \n\tdeleting stale index at ${INDEX_NAME}`
+      )
       await esClient.indices.delete({ index: INDEX_NAME })
     }
-    console.log(`identifiers integration test setup: \n\tcreating new index at ${INDEX_NAME}`)
-
-    await esClient.indices.create({ index: INDEX_NAME, body: indexSettings })
+    console.log(
+      `identifiers integration test setup: \n\tcreating new index at ${INDEX_NAME}`
+    )
+    try {
+      await esClient.indices.create({
+        index: INDEX_NAME,
+        body: { settings: indexSettings, mappings: identiferSettings.mappings }
+      })
+    } catch (e) {
+      console.dir(e, { depth: null })
+    }
   })
 
   after(async () => {
     if (esClient) {
-      console.log(`identifiers integration test teardown: \n\tdeleting index at ${INDEX_NAME}`)
+      console.log(
+        `identifiers integration test teardown: \n\tdeleting index at ${INDEX_NAME}`
+      )
 
       await esClient.indices.delete({ index: INDEX_NAME })
     }

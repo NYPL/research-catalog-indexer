@@ -41,11 +41,6 @@
           "pattern": "-",
           "replacement": ""
         },
-        "clean_identifier_filter": {
-          "type": "pattern_replace",
-          "pattern": "[^0-9xX]",
-          "replacement": ""
-        },
         "bnumber_strip_prefix": {
           "type": "pattern_replace",
           "pattern": "^[bBcChHpPyY]+",
