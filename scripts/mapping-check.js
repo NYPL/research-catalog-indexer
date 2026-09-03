@@ -1,6 +1,6 @@
 /**
 * Script to check for local schema changes that don't exist in the remote index
-* (and vice versa). Checks the schema def in lib/elastic-search/index-schema
+* (and vice versa). Checks the schema def in lib/elastic-search/index-config/index-schema
 * (not es-models). For each discrepancy found, suggests PUT requests you can
 * make to rectify the difference.
 *
@@ -15,7 +15,7 @@ const assert = require('assert')
 const argv = require('minimist')(process.argv.slice(2))
 const logger = require('../lib/logger')
 const esClient = require('../lib/elastic-search/client')
-const { schema } = require('../lib/elastic-search/index-schema')
+const { schema } = require('../lib/elastic-search/index-config/index-schema')
 const { die, setAwsProfile } = require('./utils')
 
 const usage = () => {
