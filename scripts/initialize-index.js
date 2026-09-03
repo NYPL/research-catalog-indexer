@@ -14,7 +14,7 @@ const logger = require('../lib/logger')
 const esClient = require('../lib/elastic-search/client')
 const { schema } = require('../lib/elastic-search/index-config/index-schema')
 const { die, setAwsProfile } = require('./utils')
-const { mergedSettings } = require('../lib/elastic-search/index-config/index-settings')
+const { indexSettings } = require('../lib/elastic-search/index-config/index-settings')
 
 const usage = () => {
   console.log('Usage: node scripts/initialize-index.js --envfile [path to .env] [--index INDEX]')
@@ -35,7 +35,7 @@ exports.run = async (options = {}) => {
     await client.indices.create({
       index: options.index,
       body: {
-        settings: mergedSettings(),
+        settings: indexSettings,
         mappings: {
           dynamic: 'strict',
           properties: schema()
