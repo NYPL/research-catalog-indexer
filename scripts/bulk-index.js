@@ -45,18 +45,16 @@
  *
  *  I. Updating by Bib/Item Service query:
  *
- *    node scripts/bulk-index.js --type (item|bib) [--hasMarc MARC] [--hasSubfield S] [--nyplSource NYPLSOURCE]
+ *    node scripts/bulk-index.js --type (item|bib) [--nyplSource NYPLSOURCE]
  *
  *    Arguments:
- *      - hasMarc {string}: Marc tag that must be present in the record
- *      - hasSubfield {string}: When used with hasMarc, restricts to records matching both marc tag and subfield
  *      - orderBy {string}: Columns to order query by. Default '' (no sort).
  *        e.g. `--orderBy id`. Sortable columns include `id`, `updated_date`,
  *        `created_date`.
  *
  *    One of these mutually exclusive arguments must be used so that the script
  *    has something to query on:
- *     - hasMarc
+ *     - type
  *     - bibId
  *
  *    Note that omitting --limit may cause the query to take a long time to
@@ -67,12 +65,6 @@
  *    batch. (Otherwise, results are processed in an unstable order between jobs.)
  *
  *    Examples
- *
- *    To reindex all NYPL bibs with marc 001 in QA:
- *      node scripts/bulk-index.js --type bib --hasMarc 001
- *
- *    To reindex all NYPL bibs with 700 $t in QA:
- *      node scripts/bulk-index.js --type bib --hasMarc 700 --hasSubfield t
  *
  *    To reindex all bibs in QA:
  *      node scripts/bulk-index.js --type bib
@@ -110,9 +102,10 @@ const argv = require('minimist')(process.argv.slice(2), {
     updateOnly: false
   },
   boolean: ['updateOnly', 'skipDeletes'],
-  string: ['hasMarc', 'hasSubfield', 'bibId', 'fromDate', 'toDate'],
+  string: ['bibId', 'fromDate', 'toDate'],
   integer: ['limit', 'offset', 'batchSize']
 })
+
 const { populateBarcodeRecapCustomerCodeCache } = require('../lib/scsb/requests')
 
 const isCalledViaCommandLine = /scripts\/bulk-index(.js)?/.test(fs.realpathSync(process.argv[1]))
@@ -171,10 +164,8 @@ const usage = () => {
     'Usage:',
     'Reindex a single record:',
     '  node bulk-index --envfile [path to .env] (--bibId id|--itemId id)',
-    'Reindex by has-marc:',
-    '  node bulk-index --envfile [path to .env] --type (bib|item) --hasMarc 001 [--hasSubfield S]',
     'Reindex by nypl-source:',
-    '  node bulk-index --envfile [path to .env] --type (bib|item) --nyplSource SOURCE [--hasSubfield S]',
+    '  node bulk-index --envfile [path to .env] --type (bib|item) --nyplSource SOURCE',
     'Reindex by CSV (containing prefixed ids):',
     '  node bulk-index --envfile [path to .env] --csv FILE --csvIdColumn 0',
     'Perform any reindex only for specific bib-only properties by adding the following to any reindex args: ',
@@ -497,20 +488,6 @@ const buildSqlQuery = (options) => {
       params.push(options.nyplSource)
     }
 
-    // Filter on having a specific marc field:
-    if (options.hasMarc) {
-      selects.push('json_array_elements(var_fields::json) jV')
-      wheres.push("jV->>'marcTag' = $2")
-      params.push(options.hasMarc)
-    }
-
-    // Filter on existence of specific subfield:
-    if (options.hasSubfield) {
-      selects.push("json_array_elements(jV->'subfields') jVS")
-      wheres.push("jVS->>'tag' = $3")
-      params.push(options.hasSubfield)
-    }
-
     sqlFromAndWhere = selects.join(',\n')
     if (wheres.length) {
       sqlFromAndWhere += '\nWHERE ' + wheres.join('\nAND ')
@@ -519,23 +496,10 @@ const buildSqlQuery = (options) => {
     throw new Error('Insufficient options to buildSqlQuery')
   }
 
-  // Determine whether or not to use an inner-select to de-dupe the records:
-  const dedupe = !!options.hasMarc
-
-  const primaryColumns = dedupe ? 'DISTINCT id, nypl_source' : '*'
-  let query = `SELECT ${primaryColumns} FROM ${sqlFromAndWhere}` +
+  const query = `SELECT * FROM ${sqlFromAndWhere}` +
     (options.orderBy ? ` ORDER BY ${options.orderBy}` : '') +
     (options.limit ? ` LIMIT ${options.limit}` : '') +
     (options.offset ? ` OFFSET ${options.offset}` : '')
-  // Some queries will return bibs multiple times because a matched var/subfield repeats.
-  // To ensure we only handle such bibs once, we must de-deupe the results on id & nypl_source.
-  // We use an inner-select to identify all of the distinct bibs (by id and nypl_source)
-  // which we then JOIN to retrieve all fields.
-  if (dedupe) {
-    query = 'SELECT R.*' +
-      ` FROM (\n${query}\n) _R` +
-      ` INNER JOIN ${type} R ON _R.id=R.id AND _R.nypl_source=R.nypl_source`
-  }
 
   return { query, params, type }
 }
@@ -831,7 +795,6 @@ const run = async () => {
     (
       argv.type &&
       (
-        argv.hasMarc ||
         argv.nyplSource ||
         argv.fromDate
       )

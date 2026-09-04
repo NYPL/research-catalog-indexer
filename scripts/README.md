@@ -19,6 +19,14 @@ This document is a work in progress and is nowhere near exhaustive. It is meant 
 * Risks: Low. 
   * Single record update using code that has passed code review and has been safely deployed.
 
+### `export-ids-by-marc.js`
+* Summary: Query the BibService or ItemService by MARC tag (and optionally subfield) and output the matching `id` and `nypl_source` to a CSV file.
+* Input: `--type (bib|item) --hasMarc [marc] --toCsv [output.csv]`
+* Uses:
+  * Collecting records to reindex via `bulk-index.js` by CSV when you need to reindex by a specific MARC field.
+* Risks: Low. 
+  * Queries are read-only.
+
 ### `bulk-index.js`
 * Summary: reindex any number of bibs using indexer code **currently checked out** on your machine, using data from specified environment, to live ES index from that environment
 * Input: csv of ids or bib service query. Note that it may be more efficient to run the bib service query separately and output to a csv with id and nyplSource column. If the property in question is a bib-level property, see documentation `bulk-index.js` about bib-only update invocations.
@@ -59,9 +67,10 @@ This case has two possible sources of bib ids:
   2. Bib service
     - A single marc field rule has been changed for a property that is comprised of multiple marc fields, AND that single marc field is not on every bib
     - Example: `subjectLiteral` ES property contains many 6xx fields. If recent updates only apply to uncommon 690 fields, every bib does not need to be updated, just the ones with 690 fields. Querying the bib service is the way to go here since the marc field is relevant.
-    - Example of SQL query for ids for bibs with a 690 marc field present, the output of which is written to a CSV:
+    - Example of using `export-ids-by-marc.js` to get bibs with a 690 marc field present, the output of which is written to a CSV:
     ```
-    \COPY (SELECT DISTINCT id, nypl_source FROM bib, json_array_elements(bib.var_fields::json) j690 WHERE jsonb_typeof(bib.var_fields) = 'array' AND j690->>'marcTag' = '690') TO '~/690_bibs.csv' WITH CSV DELIMITER ',' HEADER;
+    node scripts/export-ids-by-marc.js --envfile config/qa-bulk-index.env --type bib --hasMarc 690 --toCsv 690_bibs.csv
+    ```
 
 ## EC2
 If you are reindexing or updating more than a million or so records, it is a good idea to run the script from our dedicated server in AWS for long-running scripts. See documentation [here](https://docs.google.com/document/d/1A2PQt32tMmLRyI7KcTsOtheFMVvROt3akGdXuSXxwYQ/edit?tab=t.0#heading=h.njlhfusam8s0) for instructions.

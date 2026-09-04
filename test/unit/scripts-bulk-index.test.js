@@ -292,22 +292,6 @@ describe('scripts/bulk-index', () => {
         })
     })
 
-    it('builds sql for has-marc query', () => {
-      expect(bulkIndexer.buildSqlQuery({ hasMarc: '123', nyplSource: 'some-source', type: 'table_name' }))
-        .to.deep.eq({
-          query: [
-            'SELECT R.* FROM (',
-            'SELECT DISTINCT id, nypl_source FROM table_name,',
-            'json_array_elements(var_fields::json) jV',
-            'WHERE nypl_source = $1',
-            "AND jV->>'marcTag' = $2",
-            ') _R INNER JOIN table_name R ON _R.id=R.id AND _R.nypl_source=R.nypl_source'
-          ].join('\n'),
-          params: ['some-source', '123'],
-          type: 'table_name'
-        })
-    })
-
     it('builds sql for type query', () => {
       expect(bulkIndexer.buildSqlQuery({ type: 'table_name' }))
         .to.deep.eq({
