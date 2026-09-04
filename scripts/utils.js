@@ -402,9 +402,9 @@ class Timer {
 }
 
 class CsvProgress {
-  constructor (filepath) {
+  constructor (filepath, statusFilepath) {
     this.filepath = filepath
-    this.statusFilepath = `${filepath}-status.json`
+    this.statusFilepath = statusFilepath || `${filepath}-status.json`
     this.state = {
       status: 'preparing',
       started: new Date().toISOString(),
@@ -415,8 +415,8 @@ class CsvProgress {
     }
   }
 
-  static async forCsv (filepath) {
-    const progress = new CsvProgress(filepath)
+  static async forCsv (filepath, statusFilepath) {
+    const progress = new CsvProgress(filepath, statusFilepath)
     if (fs.existsSync(progress.statusFilepath)) {
       progress.state = JSON.parse(fs.readFileSync(progress.statusFilepath, 'utf8'))
     } else {
@@ -432,6 +432,7 @@ class CsvProgress {
 
   save () {
     this.state.updated = new Date().toISOString()
+    console.log('saving to ', this.statusFilepath)
     fs.writeFileSync(this.statusFilepath, JSON.stringify(this.state, null, 2))
   }
 
