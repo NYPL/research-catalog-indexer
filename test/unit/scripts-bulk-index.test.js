@@ -3,12 +3,14 @@ const expect = chai.expect
 chai.use(require('chai-as-promised'))
 
 const sinon = require('sinon')
+const fs = require('fs')
 
 const logger = require('../../lib/logger')
 const bulkIndexer = require('../../scripts/bulk-index')
 const index = require('../../index')
 const prefetchers = require('../../lib/prefetch')
 const schema = require('../../lib/elastic-search/index-schema')
+const utils = require('../../scripts/utils')
 
 // Util for stripping dupe whitespace from sql queries:
 const removeDupeWhitespace = (sql) => {
@@ -74,6 +76,38 @@ const pgFixtures = [
       { id: 2345 },
       { id: 3456 }
     ]
+  },
+  {
+    match: /SELECT \* FROM bib WHERE nypl_source = \$1 AND id IN \('2345','3456','4567'\) LIMIT 3/,
+    rows: [
+      { id: 2345 },
+      { id: 3456 },
+      { id: 4567 }
+    ]
+  },
+  {
+    match: /SELECT \* FROM bib WHERE nypl_source = \$1 AND id IN \('1234'\) LIMIT 1/,
+    rows: [{ id: 1234 }]
+  },
+  {
+    match: /SELECT \* FROM bib WHERE nypl_source = \$1 AND id IN \('2345'\) LIMIT 1/,
+    rows: [{ id: 2345 }]
+  },
+  {
+    match: /SELECT \* FROM bib WHERE nypl_source = \$1 AND id IN \('3456'\) LIMIT 1/,
+    rows: [{ id: 3456 }]
+  },
+  {
+    match: /SELECT \* FROM bib WHERE nypl_source = \$1 AND id IN \('5789'\) LIMIT 1/,
+    rows: [{ id: 5789 }]
+  },
+  {
+    match: /SELECT \* FROM bib WHERE nypl_source = \$1 AND id IN \('5678'\) LIMIT 1/,
+    rows: [{ id: 5678 }]
+  },
+  {
+    match: /SELECT \* FROM bib WHERE nypl_source = \$1 AND id IN \('2345','3456'\) LIMIT 2/,
+    rows: [{ id: 2345 }, { id: 3456 }]
   },
   {
     match: /SELECT \* FROM bib WHERE nypl_source = \$1 AND id IN \('4567'\) LIMIT 1/,
@@ -151,6 +185,23 @@ describe('scripts/bulk-index', () => {
     })
   })
   describe('updateByCsv', () => {
+    const cleanUpStatusFiles = () => {
+      const testFiles = [
+        './test/fixtures/bulk-index-by-csv-numeric-ids.csv-status.json',
+        './test/fixtures/bulk-index-by-csv-ids-with-nypl-source.csv-status.json',
+        './test/fixtures/bulk-index-by-csv-prefixed-ids.csv-status.json',
+        './nonexistantfile-status.json'
+      ]
+      testFiles.forEach(file => {
+        if (fs.existsSync(file)) {
+          fs.unlinkSync(file)
+        }
+      })
+    }
+
+    beforeEach(cleanUpStatusFiles)
+    afterEach(cleanUpStatusFiles)
+
     it('throws error when insufficient config', async () => {
       await expect(bulkIndexer.updateByCsv()).to.be.rejected
       await expect(bulkIndexer.updateByCsv({})).to.be.rejected
@@ -164,7 +215,9 @@ describe('scripts/bulk-index', () => {
     it('given a csv with numeric ids, throws error if type or nyplSource not given', async () => {
       const csv = './test/fixtures/bulk-index-by-csv-numeric-ids.csv'
       await expect(bulkIndexer.updateByCsv({ csv, csvIdColumn: 0 })).to.be.rejected
+      cleanUpStatusFiles()
       await expect(bulkIndexer.updateByCsv({ csv, csvIdColumn: 0, type: 'bib' })).to.be.rejected
+      cleanUpStatusFiles()
       await expect(bulkIndexer.updateByCsv({ csv, csvIdColumn: 0, nyplSource: 'sierra-nypl' })).to.be.rejected
     })
 
@@ -208,6 +261,66 @@ describe('scripts/bulk-index', () => {
       expect(records[0]).to.deep.include({
         id: 1234,
         nyplSource: 'sierra-nypl'
+      })
+    })
+
+    describe('CsvProgress integration', () => {
+      it('writes a "failed" status on initialization error', async () => {
+        const csv = './test/fixtures/bulk-index-by-csv-numeric-ids.csv'
+        await expect(bulkIndexer.updateByCsv({ csv, csvIdColumn: 0 })).to.be.rejected
+
+        const status = JSON.parse(fs.readFileSync(`${csv}-status.json`, 'utf8'))
+        expect(status.status).to.equal('failed')
+        expect(status.messages[0]).to.include('Must specify --nyplSource')
+      })
+
+      it('updates the offset after each batch and marks completed', async () => {
+        const csv = './test/fixtures/bulk-index-by-csv-ids-with-nypl-source.csv'
+        const updateOffsetSpy = sinon.spy(utils.CsvProgress.prototype, 'updateOffset')
+
+        // Process 3 records with a batchSize of 1 so it updates offset 3 times, plus 1 initial setup update
+        await bulkIndexer.updateByCsv({ csv, csvIdColumn: 0, csvNyplSourceColumn: 1, type: 'bib', batchSize: 1, limit: 3 })
+
+        expect(updateOffsetSpy.callCount).to.equal(4)
+        expect(updateOffsetSpy.getCall(0).args[0]).to.equal(0)
+        expect(updateOffsetSpy.getCall(1).args[0]).to.equal(1)
+        expect(updateOffsetSpy.getCall(2).args[0]).to.equal(2)
+        expect(updateOffsetSpy.getCall(3).args[0]).to.equal(3)
+
+        const status = JSON.parse(fs.readFileSync(`${csv}-status.json`, 'utf8'))
+        expect(status.status).to.equal('completed')
+        expect(status.offset).to.equal(3)
+
+        updateOffsetSpy.restore()
+      })
+
+      it('resumes from the correct offset if a running status file exists', async () => {
+        const csv = './test/fixtures/bulk-index-by-csv-ids-with-nypl-source.csv'
+        fs.writeFileSync(`${csv}-status.json`, JSON.stringify({
+          status: 'running',
+          offset: 2,
+          count: 6
+        }))
+
+        await bulkIndexer.updateByCsv({ csv, csvIdColumn: 0, csvNyplSourceColumn: 1, type: 'bib', batchSize: 3, limit: 2 })
+
+        const [, records] = index.processRecords.getCall(0).args
+        // Fast forwards past first 2 rows, parsing the next 2
+        expect(records).to.have.lengthOf(2)
+        expect(records[0]).to.deep.include({ id: 5678 })
+      })
+
+      it('starts with the correct offset if passed explicitly', async () => {
+        const csv = './test/fixtures/bulk-index-by-csv-ids-with-nypl-source.csv'
+        await bulkIndexer.updateByCsv({ csv, csvIdColumn: 0, csvNyplSourceColumn: 1, type: 'bib', batchSize: 3, offset: 1 })
+
+        const [, records] = index.processRecords.getCall(0).args
+        expect(records).to.have.lengthOf(3)
+        expect(records[0]).to.deep.include({ id: 2345 })
+
+        const status = JSON.parse(fs.readFileSync(`${csv}-status.json`, 'utf8'))
+        expect(status.status).to.equal('completed')
+        expect(status.offset).to.equal(6)
       })
     })
   })
@@ -317,6 +430,69 @@ describe('scripts/bulk-index', () => {
           params: [],
           type: 'table_name'
         })
+    })
+  })
+
+  describe('extractAndValidateIdentifiers', () => {
+    let sourceMapper
+    const mockProgress = {
+      addMessage: sinon.stub(),
+      updateStatus: sinon.stub()
+    }
+
+    before(() => {
+      sourceMapper = {
+        splitIdentifier: (id) => {
+          if (id.startsWith('cb')) return { id: id.slice(2), type: 'bib', nyplSource: 'recap-cul' }
+          if (id.startsWith('pb')) return { id: id.slice(2), type: 'bib', nyplSource: 'recap-pul' }
+          if (id.startsWith('b')) return { id: id.slice(1), type: 'bib', nyplSource: 'sierra-nypl' }
+          return null
+        }
+      }
+    })
+
+    afterEach(() => {
+      mockProgress.addMessage.resetHistory()
+      mockProgress.updateStatus.resetHistory()
+    })
+
+    it('processes a single column CSV with prefixed ids', () => {
+      const rows = [['b1234'], ['cb5678'], ['pb9012']]
+      const options = { csvIdColumn: 0, offset: 0, csv: 'test.csv' }
+      const res = bulkIndexer._testing.extractAndValidateIdentifiers(rows, options, mockProgress, sourceMapper)
+
+      expect(res).to.deep.equal([
+        { id: '1234', nyplSource: 'sierra-nypl', type: 'bib' },
+        { id: '5678', nyplSource: 'recap-cul', type: 'bib' },
+        { id: '9012', nyplSource: 'recap-pul', type: 'bib' }
+      ])
+    })
+
+    it('processes a two column CSV with non-prefixed ids and nyplSource', () => {
+      const rows = [['1234', 'sierra-nypl'], ['5678', 'sierra-nypl']]
+      const options = { csvIdColumn: 0, csvNyplSourceColumn: 1, type: 'bib', offset: 0, csv: 'test.csv' }
+      const res = bulkIndexer._testing.extractAndValidateIdentifiers(rows, options, mockProgress, sourceMapper)
+
+      expect(res).to.deep.equal([
+        { id: '1234', nyplSource: 'sierra-nypl' },
+        { id: '5678', nyplSource: 'sierra-nypl' }
+      ])
+    })
+
+    it('throws error when type is not apparent or specified', () => {
+      const rows = [['1234', 'sierra-nypl']]
+      const options = { csvIdColumn: 0, csvNyplSourceColumn: 1, offset: 0, csv: 'test.csv' }
+      expect(() => bulkIndexer._testing.extractAndValidateIdentifiers(rows, options, mockProgress, sourceMapper))
+        .to.throw('Must specify --type if not apparent from CSV')
+      expect(mockProgress.updateStatus.calledWith('failed')).to.eq(true)
+    })
+
+    it('throws error when nyplSource is not apparent or specified', () => {
+      const rows = [['1234']]
+      const options = { csvIdColumn: 0, type: 'bib', offset: 0, csv: 'test.csv' }
+      expect(() => bulkIndexer._testing.extractAndValidateIdentifiers(rows, options, mockProgress, sourceMapper))
+        .to.throw('Must specify --nyplSource if not apparent from CSV (use --csvNyplSourceColumn N if CSV includes nyplSource)')
+      expect(mockProgress.updateStatus.calledWith('failed')).to.eq(true)
     })
   })
 
