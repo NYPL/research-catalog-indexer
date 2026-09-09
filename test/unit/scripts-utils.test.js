@@ -1,5 +1,6 @@
 const expect = require('chai').expect
 const sinon = require('sinon')
+const fs = require('fs')
 
 const logger = require('../../lib/logger')
 const utils = require('../../scripts/utils')
@@ -181,6 +182,67 @@ describe('scripts/utils', () => {
           { id: '5678', nyplSource: null }
         ]
       ])
+    })
+  })
+
+  describe('CsvProgress', () => {
+    const dummyCsv = './dummy.csv'
+    const statusFile = `${dummyCsv}-status.json`
+
+    afterEach(() => {
+      if (fs.existsSync(statusFile)) {
+        fs.unlinkSync(statusFile)
+      }
+    })
+
+    it('initializes a new status file if none exists', async () => {
+      const progress = await utils.CsvProgress.forCsv(dummyCsv)
+      expect(progress.status()).to.equal('preparing')
+      expect(progress.offset).to.equal(0)
+
+      const fileContent = JSON.parse(fs.readFileSync(statusFile, 'utf8'))
+      expect(fileContent.status).to.equal('preparing')
+      expect(fileContent.count).to.equal(0)
+      expect(fileContent.offset).to.equal(0)
+    })
+
+    it('loads existing status file', async () => {
+      fs.writeFileSync(statusFile, JSON.stringify({
+        status: 'running',
+        offset: 42,
+        count: 100
+      }))
+
+      const progress = await utils.CsvProgress.forCsv(dummyCsv)
+      expect(progress.status()).to.equal('running')
+      expect(progress.offset).to.equal(42)
+    })
+
+    it('updates status and saves', async () => {
+      const progress = await utils.CsvProgress.forCsv(dummyCsv)
+      progress.updateStatus('completed')
+
+      expect(progress.status()).to.equal('completed')
+      const fileContent = JSON.parse(fs.readFileSync(statusFile, 'utf8'))
+      expect(fileContent.status).to.equal('completed')
+    })
+
+    it('updates offset and saves', async () => {
+      const progress = await utils.CsvProgress.forCsv(dummyCsv)
+      progress.updateOffset(50)
+
+      expect(progress.offset).to.equal(50)
+      const fileContent = JSON.parse(fs.readFileSync(statusFile, 'utf8'))
+      expect(fileContent.offset).to.equal(50)
+    })
+
+    it('adds messages and saves', async () => {
+      const progress = await utils.CsvProgress.forCsv(dummyCsv)
+      progress.addMessage('error 1')
+      progress.addMessage('error 2')
+
+      const fileContent = JSON.parse(fs.readFileSync(statusFile, 'utf8'))
+      expect(fileContent.messages).to.deep.equal(['error 1', 'error 2'])
     })
   })
 })
