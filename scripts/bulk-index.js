@@ -99,10 +99,11 @@ const argv = require('minimist')(process.argv.slice(2), {
     properties: '',
     recapBarcodeCustomerCodeMap: null,
     skipPrefetch: false,
-    updateOnly: false
+    updateOnly: false,
+    jobfile: null
   },
   boolean: ['updateOnly', 'skipDeletes'],
-  string: ['bibId', 'fromDate', 'toDate'],
+  string: ['hasMarc', 'hasSubfield', 'bibId', 'fromDate', 'toDate', 'jobfile', 'envfile'],
   integer: ['limit', 'offset', 'batchSize']
 })
 
@@ -691,7 +692,7 @@ const updateByCsv = async (options = {}) => {
   const preparing = 'preparing'
   const running = 'running'
 
-  const progress = await CsvProgress.forCsv(options.csv)
+  const progress = await CsvProgress.forCsv(options.csv, options.jobfile)
 
   if ([completed, failed].includes(progress.status())) {
     logger.info(`Skipping CSV ${options.csv} because status is ${progress.status()}`)
