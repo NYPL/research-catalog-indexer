@@ -37,7 +37,7 @@ const SierraBib = require('../lib/sierra-models/bib')
 const SierraHolding = require('../lib/sierra-models/holding')
 const { currentDocument } = require('../lib/elastic-search/requests')
 const { loadNyplCoreData } = require('../lib/load-core-data')
-const { schema } = require('../lib/elastic-search/index-schema')
+const { schema } = require('../lib/elastic-search/index-config/index-schema')
 
 const logger = require('../lib/logger')
 logger.setLevel(process.env.LOG_LEVEL || 'info')
