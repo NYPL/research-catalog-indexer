@@ -9,7 +9,7 @@
  * instead of reporting only that there is a diff.
  *
  * Usage:
- *   node scripts/compare-with-indexed --envfile [path to .env] --uri [bnum] --activeIndex [boolean] --verbose [boolean]
+ *   node scripts/compare-with-indexed.js --envfile [path to .env] --uri [bnum] --activeIndex [boolean] --verbose [boolean]
  */
 
 const argv = require('minimist')(process.argv.slice(2), {

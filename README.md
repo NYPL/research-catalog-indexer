@@ -36,7 +36,7 @@ sam local invoke --profile nypl-digital-dev -t sam.local.yml -e test/sample-even
 
 The bulk-indexer can be used to index lots of records at once by direct BibService SQL query.
 
-For example, to reindex the first 10K NYPL bibs with marc 001 in QA:
+For example, to reindex the first 10K NYPL bibs in QA:
 ```
 node scripts/bulk-index.js --envfile config/qa-bulk-index.env --type bib --hasMarc 001 --nyplSource sierra-nypl --limit 10000
 ```
