@@ -58,8 +58,9 @@ const optionallyCopyContentsToNewIndex = async (newIndexName) => {
     if (answer === 'yes') {
       console.log(`Copying contents of ${oldIndex} to ${newIndexName}`)
       const resp = await client.reindex({
+        wait_for_completion: false, 
         body: {
-          source: { index: oldIndex },
+          source: { index: oldIndex, "_source": Object.keys(schema())},
           dest: { index: newIndexName }
         }
       })
