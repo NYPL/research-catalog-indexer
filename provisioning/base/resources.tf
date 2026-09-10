@@ -47,10 +47,10 @@ resource "aws_s3_object" "uploaded_zip" {
 resource "aws_lambda_function" "lambda_instance" {
   description   = "Indexes bib data for the DiscoveryAPI, which powers the Research Catalog"
   function_name = "ResearchCatalogIndexer-${var.environment}"
-  handler       = "index.handler"
+  handler       = "newrelic-lambda-wrapper.handler"
   memory_size   = 512
   role          = "arn:aws:iam::946183545209:role/lambda-full-access"
-  runtime       = "nodejs20.x"
+  runtime       = "nodejs22.x"
   timeout       = 300
 
   # Location of the zipped code in S3:
@@ -65,6 +65,8 @@ resource "aws_lambda_function" "lambda_instance" {
   environment {
     variables = { for tuple in regexall("(.*?)=(.*)", file("../../config/${var.environment}.env")) : tuple[0] => tuple[1] }
   }
+
+  layers = [ "arn:aws:lambda:us-east-1:451483290750:layer:NewRelicNodeJS:33" ]
 
   vpc_config {
     subnet_ids         = var.vpc_config.subnet_ids
