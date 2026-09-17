@@ -1,8 +1,11 @@
 const expect = require('chai').expect
 const sinon = require('sinon')
+const fs = require('fs')
 
 const logger = require('../../lib/logger')
 const utils = require('../../scripts/utils')
+const retryUtils = require('../../lib/utils/retry.js')
+const { retry } = retryUtils
 
 describe('scripts/utils', () => {
   describe('batch', () => {
@@ -66,15 +69,17 @@ describe('scripts/utils', () => {
   describe('retry', () => {
     before(() => {
       sinon.stub(utils, 'delay').callsFake(() => Promise.resolve())
+      sinon.stub(retryUtils, 'delay').callsFake(() => Promise.resolve())
     })
 
     after(() => utils.delay.restore())
+    after(() => retryUtils.delay.restore())
 
     it('retries a failing function N times', async () => {
       const call = () => Promise.reject(new Error('Error!'))
 
-      await expect(call().catch(utils.retry(call, 1))).to.be.rejectedWith('Exhausted 1 retries')
-      await expect(call().catch(utils.retry(call, 3))).to.be.rejectedWith('Exhausted 3 retries')
+      await expect(call().catch(retry(call, 1))).to.be.rejectedWith('Exhausted 1 retries')
+      await expect(call().catch(retry(call, 3))).to.be.rejectedWith('Exhausted 3 retries')
     })
 
     it('resolves a temporarily failing function', async () => {
@@ -89,11 +94,11 @@ describe('scripts/utils', () => {
       }
 
       // First, confirm fails if only allowed to retry twice:
-      await expect(call().catch(utils.retry(call, 2))).to.be.rejectedWith('Exhausted 2 retries')
+      await expect(call().catch(retry(call, 2))).to.be.rejectedWith('Exhausted 2 retries')
 
       // Next, confirm it succeeds if allowed to retry thrice:
       errorCount = 0
-      await expect(call().catch(utils.retry(call, 3))).to.eventually.equal('toast')
+      await expect(call().catch(retry(call, 3))).to.eventually.equal('toast')
     })
   })
 
@@ -177,6 +182,67 @@ describe('scripts/utils', () => {
           { id: '5678', nyplSource: null }
         ]
       ])
+    })
+  })
+
+  describe('CsvProgress', () => {
+    const dummyCsv = './dummy.csv'
+    const statusFile = `${dummyCsv}-status.json`
+
+    afterEach(() => {
+      if (fs.existsSync(statusFile)) {
+        fs.unlinkSync(statusFile)
+      }
+    })
+
+    it('initializes a new status file if none exists', async () => {
+      const progress = await utils.CsvProgress.forCsv(dummyCsv)
+      expect(progress.status()).to.equal('preparing')
+      expect(progress.offset).to.equal(0)
+
+      const fileContent = JSON.parse(fs.readFileSync(statusFile, 'utf8'))
+      expect(fileContent.status).to.equal('preparing')
+      expect(fileContent.count).to.equal(0)
+      expect(fileContent.offset).to.equal(0)
+    })
+
+    it('loads existing status file', async () => {
+      fs.writeFileSync(statusFile, JSON.stringify({
+        status: 'running',
+        offset: 42,
+        count: 100
+      }))
+
+      const progress = await utils.CsvProgress.forCsv(dummyCsv)
+      expect(progress.status()).to.equal('running')
+      expect(progress.offset).to.equal(42)
+    })
+
+    it('updates status and saves', async () => {
+      const progress = await utils.CsvProgress.forCsv(dummyCsv)
+      progress.updateStatus('completed')
+
+      expect(progress.status()).to.equal('completed')
+      const fileContent = JSON.parse(fs.readFileSync(statusFile, 'utf8'))
+      expect(fileContent.status).to.equal('completed')
+    })
+
+    it('updates offset and saves', async () => {
+      const progress = await utils.CsvProgress.forCsv(dummyCsv)
+      progress.updateOffset(50)
+
+      expect(progress.offset).to.equal(50)
+      const fileContent = JSON.parse(fs.readFileSync(statusFile, 'utf8'))
+      expect(fileContent.offset).to.equal(50)
+    })
+
+    it('adds messages and saves', async () => {
+      const progress = await utils.CsvProgress.forCsv(dummyCsv)
+      progress.addMessage('error 1')
+      progress.addMessage('error 2')
+
+      const fileContent = JSON.parse(fs.readFileSync(statusFile, 'utf8'))
+      expect(fileContent.messages).to.deep.equal(['error 1', 'error 2'])
     })
   })
 })

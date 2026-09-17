@@ -58,6 +58,24 @@ describe('EsItem', function () {
     })
   })
 
+  describe('buildingLocationId', function () {
+    it('returns building location based on item holding location', function () {
+      const record = new SierraItem(require('../fixtures/item-14441624.json'))
+      const esItem = new EsItem(record)
+      expect(esItem.buildingLocationId()).to.deep.equal(['ma'])
+    })
+
+    it('returns null if item holding location does not map to a building locatin', function () {
+      const fakeRecord = new SierraItem({
+        id: '1234',
+        nyplSource: 'sierra-nypl',
+        location: { code: 'zzzzz' }
+      })
+      const esItem = new EsItem(fakeRecord)
+      expect(esItem.buildingLocationId()).to.equal(null)
+    })
+  })
+
   describe('catalogItemType', function () {
     it('should return mapped item type if present', function () {
       const record = new SierraItem(require('../fixtures/item-17145801.json'))
@@ -81,6 +99,24 @@ describe('EsItem', function () {
           'catalogItemType:33||google project, serial'
         ]
       )
+    })
+  })
+
+  describe('collectionId', function () {
+    it('returns collection code based on item holding location', function () {
+      const record = new SierraItem(require('../fixtures/item-14441624.json'))
+      const esItem = new EsItem(record)
+      expect(esItem.collectionId()).to.deep.equal(['map'])
+    })
+
+    it('returns null if item holding location does not map to a collection', function () {
+      const fakeRecord = new SierraItem({
+        id: '1234',
+        nyplSource: 'sierra-nypl',
+        location: { code: 'zzzzz' }
+      })
+      const esItem = new EsItem(fakeRecord)
+      expect(esItem.collectionId()).to.equal(null)
     })
   })
 
@@ -201,6 +237,21 @@ describe('EsItem', function () {
           ]
         )
       })
+
+      it('should ignore copy numbers < 2', function () {
+        // Overwrite fixture 'Copy No.' value with "0" and "1":
+        const itemMarc = JSON.parse(JSON.stringify(require('../fixtures/item-42330197.json')))
+        ; ['0', '1'].forEach((value) => {
+          itemMarc.fixedFields['58'].value = value
+          const record = new SierraItem(itemMarc)
+          const esItem = new EsItem(record)
+          expect(esItem.shelfMark()).to.deep.equal(
+            [
+              '*MGZPA JRDD 1972 1'
+            ]
+          )
+        })
+      })
     })
   })
 
@@ -271,6 +322,30 @@ describe('EsItem', function () {
         record._recapCustomerCode = 'NA'
         const esItem = new EsItem(record)
         expect(esItem.recapCustomerCode()).to.deep.equal(['NA'])
+      })
+    })
+
+    describe('hl record in recap', function () {
+      it('should return the recapCustomerCode without prefix', function () {
+        const record = new SierraItem(require('../fixtures/item-hl-231730577470003941.json'))
+        const esItem = new EsItem(record)
+        expect(esItem.recapCustomerCode()).to.deep.equal(['HV'])
+      })
+    })
+
+    describe('hl record in hd', function () {
+      it('should return the recapCustomerCode with hd prefix', function () {
+        const record = new SierraItem(require('../fixtures/item-hl-231911262430003941.json'))
+        const esItem = new EsItem(record)
+        expect(esItem.recapCustomerCode()).to.deep.equal(['hd:HL'])
+      })
+    })
+
+    describe('PUL record in recap', function () {
+      it('should return the recapCustomerCode without prefix', function () {
+        const record = new SierraItem(require('../fixtures/item-pul-189241.json'))
+        const esItem = new EsItem(record)
+        expect(esItem.recapCustomerCode()).to.deep.equal(['PA'])
       })
     })
   })
