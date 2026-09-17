@@ -35,7 +35,8 @@ for file in `ls $BIB_IDS_DIR`; do
   echo "Processing $file"
   if ! node ./scripts/bulk-index.js "$@" --batchSize 500 --type bib --envfile $CONFIG_PATH --skipDeletes --csv $BIB_IDS_DIR/$file --csvIdColumn 0 --csvNyplSourceColumn 1; then
     echo "csv file failed run: $file"
-    mv $BIB_IDS_DIR/$file $ERRORS_DIR
+    mv $BIB_IDS_DIR/$file* $ERRORS_DIR
+  else
+    mv $BIB_IDS_DIR/$file* $PROCESSED_IDS_DIR
   fi
-  mv $BIB_IDS_DIR/$file $PROCESSED_IDS_DIR
 done

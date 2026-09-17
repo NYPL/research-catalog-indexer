@@ -616,6 +616,15 @@ const updateByBibOrItemServiceQuery = async (options) => {
 const castRowToIdentifier = (row, options) => {
   const id = row[options.idColumn]
 
+  // If the CSV already tells us the nyplSource, trust it instead of guessing
+  // from the id's shape
+  if (typeof options.nyplSourceColumn !== 'undefined') {
+    return {
+      id,
+      nyplSource: row[options.nyplSourceColumn]
+    }
+  }
+
   const isPrefixedId = /^[a-z]+\d+$/.test(id)
 
   if (isPrefixedId) {
@@ -626,8 +635,8 @@ const castRowToIdentifier = (row, options) => {
     return split
   } else {
     return {
-      id: row[options.idColumn],
-      nyplSource: typeof options.nyplSourceColumn === 'undefined' ? null : row[options.nyplSourceColumn]
+      id,
+      nyplSource: null
     }
   }
 }
