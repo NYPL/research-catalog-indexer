@@ -712,7 +712,7 @@ const updateByCsv = async (options = {}) => {
   }
 
   const rawContent = fs.readFileSync(options.csv, 'utf8')
-  const rows = csvParse(rawContent)
+  const rows = csvParse(rawContent, { trim: true, skip_empty_lines: true })
 
   const sourceMapper = NyplSourceMapper.instance()
 
