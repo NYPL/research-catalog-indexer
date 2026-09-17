@@ -18,7 +18,7 @@ const setAwsProfile = (profile = 'nypl-digital-dev') => {
 
 const die = (message) => {
   logger.error('Error: ' + message)
-  process.exit()
+  process.exit(1)
 }
 
 function removeEmpty (obj) {
