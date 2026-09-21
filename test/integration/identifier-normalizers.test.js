@@ -58,14 +58,10 @@ describe('ID2NYQL identifier normalizers (_analyze integration)', () => {
     console.log(
       `identifiers integration test setup: \n\tcreating new index at ${INDEX_NAME}`
     )
-    try {
-      await esClient.indices.create({
-        index: INDEX_NAME,
-        body: { settings: indexSettings, mappings: identiferSettings.mappings }
-      })
-    } catch (e) {
-      console.dir(e, { depth: null })
-    }
+    await esClient.indices.create({
+      index: INDEX_NAME,
+      body: { settings: indexSettings, mappings: identiferSettings.mappings }
+    })
   })
 
   after(async () => {
