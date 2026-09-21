@@ -48,7 +48,7 @@
         },
         "bnumber_strip_check_digit": {
           "type": "pattern_replace",
-          "pattern": "^(\\d{8})\\d$",
+          "pattern": "^(\\d{8})(?:\\d|[xX])$",
           "replacement": "$1"
         }
       },
