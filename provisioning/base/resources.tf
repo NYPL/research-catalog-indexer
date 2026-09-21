@@ -124,7 +124,7 @@ resource "aws_cloudwatch_metric_alarm" "kinesis_iterator_age" {
 
 resource "aws_cloudwatch_log_metric_filter" "log_error_metric_filter" {
   name           = local.log_error_metric
-  pattern        = "{ $.level = error }"
+  pattern        = "{ $.level = \"error\" }"
   log_group_name = "/aws/lambda/${aws_lambda_function.lambda_instance.function_name}"
 
   metric_transformation {
