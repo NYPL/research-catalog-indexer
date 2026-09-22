@@ -1,5 +1,5 @@
 const expect = require('chai').expect
-const { schema } = require('../../lib/elastic-search/index-schema')
+const { schema } = require('../../lib/elastic-search/index-config/index-schema')
 
 describe('elastic search schema', () => {
   it('returns the schema', () => {
