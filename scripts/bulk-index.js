@@ -202,7 +202,7 @@ const db = {
     ])
       .catch((e) => {
         logger.error('Error decrypting db config. Be sure to specify an --envfile with encrypted db connection info.')
-        process.exit()
+        process.exit(1)
       })
     const config = {
       user,
@@ -589,6 +589,13 @@ const updateByBibOrItemServiceQuery = async (options) => {
           }
         }
       }
+      // If we did all retries and no success, the batch was not indexed
+      if (!processed) {
+        cursor.close(() => {
+          client.release()
+        })
+        throw new Error(`Failed to process batch of ${rows.length} record(s) after retries`)
+      }
       count += rows.length
 
       // Log out progress so far:
@@ -610,6 +617,15 @@ const updateByBibOrItemServiceQuery = async (options) => {
 const castRowToIdentifier = (row, options) => {
   const id = row[options.idColumn]
 
+  // If the CSV already tells us the nyplSource, trust it instead of guessing
+  // from the id's shape
+  if (typeof options.nyplSourceColumn !== 'undefined') {
+    return {
+      id,
+      nyplSource: row[options.nyplSourceColumn]
+    }
+  }
+
   const isPrefixedId = /^[a-z]+\d+$/.test(id)
 
   if (isPrefixedId) {
@@ -620,8 +636,8 @@ const castRowToIdentifier = (row, options) => {
     return split
   } else {
     return {
-      id: row[options.idColumn],
-      nyplSource: typeof options.nyplSourceColumn === 'undefined' ? null : row[options.nyplSourceColumn]
+      id,
+      nyplSource: null
     }
   }
 }
@@ -706,7 +722,7 @@ const updateByCsv = async (options = {}) => {
   }
 
   const rawContent = fs.readFileSync(options.csv, 'utf8')
-  const rows = csvParse(rawContent)
+  const rows = csvParse(rawContent, { trim: true, skip_empty_lines: true })
 
   const sourceMapper = NyplSourceMapper.instance()
 
@@ -846,6 +862,9 @@ const run = async () => {
     await updateByCsv(argv)
       .catch((e) => {
         logger.error(`Error: ${e.message}`, e)
+        // Ensure the process exits non-zero so callers (e.g. the bulk chunk
+        // runner) detect the failure instead of treating a partial run as success:
+        process.exitCode = 1
       })
   } else if (
     argv.bibId ||
@@ -892,7 +911,8 @@ const cleanup = async () => {
   // }
   totalTimer.endTimer()
   totalTimer.howMany('hours')
-  process.exit(0)
+  // Preserve any non-zero exitCode already set (e.g. by a swallowed CSV error) instead of forcing success:
+  process.exit(process.exitCode || 0)
 }
 
 const totalTimer = new Timer('bulk update')
@@ -900,7 +920,10 @@ const totalTimer = new Timer('bulk update')
 if (isCalledViaCommandLine) {
   preflightSetup()
     .then(run)
-    .catch((e) => logger.error(e.message))
+    .catch((e) => {
+      logger.error(e.message)
+      process.exitCode = 1
+    })
     .finally(cleanup)
 }
 

@@ -9,14 +9,14 @@ BIB_IDS_DIR=$SCRIPT_DIR/tmp/bib_ids/
 ERRORS_DIR=$SCRIPT_DIR/tmp/chunk_run_errors/
 PROCESSED_IDS_DIR=$SCRIPT_DIR/tmp/processed/
 FETCH_IDS=$2
-CONFIG_PATH=$1
+CONFIG_PATH=config/"$1"-bulk-index.env
 
 mkdir -p $BIB_IDS_DIR
 mkdir -p $ERRORS_DIR
 mkdir -p $PROCESSED_IDS_DIR
 
 if [ "$FETCH_IDS" == "true" ]; then
-  source config/"$1"-bulk-index.env
+  source "$CONFIG_PATH"
   DECRYPTED_PW=$(kms-util decrypt $BIB_SERVICE_DB_PW)
   DECRYPTED_HOST=$(kms-util decrypt $BIB_SERVICE_DB_HOST)
   DECRYPTED_USER=$(kms-util decrypt $BIB_SERVICE_DB_USER)
@@ -35,7 +35,8 @@ for file in `ls $BIB_IDS_DIR`; do
   echo "Processing $file"
   if ! node ./scripts/bulk-index.js "$@" --batchSize 500 --type bib --envfile $CONFIG_PATH --skipDeletes --csv $BIB_IDS_DIR/$file --csvIdColumn 0 --csvNyplSourceColumn 1; then
     echo "csv file failed run: $file"
-    mv $BIB_IDS_DIR/$file $ERRORS_DIR
+    mv $BIB_IDS_DIR/$file* $ERRORS_DIR
+  else
+    mv $BIB_IDS_DIR/$file* $PROCESSED_IDS_DIR
   fi
-  mv $BIB_IDS_DIR/$file $PROCESSED_IDS_DIR
 done
