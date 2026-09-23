@@ -84,14 +84,14 @@ data "aws_sns_topic" "rc_alarms" {
 
 resource "aws_cloudwatch_metric_alarm" "lambda_errors" {
   alarm_name          = "ResearchCatalogIndexerLambdaErrorAlarm-${var.environment}"
-  comparison_operator = "GreaterThanThreshold"
+  comparison_operator = "GreaterThanOrEqualToThreshold"
   evaluation_periods  = 1
   metric_name         = "Errors"
   namespace           = "AWS/Lambda"
   period              = 300
   statistic           = "Sum"
   threshold           = 1
-  alarm_description   = "Lambda function ${aws_lambda_function.lambda_instance.function_name} has more than 1 error in 5 minutes"
+  alarm_description   = "Lambda function ${aws_lambda_function.lambda_instance.function_name} has invocation errors"
   alarm_actions       = [data.aws_sns_topic.rc_alarms.arn]
   treat_missing_data  = "notBreaching"
 
@@ -136,14 +136,14 @@ resource "aws_cloudwatch_log_metric_filter" "log_error_metric_filter" {
 
 resource "aws_cloudwatch_metric_alarm" "log_errors" {
   alarm_name          = "ResearchCatalogIndexerLogErrorAlarm-${var.environment}"
-  comparison_operator = "GreaterThanThreshold"
+  comparison_operator = "GreaterThanOrEqualToThreshold"
   evaluation_periods  = 1
   metric_name         = local.log_error_metric
   namespace           = "LogMetrics"
   period              = 300
   statistic           = "Sum"
   threshold           = 1
-  alarm_description   = "Lambda function ${aws_lambda_function.lambda_instance.function_name} has more than 1 error log in 5 minutes"
+  alarm_description   = "Lambda function ${aws_lambda_function.lambda_instance.function_name} has error logs"
   alarm_actions       = [data.aws_sns_topic.rc_alarms.arn]
   treat_missing_data  = "notBreaching"
 
