@@ -7,6 +7,8 @@ locals {
     Project = "Research Catalog"
     BusinessUnit = "LSP"
   }
+
+  log_error_metric = "ResearchCatalogIndexerLogError-${var.environment}"
 }
 
 variable "environment" {
@@ -81,15 +83,15 @@ data "aws_sns_topic" "rc_alarms" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "lambda_errors" {
-  alarm_name          = "lambda-errors-${aws_lambda_function.lambda_instance.function_name}"
-  comparison_operator = "GreaterThanThreshold"
+  alarm_name          = "ResearchCatalogIndexerLambdaErrorAlarm-${var.environment}"
+  comparison_operator = "GreaterThanOrEqualToThreshold"
   evaluation_periods  = 1
   metric_name         = "Errors"
   namespace           = "AWS/Lambda"
   period              = 300
   statistic           = "Sum"
   threshold           = 1
-  alarm_description   = "Lambda function ${aws_lambda_function.lambda_instance.function_name} has more than 1 error in 5 minutes"
+  alarm_description   = "Lambda function ${aws_lambda_function.lambda_instance.function_name} has invocation errors"
   alarm_actions       = [data.aws_sns_topic.rc_alarms.arn]
   treat_missing_data  = "notBreaching"
 
@@ -101,20 +103,53 @@ resource "aws_cloudwatch_metric_alarm" "lambda_errors" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "kinesis_iterator_age" {
-  alarm_name          = "lambda-kinesis-iterator-age-high"
+  alarm_name          = "ResearchCatalogIndexerKinesisIteratorAgeAlarm-${var.environment}"
   comparison_operator = "GreaterThanThreshold"
-  evaluation_periods  = 2
+  evaluation_periods  = 1
   metric_name         = "IteratorAge"
   namespace           = "AWS/Lambda"
   period              = 60
   statistic           = "Maximum"
-  threshold           = 60000 # Value in milliseconds (e.g., 60000ms = 60 seconds / 1 minute)
-  alarm_description   = "Triggered when Lambda Kinesis iterator age exceeds 1 minute"
+  threshold           = 3600000 # 1 hour
+  alarm_description   = "Triggered when Kinesis iterator age of lambda function ${aws_lambda_function.lambda_instance.function_name} exceeds 1 hour"
+  alarm_actions       = [data.aws_sns_topic.rc_alarms.arn]
+  treat_missing_data  = "notBreaching"
 
   dimensions = {
-    FunctionName = aws_lambda_function.example.function_name
+    FunctionName = aws_lambda_function.lambda_instance.function_name
   }
 
-  # Optional: Add your SNS topic ARN for notifications
-  # alarm_actions = [aws_sns_topic.example.arn]
+  tags = local.tags
+}
+
+resource "aws_cloudwatch_log_metric_filter" "log_error_metric_filter" {
+  name           = local.log_error_metric
+  pattern        = "{ $.level = \"error\" }"
+  log_group_name = "/aws/lambda/${aws_lambda_function.lambda_instance.function_name}"
+
+  metric_transformation {
+    name      = local.log_error_metric
+    namespace = "LogMetrics"
+    value     = "1"
+  }
+}
+
+resource "aws_cloudwatch_metric_alarm" "log_errors" {
+  alarm_name          = "ResearchCatalogIndexerLogErrorAlarm-${var.environment}"
+  comparison_operator = "GreaterThanOrEqualToThreshold"
+  evaluation_periods  = 1
+  metric_name         = local.log_error_metric
+  namespace           = "LogMetrics"
+  period              = 300
+  statistic           = "Sum"
+  threshold           = 1
+  alarm_description   = "Lambda function ${aws_lambda_function.lambda_instance.function_name} has error logs"
+  alarm_actions       = [data.aws_sns_topic.rc_alarms.arn]
+  treat_missing_data  = "notBreaching"
+
+  dimensions = {
+    FunctionName = aws_lambda_function.lambda_instance.function_name
+  }
+
+  tags = local.tags
 }
