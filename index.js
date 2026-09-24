@@ -8,7 +8,7 @@ const { notifyDocumentProcessed } = require('./lib/streams-client')
 const browse = require('./lib/browse-terms')
 const { filteredSierraBibsForBibs } = require('./lib/prefilter')
 const { loadNyplCoreData } = require('./lib/load-core-data')
-const schema = require('./lib/elastic-search/index-schema')
+const schema = require('./lib/elastic-search/index-config/index-schema')
 const SierraBib = require('./lib/sierra-models/bib')
 const EsBib = require('./lib/es-models/bib')
 
