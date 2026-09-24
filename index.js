@@ -90,8 +90,7 @@ const processRecords = async (type, records, options = {}) => {
   if (process.env.EMIT_BROWSE_TERMS === 'true') {
     // emit for deleted records as well
     const allEsDocuments = esModels.concat(removedBibs.map(bib => new EsBib(new SierraBib(bib))))
-    await browse.emitBrowseTerms(allEsDocuments, 'subject')
-    await browse.emitBrowseTerms(allEsDocuments, 'contributor')
+    await Promise.allSettled[browse.emitBrowseTerms(allEsDocuments, 'subject'), browse.emitBrowseTerms(allEsDocuments, 'contributor')]
   }
   const message = messages.length ? messages.join('; ') : 'Nothing to do.'
 
