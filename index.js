@@ -112,10 +112,10 @@ const processRecords = async (type, records, options = {}) => {
     const allEsDocuments = esModels.concat(
       removedBibs.map((bib) => new EsBib(new SierraBib(bib)))
     )
-    await Promise.allSettled[
-      (browse.emitBrowseTerms(allEsDocuments, 'subject'),
-      browse.emitBrowseTerms(allEsDocuments, 'contributor'))
-    ]
+    await Promise.allSettled([
+      browse.emitBrowseTerms(allEsDocuments, 'subject'),
+      browse.emitBrowseTerms(allEsDocuments, 'contributor')
+    ])
   }
   const message = messages.length ? messages.join('; ') : 'Nothing to do.'
 
