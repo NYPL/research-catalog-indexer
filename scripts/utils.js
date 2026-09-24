@@ -18,7 +18,7 @@ const setAwsProfile = (profile = 'nypl-digital-dev') => {
 
 const die = (message) => {
   logger.error('Error: ' + message)
-  process.exit()
+  process.exit(1)
 }
 
 function removeEmpty (obj) {
@@ -351,7 +351,7 @@ const lineCount = (file) => {
   const exec = require('child_process').exec
 
   return new Promise((resolve, reject) => {
-    exec(`wc -l ${file}`, (error, results) => {
+    exec(`awk 'END {print NR}' ${file}`, (error, results) => {
       if (error) return reject(error)
 
       const count = parseInt(
@@ -362,44 +362,6 @@ const lineCount = (file) => {
       resolve(count)
     })
   })
-}
-
-/**
-* Retry an async call on error. Returns an async function that retries the
-* given call the given amount of times. Resolves when any call succeeds. Errors
-* when retries exhausted.
-*
-* Usage:
-*   doSomethingAsync()
-*     .catch(retry(doSomethingAsync, 3))
-**/
-const retry = (call, retries = 3, retryIndex = 0) => {
-  return async (error) => {
-    // Have we exhausted retries?
-    if (retryIndex === retries) {
-      console.error('Encountered error. Exhausted retries.', error)
-      // Failed after 3 retries? Fail hard:
-      throw new Error(`Exhausted ${retries} retries`)
-    }
-
-    console.error('Encountered error. Will retry:', error)
-    const retryLabel = `Retry ${retryIndex + 1} of ${retries}`
-    // Back off 3s, 9s, 27s:
-    const howLong = Math.pow(3, retryIndex + 1)
-    console.log(`${retryLabel}: Waiting ${howLong}s`)
-    await module.exports.delay(howLong * 1000)
-
-    // Execute call:
-    console.log(`${retryLabel}: Executing`)
-    return call()
-      // If retry succeeded, brag about it and return:
-      .then((res) => {
-        console.log(`${retryLabel}: Succeeded!`)
-        return res
-      })
-      // If call failed again, retry:
-      .catch(retry(call, retries, retryIndex + 1))
-  }
 }
 
 class Timer {
@@ -439,6 +401,65 @@ class Timer {
   }
 }
 
+class CsvProgress {
+  constructor (filepath) {
+    this.filepath = filepath
+    this.statusFilepath = `${filepath}-status.json`
+    this.state = {
+      status: 'preparing',
+      started: new Date().toISOString(),
+      updated: new Date().toISOString(),
+      count: 0,
+      offset: 0,
+      messages: []
+    }
+  }
+
+  static async forCsv (filepath) {
+    const progress = new CsvProgress(filepath)
+    if (fs.existsSync(progress.statusFilepath)) {
+      progress.state = JSON.parse(fs.readFileSync(progress.statusFilepath, 'utf8'))
+    } else {
+      try {
+        progress.state.count = await lineCount(filepath)
+      } catch (e) {
+        progress.state.count = 0
+      }
+      progress.save()
+    }
+    return progress
+  }
+
+  save () {
+    this.state.updated = new Date().toISOString()
+    fs.writeFileSync(this.statusFilepath, JSON.stringify(this.state, null, 2))
+  }
+
+  status () {
+    return this.state.status
+  }
+
+  get offset () {
+    return this.state.offset
+  }
+
+  updateStatus (status) {
+    this.state.status = status
+    this.save()
+  }
+
+  updateOffset (offset) {
+    this.state.offset = offset
+    this.save()
+  }
+
+  addMessage (message) {
+    if (!this.state.messages) this.state.messages = []
+    this.state.messages.push(message)
+    this.save()
+  }
+}
+
 Timer.allTimers = {}
 
 Timer.startNew = (name) => {
@@ -459,13 +480,13 @@ module.exports = {
   camelize,
   capitalize,
   castArgsToInts,
+  CsvProgress,
   delay,
   die,
   groupIdentifierEntitiesByTypeAndNyplSource,
   lineCount,
   printDiff,
   printProgress,
-  retry,
   secondsAsFriendlyDuration,
   setAwsProfile,
   Timer

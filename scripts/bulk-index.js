@@ -45,18 +45,16 @@
  *
  *  I. Updating by Bib/Item Service query:
  *
- *    node scripts/bulk-index.js --type (item|bib) [--hasMarc MARC] [--hasSubfield S] [--nyplSource NYPLSOURCE]
+ *    node scripts/bulk-index.js --type (item|bib) [--nyplSource NYPLSOURCE]
  *
  *    Arguments:
- *      - hasMarc {string}: Marc tag that must be present in the record
- *      - hasSubfield {string}: When used with hasMarc, restricts to records matching both marc tag and subfield
  *      - orderBy {string}: Columns to order query by. Default '' (no sort).
  *        e.g. `--orderBy id`. Sortable columns include `id`, `updated_date`,
  *        `created_date`.
  *
  *    One of these mutually exclusive arguments must be used so that the script
  *    has something to query on:
- *     - hasMarc
+ *     - type
  *     - bibId
  *
  *    Note that omitting --limit may cause the query to take a long time to
@@ -67,12 +65,6 @@
  *    batch. (Otherwise, results are processed in an unstable order between jobs.)
  *
  *    Examples
- *
- *    To reindex all NYPL bibs with marc 001 in QA:
- *      node scripts/bulk-index.js --type bib --hasMarc 001
- *
- *    To reindex all NYPL bibs with 700 $t in QA:
- *      node scripts/bulk-index.js --type bib --hasMarc 700 --hasSubfield t
  *
  *    To reindex all bibs in QA:
  *      node scripts/bulk-index.js --type bib
@@ -110,14 +102,14 @@ const argv = require('minimist')(process.argv.slice(2), {
     updateOnly: false
   },
   boolean: ['updateOnly', 'skipDeletes'],
-  string: ['hasMarc', 'hasSubfield', 'bibId', 'fromDate', 'toDate'],
+  string: ['bibId', 'fromDate', 'toDate'],
   integer: ['limit', 'offset', 'batchSize']
 })
+
 const { populateBarcodeRecapCustomerCodeCache } = require('../lib/scsb/requests')
 
 const isCalledViaCommandLine = /scripts\/bulk-index(.js)?/.test(fs.realpathSync(process.argv[1]))
 const dotenv = require('dotenv')
-const { exec } = require('child_process')
 // Conditionally set up NR instrumentation
 // Initialize `instrument` as a pass-through
 let instrument = (label, cb) => cb()
@@ -148,6 +140,7 @@ const {
 } = require('../lib/prefilter')
 const {
   batch,
+  CsvProgress,
   groupIdentifierEntitiesByTypeAndNyplSource,
   delay,
   die,
@@ -172,10 +165,8 @@ const usage = () => {
     'Usage:',
     'Reindex a single record:',
     '  node bulk-index --envfile [path to .env] (--bibId id|--itemId id)',
-    'Reindex by has-marc:',
-    '  node bulk-index --envfile [path to .env] --type (bib|item) --hasMarc 001 [--hasSubfield S]',
     'Reindex by nypl-source:',
-    '  node bulk-index --envfile [path to .env] --type (bib|item) --nyplSource SOURCE [--hasSubfield S]',
+    '  node bulk-index --envfile [path to .env] --type (bib|item) --nyplSource SOURCE',
     'Reindex by CSV (containing prefixed ids):',
     '  node bulk-index --envfile [path to .env] --csv FILE --csvIdColumn 0',
     'Perform any reindex only for specific bib-only properties by adding the following to any reindex args: ',
@@ -210,7 +201,7 @@ const db = {
     ])
       .catch((e) => {
         logger.error('Error decrypting db config. Be sure to specify an --envfile with encrypted db connection info.')
-        process.exit()
+        process.exit(1)
       })
     const config = {
       user,
@@ -498,20 +489,6 @@ const buildSqlQuery = (options) => {
       params.push(options.nyplSource)
     }
 
-    // Filter on having a specific marc field:
-    if (options.hasMarc) {
-      selects.push('json_array_elements(var_fields::json) jV')
-      wheres.push("jV->>'marcTag' = $2")
-      params.push(options.hasMarc)
-    }
-
-    // Filter on existence of specific subfield:
-    if (options.hasSubfield) {
-      selects.push("json_array_elements(jV->'subfields') jVS")
-      wheres.push("jVS->>'tag' = $3")
-      params.push(options.hasSubfield)
-    }
-
     sqlFromAndWhere = selects.join(',\n')
     if (wheres.length) {
       sqlFromAndWhere += '\nWHERE ' + wheres.join('\nAND ')
@@ -520,23 +497,10 @@ const buildSqlQuery = (options) => {
     throw new Error('Insufficient options to buildSqlQuery')
   }
 
-  // Determine whether or not to use an inner-select to de-dupe the records:
-  const dedupe = !!options.hasMarc
-
-  const primaryColumns = dedupe ? 'DISTINCT id, nypl_source' : '*'
-  let query = `SELECT ${primaryColumns} FROM ${sqlFromAndWhere}` +
+  const query = `SELECT * FROM ${sqlFromAndWhere}` +
     (options.orderBy ? ` ORDER BY ${options.orderBy}` : '') +
     (options.limit ? ` LIMIT ${options.limit}` : '') +
     (options.offset ? ` OFFSET ${options.offset}` : '')
-  // Some queries will return bibs multiple times because a matched var/subfield repeats.
-  // To ensure we only handle such bibs once, we must de-deupe the results on id & nypl_source.
-  // We use an inner-select to identify all of the distinct bibs (by id and nypl_source)
-  // which we then JOIN to retrieve all fields.
-  if (dedupe) {
-    query = 'SELECT R.*' +
-      ` FROM (\n${query}\n) _R` +
-      ` INNER JOIN ${type} R ON _R.id=R.id AND _R.nypl_source=R.nypl_source`
-  }
 
   return { query, params, type }
 }
@@ -624,6 +588,13 @@ const updateByBibOrItemServiceQuery = async (options) => {
           }
         }
       }
+      // If we did all retries and no success, the batch was not indexed
+      if (!processed) {
+        cursor.close(() => {
+          client.release()
+        })
+        throw new Error(`Failed to process batch of ${rows.length} record(s) after retries`)
+      }
       count += rows.length
 
       // Log out progress so far:
@@ -645,6 +616,15 @@ const updateByBibOrItemServiceQuery = async (options) => {
 const castRowToIdentifier = (row, options) => {
   const id = row[options.idColumn]
 
+  // If the CSV already tells us the nyplSource, trust it instead of guessing
+  // from the id's shape
+  if (typeof options.nyplSourceColumn !== 'undefined') {
+    return {
+      id,
+      nyplSource: row[options.nyplSourceColumn]
+    }
+  }
+
   const isPrefixedId = /^[a-z]+\d+$/.test(id)
 
   if (isPrefixedId) {
@@ -655,10 +635,49 @@ const castRowToIdentifier = (row, options) => {
     return split
   } else {
     return {
-      id: row[options.idColumn],
-      nyplSource: typeof options.nyplSourceColumn === 'undefined' ? null : row[options.nyplSourceColumn]
+      id,
+      nyplSource: null
     }
   }
+}
+
+/**
+ * Extract and validate identifiers from CSV rows
+ */
+const extractAndValidateIdentifiers = (rows, options, progress, sourceMapper) => {
+  const end = options.limit ? options.limit + options.offset : rows.length
+  let rowsToProcess
+  try {
+    rowsToProcess = rows.slice(options.offset, end)
+      .map((row) => castRowToIdentifier(row, { idColumn: options.csvIdColumn, nyplSourceColumn: options.csvNyplSourceColumn, sourceMapper }))
+  } catch (e) {
+    progress.addMessage(e.message)
+    progress.updateStatus('failed')
+    throw e
+  }
+
+  logger.info(`Processing ${options.csv} rows ${options.offset} to ${end} (${rowsToProcess.length} rows)`)
+
+  // Test first row to determine whether we need to interpret as prefixed
+  // identifiers or just plain numeric ids:
+  if (rowsToProcess.length > 0) {
+    const identifiersHaveNyplSource = rowsToProcess[0].nyplSource
+    const identifiersHaveType = rowsToProcess[0].type
+
+    if (!options.nyplSource && !identifiersHaveNyplSource) {
+      const errorMsg = 'Must specify --nyplSource if not apparent from CSV (use --csvNyplSourceColumn N if CSV includes nyplSource)'
+      progress.addMessage(errorMsg)
+      progress.updateStatus('failed')
+      throw new Error(errorMsg)
+    } else if (!options.type && !identifiersHaveType) {
+      const errorMsg = 'Must specify --type if not apparent from CSV'
+      progress.addMessage(errorMsg)
+      progress.updateStatus('failed')
+      throw new Error(errorMsg)
+    }
+  }
+
+  return rowsToProcess
 }
 
 /**
@@ -676,34 +695,43 @@ const castRowToIdentifier = (row, options) => {
 *  - batchSize {int} - Number of records to process in each batch
 *  - skipDeletes {boolean} - Whether to skip deleting suppressed records, useful if doing a large bulk where we are trying to update fields on existing records
 */
-const updateByCsv = async (options = { offset: 0 }) => {
+const updateByCsv = async (options = {}) => {
+  options.offset = options.offset || 0
   if (!options.csv) throw new Error('--csv is required')
   if (isNaN(options.csvIdColumn)) {
     throw new Error('--csvIdColumn is required')
   }
 
+  const completed = 'completed'
+  const failed = 'failed'
+  const preparing = 'preparing'
+  const running = 'running'
+
+  const progress = await CsvProgress.forCsv(options.csv)
+
+  if ([completed, failed].includes(progress.status())) {
+    logger.info(`Skipping CSV ${options.csv} because status is ${progress.status()}`)
+    return
+  }
+
+  if (progress.status() === running) {
+    options.offset = progress.offset
+  } else if (progress.status() === preparing) {
+    progress.updateOffset(options.offset)
+  }
+
   const rawContent = fs.readFileSync(options.csv, 'utf8')
-  const rows = csvParse(rawContent)
+  const rows = csvParse(rawContent, { trim: true, skip_empty_lines: true })
 
   const sourceMapper = NyplSourceMapper.instance()
 
-  // Slice rows-to-process using --offset and --limit:
-  const end = options.limit ? options.limit + options.offset : rows.length
-  const rowsToProcess = rows.slice(options.offset, end)
-    .map((row) => castRowToIdentifier(row, { idColumn: options.csvIdColumn, nyplSourceColumn: options.csvNyplSourceColumn, sourceMapper }))
+  const rowsToProcess = extractAndValidateIdentifiers(rows, options, progress, sourceMapper)
 
-  logger.info(`Processing ${options.csv} rows ${options.offset} to ${end} (${rowsToProcess.length} rows)`)
+  if (progress.status() === preparing) {
+    progress.updateStatus(running)
+  }
 
-  // Test first row to determine whether we need to interpret as prefixed
-  // identifiers or just plain numeric ids:
-  const identifiersHaveNyplSource = rowsToProcess[0].nyplSource
-  const identifiersHaveType = rowsToProcess[0].type
-
-  if (!options.nyplSource && !identifiersHaveNyplSource) {
-    throw new Error('Must specify --nyplSource if not apparent from CSV (use --csvNyplSourceColumn N if CSV includes nyplSource)')
-  } else if (!options.type && !identifiersHaveType) {
-    throw new Error('Must specify --type if not apparent from CSV')
-  } else {
+  if (rowsToProcess.length > 0) {
     const batches = groupIdentifierEntitiesByTypeAndNyplSource(rowsToProcess)
       .map((grouped) => batch(grouped, options.batchSize))
       .flat()
@@ -711,13 +739,17 @@ const updateByCsv = async (options = { offset: 0 }) => {
     await db.initPools()
     // Add stats to options object (for progress reporting):
     const optionsWithStats = Object.assign(options, {
+      startingOffset: options.offset,
       count: 0,
       total: rowsToProcess.length,
-      startTime: new Date()
+      startTime: new Date(),
+      progress
     })
     await processCsvBatch(batches, 0, optionsWithStats)
     db.endPools()
   }
+
+  progress.updateStatus(completed)
 }
 
 /**
@@ -747,6 +779,10 @@ const processCsvBatch = async (batches, index = 0, options) => {
 
   // Log out progress so far:
   printProgress(options.count + batch.length, options.total, options.batchSize, options.startTime)
+
+  if (options.progress) {
+    options.progress.updateOffset(options.startingOffset + options.count + batch.length)
+  }
 
   if (batches.length > index + 1) {
     // Update `count` (for progress stats):
@@ -825,6 +861,9 @@ const run = async () => {
     await updateByCsv(argv)
       .catch((e) => {
         logger.error(`Error: ${e.message}`, e)
+        // Ensure the process exits non-zero so callers (e.g. the bulk chunk
+        // runner) detect the failure instead of treating a partial run as success:
+        process.exitCode = 1
       })
   } else if (
     argv.bibId ||
@@ -832,7 +871,6 @@ const run = async () => {
     (
       argv.type &&
       (
-        argv.hasMarc ||
         argv.nyplSource ||
         argv.fromDate
       )
@@ -866,12 +904,14 @@ const preflightSetup = async () => {
 
 const cleanup = async () => {
   if (process.env.STOP_REFRESH === 'true') await setIndexRefresh(process.env.ELASTIC_RESOURCES_INDEX_NAME, '30s')
-  if (process.env.UPDATE_ONLY || argv.updateOnly) {
-    exec(`cat temp-unindexed-records* > unindexed-records-${(argv.properties || process.env.PROPERTIES)}-${Date.now()}.txt; rm temp-unindexed-records*`)
-  }
+  // TODO: move unindexed id batches into a single file
+  // if (process.env.UPDATE_ONLY || argv.updateOnly) {
+  //   exec(`cat temp-unindexed-records* > unindexed-records-${(argv.properties || process.env.PROPERTIES)}-${Date.now()}.txt; rm temp-unindexed-records*`)
+  // }
   totalTimer.endTimer()
   totalTimer.howMany('hours')
-  process.exit(0)
+  // Preserve any non-zero exitCode already set (e.g. by a swallowed CSV error) instead of forcing success:
+  process.exit(process.exitCode || 0)
 }
 
 const totalTimer = new Timer('bulk update')
@@ -879,7 +919,10 @@ const totalTimer = new Timer('bulk update')
 if (isCalledViaCommandLine) {
   preflightSetup()
     .then(run)
-    .catch(logger.error)
+    .catch((e) => {
+      logger.error(e.message)
+      process.exitCode = 1
+    })
     .finally(cleanup)
 }
 
@@ -895,6 +938,7 @@ module.exports = {
     restoreGeneralPrefetch,
     overwriteSchema,
     restoreSchema,
-    barcodeCustomerCodeMapFromCsv
+    barcodeCustomerCodeMapFromCsv,
+    extractAndValidateIdentifiers
   }
 }

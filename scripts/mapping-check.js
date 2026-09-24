@@ -7,6 +7,7 @@
 * Usage:
 *   node scripts/mapping-check --envfile CONFIG [--index INDEX]
 *
+* See also: mapping-compare.js for comparing two live indexes
 */
 const dotenv = require('dotenv')
 const fs = require('fs')

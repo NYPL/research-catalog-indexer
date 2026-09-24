@@ -38,9 +38,10 @@ const {
   die,
   lineCount,
   printProgress,
-  retry,
   setAwsProfile
 } = require('./utils')
+
+const { retry } = require('../lib/utils/retry.js')
 
 /**
 * Parse script arguments from process.argv:

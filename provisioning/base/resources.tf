@@ -99,4 +99,3 @@ resource "aws_cloudwatch_metric_alarm" "lambda_errors" {
 
   tags = local.tags
 }
-
