@@ -7,7 +7,7 @@
 */
 const dotenv = require('dotenv')
 const fs = require('fs')
-const readline = require('node:readline')
+const readline = require('node:readline/promises')
 
 const argv = require('minimist')(process.argv.slice(2))
 const logger = require('../lib/logger')
