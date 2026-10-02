@@ -12,9 +12,9 @@ const readline = require('node:readline/promises')
 const argv = require('minimist')(process.argv.slice(2))
 const logger = require('../lib/logger')
 const esClient = require('../lib/elastic-search/client')
-const { schema } = require('../lib/elastic-search/index-schema')
+const { schema } = require('../lib/elastic-search/index-config/index-schema')
 const { die, setAwsProfile } = require('./utils')
-const indexSettings = require('../lib/elastic-search/index-settings.json')
+const { indexSettings } = require('../lib/elastic-search/index-config/index-settings')
 
 const usage = () => {
   console.log('Usage: node scripts/initialize-index.js --envfile [path to .env] [--index INDEX]')
@@ -27,7 +27,6 @@ const usage = () => {
 exports.run = async (options = {}) => {
   const client = await esClient.client()
   const exists = (await client.indices.exists({ index: options.index })).body
-
   if (exists) {
     console.log(`Index ${options.index} exists.`)
   } else {
@@ -55,19 +54,21 @@ const optionallyCopyContentsToNewIndex = async (newIndexName) => {
     output: process.stdout
   })
   const oldIndex = process.env.ELASTIC_RESOURCES_INDEX_NAME
-  const answer = await reindexRl.question(`copy contents of ${oldIndex} to ${newIndexName}? Only "yes" will trigger copy... `)
-  reindexRl.close()
-  if (answer === 'yes') {
-    console.log(`Copying contents of ${oldIndex} to ${newIndexName}`)
-    const resp = await client.reindex({
-      body: {
-        source: { index: oldIndex },
-        dest: { index: newIndexName }
-      }
-    })
-    console.log(`Started reindex task ${resp.body.task}`)
-    console.log(`Don't forget to: \n\tUpdate this repo with ${newIndexName}\n\tUpdate Discovery API with ${newIndexName} after verifying with the mapping-check.js script in that repo\n\tUpdate index alias with ${newIndexName} (referenced by browse-term-indexer\n\tDelete ${oldIndex}`)
-  } else console.log('only yes will trigger reindex. Goodbye!')
+  await reindexRl.question(`copy contents of ${oldIndex} to ${newIndexName}? Only "yes" will trigger copy... `, async answer => {
+    if (answer === 'yes') {
+      console.log(`Copying contents of ${oldIndex} to ${newIndexName}`)
+      const resp = await client.reindex({
+        wait_for_completion: false,
+        body: {
+          source: { index: oldIndex, _source: Object.keys(schema()) },
+          dest: { index: newIndexName }
+        }
+      })
+      console.log(`Started reindex task ${resp.body.task}`)
+      console.log(`Don't forget to: \n\tUpdate this repo with ${newIndexName}\n\tUpdate Discovery API with ${newIndexName} after verifying with the mapping-check.js script in that repo\n\tUpdate index alias with ${newIndexName} (referenced by browse-term-indexer\n\tDelete ${oldIndex}`)
+    } else console.log('only yes will trigger reindex. Goodbye!')
+    reindexRl.close()
+  })
 }
 
 const isCalledViaCommandLine = /scripts\/initialize-index(.js)?/.test(fs.realpathSync(process.argv[1]))
