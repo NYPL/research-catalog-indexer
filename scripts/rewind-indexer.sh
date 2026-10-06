@@ -19,7 +19,7 @@ for STREAM in Bib Item Holding; do
   EVENT_SOURCE_ARN=arn:aws:kinesis:us-east-1:946183545209:stream/$STREAM-$ENV 
   echo Locating $STREAM-$ENV triggers to delete..
   UUIDS=`aws lambda list-event-source-mappings --event-source-arn $EVENT_SOURCE_ARN \
-  | jq -c -r '.EventSourceMappings[].UUID'`
+  | jq -c -r '.EventSourceMappings[] | select(.FunctionArn | contains("ResearchCatalogIndexer")) | .UUID'`
   for UUID in $UUIDS; do
     echo Deleting $STREAM-$ENV trigger with UUID $UUID..
     aws lambda delete-event-source-mapping\
