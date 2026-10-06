@@ -55,6 +55,9 @@ resource "aws_lambda_function" "lambda_instance" {
   runtime       = "nodejs20.x"
   timeout       = 300
 
+  # Concurrency
+  reserved_concurrent_executions = 2
+
   # Location of the zipped code in S3:
   s3_bucket     = aws_s3_object.uploaded_zip.bucket
   s3_key        = aws_s3_object.uploaded_zip.key
