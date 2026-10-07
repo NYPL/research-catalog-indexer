@@ -1,6 +1,9 @@
 /**
  * To be used when changing normalizer settings.
  * this script can be run simply to change the underlying normalizer.
+ * Invoking this script closes the index, applies updated settings, 
+ * reopens the index, and then triggers a reindex, applying updated
+ * normalization to all documents.
  *
  * See #usage for invocation example
  *  */
