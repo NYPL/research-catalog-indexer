@@ -40,6 +40,11 @@ describe('SierraBase', function () {
           b: 'Ereveli hay kazunkʻ ; Parskastan /',
           c: 'Ashkhatasirutʻiamb Galust Shermazaniani.'
         },
+        subfields: [
+          { tag: 'a', content: 'Niwtʻer azgayin patmutʻian hamar' },
+          { tag: 'b', content: 'Ereveli hay kazunkʻ ; Parskastan /' },
+          { tag: 'c', content: 'Ashkhatasirutʻiamb Galust Shermazaniani.' }
+        ],
         varFieldIndex: 14
       })
     })
@@ -94,6 +99,9 @@ describe('SierraBase', function () {
       expect(varFieldValue.parallel).to.deep.equal({
         value: 'ابن الكلبي.',
         subfieldMap: { a: 'ابن الكلبي.' },
+        subfields: [
+          { tag: 'a', content: 'ابن الكلبي.' }
+        ],
         script: 'arabic',
         direction: 'rtl',
         varFieldIndex: 8
@@ -115,6 +123,9 @@ describe('SierraBase', function () {
         subfieldMap: {
           a: 'תולדות ישו.'
         },
+        subfields: [
+          { tag: 'a', content: 'תולדות ישו.' }
+        ],
         varFieldIndex: 22
       })
     })
@@ -144,6 +155,10 @@ describe('SierraBase', function () {
             a: '600 primary value a',
             b: '600 primary value b'
           },
+          subfields: [
+            { tag: 'a', content: '600 primary value a' },
+            { tag: 'b', content: '600 primary value b' }
+          ],
           parallel: {
             varFieldIndex: 1,
             value: '600 parallel value a 600 parallel value b',
@@ -152,7 +167,11 @@ describe('SierraBase', function () {
             subfieldMap: {
               a: '600 parallel value a',
               b: '600 parallel value b'
-            }
+            },
+            subfields: [
+              { tag: 'a', content: '600 parallel value a' },
+              { tag: 'b', content: '600 parallel value b' }
+            ]
           }
         }
       ])
@@ -172,7 +191,17 @@ describe('SierraBase', function () {
             subfieldMap: {
               a: '100 parallel value a',
               b: '100 parallel value b'
-            }
+            },
+            subfields: [
+              {
+                content: '100 parallel value a',
+                tag: 'a'
+              },
+              {
+                content: '100 parallel value b',
+                tag: 'b'
+              }
+            ]
           }
         }
       ])
@@ -358,7 +387,13 @@ describe('SierraBase', function () {
         {
           varFieldIndex: 0,
           value: 'Schiff Collection.',
-          subfieldMap: { a: 'Schiff Collection.' }
+          subfieldMap: { a: 'Schiff Collection.' },
+          subfields: [
+            {
+              content: 'Schiff Collection.',
+              tag: 'a'
+            }
+          ]
         }
       ])
     })

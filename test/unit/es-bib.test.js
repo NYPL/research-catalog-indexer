@@ -2312,6 +2312,47 @@ describe('EsBib', function () {
       ])
     })
   })
+
+  describe('physicalDescription with varField mocked directly', () => {
+    it('collapses the shared joiner between $f and $c', async () => {
+      const bib = new SierraBib({})
+      sinon.stub(bib, 'varField').returns([
+        {
+          varFieldIndex: 17,
+          value: '1 item ([1] p.) ; 23 cm.',
+          marc: {
+            ind1: ' ',
+            ind2: ' ',
+            content: null,
+            marcTag: '300',
+            fieldTag: 'r',
+            subfields: [
+              { tag: 'a', content: '1' },
+              { tag: 'f', content: 'item ([1] p.) ;' },
+              { tag: 'c', content: '23 cm.' }
+            ],
+            varFieldIndex: 17
+          },
+          subfields: [
+            { tag: 'a', content: '1' },
+            { tag: 'f', content: 'item ([1] p.) ;' },
+            { tag: 'c', content: '23 cm.' }
+          ],
+          subfieldMap: {
+            a: '1',
+            f: 'item ([1] p.) ;',
+            c: '23 cm.'
+          }
+        }
+      ])
+      const esBib = new EsBib(bib)
+
+      expect(esBib.physicalDescription()).to.deep.equal([
+        '1 item ([1] p.) ; 23 cm.'
+      ])
+    })
+  })
+
   describe('series fields', () => {
     let esBib
     before(() => {
