@@ -2269,6 +2269,49 @@ describe('EsBib', function () {
     })
   })
 
+  describe('physicalDescription without a leading $a', () => {
+    it('does not prepend a prefix to the first subfield', () => {
+      const bib = new SierraBib({
+        varFields: [
+          {
+            marcTag: '300',
+            subfields: [
+              { tag: 'c', content: '29 cm' }
+            ]
+          }
+        ]
+      })
+      const esBib = new EsBib(bib)
+
+      expect(esBib.physicalDescription()).to.deep.equal([
+        '29 cm'
+      ])
+    })
+  })
+
+  describe('physicalDescription subfield filtering', () => {
+    it('excludes subfields with null content and tags not in the mapping', async () => {
+      const bib = new SierraBib({
+        varFields: [
+          {
+            marcTag: '300',
+            subfields: [
+              { tag: 'a', content: '1 score (16 p.)' },
+              { tag: 'b', content: null },
+              { tag: 'z', content: 'not a mapped subfield' },
+              { tag: 'c', content: '29 cm' }
+            ]
+          }
+        ]
+      })
+      const esBib = new EsBib(bib)
+
+      expect(esBib.physicalDescription()).to.deep.equal([
+        '1 score (16 p.) ; 29 cm'
+      ])
+    })
+  })
+
   describe('physicalDescriptionSubset2', () => {
     it('extracts physicalDescription content', async () => {
       const bib = new SierraBib({
