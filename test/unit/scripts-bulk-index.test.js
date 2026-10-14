@@ -9,7 +9,7 @@ const logger = require('../../lib/logger')
 const bulkIndexer = require('../../scripts/bulk-index')
 const index = require('../../index')
 const prefetchers = require('../../lib/prefetch')
-const schema = require('../../lib/elastic-search/index-schema')
+const schema = require('../../lib/elastic-search/index-config/index-schema')
 const utils = require('../../scripts/utils')
 
 // Util for stripping dupe whitespace from sql queries:
