@@ -1,0 +1,298 @@
+{
+  "id": "15495211",
+  "varFields": [
+    {
+      "fieldTag": "b",
+      "marcTag": "710",
+      "ind1": "2",
+      "ind2": " ",
+      "subfields": [{ "tag": "a", "content": "University of Aberdeen." }]
+    },
+    {
+      "fieldTag": "c",
+      "marcTag": "852",
+      "ind1": "8",
+      "ind2": " ",
+      "subfields": [
+        { "tag": "h", "content": "STK (Aberdeen University studies)" },
+        {
+          "tag": "z",
+          "content": "Library has: no. 6, 51, 88, 131-157, published 1904?-1983. Other vols. classed separately."
+        }
+      ]
+    },
+    {
+      "fieldTag": "l",
+      "marcTag": "010",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [{ "tag": "a", "content": "sn 97023008" }]
+    },
+    {
+      "fieldTag": "l",
+      "marcTag": "035",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [{ "tag": "a", "content": "(WaOLN)Z120000254" }]
+    },
+    {
+      "fieldTag": "n",
+      "marcTag": "500",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "No. 32, 33, 37 belong to the Gifford lecture series and are not of the edition published in the Aberdeen University studies.  No. 26 published in Oxford is not of this ed."
+        }
+      ]
+    },
+    {
+      "fieldTag": "n",
+      "marcTag": "905",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        { "tag": "a", "content": "Later title not in NYPL (05-24-04)" }
+      ]
+    },
+    {
+      "fieldTag": "o",
+      "marcTag": "001",
+      "ind1": " ",
+      "ind2": " ",
+      "content": "1460539"
+    },
+    {
+      "fieldTag": "p",
+      "marcTag": "260",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        { "tag": "a", "content": "Aberdeen :" },
+        { "tag": "b", "content": "University of Aberdeen," },
+        { "tag": "c", "content": "1900-1970." }
+      ]
+    },
+    {
+      "fieldTag": "q",
+      "marcTag": "852",
+      "ind1": "8",
+      "ind2": " ",
+      "subfields": [
+        { "tag": "h", "content": "STK (Aberdeen University studies)" },
+        {
+          "tag": "z",
+          "content": "Library has: no. 6, 51, 88, 131-157, published 1904?-1983. Other vols. classed separately."
+        }
+      ]
+    },
+    {
+      "fieldTag": "r",
+      "marcTag": "300",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        { "tag": "a", "content": "151 v. :" },
+        { "tag": "b", "content": "ill. ;" },
+        { "tag": "c", "content": "23-29 cm." }
+      ]
+    },
+    {
+      "fieldTag": "r",
+      "marcTag": "310",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [{ "tag": "a", "content": "Irregular" }]
+    },
+    {
+      "fieldTag": "r",
+      "marcTag": "362",
+      "ind1": "0",
+      "ind2": " ",
+      "subfields": [{ "tag": "a", "content": "No. 1-no. 151." }]
+    },
+    {
+      "fieldTag": "t",
+      "marcTag": "245",
+      "ind1": "0",
+      "ind2": "0",
+      "subfields": [{ "tag": "a", "content": "Aberdeen University studies." }]
+    },
+    {
+      "fieldTag": "u",
+      "marcTag": "299",
+      "ind1": "0",
+      "ind2": "0",
+      "subfields": [{ "tag": "a", "content": "Aberdeen University studies." }]
+    },
+    {
+      "fieldTag": "v",
+      "marcTag": "959",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        { "tag": "a", "content": ".b71733280" },
+        { "tag": "b", "content": "05-29-08" },
+        { "tag": "c", "content": "09-16-02" }
+      ]
+    },
+    {
+      "fieldTag": "w",
+      "marcTag": "762",
+      "ind1": "0",
+      "ind2": " ",
+      "subfields": [
+        {
+          "tag": "a",
+          "content": "University of Aberdeen. Anatomical and Anthropological Society."
+        },
+        {
+          "tag": "t",
+          "content": "Proceedings of the Aberdeen University Anatomical and Anthropological Society"
+        },
+        { "tag": "w", "content": "(DLC)   05041796" },
+        { "tag": "w", "content": "(OCoLC)1642603" }
+      ]
+    },
+    {
+      "fieldTag": "z",
+      "marcTag": "785",
+      "ind1": "0",
+      "ind2": "0",
+      "subfields": [
+        { "tag": "t", "content": "Aberdeen University studies series" },
+        { "tag": "w", "content": "(DLC)sn 97023009" },
+        { "tag": "w", "content": "(OCoLC)7432701" }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "856",
+      "ind1": "4",
+      "ind2": "1",
+      "subfields": [
+        {
+          "tag": "u",
+          "content": "http://hdl.handle.net/2027/nyp.33433082154851"
+        },
+        { "tag": "z", "content": "Full text available via HathiTrust--no. 6" }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "856",
+      "ind1": "4",
+      "ind2": "1",
+      "subfields": [
+        {
+          "tag": "u",
+          "content": "http://hdl.handle.net/2027/nyp.33433082154869"
+        },
+        { "tag": "z", "content": "Full text available via HathiTrust--no. 21" }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "003",
+      "ind1": " ",
+      "ind2": " ",
+      "content": "OCoLC"
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "005",
+      "ind1": " ",
+      "ind2": " ",
+      "content": "20020913135454.8"
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "008",
+      "ind1": " ",
+      "ind2": " ",
+      "content": "750720d19001970stk x m      o0    0eng dcas a "
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "012",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [{ "tag": "i", "content": "9702" }]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "040",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        { "tag": "a", "content": "MUL" },
+        { "tag": "c", "content": "MUL" },
+        { "tag": "d", "content": "UCU" },
+        { "tag": "d", "content": "EYM" },
+        { "tag": "d", "content": "DLC" },
+        { "tag": "d", "content": "NYP" },
+        { "tag": "d", "content": "OCoLC" }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "042",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [{ "tag": "a", "content": "lcd" }]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "049",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [{ "tag": "a", "content": "NYPG" }]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "850",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [{ "tag": "a", "content": "MiU" }]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "904",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [{ "tag": "a", "content": "MONO SER/CLASSED SEP/TR" }]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "946",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [{ "tag": "a", "content": "q" }]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "997",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        { "tag": "a", "content": "hg" },
+        { "tag": "b", "content": "09-16-02" },
+        { "tag": "c", "content": "s" },
+        { "tag": "d", "content": "a" },
+        { "tag": "e", "content": "-" },
+        { "tag": "f", "content": "eng" },
+        { "tag": "g", "content": "stk" },
+        { "tag": "h", "content": "0" }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "910",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [{ "tag": "a", "content": "RL" }]
+    },
+    { "fieldTag": "_", "content": "00000cas  2200349 a 4500" }
+  ]
+}
