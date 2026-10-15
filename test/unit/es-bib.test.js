@@ -14,7 +14,7 @@ describe('EsBib', function () {
       expect(esBib.bib).to.eq(record)
     })
   })
-  describe.only('linkingEntry', () => {
+  describe('linkingEntry', () => {
     it('does the thing', () => {
       const bib = new EsBib(new SierraBib(require('../fixtures/b15495211.json')))
       console.dir(bib.linkingEntry(), { depth: null })
