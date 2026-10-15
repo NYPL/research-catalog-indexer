@@ -485,64 +485,64 @@
       {
         "marc": "760",
         "description": "Main Series Entry",
-        "excludedSubfields": ["6", "7", "2"]
+        "excludedSubfields": ["1","4","5","6","7","8"]
       },
       {
         "marc": "762",
         "description": "Subseries Entry",
-        "excludedSubfields": ["6", "7", "2"]
+        "excludedSubfields": ["1","4","5","6","7","8"]
       },{
         "marc": "765",
         "description": "Original Language Entry",
-        "excludedSubfields": ["6", "7", "2"]
+        "excludedSubfields": ["1","4","5","6","7","8"]
       },{
         "marc": "767",
         "description": "Translation Entry",
-        "excludedSubfields": ["6", "7", "2"]
+        "excludedSubfields": ["1","4","5","6","7","8"]
       },{
         "marc": "770",
         "description": "Supplemental/Special Issue Entry",
-        "excludedSubfields": ["6", "7", "2"]
+        "excludedSubfields": ["1","4","5","6","7","8"]
       },{
         "marc": "772",
         "description": "Supplement Parent Entry",
-        "excludedSubfields": ["6", "7", "2"]
+        "excludedSubfields": ["1","4","5","6","7","8"]
       },{
         "marc": "773",
         "description": "Host Item Entry",
-        "excludedSubfields": ["6", "7", "2"]
+        "excludedSubfields": ["1","4","5","6","7","8"]
       },{
         "marc": "774",
         "description": "Constituent Unit Entry",
-        "excludedSubfields": ["6", "7", "2"]
+        "excludedSubfields": ["1","4","5","6","7","8"]
       },{
         "marc": "775",
         "description": "Other Edition Entry",
-        "excludedSubfields": ["6", "7", "2"]
+        "excludedSubfields": ["1","4","5","6","7","8"]
       },{
         "marc": "776",
         "description": "Additional Physical Form Entry",
-        "excludedSubfields": ["6", "7", "2"]
+        "excludedSubfields": ["1","4","5","6","7","8"]
       },{
         "marc": "777",
         "description": "Issued With Entry",
-        "excludedSubfields": ["6", "7", "2"]
+        "excludedSubfields": ["1","4","5","6","7","8"]
       },{
         "marc": "780",
         "description": "Preceding Entry",
-        "excludedSubfields": ["6", "7", "2"]
+        "excludedSubfields": ["1","4","5","6","7","8"]
       },{
         "marc": "785",
         "description": "Succeeding Entry",
-        "excludedSubfields": ["6", "7", "2"]
+        "excludedSubfields": ["1","4","5","6","7","8"]
       },{
         "marc": "786",
         "description": "Data Source Entry",
-        "excludedSubfields": ["6", "7", "2"]
+        "excludedSubfields": ["1","4","5","6","7","8"]
       },{
         "marc": "787",
         "description": "Other Relationship Entry",
-        "excludedSubfields": ["6", "7", "2"]
+        "excludedSubfields": ["1","4","5","6","7","8"]
       }
     ]
   },
