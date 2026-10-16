@@ -209,7 +209,6 @@ const db = {
       host,
       database: process.env[`${prefix}_SERVICE_DB_NAME`],
       password,
-      query_timeout: 1000 * 60 * 5
     }
     return new Pool(config)
   },
@@ -506,19 +505,6 @@ const buildSqlQuery = (options) => {
   return { query, params, type }
 }
 
-const readCursorRecurser = async (batchSize, cursor, retry = 1) => {
-  if (retry > 3) {
-    throw new Error('Error connecting to db after 3 tries')
-  }
-  try {
-    return await cursor.read(batchSize)
-  } catch (e) {
-    logger.warn('readCursorRecursor error: ', e)
-    logger.info(`readCursorRecursor retry #${retry}`)
-    return await readCursorRecurser(batchSize, cursor, ++retry)
-  }
-}
-
 /**
  *  Reindex a bunch of bibs based on a BibService query
  */
@@ -549,7 +535,7 @@ const updateByBibOrItemServiceQuery = async (options) => {
       // Pull next batch of records from the cursor:
       let rows
       try {
-        rows = await readCursorRecurser(options.batchSize, cursor)
+        rows = await cursor.read(options.batchSize)
       } catch (e) {
         cursor.close(() => {
           client.release()
@@ -710,7 +696,7 @@ const updateByCsv = async (options = {}) => {
 
   const progress = await CsvProgress.forCsv(options.csv, options.jobfile)
 
-  if ([completed, failed].includes(progress.status())) {
+  if ([completed, failed].includes(progress.status()) && !options.skipProgressCheck) {
     logger.info(`Skipping CSV ${options.csv} because status is ${progress.status()}`)
     return
   }
