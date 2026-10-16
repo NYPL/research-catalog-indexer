@@ -27,10 +27,25 @@ describe('EsBib', function () {
       expect(regularParallel.label).to.equal('Continues')
       expect(regularParallel.display).to.equal('Si hai zhi you 1974-1984')
     })
-    // it('returns an array of linking entries', () => {
-    //   const linkingEntries = new EsBib(new SierraBib(require('../fixtures/b15495211.json')))
-    //   ex
-    // })
+    it('returns an array of linking entries', () => {
+      const entry = new EsBib(new SierraBib(require('../fixtures/b15495211.json')))
+        .linkingEntry().find((entry) =>
+          entry.marcTag === '762'
+        )
+      expect(entry).to.deep.equal({
+        parallelDisplay: null,
+        label: 'Subseries Entry',
+        display: 'University of Aberdeen. Anatomical and Anthropological Society. Proceedings of the Aberdeen University Anatomical and Anthropological Society (DLC)   05041796 (OCoLC)1642603 issn language code isbn',
+        marcTag: '762',
+        issn: 'issn',
+        isbn: 'isbn',
+        language: 'language code',
+        oclc: '(DLC)   05041796',
+        lccn: null,
+        index: 15,
+        hash: 'spaghetti'
+      })
+    })
   })
 
   describe('serialPublicationDates', function () {

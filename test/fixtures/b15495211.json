@@ -152,7 +152,10 @@
           "content": "Proceedings of the Aberdeen University Anatomical and Anthropological Society"
         },
         { "tag": "w", "content": "(DLC)   05041796" },
-        { "tag": "w", "content": "(OCoLC)1642603" }
+        { "tag": "w", "content": "(OCoLC)1642603" },
+        { "tag": "x", "content": "issn"},
+        { "tag": "e", "content": "language code"},
+        { "tag": "z", "content": "isbn"}
       ]
     },
     {
