@@ -14,7 +14,7 @@ describe('EsBib', function () {
       expect(esBib.bib).to.eq(record)
     })
   })
-  describe.only('linkingEntry', () => {
+  describe('linkingEntry', () => {
     it('handles orphan parallels as expected', () => {
       const orphanedParallel = new EsBib(new SierraBib(require('../fixtures/b14983919.json'))).linkingEntry()[0]
       expect(orphanedParallel.parallelDisplay === 'some orphaned parallel')
