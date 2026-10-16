@@ -15,14 +15,22 @@ describe('EsBib', function () {
     })
   })
   describe.only('linkingEntry', () => {
-    it('does the parallel thing', () => {
-      const bib = new EsBib(new SierraBib(require('../fixtures/b14983919.json')))
-      console.dir(bib.parallelLinkingEntry(), { depth: null })
+    it('handles orphan parallels as expected', () => {
+      const orphanedParallel = new EsBib(new SierraBib(require('../fixtures/b14983919.json'))).linkingEntry()[0]
+      expect(orphanedParallel.parallelDisplay === 'some orphaned parallel')
+      expect(orphanedParallel.display === undefined)
+      expect(orphanedParallel.label === 'Subseries entry')
     })
-    it('does the thing', () => {
-      const bib = new EsBib(new SierraBib(require('../fixtures/b15495211.json')))
-      console.dir(bib.linkingEntry(), { depth: null })
+    it('handles regular parallels as expected', () => {
+      const regularParallel = new EsBib(new SierraBib(require('../fixtures/b14983919.json'))).linkingEntry()[1]
+      expect(regularParallel.parallelDisplay).to.equal('四海 之 友 1974-1984')
+      expect(regularParallel.label).to.equal('Continues')
+      expect(regularParallel.display).to.equal('Si hai zhi you 1974-1984')
     })
+    // it('returns an array of linking entries', () => {
+    //   const linkingEntries = new EsBib(new SierraBib(require('../fixtures/b15495211.json')))
+    //   ex
+    // })
   })
 
   describe('serialPublicationDates', function () {
