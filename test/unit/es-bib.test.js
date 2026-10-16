@@ -43,7 +43,7 @@ describe('EsBib', function () {
         oclc: '(DLC)   05041796',
         lccn: null,
         index: 0,
-        hash: 'spaghetti'
+        hash: 29252762113
       })
     })
     it('has incrementing indexes for multiple marc tags', () => {
