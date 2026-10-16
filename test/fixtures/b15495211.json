@@ -138,6 +138,15 @@
       ]
     },
     {
+      "fieldTag": "z",
+      "marcTag": "785",
+      "ind1": "0",
+      "ind2": "0",
+      "subfields": [
+        { "tag": "t", "content": "First 785 field" }
+      ]
+    },
+    {
       "fieldTag": "w",
       "marcTag": "762",
       "ind1": "0",
@@ -165,8 +174,18 @@
       "ind2": "0",
       "subfields": [
         { "tag": "t", "content": "Aberdeen University studies series" },
+        { "tag": "t", "content": "Second 785 field" },
         { "tag": "w", "content": "(DLC)sn 97023009" },
         { "tag": "w", "content": "(OCoLC)7432701" }
+      ]
+    },
+        {
+      "fieldTag": "z",
+      "marcTag": "785",
+      "ind1": "0",
+      "ind2": "0",
+      "subfields": [
+        { "tag": "t", "content": "Third 785 field" }
       ]
     },
     {
