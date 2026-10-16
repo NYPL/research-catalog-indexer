@@ -41,8 +41,8 @@ describe('EsBib', function () {
         issn: 'issn',
         isbn: 'isbn',
         language: 'language code',
-        oclc: '(DLC)   05041796',
-        lccn: null,
+        oclc: '(OCoLC)1642603',
+        lccn: '(DLC)   05041796',
         marcTagIndex: 0,
         hash: 18769661742
       })
