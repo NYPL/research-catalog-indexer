@@ -42,22 +42,22 @@ describe('EsBib', function () {
         language: 'language code',
         oclc: '(DLC)   05041796',
         lccn: null,
-        index: 0,
+        marcTagIndex: 0,
         hash: 29252762113
       })
     })
-    it('has incrementing indexes for multiple marc tags', () => {
+    it('has incrementing marcTagIndexes for multiple marc tags', () => {
       const entries = new EsBib(new SierraBib(require('../fixtures/b15495211.json')))
       const first = entries.linkingEntry().find((entry) =>
-        entry.marcTag === '785' && entry.index === 0
+        entry.marcTag === '785' && entry.marcTagIndex === 0
       )
       expect(first.display).to.contain('First')
       const second = entries.linkingEntry().find((entry) =>
-        entry.marcTag === '785' && entry.index === 1
+        entry.marcTag === '785' && entry.marcTagIndex === 1
       )
       expect(second.display).to.contain('Second')
       const third = entries.linkingEntry().find((entry) =>
-        entry.marcTag === '785' && entry.index === 2
+        entry.marcTag === '785' && entry.marcTagIndex === 2
       )
       expect(third.display).to.contain('Third')
     })
