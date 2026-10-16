@@ -20,6 +20,7 @@ describe('EsBib', function () {
       expect(orphanedParallel.parallelDisplay === 'some orphaned parallel')
       expect(orphanedParallel.display === undefined)
       expect(orphanedParallel.label === 'Subseries entry')
+      expect(orphanedParallel.hash).to.equal(undefined)
     })
     it('handles regular parallels as expected', () => {
       const regularParallel = new EsBib(new SierraBib(require('../fixtures/b14983919.json'))).linkingEntry()[1]
@@ -43,7 +44,7 @@ describe('EsBib', function () {
         oclc: '(DLC)   05041796',
         lccn: null,
         marcTagIndex: 0,
-        hash: 29252762113
+        hash: 18769661742
       })
     })
     it('has incrementing marcTagIndexes for multiple marc tags', () => {
