@@ -7,11 +7,11 @@ This repo uses the [Main-QA-Production](https://github.com/NYPL/engineering-gene
 1. Create a feature branch off `main`. 
 2. Open a PR against `main`.
    - The PR should include an updated changelog and package version, since QA index updates will be initiated on `main`.
-3. Merge `main` > `qa`
+3. Merge `main` > `qa`.
    - Production index updates should be initiated on `qa`.
 4. After QA signoff, merge `qa` > `production`.
 
-Our `main` is essentially a staging area for `qa`, but merging into `main` indicates it's dev-approved and ready for other developers to pull it down into their own feature work.
+Merging into `main` should indicates it's dev-approved, ready for other developers to pull it down into their own feature work, and can be safely included in the next QA reindex.
 
 ### Changelog
 
