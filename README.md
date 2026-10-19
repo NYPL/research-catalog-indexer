@@ -4,16 +4,34 @@ This app manipulates MarcInJson records, writing the result to the Elastic Searc
 ## Contributing
 
 This repo uses the [Main-QA-Production](https://github.com/NYPL/engineering-general/blob/master/standards/git-workflow.md#main-qa-production)
-1. Create feature branch off main
-2. Compute next logical version and update README.md, CHANGELOG.md, package.json, etc.
-3. Create PR against main
-4. After merging the PR, git tag main with new version number.
-5. Merge main > qa
-6. After QC signoff, merge qa > production
+1. Create a feature branch off `main`. 
+2. Open a PR against `main`.
+   - The PR should include an updated changelog and package version, since QA index updates will be initiated on `main`.
+3. Merge `main` > `qa`
+   - Production index updates should be initiated on `qa`.
+4. After QA signoff, merge `qa` > `production`.
+
+Our `main` is essentially a staging area for `qa`, but merging into `main` indicates it's dev-approved and ready for other developers to pull it down into their own feature work.
+
+### Changelog
+
+This project maintains a [CHANGELOG](./CHANGELOG.md).
+
+- All PRs should include a relevant CHANGELOG entry with a brief summary of the PR's changes and the relevant ticket (if there is one) in the `Prerelease` section
+- When merging into `main`, update the `Prerelease` section with the next version and the current date (e.g., `## [1.0.1] - 2026-10-15`)
+- To skip CHANGELOG or versioning enforcement, add the `skip-changelog`/`skip-versionbump` label to your PR. Generally, avoid this (hot fixes need to be documented even if you're in a rush) 
+
+Example format:
+```
+## Prerelease
+
+- Removed every letter Y (SCC-0123)
+- Updated parallels for contributor fields (SCC-1234)
+```
 
 ## Deployment
 
-This app uses Travis-CI and terraform for deployment. Code pushed to `qa` and `main` trigger deployments to `qa` and `production`, respectively.
+This app uses Terraform for deployment. Code pushed to `qa` and `production` trigger deployments to `qa` and `production`, respectively.
 
 ## Testing
 
