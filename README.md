@@ -18,7 +18,7 @@ Our `main` is essentially a staging area for `qa`, but merging into `main` indic
 This project maintains a [CHANGELOG](./CHANGELOG.md).
 
 - All PRs should include a relevant CHANGELOG entry with a brief summary of the PR's changes and the relevant ticket (if there is one) in the `Prerelease` section
-- When merging into `main`, update the `Prerelease` section with the next version and the current date (e.g., `## [1.0.1] - 2026-10-15`)
+- When merging into `main`, update the `Prerelease` section with the next version and the current date (e.g., `## [1.0.1] - 2026-10-15`). Update the `package.json` version as well
 - To skip CHANGELOG or versioning enforcement, add the `skip-changelog`/`skip-versionbump` label to your PR. Generally, avoid this (hot fixes need to be documented even if you're in a rush) 
 
 Example format:
