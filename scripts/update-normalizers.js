@@ -49,13 +49,14 @@ const updateSettings = async (options) => {
 }
 
 const reindexRecordsWithNewSettings = async (options) => {
+  const definitelyRunningOnQa = options.index.includes('qa') && options.envfile.includes('qa')
   const esClient = await elasticsearch.client()
   const resp = await esClient.updateByQuery({
     index: options.index,
     conflicts: 'proceed',
     wait_for_completion: false,
-    body: { query: { match_all: {} } }
-    // requests_per_second: 200
+    body: { query: { match_all: {} } },
+    requests_per_second: definitelyRunningOnQa ? -1 : 200
   })
   console.log(`Started reindex task ${resp.body.task}`)
 }
