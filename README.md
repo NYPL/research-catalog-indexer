@@ -6,7 +6,8 @@ This app manipulates MarcInJson records, writing the result to the Elastic Searc
 This repo uses the [Main-QA-Production](https://github.com/NYPL/engineering-general/blob/master/standards/git-workflow.md#main-qa-production)
 1. Create a feature branch off `main`. 
 2. Open a PR against `main`.
-   - The PR should include an updated changelog and package version, since QA index updates will be initiated on `main`.
+   - The PR should include an updated changelog and package version. 
+   - Git will automatically tag the new version you merge into `main`, and QA index updates will be initiated on `main`.
 3. Merge `main` > `qa`.
    - Production index updates should be initiated on `qa`.
 4. After QA signoff, merge `qa` > `production`.
@@ -31,7 +32,7 @@ Example format:
 
 ## Deployment
 
-This app uses Terraform for deployment. Code pushed to `qa` and `production` trigger deployments to `qa` and `production`, respectively.
+This app uses Terraform for deployment. Code pushed to `qa` and `production` triggers deployments to `qa` and `production`, respectively.
 
 ## Testing
 
