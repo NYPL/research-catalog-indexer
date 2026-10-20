@@ -54,7 +54,7 @@ const reindexRecordsWithNewSettings = async (options) => {
     index: options.index,
     conflicts: 'proceed',
     wait_for_completion: false,
-    body: { query: { match_all: {} } },
+    body: { query: { match_all: {} } }
     // requests_per_second: 200
   })
   console.log(`Started reindex task ${resp.body.task}`)
