@@ -208,7 +208,7 @@ const db = {
       user,
       host,
       database: process.env[`${prefix}_SERVICE_DB_NAME`],
-      password,
+      password
     }
     return new Pool(config)
   },

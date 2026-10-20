@@ -14,23 +14,23 @@ describe('EsBib', function () {
       expect(esBib.bib).to.eq(record)
     })
   })
-  describe('linkingEntry', () => {
+  describe('linkedEntry', () => {
     it('handles orphan parallels as expected', () => {
-      const orphanedParallel = new EsBib(new SierraBib(require('../fixtures/b14983919.json'))).linkingEntry()[0]
+      const orphanedParallel = new EsBib(new SierraBib(require('../fixtures/b14983919.json'))).linkedEntry()[0]
       expect(orphanedParallel.parallelDisplay === 'some orphaned parallel')
       expect(orphanedParallel.display === undefined)
       expect(orphanedParallel.label === 'Subseries entry')
       expect(orphanedParallel.hash).to.equal(undefined)
     })
     it('handles regular parallels as expected', () => {
-      const regularParallel = new EsBib(new SierraBib(require('../fixtures/b14983919.json'))).linkingEntry()[1]
+      const regularParallel = new EsBib(new SierraBib(require('../fixtures/b14983919.json'))).linkedEntry()[1]
       expect(regularParallel.parallelDisplay).to.equal('四海 之 友 1974-1984')
       expect(regularParallel.label).to.equal('Continues')
       expect(regularParallel.display).to.equal('Si hai zhi you 1974-1984')
     })
     it('returns an array of linking entries', () => {
       const entry = new EsBib(new SierraBib(require('../fixtures/b15495211.json')))
-        .linkingEntry().find((entry) =>
+        .linkedEntry().find((entry) =>
           entry.marcTag === '762'
         )
       expect(entry).to.deep.equal({
@@ -49,15 +49,15 @@ describe('EsBib', function () {
     })
     it('has incrementing marcTagIndexes for multiple marc tags', () => {
       const entries = new EsBib(new SierraBib(require('../fixtures/b15495211.json')))
-      const first = entries.linkingEntry().find((entry) =>
+      const first = entries.linkedEntry().find((entry) =>
         entry.marcTag === '785' && entry.marcTagIndex === 0
       )
       expect(first.display).to.contain('First')
-      const second = entries.linkingEntry().find((entry) =>
+      const second = entries.linkedEntry().find((entry) =>
         entry.marcTag === '785' && entry.marcTagIndex === 1
       )
       expect(second.display).to.contain('Second')
-      const third = entries.linkingEntry().find((entry) =>
+      const third = entries.linkedEntry().find((entry) =>
         entry.marcTag === '785' && entry.marcTagIndex === 2
       )
       expect(third.display).to.contain('Third')
