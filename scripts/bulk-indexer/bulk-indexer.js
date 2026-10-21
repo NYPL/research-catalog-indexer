@@ -15,11 +15,12 @@ const {
   camelize,
   capitalize,
   groupIdentifierEntitiesByTypeAndNyplSource,
+  lineCount,
   printProgress
 } = require('../utils')
 const schema = require('../../lib/elastic-search/index-config/index-schema.js')
 const logger = require('../../lib/logger')
-const { buildCsv: buildCsvForCriteria } = require('../identify-ids-by-marc')
+const { buildCsv: buildCsvForMarc } = require('../identify-ids-by-marc')
 const NyplSourceMapper = require('../../lib/utils/nypl-source-mapper')
 const { JobState } = require('./job-state')
 
@@ -410,7 +411,7 @@ const enableBulkIndexOverrides = (options) => {
 }
 
 /**
- *  Restore affect of above.
+ *  Restore effect of above.
  */
 const revertBulkIndexerOverrides = () => {
   restoreModelPrefetch()
@@ -451,16 +452,30 @@ const extractAndValidateIdentifiers = (rows, options, sourceMapper) => {
  *  Given a state, generates relevant CSV for given criteria, updating state to reference new CSV
  * */
 const prepareCsv = async (state) => {
-  if (state.csvPath() && state.count) {
+  if (state.csvCount()) {
     return
   }
 
-  state.addMessage(`Building CSV for ${state.basePath}`)
-  const csv = state.basePath + '.csv'
-  await buildCsvForCriteria({ ...state.data.params, toCsv: csv })
-  state.save({ csv })
+  // Build CSV:
+  if (!state.csvPath()) {
+    state.addMessage(`Building CSV for ${state.basePath}`)
+    const csv = state.basePath + '.csv'
+    await buildCsvForMarc({ ...state.data.params, toCsv: csv })
+    state.save({ csv })
+  }
 
-  return handleJobEvent(state, 'csv-built')
+  // Count rows:
+  if (state.csvPath() && fs.existsSync(state.csvPath())) {
+    state.addMessage(`Counting rows in ${state.csvPath()}`)
+    const count = await lineCount(state.csvPath())
+    state.save({ count })
+  }
+
+  if (state.csvPath() && state.csvCount()) {
+    return handleJobEvent(state, 'csv-built')
+  } else {
+    return handleJobEvent(state, 'error')
+  }
 }
 
 /**
@@ -508,6 +523,7 @@ const STATES = {
   [STATUS_PREPARING]: {
     handler: prepareCsv,
     events: {
+      error: STATUS_FAILED,
       'csv-built': STATUS_INDEXING
     }
   },
@@ -546,6 +562,10 @@ class BulkIndexJobState extends JobState {
     return this.data.csv
   }
 
+  csvCount () {
+    return this.csvPath() && this.data.count
+  }
+
   static fromParams (params) {
     return JobState.fromParams(params, BulkIndexJobState)
   }
@@ -572,7 +592,7 @@ const resumeJob = (state) => {
  */
 const handleJobEvent = (state, event) => {
   if (!(event in STATES[state.status()].events)) {
-    throw new Error(`Don't know how to handle ${event} in state ${state.status()}`)
+    throw new Error(`Don't know how to handle event '${event}' in state '${state.status()}'`)
   }
 
   const newState = STATES[state.status()].events[event]

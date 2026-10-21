@@ -1,26 +1,60 @@
 /**
  *  Bulk Index
  *
- *  This script allows you to index lots of records in bulk based on either:
- *   1. an arbitrary Bib- or ItemService SQL query.
- *   2. a CSV containing identifiers
+ *  This script provides the CLI interface for starting a single bulk-index process on:
+ *    1. an arbitrary Bib- or ItemService SQL query.
+ *    2. a CSV containing identifiers
  *
- *  Common Arguments
+ *    Required arguments:
+ *     - envfile {string}: Path to local .env file. Default ./config/qa-bulk-index.env
+ *     - type {string}: Required. One of item or bib
  *
- *    These arguments are generally available however the script is invoked:
  *
+ *  Updating by marc:
+ *
+ *    node scripts/bulk-index.js --type (item|bib) --hasMarc M ...
+ *
+ *    Arguments:
+ *     - hasMarc {string}: Marc tag, e.g. '300'
+ *     - hasSubfield {string}: Optional. Subfield code, e.g. 'f'
+ *
+ *
+ *  Updating by CSV:
+ *
+ *    If you have a CSV obtained through some outside process, you can process it directly:
+ *
+ *    node scripts/bulk-index --csv CSVFILE --csvIdColumn 0 [--csvDropChecksum]
+ *
+ *    Arguments:
+ *      - csv {string}: Path to local CSV. Required.
+ *      - csvIdColumn {int}: Column index (0-indexed) in CSV from which to extract the id. Required.
+ *      - csvNyplSourceColumn {int}: Column index (0-indexed) in CSV from which to extract the nyplSource.
+ *        Required unless CSV contains prefixed ids or --nyplSource is speified
+ *      - csvDropChecksum {boolean}: Whether or not to remove the Sierra check-digit from extracted ids.
+ *        Default false.
+ *
+ *
+ *  Common arguments
+ *
+ *    Arguments that can be used for most reindex calls to override default behavior:
  *     - batchSize {int}: How many records to index at one time. Default 100
  *     - dryrun {boolean}: Set to true to perform all work, but skip writing to index.
- *     - envfile {string}: Path to local .env file. Default ./config/qa-bulk-index.env
  *     - limit {int}: How many records to process. Default null (no limit)
  *     - nyplSource {string}: NYPL Source value. Default 'sierra-nypl'
  *     - offset {int}: How many records to skip over in the CSV. Default 0
  *     - table {string}: Override primary table name used (e.g. bib_v2)
- *     - type {string}: Required. One of item or bib
- *     - properties {string}: comma-delineated list of bib-level properties to run update for
+ *     - properties {string}: comma-delineated list of bib-level properties to run update for. Required when --updateOnly used.
  *     - recapBarcodeCustomerCodeMap {string}: Path to local CSV containing barcode and customer-code pairs.
  *         When provided, allows script to skip many expensive SCSB API calls.
  *         This CSV may be provided by ReCAP staff or generated from our ES.
+ *     - skipDbPrefetch {boolean}: Flag to skip item and holding fetches from the DB. Can be false for any bib-level
+ *       updates, must be true for item or holding level updates. Can also be controlled via SKIP_DB_PREFETCH env var.
+ *     - skipApiPrefetch {boolean}: Skip API calls to M2 customer code store and SCSB. Can be true for any bib-level
+ *       update. Can be true for item level updates that do not have to do with live SCSB or M2 customer code data.
+ *       Can also be controlled via SKIP_API_PREFETCH env var.
+ *
+ *
+ *  Performance considerations
  *
  *  Performing property-specific bib-only update:
  *
@@ -42,60 +76,6 @@
  *     - updateOnly {boolean}: Flag to run as update only script and not standard bulk index overwrite. Can also be
  *       controlled via UPDATE_ONLY env var.
  *
- *
- *  I. Updating by Bib/Item Service query:
- *
- *    node scripts/bulk-index.js --type (item|bib) [--nyplSource NYPLSOURCE]
- *
- *    Arguments:
- *      - orderBy {string}: Columns to order query by. Default '' (no sort).
- *        e.g. `--orderBy id`. Sortable columns include `id`, `updated_date`,
- *        `created_date`.
- *
- *    One of these mutually exclusive arguments must be used so that the script
- *    has something to query on:
- *     - type
- *     - bibId
- *
- *    Note that omitting --limit may cause the query to take a long time to
- *    return due to the size of the databases.
- *
- *    Using --orderBy may slow down the query, but will ensure you can resume
- *    when a job fails by setting --offset to the index of the last successful
- *    batch. (Otherwise, results are processed in an unstable order between jobs.)
- *
- *    Examples
- *
- *    To reindex all bibs in QA:
- *      node scripts/bulk-index.js --type bib
- *
- *  II. Updating by CSV:
- *
- *      node scripts/bulk-index --csv CSVFILE --csvIdColumn 0 [--csvDropChecksum]
- *
- *    CSV is may contain any number of columns, but one of them must contain prefixed ids (e.g. b1234)
- *
- *    Arguments:
- *      - csv {string}: Path to local CSV. Required.
- *      - csvIdColumn {int}: Column index (0-indexed) in CSV from which to extract the id. Required.
- *      - csvNyplSourceColumn {int}: Column index (0-indexed) in CSV from which to extract the nyplSource.
- *        Required unless CSV contains prefixed ids or --nyplSource is speified
- *      - csvDropChecksum {boolean}: Whether or not to remove the Sierra check-digit from extracted ids.
- *        Default false.
- *
- *
- *  bulk-index
- *   - by params / jobfile
- *   - creates jobfile if missing
- *   - creates statusfile if missing
- *   - observes state transition rules:
- *     - | state        | event        | next_state         |
- *       |--------------|--------------|--------------------|
- *       | preparing    | csv-built    | running            |
- *       | running      | error        | failed             |
- *       |              | completed    | completed          |
- *       | failed       | restarted    | preparing          |
- *
  */
 const fs = require('fs')
 const { parse: csvParse } = require('csv-parse/sync')
@@ -112,11 +92,10 @@ const argv = require('minimist')(process.argv.slice(2), {
     properties: '',
     recapBarcodeCustomerCodeMap: null,
     skipPrefetch: false,
-    updateOnly: false,
-    jobfile: null
+    updateOnly: false
   },
   boolean: ['updateOnly', 'skipDeletes', 'dryrun'],
-  string: ['hasMarc', 'hasSubfield', 'bibId', 'fromDate', 'toDate', 'jobfile', 'envfile'],
+  string: ['hasMarc', 'hasSubfield', 'fromDate', 'toDate', 'envfile'],
   integer: ['limit', 'offset', 'batchSize']
 })
 
@@ -153,12 +132,10 @@ if (process.env.NEW_RELIC_LICENSE_KEY && process.env.NEW_RELIC_APP_NAME) {
 const usage = () => {
   console.log([
     'Usage:',
-    'Reindex a single record:',
-    '  node bulk-index --envfile [path to .env] (--bibId id|--itemId id)',
     'Reindex by nypl-source:',
-    '  node bulk-index --envfile [path to .env] --type (bib|item) --nyplSource SOURCE',
+    '  node scripts/bulk-indexer/bulk-index.js --envfile [path to .env] --type (bib|item) --nyplSource SOURCE',
     'Reindex by CSV (containing prefixed ids):',
-    '  node bulk-index --envfile [path to .env] --csv FILE --csvIdColumn 0',
+    '  node scripts/bulk-indexer/bulk-index.js --envfile [path to .env] --csv FILE --csvIdColumn 0',
     'Perform any reindex only for specific bib-only properties by adding the following to any reindex args: ',
     '  --properties subjectLiteral,addedAuthorTitle --skipPrefetch true  --updateOnly true'
   ].join('\n'))
@@ -170,23 +147,20 @@ const usage = () => {
  *  Raise error if something's amiss.
  */
 const validateParams = (argv) => {
-  let message
+  const problems = []
   const updateOnly = process.env.UPDATE_ONLY === 'true' || argv.updateOnly
   const properties = process.env.PROPERTIES || argv.properties
   if ((updateOnly || properties) && !(updateOnly && properties)) {
-    message = 'Must provide --properties when UPDATE_ONLY=true or --updateOnly true (and vice versa)'
-  } else if (
-    (
-      !argv.type ||
-      (
-        !argv.csv && !argv.hasMarc
-      )
-    )
-  ) {
-    message = 'Insufficient params'
+    problems.push('Must provide --properties when UPDATE_ONLY=true or --updateOnly true (and vice versa)')
   }
-  if (message) {
-    throw new Error(message)
+  if (!argv.type) {
+    problems.push('Missing --type')
+  }
+  if (!(argv.csv || argv.hasMarc || argv.nyplSource)) {
+    problems.push('Missing --csv or --hasMarc or --nyplSource')
+  }
+  if (problems.length) {
+    throw new Error(problems.join(' ; '))
   }
 }
 

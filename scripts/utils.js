@@ -415,6 +415,20 @@ Timer.startNew = (name) => {
   return timer
 }
 
+/**
+ *  Execute callback, but restrict repeated calls to given frequency.
+ */
+const throttleCall = (cb, callsPerMs = 1000, id = cb.toString()) => {
+  if (!this.lastCall) {
+    this.lastCall = {}
+  }
+
+  if (!this.lastCall[id] || ((new Date()) - this.lastCall[id]) >= callsPerMs) {
+    cb()
+    this.lastCall[id] = new Date()
+  }
+}
+
 module.exports = {
   batch,
   buildSierraModelFromUri,
@@ -429,5 +443,6 @@ module.exports = {
   printProgress,
   secondsAsFriendlyDuration,
   setAwsProfile,
+  throttleCall,
   Timer
 }

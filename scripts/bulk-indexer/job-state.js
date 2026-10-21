@@ -16,8 +16,9 @@ class JobState {
   }
 
   loadState () {
-    console.log('loadState ...', this.filePath(), fs.existsSync(this.filePath()))
     if (fs.existsSync(this.filePath())) {
+      logger.info(`Loading state from ${this.filePath()}`)
+
       let restoredData
       try {
         restoredData = JSON.parse(fs.readFileSync(this.filePath(), 'utf8'))
@@ -43,6 +44,7 @@ class JobState {
         })
       }
     } else {
+      logger.info(`Initializing job state in ${this.filePath()}`)
       this.data = {
         ...this.data,
         status: 'preparing',
@@ -87,18 +89,28 @@ class JobState {
   }
 
   static fromParams (params, Klass = JobState) {
-    // Build filepath based on params:
-    const path = [
-      `${params.type}s`,
-      (params.nyplSource ? params.nyplSource : null),
-      (params.hasMarc ? `with-marc-${params.hasMarc}` : null)
-    ]
-      .filter(Boolean)
-      .join('-')
+    let path
+    if (params.csv) {
+      path = params.csv
+    } else {
+      // Build filepath based on params:
+      path = [
+        `${params.type}s`,
+        (params.nyplSource ? params.nyplSource : null),
+        (params.hasMarc ? `with-marc-${params.hasMarc}` : null),
+        (params.hasSubfield ? params.hasSubfield : null)
+      ]
+        .filter(Boolean)
+        .join('-')
+    }
     // Instantiate JobState subclass:
     const state = new Klass(path, params)
     state.loadState()
-    state.save()
+    const props = {}
+    if (params.csv) {
+      props.csv = params.csv
+    }
+    state.save(props)
     return state
   }
 }

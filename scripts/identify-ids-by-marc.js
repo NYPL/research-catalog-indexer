@@ -24,7 +24,7 @@ const { to: copyTo } = require('pg-copy-streams')
 const { pipeline } = require('node:stream/promises')
 const kms = require('../lib/kms.js')
 const logger = require('../lib/logger')
-const { setAwsProfile, capitalize, die } = require('./utils')
+const { setAwsProfile, capitalize, die, throttleCall } = require('./utils')
 
 const usage = () => {
   console.log('Usage:')
@@ -84,6 +84,7 @@ const buildSqlQuery = (options) => {
   }
 
   if (options.hasMarc) {
+    // Leverage indexed marc_tags column to do initial match
     wheres.push(`marc_tags @> ARRAY['${options.hasMarc}']`)
   }
 
@@ -131,21 +132,21 @@ const buildCsv = async (options) => {
 const _buildCsv = async (options) => {
   if (!options.type) return usage() && die('--type required')
   if (!['item', 'bib'].includes(options.type)) return usage() && die('--type must be item or bib')
-  if (!options.hasMarc) return usage() && die('--hasMarc required')
+  if (!options.hasMarc && !options.nyplSource) return usage() && die('--nyplSource and/or --hasMarc required')
   if (!options.toCsv) return usage() && die('--toCsv required')
 
   logger.setLevel(process.env.LOG_LEVEL || 'info')
 
   await db.initPools()
 
-  const { query, params, type } = buildSqlQuery(options)
+  const { query, type } = buildSqlQuery(options)
   const copyQuery = [
     'COPY (',
     query,
     ') TO STDOUT WITH CSV DELIMITER \',\''
   ].join('')
 
-  logger.info(`Querying ${capitalize(type)}Service: ${copyQuery} | ${JSON.stringify(params)}`)
+  logger.info(`Querying ${capitalize(type)}Service: ${copyQuery}`)
   const client = await db.connect(`${type}Service`)
 
   try {
@@ -156,7 +157,8 @@ const _buildCsv = async (options) => {
     sourceStream.on('data', (d) => {
       const data = Buffer.from(d).toString('utf8')
       rowsRead += data.split('\n').length - 1
-      console.log(`Read ${rowsRead} rows`)
+      // Print progress, but restrict to logging at most once per second:
+      throttleCall(() => console.info(`Read ${rowsRead} rows`), 1000)
     })
 
     await pipeline(sourceStream, writeStream) // process.stdout)
