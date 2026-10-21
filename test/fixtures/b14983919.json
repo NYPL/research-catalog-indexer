@@ -1,0 +1,412 @@
+{
+  "id": "14983919",
+  "varFields": [
+    {
+      "fieldTag": "c",
+      "marcTag": "852",
+      "ind1": "8",
+      "ind2": " ",
+      "subfields": [
+        { "tag": "h", "content": "*OVA (Hai Hua)" },
+        {
+          "tag": "z",
+          "content": "Library has: no. 26(1987)-no. 105(1993) [inc.]"
+        }
+      ]
+    },
+    {
+      "fieldTag": "d",
+      "marcTag": "650",
+      "ind1": " ",
+      "ind2": "0",
+      "subfields": [
+        { "tag": "a", "content": "Chinese" },
+        { "tag": "x", "content": "Foreign countries" },
+        { "tag": "v", "content": "Periodicals." }
+      ]
+    },
+    {
+      "fieldTag": "d",
+      "marcTag": "651",
+      "ind1": " ",
+      "ind2": "0",
+      "subfields": [
+        { "tag": "a", "content": "Taiwan" },
+        { "tag": "v", "content": "Periodicals." }
+      ]
+    },
+    {
+      "fieldTag": "l",
+      "marcTag": "010",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [{ "tag": "a", "content": "90645686 /ACN" }]
+    },
+    {
+      "fieldTag": "l",
+      "marcTag": "035",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [{ "tag": "a", "content": "(OCoLC)18475300" }]
+    },
+    {
+      "fieldTag": "n",
+      "marcTag": "500",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [{ "tag": "a", "content": "Title from cover." }]
+    },
+    {
+      "fieldTag": "o",
+      "marcTag": "001",
+      "ind1": " ",
+      "ind2": " ",
+      "content": "NYPO01-S78"
+    },
+    {
+      "fieldTag": "p",
+      "marcTag": "260",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        { "tag": "6", "content": "880-03" },
+        { "tag": "a", "content": "Taibei :" },
+        { "tag": "b", "content": "Hai Hua za zhi she," },
+        { "tag": "c", "content": "1985-1993." }
+      ]
+    },
+    {
+      "fieldTag": "q",
+      "marcTag": "852",
+      "ind1": "8",
+      "ind2": " ",
+      "subfields": [
+        { "tag": "h", "content": "*OVA (Hai Hua)" },
+        {
+          "tag": "z",
+          "content": "Library has: no. 26(1987)-no. 105(1993) [inc.]"
+        }
+      ]
+    },
+    {
+      "fieldTag": "r",
+      "marcTag": "300",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        { "tag": "a", "content": "105 v. :" },
+        { "tag": "b", "content": "ill. (some col.)  ;" },
+        { "tag": "c", "content": "29 cm." }
+      ]
+    },
+    {
+      "fieldTag": "r",
+      "marcTag": "362",
+      "ind1": "0",
+      "ind2": " ",
+      "subfields": [
+        { "tag": "6", "content": "880-04" },
+        {
+          "tag": "a",
+          "content": "Chuang kan hao (74 nian 2 yue [Feb. 1985])-di 105 qi (Min guo 82 nian 10 yue [Oct. 1993]) = Di 1 juan di 1 qi-di 9 juan di 9 qi."
+        }
+      ]
+    },
+    {
+      "fieldTag": "t",
+      "marcTag": "245",
+      "ind1": "0",
+      "ind2": "0",
+      "subfields": [
+        { "tag": "6", "content": "880-01" },
+        { "tag": "a", "content": "Hai Hua za zhi =" },
+        { "tag": "b", "content": "Overseas-Chinese magazine." }
+      ]
+    },
+    {
+      "fieldTag": "u",
+      "marcTag": "246",
+      "ind1": "1",
+      "ind2": "0",
+      "subfields": [
+        { "tag": "6", "content": "880-02" },
+        { "tag": "a", "content": "Hai Hua" }
+      ]
+    },
+    {
+      "fieldTag": "u",
+      "marcTag": "246",
+      "ind1": "1",
+      "ind2": "0",
+      "subfields": [{ "tag": "a", "content": "Overseas Chinese magazine" }]
+    },
+    {
+      "fieldTag": "u",
+      "marcTag": "246",
+      "ind1": "1",
+      "ind2": "1",
+      "subfields": [{ "tag": "a", "content": "Overseas-Chinese magazine" }]
+    },
+    {
+      "fieldTag": "u",
+      "marcTag": "299",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [{ "tag": "a", "content": "Hai Hua." }]
+    },
+    {
+      "fieldTag": "u",
+      "marcTag": "299",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [{ "tag": "a", "content": "Haihua tsachih" }]
+    },
+    {
+      "fieldTag": "u",
+      "marcTag": "299",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [{ "tag": "a", "content": "Overseas-Chinese magazine." }]
+    },
+    {
+      "fieldTag": "u",
+      "marcTag": "299",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [{ "tag": "a", "content": "Overseas Chinese magazine." }]
+    },
+    {
+      "fieldTag": "v",
+      "marcTag": "959",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        { "tag": "a", "content": ".b66370334" },
+        { "tag": "b", "content": "01-11-08" },
+        { "tag": "c", "content": "02-27-01" }
+      ]
+    },
+    {
+      "fieldTag": "x",
+      "marcTag": "780",
+      "ind1": "0",
+      "ind2": "0",
+      "subfields": [
+        { "tag": "6", "content": "880-05" },
+        { "tag": "t", "content": "Si hai zhi you" },
+        { "tag": "g", "content": "1974-1984" }
+      ]
+    },
+
+    {
+      "fieldTag": "z",
+      "marcTag": "785",
+      "ind1": "0",
+      "ind2": "0",
+      "subfields": [
+        { "tag": "6", "content": "880-06" },
+        { "tag": "t", "content": "Hong guan" }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "003",
+      "ind1": " ",
+      "ind2": " ",
+      "content": "CStRLIN"
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "005",
+      "ind1": " ",
+      "ind2": " ",
+      "content": "20021115110330.0"
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "008",
+      "ind1": " ",
+      "ind2": " ",
+      "content": "010223d19851993ch mr p       0uuue0chiodcas a "
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "040",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        { "tag": "a", "content": "WaChenE" },
+        { "tag": "c", "content": "WaChenE" },
+        { "tag": "d", "content": "DLC" },
+        { "tag": "d", "content": "NST" },
+        { "tag": "d", "content": "DLC" },
+        { "tag": "d", "content": "CStRLIN" },
+        { "tag": "d", "content": "IaU" },
+        { "tag": "d", "content": "CU" },
+        { "tag": "d", "content": "NN" }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "042",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [{ "tag": "a", "content": "lc" }]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "043",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [{ "tag": "a", "content": "a-ch---" }]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "050",
+      "ind1": "0",
+      "ind2": " ",
+      "subfields": [
+        { "tag": "a", "content": "DS732" },
+        { "tag": "b", "content": ".H248" }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "908",
+      "ind1": "0",
+      "ind2": " ",
+      "subfields": [
+        { "tag": "a", "content": "DS732" },
+        { "tag": "b", "content": ".H248" }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "066",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [{ "tag": "c", "content": "$1" }]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "880",
+      "ind1": "0",
+      "ind2": "0",
+      "subfields": [
+        { "tag": "6", "content": "245-01/$1" },
+        { "tag": "a", "content": "海華 雜誌 =" },
+        { "tag": "b", "content": "Overseas-Chinese magazine." }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "880",
+      "ind1": "1",
+      "ind2": "0",
+      "subfields": [
+        { "tag": "6", "content": "246-02/$1" },
+        { "tag": "a", "content": "海華" }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "880",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        { "tag": "6", "content": "260-03/$1" },
+        { "tag": "a", "content": "台北 :" },
+        { "tag": "b", "content": "海華 雜誌社," },
+        { "tag": "c", "content": "1985-1993." }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "880",
+      "ind1": "0",
+      "ind2": " ",
+      "subfields": [
+        { "tag": "6", "content": "362-04/$1" },
+        {
+          "tag": "a",
+          "content": "創刊號 (74年 2月 [Feb. 1985])-第105期 (民國82年 10月 [Oct. 1993]) = 第1卷 第1期-第9卷 第9期."
+        }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "880",
+      "ind1": "0",
+      "ind2": "0",
+      "subfields": [
+        { "tag": "6", "content": "780-05/$1" },
+        { "tag": "t", "content": "四海 之 友" },
+        { "tag": "g", "content": "1974-1984" }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "880",
+      "ind1": "0",
+      "ind2": "0",
+      "subfields": [
+        { "tag": "6", "content": "762-01/$1" },
+        { "tag": "t", "content": "some orphaned parallel" }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "880",
+      "ind1": "0",
+      "ind2": "0",
+      "subfields": [
+        { "tag": "6", "content": "785-06/$1" },
+        { "tag": "t", "content": "宏觀" }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "987",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        { "tag": "a", "content": "PINYIN" },
+        { "tag": "b", "content": "CStRLIN" },
+        { "tag": "c", "content": "20010609" },
+        { "tag": "d", "content": "c" },
+        { "tag": "e", "content": "1.1" }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "997",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        { "tag": "a", "content": "ho" },
+        { "tag": "b", "content": "12-06-02" },
+        { "tag": "c", "content": "s" },
+        { "tag": "d", "content": "a" },
+        { "tag": "e", "content": "-" },
+        { "tag": "f", "content": "chi" },
+        { "tag": "g", "content": "ch " },
+        { "tag": "h", "content": "0" }
+      ]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "991",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [{ "tag": "y", "content": "18475300" }]
+    },
+    {
+      "fieldTag": "y",
+      "marcTag": "910",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [{ "tag": "a", "content": "RL" }]
+    },
+    { "fieldTag": "_", "content": "00000cas  2200457 a 4500" }
+  ]
+}
