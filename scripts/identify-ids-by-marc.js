@@ -54,11 +54,9 @@ const db = {
       user,
       host,
       database: process.env[`${prefix}_SERVICE_DB_NAME`],
-      password // ,
-      // query_timeout: 1000 * 60 * 5
+      password
     }
     return new Pool(config)
-    // return new Client(config)
   },
   connect: (name) => db.dbConnectionPools[name].connect(),
   endPools: () => {
@@ -161,7 +159,7 @@ const _buildCsv = async (options) => {
       throttleCall(() => console.info(`Read ${rowsRead} rows`), 1000)
     })
 
-    await pipeline(sourceStream, writeStream) // process.stdout)
+    await pipeline(sourceStream, writeStream)
   } catch (e) {
     console.error('Encountered sql error: ', e)
     throw e
