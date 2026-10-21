@@ -8,9 +8,9 @@ describe('scripts/bulk-index', () => {
   describe('validateParams', () => {
     it('requires minimal critiera', () => {
       expect(() => bulkIndexer._testing.validateParams({ }))
-        .to.throw('Insufficient params')
+        .to.throw('Missing --type ; Missing --csv or --hasMarc or --nyplSource')
       expect(() => bulkIndexer._testing.validateParams({ hasMarc: '123' }))
-        .to.throw('Insufficient params')
+        .to.throw('Missing --type')
     })
 
     it('cancels run if properties not specified with updateOnly', () => {

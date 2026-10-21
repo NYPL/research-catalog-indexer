@@ -440,7 +440,8 @@ describe('scripts/bulk-indexer', () => {
       state = {
         basePath: 'fake-job',
         status: () => state._status,
-        csvPath: () => 'fake-job.csv',
+        csvPath: () => null,
+        csvCount: () => null,
         addMessage: () => true,
         save: sinon.spy(),
         updateStatus: (s) => {
