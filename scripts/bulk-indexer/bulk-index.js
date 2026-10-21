@@ -6,13 +6,12 @@
  *    2. a CSV containing identifiers
  *
  *    Required arguments:
- *     - envfile {string}: Path to local .env file. Default ./config/qa-bulk-index.env
  *     - type {string}: Required. One of item or bib
  *
  *
  *  Updating by marc:
  *
- *    node scripts/bulk-indexer/bulk-index.js --type (item|bib) --envfile E --hasMarc M ...
+ *    node scripts/bulk-indexer/bulk-index.js --type (item|bib) [--envfile E] --hasMarc M ...
  *
  *    Arguments:
  *     - hasMarc {string}: Marc tag, e.g. '300'
@@ -21,14 +20,14 @@
  *
  *  Updating all:
  *
- *    node scripts/bulk-indexer/bulk-index.js --type (item|bib) --envfile E [--nyplSource S]
+ *    node scripts/bulk-indexer/bulk-index.js --type (item|bib) [--envfile E] [--nyplSource S]
  *
  *
  *  Updating by CSV:
  *
  *    If you have a CSV obtained through some outside process, you can process it directly:
  *
- *    node scripts/bulk-indexer/bulk-index.js --type (item|bib) --envfile E --csv CSVFILE --csvIdColumn 0 [--csvDropChecksum]
+ *    node scripts/bulk-indexer/bulk-index.js --type (item|bib) [--envfile E] --csv CSVFILE --csvIdColumn 0 [--csvDropChecksum]
  *
  *    Arguments:
  *      - csv {string}: Path to local CSV. Required.
@@ -39,15 +38,16 @@
  *        Default false.
  *
  *
- *  Common arguments
+ *  Common optional arguments
  *
- *    Arguments that can be used for most reindex calls to override default behavior:
+ *    These arguments can be used for most reindex calls to override default behavior:
+ *
  *     - batchSize {int}: How many records to index at one time. Default 100
  *     - dryrun {boolean}: Set to true to perform all work, but skip writing to index.
+ *     - envfile {string}: Path to local .env file. Default ./config/qa-bulk-index.env
  *     - limit {int}: How many records to process. Default null (no limit)
  *     - nyplSource {string}: NYPL Source value. Default 'sierra-nypl'
  *     - offset {int}: How many records to skip over in the CSV. Default 0
- *     - table {string}: Override primary table name used (e.g. bib_v2)
  *     - properties {string}: comma-delineated list of bib-level properties to run update for. Required when --updateOnly used.
  *     - recapBarcodeCustomerCodeMap {string}: Path to local CSV containing barcode and customer-code pairs.
  *         When provided, allows script to skip many expensive SCSB API calls.
@@ -57,6 +57,7 @@
  *     - skipApiPrefetch {boolean}: Skip API calls to M2 customer code store and SCSB. Can be true for any bib-level
  *       update. Can be true for item level updates that do not have to do with live SCSB or M2 customer code data.
  *       Can also be controlled via SKIP_API_PREFETCH env var.
+ *     - table {string}: Override primary table name used (e.g. bib_v2)
  *
  *
  *  Performance considerations
@@ -135,15 +136,7 @@ if (process.env.NEW_RELIC_LICENSE_KEY && process.env.NEW_RELIC_APP_NAME) {
 }
 
 const usage = () => {
-  console.log([
-    'Usage:',
-    'Reindex by nypl-source:',
-    '  node scripts/bulk-indexer/bulk-index.js --envfile [path to .env] --type (bib|item) --nyplSource SOURCE',
-    'Reindex by CSV (containing prefixed ids):',
-    '  node scripts/bulk-indexer/bulk-index.js --envfile [path to .env] --csv FILE --csvIdColumn 0',
-    'Perform any reindex only for specific bib-only properties by adding the following to any reindex args: ',
-    '  --properties subjectLiteral,addedAuthorTitle --skipPrefetch true  --updateOnly true'
-  ].join('\n'))
+  logger.info('See ./scripts/bulk-indexer/bulk-index.js for usage.\n')
   return true
 }
 
@@ -161,6 +154,7 @@ const validateParams = (argv) => {
   if (!argv.type) {
     problems.push('Missing --type')
   }
+  // Note that --nyplSource defaults to 'sierra-nypl'
   if (!(argv.csv || argv.hasMarc || argv.nyplSource)) {
     problems.push('Missing --csv or --hasMarc or --nyplSource')
   }

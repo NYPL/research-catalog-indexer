@@ -16,9 +16,9 @@ const setAwsProfile = (profile = 'nypl-digital-dev') => {
   process.env.AWS_PROFILE = profile
 }
 
-const die = (message, exitCode = 2) => {
-  logger.error('Error: ' + message)
-  process.exit(exitCode)
+const die = (message) => {
+  logger.error('' + message)
+  process.exit(1)
 }
 
 function removeEmpty (obj) {
