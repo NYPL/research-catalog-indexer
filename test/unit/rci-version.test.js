@@ -30,7 +30,6 @@ describe('rciVersion', () => {
   })
 
   it('returns the version when HEAD tree matches the release tag', () => {
-    execSyncStub.withArgs('git fetch --tags --quiet', sinon.match.any).returns('')
     execSyncStub.withArgs(`git rev-parse v${version}^{tree}`, sinon.match.any).returns('sametree\n')
     execSyncStub.withArgs('git rev-parse HEAD^{tree}', sinon.match.any).returns('sametree\n')
     const { rciVersion } = require('../../lib/utils/rci-version')
@@ -39,7 +38,6 @@ describe('rciVersion', () => {
   })
 
   it('appends "-local" when HEAD does not match the release tag', () => {
-    execSyncStub.withArgs('git fetch --tags --quiet', sinon.match.any).returns('')
     execSyncStub.withArgs(`git rev-parse v${version}^{tree}`, sinon.match.any).returns('released-tree\n')
     execSyncStub.withArgs('git rev-parse HEAD^{tree}', sinon.match.any).returns('feature-branch-tree\n')
     const { rciVersion } = require('../../lib/utils/rci-version')
@@ -52,5 +50,17 @@ describe('rciVersion', () => {
     const { rciVersion } = require('../../lib/utils/rci-version')
 
     expect(rciVersion()).to.equal(`${version}-local`)
+  })
+
+  it('memoizes the result so git situation is only checked once per process', () => {
+    execSyncStub.withArgs(`git rev-parse v${version}^{tree}`, sinon.match.any).returns('sametree\n')
+    execSyncStub.withArgs('git rev-parse HEAD^{tree}', sinon.match.any).returns('sametree\n')
+    const { rciVersion } = require('../../lib/utils/rci-version')
+
+    rciVersion()
+    rciVersion()
+    rciVersion()
+
+    expect(execSyncStub.callCount).to.equal(2)
   })
 })
