@@ -2,9 +2,9 @@ const chai = require('chai')
 const expect = chai.expect
 chai.use(require('chai-as-promised'))
 
-const bulkIndexer = require('../../scripts/bulk-indexer/bulk-index')
+const bulkIndexer = require('../../scripts/bulk-indexer/bulk-index-cli')
 
-describe('scripts/bulk-index', () => {
+describe('scripts/bulk-index-cli', () => {
   describe('validateParams', () => {
     it('requires minimal critiera', () => {
       expect(() => bulkIndexer._testing.validateParams({ }))
