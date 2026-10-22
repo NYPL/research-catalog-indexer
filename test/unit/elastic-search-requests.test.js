@@ -44,8 +44,8 @@ describe('elastic search requests', () => {
       const docStatements = statements.filter((s) => s.doc && s.doc.updatedAt)
       // all statments had updatedAt added
       expect(docStatements).to.have.lengthOf(records.length)
-      const versionedStatements = statements.filter((s) => s.doc && s.doc.updatedByRciVersion)
-      // all statements had updatedByRciVersion added
+      const versionedStatements = statements.filter((s) => s.doc && s.doc.rciVersion)
+      // all statements had rciVersion added
       expect(versionedStatements).to.have.lengthOf(records.length)
     })
 
@@ -59,8 +59,8 @@ describe('elastic search requests', () => {
       const docStatements = statements.filter((s) => s.updatedAt)
       // all statements had updatedAt added
       expect(docStatements).to.have.lengthOf(records.length)
-      const versionedStatements = statements.filter((s) => s.updatedByRciVersion)
-      // all statements had updatedByRciVersion added
+      const versionedStatements = statements.filter((s) => s.rciVersion)
+      // all statements had rciVersion added
       expect(versionedStatements).to.have.lengthOf(records.length)
     })
   })
