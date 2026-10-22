@@ -11,7 +11,7 @@
  *
  *  Updating by marc:
  *
- *    node scripts/bulk-indexer/bulk-index.js --type (item|bib) [--envfile E] --hasMarc M ...
+ *    node scripts/bulk-indexer/bulk-index-cli.js --type (item|bib) [--envfile E] --hasMarc M ...
  *
  *    Arguments:
  *     - hasMarc {string}: Marc tag, e.g. '300'
@@ -20,14 +20,14 @@
  *
  *  Updating all:
  *
- *    node scripts/bulk-indexer/bulk-index.js --type (item|bib) [--envfile E] [--nyplSource S]
+ *    node scripts/bulk-indexer/bulk-index-cli.js --type (item|bib) [--envfile E] [--nyplSource S]
  *
  *
  *  Updating by CSV:
  *
  *    If you have a CSV obtained through some outside process, you can process it directly:
  *
- *    node scripts/bulk-indexer/bulk-index.js --type (item|bib) [--envfile E] --csv CSVFILE --csvIdColumn 0 [--csvDropChecksum]
+ *    node scripts/bulk-indexer/bulk-index-cli.js --type (item|bib) [--envfile E] --csv CSVFILE --csvIdColumn 0 [--csvDropChecksum]
  *
  *    Arguments:
  *      - csv {string}: Path to local CSV. Required.
@@ -69,7 +69,7 @@
  *    process.env.STOP_REFRESH to true to avoid latency in the resources index while running.
  *
  *    Example:
- *      node scripts/bulk-indexer/bulk-index.js [...bulk index args]  --batchSize 1000 (recommended) \
+ *      node scripts/bulk-indexer/bulk-index-cli.js [...bulk index args]  --batchSize 1000 (recommended) \
  *        --properties subjectLiteral,addedAuthorTitle (--skipApiPrefetch true --skipDbPrefetch true \
  *        --updateOnly true) (not required if passed as env vars)
  *
@@ -105,7 +105,7 @@ const argv = require('minimist')(process.argv.slice(2), {
   integer: ['limit', 'offset', 'batchSize']
 })
 
-const isCalledViaCommandLine = /scripts\/bulk-indexer\/bulk-index(.js)?/.test(fs.realpathSync(process.argv[1]))
+const isCalledViaCommandLine = /scripts\/bulk-indexer\/bulk-index-cli(.js)?/.test(fs.realpathSync(process.argv[1]))
 const dotenv = require('dotenv')
 const { initializeJobState, resumeJob, enableNrInstrumentation } = require('./bulk-indexer')
 
@@ -136,7 +136,7 @@ if (process.env.NEW_RELIC_LICENSE_KEY && process.env.NEW_RELIC_APP_NAME) {
 }
 
 const usage = () => {
-  logger.info('See ./scripts/bulk-indexer/bulk-index.js for usage.\n')
+  logger.info('See ./scripts/bulk-indexer/bulk-index-cli.js for usage.\n')
   return true
 }
 
