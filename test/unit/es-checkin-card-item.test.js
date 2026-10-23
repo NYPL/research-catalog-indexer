@@ -157,7 +157,7 @@ describe('EsCheckinCardItem', function () {
     })
 
     it('returns null if holding location does not map to a collection', () => {
-      const fakeHolding = { location: { code: 'scf' }, checkInCards: [{ }] }
+      const fakeHolding = { location: { code: 'test' }, checkInCards: [{ }] }
       const items = EsCheckinCardItem.fromSierraHolding(fakeHolding)
       expect(items[0].collectionId()).to.equal(null)
     })
