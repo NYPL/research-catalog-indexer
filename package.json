@@ -33,6 +33,7 @@
     "moment": "^2.30.1",
     "newrelic": "^11.7.0",
     "pg": "^8.11.3",
+    "pg-copy-streams": "^7.0.0",
     "pg-cursor": "^2.10.3",
     "string-similarity-js": "2.1.4",
     "sync-request": "^6.1.0",
@@ -67,6 +68,7 @@
     "rewire": "^6.0.0",
     "sinon": "^15.0.0",
     "sinon-chai": "^3.7.0",
-    "standard": "^17.1.2"
+    "standard": "^17.1.2",
+    "ts-standard": "^12.0.2"
   }
 }
