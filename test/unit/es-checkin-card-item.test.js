@@ -149,6 +149,26 @@ describe('EsCheckinCardItem', function () {
     })
   })
 
+  describe('collectionId', () => {
+    it('returns collection code based on holding location', () => {
+      const fakeHolding = { location: { code: 'mapp9' }, checkInCards: [{ }] }
+      const items = EsCheckinCardItem.fromSierraHolding(fakeHolding)
+      expect(items[0].collectionId()).to.deep.equal(['map'])
+    })
+
+    it('returns null if holding location does not map to a collection', () => {
+      const fakeHolding = { location: { code: 'scf' }, checkInCards: [{ }] }
+      const items = EsCheckinCardItem.fromSierraHolding(fakeHolding)
+      expect(items[0].collectionId()).to.equal(null)
+    })
+
+    it('returns null if holding has no location', () => {
+      const fakeHolding = { checkInCards: [{ }] }
+      const items = EsCheckinCardItem.fromSierraHolding(fakeHolding)
+      expect(items[0].collectionId()).to.equal(null)
+    })
+  })
+
   describe('identifierV2', () => {
     it('returns identifier array with shelfMark', () => {
       expect(checkinCardItems[0].identifierV2()).to.deep.equal([
