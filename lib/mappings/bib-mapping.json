@@ -484,64 +484,64 @@
     "paths": [
       {
         "marc": "760",
-        "description": "Main Series Entry",
+        "description": "Subseries of",
         "excludedSubfields": ["1","4","5","6","7","8"]
       },
       {
         "marc": "762",
-        "description": "Subseries Entry",
+        "description": "Has subseries",
         "excludedSubfields": ["1","4","5","6","7","8"]
       },{
         "marc": "765",
-        "description": "Original Language Entry",
+        "description": "Translation of",
         "excludedSubfields": ["1","4","5","6","7","8"]
       },{
         "marc": "767",
-        "description": "Translation Entry",
+        "description": "Translated as",
         "excludedSubfields": ["1","4","5","6","7","8"]
       },{
         "marc": "770",
-        "description": "Supplemental/Special Issue Entry",
+        "description": "Has supplement",
         "excludedSubfields": ["1","4","5","6","7","8"]
       },{
         "marc": "772",
-        "description": "Supplement Parent Entry",
+        "description": "Supplement to",
         "excludedSubfields": ["1","4","5","6","7","8"]
       },{
         "marc": "773",
-        "description": "Host Item Entry",
+        "description": "Found in",
         "excludedSubfields": ["1","4","5","6","7","8"]
       },{
         "marc": "774",
-        "description": "Constituent Unit Entry",
+        "description": "Constituent unit",
         "excludedSubfields": ["1","4","5","6","7","8"]
       },{
         "marc": "775",
-        "description": "Other Edition Entry",
+        "description": "Other editions",
         "excludedSubfields": ["1","4","5","6","7","8"]
       },{
         "marc": "776",
-        "description": "Additional Physical Form Entry",
+        "description": "Other forms",
         "excludedSubfields": ["1","4","5","6","7","8"]
       },{
         "marc": "777",
-        "description": "Issued With Entry",
+        "description": "Issued with",
         "excludedSubfields": ["1","4","5","6","7","8"]
       },{
         "marc": "780",
-        "description": "Preceding Entry",
+        "description": "description determined by indicators, see es model",
         "excludedSubfields": ["1","4","5","6","7","8"]
       },{
         "marc": "785",
-        "description": "Succeeding Entry",
+        "description": "description determined by indicators, see es model",
         "excludedSubfields": ["1","4","5","6","7","8"]
       },{
         "marc": "786",
-        "description": "Data Source Entry",
+        "description": "Data source",
         "excludedSubfields": ["1","4","5","6","7","8"]
       },{
         "marc": "787",
-        "description": "Other Relationship Entry",
+        "description": "Related to",
         "excludedSubfields": ["1","4","5","6","7","8"]
       }
     ]

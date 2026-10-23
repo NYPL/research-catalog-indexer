@@ -34,8 +34,9 @@ describe('EsBib', function () {
           entry.marcTag === '762'
         )
       expect(entry).to.deep.equal({
+        author: 'University of Aberdeen. Anatomical and Anthropological Society.',
         parallelDisplay: null,
-        label: 'Subseries Entry',
+        label: 'Has subseries',
         display: 'University of Aberdeen. Anatomical and Anthropological Society. Proceedings of the Aberdeen University Anatomical and Anthropological Society (DLC)   05041796 (OCoLC)1642603 issn language code isbn',
         marcTag: '762',
         issn: 'issn',
@@ -44,7 +45,8 @@ describe('EsBib', function () {
         oclc: '(OCoLC)1642603',
         lccn: '(DLC)   05041796',
         marcTagIndex: 0,
-        hash: 18769661742
+        hash: 18769661742,
+        title: 'Proceedings of the Aberdeen University Anatomical and Anthropological Society'
       })
     })
     it('has incrementing marcTagIndexes for multiple marc tags', () => {
