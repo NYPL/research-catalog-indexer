@@ -29,7 +29,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: hashicorp/setup-terraform@v2
       - name: Push image to QA ECR
-        env: ENV_TAG=qa ./provisioning/build-and-push-image.sh
+        run: ENV_TAG=qa ./provisioning/build-and-push-image.sh
   deploy-qa:
     permissions:
       id-token: write
