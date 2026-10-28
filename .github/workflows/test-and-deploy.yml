@@ -72,5 +72,3 @@ jobs:
         run: |
           terraform -chdir=provisioning/production init -input=false
           terraform -chdir=provisioning/production apply -auto-approve -input=false
-      - name: Push image to Prod ECR
-        env: ENV_TAG=production ./provisioning/build-and-push-image.sh
