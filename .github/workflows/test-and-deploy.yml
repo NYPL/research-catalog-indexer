@@ -28,9 +28,7 @@ jobs:
           aws-region: us-east-1
       - uses: actions/checkout@v3
       - uses: hashicorp/setup-terraform@v2
-      - name: Log in to Amazon ECR
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v2
+      - uses: aws-actions/amazon-ecr-login@v2
       - name: Push image to ECR
         run: ENV_TAG=qa ./provisioning/build-and-push-image.sh
   deploy-qa:
@@ -54,6 +52,9 @@ jobs:
         run: |
           terraform -chdir=provisioning/qa init -input=false
           terraform -chdir=provisioning/qa apply -auto-approve -input=false
+      - uses: aws-actions/amazon-ecr-login@v2
+      - name: Push image to ECR
+        run: ENV_TAG=qa ./provisioning/build-and-push-image.sh
   deploy-production:
     permissions:
       id-token: write
@@ -75,3 +76,6 @@ jobs:
         run: |
           terraform -chdir=provisioning/production init -input=false
           terraform -chdir=provisioning/production apply -auto-approve -input=false
+      - uses: aws-actions/amazon-ecr-login@v2
+      - name: Push image to ECR
+        run: ENV_TAG=production ./provisioning/build-and-push-image.sh
