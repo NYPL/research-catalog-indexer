@@ -2,6 +2,7 @@
 
 
 ## Prerelease
+- Update NewRelic layer to 'slim' version
 
 ## v1.0.1 - TBD
 - Add changelog, version bumping, and git tagging hooks, plus `rciVersion` property to indexed documents (SCC-5406)
