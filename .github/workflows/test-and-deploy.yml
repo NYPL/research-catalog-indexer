@@ -51,8 +51,6 @@ jobs:
         run: |
           terraform -chdir=provisioning/qa init -input=false
           terraform -chdir=provisioning/qa apply -auto-approve -input=false
-      - name: Push image to QA ECR
-        env: ENV_TAG=qa ./provisioning/build-and-push-image.sh
   deploy-production:
     permissions:
       id-token: write
