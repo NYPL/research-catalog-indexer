@@ -1,3 +1,5 @@
+# This script can be run locally to manually push the app to ECR for use in AWS Batch
+#
 # Usage:
 #   ENV_TAG=qa ./provisioning/build-and-push-image-local.sh
 

@@ -1,3 +1,6 @@
+# This script builds the app as a Docker image and pushes it to ECR
+# for use in AWS Batch
+
 ECR_REGISTRY=946183545209.dkr.ecr.us-east-1.amazonaws.com
 ECR_REPOSITORY=research-catalog-indexer
 GIT_SHA=$(git rev-parse --short HEAD)
