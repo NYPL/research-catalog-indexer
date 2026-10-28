@@ -6,7 +6,7 @@
  * to a CSV file.
  *
  * Usage:
- *   node scripts/export-ids-by-marc.js --envfile [path to .env] --type (bib|item) --hasMarc 001 [--hasSubfield S] --toCsv [output.csv]
+ *   node scripts/identify-ids-by-marc.js --envfile [path to .env] --type (bib|item) --hasMarc 001 [--hasSubfield S] --toCsv [output.csv]
  */
 
 const fs = require('fs')
@@ -20,14 +20,15 @@ const argv = require('minimist')(process.argv.slice(2), {
 })
 const dotenv = require('dotenv')
 const { Pool } = require('pg')
-const Cursor = require('pg-cursor')
+const { to: copyTo } = require('pg-copy-streams')
+const { pipeline } = require('node:stream/promises')
 const kms = require('../lib/kms.js')
 const logger = require('../lib/logger')
-const { setAwsProfile, capitalize, printProgress, die } = require('./utils')
+const { setAwsProfile, capitalize, die, throttleCall } = require('./utils')
 
 const usage = () => {
   console.log('Usage:')
-  console.log('  node scripts/export-ids-by-marc.js --envfile [path] --type (bib|item) --hasMarc [marc] --toCsv [output.csv]')
+  console.log('  node scripts/identify-ids-by-marc.js --envfile [path] --type (bib|item) --hasMarc [marc] --toCsv [output.csv]')
   return true
 }
 
@@ -53,8 +54,7 @@ const db = {
       user,
       host,
       database: process.env[`${prefix}_SERVICE_DB_NAME`],
-      password,
-      query_timeout: 1000 * 60 * 5
+      password
     }
     return new Pool(config)
   },
@@ -66,105 +66,114 @@ const db = {
   }
 }
 
+/**
+ *  Given criteria, builds a SQL (string) for querying relevant db
+ */
 const buildSqlQuery = (options) => {
   const type = options.type
   const table = type
 
   const selects = [table]
   const wheres = []
-  const params = []
+  wheres.push("(is_nypl_research OR nypl_source != 'sierra-nypl')")
 
   if (options.nyplSource && options.nyplSource !== 'all') {
-    params.push(options.nyplSource)
-    wheres.push(`nypl_source = $${params.length}`)
+    wheres.push(`nypl_source = '${options.nyplSource}'`)
   }
 
   if (options.hasMarc) {
-    selects.push('json_array_elements(var_fields::json) jV')
-    params.push(options.hasMarc)
-    wheres.push(`jV->>'marcTag' = $${params.length}`)
+    // Leverage indexed marc_tags column to do initial match
+    wheres.push(`marc_tags @> ARRAY['${options.hasMarc}']`)
   }
 
   if (options.hasSubfield) {
+    // Since we're additionally filtering on subfield, parse varfields:
+    selects.push('json_array_elements(bib.var_fields::json) jV')
+
+    // .. with matching marcTag
+    wheres.push("json_typeof(bib.var_fields::json) = 'array'")
+    wheres.push(`jV->>'marcTag' = '${options.hasMarc}'`)
+
+    // .. And then parse embedded subfields:
+    wheres.push("json_typeof(jV->'subfields') = 'array'")
     selects.push("json_array_elements(jV->'subfields') jVS")
-    params.push(options.hasSubfield)
-    wheres.push(`jVS->>'tag' = $${params.length}`)
+
+    // .. To filter on matching subfield tag:
+    wheres.push(`jVS->>'tag' = '${options.hasSubfield}'`)
   }
 
-  let sqlFromAndWhere = selects.join(',\n')
+  let sqlFromAndWhere = selects.join(', ')
   if (wheres.length) {
-    sqlFromAndWhere += '\nWHERE ' + wheres.join('\nAND ')
+    sqlFromAndWhere += ' WHERE ' + wheres.join(' AND ')
   }
 
-  let query = `SELECT DISTINCT id, nypl_source FROM ${sqlFromAndWhere}`
+  let query = `SELECT id, nypl_source FROM ${sqlFromAndWhere}`
   if (options.limit) {
     query += ` LIMIT ${options.limit}`
   }
 
-  return { query, params, type }
-}
-
-const readCursorRecurser = async (batchSize, cursor, retry = 1) => {
-  if (retry > 3) throw new Error('Error connecting to db after 3 tries')
-  try {
-    return await cursor.read(batchSize)
-  } catch (e) {
-    logger.warn('readCursorRecursor error: ', e)
-    logger.info(`readCursorRecursor retry #${retry}`)
-    return await readCursorRecurser(batchSize, cursor, ++retry)
-  }
+  return { query, type }
 }
 
 const run = async () => {
   setAwsProfile()
   if (!argv.envfile) return usage() && die('--envfile required')
-  if (!argv.type) return usage() && die('--type required')
-  if (!['item', 'bib'].includes(argv.type)) return usage() && die('--type must be item or bib')
-  if (!argv.hasMarc) return usage() && die('--hasMarc required')
-  if (!argv.toCsv) return usage() && die('--toCsv required')
-
   dotenv.config({ path: argv.envfile })
+
+  return buildCsv(argv)
+}
+
+const buildCsv = async (options) => {
+  return module.exports._buildCsv(options)
+}
+
+const _buildCsv = async (options) => {
+  if (!options.type) return usage() && die('--type required')
+  if (!['item', 'bib'].includes(options.type)) return usage() && die('--type must be item or bib')
+  if (!options.hasMarc && !options.nyplSource) return usage() && die('--nyplSource and/or --hasMarc required')
+  if (!options.toCsv) return usage() && die('--toCsv required')
+
   logger.setLevel(process.env.LOG_LEVEL || 'info')
 
   await db.initPools()
 
-  const { query, params, type } = buildSqlQuery(argv)
+  const { query, type } = buildSqlQuery(options)
+  const copyQuery = [
+    'COPY (',
+    query,
+    ') TO STDOUT WITH CSV DELIMITER \',\''
+  ].join('')
 
-  logger.info(`Querying ${capitalize(type)}Service: ${query} | ${JSON.stringify(params)}`)
+  logger.info(`Querying ${capitalize(type)}Service: ${copyQuery}`)
   const client = await db.connect(`${type}Service`)
-  const cursor = client.query(new Cursor(query, params))
 
-  let count = 0
-  const startTime = new Date()
-  let done = false
+  try {
+    const sourceStream = client.query(copyTo(copyQuery))
+    const writeStream = fs.createWriteStream(options.toCsv)
 
-  while (!done && (!argv.limit || count < argv.limit)) {
-    let rows
-    try {
-      rows = await readCursorRecurser(argv.batchSize, cursor)
-    } catch (e) {
-      cursor.close(() => client.release())
-      throw e
-    }
+    let rowsRead = 0
+    sourceStream.on('data', (d) => {
+      const data = Buffer.from(d).toString('utf8')
+      rowsRead += data.split('\n').length - 1
+      // Print progress, but restrict to logging at most once per second:
+      throttleCall(() => console.info(`Read ${rowsRead} rows`), 1000)
+    })
 
-    if (rows.length === 0) {
-      logger.info(`Cursor reached the end. Stopping after ${count} processed.`)
-      done = true
-      break
-    }
-
-    fs.appendFileSync(argv.toCsv, rows.map(row => `${row.id},${row.nypl_source}\n`).join(''))
-    count += rows.length
-    printProgress(count, argv.limit, argv.batchSize, startTime)
+    await pipeline(sourceStream, writeStream)
+  } catch (e) {
+    console.error('Encountered sql error: ', e)
+    throw e
+  } finally {
+    client.release()
   }
 
-  await new Promise((resolve) => {
-    cursor.close(() => {
-      client.release()
-      resolve()
-    })
-  })
   await db.endPools()
+}
+
+module.exports = {
+  buildCsv,
+  buildSqlQuery,
+  _buildCsv
 }
 
 if (require.main === module) {
@@ -174,8 +183,4 @@ if (require.main === module) {
       logger.error(e)
       process.exit(1)
     })
-}
-
-module.exports = {
-  buildSqlQuery
 }

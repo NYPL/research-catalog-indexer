@@ -166,7 +166,7 @@ const run = async () => {
   wrapper.config(config)
 
   if (argv.timestamprange) {
-    getUpdatedIds(argv.timestamprange, argv.offset)
+    getUpdatedIds(argv.type, argv.timestamprange, argv.offset)
   } else if (argv.hasmarc) {
     getBibIdsByHasMarc(argv.hasmarc)
   } else if (argv.query) {

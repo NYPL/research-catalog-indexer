@@ -57,8 +57,10 @@ The bulk-indexer can be used to index lots of records at once by direct BibServi
 
 For example, to reindex the first 10K NYPL bibs in QA:
 ```
-node scripts/bulk-index.js --envfile config/qa-bulk-index.env --type bib --hasMarc 001 --nyplSource sierra-nypl --limit 10000
+node ./scripts/bulk-indexer/bulk-index-cli.js --envfile config/qa-bulk-index.env --type bib --hasMarc 001 --nyplSource sierra-nypl --limit 10000
 ```
+
+See `./scripts/bulk-indexer/bulk-index-cli.js` for all bulk-index options.
 
 To enable NewRelic reporting during bulk-indexing:
  - Install the NR agent:
