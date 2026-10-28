@@ -7,6 +7,14 @@ GIT_SHA=$(git rev-parse --short HEAD)
 IMAGE_TAG=$GIT_SHA
 DOCKER_DEFAULT_PLATFORM=linux/amd64
 
+# If running locally, log in.
+# Absense of CI env var indicates running outside GHA:
+if [[ -z "$CI" ]]; then
+  echo Logging you in
+  AWS_PROFILE=nypl-digital-dev
+  aws ecr get-login-password --region us-east-1 --profile $AWS_PROFILE | docker login --username AWS --password-stdin $ECR_REGISTRY
+fi
+
 if [[ -z "$ENV_TAG" ]]; then
   echo ENV_TAG must be set to qa / production
   exit

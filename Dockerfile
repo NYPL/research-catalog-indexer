@@ -1,6 +1,6 @@
 FROM amazonlinux:2023
 
-RUN dnf install nodejs20 -y
+RUN dnf install nodejs22 -y
 
 # Create app directory
 WORKDIR /usr/src/app
