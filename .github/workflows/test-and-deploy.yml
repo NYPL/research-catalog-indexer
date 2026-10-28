@@ -28,7 +28,10 @@ jobs:
           aws-region: us-east-1
       - uses: actions/checkout@v3
       - uses: hashicorp/setup-terraform@v2
-      - name: Push image to QA ECR
+      - name: Log in to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+      - name: Push image to ECR
         run: ENV_TAG=qa ./provisioning/build-and-push-image.sh
   deploy-qa:
     permissions:
