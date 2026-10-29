@@ -1,0 +1,57 @@
+name: Changelog and versioning
+
+on:
+  pull_request:
+    branches:
+      - main
+      - qa
+      - production
+
+permissions:
+  contents: read
+
+jobs:
+  changelog:
+    # skip back-merges 
+    if: |
+      !(
+        (github.event.pull_request.base.ref == 'main' &&
+          contains(fromJSON('["qa", "production"]'), github.event.pull_request.head.ref)) ||
+        (github.event.pull_request.base.ref == 'qa' &&
+          github.event.pull_request.head.ref == 'production')
+      )
+    permissions:
+      contents: read
+      pull-requests: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Enforce CHANGELOG update
+        uses: dangoslen/changelog-enforcer@v3
+        with:
+          skipLabels: 'skip-changelog'
+
+  version-bump:
+    # for feature branch -> main PRs, unless labeled to skip
+    if: |
+      github.event.pull_request.base.ref == 'main' &&
+      !contains(github.event.pull_request.labels.*.name, 'skip-versionbump')
+    permissions:
+      contents: read
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Enforce package version bump
+        run: |
+          git fetch origin ${{ github.event.pull_request.base.ref }} --depth=1
+          base_version=$(git show origin/${{ github.event.pull_request.base.ref }}:package.json | node -pe 'JSON.parse(require("fs").readFileSync(0, "utf8")).version')
+          head_version=$(node -pe 'require("./package.json").version')
+          if [ "$base_version" = "$head_version" ]; then
+            echo "package version ($head_version) must be bumped from ${{ github.event.pull_request.base.ref }}'s version ($base_version)."
+            exit 1
+          fi
+          echo "verified that version bumped $base_version -> $head_version"

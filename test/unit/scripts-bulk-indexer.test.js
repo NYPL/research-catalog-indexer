@@ -5,12 +5,12 @@ chai.use(require('chai-as-promised'))
 const sinon = require('sinon')
 const fs = require('fs')
 
-const logger = require('../../lib/logger')
-const bulkIndexer = require('../../scripts/bulk-index')
+const bulkIndexer = require('../../scripts/bulk-indexer/bulk-indexer')
 const index = require('../../index')
 const prefetchers = require('../../lib/prefetch')
 const schema = require('../../lib/elastic-search/index-config/index-schema')
-const utils = require('../../scripts/utils')
+const identifyIdsByMarc = require('../../scripts/identify-ids-by-marc')
+// const utils = require('../../scripts/utils')
 
 // Util for stripping dupe whitespace from sql queries:
 const removeDupeWhitespace = (sql) => {
@@ -121,6 +121,12 @@ const pgFixtures = [
       { id: 5678 },
       { id: 5789 }
     ]
+  },
+  {
+    match: /SELECT \* FROM bib WHERE nypl_source = \$1 AND id IN \('123'\) LIMIT 1/,
+    rows: [
+      { id: 123 }
+    ]
   }
 ]
 
@@ -138,7 +144,7 @@ const mockedRowsForQuery = (sql) => {
   return matchingFixture.rows
 }
 
-describe('scripts/bulk-index', () => {
+describe('scripts/bulk-indexer', () => {
   // Set up a mock to handle pg query calls:
   const mockedQuery = sinon.spy((q) => {
     const sql = (typeof q === 'string' ? q : q.text)
@@ -176,14 +182,7 @@ describe('scripts/bulk-index', () => {
     bulkIndexer.db.connect.restore()
     index.processRecords.restore()
   })
-  describe('validateParams', () => {
-    it('cancels run if properties not specified with updateOnly', () => {
-      process.env.UPDATE_ONLY = false
-      const errorLogSpy = sinon.spy(logger, 'error')
-      bulkIndexer._testing.validateParams({ properties: 'dates' })
-      expect(errorLogSpy.calledWith('Error: Must provide --properties when UPDATE_ONLY=true or --updateOnly true (and vice versa)')).to.eq(true)
-    })
-  })
+
   describe('updateByCsv', () => {
     const cleanUpStatusFiles = () => {
       const testFiles = [
@@ -263,67 +262,8 @@ describe('scripts/bulk-index', () => {
         nyplSource: 'sierra-nypl'
       })
     })
-
-    describe('CsvProgress integration', () => {
-      it('writes a "failed" status on initialization error', async () => {
-        const csv = './test/fixtures/bulk-index-by-csv-numeric-ids.csv'
-        await expect(bulkIndexer.updateByCsv({ csv, csvIdColumn: 0 })).to.be.rejected
-
-        const status = JSON.parse(fs.readFileSync(`${csv}-status.json`, 'utf8'))
-        expect(status.status).to.equal('failed')
-        expect(status.messages[0]).to.include('Must specify --nyplSource')
-      })
-
-      it('updates the offset after each batch and marks completed', async () => {
-        const csv = './test/fixtures/bulk-index-by-csv-ids-with-nypl-source.csv'
-        const updateOffsetSpy = sinon.spy(utils.CsvProgress.prototype, 'updateOffset')
-
-        // Process 3 records with a batchSize of 1 so it updates offset 3 times, plus 1 initial setup update
-        await bulkIndexer.updateByCsv({ csv, csvIdColumn: 0, csvNyplSourceColumn: 1, type: 'bib', batchSize: 1, limit: 3 })
-
-        expect(updateOffsetSpy.callCount).to.equal(4)
-        expect(updateOffsetSpy.getCall(0).args[0]).to.equal(0)
-        expect(updateOffsetSpy.getCall(1).args[0]).to.equal(1)
-        expect(updateOffsetSpy.getCall(2).args[0]).to.equal(2)
-        expect(updateOffsetSpy.getCall(3).args[0]).to.equal(3)
-
-        const status = JSON.parse(fs.readFileSync(`${csv}-status.json`, 'utf8'))
-        expect(status.status).to.equal('completed')
-        expect(status.offset).to.equal(3)
-
-        updateOffsetSpy.restore()
-      })
-
-      it('resumes from the correct offset if a running status file exists', async () => {
-        const csv = './test/fixtures/bulk-index-by-csv-ids-with-nypl-source.csv'
-        fs.writeFileSync(`${csv}-status.json`, JSON.stringify({
-          status: 'running',
-          offset: 2,
-          count: 6
-        }))
-
-        await bulkIndexer.updateByCsv({ csv, csvIdColumn: 0, csvNyplSourceColumn: 1, type: 'bib', batchSize: 3, limit: 2 })
-
-        const [, records] = index.processRecords.getCall(0).args
-        // Fast forwards past first 2 rows, parsing the next 2
-        expect(records).to.have.lengthOf(2)
-        expect(records[0]).to.deep.include({ id: 5678 })
-      })
-
-      it('starts with the correct offset if passed explicitly', async () => {
-        const csv = './test/fixtures/bulk-index-by-csv-ids-with-nypl-source.csv'
-        await bulkIndexer.updateByCsv({ csv, csvIdColumn: 0, csvNyplSourceColumn: 1, type: 'bib', batchSize: 3, offset: 1 })
-
-        const [, records] = index.processRecords.getCall(0).args
-        expect(records).to.have.lengthOf(3)
-        expect(records[0]).to.deep.include({ id: 2345 })
-
-        const status = JSON.parse(fs.readFileSync(`${csv}-status.json`, 'utf8'))
-        expect(status.status).to.equal('completed')
-        expect(status.offset).to.equal(6)
-      })
-    })
   })
+
   describe('overwriteGeneralPrefetch', () => {
     beforeEach(bulkIndexer._testing.overwriteGeneralPrefetch)
     afterEach(bulkIndexer._testing.restoreGeneralPrefetch)
@@ -378,45 +318,6 @@ describe('scripts/bulk-index', () => {
     })
   })
 
-  describe('buildSqlQuery', () => {
-    it('builds sql for single bib', () => {
-      expect(bulkIndexer.buildSqlQuery({ bibId: '1234', nyplSource: 'sierra-nypl' }))
-        .to.deep.eq({
-          query: [
-            'SELECT * FROM bib',
-            '      WHERE nypl_source = $1',
-            '      AND id = $2 LIMIT 1'
-          ].join('\n'),
-          params: ['sierra-nypl', '1234'],
-          type: 'bib'
-        })
-    })
-
-    it('builds sql for array of ids', () => {
-      expect(bulkIndexer.buildSqlQuery({ ids: ['1234'], nyplSource: 'some-source', type: 'table_name' }))
-        .to.deep.eq({
-          query: [
-            'SELECT * FROM table_name',
-            '      WHERE nypl_source = $1',
-            "      AND id IN ('1234') LIMIT 1"
-          ].join('\n'),
-          params: ['some-source'],
-          type: 'table_name'
-        })
-    })
-
-    it('builds sql for type query', () => {
-      expect(bulkIndexer.buildSqlQuery({ type: 'table_name' }))
-        .to.deep.eq({
-          query: [
-            'SELECT * FROM table_name'
-          ].join('\n'),
-          params: [],
-          type: 'table_name'
-        })
-    })
-  })
-
   describe('extractAndValidateIdentifiers', () => {
     let sourceMapper
     const mockProgress = {
@@ -431,6 +332,9 @@ describe('scripts/bulk-index', () => {
           if (id.startsWith('pb')) return { id: id.slice(2), type: 'bib', nyplSource: 'recap-pul' }
           if (id.startsWith('b')) return { id: id.slice(1), type: 'bib', nyplSource: 'sierra-nypl' }
           return null
+        },
+        validSource: (source) => {
+          return true
         }
       }
     })
@@ -443,7 +347,7 @@ describe('scripts/bulk-index', () => {
     it('processes a single column CSV with prefixed ids', () => {
       const rows = [['b1234'], ['cb5678'], ['pb9012']]
       const options = { csvIdColumn: 0, offset: 0, csv: 'test.csv' }
-      const res = bulkIndexer._testing.extractAndValidateIdentifiers(rows, options, mockProgress, sourceMapper)
+      const res = bulkIndexer._testing.extractAndValidateIdentifiers(rows, options, sourceMapper)
 
       expect(res).to.deep.equal([
         { id: '1234', nyplSource: 'sierra-nypl', type: 'bib' },
@@ -455,7 +359,7 @@ describe('scripts/bulk-index', () => {
     it('processes a two column CSV with non-prefixed ids and nyplSource', () => {
       const rows = [['1234', 'sierra-nypl'], ['5678', 'sierra-nypl']]
       const options = { csvIdColumn: 0, csvNyplSourceColumn: 1, type: 'bib', offset: 0, csv: 'test.csv' }
-      const res = bulkIndexer._testing.extractAndValidateIdentifiers(rows, options, mockProgress, sourceMapper)
+      const res = bulkIndexer._testing.extractAndValidateIdentifiers(rows, options, sourceMapper)
 
       expect(res).to.deep.equal([
         { id: '1234', nyplSource: 'sierra-nypl' },
@@ -466,17 +370,15 @@ describe('scripts/bulk-index', () => {
     it('throws error when type is not apparent or specified', () => {
       const rows = [['1234', 'sierra-nypl']]
       const options = { csvIdColumn: 0, csvNyplSourceColumn: 1, offset: 0, csv: 'test.csv' }
-      expect(() => bulkIndexer._testing.extractAndValidateIdentifiers(rows, options, mockProgress, sourceMapper))
+      expect(() => bulkIndexer._testing.extractAndValidateIdentifiers(rows, options, sourceMapper))
         .to.throw('Must specify --type if not apparent from CSV')
-      expect(mockProgress.updateStatus.calledWith('failed')).to.eq(true)
     })
 
     it('throws error when nyplSource is not apparent or specified', () => {
       const rows = [['1234']]
       const options = { csvIdColumn: 0, type: 'bib', offset: 0, csv: 'test.csv' }
-      expect(() => bulkIndexer._testing.extractAndValidateIdentifiers(rows, options, mockProgress, sourceMapper))
+      expect(() => bulkIndexer._testing.extractAndValidateIdentifiers(rows, options, sourceMapper))
         .to.throw('Must specify --nyplSource if not apparent from CSV (use --csvNyplSourceColumn N if CSV includes nyplSource)')
-      expect(mockProgress.updateStatus.calledWith('failed')).to.eq(true)
     })
   })
 
@@ -487,6 +389,105 @@ describe('scripts/bulk-index', () => {
         1234: 'NA',
         2345: 'NH',
         3456: 'NA'
+      })
+    })
+  })
+
+  describe('initializeJobState', () => {
+    describe('bad restores', () => {
+      afterEach(() => {
+        fs.readFileSync.restore()
+        fs.existsSync.restore()
+      })
+
+      const badStatefileContents = [
+        // Non-json:
+        '',
+        // No status:
+        JSON.stringify({}),
+        JSON.stringify({ params: {} }),
+        // No params defined:
+        JSON.stringify({ status: 'preparing' })
+      ]
+
+      badStatefileContents.forEach((contents) => {
+        it(`fails invalid state file (${contents})`, () => {
+          sinon.stub(fs, 'existsSync').callsFake(() => true)
+          sinon.stub(fs, 'readFileSync').callsFake(() => contents)
+
+          expect(() => bulkIndexer.initializeJobState({}))
+            .to.throw('Error restoring state')
+        })
+      })
+    })
+
+    it('builds state from params', () => {
+      const params = {
+        type: 'bib',
+        hasMarc: '123'
+      }
+      const state = bulkIndexer.initializeJobState(params)
+      expect(state).to.be.a('object')
+      expect(state.constructor.name).to.eq('BulkIndexJobState')
+    })
+  })
+
+  describe('resumeJob', () => {
+    let state = null
+
+    beforeEach(() => {
+      // Build fake state:
+      state = {
+        basePath: 'fake-job',
+        status: () => state._status,
+        csvPath: () => null,
+        csvCount: () => null,
+        addMessage: () => true,
+        save: sinon.spy(),
+        updateStatus: (s) => {
+          state._status = 'completed'
+        },
+        data: { params: { csvIdColumn: 0, csvNyplSourceColumn: 1, type: 'bib', hasMarc: '123' } }
+      }
+    })
+
+    it('rejects invalid state', async () => {
+      state._status = 'fladeedle'
+
+      bulkIndexer.resumeJob(state)
+      await expect(bulkIndexer.resumeJob(state))
+        .to.be.rejectedWith('Invalid status: fladeedle')
+    })
+
+    it('resumes csv-generation', async () => {
+      const buildCsvSpy = sinon.stub(identifyIdsByMarc, '_buildCsv').callsFake(() => true)
+
+      state._status = 'preparing'
+
+      await bulkIndexer.resumeJob(state)
+      expect(buildCsvSpy.callCount).to.equal(1)
+
+      identifyIdsByMarc._buildCsv.restore()
+    })
+
+    describe('resumes indexing', () => {
+      beforeEach(() => {
+        sinon.stub(fs, 'readFileSync').callsFake(() => '123,sierra-nypl')
+        sinon.stub(bulkIndexer._testing, 'recordsByIds').callsFake(() => [])
+      })
+
+      afterEach(() => {
+        fs.readFileSync.restore()
+        bulkIndexer._testing.recordsByIds.restore()
+      })
+
+      it('resumes indexing from 0', async () => {
+        state._status = 'indexing'
+
+        await bulkIndexer.resumeJob(state)
+
+        expect(state.save.callCount).to.equal(1)
+        expect(state.save.getCall(0).args[0]).to.deep.equal({ offset: 1 })
       })
     })
   })

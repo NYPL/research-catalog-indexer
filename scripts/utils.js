@@ -17,7 +17,7 @@ const setAwsProfile = (profile = 'nypl-digital-dev') => {
 }
 
 const die = (message) => {
-  logger.error('Error: ' + message)
+  logger.error('' + message)
   process.exit(1)
 }
 
@@ -401,66 +401,6 @@ class Timer {
   }
 }
 
-class CsvProgress {
-  constructor (filepath, statusFilepath) {
-    this.filepath = filepath
-    this.statusFilepath = statusFilepath || `${filepath}-status.json`
-    this.state = {
-      status: 'preparing',
-      started: new Date().toISOString(),
-      updated: new Date().toISOString(),
-      count: 0,
-      offset: 0,
-      messages: []
-    }
-  }
-
-  static async forCsv (filepath, statusFilepath) {
-    const progress = new CsvProgress(filepath, statusFilepath)
-    if (fs.existsSync(progress.statusFilepath)) {
-      progress.state = JSON.parse(fs.readFileSync(progress.statusFilepath, 'utf8'))
-    } else {
-      try {
-        progress.state.count = await lineCount(filepath)
-      } catch (e) {
-        progress.state.count = 0
-      }
-      progress.save()
-    }
-    return progress
-  }
-
-  save () {
-    this.state.updated = new Date().toISOString()
-    console.log('saving to ', this.statusFilepath)
-    fs.writeFileSync(this.statusFilepath, JSON.stringify(this.state, null, 2))
-  }
-
-  status () {
-    return this.state.status
-  }
-
-  get offset () {
-    return this.state.offset
-  }
-
-  updateStatus (status) {
-    this.state.status = status
-    this.save()
-  }
-
-  updateOffset (offset) {
-    this.state.offset = offset
-    this.save()
-  }
-
-  addMessage (message) {
-    if (!this.state.messages) this.state.messages = []
-    this.state.messages.push(message)
-    this.save()
-  }
-}
-
 Timer.allTimers = {}
 
 Timer.startNew = (name) => {
@@ -475,13 +415,26 @@ Timer.startNew = (name) => {
   return timer
 }
 
+/**
+ *  Execute callback, but restrict repeated calls to given frequency.
+ */
+const throttleCall = (cb, callsPerMs = 1000, id = cb.toString()) => {
+  if (!this.lastCall) {
+    this.lastCall = {}
+  }
+
+  if (!this.lastCall[id] || ((new Date()) - this.lastCall[id]) >= callsPerMs) {
+    cb()
+    this.lastCall[id] = new Date()
+  }
+}
+
 module.exports = {
   batch,
   buildSierraModelFromUri,
   camelize,
   capitalize,
   castArgsToInts,
-  CsvProgress,
   delay,
   die,
   groupIdentifierEntitiesByTypeAndNyplSource,
@@ -490,5 +443,6 @@ module.exports = {
   printProgress,
   secondsAsFriendlyDuration,
   setAwsProfile,
+  throttleCall,
   Timer
 }
