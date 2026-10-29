@@ -32,7 +32,7 @@ Example format:
 
 ## Deployment
 
-This app uses Terraform for deployment. Code pushed to `qa` and `production` triggers deployments to `qa` and `production`, respectively.
+This app uses Terraform for deployment. Code pushed to `qa` and `production` triggers deployments to `qa` and `production`, respectively. The primary indexer is deployed to AWS lambda via S3. A copy of the app is dockerized and pushed to ECR for running bulk-index jobs via AWS Batch.
 
 ## Testing
 
