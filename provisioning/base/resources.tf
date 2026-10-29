@@ -71,7 +71,7 @@ resource "aws_lambda_function" "lambda_instance" {
     variables = { for tuple in regexall("(.*?)=(.*)", file("../../config/${var.environment}.env")) : tuple[0] => tuple[1] }
   }
 
-  layers = [ "arn:aws:lambda:us-east-1:451483290750:layer:NewRelicNodeJS:33" ]
+  layers = [ "arn:aws:lambda:us-east-1:451483290750:layer:NewRelicNodeJS-slim:43" ]
 
   vpc_config {
     subnet_ids         = var.vpc_config.subnet_ids
