@@ -1,4 +1,5 @@
 const fs = require('fs')
+const path = require('path')
 const { parse: csvParse } = require('csv-parse/sync')
 const { Pool } = require('pg')
 
@@ -551,7 +552,9 @@ class BulkIndexJobState extends JobState {
 
     if (this.status() === STATUS_COMPLETED) {
       const dateString = this.data.started.split('T').shift()
-      return `${dateString}-${this.basePath}-status.json`
+      const dir = path.dirname(this.basePath)
+      const base = path.basename(this.basePath)
+      return path.join(dir, `${dateString}-${base}-status.json`)
     } else {
       return defaultPath
     }
