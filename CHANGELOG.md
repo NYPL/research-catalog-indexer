@@ -3,7 +3,13 @@
 
 ## Prerelease
 
-## v1.0.1 - TBD
+## v1.0.1 - 2026-11-03
+- Update to new qa and prod resources indexes: `resources-qa-2026-10-23`, `resources-prod-2026-10-29`
+- Revise bulk index scripts for future managed jobs (SCC-5617)
+- Add `collectionId` to checkin card item model (SCC-5742)
+- Add `flattenedNotIndexed` property type to index schema
+- Add linking entries to bib model (SCC-5564)
+- Update normalizers
 - Add changelog, version bumping, and git tagging hooks, plus `rciVersion` property to indexed documents (SCC-5406)
 - Update NewRelic layer to 'slim' version
 
