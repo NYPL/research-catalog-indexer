@@ -2,6 +2,7 @@
 
 
 ## Prerelease
+- Changes to linking entry logic (SCC-5564)
 
 ## v1.0.1 - TBD
 - Add changelog, version bumping, and git tagging hooks, plus `rciVersion` property to indexed documents (SCC-5406)
