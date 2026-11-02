@@ -14,6 +14,7 @@ ENV=$1
 FROM_TIMESTAMP=$2
 
 echo Setting triggers for ResearchCatalogIndexer-$ENV to $FROM_TIMESTAMP
+read -n 1 -r -s -p $'Ensure refresh_interval is set to at least 30s. Press any key to continue\n'
 
 for STREAM in Bib Item Holding; do
   EVENT_SOURCE_ARN=arn:aws:kinesis:us-east-1:946183545209:stream/$STREAM-$ENV 

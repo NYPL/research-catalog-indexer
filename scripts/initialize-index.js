@@ -54,7 +54,7 @@ const optionallyCopyContentsToNewIndex = async (newIndexName) => {
     output: process.stdout
   })
   const oldIndex = process.env.ELASTIC_RESOURCES_INDEX_NAME
-  await reindexRl.question(`copy contents of ${oldIndex} to ${newIndexName}? Only "yes" will trigger copy... `, async answer => {
+  const answer = await reindexRl.question(`copy contents of ${oldIndex} to ${newIndexName}? Only "yes" will trigger copy... `)
     if (answer === 'yes') {
       console.log(`Copying contents of ${oldIndex} to ${newIndexName}`)
       const resp = await client.reindex({
@@ -68,7 +68,6 @@ const optionallyCopyContentsToNewIndex = async (newIndexName) => {
       console.log(`Don't forget to: \n\tUpdate this repo with ${newIndexName}\n\tUpdate Discovery API with ${newIndexName} after verifying with the mapping-check.js script in that repo\n\tUpdate index alias with ${newIndexName} (referenced by browse-term-indexer\n\tDelete ${oldIndex}`)
     } else console.log('only yes will trigger reindex. Goodbye!')
     reindexRl.close()
-  })
 }
 
 const isCalledViaCommandLine = /scripts\/initialize-index(.js)?/.test(fs.realpathSync(process.argv[1]))

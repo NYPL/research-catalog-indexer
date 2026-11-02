@@ -1,0 +1,32 @@
+name: Tag version
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  tag-release:
+      # tag main with the package version once a version-bump PR is merged
+      permissions:
+        contents: write
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v3
+          with:
+            fetch-depth: 0
+        - name: Tag release
+          run: |
+            version=$(node -pe 'require("./package.json").version')
+            tag="v$version"
+            if git ls-remote --tags origin | grep -q "refs/tags/$tag$"; then
+              echo "Tag $tag already exists on origin, skipping."
+              exit 0
+            fi
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git tag "$tag"
+            git push origin "$tag"

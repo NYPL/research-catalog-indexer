@@ -2320,6 +2320,49 @@ describe('EsBib', function () {
     })
   })
 
+  describe('physicalDescription without a leading $a', () => {
+    it('does not prepend a prefix to the first subfield', () => {
+      const bib = new SierraBib({
+        varFields: [
+          {
+            marcTag: '300',
+            subfields: [
+              { tag: 'c', content: '29 cm' }
+            ]
+          }
+        ]
+      })
+      const esBib = new EsBib(bib)
+
+      expect(esBib.physicalDescription()).to.deep.equal([
+        '29 cm'
+      ])
+    })
+  })
+
+  describe('physicalDescription subfield filtering', () => {
+    it('excludes subfields with null content and tags not in the mapping', async () => {
+      const bib = new SierraBib({
+        varFields: [
+          {
+            marcTag: '300',
+            subfields: [
+              { tag: 'a', content: '1 score (16 p.)' },
+              { tag: 'b', content: null },
+              { tag: 'z', content: 'not a mapped subfield' },
+              { tag: 'c', content: '29 cm' }
+            ]
+          }
+        ]
+      })
+      const esBib = new EsBib(bib)
+
+      expect(esBib.physicalDescription()).to.deep.equal([
+        '1 score (16 p.) ; 29 cm'
+      ])
+    })
+  })
+
   describe('physicalDescriptionSubset2', () => {
     it('extracts physicalDescription content', async () => {
       const bib = new SierraBib({
@@ -2363,6 +2406,47 @@ describe('EsBib', function () {
       ])
     })
   })
+
+  describe('physicalDescription with varField mocked directly', () => {
+    it('collapses the shared joiner between $f and $c', async () => {
+      const bib = new SierraBib({})
+      sinon.stub(bib, 'varField').returns([
+        {
+          varFieldIndex: 17,
+          value: '1 item ([1] p.) ; 23 cm.',
+          marc: {
+            ind1: ' ',
+            ind2: ' ',
+            content: null,
+            marcTag: '300',
+            fieldTag: 'r',
+            subfields: [
+              { tag: 'a', content: '1' },
+              { tag: 'f', content: 'item ([1] p.) ;' },
+              { tag: 'c', content: '23 cm.' }
+            ],
+            varFieldIndex: 17
+          },
+          subfields: [
+            { tag: 'a', content: '1' },
+            { tag: 'f', content: 'item ([1] p.) ;' },
+            { tag: 'c', content: '23 cm.' }
+          ],
+          subfieldMap: {
+            a: '1',
+            f: 'item ([1] p.) ;',
+            c: '23 cm.'
+          }
+        }
+      ])
+      const esBib = new EsBib(bib)
+
+      expect(esBib.physicalDescription()).to.deep.equal([
+        '1 item ([1] p.) ; 23 cm.'
+      ])
+    })
+  })
+
   describe('series fields', () => {
     let esBib
     before(() => {
