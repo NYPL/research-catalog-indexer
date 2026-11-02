@@ -9,7 +9,8 @@
 - Add `collectionId` to checkin card item model (SCC-5742)
 - Add `flattenedNotIndexed` property type to index schema
 - Add linking entries to bib model (SCC-5564)
-- Update normalizers
+- Update `physicalDescription` logic to correctly order subfields (SCC-5337)
+- Update normalizers (SCC-5685)
 - Add changelog, version bumping, and git tagging hooks, plus `rciVersion` property to indexed documents (SCC-5406)
 - Update NewRelic layer to 'slim' version
 
