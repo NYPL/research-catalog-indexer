@@ -1,7 +1,7 @@
 # Changelog
 
 ## v1.0.2
-- Changes to linking entry logic (SCC-5564)
+- Changes to linking entry logic (SCC-5564), including enforcing array values. 
 
 ## v1.0.1 - TBD
 - Add changelog, version bumping, and git tagging hooks, plus `rciVersion` property to indexed documents (SCC-5406)
