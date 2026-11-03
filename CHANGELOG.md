@@ -1,7 +1,6 @@
 # Changelog
 
-
-## Prerelease
+## v1.0.2
 - Changes to linking entry logic (SCC-5564)
 
 ## v1.0.1 - TBD
