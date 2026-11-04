@@ -39,13 +39,13 @@ describe('EsBib', function () {
         label: 'Has subseries',
         display: 'University of Aberdeen. Anatomical and Anthropological Society. Proceedings of the Aberdeen University Anatomical and Anthropological Society (DLC)   05041796 (OCoLC)1642603 issn another issn language code isbn',
         marcTag: '762',
-        issn: ['issn', 'another issn'],
+        issn: ['another issn', 'issn'],
         isbn: ['isbn'],
         language: ['language code'],
         oclc: ['(OCoLC)1642603'],
         lccn: ['(DLC)   05041796'],
         marcTagIndex: 0,
-        hash: 8337271468,
+        hash: 8084620108,
         title: ['Proceedings of the Aberdeen University Anatomical and Anthropological Society']
       })
     })
