@@ -190,7 +190,6 @@ const run = async () => {
 
   // Build a job state file based on index criteria
   const jobState = initializeJobState(options)
-
   if (jobState.runnable()) {
     await resumeJob(jobState)
   } else {

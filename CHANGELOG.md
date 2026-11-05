@@ -1,7 +1,7 @@
 # Changelog
 
-
-## Prerelease
+## v1.0.2
+- Changes to linking entry logic (SCC-5564), including enforcing array values. 
 
 ## v1.0.1 - 2026-11-03
 - Update to new qa and prod resources indexes: `resources-qa-2026-10-23`, `resources-prod-2026-10-29`
