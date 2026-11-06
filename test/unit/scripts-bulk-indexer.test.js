@@ -421,14 +421,28 @@ describe('scripts/bulk-indexer', () => {
       })
     })
 
-    it('builds state from params', () => {
-      const params = {
-        type: 'bib',
-        hasMarc: '123'
-      }
-      const state = bulkIndexer.initializeJobState(params)
-      expect(state).to.be.a('object')
-      expect(state.constructor.name).to.eq('BulkIndexJobState')
+    describe('builds state from params', () => {
+      beforeEach(() => {
+        sinon.stub(fs, 'writeFileSync').callsFake(() => true)
+        sinon.stub(fs, 'existsSync').callsFake(() => false)
+      })
+
+      afterEach(() => {
+        fs.writeFileSync.restore()
+        fs.existsSync.restore()
+      })
+
+      it('builds state from params', () => {
+        const params = {
+          type: 'bib',
+          hasMarc: '123'
+        }
+        const state = bulkIndexer.initializeJobState(params)
+        expect(state).to.be.a('object')
+        expect(state.constructor.name).to.eq('BulkIndexJobState')
+        // Confirm state was "written" via the stub, not to a real file:
+        expect(fs.writeFileSync.called).to.equal(true)
+      })
     })
   })
 
