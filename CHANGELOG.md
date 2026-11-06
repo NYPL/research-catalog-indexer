@@ -2,6 +2,7 @@
 
 
 ## Prerelease
+- update browse-term module, include 662 in subjectLiteral bib-mapping
 
 ## v1.0.1 - 2026-11-03
 - Update to new qa and prod resources indexes: `resources-qa-2026-10-23`, `resources-prod-2026-10-29`
