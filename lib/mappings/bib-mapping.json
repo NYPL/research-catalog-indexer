@@ -16,6 +16,18 @@
       }
     ]
   },
+  "addedEntryPublication": {
+    "paths": [
+      {
+        "marc": "752",
+        "subfields": [
+          "a",
+          "b",
+          "d"
+        ]
+      }
+    ]
+  },
   "contributorNameTitle": {
     "notes": "Name and title for contributors/creators",
     "paths": [
@@ -923,14 +935,6 @@
         "subfields": [
           "a"
         ]
-      },
-      {
-        "marc": "752",
-        "subfields": [
-          "a",
-          "b",
-          "d"
-        ]
       }
     ]
   },
@@ -939,14 +943,19 @@
       {
         "marc": "260",
         "subfields": [
+          "3",
           "a",
           "b",
-          "c"
+          "c",
+          "e",
+          "f",
+          "g"
         ]
       },
       {
         "marc": "264",
         "subfields": [
+          "3",
           "a",
           "b",
           "c"

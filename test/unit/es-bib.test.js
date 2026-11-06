@@ -1267,34 +1267,159 @@ describe('EsBib', function () {
       expect(esBib.placeOfPublication()).to.deep.equal(['Ṛostov (Doni Vra)'])
     })
 
-    it('should include data from 752', function () {
+    it('should not include data from 752 (now addedEntryPublication)', function () {
       const record = new SierraBib(require('../fixtures/bib-11606020.json'))
       const esBib = new EsBib(record)
-      expect(esBib.placeOfPublication()).to.deep.equal([
-        'England London',
-        'London'
+      expect(esBib.placeOfPublication()).to.deep.equal(['London'])
+    })
+  })
+
+  describe('addedEntryPublication', () => {
+    it('should return array of {primary, parallel} from 752', function () {
+      const record = new SierraBib(require('../fixtures/bib-11606020.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.addedEntryPublication()).to.deep.equal([
+        { primary: 'England London', parallel: null }
       ])
+    })
+
+    it('returns null when there is no 752', function () {
+      const record = new SierraBib(require('../fixtures/bib-10001936.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.addedEntryPublication()).to.equal(null)
     })
   })
 
   describe('publicationStatement', () => {
-    it('should return array with publicationStatement', function () {
+    it('should return array of publicationStatement entries', function () {
       const record = new SierraBib(require('../fixtures/bib-10001936.json'))
       const esBib = new EsBib(record)
-      expect(esBib.publicationStatement()).to.deep.equal(['Ṛostov (Doni Vra) : Tparan Hovhannu Tēr-Abrahamian, 1890 [i.e. 1891]'])
+      expect(esBib.publicationStatement()).to.deep.equal([
+        {
+          display: 'Ṛostov (Doni Vra) : Tparan Hovhannu Tēr-Abrahamian, 1890 [i.e. 1891]',
+          label: 'Imprint',
+          filterToSubstring: {
+            'Ṛostov (Doni Vra)': 'placeOfPublication',
+            'Tparan Hovhannu Tēr-Abrahamian': 'publisherLiteral'
+          },
+          parallel: {
+            display: 'parallel for Tparan Hovhannu Tēr-Abrahamian',
+            label: 'Imprint',
+            filterToSubstring: {
+              'parallel for Tparan Hovhannu Tēr-Abrahamian': 'publisherLiteral'
+            }
+          }
+        }
+      ])
+    })
+
+    it('should strip trailing connecting punctuation from filterToSubstring keys', function () {
+      const record = new SierraBib(require('../fixtures/bib-11606020.json'))
+      const esBib = new EsBib(record)
+      expect(esBib.publicationStatement()).to.deep.equal([
+        {
+          display: 'London : R. Carlile, 1823.',
+          label: 'Imprint',
+          filterToSubstring: {
+            London: 'placeOfPublication',
+            'R. Carlile': 'publisherLiteral'
+          },
+          parallel: null
+        }
+      ])
+    })
+
+    it('derives label from the 264 marctag/indicator chart', function () {
+      const bibData = {
+        id: '1',
+        nyplSource: 'sierra-nypl',
+        varFields: [
+          {
+            marcTag: '264',
+            ind1: ' ',
+            ind2: '2',
+            subfields: [
+              { tag: 'a', content: 'Place :' },
+              { tag: 'b', content: 'Distributor,' },
+              { tag: 'c', content: '2000.' }
+            ]
+          },
+          {
+            marcTag: '264',
+            ind1: '3',
+            ind2: '4',
+            subfields: [
+              { tag: 'c', content: '(c) 2001.' }
+            ]
+          }
+        ]
+      }
+      const record = new SierraBib(bibData)
+      const esBib = new EsBib(record)
+      expect(esBib.publicationStatement()).to.deep.equal([
+        {
+          display: 'Place : Distributor, 2000.',
+          label: 'Distributor',
+          filterToSubstring: {
+            Place: 'placeOfPublication',
+            Distributor: 'publisherLiteral'
+          },
+          parallel: null
+        },
+        {
+          display: '(c) 2001.',
+          label: 'Latest copyright',
+          filterToSubstring: {},
+          parallel: null
+        }
+      ])
+    })
+
+    it('includes orphaned parallels, defaulting label when indicators are unavailable', function () {
+      const bibData = {
+        id: '99999999',
+        nyplSource: 'sierra-nypl',
+        varFields: [
+          {
+            marcTag: '880',
+            ind1: ' ',
+            ind2: ' ',
+            subfields: [
+              { tag: '6', content: '260-01' },
+              { tag: 'a', content: 'orphaned place :' },
+              { tag: 'b', content: 'orphaned publisher,' }
+            ]
+          }
+        ]
+      }
+      const record = new SierraBib(bibData)
+      const esBib = new EsBib(record)
+      expect(esBib.publicationStatement()).to.deep.equal([
+        {
+          display: null,
+          label: 'Imprint',
+          filterToSubstring: {},
+          parallel: {
+            display: 'orphaned place : orphaned publisher',
+            label: 'Imprint',
+            filterToSubstring: {
+              'orphaned place': 'placeOfPublication',
+              'orphaned publisher': 'publisherLiteral'
+            }
+          }
+        }
+      ])
     })
   })
 
   describe('publisherLiteral', () => {
-    it('should return array with publisherLiteral', function () {
+    it('should return array with publisherLiteral, including parallel values alongside primaries', function () {
       const record = new SierraBib(require('../fixtures/bib-10001936.json'))
       const esBib = new EsBib(record)
-      expect(esBib.publisherLiteral()).to.deep.equal(['Tparan Hovhannu Tēr-Abrahamian'])
-    })
-    it('parallelPublisherLiteral', () => {
-      const record = new SierraBib(require('../fixtures/bib-10001936.json'))
-      const esBib = new EsBib(record)
-      expect(esBib.parallelPublisherLiteral()).to.deep.equal(['parallel for Tparan Hovhannu Tēr-Abrahamian'])
+      expect(esBib.publisherLiteral()).to.deep.equal([
+        'Tparan Hovhannu Tēr-Abrahamian',
+        'parallel for Tparan Hovhannu Tēr-Abrahamian'
+      ])
     })
   })
 
@@ -1474,14 +1599,32 @@ describe('EsBib', function () {
     })
   })
 
-  describe('parallelPublicationStatment', () => {
-    it('returns parallel publication statement', () => {
+  describe('publicationStatement parallel', () => {
+    it('includes a parallel display/label/filterToSubstring entry', () => {
       const record = new SierraBib(require('../fixtures/bib-parallels-late-added.json'))
       const esBib = new EsBib(record)
-      expect(esBib.parallelPublicationStatement()).to.deep.equal([
-        '长沙市 : 湖南人民出版社 : 湖南省新華書店发行, 1984.'
+      expect(esBib.publicationStatement()).to.deep.equal([
+        {
+          display: 'Changsha Shi : Hunan ren min chu ban she : Hunan sheng xin hua shu dian fa xing, 1984.',
+          label: 'Imprint',
+          filterToSubstring: {
+            'Changsha Shi': 'placeOfPublication',
+            'Hunan ren min chu ban she': 'publisherLiteral',
+            'Hunan sheng xin hua shu dian fa xing': 'publisherLiteral'
+          },
+          parallel: {
+            display: '长沙市 : 湖南人民出版社 : 湖南省新華書店发行, 1984.',
+            label: 'Imprint',
+            filterToSubstring: {
+              长沙市: 'placeOfPublication',
+              湖南人民出版社: 'publisherLiteral',
+              湖南省新華書店发行: 'publisherLiteral'
+            }
+          }
+        }
       ])
-      expect(esBib.parallelPlaceOfPublication()).to.deep.equal([
+      expect(esBib.placeOfPublication()).to.deep.equal([
+        'Changsha Shi',
         '长沙市'
       ])
       expect(esBib.parallelEditionStatement()).to.deep.equal([
