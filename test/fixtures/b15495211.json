@@ -163,6 +163,7 @@
         { "tag": "w", "content": "(DLC)   05041796" },
         { "tag": "w", "content": "(OCoLC)1642603" },
         { "tag": "x", "content": "issn"},
+        { "tag": "x", "content": "another issn"},
         { "tag": "e", "content": "language code"},
         { "tag": "z", "content": "isbn"}
       ]

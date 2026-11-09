@@ -497,6 +497,7 @@ const indexRecords = async (state) => {
       }
     })
   } catch (e) {
+    console.error(e)
     return handleJobEvent(state, 'error')
   }
 
