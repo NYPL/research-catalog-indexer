@@ -1075,6 +1075,10 @@
         "description": "Subject Added Entry-Geographic Name"
       },
       {
+        "marc": "662",
+        "description": "Subject Added Entry - Hierarchical Place Name"
+      },
+      {
         "marc": "653",
         "description": "Index Term"
       },
