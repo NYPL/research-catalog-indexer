@@ -1,6 +1,6 @@
 # Changelog
 
-## v1.0.2
+## v1.0.3
 - Changes to linking entry logic (SCC-5564), including enforcing array values. 
 - update browse-term module, include 662 in subjectLiteral bib-mapping
 
