@@ -2,7 +2,7 @@ const { sentenceCase, sortSubfields, hashObject } = require('../../lib/utils/lin
 const { expect } = require('chai')
 
 describe('linking entry utils', () => {
-  describe.only('hashObject', () => {
+  describe('hashObject', () => {
     it('outputs the same hash', () => {
       const versionA = {
         a: 'University of Aberdeen. Anatomical and Anthropological Society.',
