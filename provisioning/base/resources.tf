@@ -6,6 +6,7 @@ locals {
   tags = {
     Project = "Research Catalog"
     BusinessUnit = "LSP"
+    TestTag = "working"
   }
 
   log_error_metric = "ResearchCatalogIndexerLogError-${var.environment}"
