@@ -20,7 +20,9 @@ describe('linking entry utils', () => {
         w: ['(OCoLC)1642603', '(DLC)   05041796'],
         z: 'isbn'
       }
-      expect(hashObject(versionA)).to.deep.equal(hashObject(versionB))
+      expect(hashObject(versionA)).to.equal(hashObject(versionB))
+      // DO NOT CHANGE THIS VALUE TO TRY AND FIX TESTS
+      expect(hashObject(versionA)).to.equal(8084620108)
     })
     it('outputs a different hash', () => {
       const versionA = {
