@@ -6,7 +6,6 @@ locals {
   tags = {
     Project = "Research Catalog"
     BusinessUnit = "LSP"
-    TestTag = "working"
   }
 
   log_error_metric = "ResearchCatalogIndexerLogError-${var.environment}"
@@ -86,6 +85,12 @@ data "aws_sns_topic" "rc_alarms" {
   name = "research-catalog-team-alarms-${var.environment}"
 
   tags = local.tags
+}
+
+resource "aws_cloudwatch_log_group" "lambda_logs" {
+  name = "/aws/lambda/ResearchCatalogIndexer-${var.environment}"
+
+  retention_in_days = 30
 }
 
 resource "aws_cloudwatch_metric_alarm" "lambda_errors" {
